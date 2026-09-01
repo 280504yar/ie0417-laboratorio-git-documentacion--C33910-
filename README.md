@@ -67,6 +67,11 @@ Proyecto utilizado para la documentación en Python mediante Sphinx.
 - **Repositorio original:** [https://github.com/numpy/numpy](https://github.com/numpy/numpy)
 
 ---
+## Hash
+
+hash del último commit:
+- b817c346acf08ca7a68aec213ebfb0031f597273
+
 
 ## Instrucciones breves para regenerar ambas documentaciones
 
