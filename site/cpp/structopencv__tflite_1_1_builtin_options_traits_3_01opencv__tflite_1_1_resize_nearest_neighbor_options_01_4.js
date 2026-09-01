@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_resize_nearest_neighbor_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_resize_nearest_neighbor_options_01_4.html#af85e3c332ddfa8b28a6db9c8c08a72e8", null ]
+];

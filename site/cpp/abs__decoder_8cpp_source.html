@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/barcode_decoder/abs_decoder.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('abs__decoder_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">abs_decoder.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="abs__decoder_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (c) 2020-2021 darkliang wangberlinT Certseeds</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="objdetect_2src_2precomp_8hpp.html">../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="abs__decoder_8hpp.html">abs_decoder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1barcode.html">barcode</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#a8e24fa38d33dba21cedc5848c8c61fbd">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1barcode.html#a8e24fa38d33dba21cedc5848c8c61fbd">cropROI</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;src, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keyword">const</span> std::vector&lt;Point2f&gt; &amp;rects)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    std::vector&lt;Point2f&gt; vertices = rects;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">int</span> height = <a class="code hl_function" href="group__core__utils.html#ga52772e491afc3a9fe095c3f82624a53a">cvRound</a>(<a class="code hl_function" href="group__core__array.html#gac0394807342b15de64df07e0b4797076">norm</a>(vertices[0] - vertices[1]));</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">int</span> width = <a class="code hl_function" href="group__core__utils.html#ga52772e491afc3a9fe095c3f82624a53a">cvRound</a>(<a class="code hl_function" href="group__core__array.html#gac0394807342b15de64df07e0b4797076">norm</a>(vertices[1] - vertices[2]));</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (height &gt; width)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        std::swap(height, width);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a> v0 = vertices[0];</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        vertices.erase(vertices.begin());</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        vertices.push_back(v0);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::vector&lt;Point2f&gt; dst_vertices{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>(0, (<span class="keywordtype">float</span>) (height - 1)), <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>(0, 0), <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>((<span class="keywordtype">float</span>) (width - 1), 0),</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>((<span class="keywordtype">float</span>) (width - 1), (<span class="keywordtype">float</span>) (height - 1))};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(<a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(width, height), <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> M = <a class="code hl_function" href="group__geometry__shape.html#ga44f2488e0a36e54bfca7d2fcf2ae7a34">getPerspectiveTransform</a>(vertices, dst_vertices);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="group__imgproc__transform.html#ga17de6731fa988e5f3ab0695e85a64a37">warpPerspective</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, M, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">size</a>(), <a class="code hl_enumvalue" href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121ac97d8e4880d8b5d509e96825c7522deb">cv::INTER_LINEAR</a>, <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aed2e4346047e265c8c5a6d0276dcd838">BORDER_CONSTANT</a>, <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a>(255));</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#ac59ed5229e20c2ffd07d73a283c6c084">   32</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1barcode.html#ac59ed5229e20c2ffd07d73a283c6c084">fillCounter</a>(<span class="keyword">const</span> std::vector&lt;uchar&gt; &amp;row, <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> start, <a class="code hl_struct" href="structcv_1_1barcode_1_1_counter.html">Counter</a> &amp;counter)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">size_t</span> counter_length = counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>.size();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    std::fill(counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>.begin(), counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>.end(), 0);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">sum</a> = 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">size_t</span> end = row.size();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> <a class="code hl_namespace" href="namespacecolor.html">color</a> = row[start];</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> counterPosition = 0;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">while</span> (start &lt; end)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (row[start] == <a class="code hl_namespace" href="namespacecolor.html">color</a>)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        { <span class="comment">// that is, exactly one is true</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>[counterPosition]++;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">sum</a>++;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            counterPosition++;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">if</span> (counterPosition == counter_length)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>[counterPosition] = 1;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">sum</a>++;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <a class="code hl_namespace" href="namespacecolor.html">color</a> = 255 - <a class="code hl_namespace" href="namespacecolor.html">color</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        ++start;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a></div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#a1ca454fc74391b550a8d8c018d1f26f5">   66</a></span><a class="code hl_function" href="namespacecv_1_1barcode.html#a1ca454fc74391b550a8d8c018d1f26f5">patternMatchVariance</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1barcode_1_1_counter.html">Counter</a> &amp;counter, <span class="keyword">const</span> std::vector&lt;int&gt; &amp;pattern, <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> maxIndividualVariance)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">size_t</span> numCounters = counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>.size();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">sum</a>);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">int</span> patternLength = std::accumulate(pattern.cbegin(), pattern.cend(), 0);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> &lt; patternLength)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="comment">// If we don&#39;t even have one pixel per unit of bar width, assume this is too small</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="comment">// to reliably match, so fail:</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="comment">// and use constexpr functions</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">return</span> WHITE;<span class="comment">// max</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="comment">// We&#39;re going to fake floating-point math in integers. We just need to use more bits.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">// Scale up patternLength so that intermediate values below like scaledCounter will have</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">// more &quot;significant digits&quot;</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">int</span> unitBarWidth = (<a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> &lt;&lt; INTEGER_MATH_SHIFT) / patternLength;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    maxIndividualVariance = (maxIndividualVariance * unitBarWidth) &gt;&gt; INTEGER_MATH_SHIFT;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> totalVariance = 0;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 0; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; numCounters; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordtype">int</span> cnt = counter.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] &lt;&lt; INTEGER_MATH_SHIFT;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordtype">int</span> scaledPattern = pattern[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] * unitBarWidth;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> variance = std::abs(cnt - scaledPattern);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">if</span> (variance &gt; maxIndividualVariance)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keywordflow">return</span> WHITE;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        totalVariance += variance;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">return</span> totalVariance / <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#a1771d7ce95b9642703d7377809c30506">  112</a></span><a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_function" href="namespacecv_1_1barcode.html#a1771d7ce95b9642703d7377809c30506">patternMatch</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1barcode_1_1_counter.html">Counter</a> &amp;counters, <span class="keyword">const</span> std::vector&lt;int&gt; &amp;pattern, <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> maxIndividual)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>{</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(counters.<a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>.size() == pattern.size());</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecv_1_1barcode.html#a1ca454fc74391b550a8d8c018d1f26f5">patternMatchVariance</a>(counters, pattern, maxIndividual);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+<div class="ttc" id="aabs__decoder_8hpp_html"><div class="ttname"><a href="abs__decoder_8hpp.html">abs_decoder.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a0d8ed64f7bbbda6d34e3289681ffdff0"><div class="ttname"><a href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">cv::_InputArray::size</a></div><div class="ttdeci">Size size(int i=-1) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l00503">matrix_wrap.cpp:503</a></div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4eb2daf4732c371c7565db49f76c63ce"><div class="ttname"><a href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">cv::_OutputArray::create</a></div><div class="ttdeci">void create(Size sz, int type, int i=-1, bool allowTransposed=false, _OutputArray::DepthMask fixedDepthMask=static_cast&lt; _OutputArray::DepthMask &gt;(0)) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01466">matrix_wrap.cpp:1466</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gac0394807342b15de64df07e0b4797076"><div class="ttname"><a href="group__core__array.html#gac0394807342b15de64df07e0b4797076">cv::norm</a></div><div class="ttdeci">CV_EXPORTS_W double norm(InputArray src1, int normType=NORM_L2, InputArray mask=noArray())</div><div class="ttdoc">Calculates the absolute norm of an array.</div><div class="ttdef"><b>Definición</b> <a href="norm_8dispatch_8cpp_source.html#l00302">norm.dispatch.cpp:302</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5aed2e4346047e265c8c5a6d0276dcd838"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aed2e4346047e265c8c5a6d0276dcd838">cv::BORDER_CONSTANT</a></div><div class="ttdeci">@ BORDER_CONSTANT</div><div class="ttdoc">iiiiii|abcdefgh|iiiiiii with some specified i</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00267">base.hpp:267</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga7d080aa40de011e4410bca63385ffe2a"><div class="ttname"><a href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">cv::Point2f</a></div><div class="ttdeci">Point_&lt; float &gt; Point2f</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00207">types.hpp:207</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa4ffa7f460d95bda4fd293dd4e337418"><div class="ttname"><a href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">cv::uint</a></div><div class="ttdeci">uint32_t uint</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00038">templmatch.cpp:38</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga52772e491afc3a9fe095c3f82624a53a"><div class="ttname"><a href="group__core__utils.html#ga52772e491afc3a9fe095c3f82624a53a">cv::cvRound</a></div><div class="ttdeci">int cvRound(double value)</div><div class="ttdoc">Rounds floating-point number to the nearest integer.</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00201">templmatch.cpp:201</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__geometry__shape_html_ga44f2488e0a36e54bfca7d2fcf2ae7a34"><div class="ttname"><a href="group__geometry__shape.html#ga44f2488e0a36e54bfca7d2fcf2ae7a34">cv::getPerspectiveTransform</a></div><div class="ttdeci">CV_EXPORTS_W Mat getPerspectiveTransform(InputArray src, InputArray dst, int solveMethod=DECOMP_LU)</div><div class="ttdoc">Calculates a perspective transform from four pairs of the corresponding points.</div><div class="ttdef"><b>Definición</b> <a href="geometry_8cpp_source.html#l00901">geometry.cpp:901</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_ga17de6731fa988e5f3ab0695e85a64a37"><div class="ttname"><a href="group__imgproc__transform.html#ga17de6731fa988e5f3ab0695e85a64a37">cv::warpPerspective</a></div><div class="ttdeci">CV_EXPORTS_W void warpPerspective(InputArray src, OutputArray dst, InputArray M, Size dsize, int flags=INTER_LINEAR, int borderMode=BORDER_CONSTANT, const Scalar &amp;borderValue=Scalar(), AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Applies a perspective transformation to an image.</div><div class="ttdef"><b>Definición</b> <a href="imgwarp_8cpp_source.html#l03013">imgwarp.cpp:3013</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_gga5bb5a1fea74ea38e1a5445ca803ff121ac97d8e4880d8b5d509e96825c7522deb"><div class="ttname"><a href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121ac97d8e4880d8b5d509e96825c7522deb">cv::INTER_LINEAR</a></div><div class="ttdeci">@ INTER_LINEAR</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00253">imgproc.hpp:253</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecolor_html"><div class="ttname"><a href="namespacecolor.html">color</a></div><div class="ttdef"><b>Definición</b> <a href="color_8py_source.html#l00001">color.py:1</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html"><div class="ttname"><a href="namespacecv_1_1barcode.html">cv::barcode</a></div><div class="ttdef"><b>Definición</b> <a href="barcode_8hpp_source.html#l00013">barcode.hpp:13</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a1771d7ce95b9642703d7377809c30506"><div class="ttname"><a href="namespacecv_1_1barcode.html#a1771d7ce95b9642703d7377809c30506">cv::barcode::patternMatch</a></div><div class="ttdeci">uint patternMatch(const Counter &amp;counters, const std::vector&lt; int &gt; &amp;pattern, uint maxIndividual)</div><div class="ttdef"><b>Definición</b> <a href="#l00112">abs_decoder.cpp:112</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a1ca454fc74391b550a8d8c018d1f26f5"><div class="ttname"><a href="namespacecv_1_1barcode.html#a1ca454fc74391b550a8d8c018d1f26f5">cv::barcode::patternMatchVariance</a></div><div class="ttdeci">static uint patternMatchVariance(const Counter &amp;counter, const std::vector&lt; int &gt; &amp;pattern, uint maxIndividualVariance)</div><div class="ttdef"><b>Definición</b> <a href="#l00066">abs_decoder.cpp:66</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a8e24fa38d33dba21cedc5848c8c61fbd"><div class="ttname"><a href="namespacecv_1_1barcode.html#a8e24fa38d33dba21cedc5848c8c61fbd">cv::barcode::cropROI</a></div><div class="ttdeci">void cropROI(const Mat &amp;src, Mat &amp;dst, const std::vector&lt; Point2f &gt; &amp;rects)</div><div class="ttdef"><b>Definición</b> <a href="#l00012">abs_decoder.cpp:12</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_ac59ed5229e20c2ffd07d73a283c6c084"><div class="ttname"><a href="namespacecv_1_1barcode.html#ac59ed5229e20c2ffd07d73a283c6c084">cv::barcode::fillCounter</a></div><div class="ttdeci">void fillCounter(const std::vector&lt; uchar &gt; &amp;row, uint start, Counter &amp;counter)</div><div class="ttdef"><b>Definición</b> <a href="#l00032">abs_decoder.cpp:32</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ad0ae34c58960d6781fd8ceb895524722"><div class="ttname"><a href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">cv::dnn::total</a></div><div class="ttdeci">size_t total(const MatShape &amp;shape, int start=-1, int end=-1)</div><div class="ttdef"><b>Definición</b> <a href="shape__utils_8hpp_source.html#l00155">shape_utils.hpp:155</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aobjdetect_2src_2precomp_8hpp_html"><div class="ttname"><a href="objdetect_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html">cv::barcode::Counter</a></div><div class="ttdef"><b>Definición</b> <a href="abs__decoder_8hpp_source.html#l00060">abs_decoder.hpp:61</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html_a0bb1d332e69d34214143d42659a0a03b"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">cv::barcode::Counter::sum</a></div><div class="ttdeci">uint sum</div><div class="ttdef"><b>Definición</b> <a href="abs__decoder_8hpp_source.html#l00063">abs_decoder.hpp:63</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html_a6a779b7eac769256e543cbf05312f4d4"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">cv::barcode::Counter::pattern</a></div><div class="ttdeci">std::vector&lt; int &gt; pattern</div><div class="ttdef"><b>Definición</b> <a href="abs__decoder_8hpp_source.html#l00062">abs_decoder.hpp:62</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_4daf0341874e9eb5cb8974052196445c.html">barcode_decoder</a></li><li class="navelem"><a href="abs__decoder_8cpp.html">abs_decoder.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

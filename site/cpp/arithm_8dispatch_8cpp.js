@@ -1,0 +1,26 @@
+var arithm_8dispatch_8cpp =
+[
+    [ "cv::hal::and8u", "group__core__hal__functions.html#ga1a479a26d137b754fbc2b1741a7ac896", null ],
+    [ "cv::hal::bitwise8u", "namespacecv_1_1hal.html#a7620d468d79a989d8ac172d65bf10d9e", null ],
+    [ "cv::ew::getAbsdiffFunc", "namespacecv_1_1ew.html#a1fc860169f082bd4194123c3e7066060", null ],
+    [ "cv::ew::getAddFunc", "namespacecv_1_1ew.html#aaa3128c0feea22463968ac676574ca58", null ],
+    [ "cv::ew::getAddWeightedFunc", "namespacecv_1_1ew.html#ab027d2adbbdfcd005efe62ca2ebdb626", null ],
+    [ "cv::ew::getAtan2Func", "namespacecv_1_1ew.html#adf61c00f9dd18bf9f65ae756451f42b2", null ],
+    [ "cv::ew::getBitwiseFunc", "namespacecv_1_1ew.html#a50b6261509b9b6f21a79f9d0f6d5caf1", null ],
+    [ "cv::ew::getCastFunc", "namespacecv_1_1ew.html#a3d36ff33d97764a1b4287eb14abf2584", null ],
+    [ "cv::ew::getClampFunc", "namespacecv_1_1ew.html#ab61e73992229d57349f3d7861242bd74", null ],
+    [ "cv::ew::getCmpFunc", "namespacecv_1_1ew.html#aba9dcfe4b74b5a43d47f6efb73d704d7", null ],
+    [ "cv::ew::getDivFunc", "namespacecv_1_1ew.html#a5e6508fefa0a6023b407e2ddb7140d37", null ],
+    [ "cv::ew::getElemwiseFunc", "namespacecv_1_1ew.html#ac3484369aa189bed0c3e467b09711bf5", null ],
+    [ "cv::ew::getHypotFunc", "namespacecv_1_1ew.html#a2cd73ffc576b5ccaafded1e18af5c6ac", null ],
+    [ "cv::ew::getMaxFunc", "namespacecv_1_1ew.html#abdcf44dac847eb57adddea9e9fb0d330", null ],
+    [ "cv::ew::getMinFunc", "namespacecv_1_1ew.html#a1f8fe6a3b864ec0ee5245e632d3cd996", null ],
+    [ "cv::ew::getMulFunc", "namespacecv_1_1ew.html#a689d68f58b1c119dc3e620ca81a7dccd", null ],
+    [ "cv::ew::getNotFunc", "namespacecv_1_1ew.html#a03b67a89b30dc918776b692780f58716", null ],
+    [ "cv::ew::getSelectFunc", "namespacecv_1_1ew.html#aa45ad86d3d6802ce23b9e7f91ed415c0", null ],
+    [ "cv::ew::getSubFunc", "namespacecv_1_1ew.html#a16937c65feebbb574fd23748d7f26479", null ],
+    [ "cv::hal::mul8u", "group__core__hal__functions.html#ga3dd47e9d72de2668e8a1ae6b5ec99b29", null ],
+    [ "cv::hal::not8u", "group__core__hal__functions.html#gabf1778785d2fa6835daa6ef4eec982d6", null ],
+    [ "cv::hal::or8u", "group__core__hal__functions.html#gabe8e8d763760f73eb41f9b555b92a6a3", null ],
+    [ "cv::hal::xor8u", "group__core__hal__functions.html#gaf6b6b88b438cb9b1c2beaeb0b8582117", null ]
+];

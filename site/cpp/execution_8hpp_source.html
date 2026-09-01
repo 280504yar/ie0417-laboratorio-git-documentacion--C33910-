@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda/execution.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('execution_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">execution.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="execution_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA_EXECUTION_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA_EXECUTION_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="error_8hpp.html">../cuda4dnn/csl/error.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8hpp.html">../cuda4dnn/csl/stream.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cuda_runtime_api.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">csl</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html">   19</a></span>    <span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a5c164a27457e1b5c5c8d244533f43917">execution_policy</a> {</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a5c164a27457e1b5c5c8d244533f43917">   20</a></span>        <a class="code hl_function" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a5c164a27457e1b5c5c8d244533f43917">execution_policy</a>(dim3 grid_size, dim3 block_size)</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            : <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">grid</a>{ grid_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">block</a>{ block_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">sharedMem</a>{ 0 }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">stream</a>{ 0 } { }</div>
+</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a3d96f1745c8ec5f46b8b2f540e2a9518">   23</a></span>        <a class="code hl_function" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a3d96f1745c8ec5f46b8b2f540e2a9518">execution_policy</a>(dim3 grid_size, dim3 block_size, std::size_t shared_mem)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            : <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">grid</a>{ grid_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">block</a>{ block_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">sharedMem</a>{ shared_mem }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">stream</a>{ nullptr } { }</div>
+</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a25440780d8f1558d57fdefb1e1862b66">   26</a></span>        <a class="code hl_function" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a25440780d8f1558d57fdefb1e1862b66">execution_policy</a>(dim3 grid_size, dim3 block_size, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">Stream</a>&amp; strm)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            : <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">grid</a>{ grid_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">block</a>{ block_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">sharedMem</a>{ 0 }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">stream</a>{ strm.get() } { }</div>
+</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a3d653bd42f29693ae1e7d3e81e212b8c">   29</a></span>        <a class="code hl_function" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a3d653bd42f29693ae1e7d3e81e212b8c">execution_policy</a>(dim3 grid_size, dim3 block_size, std::size_t shared_mem, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">Stream</a>&amp; strm)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            : <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">grid</a>{ grid_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">block</a>{ block_size }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">sharedMem</a>{ shared_mem }, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">stream</a>{ strm.get() } { }</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">   32</a></span>        dim3 <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">grid</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">   33</a></span>        dim3 <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">block</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">   34</a></span>        std::size_t <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">sharedMem</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">   35</a></span>        cudaStream_t <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">stream</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
+</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">/* this overload shouldn&#39;t be necessary; we should always provide a bound on the number of threads */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">    template &lt;class Kernel&gt; inline</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    execution_policy make_policy(Kernel kernel, std::size_t sharedMem = 0, const Stream&amp; stream = 0) {</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">        int grid_size, block_size;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        CUDA4DNN_CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(&amp;grid_size, &amp;block_size, kernel, sharedMem));</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">        return execution_policy(grid_size, block_size, sharedMem, stream);</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    }*/</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Kernel&gt; <span class="keyword">inline</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a57a9be9aa017331ba5781d587598f20f">   48</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html">execution_policy</a> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a57a9be9aa017331ba5781d587598f20f">make_policy</a>(Kernel <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, std::size_t max_threads, std::size_t sharedMem = 0, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">Stream</a>&amp; stream = 0) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(max_threads &gt; 0);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">int</span> grid_size = 0, block_size = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaOccupancyMaxPotentialBlockSize(&amp;grid_size, &amp;block_size, <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, sharedMem));</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">if</span> (grid_size * block_size &gt; max_threads) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            grid_size = (max_threads + block_size - 1) / block_size;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">if</span> (block_size &gt; max_threads)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                block_size = max_threads;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(grid_size &gt;= 1 &amp;&amp; block_size &gt;= 1);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a5c164a27457e1b5c5c8d244533f43917">execution_policy</a>(grid_size, block_size, sharedMem, stream);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span>Kernel, <span class="keyword">typename</span> ...Args&gt; <span class="keyword">inline</span></div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a6b63d457d7111c62be8afefb47004bca">   64</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a6b63d457d7111c62be8afefb47004bca">launch_kernel</a>(Kernel <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, Args ...args) {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">auto</span> policy = <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a57a9be9aa017331ba5781d587598f20f">make_policy</a>(<a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a> &lt;&lt;&lt;policy.grid, policy.block&gt;&gt;&gt; (args...);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span>Kernel, <span class="keyword">typename</span> ...Args&gt; <span class="keyword">inline</span></div>
+<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a82a16f879aaa3c852ca89f8634b9c9ad">   70</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a6b63d457d7111c62be8afefb47004bca">launch_kernel</a>(Kernel <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, dim3 grid, dim3 block, Args ...args) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel &lt;&lt;&lt;grid, block&gt;</a>&gt;&gt; (args...);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span>Kernel, <span class="keyword">typename</span> ...Args&gt; <span class="keyword">inline</span></div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a4f44367a4ca9ce616d8b3e9d17f26a73">   75</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a6b63d457d7111c62be8afefb47004bca">launch_kernel</a>(Kernel <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, <a class="code hl_struct" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html">execution_policy</a> policy, Args ...args) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a> &lt;&lt;&lt;policy.<a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">grid</a>, policy.<a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">block</a>, policy.<a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">sharedMem</a>, policy.<a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">stream</a>&gt;&gt;&gt; (args...);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}}}} <span class="comment">/* namespace cv::dnn::cuda4dnn::csl */</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA_EXECUTION_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">cv::dnn::cuda4dnn::csl::Stream</a></div><div class="ttdoc">sharable smart CUDA stream</div><div class="ttdef"><b>Definición</b> <a href="stream_8hpp_source.html#l00116">stream.hpp:116</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_a78eb7f9d6378d214ab43da4f1fcd28ae"><div class="ttname"><a href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a></div><div class="ttdeci">#define CUDA4DNN_CHECK_CUDA(call)</div><div class="ttdef"><b>Definición</b> <a href="error_8hpp_source.html#l00012">error.hpp:12</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gacf70dd7604c25059c5c22f3068158cae"><div class="ttname"><a href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">cv::kernel</a></div><div class="ttdeci">OutputArray InputArray kernel</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">cv::dnn::cuda4dnn::csl</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html_a57a9be9aa017331ba5781d587598f20f"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a57a9be9aa017331ba5781d587598f20f">cv::dnn::cuda4dnn::csl::make_policy</a></div><div class="ttdeci">execution_policy make_policy(Kernel kernel, std::size_t max_threads, std::size_t sharedMem=0, const Stream &amp;stream=0)</div><div class="ttdef"><b>Definición</b> <a href="#l00048">execution.hpp:48</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html_a6b63d457d7111c62be8afefb47004bca"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#a6b63d457d7111c62be8afefb47004bca">cv::dnn::cuda4dnn::csl::launch_kernel</a></div><div class="ttdeci">void launch_kernel(Kernel kernel, Args ...args)</div><div class="ttdef"><b>Definición</b> <a href="#l00064">execution.hpp:64</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astream_8hpp_html"><div class="ttname"><a href="stream_8hpp.html">stream.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html">cv::dnn::cuda4dnn::csl::execution_policy</a></div><div class="ttdef"><b>Definición</b> <a href="#l00019">execution.hpp:19</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_a25440780d8f1558d57fdefb1e1862b66"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a25440780d8f1558d57fdefb1e1862b66">cv::dnn::cuda4dnn::csl::execution_policy::execution_policy</a></div><div class="ttdeci">execution_policy(dim3 grid_size, dim3 block_size, const Stream &amp;strm)</div><div class="ttdef"><b>Definición</b> <a href="#l00026">execution.hpp:26</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_a3d653bd42f29693ae1e7d3e81e212b8c"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a3d653bd42f29693ae1e7d3e81e212b8c">cv::dnn::cuda4dnn::csl::execution_policy::execution_policy</a></div><div class="ttdeci">execution_policy(dim3 grid_size, dim3 block_size, std::size_t shared_mem, const Stream &amp;strm)</div><div class="ttdef"><b>Definición</b> <a href="#l00029">execution.hpp:29</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_a3d96f1745c8ec5f46b8b2f540e2a9518"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a3d96f1745c8ec5f46b8b2f540e2a9518">cv::dnn::cuda4dnn::csl::execution_policy::execution_policy</a></div><div class="ttdeci">execution_policy(dim3 grid_size, dim3 block_size, std::size_t shared_mem)</div><div class="ttdef"><b>Definición</b> <a href="#l00023">execution.hpp:23</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_a4422d2afbeddca8f363241ddadd51d0e"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a4422d2afbeddca8f363241ddadd51d0e">cv::dnn::cuda4dnn::csl::execution_policy::block</a></div><div class="ttdeci">dim3 block</div><div class="ttdef"><b>Definición</b> <a href="#l00033">execution.hpp:33</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_a5c164a27457e1b5c5c8d244533f43917"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a5c164a27457e1b5c5c8d244533f43917">cv::dnn::cuda4dnn::csl::execution_policy::execution_policy</a></div><div class="ttdeci">execution_policy(dim3 grid_size, dim3 block_size)</div><div class="ttdef"><b>Definición</b> <a href="#l00020">execution.hpp:20</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_a7bb171e89a3b19e119c4fd3a9d5ee189"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#a7bb171e89a3b19e119c4fd3a9d5ee189">cv::dnn::cuda4dnn::csl::execution_policy::sharedMem</a></div><div class="ttdeci">std::size_t sharedMem</div><div class="ttdef"><b>Definición</b> <a href="#l00034">execution.hpp:34</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_ae700cb33391af322bc57d0f399cac170"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#ae700cb33391af322bc57d0f399cac170">cv::dnn::cuda4dnn::csl::execution_policy::grid</a></div><div class="ttdeci">dim3 grid</div><div class="ttdef"><b>Definición</b> <a href="#l00032">execution.hpp:32</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy_html_af756d3d3be3f444522d8df0b88494ef2"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1execution__policy.html#af756d3d3be3f444522d8df0b88494ef2">cv::dnn::cuda4dnn::csl::execution_policy::stream</a></div><div class="ttdeci">cudaStream_t stream</div><div class="ttdef"><b>Definición</b> <a href="#l00035">execution.hpp:35</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_9095b0da6c527c598e930c4bc036305d.html">cuda</a></li><li class="navelem"><a href="execution_8hpp.html">execution.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

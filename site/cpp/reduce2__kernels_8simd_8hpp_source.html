@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/cpu_kernels/reduce2_kernels.simd.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('reduce2__kernels_8simd_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">reduce2_kernels.simd.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="reduce2__kernels_8simd_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="utility_8hpp.html">opencv2/core/utility.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="all__layers_8hpp.html">opencv2/dnn/all_layers.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="intrin_8hpp.html">opencv2/core/hal/intrin.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cfloat&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// Reduce-all over a contiguous CV_32F src</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a6feab48a4c339cb29b81d811df7d5e45">reduceAllFloatParallel_</a>(<span class="keyword">const</span> Mat&amp; src, Mat&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">int</span> reduce_type);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// Reduce a contiguous trailing block of axes for CV_32F src.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ab127ee2dd128bbe42276912b03f74256">reduceLastAxesFloatParallel_</a>(<span class="keyword">const</span> Mat&amp; src, Mat&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">size_t</span> innerLen, <span class="keywordtype">int</span> reduce_type);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#ifndef CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a6feab48a4c339cb29b81d811df7d5e45">   33</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a6feab48a4c339cb29b81d811df7d5e45">reduceAllFloatParallel_</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">int</span> reduce_type_int) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <a class="code hl_enumeration" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48">Reduce2Layer::ReduceType</a> rt = (<a class="code hl_enumeration" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48">Reduce2Layer::ReduceType</a>)reduce_type_int;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">const</span> <span class="keywordtype">float</span>* p = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keyword">const</span> <span class="keywordtype">float</span>&gt;();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = src.<a class="code hl_function" href="classcv_1_1_mat.html#aedf850a24d0fa24cd7f84044a82aaae3">total</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> nThreads = std::max(1, <a class="code hl_function" href="group__core__utils.html#ga2db334ec41d98da3129ef4a2342fc4d4">cv::getNumThreads</a>());</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> stripes = std::max(1, std::min&lt;int&gt;(</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        (<span class="keywordtype">int</span>)((<a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> + 16383) / 16384), nThreads));</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">float</span> init_f = 0.0f;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (rt == <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a26a4b44a837bf97b972628509912b4a5">Reduce2Layer::ReduceType::MAX</a>)       init_f = -FLT_MAX;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (rt == <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ace31e2a082d17e038fcc6e3006166653">Reduce2Layer::ReduceType::MIN</a>)  init_f = FLT_MAX;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (rt == <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ac8074bb318fb85693233e64acc64c1ed">Reduce2Layer::ReduceType::PROD</a>) init_f = 1.0f;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    std::vector&lt;float&gt;  partial_f(stripes, init_f);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">Range</a>(0, stripes), [&amp;](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">Range</a>&amp; r) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = r.start; s &lt; r.end; s++) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordtype">size_t</span> start = (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)s * <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> / stripes;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordtype">size_t</span> end   = (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)(s + 1) * <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> / stripes;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keyword">const</span> <span class="keywordtype">float</span>* q = p + start;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordtype">size_t</span> n = end - start, i = 0;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> L = VTraits&lt;v_float32&gt;::vlanes();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordflow">switch</span> (rt) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a26a4b44a837bf97b972628509912b4a5">Reduce2Layer::ReduceType::MAX</a>: {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                <span class="keywordtype">float</span> acc = -FLT_MAX;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                v_float32 va = vx_setall_f32(-FLT_MAX);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = v_max(va, vx_load(q + i));</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                acc = v_reduce_max(va);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc = acc &gt; q[i] ? acc : q[i];</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                partial_f[s] = acc;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ace31e2a082d17e038fcc6e3006166653">Reduce2Layer::ReduceType::MIN</a>: {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="keywordtype">float</span> acc = FLT_MAX;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                v_float32 va = vx_setall_f32(FLT_MAX);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = v_min(va, vx_load(q + i));</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                acc = v_reduce_min(va);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc = acc &lt; q[i] ? acc : q[i];</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                partial_f[s] = acc;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a6970bdc2201030b9c03fbdcf3973858a">Reduce2Layer::ReduceType::SUM</a>:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a4ea6d1161ea24d7599365f574aff6610">Reduce2Layer::ReduceType::MEAN</a>:</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a0ce75759449635ab516d2a3920a02881">Reduce2Layer::ReduceType::LOG_SUM</a>: {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordtype">float</span> acc = 0.0f;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                v_float32 va = vx_setzero_f32();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(va, vx_load(q + i));</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                acc += <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(va);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc += q[i];</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                partial_f[s] = acc;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a9ec4c0afd450ceac7adb81c3bcfc9732">Reduce2Layer::ReduceType::L1</a>: {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="keywordtype">float</span> acc = 0.0f;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                v_float32 va = vx_setzero_f32();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(va, v_abs(vx_load(q + i)));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                acc += <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(va);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc += std::fabs(q[i]);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                partial_f[s] = acc;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a7e6aa2d53f6ee2b1a34b017fa403cb76">Reduce2Layer::ReduceType::L2</a>:</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a2ce6e134b828b72fad160fa17c8d1b64">Reduce2Layer::ReduceType::SUM_SQUARE</a>: {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordtype">float</span> acc = 0.0f;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                v_float32 va = vx_setzero_f32();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    v_float32 <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = vx_load(q + i);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    va = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(va, <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>));</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                acc += <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(va);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) { <span class="keywordtype">float</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = q[i]; acc += <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>; }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                partial_f[s] = acc;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ac8074bb318fb85693233e64acc64c1ed">Reduce2Layer::ReduceType::PROD</a>: {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                <span class="keywordtype">float</span> acc = 1.0f;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                v_float32 va = vx_setall_f32(1.0f);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(va, vx_load(q + i));</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <span class="keywordtype">float</span> buf[VTraits&lt;v_float32&gt;::max_nlanes];</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(buf, va);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; L; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++) acc *= buf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc *= q[i];</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                partial_f[s] = acc;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">default</span>: <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab3e6a206e16ca696761f9cb52ddd9e1d">Error::StsInternal</a>, <span class="stringliteral">&quot;reduceAllFloatParallel_: unhandled type&quot;</span>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    });</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordtype">float</span>* out = <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.ptr&lt;<span class="keywordtype">float</span>&gt;();</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">switch</span> (rt) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a26a4b44a837bf97b972628509912b4a5">Reduce2Layer::ReduceType::MAX</a>: {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordtype">float</span> m = -FLT_MAX;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) m = m &gt; partial_f[s] ? m : partial_f[s];</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        *out = m;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ace31e2a082d17e038fcc6e3006166653">Reduce2Layer::ReduceType::MIN</a>: {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordtype">float</span> m = FLT_MAX;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) m = m &lt; partial_f[s] ? m : partial_f[s];</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        *out = m;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a6970bdc2201030b9c03fbdcf3973858a">Reduce2Layer::ReduceType::SUM</a>: {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordtype">float</span> acc = 0.0f; <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) acc += partial_f[s];</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        *out = acc;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a4ea6d1161ea24d7599365f574aff6610">Reduce2Layer::ReduceType::MEAN</a>: {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordtype">float</span> acc = 0.0f; <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) acc += partial_f[s];</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        *out = <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> &gt; 0 ? (float)((<span class="keywordtype">double</span>)acc / (<span class="keywordtype">double</span>)<a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>) : 0.0f;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a9ec4c0afd450ceac7adb81c3bcfc9732">Reduce2Layer::ReduceType::L1</a>:</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a2ce6e134b828b72fad160fa17c8d1b64">Reduce2Layer::ReduceType::SUM_SQUARE</a>: {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordtype">float</span> acc = 0.0f; <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) acc += partial_f[s];</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        *out = acc;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a7e6aa2d53f6ee2b1a34b017fa403cb76">Reduce2Layer::ReduceType::L2</a>: {</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordtype">float</span> acc = 0.0f; <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) acc += partial_f[s];</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        *out = std::sqrt(acc);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a0ce75759449635ab516d2a3920a02881">Reduce2Layer::ReduceType::LOG_SUM</a>: {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordtype">float</span> acc = 0.0f; <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) acc += partial_f[s];</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        *out = <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> &gt; 0 ? std::log(acc) : -std::numeric_limits&lt;float&gt;::infinity();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ac8074bb318fb85693233e64acc64c1ed">Reduce2Layer::ReduceType::PROD</a>: {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordtype">float</span> acc = 1.0f; <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; stripes; s++) acc *= partial_f[s];</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        *out = acc;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    }</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">default</span>: <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab3e6a206e16ca696761f9cb52ddd9e1d">Error::StsInternal</a>, <span class="stringliteral">&quot;reduceAllFloatParallel_: unhandled type&quot;</span>);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}</div>
+</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="foldopen" id="foldopen00186" data-start="{" data-end="}">
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#ab127ee2dd128bbe42276912b03f74256">  186</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ab127ee2dd128bbe42276912b03f74256">reduceLastAxesFloatParallel_</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">size_t</span> innerLen, <span class="keywordtype">int</span> reduce_type_int) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keyword">const</span> <a class="code hl_enumeration" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48">Reduce2Layer::ReduceType</a> rt = (<a class="code hl_enumeration" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48">Reduce2Layer::ReduceType</a>)reduce_type_int;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keyword">const</span> <span class="keywordtype">float</span>* p = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keyword">const</span> <span class="keywordtype">float</span>&gt;();</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">float</span>* q = <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.ptr&lt;<span class="keywordtype">float</span>&gt;();</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nOut = src.<a class="code hl_function" href="classcv_1_1_mat.html#aedf850a24d0fa24cd7f84044a82aaae3">total</a>() / innerLen;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> inv_inner = innerLen &gt; 0 ? 1.0f / (float)innerLen : 0.0f;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">Range</a>(0, (<span class="keywordtype">int</span>)nOut), [&amp;](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">Range</a>&amp; r) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = r.start; row &lt; r.end; row++) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <span class="keyword">const</span> <span class="keywordtype">float</span>* s0 = p + (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)row * innerLen;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="keywordtype">size_t</span> i = 0, n = innerLen;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> L = VTraits&lt;v_float32&gt;::vlanes();</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <span class="keywordflow">switch</span> (rt) {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a26a4b44a837bf97b972628509912b4a5">Reduce2Layer::ReduceType::MAX</a>: {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                <span class="keywordtype">float</span> acc = -FLT_MAX;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                <span class="keywordflow">if</span> (n &gt;= (<span class="keywordtype">size_t</span>)L) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                    v_float32 va = vx_setall_f32(-FLT_MAX);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                    <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = v_max(va, vx_load(s0 + i));</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                    acc = v_reduce_max(va);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc = acc &gt; s0[i] ? acc : s0[i];</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                q[row] = acc;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ace31e2a082d17e038fcc6e3006166653">Reduce2Layer::ReduceType::MIN</a>: {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                <span class="keywordtype">float</span> acc = FLT_MAX;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                <span class="keywordflow">if</span> (n &gt;= (<span class="keywordtype">size_t</span>)L) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                    v_float32 va = vx_setall_f32(FLT_MAX);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                    <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = v_min(va, vx_load(s0 + i));</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                    acc = v_reduce_min(va);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc = acc &lt; s0[i] ? acc : s0[i];</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                q[row] = acc;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a6970bdc2201030b9c03fbdcf3973858a">Reduce2Layer::ReduceType::SUM</a>:</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a4ea6d1161ea24d7599365f574aff6610">Reduce2Layer::ReduceType::MEAN</a>:</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a0ce75759449635ab516d2a3920a02881">Reduce2Layer::ReduceType::LOG_SUM</a>: {</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                <span class="keywordtype">float</span> acc = 0.0f;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>                <span class="keywordflow">if</span> (n &gt;= (<span class="keywordtype">size_t</span>)L) {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>                    v_float32 va = vx_setzero_f32();</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                    <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(va, vx_load(s0 + i));</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                    acc += <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(va);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                }</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc += s0[i];</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                <span class="keywordflow">if</span> (rt == <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a4ea6d1161ea24d7599365f574aff6610">Reduce2Layer::ReduceType::MEAN</a>)        q[row] = acc * inv_inner;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (rt == <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a0ce75759449635ab516d2a3920a02881">Reduce2Layer::ReduceType::LOG_SUM</a>) q[row] = std::log(acc);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                <span class="keywordflow">else</span>                                              q[row] = acc;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a9ec4c0afd450ceac7adb81c3bcfc9732">Reduce2Layer::ReduceType::L1</a>: {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                <span class="keywordtype">float</span> acc = 0.0f;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                <span class="keywordflow">if</span> (n &gt;= (<span class="keywordtype">size_t</span>)L) {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                    v_float32 va = vx_setzero_f32();</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                    <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(va, v_abs(vx_load(s0 + i)));</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>                    acc += <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(va);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc += std::fabs(s0[i]);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                q[row] = acc;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            }</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a7e6aa2d53f6ee2b1a34b017fa403cb76">Reduce2Layer::ReduceType::L2</a>:</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a2ce6e134b828b72fad160fa17c8d1b64">Reduce2Layer::ReduceType::SUM_SQUARE</a>: {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                <span class="keywordtype">float</span> acc = 0.0f;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                <span class="keywordflow">if</span> (n &gt;= (<span class="keywordtype">size_t</span>)L) {</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                    v_float32 va = vx_setzero_f32();</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                    <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                        v_float32 <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = vx_load(s0 + i);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                        va = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(va, <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>));</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                    }</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                    acc += <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(va);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                }</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) { <span class="keywordtype">float</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = s0[i]; acc += <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>; }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                q[row] = (rt == <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a7e6aa2d53f6ee2b1a34b017fa403cb76">Reduce2Layer::ReduceType::L2</a>) ? std::sqrt(acc) : acc;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ac8074bb318fb85693233e64acc64c1ed">Reduce2Layer::ReduceType::PROD</a>: {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                <span class="keywordtype">float</span> acc = 1.0f;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                <span class="keywordflow">if</span> (n &gt;= (<span class="keywordtype">size_t</span>)L) {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                    v_float32 va = vx_setall_f32(1.0f);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                    <span class="keywordflow">for</span> (; i + L &lt;= n; i += L) va = <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(va, vx_load(s0 + i));</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                    <span class="keywordtype">float</span> buf[VTraits&lt;v_float32&gt;::max_nlanes];</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                    <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(buf, va);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; L; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++) acc *= buf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                }</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                <span class="keywordflow">for</span> (; i &lt; n; i++) acc *= s0[i];</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                q[row] = acc;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>            }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            <span class="keywordflow">default</span>: <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab3e6a206e16ca696761f9cb52ddd9e1d">Error::StsInternal</a>, <span class="stringliteral">&quot;reduceLastAxesFloatParallel_: unhandled type&quot;</span>);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            }</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        }</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    }, (double)nOut * (<span class="keywordtype">double</span>)innerLen / 16384.0);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>}</div>
+</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>}}  <span class="comment">// cv::dnn</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="preprocessor">#endif  </span><span class="comment">// CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="ttc" id="aall__layers_8hpp_html"><div class="ttname"><a href="all__layers_8hpp.html">all_layers.hpp</a></div></div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a8d1a237453cad869d11df90f8279651a"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void void *CL_RUNTIME_EXPORT const cl_device_id const char const cl_program const char void void *CL_RUNTIME_EXPORT size_t</div><div class="ttdef"><b>Definición</b> <a href="autogenerated_2opencl__core_8hpp_source.html#l00286">opencl_core.hpp:286</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8b2912f6a6f5d55a3c9a7aae9134d862"><div class="ttname"><a href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">cv::Mat::ptr</a></div><div class="ttdeci">uchar * ptr(int i0=0)</div><div class="ttdoc">Returns a pointer to the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aedf850a24d0fa24cd7f84044a82aaae3"><div class="ttname"><a href="classcv_1_1_mat.html#aedf850a24d0fa24cd7f84044a82aaae3">cv::Mat::total</a></div><div class="ttdeci">size_t total() const</div><div class="ttdoc">Returns the total number of array elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01033">matrix.cpp:1033</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html"><div class="ttname"><a href="classcv_1_1_range.html">cv::Range</a></div><div class="ttdoc">Template class specifying a continuous subsequence (slice) of a sequence.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00632">types.hpp:633</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aafab1fe471bac7c314dcd0d678ac4e2d"><div class="ttname"><a href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">cv::Range::Range</a></div><div class="ttdeci">Range()</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48">cv::dnn::Reduce2Layer::ReduceType</a></div><div class="ttdeci">ReduceType</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00606">all_layers.hpp:607</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a0ce75759449635ab516d2a3920a02881"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a0ce75759449635ab516d2a3920a02881">cv::dnn::Reduce2Layer::ReduceType::LOG_SUM</a></div><div class="ttdeci">@ LOG_SUM</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00616">all_layers.hpp:616</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a26a4b44a837bf97b972628509912b4a5"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a26a4b44a837bf97b972628509912b4a5">cv::dnn::Reduce2Layer::ReduceType::MAX</a></div><div class="ttdeci">@ MAX</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00608">all_layers.hpp:608</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a2ce6e134b828b72fad160fa17c8d1b64"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a2ce6e134b828b72fad160fa17c8d1b64">cv::dnn::Reduce2Layer::ReduceType::SUM_SQUARE</a></div><div class="ttdeci">@ SUM_SQUARE</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00615">all_layers.hpp:615</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a4ea6d1161ea24d7599365f574aff6610"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a4ea6d1161ea24d7599365f574aff6610">cv::dnn::Reduce2Layer::ReduceType::MEAN</a></div><div class="ttdeci">@ MEAN</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00610">all_layers.hpp:610</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a6970bdc2201030b9c03fbdcf3973858a"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a6970bdc2201030b9c03fbdcf3973858a">cv::dnn::Reduce2Layer::ReduceType::SUM</a></div><div class="ttdeci">@ SUM</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00611">all_layers.hpp:611</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a7e6aa2d53f6ee2b1a34b017fa403cb76"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a7e6aa2d53f6ee2b1a34b017fa403cb76">cv::dnn::Reduce2Layer::ReduceType::L2</a></div><div class="ttdeci">@ L2</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00613">all_layers.hpp:613</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48a9ec4c0afd450ceac7adb81c3bcfc9732"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48a9ec4c0afd450ceac7adb81c3bcfc9732">cv::dnn::Reduce2Layer::ReduceType::L1</a></div><div class="ttdeci">@ L1</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00612">all_layers.hpp:612</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48ac8074bb318fb85693233e64acc64c1ed"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ac8074bb318fb85693233e64acc64c1ed">cv::dnn::Reduce2Layer::ReduceType::PROD</a></div><div class="ttdeci">@ PROD</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00614">all_layers.hpp:614</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_reduce2_layer_html_a595fc5c11802848837de6c6e17d0be48ace31e2a082d17e038fcc6e3006166653"><div class="ttname"><a href="classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48ace31e2a082d17e038fcc6e3006166653">cv::dnn::Reduce2Layer::ReduceType::MIN</a></div><div class="ttdeci">@ MIN</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00609">all_layers.hpp:609</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_a25097f49e52ccec77b2128b6ffadf135"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_END</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00024">cv_cpu_include_simd_declarations.hpp:24</a></div></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_aa4729b8f9a8694dc2e0953561fd6a6f2"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00023">cv_cpu_include_simd_declarations.hpp:23</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga275dfa9c8935f5e9a1031121cde460f4"><div class="ttname"><a href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">cv::v_store</a></div><div class="ttdeci">void v_store(_Tp *ptr, const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Store data to memory.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l02260">intrin_cpp.hpp:2260</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga51066f94e5de1b7905996186d848b5dc"><div class="ttname"><a href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">cv::v_reduce_sum</a></div><div class="ttdeci">V_TypeTraits&lt; _Tp &gt;::sum_type v_reduce_sum(const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Element shift left among vector.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01405">intrin_cpp.hpp:1405</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gaaa56a561e899888ef65fc2c2e258b892"><div class="ttname"><a href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">cv::v_mul</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_mul(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Multiply values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gadcf8617ab63379c5cbb04ea5f819ff20"><div class="ttname"><a href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">cv::v_add</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_add(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Add values.</div></div>
+<div class="ttc" id="agroup__core__parallel_html_gaa42ec9937b847cb52a97c613fc894c4a"><div class="ttname"><a href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">cv::parallel_for_</a></div><div class="ttdeci">CV_EXPORTS void parallel_for_(const Range &amp;range, const ParallelLoopBody &amp;body, double nstripes=-1.)</div><div class="ttdoc">Parallel data processor.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00503">parallel.cpp:503</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga2db334ec41d98da3129ef4a2342fc4d4"><div class="ttname"><a href="group__core__utils.html#ga2db334ec41d98da3129ef4a2342fc4d4">cv::getNumThreads</a></div><div class="ttdeci">CV_EXPORTS_W int getNumThreads()</div><div class="ttdoc">Returns the number of threads used by OpenCV for parallel regions.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00630">parallel.cpp:630</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="aintrin_8hpp_html"><div class="ttname"><a href="intrin_8hpp.html">intrin.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaab3e6a206e16ca696761f9cb52ddd9e1d"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab3e6a206e16ca696761f9cb52ddd9e1d">cv::Error::StsInternal</a></div><div class="ttdeci">@ StsInternal</div><div class="ttdoc">internal error (bad state)</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00022">exception.hpp:22</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a6feab48a4c339cb29b81d811df7d5e45"><div class="ttname"><a href="namespacecv_1_1dnn.html#a6feab48a4c339cb29b81d811df7d5e45">cv::dnn::reduceAllFloatParallel_</a></div><div class="ttdeci">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN void reduceAllFloatParallel_(const Mat &amp;src, Mat &amp;dst, int reduce_type)</div><div class="ttdef"><b>Definición</b> <a href="#l00033">reduce2_kernels.simd.hpp:33</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ab127ee2dd128bbe42276912b03f74256"><div class="ttname"><a href="namespacecv_1_1dnn.html#ab127ee2dd128bbe42276912b03f74256">cv::dnn::reduceLastAxesFloatParallel_</a></div><div class="ttdeci">void reduceLastAxesFloatParallel_(const Mat &amp;src, Mat &amp;dst, size_t innerLen, int reduce_type)</div><div class="ttdef"><b>Definición</b> <a href="#l00186">reduce2_kernels.simd.hpp:186</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ad0ae34c58960d6781fd8ceb895524722"><div class="ttname"><a href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">cv::dnn::total</a></div><div class="ttdeci">size_t total(const MatShape &amp;shape, int start=-1, int end=-1)</div><div class="ttdef"><b>Definición</b> <a href="shape__utils_8hpp_source.html#l00155">shape_utils.hpp:155</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="autility_8hpp_html"><div class="ttname"><a href="utility_8hpp.html">utility.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="dir_f4f7c9f64246e7a78cb90b1cc26742b7.html">cpu_kernels</a></li><li class="navelem"><a href="reduce2__kernels_8simd_8hpp.html">reduce2_kernels.simd.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

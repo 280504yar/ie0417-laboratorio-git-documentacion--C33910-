@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/imgproc/src/contours_blockstorage.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('contours__blockstorage_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">contours_blockstorage.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="contours__blockstorage_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_CONTOURS_BLOCKSTORAGE_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_CONTOURS_BLOCKSTORAGE_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="imgproc_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// BLOCK_SIZE_ELEM - number of elements in a block</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// STATIC_CAPACITY_BYTES - static memory in bytes for preallocated blocks</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">size_t</span> BLOCK_SIZE_ELEM = 1024, <span class="keywordtype">size_t</span> STATIC_CAPACITY_BYTES = 4096&gt;</div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html">   17</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">   19</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a> = <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structcv_1_1_block_storage_1_1block__type.html#a2e2ef19707adcfa5aae0e4fbbeead5bd">   20</a></span>        <span class="keyword">typedef</span> <span class="keyword">struct </span>{<a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a> <a class="code hl_variable" href="structcv_1_1_block_storage_1_1block__type.html#a2e2ef19707adcfa5aae0e4fbbeead5bd">data</a>[BLOCK_SIZE_ELEM];} <a class="code hl_struct" href="structcv_1_1_block_storage_1_1block__type.html">block_type</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">   22</a></span>        <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>()</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> minDynamicBlocks = !staticBlocksCount ? 1 : 0;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0 ; i&lt;minDynamicBlocks ; ++i)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                dynamicBlocks.push_back(<span class="keyword">new</span> block_type);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        }</div>
+</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a3cadfd4bfa9dd1f43093cb28a8791b7e">   28</a></span>        <a class="code hl_function" href="classcv_1_1_block_storage.html#a3cadfd4bfa9dd1f43093cb28a8791b7e">BlockStorage</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a3d8dc290fedc6f7ea16d0aa938595921">   29</a></span>        <a class="code hl_function" href="classcv_1_1_block_storage.html#a3d8dc290fedc6f7ea16d0aa938595921">BlockStorage</a>(<a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#aa9b1d4148c3dfab31091b5f9f479c97b">   30</a></span>        <a class="code hl_function" href="classcv_1_1_block_storage.html#aa9b1d4148c3dfab31091b5f9f479c97b">~BlockStorage</a>() {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp; block : dynamicBlocks) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                <span class="keyword">delete</span> block;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        }</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#ad62362b333d6ab170dca34e66c057a40">   35</a></span>        <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage.html#ad62362b333d6ab170dca34e66c057a40">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a93bd5973308352681a06a20c0b5296ef">   36</a></span>        <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage.html#a93bd5973308352681a06a20c0b5296ef">operator=</a>(<a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a77f168aa24e7ec70e67e92582798f0d8">   38</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a77f168aa24e7ec70e67e92582798f0d8">clear</a>(<span class="keywordtype">void</span>) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> minDynamicBlocks = !staticBlocksCount ? 1 : 0;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = minDynamicBlocks, count = dynamicBlocks.size() ; i&lt;count ; ++i ) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keyword">delete</span> dynamicBlocks[i];</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            dynamicBlocks.resize(minDynamicBlocks);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            sz = 0;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        }</div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#af59493532094a8ba14ba4d1a5ff04d08">   47</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#af59493532094a8ba14ba4d1a5ff04d08">push_back</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>&amp; value) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> blockIndex = sz / BLOCK_SIZE_ELEM;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> currentBlocksCount = staticBlocksCount+dynamicBlocks.size();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">if</span> (blockIndex == currentBlocksCount)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                dynamicBlocks.push_back(<span class="keyword">new</span> block_type);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            block_type&amp; cur_block =</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                (blockIndex &lt; staticBlocksCount) ? staticBlocks[blockIndex] :</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                *dynamicBlocks[blockIndex-staticBlocksCount];</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            cur_block.data[sz % BLOCK_SIZE_ELEM] = value;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            ++sz;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        }</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a268aa6380bae9d68be1f44cfd35ff8b9">   59</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a268aa6380bae9d68be1f44cfd35ff8b9">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> sz; }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a63b1c27ea38f8b496044ffda0083d029">   61</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage.html#a63b1c27ea38f8b496044ffda0083d029">at</a>(<span class="keywordtype">size_t</span> index)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> blockIndex = index / BLOCK_SIZE_ELEM;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">const</span> block_type&amp; cur_block =</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                (blockIndex &lt; staticBlocksCount) ? staticBlocks[blockIndex] :</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                *dynamicBlocks[blockIndex-staticBlocksCount];</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordflow">return</span> cur_block.data[index % BLOCK_SIZE_ELEM];</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
+</div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#acb3544cf1c0d530a7a9c4bea0fd99215">   68</a></span>        <a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage.html#acb3544cf1c0d530a7a9c4bea0fd99215">at</a>(<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> blockIndex = index / BLOCK_SIZE_ELEM;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            block_type&amp; cur_block =</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                (blockIndex &lt; staticBlocksCount) ? staticBlocks[blockIndex] :</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                *dynamicBlocks[blockIndex-staticBlocksCount];</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">return</span> cur_block.data[index % BLOCK_SIZE_ELEM];</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#ab6b2336e6f300b137423902c2cd40095">   75</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage.html#ab6b2336e6f300b137423902c2cd40095">operator[]</a>(<span class="keywordtype">size_t</span> index)<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a63b1c27ea38f8b496044ffda0083d029">at</a>(index);}</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a581206279ec05e143801108595462f05">   76</a></span>        <a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage.html#a581206279ec05e143801108595462f05">operator[]</a>(<span class="keywordtype">size_t</span> index) {<span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a63b1c27ea38f8b496044ffda0083d029">at</a>(index);}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#a8d46d1d1974ee6665ad406490fc4cff0">   78</a></span>        <span class="keyword">friend</span> <span class="keyword">class </span>RangeIterator;</div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="};">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage_1_1_range_iterator.html">   79</a></span>        <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#aa4936e5bf8e17888509c767579d1f1a0">RangeIterator</a></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage_1_1_range_iterator.html#aa4936e5bf8e17888509c767579d1f1a0">   82</a></span>                <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#aa4936e5bf8e17888509c767579d1f1a0">RangeIterator</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>* _owner, <span class="keywordtype">size_t</span> _first, <span class="keywordtype">size_t</span> _last)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                             :owner(_owner),remaining(_last-_first),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                              blockIndex(_first/BLOCK_SIZE_ELEM),offset(_first%BLOCK_SIZE_ELEM) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                }</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                <span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">BlockStorage</a>* owner = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keywordtype">size_t</span> remaining = 0;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordtype">size_t</span> blockIndex = 0;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <span class="keywordtype">size_t</span> offset = 0;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage_1_1_range_iterator.html#a65ca236fcb5d7b513faae49b1589f3a0">   92</a></span>                <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#a65ca236fcb5d7b513faae49b1589f3a0">done</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{<span class="keywordflow">return</span> !remaining;}</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage_1_1_range_iterator.html#a748a717e74225a19edc9bd137b81c084">   93</a></span>                std::pair&lt;const value_type*, size_t&gt; <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#a748a717e74225a19edc9bd137b81c084">operator*</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#ae06ee5fe88468245987efe05d0963789">get</a>();}</div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage_1_1_range_iterator.html#ae06ee5fe88468245987efe05d0963789">   94</a></span>                std::pair&lt;const value_type*, size_t&gt; <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#ae06ee5fe88468245987efe05d0963789">get</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_block_storage_1_1block__type.html">block_type</a>&amp; cur_block =</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                        (blockIndex &lt; owner-&gt;staticBlocksCount) ? owner-&gt;staticBlocks[blockIndex] :</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                        *owner-&gt;dynamicBlocks[blockIndex-owner-&gt;staticBlocksCount];</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <span class="keyword">const</span> <a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>* rangeStart = cur_block.<a class="code hl_variable" href="structcv_1_1_block_storage_1_1block__type.html#a2e2ef19707adcfa5aae0e4fbbeead5bd">data</a>+offset;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    <span class="keyword">const</span> <span class="keywordtype">size_t</span> rangeLength = std::min(remaining, BLOCK_SIZE_ELEM-offset);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                    <span class="keywordflow">return</span> std::make_pair(rangeStart, rangeLength);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                }</div>
+</div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage_1_1_range_iterator.html#a90258a5fc818c03326aa2bbaac1cca9b">  102</a></span>                <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#aa4936e5bf8e17888509c767579d1f1a0">RangeIterator</a>&amp; <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#a90258a5fc818c03326aa2bbaac1cca9b">operator++</a>() {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    std::pair&lt;const value_type*, size_t&gt; range = <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#ae06ee5fe88468245987efe05d0963789">get</a>();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                    remaining -= range.second;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    offset = 0;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    ++blockIndex;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                }</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        };</div>
+</div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classcv_1_1_block_storage.html#aaed68a1f007cff3c9bcde331ddf28fef">  110</a></span>        RangeIterator <a class="code hl_function" href="classcv_1_1_block_storage.html#aaed68a1f007cff3c9bcde331ddf28fef">getRangeIterator</a>(<span class="keywordtype">size_t</span> first, <span class="keywordtype">size_t</span> last)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>          <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_block_storage_1_1_range_iterator.html#aa4936e5bf8e17888509c767579d1f1a0">RangeIterator</a>(<span class="keyword">this</span>, first, last);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        std::array&lt;block_type, STATIC_CAPACITY_BYTES/(BLOCK_SIZE_ELEM*<span class="keyword">sizeof</span>(<a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>))&gt; staticBlocks;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> staticBlocksCount = STATIC_CAPACITY_BYTES/(BLOCK_SIZE_ELEM*<span class="keyword">sizeof</span>(<a class="code hl_typedef" href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">value_type</a>));</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        std::vector&lt;block_type*&gt; dynamicBlocks;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordtype">size_t</span> sz = 0;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}  <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#endif  </span><span class="comment">// OPENCV_CONTOURS_BLOCKSTORAGE_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_1_1_range_iterator_html_a65ca236fcb5d7b513faae49b1589f3a0"><div class="ttname"><a href="classcv_1_1_block_storage_1_1_range_iterator.html#a65ca236fcb5d7b513faae49b1589f3a0">cv::BlockStorage::RangeIterator::done</a></div><div class="ttdeci">bool done(void) const</div><div class="ttdef"><b>Definición</b> <a href="#l00092">contours_blockstorage.hpp:92</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_1_1_range_iterator_html_a748a717e74225a19edc9bd137b81c084"><div class="ttname"><a href="classcv_1_1_block_storage_1_1_range_iterator.html#a748a717e74225a19edc9bd137b81c084">cv::BlockStorage::RangeIterator::operator*</a></div><div class="ttdeci">std::pair&lt; const value_type *, size_t &gt; operator*(void) const</div><div class="ttdef"><b>Definición</b> <a href="#l00093">contours_blockstorage.hpp:93</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_1_1_range_iterator_html_a90258a5fc818c03326aa2bbaac1cca9b"><div class="ttname"><a href="classcv_1_1_block_storage_1_1_range_iterator.html#a90258a5fc818c03326aa2bbaac1cca9b">cv::BlockStorage::RangeIterator::operator++</a></div><div class="ttdeci">RangeIterator &amp; operator++()</div><div class="ttdef"><b>Definición</b> <a href="#l00102">contours_blockstorage.hpp:102</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_1_1_range_iterator_html_aa4936e5bf8e17888509c767579d1f1a0"><div class="ttname"><a href="classcv_1_1_block_storage_1_1_range_iterator.html#aa4936e5bf8e17888509c767579d1f1a0">cv::BlockStorage::RangeIterator::RangeIterator</a></div><div class="ttdeci">RangeIterator(const BlockStorage *_owner, size_t _first, size_t _last)</div><div class="ttdef"><b>Definición</b> <a href="#l00082">contours_blockstorage.hpp:82</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_1_1_range_iterator_html_ae06ee5fe88468245987efe05d0963789"><div class="ttname"><a href="classcv_1_1_block_storage_1_1_range_iterator.html#ae06ee5fe88468245987efe05d0963789">cv::BlockStorage::RangeIterator::get</a></div><div class="ttdeci">std::pair&lt; const value_type *, size_t &gt; get(void) const</div><div class="ttdef"><b>Definición</b> <a href="#l00094">contours_blockstorage.hpp:94</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a268aa6380bae9d68be1f44cfd35ff8b9"><div class="ttname"><a href="classcv_1_1_block_storage.html#a268aa6380bae9d68be1f44cfd35ff8b9">cv::BlockStorage::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definición</b> <a href="#l00059">contours_blockstorage.hpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a3cadfd4bfa9dd1f43093cb28a8791b7e"><div class="ttname"><a href="classcv_1_1_block_storage.html#a3cadfd4bfa9dd1f43093cb28a8791b7e">cv::BlockStorage::BlockStorage</a></div><div class="ttdeci">BlockStorage(const BlockStorage &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a3d8dc290fedc6f7ea16d0aa938595921"><div class="ttname"><a href="classcv_1_1_block_storage.html#a3d8dc290fedc6f7ea16d0aa938595921">cv::BlockStorage::BlockStorage</a></div><div class="ttdeci">BlockStorage(BlockStorage &amp;&amp;)=default</div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a42e83dce03d50438333c97984bca04a1"><div class="ttname"><a href="classcv_1_1_block_storage.html#a42e83dce03d50438333c97984bca04a1">cv::BlockStorage::value_type</a></div><div class="ttdeci">T value_type</div><div class="ttdef"><b>Definición</b> <a href="#l00019">contours_blockstorage.hpp:19</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a581206279ec05e143801108595462f05"><div class="ttname"><a href="classcv_1_1_block_storage.html#a581206279ec05e143801108595462f05">cv::BlockStorage::operator[]</a></div><div class="ttdeci">value_type &amp; operator[](size_t index)</div><div class="ttdef"><b>Definición</b> <a href="#l00076">contours_blockstorage.hpp:76</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a63b1c27ea38f8b496044ffda0083d029"><div class="ttname"><a href="classcv_1_1_block_storage.html#a63b1c27ea38f8b496044ffda0083d029">cv::BlockStorage::at</a></div><div class="ttdeci">const value_type &amp; at(size_t index) const</div><div class="ttdef"><b>Definición</b> <a href="#l00061">contours_blockstorage.hpp:61</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a6672bd8e03cddcc33a9d95892000a151"><div class="ttname"><a href="classcv_1_1_block_storage.html#a6672bd8e03cddcc33a9d95892000a151">cv::BlockStorage::BlockStorage</a></div><div class="ttdeci">BlockStorage()</div><div class="ttdef"><b>Definición</b> <a href="#l00022">contours_blockstorage.hpp:22</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a77f168aa24e7ec70e67e92582798f0d8"><div class="ttname"><a href="classcv_1_1_block_storage.html#a77f168aa24e7ec70e67e92582798f0d8">cv::BlockStorage::clear</a></div><div class="ttdeci">void clear(void)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">contours_blockstorage.hpp:38</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_a93bd5973308352681a06a20c0b5296ef"><div class="ttname"><a href="classcv_1_1_block_storage.html#a93bd5973308352681a06a20c0b5296ef">cv::BlockStorage::operator=</a></div><div class="ttdeci">BlockStorage &amp; operator=(BlockStorage &amp;&amp;)=default</div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_aa9b1d4148c3dfab31091b5f9f479c97b"><div class="ttname"><a href="classcv_1_1_block_storage.html#aa9b1d4148c3dfab31091b5f9f479c97b">cv::BlockStorage::~BlockStorage</a></div><div class="ttdeci">~BlockStorage()</div><div class="ttdef"><b>Definición</b> <a href="#l00030">contours_blockstorage.hpp:30</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_aaed68a1f007cff3c9bcde331ddf28fef"><div class="ttname"><a href="classcv_1_1_block_storage.html#aaed68a1f007cff3c9bcde331ddf28fef">cv::BlockStorage::getRangeIterator</a></div><div class="ttdeci">RangeIterator getRangeIterator(size_t first, size_t last) const</div><div class="ttdef"><b>Definición</b> <a href="#l00110">contours_blockstorage.hpp:110</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_ab6b2336e6f300b137423902c2cd40095"><div class="ttname"><a href="classcv_1_1_block_storage.html#ab6b2336e6f300b137423902c2cd40095">cv::BlockStorage::operator[]</a></div><div class="ttdeci">const value_type &amp; operator[](size_t index) const</div><div class="ttdef"><b>Definición</b> <a href="#l00075">contours_blockstorage.hpp:75</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_acb3544cf1c0d530a7a9c4bea0fd99215"><div class="ttname"><a href="classcv_1_1_block_storage.html#acb3544cf1c0d530a7a9c4bea0fd99215">cv::BlockStorage::at</a></div><div class="ttdeci">value_type &amp; at(size_t index)</div><div class="ttdef"><b>Definición</b> <a href="#l00068">contours_blockstorage.hpp:68</a></div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_ad62362b333d6ab170dca34e66c057a40"><div class="ttname"><a href="classcv_1_1_block_storage.html#ad62362b333d6ab170dca34e66c057a40">cv::BlockStorage::operator=</a></div><div class="ttdeci">BlockStorage &amp; operator=(const BlockStorage &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1_block_storage_html_af59493532094a8ba14ba4d1a5ff04d08"><div class="ttname"><a href="classcv_1_1_block_storage.html#af59493532094a8ba14ba4d1a5ff04d08">cv::BlockStorage::push_back</a></div><div class="ttdeci">void push_back(const value_type &amp;value)</div><div class="ttdef"><b>Definición</b> <a href="#l00047">contours_blockstorage.hpp:47</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="aimgproc_2src_2precomp_8hpp_html"><div class="ttname"><a href="imgproc_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_block_storage_1_1block__type_html"><div class="ttname"><a href="structcv_1_1_block_storage_1_1block__type.html">cv::BlockStorage::block_type</a></div><div class="ttdef"><b>Definición</b> <a href="#l00020">contours_blockstorage.hpp:20</a></div></div>
+<div class="ttc" id="astructcv_1_1_block_storage_1_1block__type_html_a2e2ef19707adcfa5aae0e4fbbeead5bd"><div class="ttname"><a href="structcv_1_1_block_storage_1_1block__type.html#a2e2ef19707adcfa5aae0e4fbbeead5bd">cv::BlockStorage::block_type::data</a></div><div class="ttdeci">value_type data[BLOCK_SIZE_ELEM]</div><div class="ttdef"><b>Definición</b> <a href="#l00020">contours_blockstorage.hpp:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_ff1242571287b720ea1174d525b8d38d.html">imgproc</a></li><li class="navelem"><a href="dir_3381323028adc7a7a76521f55c54fb57.html">src</a></li><li class="navelem"><a href="contours__blockstorage_8hpp.html">contours_blockstorage.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

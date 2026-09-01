@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/photo/src/ccm/utils.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('photo_2src_2ccm_2utils_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">utils.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="photo_2src_2ccm_2utils_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Author: Longbu Wang &lt;wanglongbu@huawei.com.com&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//         Jinheng Zhang &lt;zhangjinheng1@huawei.com&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//         Chenqi Shan &lt;shanchenqi@huawei.com&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="photo_2src_2ccm_2utils_8hpp.html">utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1ccm.html">ccm</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="group__ccm.html#ga06f4d6486f3026f65df4f75ad3207165">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga06f4d6486f3026f65df4f75ad3207165">gammaCorrection</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <span class="keywordtype">double</span> gamma)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src = _src.getMat();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(gamma &gt; 0);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">double</span>  maxVal;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">int</span>     depth = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">depth</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">switch</span> (depth)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>:  maxVal = 255.0;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gaf55ae5a94c48cae66b96979877576f12">CV_16U</a>: maxVal = 65535.0;  <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga9d2ee1a8334733dea7482a47a88e0f87">CV_16S</a>: maxVal = 32767.0;  <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>: maxVal = 1.0;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>: maxVal = 1.0;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa33999ba3bd3e78ac3f1b615782a103d2">Error::StsUnsupportedFormat</a>,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                <span class="stringliteral">&quot;gammaCorrection: unsupported image depth&quot;</span>);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// Special‐case for uint8 with a LUT</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (depth == <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> lut(1, 256, <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* p = lut.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 256; ++i)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordtype">double</span> fn = std::pow(i / 255.0, gamma) * 255.0;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            p[i] = <a class="code hl_function" href="group__core__utils.html#ga2858f5fe522e46a2e17662669199f6ff">cv::saturate_cast&lt;uchar&gt;</a>(fn + 0.5);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        _dst.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(src.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>());</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_function" href="group__core__array.html#gab55b8d062b7f5587720ede032d34156f">cv::LUT</a>(src, lut, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> f;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    src.<a class="code hl_function" href="classcv_1_1_mat.html#afbe2adb264f22740ae30b69e3500a213">convertTo</a>(f, <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>, 1.0 / maxVal);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_function" href="group__core__array.html#gaf0d056b5bd1dc92500d6f6cf6bac41ef">cv::pow</a>(f, gamma, f);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    _dst.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(src.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>());</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    f.convertTo(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>(), maxVal);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">   59</a></span><a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">maskCopyTo</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> fullMasked;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    src.<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(fullMasked, <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    std::vector&lt;Point&gt; nonZeroLocations;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_function" href="group__core__array.html#gaed7df59a3539b4cc0fe5c9c8d7586190">findNonZero</a>(<a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, nonZeroLocations);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nonZeroLocations.size()), 1, src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>());</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">int</span> channels = src.<a class="code hl_function" href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">channels</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">if</span> (channels == 1)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nonZeroLocations.size(); i++)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.at&lt;<span class="keywordtype">double</span>&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i), 0) = fullMasked.<a class="code hl_function" href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">at</a>&lt;<span class="keywordtype">double</span>&gt;(nonZeroLocations[i]);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (channels == 3)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nonZeroLocations.size(); i++)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.at&lt;<a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i), 0) = fullMasked.<a class="code hl_function" href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">at</a>&lt;<a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&gt;(nonZeroLocations[i]);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">Error::StsBadArg</a>, <span class="stringliteral">&quot;Unsupported number of channels&quot;</span>);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="namespacecv_1_1ccm.html#ae4f9ef5fca00c19ac0fb37b3c4a3458c">   92</a></span><a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="namespacecv_1_1ccm.html#ae4f9ef5fca00c19ac0fb37b3c4a3458c">multiple</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; xyz, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_namespace" href="namespacecv_1_1ccm.html">ccm</a>)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>{</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> tmp = xyz.<a class="code hl_function" href="classcv_1_1_mat.html#ae03aafd9e312b130a8d0b59c7824a8be">reshape</a>(1, xyz.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a> * xyz.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> res = tmp * <a class="code hl_namespace" href="namespacecv_1_1ccm.html">ccm</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    res = res.reshape(res.cols, xyz.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="namespacecv_1_1ccm.html#a800acd96f15b34d1ea86a9a50db3a03f">  100</a></span><a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="namespacecv_1_1ccm.html#a800acd96f15b34d1ea86a9a50db3a03f">saturate</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <span class="keywordtype">double</span> low, <span class="keywordtype">double</span> up)</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>{</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>() == <a class="code hl_define" href="group__core__hal__interface.html#gac2b9f01245cd8c07a171af40d11d8098">CV_64FC3</a>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> lower_bound(low, low, low);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> upper_bound(up, up, up);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_function" href="group__core__array.html#ga48af0ab51e36436c5d04340e036ce981">inRange</a>(src, lower_bound, upper_bound, <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a> /= 255;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}  <span class="comment">// namespace cv::ccm</span></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a9c09739ca3e0ce212e2ab8374aa2f195"><div class="ttname"><a href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">cv::_InputArray::getMat</a></div><div class="ttdeci">Mat getMat(int idx=-1) const</div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4eb2daf4732c371c7565db49f76c63ce"><div class="ttname"><a href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">cv::_OutputArray::create</a></div><div class="ttdeci">void create(Size sz, int type, int i=-1, bool allowTransposed=false, _OutputArray::DepthMask fixedDepthMask=static_cast&lt; _OutputArray::DepthMask &gt;(0)) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01466">matrix_wrap.cpp:1466</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a146f8e8dda07d1365a575ab83d9828d1"><div class="ttname"><a href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">cv::Mat::size</a></div><div class="ttdeci">MatSize size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02513">mat.hpp:2513</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a2cc2a68970b85d50f3a4fac1b55ba7c8"><div class="ttname"><a href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">cv::Mat::copyTo</a></div><div class="ttdeci">void copyTo(OutputArray m) const</div><div class="ttdoc">Copies the matrix to another one.</div><div class="ttdef"><b>Definición</b> <a href="copy_8cpp_source.html#l00447">copy.cpp:447</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8b2912f6a6f5d55a3c9a7aae9134d862"><div class="ttname"><a href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">cv::Mat::ptr</a></div><div class="ttdeci">uchar * ptr(int i0=0)</div><div class="ttdoc">Returns a pointer to the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8da9f853b6f3a29d738572fd1ffc44c0"><div class="ttname"><a href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">cv::Mat::depth</a></div><div class="ttdeci">int depth() const</div><div class="ttdoc">Returns the depth of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa10d804e90b51d4157b5c26e12c5d2df"><div class="ttname"><a href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">cv::Mat::at</a></div><div class="ttdeci">_Tp &amp; at(int i0=0)</div><div class="ttdoc">Returns a reference to the specified array element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa11336b9ac538e0475d840657ce164be"><div class="ttname"><a href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">cv::Mat::channels</a></div><div class="ttdeci">int channels() const</div><div class="ttdoc">Returns the number of matrix channels.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa3e5a47585c9ef6a0842556739155e3e"><div class="ttname"><a href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cv::Mat::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_abed816466c45234254d25bc59c31245e"><div class="ttname"><a href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">cv::Mat::rows</a></div><div class="ttdeci">int rows</div><div class="ttdoc">the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ae03aafd9e312b130a8d0b59c7824a8be"><div class="ttname"><a href="classcv_1_1_mat.html#ae03aafd9e312b130a8d0b59c7824a8be">cv::Mat::reshape</a></div><div class="ttdeci">Mat reshape(int cn, int rows=0) const</div><div class="ttdoc">Changes the shape and/or the number of channels of a 2D matrix without copying the data.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01678">matrix.cpp:1678</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af2d2652e552d7de635988f18a84b53e5"><div class="ttname"><a href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">cv::Mat::type</a></div><div class="ttdeci">int type() const</div><div class="ttdoc">Returns the type of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_afbe2adb264f22740ae30b69e3500a213"><div class="ttname"><a href="classcv_1_1_mat.html#afbe2adb264f22740ae30b69e3500a213">cv::Mat::convertTo</a></div><div class="ttdeci">void convertTo(OutputArray m, int rtype, double alpha=1, double beta=0) const</div><div class="ttdoc">Converts an array to another data type with optional scaling.</div><div class="ttdef"><b>Definición</b> <a href="convert_8dispatch_8cpp_source.html#l00136">convert.dispatch.cpp:136</a></div></div>
+<div class="ttc" id="agroup__ccm_html_ga06f4d6486f3026f65df4f75ad3207165"><div class="ttname"><a href="group__ccm.html#ga06f4d6486f3026f65df4f75ad3207165">cv::ccm::gammaCorrection</a></div><div class="ttdeci">CV_EXPORTS_W void gammaCorrection(InputArray src, OutputArray dst, double gamma)</div><div class="ttdoc">Applies gamma correction to the input image.</div><div class="ttdef"><b>Definición</b> <a href="#l00014">utils.cpp:14</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga48af0ab51e36436c5d04340e036ce981"><div class="ttname"><a href="group__core__array.html#ga48af0ab51e36436c5d04340e036ce981">cv::inRange</a></div><div class="ttdeci">CV_EXPORTS_W void inRange(InputArray src, InputArray lowerb, InputArray upperb, OutputArray dst)</div><div class="ttdoc">Checks if array elements lie between the elements of two other arrays.</div><div class="ttdef"><b>Definición</b> <a href="arithm_8cpp_source.html#l01735">arithm.cpp:1735</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gab55b8d062b7f5587720ede032d34156f"><div class="ttname"><a href="group__core__array.html#gab55b8d062b7f5587720ede032d34156f">cv::LUT</a></div><div class="ttdeci">CV_EXPORTS_W void LUT(InputArray src, InputArray lut, OutputArray dst)</div><div class="ttdoc">Performs a look-up table transform of an array.</div><div class="ttdef"><b>Definición</b> <a href="lut_8cpp_source.html#l00156">lut.cpp:156</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gaed7df59a3539b4cc0fe5c9c8d7586190"><div class="ttname"><a href="group__core__array.html#gaed7df59a3539b4cc0fe5c9c8d7586190">cv::findNonZero</a></div><div class="ttdeci">CV_EXPORTS_W void findNonZero(InputArray src, OutputArray idx)</div><div class="ttdoc">Returns the list of locations of non-zero pixels.</div><div class="ttdef"><b>Definición</b> <a href="count__non__zero_8dispatch_8cpp_source.html#l00153">count_non_zero.dispatch.cpp:153</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gaf0d056b5bd1dc92500d6f6cf6bac41ef"><div class="ttname"><a href="group__core__array.html#gaf0d056b5bd1dc92500d6f6cf6bac41ef">cv::pow</a></div><div class="ttdeci">CV_EXPORTS_W void pow(InputArray src, double power, OutputArray dst)</div><div class="ttdoc">Raises every array element to a power.</div><div class="ttdef"><b>Definición</b> <a href="mathfuncs_8cpp_source.html#l01016">mathfuncs.cpp:1016</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga370d94209693b5b13437ab4991cabf73"><div class="ttname"><a href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">cv::Vec3d</a></div><div class="ttdeci">Vec&lt; double, 3 &gt; Vec3d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00480">matx.hpp:480</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga9d2ee1a8334733dea7482a47a88e0f87"><div class="ttname"><a href="group__core__hal__interface.html#ga9d2ee1a8334733dea7482a47a88e0f87">CV_16S</a></div><div class="ttdeci">#define CV_16S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00057">interface.h:57</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gac2b9f01245cd8c07a171af40d11d8098"><div class="ttname"><a href="group__core__hal__interface.html#gac2b9f01245cd8c07a171af40d11d8098">CV_64FC3</a></div><div class="ttdeci">#define CV_64FC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00119">interface.h:119</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaf55ae5a94c48cae66b96979877576f12"><div class="ttname"><a href="group__core__hal__interface.html#gaf55ae5a94c48cae66b96979877576f12">CV_16U</a></div><div class="ttdeci">#define CV_16U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00056">interface.h:56</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga2858f5fe522e46a2e17662669199f6ff"><div class="ttname"><a href="group__core__utils.html#ga2858f5fe522e46a2e17662669199f6ff">cv::saturate_cast&lt; uchar &gt;</a></div><div class="ttdeci">uchar saturate_cast&lt; uchar &gt;(schar v)</div><div class="ttdef"><b>Definición</b> <a href="saturate_8hpp_source.html#l00101">saturate.hpp:101</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa33999ba3bd3e78ac3f1b615782a103d2"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa33999ba3bd3e78ac3f1b615782a103d2">cv::Error::StsUnsupportedFormat</a></div><div class="ttdeci">@ StsUnsupportedFormat</div><div class="ttdoc">the data format/type is not supported by the function</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00060">exception.hpp:60</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">cv::Error::StsBadArg</a></div><div class="ttdeci">@ StsBadArg</div><div class="ttdoc">function arg/param is bad</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00024">exception.hpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html"><div class="ttname"><a href="namespacecv_1_1ccm.html">cv::ccm</a></div><div class="ttdef"><b>Definición</b> <a href="ccm_8hpp_source.html#l00017">ccm.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a800acd96f15b34d1ea86a9a50db3a03f"><div class="ttname"><a href="namespacecv_1_1ccm.html#a800acd96f15b34d1ea86a9a50db3a03f">cv::ccm::saturate</a></div><div class="ttdeci">Mat saturate(Mat &amp;src, double low, double up)</div><div class="ttdoc">multiple the function used to get the mask of saturated colors, colors between low and up will be cho...</div><div class="ttdef"><b>Definición</b> <a href="#l00100">utils.cpp:100</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a82c2831efa4d69c17d84fc88fd8410f5"><div class="ttname"><a href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">cv::ccm::maskCopyTo</a></div><div class="ttdeci">Mat maskCopyTo(const Mat &amp;src, const Mat &amp;mask)</div><div class="ttdoc">maskCopyTo a function to delete unsatisfied elementwise.</div><div class="ttdef"><b>Definición</b> <a href="#l00059">utils.cpp:59</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_ae4f9ef5fca00c19ac0fb37b3c4a3458c"><div class="ttname"><a href="namespacecv_1_1ccm.html#ae4f9ef5fca00c19ac0fb37b3c4a3458c">cv::ccm::multiple</a></div><div class="ttdeci">Mat multiple(const Mat &amp;xyz, const Mat &amp;ccm)</div><div class="ttdoc">multiple the function used to compute an array with n channels mulipied by ccm.</div><div class="ttdef"><b>Definición</b> <a href="#l00092">utils.cpp:92</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aphoto_2src_2ccm_2utils_8hpp_html"><div class="ttname"><a href="photo_2src_2ccm_2utils_8hpp.html">utils.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_847b99370ed06e1072f8b8059d2f9ef8.html">photo</a></li><li class="navelem"><a href="dir_8ce04962efed91e20e757beca4d6ab49.html">src</a></li><li class="navelem"><a href="dir_d0b5b1b6af9e9720589246207b511d01.html">ccm</a></li><li class="navelem"><a href="photo_2src_2ccm_2utils_8cpp.html">utils.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

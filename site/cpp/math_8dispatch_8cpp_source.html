@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/math.dispatch.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('math_8dispatch_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">math.dispatch.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="math_8dispatch_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Dispatch layer for the element-wise MATH + SELECT kernels (math.simd.hpp) - the sibling of</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// arithm.dispatch.cpp: plain functions forwarding to the CPU-optimal kernel via CV_CPU_DISPATCH.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// getElemwiseFunc (arithm.dispatch.cpp) routes the corresponding TOps here.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="arithm__expr_8hpp.html">arithm_expr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2hal__replacement_8hpp.html">hal_replacement.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="math_8simd_8hpp.html">math.simd.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;math.simd_declarations.hpp&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1ew.html">ew</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// ---- pluggable-HAL bridge for exp/log --------------------------------------------------------</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// The raw cv_hal_* entry points return int for a reason: without an installed HAL they are stubs</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// returning CV_HAL_ERROR_NOT_IMPLEMENTED. getMathFunc PROBES each one once (a 1-element call on</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// the safe input 1.0 - fine for both exp and log): implemented -&gt; wrap it as an engine kernel</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// (the function pointer rides in TKernel::userdata, castKernel-style) and the engine adds tiling</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// and parallelism on top of the vendor code; not implemented -&gt; the engine&#39;s own v_exp/v_log</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// kernels. Uniform over ANY HAL (an external vendor one, the IPP HAL module, ...) - the get is</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// called once per program build, the probe cost is nothing next to the kernel calls that follow.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespacecv_1_1ew.html#a79f1840ecda6d46ac300e24ef34d102d">   26</a></span><span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1ew.html#a79f1840ecda6d46ac300e24ef34d102d">halUnaryKernel</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* src0_, <span class="keywordtype">size_t</span> s0y, <span class="keywordtype">size_t</span> s0x,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                          <span class="keyword">const</span> <span class="keywordtype">void</span>*, <span class="keywordtype">size_t</span>, <span class="keywordtype">size_t</span>, <span class="keyword">const</span> <span class="keywordtype">void</span>*, <span class="keywordtype">size_t</span>, <span class="keywordtype">size_t</span>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                          <span class="keywordtype">void</span>* dst_, <span class="keywordtype">size_t</span> dsty, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                          <span class="keyword">const</span> <span class="keywordtype">double</span>*, <span class="keywordtype">int</span>, <span class="keywordtype">void</span>* userdata)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">typedef</span> int (*HalFunc)(<span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>*, <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>*, int);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">const</span> HalFunc fn = (HalFunc)userdata;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    s0y /= <span class="keyword">sizeof</span>(<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    dsty /= <span class="keyword">sizeof</span>(<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(s0x &lt;= 1u);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* src0 = (<span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>*)src0_;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>*)dst_;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (height &gt; 1 &amp;&amp; dsty == (<span class="keywordtype">size_t</span>)width &amp;&amp; s0y == s0x*(<span class="keywordtype">size_t</span>)width) { width *= height; height = 1; }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> urows = (s0y == 0 &amp;&amp; height &gt; 1) ? 1 : height;   <span class="comment">// vertical broadcast: 1 row + copies</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> = 0; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> &lt; urows; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>++, src0 += s0y, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> += dsty)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">int</span> code;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">if</span> (s0x == 0)                     <span class="comment">// broadcast-scalar source: one value covers the row</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> v;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            code = fn(src0, &amp;v, 1);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 0; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; width; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++) <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] = v;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            code = fn(src0, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, width);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">if</span> (code != <a class="code hl_define" href="group__core__hal__interface.html#gaa600ffad4255793712ffedcaf36df9e8">CV_HAL_ERROR_OK</a>)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">return</span> code;                  <span class="comment">// shouldn&#39;t happen (probed at get time) - let exec assert</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>*)dst_;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> = urows; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> &lt; height; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>++)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        memcpy(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> + (<span class="keywordtype">size_t</span>)<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>*dsty, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, (<span class="keywordtype">size_t</span>)width*<span class="keyword">sizeof</span>(<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> HalFunc&gt;</div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">   61</a></span><span class="keyword">static</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> <a class="code hl_function" href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">probeHalUnary</a>(HalFunc fn)</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> one = (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>)1, r = (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>)0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">if</span> (fn(&amp;one, &amp;r, 1) == <a class="code hl_define" href="group__core__hal__interface.html#gaa600ffad4255793712ffedcaf36df9e8">CV_HAL_ERROR_OK</a>)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> {<a class="code hl_function" href="namespacecv_1_1ew.html#a79f1840ecda6d46ac300e24ef34d102d">halUnaryKernel&lt;T&gt;</a>, (<span class="keywordtype">void</span>*)fn, 0};</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">// The engine&#39;s OWN kernel for (op, T) - v_exp/v_log &amp; co, no HAL/IPP tiers. The final fallback of</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">// getMathFunc, and what hal::exp32f &amp; co use as THEIR built-in implementation (the former table</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">// kernels are gone), via mathSpanEngine below.</span></div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespacecv_1_1ew.html#aba36415ec495ce402bd023e7faeb73b1">   72</a></span><span class="keyword">static</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> <a class="code hl_function" href="namespacecv_1_1ew.html#aba36415ec495ce402bd023e7faeb73b1">getEngineMathFunc</a>(<a class="code hl_enumeration" href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410">TOp</a> op, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>{</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    CV_CPU_DISPATCH(<a class="code hl_function" href="namespacecv_1_1ew.html#a300d6adae85bba40f9f07c0cb339fe0d">getMathFunc_</a>,   (op, <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>),      CV_CPU_DISPATCH_MODES_ALL);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">// run the engine&#39;s own math kernel over one contiguous span (the shape hal::exp32f &amp; co need)</span></div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="}">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="namespacecv_1_1ew.html#a73ea1822acbcfd30c8f00c6208b7a9bb">   78</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1ew.html#a73ea1822acbcfd30c8f00c6208b7a9bb">mathSpanEngine</a>(<a class="code hl_enumeration" href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410">TOp</a> op, <span class="keywordtype">int</span> depth, <span class="keyword">const</span> <span class="keywordtype">void</span>* src, <span class="keywordtype">void</span>* <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">int</span> n)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>{</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = <a class="code hl_function" href="namespacecv_1_1ew.html#aba36415ec495ce402bd023e7faeb73b1">getEngineMathFunc</a>(op, depth);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.fptr);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> noparams[4] = {};</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.fptr(src, 0, 1, <span class="keyword">nullptr</span>, 0, 0, <span class="keyword">nullptr</span>, 0, 0, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, 0, n, 1, noparams, <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.<a class="code hl_variable" href="classcv_1_1___input_array.html#af3be19723301164bb9932133f550149f">flags</a>, <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.userdata);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="namespacecv_1_1ew.html#a002bc4c91d97b3434efc0435073b3406">   86</a></span><a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> <a class="code hl_function" href="namespacecv_1_1ew.html#a002bc4c91d97b3434efc0435073b3406">getMathFunc</a>(<a class="code hl_enumeration" href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410">TOp</a> op, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> ((op == <a class="code hl_enumvalue" href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410a26078db5545210b943f0104c92b6c24c">OP_EXP</a> || op == <a class="code hl_enumvalue" href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410abf1af625785d4d17482c27b340819a38">OP_LOG</a>) &amp;&amp; (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a> || <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> == <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>))</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="comment">// IPP now rides the cv_hal_* hooks too (hal/ipp), so the single probe below picks it up</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="comment">// together with any external vendor HAL - no separate IPP tier needed here.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="comment">// probe results are process-lifetime stable; cache them (thread-safe magic statics)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> exp32 = <a class="code hl_function" href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">probeHalUnary&lt;float &gt;</a>(cv_hal_exp32f);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> exp64 = <a class="code hl_function" href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">probeHalUnary&lt;double&gt;</a>(cv_hal_exp64f);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> log32 = <a class="code hl_function" href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">probeHalUnary&lt;float &gt;</a>(cv_hal_log32f);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> log64 = <a class="code hl_function" href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">probeHalUnary&lt;double&gt;</a>(cv_hal_log64f);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a>* <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = op == <a class="code hl_enumvalue" href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410a26078db5545210b943f0104c92b6c24c">OP_EXP</a> ? (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a> ? &amp;exp32 : &amp;exp64)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                                        : (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a> ? &amp;log32 : &amp;log64);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>-&gt;fptr)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">return</span> *<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecv_1_1ew.html#aba36415ec495ce402bd023e7faeb73b1">getEngineMathFunc</a>(op, <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespacecv_1_1ew.html#a6614aba07ef2e8fccb5bc0807b35dc95">  105</a></span><a class="code hl_struct" href="structcv_1_1ew_1_1_t_kernel.html">TKernel</a> <a class="code hl_function" href="namespacecv_1_1ew.html#a6614aba07ef2e8fccb5bc0807b35dc95">getPowFunc</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>)            { CV_CPU_DISPATCH(<a class="code hl_function" href="namespacecv_1_1ew.html#a3fe633490243d0d2cdaa8dfbfd4a1b02">getPowFunc_</a>,    (<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>),       CV_CPU_DISPATCH_MODES_ALL); }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}} <span class="comment">// namespace cv::ew</span></div>
+<div class="ttc" id="aarithm__expr_8hpp_html"><div class="ttname"><a href="arithm__expr_8hpp.html">arithm_expr.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_af3be19723301164bb9932133f550149f"><div class="ttname"><a href="classcv_1_1___input_array.html#af3be19723301164bb9932133f550149f">cv::_InputArray::flags</a></div><div class="ttdeci">int flags</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00375">mat.hpp:375</a></div></div>
+<div class="ttc" id="acore_2src_2hal__replacement_8hpp_html"><div class="ttname"><a href="core_2src_2hal__replacement_8hpp.html">hal_replacement.hpp</a></div></div>
+<div class="ttc" id="acore_2src_2precomp_8hpp_html"><div class="ttname"><a href="core_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_ga4f54fd94c93832386eee74ac994176bb"><div class="ttname"><a href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">cv::R</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray R</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa600ffad4255793712ffedcaf36df9e8"><div class="ttname"><a href="group__core__hal__interface.html#gaa600ffad4255793712ffedcaf36df9e8">CV_HAL_ERROR_OK</a></div><div class="ttdeci">#define CV_HAL_ERROR_OK</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00009">interface.h:9</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="amath_8simd_8hpp_html"><div class="ttname"><a href="math_8simd_8hpp.html">math.simd.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html"><div class="ttname"><a href="namespacecv_1_1ew.html">cv::ew</a></div><div class="ttdef"><b>Definición</b> <a href="arithm_8dispatch_8cpp_source.html#l00016">arithm.dispatch.cpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_a002bc4c91d97b3434efc0435073b3406"><div class="ttname"><a href="namespacecv_1_1ew.html#a002bc4c91d97b3434efc0435073b3406">cv::ew::getMathFunc</a></div><div class="ttdeci">CV_EXPORTS TKernel getMathFunc(TOp op, int T)</div><div class="ttdef"><b>Definición</b> <a href="#l00086">math.dispatch.cpp:86</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_a300d6adae85bba40f9f07c0cb339fe0d"><div class="ttname"><a href="namespacecv_1_1ew.html#a300d6adae85bba40f9f07c0cb339fe0d">cv::ew::getMathFunc_</a></div><div class="ttdeci">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN TKernel getMathFunc_(TOp op, int T)</div><div class="ttdef"><b>Definición</b> <a href="math_8simd_8hpp_source.html#l00465">math.simd.hpp:465</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_a3fe633490243d0d2cdaa8dfbfd4a1b02"><div class="ttname"><a href="namespacecv_1_1ew.html#a3fe633490243d0d2cdaa8dfbfd4a1b02">cv::ew::getPowFunc_</a></div><div class="ttdeci">TKernel getPowFunc_(int T, int R)</div><div class="ttdef"><b>Definición</b> <a href="math_8simd_8hpp_source.html#l00425">math.simd.hpp:425</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_a6614aba07ef2e8fccb5bc0807b35dc95"><div class="ttname"><a href="namespacecv_1_1ew.html#a6614aba07ef2e8fccb5bc0807b35dc95">cv::ew::getPowFunc</a></div><div class="ttdeci">CV_EXPORTS TKernel getPowFunc(int T, int R)</div><div class="ttdef"><b>Definición</b> <a href="#l00105">math.dispatch.cpp:105</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_a73ea1822acbcfd30c8f00c6208b7a9bb"><div class="ttname"><a href="namespacecv_1_1ew.html#a73ea1822acbcfd30c8f00c6208b7a9bb">cv::ew::mathSpanEngine</a></div><div class="ttdeci">CV_EXPORTS void mathSpanEngine(TOp op, int depth, const void *src, void *dst, int n)</div><div class="ttdef"><b>Definición</b> <a href="#l00078">math.dispatch.cpp:78</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_a79f1840ecda6d46ac300e24ef34d102d"><div class="ttname"><a href="namespacecv_1_1ew.html#a79f1840ecda6d46ac300e24ef34d102d">cv::ew::halUnaryKernel</a></div><div class="ttdeci">static int halUnaryKernel(const void *src0_, size_t s0y, size_t s0x, const void *, size_t, size_t, const void *, size_t, size_t, void *dst_, size_t dsty, int width, int height, const double *, int, void *userdata)</div><div class="ttdef"><b>Definición</b> <a href="#l00026">math.dispatch.cpp:26</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_aa3a2c59dc4b205283f87f4784ca60824"><div class="ttname"><a href="namespacecv_1_1ew.html#aa3a2c59dc4b205283f87f4784ca60824">cv::ew::probeHalUnary</a></div><div class="ttdeci">static TKernel probeHalUnary(HalFunc fn)</div><div class="ttdef"><b>Definición</b> <a href="#l00061">math.dispatch.cpp:61</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_aba36415ec495ce402bd023e7faeb73b1"><div class="ttname"><a href="namespacecv_1_1ew.html#aba36415ec495ce402bd023e7faeb73b1">cv::ew::getEngineMathFunc</a></div><div class="ttdeci">static TKernel getEngineMathFunc(TOp op, int T)</div><div class="ttdef"><b>Definición</b> <a href="#l00072">math.dispatch.cpp:72</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_afeed2ab0f4ff5b8e8f949575666c8410"><div class="ttname"><a href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410">cv::ew::TOp</a></div><div class="ttdeci">TOp</div><div class="ttdef"><b>Definición</b> <a href="arithm__expr_8hpp_source.html#l00048">arithm_expr.hpp:49</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_afeed2ab0f4ff5b8e8f949575666c8410a26078db5545210b943f0104c92b6c24c"><div class="ttname"><a href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410a26078db5545210b943f0104c92b6c24c">cv::ew::OP_EXP</a></div><div class="ttdeci">@ OP_EXP</div><div class="ttdef"><b>Definición</b> <a href="arithm__expr_8hpp_source.html#l00054">arithm_expr.hpp:54</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ew_html_afeed2ab0f4ff5b8e8f949575666c8410abf1af625785d4d17482c27b340819a38"><div class="ttname"><a href="namespacecv_1_1ew.html#afeed2ab0f4ff5b8e8f949575666c8410abf1af625785d4d17482c27b340819a38">cv::ew::OP_LOG</a></div><div class="ttdeci">@ OP_LOG</div><div class="ttdef"><b>Definición</b> <a href="arithm__expr_8hpp_source.html#l00054">arithm_expr.hpp:54</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1ew_1_1_t_kernel_html"><div class="ttname"><a href="structcv_1_1ew_1_1_t_kernel.html">cv::ew::TKernel</a></div><div class="ttdef"><b>Definición</b> <a href="arithm__expr_8hpp_source.html#l00159">arithm_expr.hpp:160</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="math_8dispatch_8cpp.html">math.dispatch.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

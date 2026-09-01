@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/opencl/runtime/generator/parser_cl.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('parser__cl_8py_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">parser_cl.py</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="parser__cl_8py.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html">    1</a></span><span class="comment">#!/bin/python</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"># usage:</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">#     cat opencl11/cl.h | $0 cl_runtime_opencl11</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">#     cat opencl12/cl.h | $0 cl_runtime_opencl12</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> sys, re;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">from</span> common <span class="keyword">import</span> remove_comments, getTokens, getParameters, postProcessParameters</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordflow">try</span>:</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordflow">if</span> len(sys.argv) &gt; 1:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#ab5cfa99414ffd1d791f29427306eef15">   12</a></span>        module_name = sys.argv[1]</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a77f1aa1798731abbd0b4418ae4453dba">   13</a></span>        outfile = open(<span class="stringliteral">&#39;../../../../include/opencv2/core/opencl/runtime/autogenerated/%s.hpp&#39;</span> % module_name, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a8aa310a83392744008315695e7b02ae3">   14</a></span>        outfile_impl = open(<span class="stringliteral">&#39;../autogenerated/%s_impl.hpp&#39;</span> % module_name, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a610d3c9e3d23a624d6c3f61421c6d09d">   15</a></span>        outfile_static_impl = open(<span class="stringliteral">&#39;../autogenerated/%s_static_impl.hpp&#39;</span> % module_name, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a7e674720d703c0a55da370b8f8a048d4">   16</a></span>        outfile_wrappers = open(<span class="stringliteral">&#39;../../../../include/opencv2/core/opencl/runtime/autogenerated/%s_wrappers.hpp&#39;</span> % module_name, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">if</span> len(sys.argv) &gt; 2:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a1c63ef561e539781293d415e0406c302">   18</a></span>            f = open(sys.argv[2], <span class="stringliteral">&quot;r&quot;</span>)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            f = sys.stdin</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        sys.exit(<span class="stringliteral">&quot;ERROR. Specify output file&quot;</span>)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordflow">except</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    sys.exit(<span class="stringliteral">&quot;ERROR. Can&#39;t open input/output file, check parameters&quot;</span>)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a880810282a7abd2635fc1d47b9ba7bc3">   26</a></span>fns = []</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordflow">while</span> <span class="keyword">True</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#afbac45cb62d3de09d26e7a0dce5f3918">   29</a></span>    line = f.readline()</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">if</span> len(line) == 0:</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">break</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">assert</span> isinstance(line, str)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#aeb51771a9745c02b0088b9bbd1d3c4cd">   33</a></span>    parts = line.split();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> line.startswith(<span class="stringliteral">&#39;extern&#39;</span>) <span class="keywordflow">and</span> line.find(<span class="stringliteral">&#39;CL_API_CALL&#39;</span>) != -1:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="comment"># read block of lines</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">while</span> <span class="keyword">True</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#ad5c3dab1c721ee8dbcafaa37d365af26">   37</a></span>            nl = f.readline()</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            nl = nl.strip()</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            nl = re.sub(<span class="stringliteral">r&#39;\n&#39;</span>, <span class="stringliteral">r&#39;&#39;</span>, nl)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">if</span> len(nl) == 0:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            line += <span class="stringliteral">&#39; &#39;</span> + nl</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        line = <a class="code hl_function" href="namespacecommon.html#a2560961c8f9f8a4a38c5a0e68d8f9c3b">remove_comments</a>(line)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        parts = <a class="code hl_function" href="namespacecommon.html#aa66cf2c83ebe2d786f1ed14d877ec6e4">getTokens</a>(line)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#ae715c01e1cd32daceea6dbb556b942ab">   48</a></span>        fn = {}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a53ad0aa41ceb5e702ede705d5756db7a">   49</a></span>        modifiers = []</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a3c8f80e9aa96b9389129692a4cc356db">   50</a></span>        ret = []</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a3455d69722c87ebd3bf6aae368ef444b">   51</a></span>        calling = []</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">   52</a></span>        i = 1</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">while</span> (i &lt; len(parts)):</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">if</span> parts[i].startswith(<span class="stringliteral">&#39;CL_&#39;</span>):</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                modifiers.append(parts[i])</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                <span class="keywordflow">break</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            i += 1</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">while</span> (i &lt; len(parts)):</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> parts[i].startswith(<span class="stringliteral">&#39;CL_&#39;</span>):</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                ret.append(parts[i])</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                <span class="keywordflow">break</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            i += 1</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">while</span> (i &lt; len(parts)):</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            calling.append(parts[i])</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            i += 1</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordflow">if</span> parts[i - 1] == <span class="stringliteral">&#39;CL_API_CALL&#39;</span>:</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="keywordflow">break</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        fn[<span class="stringliteral">&#39;modifiers&#39;</span>] = []  <span class="comment"># modifiers</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        fn[<span class="stringliteral">&#39;ret&#39;</span>] = ret</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        fn[<span class="stringliteral">&#39;calling&#39;</span>] = calling</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="comment"># print &#39;modifiers=&#39;+&#39; &#39;.join(modifiers)</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="comment"># print &#39;ret=&#39;+&#39; &#39;.join(type)</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="comment"># print &#39;calling=&#39;+&#39; &#39;.join(calling)</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#af9d790fa3cd16e6cf797f3ea7aefd433">   79</a></span>        name = parts[i]; i += 1;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        fn[<span class="stringliteral">&#39;name&#39;</span>] = name</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        print(<span class="stringliteral">&#39;name=&#39;</span> + name)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#af01beba6f8269b68e536208d1e485b74">   83</a></span>        params = <a class="code hl_function" href="namespacecommon.html#a5ffd2086c3598265c55b53b48a47839d">getParameters</a>(i, parts)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        fn[<span class="stringliteral">&#39;params&#39;</span>] = params</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="comment"># print &#39;params=&quot;&#39;+&#39;,&#39;.join(params)+&#39;&quot;&#39;</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        fns.append(fn)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>f.close()</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>print(<span class="stringliteral">&#39;Found %d functions&#39;</span> % len(fns))</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><a class="code hl_function" href="namespacecommon.html#afc27d4d47b2e67a852c7490e3f817c22">postProcessParameters</a>(fns)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>pprint(fns)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">from</span> common <span class="keyword">import</span> *</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a2e0308456b7c5ffb4c31b5ecb0a30461">  101</a></span>filterFileName = <span class="stringliteral">&#39;./filter/%s_functions.list&#39;</span> % module_name</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a0f9db5a727f23afd6ade609a45c46525">  102</a></span>numEnabled = <a class="code hl_function" href="namespacecommon.html#a09701b9e0dd65bcd423db68fd8d57663">readFunctionFilter</a>(fns, filterFileName)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a0222e75b70fb56bd107383730b7feef7">  104</a></span>functionsFilter = <a class="code hl_function" href="namespacecommon.html#a35c133dfc62524389a3ce8e5c3c68348">generateFilterNames</a>(fns)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#ae324de6a2cdda53bfdce4c4849b149c5">  105</a></span>filter_file = open(filterFileName, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>filter_file.write(functionsFilter)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a870930a3475ba5264085f72ed7f51fe3">  108</a></span>ctx = {}</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>ctx[<span class="stringliteral">&#39;CL_REMAP_ORIGIN&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#ae3432c123e0c81f565caa9d4ed8abb7e">generateRemapOrigin</a>(fns)</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>ctx[<span class="stringliteral">&#39;CL_REMAP_DYNAMIC&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#a90ade5e7281f4ddebc2b6a35654db5b5">generateRemapDynamic</a>(fns)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>ctx[<span class="stringliteral">&#39;CL_FN_DECLARATIONS&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#ab56ec65199f9ddf9b6845b76b115f818">generateFnDeclaration</a>(fns)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#aa0537b69904e22923d59d2af4c904ad2">  113</a></span>sys.stdout = outfile</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><a class="code hl_function" href="namespacecommon.html#ae83788af223667d7973f071d9235fe06">ProcessTemplate</a>(<span class="stringliteral">&#39;template/%s.hpp.in&#39;</span> % module_name, ctx)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>ctx[<span class="stringliteral">&#39;CL_FN_INLINE_WRAPPERS&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#a814980a41fb429b9130b5e95357018fe">generateInlineWrappers</a>(fns)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>sys.stdout = outfile_wrappers</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><a class="code hl_function" href="namespacecommon.html#ae83788af223667d7973f071d9235fe06">ProcessTemplate</a>(<span class="stringliteral">&#39;template/%s_wrappers.hpp.in&#39;</span> % module_name, ctx)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keywordflow">if</span> module_name == <span class="stringliteral">&#39;opencl_core&#39;</span>:</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    ctx[<span class="stringliteral">&#39;CL_FN_ENTRY_DEFINITIONS&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#a0abc2ebc23b36255fb4cc220af3614ac">generateStructDefinitions</a>(fns)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    ctx[<span class="stringliteral">&#39;CL_FN_ENTRY_LIST&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#abac905751c96aa3d79d0a423b399a16a">generateListOfDefinitions</a>(fns)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    ctx[<span class="stringliteral">&#39;CL_FN_ENUMS&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#a097b89766fec6811706e8f60294e483b">generateEnums</a>(fns)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    ctx[<span class="stringliteral">&#39;CL_FN_SWITCH&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#ad4fe1179e2eee6a3b4c69ee03d6490d1">generateTemplates</a>(15, <span class="stringliteral">&#39;opencl_fn&#39;</span>, <span class="stringliteral">&#39;opencl_check_fn&#39;</span>, <span class="stringliteral">&#39;CL_API_CALL&#39;</span>)</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a5fce25b5a99641768836695f2e65c781">  127</a></span>    lprefix = module_name + <span class="stringliteral">&#39;_fn&#39;</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a198b1158f8f74c1eaacc993f38871aaf">  128</a></span>    enumprefix = module_name.upper() + <span class="stringliteral">&#39;_FN&#39;</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a1176dc8a5de56a2ee4e9326fbddbc51c">  129</a></span>    fn_list_name = module_name + <span class="stringliteral">&#39;_fn_list&#39;</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    ctx[<span class="stringliteral">&#39;CL_FN_ENTRY_DEFINITIONS&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#a0abc2ebc23b36255fb4cc220af3614ac">generateStructDefinitions</a>(fns, lprefix=lprefix, enumprefix=enumprefix)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    ctx[<span class="stringliteral">&#39;CL_FN_ENTRY_LIST&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#abac905751c96aa3d79d0a423b399a16a">generateListOfDefinitions</a>(fns, fn_list_name)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="namespaceparser__cl.html#a347215b9e720dafd33209d6f05545652">  132</a></span>    ctx[<span class="stringliteral">&#39;CL_FN_ENUMS&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#a097b89766fec6811706e8f60294e483b">generateEnums</a>(fns, prefix=enumprefix)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    ctx[<span class="stringliteral">&#39;CL_FN_SWITCH&#39;</span>] = <a class="code hl_function" href="namespacecommon.html#ad4fe1179e2eee6a3b4c69ee03d6490d1">generateTemplates</a>(15, lprefix, <span class="stringliteral">&#39;%s_check_fn&#39;</span> % module_name, <span class="stringliteral">&#39;CL_API_CALL&#39;</span>)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>ctx[<span class="stringliteral">&#39;CL_NUMBER_OF_ENABLED_FUNCTIONS&#39;</span>] = <span class="stringliteral">&#39;// number of enabled functions: %d&#39;</span> % (numEnabled)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>sys.stdout = outfile_impl</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><a class="code hl_function" href="namespacecommon.html#ae83788af223667d7973f071d9235fe06">ProcessTemplate</a>(<span class="stringliteral">&#39;template/%s_impl.hpp.in&#39;</span> % module_name, ctx)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>sys.stdout = outfile_static_impl</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><a class="code hl_function" href="namespacecommon.html#ae83788af223667d7973f071d9235fe06">ProcessTemplate</a>(<span class="stringliteral">&#39;template/static_impl.hpp.in&#39;</span>, dict(CL_STATIC_DEFINITIONS=<a class="code hl_function" href="namespacecommon.html#a803d0d80232c4f5be7e1931297dda09c">generateStaticDefinitions</a>(fns)))</div>
+<div class="ttc" id="anamespacecommon_html_a09701b9e0dd65bcd423db68fd8d57663"><div class="ttname"><a href="namespacecommon.html#a09701b9e0dd65bcd423db68fd8d57663">common.readFunctionFilter</a></div><div class="ttdeci">readFunctionFilter(fns, fileName)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00084">common.py:84</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a097b89766fec6811706e8f60294e483b"><div class="ttname"><a href="namespacecommon.html#a097b89766fec6811706e8f60294e483b">common.generateEnums</a></div><div class="ttdeci">generateEnums(fns, prefix=&#39;OPENCL_FN&#39;)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00194">common.py:194</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a0abc2ebc23b36255fb4cc220af3614ac"><div class="ttname"><a href="namespacecommon.html#a0abc2ebc23b36255fb4cc220af3614ac">common.generateStructDefinitions</a></div><div class="ttdeci">generateStructDefinitions(fns, lprefix=&#39;opencl_fn&#39;, enumprefix=&#39;OPENCL_FN&#39;)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00148">common.py:148</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a2560961c8f9f8a4a38c5a0e68d8f9c3b"><div class="ttname"><a href="namespacecommon.html#a2560961c8f9f8a4a38c5a0e68d8f9c3b">common.remove_comments</a></div><div class="ttdeci">remove_comments(s)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00008">common.py:8</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a35c133dfc62524389a3ce8e5c3c68348"><div class="ttname"><a href="namespacecommon.html#a35c133dfc62524389a3ce8e5c3c68348">common.generateFilterNames</a></div><div class="ttdeci">generateFilterNames(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00135">common.py:135</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a5ffd2086c3598265c55b53b48a47839d"><div class="ttname"><a href="namespacecommon.html#a5ffd2086c3598265c55b53b48a47839d">common.getParameters</a></div><div class="ttdeci">getParameters(i, tokens)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00047">common.py:47</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a803d0d80232c4f5be7e1931297dda09c"><div class="ttname"><a href="namespacecommon.html#a803d0d80232c4f5be7e1931297dda09c">common.generateStaticDefinitions</a></div><div class="ttdeci">generateStaticDefinitions(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00167">common.py:167</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a814980a41fb429b9130b5e95357018fe"><div class="ttname"><a href="namespacecommon.html#a814980a41fb429b9130b5e95357018fe">common.generateInlineWrappers</a></div><div class="ttdeci">generateInlineWrappers(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00237">common.py:237</a></div></div>
+<div class="ttc" id="anamespacecommon_html_a90ade5e7281f4ddebc2b6a35654db5b5"><div class="ttname"><a href="namespacecommon.html#a90ade5e7281f4ddebc2b6a35654db5b5">common.generateRemapDynamic</a></div><div class="ttdeci">generateRemapDynamic(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00209">common.py:209</a></div></div>
+<div class="ttc" id="anamespacecommon_html_aa66cf2c83ebe2d786f1ed14d877ec6e4"><div class="ttname"><a href="namespacecommon.html#aa66cf2c83ebe2d786f1ed14d877ec6e4">common.getTokens</a></div><div class="ttdeci">getTokens(s)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00022">common.py:22</a></div></div>
+<div class="ttc" id="anamespacecommon_html_ab56ec65199f9ddf9b6845b76b115f818"><div class="ttname"><a href="namespacecommon.html#ab56ec65199f9ddf9b6845b76b115f818">common.generateFnDeclaration</a></div><div class="ttdeci">generateFnDeclaration(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00217">common.py:217</a></div></div>
+<div class="ttc" id="anamespacecommon_html_abac905751c96aa3d79d0a423b399a16a"><div class="ttname"><a href="namespacecommon.html#abac905751c96aa3d79d0a423b399a16a">common.generateListOfDefinitions</a></div><div class="ttdeci">generateListOfDefinitions(fns, name=&#39;opencl_fn_list&#39;)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00181">common.py:181</a></div></div>
+<div class="ttc" id="anamespacecommon_html_ad4fe1179e2eee6a3b4c69ee03d6490d1"><div class="ttname"><a href="namespacecommon.html#ad4fe1179e2eee6a3b4c69ee03d6490d1">common.generateTemplates</a></div><div class="ttdeci">generateTemplates(total, lprefix, switch_name, calling_convention=&#39;&#39;)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00225">common.py:225</a></div></div>
+<div class="ttc" id="anamespacecommon_html_ae3432c123e0c81f565caa9d4ed8abb7e"><div class="ttname"><a href="namespacecommon.html#ae3432c123e0c81f565caa9d4ed8abb7e">common.generateRemapOrigin</a></div><div class="ttdeci">generateRemapOrigin(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00203">common.py:203</a></div></div>
+<div class="ttc" id="anamespacecommon_html_ae83788af223667d7973f071d9235fe06"><div class="ttname"><a href="namespacecommon.html#ae83788af223667d7973f071d9235fe06">common.ProcessTemplate</a></div><div class="ttdeci">ProcessTemplate(inputFile, ctx, noteLine=&#39;//\n//AUTOGENERATED, DO NOT EDIT\n//&#39;)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00261">common.py:261</a></div></div>
+<div class="ttc" id="anamespacecommon_html_afc27d4d47b2e67a852c7490e3f817c22"><div class="ttname"><a href="namespacecommon.html#afc27d4d47b2e67a852c7490e3f817c22">common.postProcessParameters</a></div><div class="ttdeci">postProcessParameters(fns)</div><div class="ttdef"><b>Definición</b> <a href="common_8py_source.html#l00068">common.py:68</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="dir_2a736fd60b8c691cc1a69d8f6f3c4fc7.html">opencl</a></li><li class="navelem"><a href="dir_c50011153384abad4cad43abb8feac69.html">runtime</a></li><li class="navelem"><a href="dir_da0843a2f370f332a2c7d098ef7e5b15.html">generator</a></li><li class="navelem"><a href="parser__cl_8py.html">parser_cl.py</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

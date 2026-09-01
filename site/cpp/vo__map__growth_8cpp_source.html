@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/src/slam/odometry/vo_map_growth.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('vo__map__growth_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">vo_map_growth.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="vo__map__growth_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud_2src_2slam_2precomp_8hpp.html">../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="vo__impl_8hpp.html">vo_impl.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1slam.html">slam</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">inline</span> <a class="code hl_typedef" href="group__core__basic.html#ga32986d8c6fd05949688352abd112509f">Point2d</a> projectThrough(<span class="keyword">const</span> Mat&amp; P, <span class="keywordtype">double</span> X, <span class="keywordtype">double</span> Y, <span class="keywordtype">double</span> Z)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">double</span> u = P.at&lt;<span class="keywordtype">double</span>&gt;(0,0)*X + P.at&lt;<span class="keywordtype">double</span>&gt;(0,1)*Y + P.at&lt;<span class="keywordtype">double</span>&gt;(0,2)*Z + P.at&lt;<span class="keywordtype">double</span>&gt;(0,3);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacegl.html#a88f84c566354b11ef9b56d53251e4ecd">v</a> = P.at&lt;<span class="keywordtype">double</span>&gt;(1,0)*X + P.at&lt;<span class="keywordtype">double</span>&gt;(1,1)*Y + P.at&lt;<span class="keywordtype">double</span>&gt;(1,2)*Z + P.at&lt;<span class="keywordtype">double</span>&gt;(1,3);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacegl.html#aaa983a01a7c867f31ba50d68a1571800">w</a> = P.at&lt;<span class="keywordtype">double</span>&gt;(2,0)*X + P.at&lt;<span class="keywordtype">double</span>&gt;(2,1)*Y + P.at&lt;<span class="keywordtype">double</span>&gt;(2,2)*Z + P.at&lt;<span class="keywordtype">double</span>&gt;(2,3);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (std::abs(w) &lt; 1e-12) <span class="keywordflow">return</span> <a class="code hl_typedef" href="group__core__basic.html#ga32986d8c6fd05949688352abd112509f">Point2d</a>(0, 0);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">return</span> <a class="code hl_typedef" href="group__core__basic.html#ga32986d8c6fd05949688352abd112509f">Point2d</a>(u / w, v / w);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">inline</span> <span class="keywordtype">double</span> cameraDepth(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga366070cdc95233a6b6db521dfd99e713">Matx44d</a>&amp; T_cw, <span class="keywordtype">double</span> X, <span class="keywordtype">double</span> Y, <span class="keywordtype">double</span> Z)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">return</span> T_cw(2,0)*X + T_cw(2,1)*Y + T_cw(2,2)*Z + T_cw(2,3);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} <span class="comment">// anonymous namespace</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> VisualOdometryImpl::promoteKeyframeAndGrowMap(<a class="code hl_struct" href="structcv_1_1slam_1_1_frame.html">Frame</a>&amp; cur)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* newKf = <span class="keyword">new</span> <a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    newKf-&gt;poseCw = cur.poseCw;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    newKf-&gt;keypoints = cur.keypoints;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    newKf-&gt;descriptors = cur.descriptors.clone();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    newKf-&gt;undistKpts = cur.undistKpts;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    newKf-&gt;imageSize = cur.imageSize;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    newKf-&gt;mapPoints.assign(cur.keypoints.size(), <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    newKf-&gt;parent = lastKf;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    map.addKeyframe(newKf);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; cur.mapPoints.size(); ++<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* mp = cur.mapPoints[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">if</span> (!mp || mp-&gt;bad || cur.outliers[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        map.addObservation(newKf, i, mp);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    std::vector&lt;DMatch&gt; kfToCur;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    matchFrames(lastKf-&gt;keypoints, lastKf-&gt;descriptors, lastKf-&gt;imageSize,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                cur.keypoints, cur.descriptors, cur.imageSize, kfToCur);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    Mat Rt1(3, 4, <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>), Rt2(3, 4, <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; 3; ++<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 4; ++j)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            Rt1.at&lt;<span class="keywordtype">double</span>&gt;(<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>,j) = lastKf-&gt;poseCw(i,j);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            Rt2.at&lt;<span class="keywordtype">double</span>&gt;(<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>,j) = cur.poseCw(i,j);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    Mat P1 = K * Rt1;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    Mat P2 = K * Rt2;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    std::vector&lt;Point2f&gt; pts1, pts2;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::vector&lt;int&gt; triMatchIdx;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; kfToCur.size(); ++<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">const</span> DMatch&amp; <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a> = kfToCur[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">if</span> ((<span class="keywordtype">size_t</span>)<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.queryIdx &gt;= lastKf-&gt;mapPoints.size()) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">if</span> (lastKf-&gt;mapPoints[<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.queryIdx] != <span class="keyword">nullptr</span>) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">if</span> ((<span class="keywordtype">size_t</span>)<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.trainIdx &gt;= newKf-&gt;mapPoints.size()) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">if</span> (newKf-&gt;mapPoints[<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.trainIdx] != <span class="keyword">nullptr</span>) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        pts1.push_back(lastKf-&gt;undistKpts[<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.queryIdx]);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        pts2.push_back(cur.undistKpts[<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.trainIdx]);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        triMatchIdx.push_back((<span class="keywordtype">int</span>)i);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> (pts1.empty())</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <a class="code hl_function" href="namespacecv_1_1slam_1_1detail.html#a725ea832e09ab2ab8bfcc6949bf41b9b">detail::updateCovisibility</a>(newKf);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        map.setCurrentKeyframe(newKf);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        lastKf = newKf;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        lastKfInliers = 0;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        framesSinceKf = 0;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    Mat pts4D;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_function" href="group__d__projection.html#gad3fc9a0c82b08df034234979960b778c">triangulatePoints</a>(P1, P2, pts1, pts2, pts4D);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">int</span> nNew = 0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; pts4D.<a class="code hl_function" href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">cols</a>; ++<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacegl.html#aaa983a01a7c867f31ba50d68a1571800">w</a> = pts4D.at&lt;<span class="keywordtype">float</span>&gt;(3, <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">if</span> (std::abs(w) &lt; 1e-9) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordtype">double</span> X = pts4D.at&lt;<span class="keywordtype">float</span>&gt;(0, <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>) / w;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordtype">double</span> Y = pts4D.at&lt;<span class="keywordtype">float</span>&gt;(1, <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>) / w;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordtype">double</span> Z = pts4D.at&lt;<span class="keywordtype">float</span>&gt;(2, <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>) / w;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">if</span> (cameraDepth(lastKf-&gt;poseCw, X, Y, Z) &lt;= 0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">if</span> (cameraDepth(cur.poseCw, X, Y, Z) &lt;= 0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_typedef" href="group__core__basic.html#ga32986d8c6fd05949688352abd112509f">Point2d</a> p1p = projectThrough(P1, X, Y, Z);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_typedef" href="group__core__basic.html#ga32986d8c6fd05949688352abd112509f">Point2d</a> p2p = projectThrough(P2, X, Y, Z);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordtype">double</span> e1 = std::hypot(p1p.<a class="code hl_property" href="interface_point2d.html#a410f46be7d944e2b4aae2c6ccfaae1b5">x</a> - pts1[i].x, p1p.<a class="code hl_property" href="interface_point2d.html#a39331cc20a1d3950122ab3845edb0689">y</a> - pts1[i].y);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordtype">double</span> e2 = std::hypot(p2p.<a class="code hl_property" href="interface_point2d.html#a410f46be7d944e2b4aae2c6ccfaae1b5">x</a> - pts2[i].x, p2p.<a class="code hl_property" href="interface_point2d.html#a39331cc20a1d3950122ab3845edb0689">y</a> - pts2[i].y);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">if</span> (e1 &gt; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.pnpReprojThresh || e2 &gt; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.pnpReprojThresh) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <a class="code hl_typedef" href="group__core__basic.html#ga17f8af95b76535bd387f4909850c8810">Point3d</a> Xw(X, Y, Z);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacecv_1_1slam_1_1detail.html#a3e30dec909002a7fa848714acdc824eb">detail::parallaxDeg</a>(Xw, lastKf-&gt;poseCw, cur.poseCw)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                &lt; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.minGrowthParallaxDeg) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* mp = <span class="keyword">new</span> <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        mp-&gt;pos = Xw;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keyword">const</span> DMatch&amp; dm = kfToCur[triMatchIdx[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>]];</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        mp-&gt;refDesc = cur.descriptors.row(dm.<a class="code hl_property" href="interface_d_match.html#a68e979528bc30b17a89fc8df4809407a">trainIdx</a>).clone();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        map.addMapPoint(mp);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        map.addObservation(lastKf, (<span class="keywordtype">size_t</span>)dm.<a class="code hl_property" href="interface_d_match.html#a0363d09110f9da573593296645cedfa6">queryIdx</a>, mp);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        map.addObservation(newKf, (<span class="keywordtype">size_t</span>)dm.<a class="code hl_property" href="interface_d_match.html#a68e979528bc30b17a89fc8df4809407a">trainIdx</a>, mp);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        ++nNew;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_function" href="namespacecv_1_1slam_1_1detail.html#a725ea832e09ab2ab8bfcc6949bf41b9b">detail::updateCovisibility</a>(newKf);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    map.setCurrentKeyframe(newKf);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    lastKf = newKf;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    lastKfInliers = 0;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    framesSinceKf = 0;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    (<a class="code hl_function" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>)nNew;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}} <span class="comment">// namespace cv::slam</span></div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a1dabed62d2d603302ed85878c743e251"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void(CL_CALLBACK *)(cl_program</div></div>
+<div class="ttc" id="agroup__core__basic_html_ga17f8af95b76535bd387f4909850c8810"><div class="ttname"><a href="group__core__basic.html#ga17f8af95b76535bd387f4909850c8810">cv::Point3d</a></div><div class="ttdeci">Point3_&lt; double &gt; Point3d</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00291">types.hpp:291</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga32986d8c6fd05949688352abd112509f"><div class="ttname"><a href="group__core__basic.html#ga32986d8c6fd05949688352abd112509f">cv::Point2d</a></div><div class="ttdeci">Point_&lt; double &gt; Point2d</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00208">types.hpp:208</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga366070cdc95233a6b6db521dfd99e713"><div class="ttname"><a href="group__core__basic.html#ga366070cdc95233a6b6db521dfd99e713">cv::Matx44d</a></div><div class="ttdeci">Matx&lt; double, 4, 4 &gt; Matx44d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00265">matx.hpp:265</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__d__projection_html_gad3fc9a0c82b08df034234979960b778c"><div class="ttname"><a href="group__d__projection.html#gad3fc9a0c82b08df034234979960b778c">cv::triangulatePoints</a></div><div class="ttdeci">CV_EXPORTS_W void triangulatePoints(InputArray projMatr1, InputArray projMatr2, InputArray projPoints1, InputArray projPoints2, OutputArray points4D)</div><div class="ttdoc">This function reconstructs 3-dimensional points (in homogeneous coordinates) by using their observati...</div><div class="ttdef"><b>Definición</b> <a href="triangulate_8cpp_source.html#l00054">triangulate.cpp:54</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="ainterface_d_match_html_a0363d09110f9da573593296645cedfa6"><div class="ttname"><a href="interface_d_match.html#a0363d09110f9da573593296645cedfa6">DMatch::queryIdx</a></div><div class="ttdeci">int queryIdx</div><div class="ttdef"><b>Definición</b> <a href="_d_match_8mm_source.html#l00013">DMatch.mm:13</a></div></div>
+<div class="ttc" id="ainterface_d_match_html_a68e979528bc30b17a89fc8df4809407a"><div class="ttname"><a href="interface_d_match.html#a68e979528bc30b17a89fc8df4809407a">DMatch::trainIdx</a></div><div class="ttdeci">int trainIdx</div><div class="ttdef"><b>Definición</b> <a href="_d_match_8mm_source.html#l00021">DMatch.mm:21</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a02a1bed6246a87b004010b9a54745c1b"><div class="ttname"><a href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">-[Mat cols]</a></div><div class="ttdeci">int cols()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00248">Mat.mm:248</a></div></div>
+<div class="ttc" id="ainterface_point2d_html_a39331cc20a1d3950122ab3845edb0689"><div class="ttname"><a href="interface_point2d.html#a39331cc20a1d3950122ab3845edb0689">Point2d::y</a></div><div class="ttdeci">double y</div><div class="ttdef"><b>Definición</b> <a href="_point2d_8mm_source.html#l00022">Point2d.mm:22</a></div></div>
+<div class="ttc" id="ainterface_point2d_html_a410f46be7d944e2b4aae2c6ccfaae1b5"><div class="ttname"><a href="interface_point2d.html#a410f46be7d944e2b4aae2c6ccfaae1b5">Point2d::x</a></div><div class="ttdeci">double x</div><div class="ttdef"><b>Definición</b> <a href="_point2d_8mm_source.html#l00014">Point2d.mm:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1slam_1_1detail_html_a3e30dec909002a7fa848714acdc824eb"><div class="ttname"><a href="namespacecv_1_1slam_1_1detail.html#a3e30dec909002a7fa848714acdc824eb">cv::slam::detail::parallaxDeg</a></div><div class="ttdeci">double parallaxDeg(const Point3d &amp;X_world, const Matx44d &amp;A_cw, const Matx44d &amp;B_cw)</div><div class="ttdef"><b>Definición</b> <a href="vo__keyframe_8cpp_source.html#l00035">vo_keyframe.cpp:35</a></div></div>
+<div class="ttc" id="anamespacecv_1_1slam_1_1detail_html_a725ea832e09ab2ab8bfcc6949bf41b9b"><div class="ttname"><a href="namespacecv_1_1slam_1_1detail.html#a725ea832e09ab2ab8bfcc6949bf41b9b">cv::slam::detail::updateCovisibility</a></div><div class="ttdeci">void updateCovisibility(KeyFrame *kf)</div><div class="ttdef"><b>Definición</b> <a href="vo__keyframe_8cpp_source.html#l00077">vo_keyframe.cpp:77</a></div></div>
+<div class="ttc" id="anamespacecv_1_1slam_html"><div class="ttname"><a href="namespacecv_1_1slam.html">cv::slam</a></div><div class="ttdef"><b>Definición</b> <a href="map_8hpp_source.html#l00016">map.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_a88f84c566354b11ef9b56d53251e4ecd"><div class="ttname"><a href="namespacegl.html#a88f84c566354b11ef9b56d53251e4ecd">gl::v</a></div><div class="ttdeci">const GLint * v</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01308">gl_core_3_1.hpp:1308</a></div></div>
+<div class="ttc" id="anamespacegl_html_aaa983a01a7c867f31ba50d68a1571800"><div class="ttname"><a href="namespacegl.html#aaa983a01a7c867f31ba50d68a1571800">gl::w</a></div><div class="ttdeci">GLint GLint GLint GLint w</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01303">gl_core_3_1.hpp:1303</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a3f4c9888bcfa4a6e9150cbcfb39fc480"><div class="ttname"><a href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">parser_cl.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00052">parser_cl.py:52</a></div></div>
+<div class="ttc" id="anamespacereport_html_a0b2a055171c088a511a6dc6d9b622b68"><div class="ttname"><a href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">report.m</a></div><div class="ttdeci">m</div><div class="ttdef"><b>Definición</b> <a href="report_8py_source.html#l00116">report.py:116</a></div></div>
+<div class="ttc" id="aptcloud_2src_2slam_2precomp_8hpp_html"><div class="ttname"><a href="ptcloud_2src_2slam_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_frame_html"><div class="ttname"><a href="structcv_1_1slam_1_1_frame.html">cv::slam::Frame</a></div><div class="ttdoc">Per-frame scratch pad. Created per incoming image, never stored in the Map.</div><div class="ttdef"><b>Definición</b> <a href="frame_8hpp_source.html#l00016">frame.hpp:17</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_key_frame_html"><div class="ttname"><a href="structcv_1_1slam_1_1_key_frame.html">cv::slam::KeyFrame</a></div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_source.html#l00048">types.hpp:49</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_map_point_html"><div class="ttname"><a href="structcv_1_1slam_1_1_map_point.html">cv::slam::MapPoint</a></div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_source.html#l00034">types.hpp:35</a></div></div>
+<div class="ttc" id="avo__impl_8hpp_html"><div class="ttname"><a href="vo__impl_8hpp.html">vo_impl.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_e585da6166ee98e0160b5c7acdfa2558.html">src</a></li><li class="navelem"><a href="dir_aa880b9650842c0c513b1c18d0a14f56.html">slam</a></li><li class="navelem"><a href="dir_1a0601fbb17b04a65784e100ffcb3204.html">odometry</a></li><li class="navelem"><a href="vo__map__growth_8cpp.html">vo_map_growth.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

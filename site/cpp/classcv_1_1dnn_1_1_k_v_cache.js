@@ -1,0 +1,26 @@
+var classcv_1_1dnn_1_1_k_v_cache =
+[
+    [ "~KVCache", "classcv_1_1dnn_1_1_k_v_cache.html#aec9e977acc018a3370da94fe45994da2", null ],
+    [ "KVCache", "classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896", null ],
+    [ "KVCache", "classcv_1_1dnn_1_1_k_v_cache.html#aa01e913e13b9b783c3309d2177dc44a4", null ],
+    [ "appendTokens", "classcv_1_1dnn_1_1_k_v_cache.html#a280422a42ee79467106fe40c4ad3aefd", null ],
+    [ "clear", "classcv_1_1dnn_1_1_k_v_cache.html#a28c3a9bcb69456dd3ff2e6c00912b0a2", null ],
+    [ "getActivePageCount", "classcv_1_1dnn_1_1_k_v_cache.html#a08cbb536e590ae07c88a7b97049f83d4", null ],
+    [ "getActivePages", "classcv_1_1dnn_1_1_k_v_cache.html#a559db3e99c0742b6ed462a7480b0b90a", null ],
+    [ "getNumTokens", "classcv_1_1dnn_1_1_k_v_cache.html#af4918355843df7c86d21e36d41aedaf0", null ],
+    [ "getPageSize", "classcv_1_1dnn_1_1_k_v_cache.html#a1fbe8f28118c6f471be35e6143ff148f", null ],
+    [ "grow", "classcv_1_1dnn_1_1_k_v_cache.html#abe891d686d4f5576ff6a692c148d0b31", null ],
+    [ "growGenerate", "classcv_1_1dnn_1_1_k_v_cache.html#a1236efed22606c5f7bfbadf136cccd20", null ],
+    [ "growPrefill", "classcv_1_1dnn_1_1_k_v_cache.html#a5308a276472f09c709f607ca14f2b701", null ],
+    [ "reserve", "classcv_1_1dnn_1_1_k_v_cache.html#a025a55086e166db9baa2b12d23359f8e", null ],
+    [ "batchSize", "classcv_1_1dnn_1_1_k_v_cache.html#aa8f7221f340e3726d6e8ec04c05bec9c", null ],
+    [ "headDim", "classcv_1_1dnn_1_1_k_v_cache.html#a0bd19522ef8354a84b8df285b8c81572", null ],
+    [ "isKCache", "classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b", null ],
+    [ "nHeads", "classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562", null ],
+    [ "nTokens", "classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee", null ],
+    [ "offset", "classcv_1_1dnn_1_1_k_v_cache.html#a23905077e9e2f0f77a29abb24ae50f8f", null ],
+    [ "opt", "classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb", null ],
+    [ "pages", "classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535", null ],
+    [ "pageSize", "classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e", null ],
+    [ "reservedTokens", "classcv_1_1dnn_1_1_k_v_cache.html#ac635fe29c01aa632a597195cd5b95664", null ]
+];

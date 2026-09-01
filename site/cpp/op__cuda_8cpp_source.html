@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/op_cuda.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('op__cuda_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">op_cuda.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="op__cuda_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifdef HAVE_CUDA</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="op__cuda_8hpp.html">op_cuda.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="init_8hpp.html">cuda4dnn/init.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="net__impl_8hpp.html">net_impl.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="layer_8details_8hpp.html">opencv2/dnn/layer.details.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">class </span>CUDALegacyExec : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1dnn_1_1_layer.html">Layer</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    CUDALegacyExec(<span class="keyword">const</span> Ptr&lt;Layer&gt;&amp; impl_, <span class="keywordtype">void</span>* ctx_) : impl(impl_), <a class="code hl_variable" href="namespaceparser__cl.html#a870930a3475ba5264085f72ed7f51fe3">ctx</a>(ctx_) {}</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">static</span> Ptr&lt;Layer&gt; create(<span class="keyword">const</span> Ptr&lt;LayerInfo&gt;&amp; data, <span class="keywordtype">void</span>* backendCtx)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        Ptr&lt;Layer&gt; impl = <a class="code hl_variable" href="namespacegl.html#a261ee7895778c7283e2b8802ec75974e">data</a>.dynamicCast&lt;Layer&gt;();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">if</span> (!impl || !backendCtx || !impl-&gt;supportBackend(DNN_BACKEND_CUDA))</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordflow">return</span> Ptr&lt;Layer&gt;();  <span class="comment">// unsupported -&gt; CPU fallback</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        Ptr&lt;CUDALegacyExec&gt; e(<span class="keyword">new</span> CUDALegacyExec(impl, backendCtx));</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        e-&gt;name = impl-&gt;name;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        e-&gt;type = impl-&gt;type;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        e-&gt;inputs = impl-&gt;inputs;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        e-&gt;outputs = impl-&gt;outputs;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">return</span> e;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> finalize(InputArrayOfArrays inputs, OutputArrayOfArrays outputs) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        impl-&gt;finalize(inputs, outputs);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> forwardCUDA(InputArrayOfArrays inputs_,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                     OutputArrayOfArrays outputs_,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                     <span class="keywordtype">void</span>* workspace) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        std::vector&lt;cuda::GpuMatND&gt; inputs, outputs;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        inputs_.getGpuMatNDVector(inputs);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        outputs_.getGpuMatNDVector(outputs);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        cuda4dnn::csl::Workspace&amp; ws = *<span class="keyword">reinterpret_cast&lt;</span>cuda4dnn::csl::Workspace*<span class="keyword">&gt;</span>(workspace);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">if</span> (!node) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            impl-&gt;preferableTarget = preferableTarget;  <span class="comment">// initCUDA may pick FP16/FP32 by target</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            cuda4dnn::csl::CSLContext context = *<span class="keyword">reinterpret_cast&lt;</span>cuda4dnn::csl::CSLContext*<span class="keyword">&gt;</span>(<a class="code hl_variable" href="namespaceparser__cl.html#a870930a3475ba5264085f72ed7f51fe3">ctx</a>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            node = impl-&gt;initCUDA(&amp;context, inputs_, outputs_);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(node);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            cudaNode = node.dynamicCast&lt;CUDABackendNode&gt;();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(cudaNode);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            ws.require(cudaNode-&gt;get_workspace_memory_in_bytes());</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        cudaNode-&gt;forward(inputs, outputs, ws);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    Ptr&lt;Layer&gt; impl;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span>* <a class="code hl_variable" href="namespaceparser__cl.html#a870930a3475ba5264085f72ed7f51fe3">ctx</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    Ptr&lt;BackendNode&gt; node;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    Ptr&lt;CUDABackendNode&gt; cudaNode;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">void</span> registerCudaCommonExecs()</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(ReLU,        <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(ReLU6,       <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(NaryEltwise, <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(Flatten,     <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(BatchNorm2,  <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(MaxPool,     <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(Gemm,        <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_define" href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a>(Pooling,     <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>, CUDALegacyExec);  <span class="comment">// GlobalAveragePool/GlobalMaxPool</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keywordtype">void</span> Net::Impl::initCUDABackend(<span class="keyword">const</span> std::vector&lt;LayerPin&gt;&amp; blobsToKeep_)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>{</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a1bcb8d7ae2dc9460da9e91b00998299d">preferableBackend</a> == <a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">if</span> (!cudaInfo) <span class="comment">/* we need to check only once */</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn.html#afc00edcdb40cd442bab82ab2f59ba68a">cuda4dnn::checkVersions</a>();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn.html#af87d148c393cc321dbfc070f4338d964">cuda4dnn::getDeviceCount</a>() &lt;= 0)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">Error::StsError</a>, <span class="stringliteral">&quot;No CUDA capable device found.&quot;</span>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a73d424ddc65b24b1b52ee2f6b416533b">cuda4dnn::getDevice</a>() &lt; 0)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">Error::StsError</a>, <span class="stringliteral">&quot;No CUDA capable device selected.&quot;</span>);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e77238e50f1beba66b85054adf6cf77">cuda4dnn::isDeviceCompatible</a>())</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa98a4374ad27d41a85f3fe5b229d0ed0f">Error::GpuNotSupported</a>, <span class="stringliteral">&quot;OpenCV was not built to work with the selected device. Please check CUDA_ARCH_PTX or CUDA_ARCH_BIN in your build configuration.&quot;</span>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a68a4fc829fac71262d25f24af774fff2">preferableTarget</a> == <a class="code hl_enumvalue" href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5a36a5a729e39ff249d590ea78170b6968">DNN_TARGET_CUDA_FP16</a> &amp;&amp; !<a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a85ef1da04495ec5cd4abcfaffbaa1dd3">cuda4dnn::doesDeviceSupportFP16</a>())</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_define" href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a>(NULL, <span class="stringliteral">&quot;The selected CUDA device does not support FP16 target; switching to FP32 target.&quot;</span>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a68a4fc829fac71262d25f24af774fff2">preferableTarget</a> = <a class="code hl_enumvalue" href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5a5d7e050b90e78a923d304c328d16e5f1">DNN_TARGET_CUDA</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span> (!cudaInfo)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        cuda4dnn::csl::CSLContext context;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        context.stream = cuda4dnn::csl::Stream(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        context.cublas_handle = cuda4dnn::csl::cublas::Handle(context.stream);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        context.cudnn_handle = cuda4dnn::csl::cudnn::Handle(context.stream);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keyword">auto</span> d2h_stream = cuda4dnn::csl::Stream(<span class="keyword">true</span>);  <span class="comment">// stream for background D2H data transfers</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        cudaInfo = std::unique_ptr&lt;CudaInfo_t&gt;(<span class="keyword">new</span> CudaInfo_t(std::move(context), std::move(d2h_stream)));</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    cudaInfo-&gt;workspace = cuda4dnn::csl::Workspace();  <span class="comment">// release workspace memory if any</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; layer : <a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#abfe7f471008eee0b80acb962eff6d693">layers</a>)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keyword">auto</span>&amp; ld = <a class="code hl_variable" href="namespacegl.html#a683c5672ad822d6c22ebeffac2bf2fe5">layer</a>.second;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">if</span> (ld.id == 0 &amp;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ab9d93653e462c78f08fab1430724dd62">netInputLayer</a>-&gt;supportBackend(<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a1bcb8d7ae2dc9460da9e91b00998299d">preferableBackend</a>))</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; wrapper : ld.inputBlobsWrappers)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="keyword">auto</span> cudaWrapper = wrapper.dynamicCast&lt;CUDABackendWrapper&gt;();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                cudaWrapper-&gt;setStream(cudaInfo-&gt;context.stream, cudaInfo-&gt;d2h_stream);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; wrapper : ld.outputBlobsWrappers)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keyword">auto</span> cudaWrapper = wrapper.dynamicCast&lt;CUDABackendWrapper&gt;();</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            cudaWrapper-&gt;setStream(cudaInfo-&gt;context.stream, cudaInfo-&gt;d2h_stream);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; layer : <a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#abfe7f471008eee0b80acb962eff6d693">layers</a>)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keyword">auto</span>&amp; ld = <a class="code hl_variable" href="namespacegl.html#a683c5672ad822d6c22ebeffac2bf2fe5">layer</a>.second;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keyword">auto</span>&amp; layerInstance = ld.layerInstance;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">if</span> (!layerInstance-&gt;supportBackend(<a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>))</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            std::ostringstream os;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            os &lt;&lt; <span class="stringliteral">&quot;CUDA backend will fallback to the CPU implementation for the layer \&quot;&quot;</span> &lt;&lt; ld.name</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>               &lt;&lt; <span class="stringliteral">&quot;\&quot; of type &quot;</span> &lt;&lt; ld.type &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <a class="code hl_define" href="group__core__logging.html#ga6c2052511ce6fd604e3a9434b20e0e48">CV_LOG_INFO</a>(NULL, os.str().c_str());</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="comment">/* we make a copy so that `initCUDA` doesn&#39;t modify `cudaInfo-&gt;context` */</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keyword">auto</span> context = cudaInfo-&gt;context;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keyword">auto</span> node = layerInstance-&gt;initCUDA(&amp;context, ld.inputBlobsWrappers, ld.outputBlobsWrappers);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        ld.backendNodes[<a class="code hl_enumvalue" href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">DNN_BACKEND_CUDA</a>] = node;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">if</span>(!node.empty())</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keyword">auto</span> cudaNode = node.dynamicCast&lt;CUDABackendNode&gt;();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            cudaInfo-&gt;workspace.require(cudaNode-&gt;get_workspace_memory_in_bytes());</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">if</span> (blobsToKeep_.size() &gt; 1)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pin : blobsToKeep_)</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            LayerData&amp; ld = <a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#abfe7f471008eee0b80acb962eff6d693">layers</a>[pin.lid];</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            ld.cudaD2HBackgroundTransfers.push_back(pin.oid);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>}</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>}}  <span class="comment">// namespace cv::dnn</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#endif  </span><span class="comment">// HAVE_CUDA</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1cv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="foldopen" id="foldopen00177" data-start="{" data-end="}">
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a9a4e82767bad9f07d50df0d4fbb54955">  177</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a9a4e82767bad9f07d50df0d4fbb54955">haveCUDA</a>()</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>{</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">#ifdef HAVE_CUDA</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">int</span> dev = 0;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> ret = (cudaGetDevice(&amp;dev) == cudaSuccess);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}</div>
+</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>}}  <span class="comment">// namespace cv::dnn</span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer.html">cv::dnn::Layer</a></div><div class="ttdoc">This interface class allows to build new Layers - are building blocks of networks.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00349">dnn.hpp:350</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga6c2052511ce6fd604e3a9434b20e0e48"><div class="ttname"><a href="group__core__logging.html#ga6c2052511ce6fd604e3a9434b20e0e48">CV_LOG_INFO</a></div><div class="ttdeci">#define CV_LOG_INFO(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00170">logger.hpp:170</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga9a7297e347ba19830270825e5cbb6d0b"><div class="ttname"><a href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a></div><div class="ttdeci">#define CV_LOG_WARNING(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00169">logger.hpp:169</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c"><div class="ttname"><a href="group__dnn.html#gga186f7d9bfacac8b0ff2e26e2eab02625ab242310e1ca6b405ead9308f4b66971c">cv::dnn::DNN_BACKEND_CUDA</a></div><div class="ttdeci">@ DNN_BACKEND_CUDA</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00079">dnn.hpp:79</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gga709af7692ba29788182cf573531b0ff5a36a5a729e39ff249d590ea78170b6968"><div class="ttname"><a href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5a36a5a729e39ff249d590ea78170b6968">cv::dnn::DNN_TARGET_CUDA_FP16</a></div><div class="ttdeci">@ DNN_TARGET_CUDA_FP16</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00104">dnn.hpp:104</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gga709af7692ba29788182cf573531b0ff5a5d7e050b90e78a923d304c328d16e5f1"><div class="ttname"><a href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5a5d7e050b90e78a923d304c328d16e5f1">cv::dnn::DNN_TARGET_CUDA</a></div><div class="ttdeci">@ DNN_TARGET_CUDA</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00103">dnn.hpp:103</a></div></div>
+<div class="ttc" id="ainit_8hpp_html"><div class="ttname"><a href="init_8hpp.html">init.hpp</a></div></div>
+<div class="ttc" id="alayer_8details_8hpp_html"><div class="ttname"><a href="layer_8details_8hpp.html">layer.details.hpp</a></div></div>
+<div class="ttc" id="alayer_8details_8hpp_html_aca7358b3fb2d9e6983167cf7e8e8ffe0"><div class="ttname"><a href="layer_8details_8hpp.html#aca7358b3fb2d9e6983167cf7e8e8ffe0">CV_DNN_REGISTER_EXEC_CLASS</a></div><div class="ttdeci">#define CV_DNN_REGISTER_EXEC_CLASS(type, backendId, class)</div><div class="ttdoc">Registers a backend executor class for the new graph engine.</div><div class="ttdef"><b>Definición</b> <a href="layer_8details_8hpp_source.html#l00063">layer.details.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa98a4374ad27d41a85f3fe5b229d0ed0f"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa98a4374ad27d41a85f3fe5b229d0ed0f">cv::Error::GpuNotSupported</a></div><div class="ttdeci">@ GpuNotSupported</div><div class="ttdoc">no CUDA support</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00066">exception.hpp:66</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a></div><div class="ttdeci">@ StsError</div><div class="ttdoc">unknown /unspecified error</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00021">exception.hpp:21</a></div></div>
+<div class="ttc" id="anamespacecv_1_1cv_html"><div class="ttname"><a href="namespacecv_1_1cv.html">cv::cv</a></div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00064">templmatch.cpp:65</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a73d424ddc65b24b1b52ee2f6b416533b"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a73d424ddc65b24b1b52ee2f6b416533b">cv::dnn::cuda4dnn::getDevice</a></div><div class="ttdeci">int getDevice()</div><div class="ttdef"><b>Definición</b> <a href="init_8hpp_source.html#l00052">init.hpp:52</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e77238e50f1beba66b85054adf6cf77"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e77238e50f1beba66b85054adf6cf77">cv::dnn::cuda4dnn::isDeviceCompatible</a></div><div class="ttdeci">bool isDeviceCompatible(int device_id=-1)</div><div class="ttdef"><b>Definición</b> <a href="init_8hpp_source.html#l00059">init.hpp:59</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a85ef1da04495ec5cd4abcfaffbaa1dd3"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a85ef1da04495ec5cd4abcfaffbaa1dd3">cv::dnn::cuda4dnn::doesDeviceSupportFP16</a></div><div class="ttdeci">bool doesDeviceSupportFP16(int device_id=-1)</div><div class="ttdef"><b>Definición</b> <a href="init_8hpp_source.html#l00081">init.hpp:81</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_af87d148c393cc321dbfc070f4338d964"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#af87d148c393cc321dbfc070f4338d964">cv::dnn::cuda4dnn::getDeviceCount</a></div><div class="ttdeci">int getDeviceCount()</div><div class="ttdef"><b>Definición</b> <a href="init_8hpp_source.html#l00047">init.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_afc00edcdb40cd442bab82ab2f59ba68a"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#afc00edcdb40cd442bab82ab2f59ba68a">cv::dnn::cuda4dnn::checkVersions</a></div><div class="ttdeci">void checkVersions()</div><div class="ttdef"><b>Definición</b> <a href="init_8hpp_source.html#l00018">init.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a9a4e82767bad9f07d50df0d4fbb54955"><div class="ttname"><a href="namespacecv_1_1dnn.html#a9a4e82767bad9f07d50df0d4fbb54955">cv::dnn::haveCUDA</a></div><div class="ttdeci">bool haveCUDA()</div><div class="ttdef"><b>Definición</b> <a href="#l00177">op_cuda.cpp:177</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_a261ee7895778c7283e2b8802ec75974e"><div class="ttname"><a href="namespacegl.html#a261ee7895778c7283e2b8802ec75974e">gl::data</a></div><div class="ttdeci">GLint GLenum GLsizei GLsizei GLsizei GLint GLsizei const GLvoid * data</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01144">gl_core_3_1.hpp:1144</a></div></div>
+<div class="ttc" id="anamespacegl_html_a683c5672ad822d6c22ebeffac2bf2fe5"><div class="ttname"><a href="namespacegl.html#a683c5672ad822d6c22ebeffac2bf2fe5">gl::layer</a></div><div class="ttdeci">GLenum GLuint GLint GLint layer</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01279">gl_core_3_1.hpp:1279</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a870930a3475ba5264085f72ed7f51fe3"><div class="ttname"><a href="namespaceparser__cl.html#a870930a3475ba5264085f72ed7f51fe3">parser_cl.ctx</a></div><div class="ttdeci">dict ctx</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00108">parser_cl.py:108</a></div></div>
+<div class="ttc" id="anet__impl_8hpp_html"><div class="ttname"><a href="net__impl_8hpp.html">net_impl.hpp</a></div></div>
+<div class="ttc" id="aop__cuda_8hpp_html"><div class="ttname"><a href="op__cuda_8hpp.html">op_cuda.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a1bcb8d7ae2dc9460da9e91b00998299d"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a1bcb8d7ae2dc9460da9e91b00998299d">cv::dnn::Net::Impl::preferableBackend</a></div><div class="ttdeci">int preferableBackend</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00106">net_impl.hpp:106</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a68a4fc829fac71262d25f24af774fff2"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a68a4fc829fac71262d25f24af774fff2">cv::dnn::Net::Impl::preferableTarget</a></div><div class="ttdeci">int preferableTarget</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00107">net_impl.hpp:107</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_ab9d93653e462c78f08fab1430724dd62"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#ab9d93653e462c78f08fab1430724dd62">cv::dnn::Net::Impl::netInputLayer</a></div><div class="ttdeci">Ptr&lt; DataLayer &gt; netInputLayer</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00100">net_impl.hpp:100</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_abfe7f471008eee0b80acb962eff6d693"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#abfe7f471008eee0b80acb962eff6d693">cv::dnn::Net::Impl::layers</a></div><div class="ttdeci">MapIdToLayerData layers</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00102">net_impl.hpp:102</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="op__cuda_8cpp.html">op_cuda.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_xine.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__xine_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">cap_xine.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="cap__xine_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M//////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                        Intel License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//   * The name of Intel Corporation may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">// Authors: Konstantin Dols &lt;dols@ient.rwth-aachen.de&gt;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">//          Mark Asbach &lt;asbach@ient.rwth-aachen.de&gt;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">//</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">//          Institute of Communications Engineering</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">//          RWTH Aachen University</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="videoio_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">// required to enable some functions used here...</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="cap__xine_8cpp.html#a2d917cab7bdbe6029717ea1732d4219e">   51</a></span><span class="preprocessor">#define XINE_ENABLE_EXPERIMENTAL_FEATURES</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &lt;xine.h&gt;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &lt;xine/xineutils.h&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="};">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html">   57</a></span><span class="keyword">class </span><a class="code hl_function" href="class_x_i_n_e_capture.html#adb6a44fc62e3c0d3ea770dbd71efb43e">XINECapture</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_i_video_capture.html">IVideoCapture</a></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">// method call table</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    xine_t *xine;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    xine_stream_t *stream;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    xine_video_port_t *vo_port;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    xine_video_frame_t xine_frame;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> size;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">int</span> frame_number;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">double</span> frame_rate; <span class="comment">// fps</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">double</span> frame_duration; <span class="comment">// ms</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">bool</span> seekable;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#adb6a44fc62e3c0d3ea770dbd71efb43e">   71</a></span>    <a class="code hl_function" href="class_x_i_n_e_capture.html#adb6a44fc62e3c0d3ea770dbd71efb43e">XINECapture</a>()</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        : xine(0), stream(0), vo_port(0), frame_number(-1), frame_rate(0.), frame_duration(0.),</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>          seekable(false)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        xine_video_frame_t z = {};</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        xine_frame = z;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a5250d7026ca7882f038e734ddfd4725b">   79</a></span>    <a class="code hl_function" href="class_x_i_n_e_capture.html#a5250d7026ca7882f038e734ddfd4725b">~XINECapture</a>() { <a class="code hl_function" href="class_x_i_n_e_capture.html#a50d234fd698323d5965f561355416b2d">close</a>(); }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#ac419e3c9170ad04c5e5d84b0ddce22b4">   81</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#ac419e3c9170ad04c5e5d84b0ddce22b4">isOpened</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> xine &amp;&amp; stream; }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a3191bd85200679c2c294f8ee86f46275">   83</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a3191bd85200679c2c294f8ee86f46275">getCaptureDomain</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#gga023786be1ee68a9105bf2e48c700294da5cc03d4fed01f175de71b3fd228a1ac3">CAP_XINE</a>; }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a50d234fd698323d5965f561355416b2d">   85</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a50d234fd698323d5965f561355416b2d">close</a>()</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">if</span> (vo_port &amp;&amp; xine_frame.data)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            xine_free_video_frame(vo_port, &amp;xine_frame);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">if</span> (stream)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            xine_close(stream);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            stream = 0;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">if</span> (vo_port)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            xine_close_video_driver(xine, vo_port);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            vo_port = 0;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">if</span> (xine)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            xine_exit(xine);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            xine = 0;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a06b27f43dd05ee3966a172b6384ea0bd">  108</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a06b27f43dd05ee3966a172b6384ea0bd">open</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        CV_Assert_N(!xine, !stream, !vo_port);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordtype">char</span> configfile[2048] = {0};</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        xine = xine_new();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        snprintf(configfile, <span class="keyword">sizeof</span>(configfile), <span class="stringliteral">&quot;%s%s&quot;</span>, xine_get_homedir(), <span class="stringliteral">&quot;/.xine/config&quot;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        xine_config_load(xine, configfile);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        xine_init(xine);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        xine_engine_set_param(xine, 0, 0);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        vo_port = xine_new_framegrab_video_port(xine);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">if</span> (!vo_port)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        stream = xine_stream_new(xine, NULL, vo_port);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> (!xine_open(stream, filename))</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="comment">// reset stream...</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">if</span> (!xine_play(stream, 0, 0))</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="comment">// initialize some internals...</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        frame_number = 0;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">if</span> ( !xine_get_next_video_frame( vo_port, &amp;xine_frame ) )</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        size = <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>( xine_frame.width, xine_frame.height );</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        xine_free_video_frame( vo_port, &amp;xine_frame );</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        xine_frame.data = 0;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            xine_video_frame_t tmp;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordflow">if</span> (!xine_play( stream, 0, 300 )) <span class="comment">/* 300msec */</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">if</span> (!xine_get_next_video_frame( vo_port, &amp;tmp ))</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            seekable = ( tmp.frame_number != 0 );</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            xine_free_video_frame( vo_port, &amp;tmp );</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <span class="keywordflow">if</span> (!xine_play( stream, 0, 0 ))</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        frame_duration = xine_get_stream_info( stream, XINE_STREAM_INFO_FRAME_DURATION ) / 90.;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        frame_rate = frame_duration &gt; 0 ? 1000 / frame_duration : 0.;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="foldopen" id="foldopen00160" data-start="{" data-end="}">
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a6a06ea4a39c4f10f20f92cc5f2399abb">  160</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a6a06ea4a39c4f10f20f92cc5f2399abb">grabFrame</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(vo_port);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordtype">bool</span> res = xine_get_next_video_frame(vo_port, &amp;xine_frame);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keywordflow">if</span> (res)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            frame_number++;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
+</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="foldopen" id="foldopen00169" data-start="{" data-end="}">
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a5e1a94f77b218f3b6b860919545607a1">  169</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a5e1a94f77b218f3b6b860919545607a1">retrieveFrame</a>(<span class="keywordtype">int</span>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> out) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(vo_port);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">if</span> (xine_frame.data == 0)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordtype">bool</span> res = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> frame_bgr;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keywordflow">switch</span> (xine_frame.colorspace)</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">case</span> XINE_IMGFMT_YV12: <span class="comment">// actual format seems to be I420 (or IYUV)</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> frame(<a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(xine_frame.width, xine_frame.height * 3 / 2), <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>, xine_frame.data);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a>(frame, out, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a305e5da3816c78b3d1ffa0498424e94f">cv::COLOR_YUV2BGR_I420</a>);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            res = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">case</span> XINE_IMGFMT_YUY2:</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> frame(<a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(xine_frame.width, xine_frame.height), <a class="code hl_define" href="group__core__hal__interface.html#ga3cb9fe9fa9bc4989f5a89035e2a994e3">CV_8UC2</a>, xine_frame.data);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a>(frame, out, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a262578eae5d795e1e00b4d50be95156a">cv::COLOR_YUV2BGR_YUY2</a>);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            res = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="comment">// always release last xine_frame, not needed anymore</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        xine_free_video_frame(vo_port, &amp;xine_frame);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        xine_frame.data = 0;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    }</div>
+</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="foldopen" id="foldopen00208" data-start="{" data-end="}">
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#ac4330a99b604cee68536c08978b2dcc9">  208</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#ac4330a99b604cee68536c08978b2dcc9">getProperty</a>(<span class="keywordtype">int</span> property_id) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        CV_Assert_N(xine, vo_port, stream);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordtype">int</span> pos_t, pos_l, length;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordtype">bool</span> res = (bool)xine_get_pos_length(stream, &amp;pos_l, &amp;pos_t, &amp;length);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">switch</span> (property_id)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0">CAP_PROP_POS_MSEC</a>: <span class="keywordflow">return</span> res ? pos_t : <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068">CAP_PROP_POS_FRAMES</a>: <span class="keywordflow">return</span> frame_number;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf">CAP_PROP_POS_AVI_RATIO</a>: <span class="keywordflow">return</span> length &amp;&amp; res ? pos_l / 65535.0 : <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">CAP_PROP_FRAME_WIDTH</a>: <span class="keywordflow">return</span> size.width;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">CAP_PROP_FRAME_HEIGHT</a>: <span class="keywordflow">return</span> size.height;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">CAP_PROP_FPS</a>: <span class="keywordflow">return</span> frame_rate;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da53e1c28d4c2ca10732af106f3bf00613">CAP_PROP_FOURCC</a>: <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)xine_get_stream_info(stream, XINE_STREAM_INFO_VIDEO_FOURCC);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    }</div>
+</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a56cfdf7c9c3e2b329d29f6a7bc649c8d">  227</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a56cfdf7c9c3e2b329d29f6a7bc649c8d">setProperty</a>(<span class="keywordtype">int</span> property_id, <span class="keywordtype">double</span> value) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(vo_port);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <span class="keywordflow">switch</span> (property_id)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0">CAP_PROP_POS_MSEC</a>: <span class="keywordflow">return</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a8eb71cf113766381f34bfbf8ce8282e3">seekTime</a>((<span class="keywordtype">int</span>)value);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068">CAP_PROP_POS_FRAMES</a>: <span class="keywordflow">return</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#ae18717f81fc38ac9b9560891123de53e">seekFrame</a>((<span class="keywordtype">int</span>)value);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf">CAP_PROP_POS_AVI_RATIO</a>: <span class="keywordflow">return</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a4e616dbf2a984c8eea0f98a1c8c7d4ed">seekRatio</a>(value);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">default</span>: <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        }</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
+</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a4ad20114a10b26c627f3b5ad181ce374">  241</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a4ad20114a10b26c627f3b5ad181ce374">oldSeekFrame</a>(<span class="keywordtype">int</span> f)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        CV_Assert_N(xine, vo_port, stream);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <span class="comment">// no need to seek if we are already there...</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keywordflow">if</span> (f == frame_number)</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        {</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        }</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (f &gt; frame_number)</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            <span class="comment">// if the requested position is behind out actual position,</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            <span class="comment">// we just need to read the remaining amount of frames until we are there.</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            <span class="keywordflow">for</span> (; frame_number &lt; f; frame_number++)</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                <span class="comment">// un-increment framenumber grabbing failed</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                <span class="keywordflow">if</span> (!xine_get_next_video_frame(vo_port, &amp;xine_frame))</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                    frame_number--;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                {</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                    xine_free_video_frame(vo_port, &amp;xine_frame);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        }</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">else</span> <span class="comment">// f &lt; frame_number</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="comment">// otherwise we need to reset the stream and</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            <span class="comment">// start reading frames from the beginning.</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <span class="comment">// reset stream, should also work with non-seekable input</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            xine_play(stream, 0, 0);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            <span class="comment">// read frames until we are at the requested frame</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            <span class="keywordflow">for</span> (frame_number = 0; frame_number &lt; f; frame_number++)</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                <span class="comment">// un-increment last framenumber if grabbing failed</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                <span class="keywordflow">if</span> (!xine_get_next_video_frame(vo_port, &amp;xine_frame))</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                    frame_number--;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                {</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                    xine_free_video_frame(vo_port, &amp;xine_frame);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            }</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">return</span> f == frame_number;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
+</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="foldopen" id="foldopen00291" data-start="{" data-end="}">
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#ae18717f81fc38ac9b9560891123de53e">  291</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#ae18717f81fc38ac9b9560891123de53e">seekFrame</a>(<span class="keywordtype">int</span> f)</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        CV_Assert_N(xine, vo_port, stream);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <span class="keywordflow">if</span> (seekable)</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        {</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            <span class="keywordtype">int</span> new_time = (int)((f + 1) * (<span class="keywordtype">float</span>)frame_duration);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>            <span class="keywordflow">if</span> (xine_play(stream, 0, new_time))</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            {</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>                frame_number = f;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        {</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a4ad20114a10b26c627f3b5ad181ce374">oldSeekFrame</a>(f);</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        }</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    }</div>
+</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="foldopen" id="foldopen00310" data-start="{" data-end="}">
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a8eb71cf113766381f34bfbf8ce8282e3">  310</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a8eb71cf113766381f34bfbf8ce8282e3">seekTime</a>(<span class="keywordtype">int</span> t)</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        CV_Assert_N(xine, vo_port, stream);</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        <span class="keywordflow">if</span> (seekable)</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        {</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            <span class="keywordflow">if</span> (xine_play(stream, 0, t))</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            {</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>                frame_number = (int)((<span class="keywordtype">double</span>)t * frame_rate / 1000);</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>            }</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        }</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        {</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            <span class="keywordtype">int</span> new_frame = (int)((<span class="keywordtype">double</span>)t * frame_rate / 1000);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a4ad20114a10b26c627f3b5ad181ce374">oldSeekFrame</a>(new_frame);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    }</div>
+</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="foldopen" id="foldopen00329" data-start="{" data-end="}">
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno"><a class="line" href="class_x_i_n_e_capture.html#a4e616dbf2a984c8eea0f98a1c8c7d4ed">  329</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_x_i_n_e_capture.html#a4e616dbf2a984c8eea0f98a1c8c7d4ed">seekRatio</a>(<span class="keywordtype">double</span> ratio)</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    {</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        CV_Assert_N(xine, vo_port, stream);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        <span class="keywordflow">if</span> (ratio &gt; 1 || ratio &lt; 0)</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordflow">if</span> (seekable)</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            <span class="comment">// TODO: FIX IT, DOESN&#39;T WORK PROPERLY, YET...!</span></div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>            <span class="keywordtype">int</span> pos_t, pos_l, length;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            <span class="keywordtype">bool</span> res = (bool)xine_get_pos_length(stream, &amp;pos_l, &amp;pos_t, &amp;length);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            <span class="keywordflow">if</span> (res &amp;&amp; xine_play(stream, (<span class="keywordtype">int</span>)(ratio * (<span class="keywordtype">double</span>)length), 0))</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            {</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                frame_number = (int)(ratio * length / frame_duration);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            }</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        }</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    }</div>
+</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>};</div>
+</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="foldopen" id="foldopen00349" data-start="{" data-end="}">
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno"><a class="line" href="namespacecv.html#aa8e556c1f8cadc3b1b4fd1dc67d41b07">  349</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> <a class="code hl_function" href="namespacecv.html#aa8e556c1f8cadc3b1b4fd1dc67d41b07">cv::createXINECapture</a>(<span class="keyword">const</span> std::string &amp;filename)</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>{</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;XINECapture&gt;</a> res = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;XINECapture&gt;</a>();</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keywordflow">if</span> (res &amp;&amp; res-&gt;open(filename.c_str()))</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a>();</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>}</div>
+</div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a06b27f43dd05ee3966a172b6384ea0bd"><div class="ttname"><a href="class_x_i_n_e_capture.html#a06b27f43dd05ee3966a172b6384ea0bd">XINECapture::open</a></div><div class="ttdeci">bool open(const char *filename)</div><div class="ttdef"><b>Definición</b> <a href="#l00108">cap_xine.cpp:108</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a3191bd85200679c2c294f8ee86f46275"><div class="ttname"><a href="class_x_i_n_e_capture.html#a3191bd85200679c2c294f8ee86f46275">XINECapture::getCaptureDomain</a></div><div class="ttdeci">int getCaptureDomain() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00083">cap_xine.cpp:83</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a4ad20114a10b26c627f3b5ad181ce374"><div class="ttname"><a href="class_x_i_n_e_capture.html#a4ad20114a10b26c627f3b5ad181ce374">XINECapture::oldSeekFrame</a></div><div class="ttdeci">bool oldSeekFrame(int f)</div><div class="ttdef"><b>Definición</b> <a href="#l00241">cap_xine.cpp:241</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a4e616dbf2a984c8eea0f98a1c8c7d4ed"><div class="ttname"><a href="class_x_i_n_e_capture.html#a4e616dbf2a984c8eea0f98a1c8c7d4ed">XINECapture::seekRatio</a></div><div class="ttdeci">bool seekRatio(double ratio)</div><div class="ttdef"><b>Definición</b> <a href="#l00329">cap_xine.cpp:329</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a50d234fd698323d5965f561355416b2d"><div class="ttname"><a href="class_x_i_n_e_capture.html#a50d234fd698323d5965f561355416b2d">XINECapture::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definición</b> <a href="#l00085">cap_xine.cpp:85</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a5250d7026ca7882f038e734ddfd4725b"><div class="ttname"><a href="class_x_i_n_e_capture.html#a5250d7026ca7882f038e734ddfd4725b">XINECapture::~XINECapture</a></div><div class="ttdeci">~XINECapture()</div><div class="ttdef"><b>Definición</b> <a href="#l00079">cap_xine.cpp:79</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a56cfdf7c9c3e2b329d29f6a7bc649c8d"><div class="ttname"><a href="class_x_i_n_e_capture.html#a56cfdf7c9c3e2b329d29f6a7bc649c8d">XINECapture::setProperty</a></div><div class="ttdeci">bool setProperty(int property_id, double value) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00227">cap_xine.cpp:227</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a5e1a94f77b218f3b6b860919545607a1"><div class="ttname"><a href="class_x_i_n_e_capture.html#a5e1a94f77b218f3b6b860919545607a1">XINECapture::retrieveFrame</a></div><div class="ttdeci">bool retrieveFrame(int, OutputArray out) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00169">cap_xine.cpp:169</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a6a06ea4a39c4f10f20f92cc5f2399abb"><div class="ttname"><a href="class_x_i_n_e_capture.html#a6a06ea4a39c4f10f20f92cc5f2399abb">XINECapture::grabFrame</a></div><div class="ttdeci">bool grabFrame() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00160">cap_xine.cpp:160</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_a8eb71cf113766381f34bfbf8ce8282e3"><div class="ttname"><a href="class_x_i_n_e_capture.html#a8eb71cf113766381f34bfbf8ce8282e3">XINECapture::seekTime</a></div><div class="ttdeci">bool seekTime(int t)</div><div class="ttdef"><b>Definición</b> <a href="#l00310">cap_xine.cpp:310</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_ac419e3c9170ad04c5e5d84b0ddce22b4"><div class="ttname"><a href="class_x_i_n_e_capture.html#ac419e3c9170ad04c5e5d84b0ddce22b4">XINECapture::isOpened</a></div><div class="ttdeci">bool isOpened() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00081">cap_xine.cpp:81</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_ac4330a99b604cee68536c08978b2dcc9"><div class="ttname"><a href="class_x_i_n_e_capture.html#ac4330a99b604cee68536c08978b2dcc9">XINECapture::getProperty</a></div><div class="ttdeci">double getProperty(int property_id) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00208">cap_xine.cpp:208</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_adb6a44fc62e3c0d3ea770dbd71efb43e"><div class="ttname"><a href="class_x_i_n_e_capture.html#adb6a44fc62e3c0d3ea770dbd71efb43e">XINECapture::XINECapture</a></div><div class="ttdeci">XINECapture()</div><div class="ttdef"><b>Definición</b> <a href="#l00071">cap_xine.cpp:71</a></div></div>
+<div class="ttc" id="aclass_x_i_n_e_capture_html_ae18717f81fc38ac9b9560891123de53e"><div class="ttname"><a href="class_x_i_n_e_capture.html#ae18717f81fc38ac9b9560891123de53e">XINECapture::seekFrame</a></div><div class="ttdeci">bool seekFrame(int f)</div><div class="ttdef"><b>Definición</b> <a href="#l00291">cap_xine.cpp:291</a></div></div>
+<div class="ttc" id="aclasscv_1_1_i_video_capture_html"><div class="ttname"><a href="classcv_1_1_i_video_capture.html">cv::IVideoCapture</a></div><div class="ttdef"><b>Definición</b> <a href="cap__interface_8hpp_source.html#l00189">cap_interface.hpp:190</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga3cb9fe9fa9bc4989f5a89035e2a994e3"><div class="ttname"><a href="group__core__hal__interface.html#ga3cb9fe9fa9bc4989f5a89035e2a994e3">CV_8UC2</a></div><div class="ttdeci">#define CV_8UC2</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00082">interface.h:82</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gaf86c09fe702ed037c03c2bc603ceab14"><div class="ttname"><a href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a></div><div class="ttdeci">CV_EXPORTS_W void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0, AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Converts an image from one color space to another.</div><div class="ttdef"><b>Definición</b> <a href="imgproc_2src_2color_8cpp_source.html#l00192">color.cpp:192</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a262578eae5d795e1e00b4d50be95156a"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a262578eae5d795e1e00b4d50be95156a">cv::COLOR_YUV2BGR_YUY2</a></div><div class="ttdeci">@ COLOR_YUV2BGR_YUY2</div><div class="ttdoc">[8U] convert between YUV YUY2 and BGR, YUV is 4:2:2-subsampled and interleaved as Y1/U/Y2/V,...</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00696">imgproc.hpp:696</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a305e5da3816c78b3d1ffa0498424e94f"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a305e5da3816c78b3d1ffa0498424e94f">cv::COLOR_YUV2BGR_I420</a></div><div class="ttdeci">@ COLOR_YUV2BGR_I420</div><div class="ttdoc">synonym to IYUV</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00655">imgproc.hpp:655</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_gga023786be1ee68a9105bf2e48c700294da5cc03d4fed01f175de71b3fd228a1ac3"><div class="ttname"><a href="group__videoio__flags__base.html#gga023786be1ee68a9105bf2e48c700294da5cc03d4fed01f175de71b3fd228a1ac3">cv::CAP_XINE</a></div><div class="ttdeci">@ CAP_XINE</div><div class="ttdoc">XINE engine (Linux).</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00119">videoio.hpp:119</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">cv::CAP_PROP_UNKNOWN</a></div><div class="ttdeci">@ CAP_PROP_UNKNOWN</div><div class="ttdoc">Returned by VideoCapture::get if the requested property is unknown or unsupported.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00132">videoio.hpp:132</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da53e1c28d4c2ca10732af106f3bf00613"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da53e1c28d4c2ca10732af106f3bf00613">cv::CAP_PROP_FOURCC</a></div><div class="ttdeci">@ CAP_PROP_FOURCC</div><div class="ttdoc">4-character code of codec. see VideoWriter::fourcc .</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00139">videoio.hpp:139</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068">cv::CAP_PROP_POS_FRAMES</a></div><div class="ttdeci">@ CAP_PROP_POS_FRAMES</div><div class="ttdoc">0-based index of the frame to be decoded/captured next. When the index i is set in RAW mode (CAP_PROP...</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00134">videoio.hpp:134</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf">cv::CAP_PROP_POS_AVI_RATIO</a></div><div class="ttdeci">@ CAP_PROP_POS_AVI_RATIO</div><div class="ttdoc">Relative position of the video file: 0=start of the film, 1=end of the film.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00135">videoio.hpp:135</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0">cv::CAP_PROP_POS_MSEC</a></div><div class="ttdeci">@ CAP_PROP_POS_MSEC</div><div class="ttdoc">Current position of the video file in milliseconds.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00133">videoio.hpp:133</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">cv::CAP_PROP_FRAME_WIDTH</a></div><div class="ttdeci">@ CAP_PROP_FRAME_WIDTH</div><div class="ttdoc">Width of the frames in the video stream.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00136">videoio.hpp:136</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">cv::CAP_PROP_FRAME_HEIGHT</a></div><div class="ttdeci">@ CAP_PROP_FRAME_HEIGHT</div><div class="ttdoc">Height of the frames in the video stream.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00137">videoio.hpp:137</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">cv::CAP_PROP_FPS</a></div><div class="ttdeci">@ CAP_PROP_FPS</div><div class="ttdoc">Frame rate.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00138">videoio.hpp:138</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_aa8e556c1f8cadc3b1b4fd1dc67d41b07"><div class="ttname"><a href="namespacecv.html#aa8e556c1f8cadc3b1b4fd1dc67d41b07">cv::createXINECapture</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt; createXINECapture(const std::string &amp;filename)</div><div class="ttdef"><b>Definición</b> <a href="#l00349">cap_xine.cpp:349</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="avideoio_2src_2precomp_8hpp_html"><div class="ttname"><a href="videoio_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__xine_8cpp.html">cap_xine.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Perspective-n-Point (PnP) pose computation</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('calib3d_solve_pn_p.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Perspective-n-Point (PnP) pose computation </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__c_1_2_users_2_y_a_r_a_d_e_y_e_n_i_s_a_i_z_a_g_u_i_r_r_2opencv_2modules_2geometry_2doc_2solve_pn_p"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md54"></a>
+Pose computation overview</h1>
+<p>The pose computation problem <b>[Marchand16]</b> consists in solving for the rotation and translation that minimizes the reprojection error from 3D-2D point correspondences.</p>
+<p>The <span class="tt">solvePnP</span> and related functions estimate the object pose given a set of object points, their corresponding image projections, as well as the camera intrinsic matrix and the distortion coefficients, see the figure below (more precisely, the convention in the computer vision field is to have the X-axis of the camera frame pointing to the right, the Y-axis downward and the Z-axis forward).</p>
+<p><img src="pnp.jpg" alt="Top: the 6 dof pose computed from a list of 3D-2D point correspondences. Bottom: the considered perspective projection model." class="inline"/></p>
+<p>Points expressed in the world frame <picture><source srcset="form_716_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \bf{X}_w $" src="form_716.png"/></picture> are projected into the image plane <picture><source srcset="form_717_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \left[ u, v \right] $" src="form_717.png"/></picture> using the perspective projection model <picture><source srcset="form_718_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \Pi $" src="form_718.png"/></picture> and the camera intrinsic parameters matrix <picture><source srcset="form_719_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \bf{A} $" src="form_719.png"/></picture> (also denoted <picture><source srcset="form_720_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \bf{K} $" src="form_720.png"/></picture> in the literature):</p>
+<p class="formulaDsp">
+<picture><source srcset="form_721_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\&zwj;[  \begin{align*}
+  \begin{bmatrix}
+  u \\
+  v \\
+  1
+  \end{bmatrix} &amp;=
+  \bf{A} \hspace{0.1em} \Pi \hspace{0.2em} ^{c}\bf{T}_w
+  \begin{bmatrix}
+  X_{w} \\
+  Y_{w} \\
+  Z_{w} \\
+  1
+  \end{bmatrix} \\
+  \begin{bmatrix}
+  u \\
+  v \\
+  1
+  \end{bmatrix} &amp;=
+  \begin{bmatrix}
+  f_x &amp; 0 &amp; c_x \\
+  0 &amp; f_y &amp; c_y \\
+  0 &amp; 0 &amp; 1
+  \end{bmatrix}
+  \begin{bmatrix}
+  1 &amp; 0 &amp; 0 &amp; 0 \\
+  0 &amp; 1 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 1 &amp; 0
+  \end{bmatrix}
+  \begin{bmatrix}
+  r_{11} &amp; r_{12} &amp; r_{13} &amp; t_x \\
+  r_{21} &amp; r_{22} &amp; r_{23} &amp; t_y \\
+  r_{31} &amp; r_{32} &amp; r_{33} &amp; t_z \\
+  0 &amp; 0 &amp; 0 &amp; 1
+  \end{bmatrix}
+  \begin{bmatrix}
+  X_{w} \\
+  Y_{w} \\
+  Z_{w} \\
+  1
+  \end{bmatrix}
+  \end{align*}
+\&zwj;]" src="form_721.png"/></picture>
+</p>
+<p>The estimated pose is thus the rotation (<span class="tt">rvec</span>) and the translation (<span class="tt">tvec</span>) vectors that allow transforming a 3D point expressed in the world frame into the camera frame:</p>
+<p class="formulaDsp">
+<picture><source srcset="form_722_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\&zwj;[  \begin{align*}
+  \begin{bmatrix}
+  X_c \\
+  Y_c \\
+  Z_c \\
+  1
+  \end{bmatrix} &amp;=
+  \hspace{0.2em} ^{c}\bf{T}_w
+  \begin{bmatrix}
+  X_{w} \\
+  Y_{w} \\
+  Z_{w} \\
+  1
+  \end{bmatrix} \\
+  \begin{bmatrix}
+  X_c \\
+  Y_c \\
+  Z_c \\
+  1
+  \end{bmatrix} &amp;=
+  \begin{bmatrix}
+  r_{11} &amp; r_{12} &amp; r_{13} &amp; t_x \\
+  r_{21} &amp; r_{22} &amp; r_{23} &amp; t_y \\
+  r_{31} &amp; r_{32} &amp; r_{33} &amp; t_z \\
+  0 &amp; 0 &amp; 0 &amp; 1
+  \end{bmatrix}
+  \begin{bmatrix}
+  X_{w} \\
+  Y_{w} \\
+  Z_{w} \\
+  1
+  \end{bmatrix}
+  \end{align*}
+\&zwj;]" src="form_722.png"/></picture>
+</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md55"></a>
+Pose computation methods</h1>
+<p><a class="anchor" id="calib3d_solvePnP_flags"></a> Refer to the <a class="el" href="group__d__projection.html#ga357634492a94efe8858d0ce1509da869">cv::SolvePnPMethod</a> enum documentation for the list of possible values. Some details about each method are described below:</p>
+<ul>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869a9f589872a7f7d687dc58294e01ea33a5">cv::SOLVEPNP_ITERATIVE</a> Iterative method is based on a Levenberg-Marquardt optimization. In this case the function finds such a pose that minimizes reprojection error, that is the sum of squared distances between the observed projections "imagePoints" and the projected (using <a class="el" href="group__d__projection.html#gae1e560e850868d6e586f41392b4f7bb3" title="Projects 3D points to an image plane.">cv::projectPoints</a> ) "objectPoints". Initial solution for non-planar "objectPoints" needs at least 6 points and uses the DLT algorithm. Initial solution for planar "objectPoints" needs at least 4 points and uses pose from homography decomposition.</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869af33a85ca698777ff9bd1de916bf5959a" title="Revisiting the P3P Problem ding2023revisiting.">cv::SOLVEPNP_P3P</a> Method is based on the paper of Ding, Y., Yang, J., Larsson, V., Olsson, C., &amp; Åstrom, K. "Revisiting the P3P Problem" (<b>[ding2023revisiting]</b>). In this case the function requires exactly four object and image points.</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869a8d48dece2da6492d91fa2de0a04679f9" title="An Efficient Algebraic Solution to the Perspective-Three-Point Problem Ke17.">cv::SOLVEPNP_AP3P</a> Method is based on the paper of T. Ke, S. Roumeliotis "An Efficient Algebraic Solution to the Perspective-Three-Point Problem" (<b>[Ke17]</b>). In this case the function requires exactly four object and image points.</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869ae25763f5155defc67ef0f68b74d6c074" title="EPnP: Efficient Perspective-n-Point Camera Pose Estimation lepetit2009epnp.">cv::SOLVEPNP_EPNP</a> Method has been introduced by F. Moreno-Noguer, V. Lepetit and P. Fua in the paper "EPnP: Efficient Perspective-n-Point Camera Pose Estimation" (<b>[lepetit2009epnp]</b>).</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869acbd7d9f9513a22a59412661a9d31ca3d">cv::SOLVEPNP_IPPE</a> Method is based on the paper of T. Collins and A. Bartoli. "Infinitesimal Plane-Based Pose Estimation" (<b>[Collins14]</b>). This method requires coplanar object points.</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869ac5d28b2805d3ac32fd477eee4479406f">cv::SOLVEPNP_IPPE_SQUARE</a> Method is based on the paper of Toby Collins and Adrien Bartoli. "Infinitesimal Plane-Based Pose Estimation" (<b>[Collins14]</b>). This method is suitable for marker pose estimation. It requires 4 coplanar object points defined in the following order:<ul>
+<li>point 0: [-squareLength / 2, squareLength / 2, 0]</li>
+<li>point 1: [ squareLength / 2, squareLength / 2, 0]</li>
+<li>point 2: [ squareLength / 2, -squareLength / 2, 0]</li>
+<li>point 3: [-squareLength / 2, -squareLength / 2, 0]</li>
+</ul>
+</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869a9229a3332f6c4969251c31d2931b0729" title="SQPnP: A Consistently Fast and Globally OptimalSolution to the Perspective-n-Point Problem Terzakis20...">cv::SOLVEPNP_SQPNP</a> Method is based on the paper "A Consistently Fast and Globally Optimal Solution to the
+Perspective-n-Point Problem" by G. Terzakis and M.Lourakis (<b>[Terzakis2020SQPnP]</b>). It requires 3 or more points.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md56"></a>
+P3P</h1>
+<p>The <a class="el" href="group__d__projection.html#gae5af86788e99948d40b39a03f6acf623" title="Finds an object pose  from 3 3D-2D point correspondences.">cv::solveP3P()</a> computes an object pose from exactly 3 3D-2D point correspondences. A P3P problem has up to 4 solutions.</p>
+<dl class="section note"><dt>Nota</dt><dd>The solutions are sorted by reprojection errors (lowest to highest).</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md57"></a>
+PnP</h1>
+<p>The <a class="el" href="group__d__projection.html#ga549c2075fac14829ff4a58bc931c033d" title="Finds an object pose  from 3D-2D point correspondences:">cv::solvePnP()</a> returns the rotation and the translation vectors that transform a 3D point expressed in the object coordinate frame to the camera coordinate frame, using different methods:</p><ul>
+<li>P3P methods (<a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869af33a85ca698777ff9bd1de916bf5959a" title="Revisiting the P3P Problem ding2023revisiting.">cv::SOLVEPNP_P3P</a>, <a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869a8d48dece2da6492d91fa2de0a04679f9" title="An Efficient Algebraic Solution to the Perspective-Three-Point Problem Ke17.">cv::SOLVEPNP_AP3P</a>): need 4 input points to return a unique solution.</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869acbd7d9f9513a22a59412661a9d31ca3d">cv::SOLVEPNP_IPPE</a> Input points must be &gt;= 4 and object points must be coplanar.</li>
+<li><a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869ac5d28b2805d3ac32fd477eee4479406f">cv::SOLVEPNP_IPPE_SQUARE</a> Special case suitable for marker pose estimation. Number of input points must be 4. Object points must be defined in the following order:<ul>
+<li>point 0: [-squareLength / 2, squareLength / 2, 0]</li>
+<li>point 1: [ squareLength / 2, squareLength / 2, 0]</li>
+<li>point 2: [ squareLength / 2, -squareLength / 2, 0]</li>
+<li>point 3: [-squareLength / 2, -squareLength / 2, 0]</li>
+</ul>
+</li>
+<li>for all the other flags, number of input points must be &gt;= 4 and object points can be in any configuration.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md58"></a>
+Generic PnP</h1>
+<p>The <a class="el" href="group__d__projection.html#gab3ca9fcadecc0f9c704f696ce8fdb7ac" title="Finds an object pose  from 3D-2D point correspondences.">cv::solvePnPGeneric()</a> allows retrieving all the possible solutions.</p>
+<p>Currently, only <a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869af33a85ca698777ff9bd1de916bf5959a" title="Revisiting the P3P Problem ding2023revisiting.">cv::SOLVEPNP_P3P</a>, <a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869a8d48dece2da6492d91fa2de0a04679f9" title="An Efficient Algebraic Solution to the Perspective-Three-Point Problem Ke17.">cv::SOLVEPNP_AP3P</a>, <a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869acbd7d9f9513a22a59412661a9d31ca3d">cv::SOLVEPNP_IPPE</a>, <a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869ac5d28b2805d3ac32fd477eee4479406f">cv::SOLVEPNP_IPPE_SQUARE</a>, <a class="el" href="group__d__projection.html#gga357634492a94efe8858d0ce1509da869a9229a3332f6c4969251c31d2931b0729" title="SQPnP: A Consistently Fast and Globally OptimalSolution to the Perspective-n-Point Problem Terzakis20...">cv::SOLVEPNP_SQPNP</a> can return multiple solutions.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
+RANSAC PnP</h1>
+<p>The <a class="el" href="group__d__projection.html#ga50620f0e26e02caa2e9adc07b5fbf24e" title="Finds an object pose  from 3D-2D point correspondences using the RANSAC scheme to deal with bad match...">cv::solvePnPRansac()</a> computes the object pose wrt. the camera frame using a RANSAC scheme to deal with outliers.</p>
+<p>More information can be found in <b>[Zuliani2014RANSACFD]</b></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
+Pose refinement</h1>
+<p>Pose refinement consists in estimating the rotation and translation that minimizes the reprojection error using a non-linear minimization method and starting from an initial estimate of the solution. OpenCV proposes <a class="el" href="group__d__projection.html#ga650ba4d286a96d992f82c3e6dfa525fa" title="Refine a pose (the translation and the rotation that transform a 3D point expressed in the object coo...">cv::solvePnPRefineLM()</a> and <a class="el" href="group__d__projection.html#ga17491c0282e4af874f6206a9166774a5" title="Refine a pose (the translation and the rotation that transform a 3D point expressed in the object coo...">cv::solvePnPRefineVVS()</a> for this problem.</p>
+<p><a class="el" href="group__d__projection.html#ga650ba4d286a96d992f82c3e6dfa525fa" title="Refine a pose (the translation and the rotation that transform a 3D point expressed in the object coo...">cv::solvePnPRefineLM()</a> uses a non-linear Levenberg-Marquardt minimization scheme <b>[Madsen04]</b> <b>[Eade13]</b> and the current implementation computes the rotation update as a perturbation and not on SO(3).</p>
+<p><a class="el" href="group__d__projection.html#ga17491c0282e4af874f6206a9166774a5" title="Refine a pose (the translation and the rotation that transform a 3D point expressed in the object coo...">cv::solvePnPRefineVVS()</a> uses a Gauss-Newton non-linear minimization scheme <b>[Marchand16]</b> and with an update of the rotation part computed using the exponential map.</p>
+<dl class="section note"><dt>Nota</dt><dd>at least three 3D-2D point correspondences are necessary. </dd></dl>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

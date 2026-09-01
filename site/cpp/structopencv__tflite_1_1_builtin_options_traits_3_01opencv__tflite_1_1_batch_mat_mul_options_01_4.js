@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_batch_mat_mul_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_batch_mat_mul_options_01_4.html#a7a186c7d50d09d721b5885ab204585a5", null ]
+];

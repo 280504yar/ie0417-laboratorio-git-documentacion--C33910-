@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/flann/include/opencv2/flann/heap.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('heap_8h_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">heap.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="heap_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M*********************************************************************</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Software License Agreement (BSD License)</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright 2008-2009  Marius Muja (mariusm@cs.ubc.ca). All rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Copyright 2008-2009  David G. Lowe (lowe@cs.ubc.ca). All rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * THE BSD LICENSE</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> * modification, are permitted provided that the following conditions</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> * are met:</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * 1. Redistributions of source code must retain the above copyright</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *    notice, this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * 2. Redistributions in binary form must reproduce the above copyright</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> *    notice, this list of conditions and the following disclaimer in the</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *    documentation and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS&#39;&#39; AND ANY EXPRESS OR</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> *************************************************************************/</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#ifndef OPENCV_FLANN_HEAP_H_</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#define OPENCV_FLANN_HEAP_H_</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecvflann.html">cvflann</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">// TODO: Define x &gt; y operator and use std::greater&lt;T&gt; instead</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">struct </span>greater</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>{</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">bool</span> operator()(<span class="keyword">const</span> T&amp; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keyword">const</span> T&amp; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> &lt; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">class </span>Heap</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::vector&lt;T&gt; heap;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    Heap(<span class="keyword">const</span> <span class="keywordtype">int</span> capacity)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        reserve(capacity);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    Heap(std::vector&lt;T&gt;&amp;&amp; vec)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        : heap(std::<a class="code hl_function" href="namespacetesting_1_1internal.html#aa1114d84589bd22f45d443527528cb35">move</a>(vec))</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        std::make_heap(heap.begin(), heap.end(), greater&lt;T&gt;());</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)heap.size();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">int</span> capacity()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)heap.capacity();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">bool</span> empty()</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">return</span> heap.empty();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">void</span> clear()</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        heap.clear();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">void</span> reserve(<span class="keyword">const</span> <span class="keywordtype">int</span> capacity)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        heap.reserve(capacity);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecvtest.html#a2f7f346ea1d078be78eb8633f3b25077">insert</a>(T value)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="comment">/* If heap is full, then return without adding this element. */</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>() == capacity()) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        heap.push_back(value);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        std::push_heap(heap.begin(), heap.end(), greater&lt;T&gt;());</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">bool</span> popMin(T&amp; value)</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keywordflow">if</span> (empty()) {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <a class="code hl_variable" href="namespacegl.html#aa4896ab553e662e6d4698bbc74c51fce">value</a> = heap[0];</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        std::pop_heap(heap.begin(), heap.end(), greater&lt;T&gt;());</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        heap.pop_back();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;  <span class="comment">/* Return old last node. */</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> HashableT&gt;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keyword">static</span> cv::Ptr&lt;Heap&lt;T&gt;&gt; getPooledInstance(</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keyword">const</span> HashableT&amp; poolId, <span class="keyword">const</span> <span class="keywordtype">int</span> capacity, <span class="keywordtype">int</span> iterThreshold = 0)</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keyword">static</span> <a class="code hl_typedef" href="group__core__utils.html#gaf0b2df4f7899189c9d04f7a2c2559132">cv::Mutex</a> mutex;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__utils.html#gaac6054394f54fbbc849a09f4286774e9">cv::AutoLock</a> lock(mutex);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keyword">struct </span>HeapMapValueType {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            cv::Ptr&lt;Heap&lt;T&gt;&gt; heapPtr;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <span class="keywordtype">int</span> iterCounter;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        };</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keyword">typedef</span> std::unordered_map&lt;HashableT, HeapMapValueType&gt; HeapMapType;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keyword">static</span> HeapMapType heapsPool;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keyword">typename</span> HeapMapType::iterator heapIt = heapsPool.find(poolId);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">if</span> (heapIt == heapsPool.end())</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        {</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="comment">// Construct the heap as it does not already exists</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            HeapMapValueType heapAndTimePair = {<a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr&lt;Heap&lt;T&gt;</a>&gt;(capacity), 0};</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keyword">const</span> std::pair&lt;typename HeapMapType::iterator, bool&gt;&amp; emplaceResult = heapsPool.emplace(poolId, std::move(heapAndTimePair));</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <a class="code hl_define" href="check_8hpp.html#a61c25240a2aa49578c51fae675350615">CV_CheckEQ</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(emplaceResult.second), 1, <span class="stringliteral">&quot;Failed to insert the heap into its memory pool&quot;</span>);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            heapIt = emplaceResult.first;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <a class="code hl_define" href="check_8hpp.html#a61c25240a2aa49578c51fae675350615">CV_CheckEQ</a>(heapIt-&gt;second.heapPtr.use_count(), 1, <span class="stringliteral">&quot;Cannot modify a heap that is currently accessed by another caller&quot;</span>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            heapIt-&gt;second.heapPtr-&gt;clear();</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            heapIt-&gt;second.heapPtr-&gt;reserve(capacity);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            heapIt-&gt;second.iterCounter = 0;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">if</span> (iterThreshold &lt;= 1) {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            iterThreshold = 2 * <a class="code hl_function" href="group__core__utils.html#ga2db334ec41d98da3129ef4a2342fc4d4">cv::getNumThreads</a>();</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="comment">// Remove heaps that were not reused for more than given iterThreshold</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keyword">typename</span> HeapMapType::iterator cleanupIt = heapsPool.begin();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordflow">while</span> (cleanupIt != heapsPool.end())</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <span class="keywordflow">if</span> (cleanupIt-&gt;second.iterCounter++ &gt; iterThreshold)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(cleanupIt != heapIt);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                cleanupIt = heapsPool.erase(cleanupIt);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            }</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            ++cleanupIt;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">return</span> heapIt-&gt;second.heapPtr;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    }</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>};</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>}</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="preprocessor">#endif </span><span class="comment">//OPENCV_FLANN_HEAP_H_</span></div>
+<div class="ttc" id="acheck_8hpp_html_a61c25240a2aa49578c51fae675350615"><div class="ttname"><a href="check_8hpp.html#a61c25240a2aa49578c51fae675350615">CV_CheckEQ</a></div><div class="ttdeci">#define CV_CheckEQ(v1, v2, msg)</div><div class="ttdoc">Supported values of these types: int, float, double.</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00120">check.hpp:120</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga2db334ec41d98da3129ef4a2342fc4d4"><div class="ttname"><a href="group__core__utils.html#ga2db334ec41d98da3129ef4a2342fc4d4">cv::getNumThreads</a></div><div class="ttdeci">CV_EXPORTS_W int getNumThreads()</div><div class="ttdoc">Returns the number of threads used by OpenCV for parallel regions.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00630">parallel.cpp:630</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaac6054394f54fbbc849a09f4286774e9"><div class="ttname"><a href="group__core__utils.html#gaac6054394f54fbbc849a09f4286774e9">cv::AutoLock</a></div><div class="ttdeci">std::lock_guard&lt; cv::Mutex &gt; AutoLock</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00826">utility.hpp:826</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf0b2df4f7899189c9d04f7a2c2559132"><div class="ttname"><a href="group__core__utils.html#gaf0b2df4f7899189c9d04f7a2c2559132">cv::Mutex</a></div><div class="ttdeci">std::recursive_mutex Mutex</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00825">utility.hpp:825</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecvflann_html"><div class="ttname"><a href="namespacecvflann.html">cvflann</a></div><div class="ttdef"><b>Definición</b> <a href="flann_8hpp_source.html#l00059">flann.hpp:60</a></div></div>
+<div class="ttc" id="anamespacecvtest_html_a2f7f346ea1d078be78eb8633f3b25077"><div class="ttname"><a href="namespacecvtest.html#a2f7f346ea1d078be78eb8633f3b25077">cvtest::insert</a></div><div class="ttdeci">void insert(const Mat &amp;plane, Mat &amp;a, int coi)</div><div class="ttdef"><b>Definición</b> <a href="ts__func_8cpp_source.html#l00564">ts_func.cpp:564</a></div></div>
+<div class="ttc" id="anamespacegl_html_aa4896ab553e662e6d4698bbc74c51fce"><div class="ttname"><a href="namespacegl.html#aa4896ab553e662e6d4698bbc74c51fce">gl::value</a></div><div class="ttdeci">GLsizei const GLfloat * value</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01227">gl_core_3_1.hpp:1227</a></div></div>
+<div class="ttc" id="anamespacegl_html_aaab0b7d37c1775a965012c32b5037bda"><div class="ttname"><a href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">gl::size</a></div><div class="ttdeci">GLsizeiptr size</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01174">gl_core_3_1.hpp:1174</a></div></div>
+<div class="ttc" id="anamespacetesting_1_1internal_html_aa1114d84589bd22f45d443527528cb35"><div class="ttname"><a href="namespacetesting_1_1internal.html#aa1114d84589bd22f45d443527528cb35">testing::internal::move</a></div><div class="ttdeci">const T &amp; move(const T &amp;t)</div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l02797">ts_gtest.h:2797</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3acea4a0cbfd0a14c0c48e9147163bac.html">flann</a></li><li class="navelem"><a href="dir_95292027f6b884f2850e2a21424e129f.html">include</a></li><li class="navelem"><a href="dir_3d525c7cac41e039df74fba97dff0cf5.html">opencv2</a></li><li class="navelem"><a href="dir_d96135d0d9a5cb873e4a31fb5d3e019e.html">flann</a></li><li class="navelem"><a href="heap_8h.html">heap.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

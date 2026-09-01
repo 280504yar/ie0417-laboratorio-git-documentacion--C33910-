@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/stitching/include/opencv2/stitching/warpers.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('warpers_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">warpers.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="warpers_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                          License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifndef OPENCV_STITCHING_WARPER_CREATORS_HPP</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define OPENCV_STITCHING_WARPER_CREATORS_HPP</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &quot;<a class="code" href="detail_2warpers_8hpp.html">opencv2/stitching/detail/warpers.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="};">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classcv_1_1_py_rotation_warper.html">   50</a></span>    <span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1_py_rotation_warper.html#addb2012225fc1060df95ce9900e77529">PyRotationWarper</a></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> rw;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1_py_rotation_warper.html#addb2012225fc1060df95ce9900e77529">PyRotationWarper</a>(<a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> type, <span class="keywordtype">float</span> scale);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classcv_1_1_py_rotation_warper.html#af6597c9542d6a6e2ebba8a2809c4525c">   56</a></span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1_py_rotation_warper.html#af6597c9542d6a6e2ebba8a2809c4525c">PyRotationWarper</a>() {}</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcv_1_1_py_rotation_warper.html#a79c99d0d3d5139ce18c98d831b4abecd">   57</a></span>        <a class="code hl_function" href="classcv_1_1_py_rotation_warper.html#a79c99d0d3d5139ce18c98d831b4abecd">~PyRotationWarper</a>() {}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a> warpPoint(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a> &amp;pt, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> K, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a> warpPointBackward(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a> &amp;pt, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> K, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> buildMaps(<a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> src_size, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> K, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> xmap, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> ymap);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_typedef" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> warp(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> K, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>, <span class="keywordtype">int</span> interp_mode, <span class="keywordtype">int</span> border_mode,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> warpBackward(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> K, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>, <span class="keywordtype">int</span> interp_mode, <span class="keywordtype">int</span> border_mode,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> dst_size, <a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> warpRoi(<a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> src_size, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> K, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classcv_1_1_py_rotation_warper.html#a0e60202307e4372ab678bca0183863e6">  122</a></span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">float</span> <a class="code hl_function" href="classcv_1_1_py_rotation_warper.html#a0e60202307e4372ab678bca0183863e6">getScale</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> 1.f; }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classcv_1_1_py_rotation_warper.html#a6c9b59cefd94cc56af74f63cf18db1c1">  123</a></span>        <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_py_rotation_warper.html#a6c9b59cefd94cc56af74f63cf18db1c1">setScale</a>(<span class="keywordtype">float</span>) {}</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    };</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="};">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcv_1_1_warper_creator.html">  132</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>{</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classcv_1_1_warper_creator.html#ab17f712ee0d3c542c1908efe267d2c2f">  135</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1_warper_creator.html#ab17f712ee0d3c542c1908efe267d2c2f">~WarperCreator</a>() {}</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classcv_1_1_warper_creator.html#abd92385861a2cabc35711ceb6c972bdd">  136</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_warper_creator.html#abd92385861a2cabc35711ceb6c972bdd">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>};</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="};">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classcv_1_1_plane_warper.html">  143</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a>  <a class="code hl_class" href="classcv_1_1_plane_warper.html">PlaneWarper</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>{</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="classcv_1_1_plane_warper.html#ada856e9a5714410fcf5ce56274e3f234">  146</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_plane_warper.html#ada856e9a5714410fcf5ce56274e3f234">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::PlaneWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>};</div>
+</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span></div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="};">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classcv_1_1_affine_warper.html">  152</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a>  <a class="code hl_class" href="classcv_1_1_affine_warper.html">AffineWarper</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>{</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classcv_1_1_affine_warper.html#abb887435b6167b7fd6098450f59ff035">  155</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_affine_warper.html#abb887435b6167b7fd6098450f59ff035">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::AffineWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>};</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="};">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classcv_1_1_cylindrical_warper.html">  161</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1_cylindrical_warper.html">CylindricalWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>{</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classcv_1_1_cylindrical_warper.html#a68d4eda49605f4e5aa4bf9864f246d3a">  164</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_cylindrical_warper.html#a68d4eda49605f4e5aa4bf9864f246d3a">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::CylindricalWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>};</div>
+</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span></div>
+<div class="foldopen" id="foldopen00168" data-start="{" data-end="};">
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classcv_1_1_spherical_warper.html">  168</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1_spherical_warper.html">SphericalWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>{</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classcv_1_1_spherical_warper.html#a21c971da0c21fcc3c0626d831dd84ed5">  171</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_spherical_warper.html#a21c971da0c21fcc3c0626d831dd84ed5">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::SphericalWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>};</div>
+</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="foldopen" id="foldopen00174" data-start="{" data-end="};">
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classcv_1_1_fisheye_warper.html">  174</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1_fisheye_warper.html">FisheyeWarper</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>{</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classcv_1_1_fisheye_warper.html#a5eecb70f43d15c2d5ceb3db3952efcb6">  177</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_fisheye_warper.html#a5eecb70f43d15c2d5ceb3db3952efcb6">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::FisheyeWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>};</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="foldopen" id="foldopen00180" data-start="{" data-end="};">
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classcv_1_1_stereographic_warper.html">  180</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1_stereographic_warper.html">StereographicWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>{</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classcv_1_1_stereographic_warper.html#a6d3fb457a727206c376b1f7d80ccfb8d">  183</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_stereographic_warper.html#a6d3fb457a727206c376b1f7d80ccfb8d">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::StereographicWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>};</div>
+</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="foldopen" id="foldopen00186" data-start="{" data-end="};">
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classcv_1_1_compressed_rectilinear_warper.html">  186</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1_compressed_rectilinear_warper.html#a08636b91dd4802fb26765788c4f4e826">CompressedRectilinearWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>{</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">float</span> a, b;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00190" data-start="{" data-end="}">
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classcv_1_1_compressed_rectilinear_warper.html#a08636b91dd4802fb26765788c4f4e826">  190</a></span>    <a class="code hl_function" href="classcv_1_1_compressed_rectilinear_warper.html#a08636b91dd4802fb26765788c4f4e826">CompressedRectilinearWarper</a>(<span class="keywordtype">float</span> A = 1, <span class="keywordtype">float</span> B = 1)</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        a = A; b = B;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
+</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="classcv_1_1_compressed_rectilinear_warper.html#aa100f9fa525c847f95491ba104ddc888">  194</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_compressed_rectilinear_warper.html#aa100f9fa525c847f95491ba104ddc888">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::CompressedRectilinearWarper&gt;</a>(scale, a, b); }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>};</div>
+</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="foldopen" id="foldopen00197" data-start="{" data-end="};">
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classcv_1_1_compressed_rectilinear_portrait_warper.html">  197</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1_compressed_rectilinear_portrait_warper.html#ab8e275b58a1e3592528e4d72b4a6fa6a">CompressedRectilinearPortraitWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>{</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordtype">float</span> a, b;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00201" data-start="{" data-end="}">
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="classcv_1_1_compressed_rectilinear_portrait_warper.html#ab8e275b58a1e3592528e4d72b4a6fa6a">  201</a></span>    <a class="code hl_function" href="classcv_1_1_compressed_rectilinear_portrait_warper.html#ab8e275b58a1e3592528e4d72b4a6fa6a">CompressedRectilinearPortraitWarper</a>(<span class="keywordtype">float</span> A = 1, <span class="keywordtype">float</span> B = 1)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        a = A; b = B;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
+</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classcv_1_1_compressed_rectilinear_portrait_warper.html#a4c3642d1da83b87545b780dc2aaa9f89">  205</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_compressed_rectilinear_portrait_warper.html#a4c3642d1da83b87545b780dc2aaa9f89">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::CompressedRectilinearPortraitWarper&gt;</a>(scale, a, b); }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>};</div>
+</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="foldopen" id="foldopen00208" data-start="{" data-end="};">
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="classcv_1_1_panini_warper.html">  208</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1_panini_warper.html#a0ad34bcaf0f8530219c8e937c2a8ef79">PaniniWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>{</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordtype">float</span> a, b;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00212" data-start="{" data-end="}">
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="classcv_1_1_panini_warper.html#a0ad34bcaf0f8530219c8e937c2a8ef79">  212</a></span>    <a class="code hl_function" href="classcv_1_1_panini_warper.html#a0ad34bcaf0f8530219c8e937c2a8ef79">PaniniWarper</a>(<span class="keywordtype">float</span> A = 1, <span class="keywordtype">float</span> B = 1)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        a = A; b = B;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    }</div>
+</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="classcv_1_1_panini_warper.html#acc9f534f9b16d87eda993585d9dc11e5">  216</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_panini_warper.html#acc9f534f9b16d87eda993585d9dc11e5">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::PaniniWarper&gt;</a>(scale, a, b); }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>};</div>
+</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="foldopen" id="foldopen00219" data-start="{" data-end="};">
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="classcv_1_1_panini_portrait_warper.html">  219</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1_panini_portrait_warper.html#a81d322db1d2ff45c157ae52834b13281">PaniniPortraitWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>{</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">float</span> a, b;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classcv_1_1_panini_portrait_warper.html#a81d322db1d2ff45c157ae52834b13281">  223</a></span>    <a class="code hl_function" href="classcv_1_1_panini_portrait_warper.html#a81d322db1d2ff45c157ae52834b13281">PaniniPortraitWarper</a>(<span class="keywordtype">float</span> A = 1, <span class="keywordtype">float</span> B = 1)</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        a = A; b = B;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    }</div>
+</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classcv_1_1_panini_portrait_warper.html#aee64c97b3b471c89c30bcbf2db6a7243">  227</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_panini_portrait_warper.html#aee64c97b3b471c89c30bcbf2db6a7243">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::PaniniPortraitWarper&gt;</a>(scale, a, b); }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>};</div>
+</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="foldopen" id="foldopen00230" data-start="{" data-end="};">
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="classcv_1_1_mercator_warper.html">  230</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1_mercator_warper.html">MercatorWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>{</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classcv_1_1_mercator_warper.html#a81e589dfd1919eab49c93e4613acd411">  233</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_mercator_warper.html#a81e589dfd1919eab49c93e4613acd411">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::MercatorWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>};</div>
+</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="};">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classcv_1_1_transverse_mercator_warper.html">  236</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1_transverse_mercator_warper.html">TransverseMercatorWarper</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>{</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classcv_1_1_transverse_mercator_warper.html#ac76268c2104d488df73a6061d174e438">  239</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;detail::RotationWarper&gt;</a> <a class="code hl_function" href="classcv_1_1_transverse_mercator_warper.html#ac76268c2104d488df73a6061d174e438">create</a>(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;detail::TransverseMercatorWarper&gt;</a>(scale); }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>};</div>
+</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="preprocessor">#ifdef HAVE_OPENCV_CUDAWARPING</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="keyword">class </span>PlaneWarperGpu: <span class="keyword">public</span> WarperCreator</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>{</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    Ptr&lt;detail::RotationWarper&gt; create(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> makePtr&lt;detail::PlaneWarperGpu&gt;(scale); }</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>};</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="keyword">class </span>CylindricalWarperGpu: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>{</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    Ptr&lt;detail::RotationWarper&gt; create(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> makePtr&lt;detail::CylindricalWarperGpu&gt;(scale); }</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>};</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="keyword">class </span>SphericalWarperGpu: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_warper_creator.html">WarperCreator</a></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>{</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    Ptr&lt;detail::RotationWarper&gt; create(<span class="keywordtype">float</span> scale) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> makePtr&lt;detail::SphericalWarperGpu&gt;(scale); }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>};</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_STITCHING_WARPER_CREATORS_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_affine_warper_html"><div class="ttname"><a href="classcv_1_1_affine_warper.html">cv::AffineWarper</a></div><div class="ttdoc">Affine warper factory class.</div><div class="ttdef"><b>Definición</b> <a href="#l00152">warpers.hpp:153</a></div></div>
+<div class="ttc" id="aclasscv_1_1_affine_warper_html_abb887435b6167b7fd6098450f59ff035"><div class="ttname"><a href="classcv_1_1_affine_warper.html#abb887435b6167b7fd6098450f59ff035">cv::AffineWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00155">warpers.hpp:155</a></div></div>
+<div class="ttc" id="aclasscv_1_1_compressed_rectilinear_portrait_warper_html_a4c3642d1da83b87545b780dc2aaa9f89"><div class="ttname"><a href="classcv_1_1_compressed_rectilinear_portrait_warper.html#a4c3642d1da83b87545b780dc2aaa9f89">cv::CompressedRectilinearPortraitWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00205">warpers.hpp:205</a></div></div>
+<div class="ttc" id="aclasscv_1_1_compressed_rectilinear_portrait_warper_html_ab8e275b58a1e3592528e4d72b4a6fa6a"><div class="ttname"><a href="classcv_1_1_compressed_rectilinear_portrait_warper.html#ab8e275b58a1e3592528e4d72b4a6fa6a">cv::CompressedRectilinearPortraitWarper::CompressedRectilinearPortraitWarper</a></div><div class="ttdeci">CompressedRectilinearPortraitWarper(float A=1, float B=1)</div><div class="ttdef"><b>Definición</b> <a href="#l00201">warpers.hpp:201</a></div></div>
+<div class="ttc" id="aclasscv_1_1_compressed_rectilinear_warper_html_a08636b91dd4802fb26765788c4f4e826"><div class="ttname"><a href="classcv_1_1_compressed_rectilinear_warper.html#a08636b91dd4802fb26765788c4f4e826">cv::CompressedRectilinearWarper::CompressedRectilinearWarper</a></div><div class="ttdeci">CompressedRectilinearWarper(float A=1, float B=1)</div><div class="ttdef"><b>Definición</b> <a href="#l00190">warpers.hpp:190</a></div></div>
+<div class="ttc" id="aclasscv_1_1_compressed_rectilinear_warper_html_aa100f9fa525c847f95491ba104ddc888"><div class="ttname"><a href="classcv_1_1_compressed_rectilinear_warper.html#aa100f9fa525c847f95491ba104ddc888">cv::CompressedRectilinearWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00194">warpers.hpp:194</a></div></div>
+<div class="ttc" id="aclasscv_1_1_cylindrical_warper_html"><div class="ttname"><a href="classcv_1_1_cylindrical_warper.html">cv::CylindricalWarper</a></div><div class="ttdoc">Cylindrical warper factory class.</div><div class="ttdef"><b>Definición</b> <a href="#l00161">warpers.hpp:162</a></div></div>
+<div class="ttc" id="aclasscv_1_1_cylindrical_warper_html_a68d4eda49605f4e5aa4bf9864f246d3a"><div class="ttname"><a href="classcv_1_1_cylindrical_warper.html#a68d4eda49605f4e5aa4bf9864f246d3a">cv::CylindricalWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00164">warpers.hpp:164</a></div></div>
+<div class="ttc" id="aclasscv_1_1_fisheye_warper_html"><div class="ttname"><a href="classcv_1_1_fisheye_warper.html">cv::FisheyeWarper</a></div><div class="ttdef"><b>Definición</b> <a href="#l00174">warpers.hpp:175</a></div></div>
+<div class="ttc" id="aclasscv_1_1_fisheye_warper_html_a5eecb70f43d15c2d5ceb3db3952efcb6"><div class="ttname"><a href="classcv_1_1_fisheye_warper.html#a5eecb70f43d15c2d5ceb3db3952efcb6">cv::FisheyeWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00177">warpers.hpp:177</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mercator_warper_html"><div class="ttname"><a href="classcv_1_1_mercator_warper.html">cv::MercatorWarper</a></div><div class="ttdef"><b>Definición</b> <a href="#l00230">warpers.hpp:231</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mercator_warper_html_a81e589dfd1919eab49c93e4613acd411"><div class="ttname"><a href="classcv_1_1_mercator_warper.html#a81e589dfd1919eab49c93e4613acd411">cv::MercatorWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00233">warpers.hpp:233</a></div></div>
+<div class="ttc" id="aclasscv_1_1_panini_portrait_warper_html_a81d322db1d2ff45c157ae52834b13281"><div class="ttname"><a href="classcv_1_1_panini_portrait_warper.html#a81d322db1d2ff45c157ae52834b13281">cv::PaniniPortraitWarper::PaniniPortraitWarper</a></div><div class="ttdeci">PaniniPortraitWarper(float A=1, float B=1)</div><div class="ttdef"><b>Definición</b> <a href="#l00223">warpers.hpp:223</a></div></div>
+<div class="ttc" id="aclasscv_1_1_panini_portrait_warper_html_aee64c97b3b471c89c30bcbf2db6a7243"><div class="ttname"><a href="classcv_1_1_panini_portrait_warper.html#aee64c97b3b471c89c30bcbf2db6a7243">cv::PaniniPortraitWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00227">warpers.hpp:227</a></div></div>
+<div class="ttc" id="aclasscv_1_1_panini_warper_html_a0ad34bcaf0f8530219c8e937c2a8ef79"><div class="ttname"><a href="classcv_1_1_panini_warper.html#a0ad34bcaf0f8530219c8e937c2a8ef79">cv::PaniniWarper::PaniniWarper</a></div><div class="ttdeci">PaniniWarper(float A=1, float B=1)</div><div class="ttdef"><b>Definición</b> <a href="#l00212">warpers.hpp:212</a></div></div>
+<div class="ttc" id="aclasscv_1_1_panini_warper_html_acc9f534f9b16d87eda993585d9dc11e5"><div class="ttname"><a href="classcv_1_1_panini_warper.html#acc9f534f9b16d87eda993585d9dc11e5">cv::PaniniWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00216">warpers.hpp:216</a></div></div>
+<div class="ttc" id="aclasscv_1_1_plane_warper_html"><div class="ttname"><a href="classcv_1_1_plane_warper.html">cv::PlaneWarper</a></div><div class="ttdoc">Plane warper factory class.</div><div class="ttdef"><b>Definición</b> <a href="#l00143">warpers.hpp:144</a></div></div>
+<div class="ttc" id="aclasscv_1_1_plane_warper_html_ada856e9a5714410fcf5ce56274e3f234"><div class="ttname"><a href="classcv_1_1_plane_warper.html#ada856e9a5714410fcf5ce56274e3f234">cv::PlaneWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00146">warpers.hpp:146</a></div></div>
+<div class="ttc" id="aclasscv_1_1_py_rotation_warper_html_a0e60202307e4372ab678bca0183863e6"><div class="ttname"><a href="classcv_1_1_py_rotation_warper.html#a0e60202307e4372ab678bca0183863e6">cv::PyRotationWarper::getScale</a></div><div class="ttdeci">CV_WRAP float getScale() const</div><div class="ttdef"><b>Definición</b> <a href="#l00122">warpers.hpp:122</a></div></div>
+<div class="ttc" id="aclasscv_1_1_py_rotation_warper_html_a6c9b59cefd94cc56af74f63cf18db1c1"><div class="ttname"><a href="classcv_1_1_py_rotation_warper.html#a6c9b59cefd94cc56af74f63cf18db1c1">cv::PyRotationWarper::setScale</a></div><div class="ttdeci">CV_WRAP void setScale(float)</div><div class="ttdef"><b>Definición</b> <a href="#l00123">warpers.hpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1_py_rotation_warper_html_a79c99d0d3d5139ce18c98d831b4abecd"><div class="ttname"><a href="classcv_1_1_py_rotation_warper.html#a79c99d0d3d5139ce18c98d831b4abecd">cv::PyRotationWarper::~PyRotationWarper</a></div><div class="ttdeci">~PyRotationWarper()</div><div class="ttdef"><b>Definición</b> <a href="#l00057">warpers.hpp:57</a></div></div>
+<div class="ttc" id="aclasscv_1_1_py_rotation_warper_html_addb2012225fc1060df95ce9900e77529"><div class="ttname"><a href="classcv_1_1_py_rotation_warper.html#addb2012225fc1060df95ce9900e77529">cv::PyRotationWarper::PyRotationWarper</a></div><div class="ttdeci">CV_WRAP PyRotationWarper(String type, float scale)</div><div class="ttdef"><b>Definición</b> <a href="warpers_8cpp_source.html#l00048">warpers.cpp:48</a></div></div>
+<div class="ttc" id="aclasscv_1_1_py_rotation_warper_html_af6597c9542d6a6e2ebba8a2809c4525c"><div class="ttname"><a href="classcv_1_1_py_rotation_warper.html#af6597c9542d6a6e2ebba8a2809c4525c">cv::PyRotationWarper::PyRotationWarper</a></div><div class="ttdeci">CV_WRAP PyRotationWarper()</div><div class="ttdef"><b>Definición</b> <a href="#l00056">warpers.hpp:56</a></div></div>
+<div class="ttc" id="aclasscv_1_1_spherical_warper_html"><div class="ttname"><a href="classcv_1_1_spherical_warper.html">cv::SphericalWarper</a></div><div class="ttdoc">Spherical warper factory class.</div><div class="ttdef"><b>Definición</b> <a href="#l00168">warpers.hpp:169</a></div></div>
+<div class="ttc" id="aclasscv_1_1_spherical_warper_html_a21c971da0c21fcc3c0626d831dd84ed5"><div class="ttname"><a href="classcv_1_1_spherical_warper.html#a21c971da0c21fcc3c0626d831dd84ed5">cv::SphericalWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00171">warpers.hpp:171</a></div></div>
+<div class="ttc" id="aclasscv_1_1_stereographic_warper_html"><div class="ttname"><a href="classcv_1_1_stereographic_warper.html">cv::StereographicWarper</a></div><div class="ttdef"><b>Definición</b> <a href="#l00180">warpers.hpp:181</a></div></div>
+<div class="ttc" id="aclasscv_1_1_stereographic_warper_html_a6d3fb457a727206c376b1f7d80ccfb8d"><div class="ttname"><a href="classcv_1_1_stereographic_warper.html#a6d3fb457a727206c376b1f7d80ccfb8d">cv::StereographicWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00183">warpers.hpp:183</a></div></div>
+<div class="ttc" id="aclasscv_1_1_transverse_mercator_warper_html"><div class="ttname"><a href="classcv_1_1_transverse_mercator_warper.html">cv::TransverseMercatorWarper</a></div><div class="ttdef"><b>Definición</b> <a href="#l00236">warpers.hpp:237</a></div></div>
+<div class="ttc" id="aclasscv_1_1_transverse_mercator_warper_html_ac76268c2104d488df73a6061d174e438"><div class="ttname"><a href="classcv_1_1_transverse_mercator_warper.html#ac76268c2104d488df73a6061d174e438">cv::TransverseMercatorWarper::create</a></div><div class="ttdeci">Ptr&lt; detail::RotationWarper &gt; create(float scale) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00239">warpers.hpp:239</a></div></div>
+<div class="ttc" id="aclasscv_1_1_warper_creator_html"><div class="ttname"><a href="classcv_1_1_warper_creator.html">cv::WarperCreator</a></div><div class="ttdoc">Image warper factories base class.</div><div class="ttdef"><b>Definición</b> <a href="#l00132">warpers.hpp:133</a></div></div>
+<div class="ttc" id="aclasscv_1_1_warper_creator_html_ab17f712ee0d3c542c1908efe267d2c2f"><div class="ttname"><a href="classcv_1_1_warper_creator.html#ab17f712ee0d3c542c1908efe267d2c2f">cv::WarperCreator::~WarperCreator</a></div><div class="ttdeci">virtual CV_WRAP ~WarperCreator()</div><div class="ttdef"><b>Definición</b> <a href="#l00135">warpers.hpp:135</a></div></div>
+<div class="ttc" id="aclasscv_1_1_warper_creator_html_abd92385861a2cabc35711ceb6c972bdd"><div class="ttname"><a href="classcv_1_1_warper_creator.html#abd92385861a2cabc35711ceb6c972bdd">cv::WarperCreator::create</a></div><div class="ttdeci">virtual Ptr&lt; detail::RotationWarper &gt; create(float scale) const =0</div></div>
+<div class="ttc" id="adetail_2warpers_8hpp_html"><div class="ttname"><a href="detail_2warpers_8hpp.html">warpers.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_ga4f54fd94c93832386eee74ac994176bb"><div class="ttname"><a href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">cv::R</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray R</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1e83eafb2d26b3c93f09e8338bcab192"><div class="ttname"><a href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">cv::Point</a></div><div class="ttdeci">Point2i Point</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00209">types.hpp:209</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga7d080aa40de011e4410bca63385ffe2a"><div class="ttname"><a href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">cv::Point2f</a></div><div class="ttdeci">Point_&lt; float &gt; Point2f</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00207">types.hpp:207</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga1bf9f0e121b54272da02379cfccd0a2b"><div class="ttname"><a href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a></div><div class="ttdeci">#define CV_EXPORTS</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00446">cvdef.h:446</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4e999bc21cb894d3ed789f3f0bc26778"><div class="ttname"><a href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a></div><div class="ttdeci">#define CV_OUT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00489">cvdef.h:489</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga67ea671a3582ce612ac3c281e067f480"><div class="ttname"><a href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a></div><div class="ttdeci">#define CV_EXPORTS_W</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00483">cvdef.h:483</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gae435babf3ce7cca990524b23adf6b4a3"><div class="ttname"><a href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a></div><div class="ttdeci">#define CV_WRAP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00493">cvdef.h:493</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_61350599ec69e0dc4f4468047e146f77.html">stitching</a></li><li class="navelem"><a href="dir_409710c970ffd93d564b79d1dc318dc4.html">include</a></li><li class="navelem"><a href="dir_07f59ba62b041170eae22b21b86b5db1.html">opencv2</a></li><li class="navelem"><a href="dir_4036ac89f3496024bc4067ed27487d5f.html">stitching</a></li><li class="navelem"><a href="warpers_8hpp.html">warpers.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

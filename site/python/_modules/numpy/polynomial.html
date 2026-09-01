@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>numpy.polynomial &#8212; NumPy - Documentación Sphinx</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=3f32dc30"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para numpy.polynomial</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">A sub-package for efficiently dealing with polynomials.</span>
+
+<span class="sd">Within the documentation for this sub-package, a "finite power series,"</span>
+<span class="sd">i.e., a polynomial (also referred to simply as a "series") is represented</span>
+<span class="sd">by a 1-D numpy array of the polynomial's coefficients, ordered from lowest</span>
+<span class="sd">order term to highest.  For example, array([1,2,3]) represents</span>
+<span class="sd">``P_0 + 2*P_1 + 3*P_2``, where P_n is the n-th order basis polynomial</span>
+<span class="sd">applicable to the specific module in question, e.g., `polynomial` (which</span>
+<span class="sd">"wraps" the "standard" basis) or `chebyshev`.  For optimal performance,</span>
+<span class="sd">all operations on polynomials, including evaluation at an argument, are</span>
+<span class="sd">implemented as operations on the coefficients.  Additional (module-specific)</span>
+<span class="sd">information can be found in the docstring for the module of interest.</span>
+
+<span class="sd">This package provides *convenience classes* for each of six different kinds</span>
+<span class="sd">of polynomials:</span>
+
+<span class="sd">========================    ================</span>
+<span class="sd">**Name**                    **Provides**</span>
+<span class="sd">========================    ================</span>
+<span class="sd">`~polynomial.Polynomial`    Power series</span>
+<span class="sd">`~chebyshev.Chebyshev`      Chebyshev series</span>
+<span class="sd">`~legendre.Legendre`        Legendre series</span>
+<span class="sd">`~laguerre.Laguerre`        Laguerre series</span>
+<span class="sd">`~hermite.Hermite`          Hermite series</span>
+<span class="sd">`~hermite_e.HermiteE`       HermiteE series</span>
+<span class="sd">========================    ================</span>
+
+<span class="sd">These *convenience classes* provide a consistent interface for creating,</span>
+<span class="sd">manipulating, and fitting data with polynomials of different bases.</span>
+<span class="sd">The convenience classes are the preferred interface for the `~numpy.polynomial`</span>
+<span class="sd">package, and are available from the ``numpy.polynomial`` namespace.</span>
+<span class="sd">This eliminates the need to navigate to the corresponding submodules, e.g.</span>
+<span class="sd">``np.polynomial.Polynomial`` or ``np.polynomial.Chebyshev`` instead of</span>
+<span class="sd">``np.polynomial.polynomial.Polynomial`` or</span>
+<span class="sd">``np.polynomial.chebyshev.Chebyshev``, respectively.</span>
+<span class="sd">The classes provide a more consistent and concise interface than the</span>
+<span class="sd">type-specific functions defined in the submodules for each type of polynomial.</span>
+<span class="sd">For example, to fit a Chebyshev polynomial with degree ``1`` to data given</span>
+<span class="sd">by arrays ``xdata`` and ``ydata``, the</span>
+<span class="sd">`~chebyshev.Chebyshev.fit` class method::</span>
+
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import Chebyshev</span>
+<span class="sd">    &gt;&gt;&gt; xdata = [1, 2, 3, 4]</span>
+<span class="sd">    &gt;&gt;&gt; ydata = [1, 4, 9, 16]</span>
+<span class="sd">    &gt;&gt;&gt; c = Chebyshev.fit(xdata, ydata, deg=1)</span>
+
+<span class="sd">is preferred over the `chebyshev.chebfit` function from the</span>
+<span class="sd">``np.polynomial.chebyshev`` module::</span>
+
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial.chebyshev import chebfit</span>
+<span class="sd">    &gt;&gt;&gt; c = chebfit(xdata, ydata, deg=1)</span>
+
+<span class="sd">See :doc:`routines.polynomials.classes` for more details.</span>
+
+<span class="sd">Convenience Classes</span>
+<span class="sd">===================</span>
+
+<span class="sd">The following lists the various constants and methods common to all of</span>
+<span class="sd">the classes representing the various kinds of polynomials. In the following,</span>
+<span class="sd">the term ``Poly`` represents any one of the convenience classes (e.g.</span>
+<span class="sd">`~polynomial.Polynomial`, `~chebyshev.Chebyshev`, `~hermite.Hermite`, etc.)</span>
+<span class="sd">while the lowercase ``p`` represents an **instance** of a polynomial class.</span>
+
+<span class="sd">Constants</span>
+<span class="sd">---------</span>
+
+<span class="sd">- ``Poly.domain``     -- Default domain</span>
+<span class="sd">- ``Poly.window``     -- Default window</span>
+<span class="sd">- ``Poly.basis_name`` -- String used to represent the basis</span>
+<span class="sd">- ``Poly.maxpower``   -- Maximum value ``n`` such that ``p**n`` is allowed</span>
+
+<span class="sd">Creation</span>
+<span class="sd">--------</span>
+
+<span class="sd">Methods for creating polynomial instances.</span>
+
+<span class="sd">- ``Poly.basis(degree)``    -- Basis polynomial of given degree</span>
+<span class="sd">- ``Poly.identity()``       -- ``p`` where ``p(x) = x`` for all ``x``</span>
+<span class="sd">- ``Poly.fit(x, y, deg)``   -- ``p`` of degree ``deg`` with coefficients</span>
+<span class="sd">  determined by the least-squares fit to the data ``x``, ``y``</span>
+<span class="sd">- ``Poly.fromroots(roots)`` -- ``p`` with specified roots</span>
+<span class="sd">- ``p.copy()``              -- Create a copy of ``p``</span>
+
+<span class="sd">Conversion</span>
+<span class="sd">----------</span>
+
+<span class="sd">Methods for converting a polynomial instance of one kind to another.</span>
+
+<span class="sd">- ``p.cast(Poly)``    -- Convert ``p`` to instance of kind ``Poly``</span>
+<span class="sd">- ``p.convert(Poly)`` -- Convert ``p`` to instance of kind ``Poly`` or map</span>
+<span class="sd">  between ``domain`` and ``window``</span>
+
+<span class="sd">Calculus</span>
+<span class="sd">--------</span>
+<span class="sd">- ``p.deriv()`` -- Take the derivative of ``p``</span>
+<span class="sd">- ``p.integ()`` -- Integrate ``p``</span>
+
+<span class="sd">Validation</span>
+<span class="sd">----------</span>
+<span class="sd">- ``Poly.has_samecoef(p1, p2)``   -- Check if coefficients match</span>
+<span class="sd">- ``Poly.has_samedomain(p1, p2)`` -- Check if domains match</span>
+<span class="sd">- ``Poly.has_sametype(p1, p2)``   -- Check if types match</span>
+<span class="sd">- ``Poly.has_samewindow(p1, p2)`` -- Check if windows match</span>
+
+<span class="sd">Misc</span>
+<span class="sd">----</span>
+<span class="sd">- ``p.linspace()`` -- Return ``x, p(x)`` at equally-spaced points in ``domain``</span>
+<span class="sd">- ``p.mapparms()`` -- Return the parameters for the linear mapping between</span>
+<span class="sd">  ``domain`` and ``window``.</span>
+<span class="sd">- ``p.roots()``    -- Return the roots of ``p``.</span>
+<span class="sd">- ``p.trim()``     -- Remove trailing coefficients.</span>
+<span class="sd">- ``p.cutdeg(degree)`` -- Truncate ``p`` to given degree</span>
+<span class="sd">- ``p.truncate(size)`` -- Truncate ``p`` to given size</span>
+
+<span class="sd">"""</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.chebyshev</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chebyshev</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.hermite</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hermite</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.hermite_e</span><span class="w"> </span><span class="kn">import</span> <span class="n">HermiteE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.laguerre</span><span class="w"> </span><span class="kn">import</span> <span class="n">Laguerre</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.legendre</span><span class="w"> </span><span class="kn">import</span> <span class="n">Legendre</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.polynomial</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polynomial</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># noqa: F822</span>
+    <span class="s2">"set_default_printstyle"</span><span class="p">,</span>
+    <span class="s2">"polynomial"</span><span class="p">,</span> <span class="s2">"Polynomial"</span><span class="p">,</span>
+    <span class="s2">"chebyshev"</span><span class="p">,</span> <span class="s2">"Chebyshev"</span><span class="p">,</span>
+    <span class="s2">"legendre"</span><span class="p">,</span> <span class="s2">"Legendre"</span><span class="p">,</span>
+    <span class="s2">"hermite"</span><span class="p">,</span> <span class="s2">"Hermite"</span><span class="p">,</span>
+    <span class="s2">"hermite_e"</span><span class="p">,</span> <span class="s2">"HermiteE"</span><span class="p">,</span>
+    <span class="s2">"laguerre"</span><span class="p">,</span> <span class="s2">"Laguerre"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="set_default_printstyle">
+<a class="viewcode-back" href="../../api/polynomial.html#numpy.polynomial.set_default_printstyle">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_default_printstyle</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Set the default format for the string representation of polynomials.</span>
+
+<span class="sd">    Values for ``style`` must be valid inputs to ``__format__``, i.e. 'ascii'</span>
+<span class="sd">    or 'unicode'.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    style : str</span>
+<span class="sd">        Format string for default printing style. Must be either 'ascii' or</span>
+<span class="sd">        'unicode'.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The default format depends on the platform: 'unicode' is used on</span>
+<span class="sd">    Unix-based systems and 'ascii' on Windows. This determination is based on</span>
+<span class="sd">    default font support for the unicode superscript and subscript ranges.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; p = np.polynomial.Polynomial([1, 2, 3])</span>
+<span class="sd">    &gt;&gt;&gt; c = np.polynomial.Chebyshev([1, 2, 3])</span>
+<span class="sd">    &gt;&gt;&gt; np.polynomial.set_default_printstyle('unicode')</span>
+<span class="sd">    &gt;&gt;&gt; print(p)</span>
+<span class="sd">    1.0 + 2.0·x + 3.0·x²</span>
+<span class="sd">    &gt;&gt;&gt; print(c)</span>
+<span class="sd">    1.0 + 2.0·T₁(x) + 3.0·T₂(x)</span>
+<span class="sd">    &gt;&gt;&gt; np.polynomial.set_default_printstyle('ascii')</span>
+<span class="sd">    &gt;&gt;&gt; print(p)</span>
+<span class="sd">    1.0 + 2.0 x + 3.0 x**2</span>
+<span class="sd">    &gt;&gt;&gt; print(c)</span>
+<span class="sd">    1.0 + 2.0 T_1(x) + 3.0 T_2(x)</span>
+<span class="sd">    &gt;&gt;&gt; # Formatting supersedes all class/package-level defaults</span>
+<span class="sd">    &gt;&gt;&gt; print(f"{p:unicode}")</span>
+<span class="sd">    1.0 + 2.0·x + 3.0·x²</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'unicode'</span><span class="p">,</span> <span class="s1">'ascii'</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Unsupported format string '</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">'. Valid options are 'ascii' "</span>
+            <span class="sa">f</span><span class="s2">"and 'unicode'"</span>
+        <span class="p">)</span>
+    <span class="n">_use_unicode</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="o">==</span> <span class="s1">'ascii'</span><span class="p">:</span>
+        <span class="n">_use_unicode</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">._polybase</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABCPolyBase</span>
+    <span class="n">ABCPolyBase</span><span class="o">.</span><span class="n">_use_unicode</span> <span class="o">=</span> <span class="n">_use_unicode</span></div>
+
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy._pytesttester</span><span class="w"> </span><span class="kn">import</span> <span class="n">PytestTester</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">PytestTester</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">PytestTester</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">NumPy - Documentación Sphinx</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción a NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Referencia de API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Yara.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

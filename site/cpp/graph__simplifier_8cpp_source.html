@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/graph_simplifier.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('graph__simplifier_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">graph_simplifier.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="graph__simplifier_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2020, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="graph__simplifier_8hpp.html">graph_simplifier.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#a3457c4a3c28f178c4f6cf1849f19b9d3">   16</a></span><a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#a3457c4a3c28f178c4f6cf1849f19b9d3">Subgraph::~Subgraph</a>() {}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#a913402b7955cbf1ad80d434c348c324d">   18</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#a913402b7955cbf1ad80d434c348c324d">Subgraph::addNodeToMatch</a>(<span class="keyword">const</span> std::string&amp; op, <span class="keywordtype">int</span> input_0, <span class="keywordtype">int</span> input_1,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                             <span class="keywordtype">int</span> input_2, <span class="keywordtype">int</span> input_3)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">int</span> nodeInputs[] = {input_0, input_1, input_2, input_3};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">int</span> numInputs = 0;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        numInputs += (int)(nodeInputs[i] != -1);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#a913402b7955cbf1ad80d434c348c324d">addNodeToMatch</a>(op, std::vector&lt;int&gt;(&amp;nodeInputs[0], &amp;nodeInputs[0] + numInputs));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#ad66d49ee4a92bb0d6a18dfa07ef6052f">   30</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#a913402b7955cbf1ad80d434c348c324d">Subgraph::addNodeToMatch</a>(<span class="keyword">const</span> std::string&amp; op, <span class="keyword">const</span> std::vector&lt;int&gt;&amp; inputs_)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; inputs_.size(); ++i)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(inputs_[i] &lt; (<span class="keywordtype">int</span>)nodes.size());</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    nodes.push_back(op);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    inputs.push_back(inputs_);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> nodes.size() - 1;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
+</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#accc4644a2ef4d8c7073d925c3cf8070d">   41</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#accc4644a2ef4d8c7073d925c3cf8070d">Subgraph::setFusedNode</a>(<span class="keyword">const</span> std::string&amp; op, <span class="keywordtype">int</span> input_0, <span class="keywordtype">int</span> input_1,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                            <span class="keywordtype">int</span> input_2, <span class="keywordtype">int</span> input_3, <span class="keywordtype">int</span> input_4, <span class="keywordtype">int</span> input_5)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">int</span> nodeInputs[] = {input_0, input_1, input_2, input_3, input_4, input_5};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">int</span> numInputs = 0;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 6; ++i)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(nodeInputs[i] &lt; (<span class="keywordtype">int</span>)nodes.size());</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        numInputs += (int)(nodeInputs[i] != -1);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#accc4644a2ef4d8c7073d925c3cf8070d">setFusedNode</a>(op, std::vector&lt;int&gt;(&amp;nodeInputs[0], &amp;nodeInputs[0] + numInputs));</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#a75d5412f77314254046695080c8ababc">   54</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#accc4644a2ef4d8c7073d925c3cf8070d">Subgraph::setFusedNode</a>(<span class="keyword">const</span> std::string&amp; op, <span class="keyword">const</span> std::vector&lt;int&gt;&amp; inputs_)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    fusedNodeInputs = inputs_;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    fusedNodeOp = op;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">   60</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">Subgraph::getInputNodeId</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportGraphWrapper&gt;</a>&amp; net,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                             <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportNodeWrapper&gt;</a>&amp; node,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                             <span class="keywordtype">int</span> inpId)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>{</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(inpId &lt; node-&gt;getNumInputs());</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    std::string name = node-&gt;getInputName(inpId);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numNodes = net-&gt;getNumNodes();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numNodes; ++i)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> numOutputs = net-&gt;getNumOutputs(i);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; numOutputs; j++)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">if</span> (net-&gt;getOutputName(i, j) == name)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">return</span> i;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> -1;  <span class="comment">// not found in this graph — input comes from outer scope (valid for subgraphs)</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#af068c8f4e31af38d8c0c0ffef6ecb60d">   79</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#af068c8f4e31af38d8c0c0ffef6ecb60d">Subgraph::match</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportGraphWrapper&gt;</a>&amp; net, <span class="keywordtype">int</span> nodeId,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                     std::vector&lt;int&gt;&amp; matchedNodesIds)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>{</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    matchedNodesIds.clear();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="comment">// Collection of all matchings states across branching.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">// If there is no commutative ops in the subgraph - there would be just a single map.</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::vector&lt;std::shared_ptr&lt;std::map&lt;int, int&gt;&gt;&gt; matchCandidates;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    matchCandidates.push_back(<a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr</a>&lt;std::map&lt;int, int&gt;&gt;());</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">struct </span>State</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordtype">int</span> nodeToMatch;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">int</span> targetNodeId;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="comment">// Every state refers to current matchings pairs as well as</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="comment">// matchings from parent branches produced by commutative ops.</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        std::vector&lt;std::shared_ptr&lt;std::map&lt;int, int&gt;&gt;&gt; matchings;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="comment">// When we register a matching pair we should register it in every parent branch.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="comment">// This is actual for branching in case of commutative ops only.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordtype">void</span> addMatch(std::pair&lt;int, int&gt; <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#af068c8f4e31af38d8c0c0ffef6ecb60d">match</a>)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; m : matchings)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                m-&gt;insert(<a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#af068c8f4e31af38d8c0c0ffef6ecb60d">match</a>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    };</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    std::queue&lt;State&gt; states;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    states.push({nodeId, (int)nodes.size() - 1, matchCandidates});</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">while</span> (!states.empty())</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keyword">auto</span> state = states.front();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        states.pop();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">int</span> nodeToMatch = state.nodeToMatch;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordtype">int</span> targetNodeId = state.targetNodeId;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keyword">auto</span> matchings = state.matchings.back();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">if</span> (matchings-&gt;find(targetNodeId) != matchings-&gt;end())</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="comment">// Empty placeholder matches with any input type</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">if</span> (nodes[targetNodeId].empty()) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            state.addMatch({targetNodeId, nodeToMatch});</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportNodeWrapper&gt;</a> node = net-&gt;getNode(nodeToMatch);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">if</span> (node-&gt;getType() != nodes[targetNodeId])</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        std::vector&lt;int&gt;&amp; inputNodes = inputs[targetNodeId];</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">if</span> (inputNodes.size() != node-&gt;getNumInputs())</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        state.addMatch({targetNodeId, nodeToMatch});</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordtype">bool</span> isCommutative = net-&gt;isCommutativeOp(node-&gt;getType());</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">if</span> (isCommutative)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="keywordflow">if</span> (inputNodes.size() != 2)</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">Error::StsNotImplemented</a>, <span class="stringliteral">&quot;Commutative op fusion with more than 2 inputs&quot;</span>);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordtype">int</span> inp0 = <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">getInputNodeId</a>(net, node, 0);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordtype">int</span> inp1 = <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">getInputNodeId</a>(net, node, 1);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keyword">auto</span> newMatchings = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;std::map&lt;int, int&gt;</a>&gt;(*matchings);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            matchCandidates.push_back(newMatchings);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            state.matchings.push_back(newMatchings);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">if</span> (inp0 &gt;= 0)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                states.push({inp0, inputNodes[0], state.matchings});</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">if</span> (inp1 &gt;= 0)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                states.push({inp1, inputNodes[1], state.matchings});</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            state.matchings.pop_back();</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            newMatchings = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;std::map&lt;int, int&gt;</a>&gt;(*matchings);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            matchCandidates.push_back(newMatchings);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            state.matchings.push_back(newMatchings);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <span class="keywordflow">if</span> (inp0 &gt;= 0)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                states.push({inp0, inputNodes[1], state.matchings});</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="keywordflow">if</span> (inp1 &gt;= 0)</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                states.push({inp1, inputNodes[0], state.matchings});</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            state.matchings.pop_back();</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; inputNodes.size(); ++j)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                nodeId = <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">getInputNodeId</a>(net, node, j);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                <span class="keywordflow">if</span> (nodeId &lt; 0)</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                states.push({nodeId, inputNodes[j], state.matchings});</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; matchings : matchCandidates)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">if</span> (matchings-&gt;size() != nodes.size())</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        matchedNodesIds.resize(matchings-&gt;size());</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; matchings-&gt;size(); ++i)</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(matchings-&gt;find(i) != matchings-&gt;end());</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            matchedNodesIds[i] = matchings-&gt;at(i);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}</div>
+</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#a66e622c4223ac9360c9a3d727923a97d">  188</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#a66e622c4223ac9360c9a3d727923a97d">Subgraph::replace</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportGraphWrapper&gt;</a>&amp; net, <span class="keyword">const</span> std::vector&lt;int&gt;&amp; matchedNodesIds)</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>{</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="comment">// Extract names of input nodes.</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    std::vector&lt;std::string&gt; inputsNames(fusedNodeInputs.size());</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; fusedNodeInputs.size(); ++i)</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        std::string inpName;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="comment">// Find input node name looking at inputs of fused nodes.</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; matchedNodesIds.size() &amp;&amp; inpName.empty(); ++j)</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportNodeWrapper&gt;</a> node = net-&gt;getNode(matchedNodesIds[j]);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            std::vector&lt;int&gt;&amp; inpIndices = inputs[j];</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(inpIndices.empty() || node-&gt;getNumInputs() == inpIndices.size());</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; inpIndices.size(); ++<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>)</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                <span class="keywordflow">if</span> (inpIndices[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] == fusedNodeInputs[i])</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                    inpName = node-&gt;getInputName(<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(!inpName.empty());</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        inputsNames[i] = inpName;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportNodeWrapper&gt;</a> node = net-&gt;getNode(matchedNodesIds.back());</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="comment">// Modify the last node to be a fused one.</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    node-&gt;setType(fusedNodeOp);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    node-&gt;setInputNames(inputsNames);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    std::vector&lt;Ptr&lt;ImportNodeWrapper&gt; &gt; inputNodes(inputsNames.size());</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; inputsNames.size(); ++i)</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        inputNodes[i] = net-&gt;getNode(<a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">getInputNodeId</a>(net, node, i));</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#adcd95b2c65ffc61b9575483f090e5521">finalize</a>(net, node, inputNodes);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>}</div>
+</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="foldopen" id="foldopen00229" data-start="{" data-end="}">
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_subgraph.html#adcd95b2c65ffc61b9575483f090e5521">  229</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_subgraph.html#adcd95b2c65ffc61b9575483f090e5521">Subgraph::finalize</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportGraphWrapper&gt;</a>&amp; net,</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportNodeWrapper&gt;</a>&amp; fusedNode,</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                        std::vector&lt;<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportNodeWrapper&gt;</a> &gt;&amp; inputs) {}</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a8d2a77fb545087834a32e282c514f7dc">  233</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a8d2a77fb545087834a32e282c514f7dc">simplifySubgraphs</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;ImportGraphWrapper&gt;</a>&amp; net,</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>                       <span class="keyword">const</span> std::vector&lt;<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Subgraph&gt;</a> &gt;&amp; patterns)</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>{</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordtype">int</span> numNodes = net-&gt;getNumNodes();</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    std::vector&lt;int&gt; matchedNodesIds;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    std::vector&lt;int&gt; nodesToRemove;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; patterns.size(); ++j)</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numNodes; ++i)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            <span class="keywordflow">if</span> (patterns[j]-&gt;match(net, i, matchedNodesIds))</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            {</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>                patterns[j]-&gt;replace(net, matchedNodesIds);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                <span class="comment">// Remove matched nodes except the last one.</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                nodesToRemove.insert(nodesToRemove.end(), matchedNodesIds.begin(), matchedNodesIds.end() - 1);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            }</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        }</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    }</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keywordflow">if</span> (nodesToRemove.empty())</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="comment">// Collect reference counts for every node</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    std::vector&lt;int&gt; refcounts(net-&gt;getNumNodes(), 0);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    std::map&lt;std::string, int&gt; nodeIds;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="comment">// Register node outputs.</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="comment">// Every usage of one of the node&#39;s outputs should be counted.</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nodeId = 0; nodeId &lt; refcounts.size(); ++nodeId) {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; net-&gt;getNumOutputs(nodeId); ++i) {</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            std::string name = net-&gt;getOutputName(nodeId, i);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            nodeIds[name] = nodeId;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    }</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nodeId = 0; nodeId &lt; refcounts.size(); ++nodeId) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="comment">// Increase counters for node&#39;s inputs</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keyword">auto</span> node = net-&gt;getNode(nodeId);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; node-&gt;getNumInputs(); ++i) {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            std::string inpName = node-&gt;getInputName(i);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            <span class="keywordflow">if</span> (inpName.empty())</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keyword">auto</span> it = nodeIds.find(inpName);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">if</span> (it == nodeIds.end())</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            refcounts[it-&gt;second] += 1;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        }</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    }</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="comment">// Remove all fused nodes. Indices expected to be in descending order.</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    std::sort(nodesToRemove.begin(), nodesToRemove.end(), [](<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b) { return a &gt; b; });</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nodeId : nodesToRemove) {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="keywordflow">if</span> (refcounts[nodeId] == 0) {</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            <span class="comment">// Decrease references to node&#39;s inputs and remove node itself</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            <span class="keyword">auto</span> node = net-&gt;getNode(nodeId);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; node-&gt;getNumInputs(); ++i) {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                std::string inpName = node-&gt;getInputName(i);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                <span class="keyword">auto</span> it = nodeIds.find(inpName);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                <span class="keywordflow">if</span> (it == nodeIds.end())</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                refcounts[it-&gt;second] -= 1;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>            }</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            net-&gt;removeNode(nodeId);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            refcounts[nodeId] = -1;  <span class="comment">// Same node cannot be removed twice</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        }</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    }</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>}</div>
+</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>}}  <span class="comment">// namespace cv::dnn</span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_a3457c4a3c28f178c4f6cf1849f19b9d3"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#a3457c4a3c28f178c4f6cf1849f19b9d3">cv::dnn::Subgraph::~Subgraph</a></div><div class="ttdeci">virtual ~Subgraph()</div><div class="ttdef"><b>Definición</b> <a href="#l00016">graph_simplifier.cpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_a66e622c4223ac9360c9a3d727923a97d"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#a66e622c4223ac9360c9a3d727923a97d">cv::dnn::Subgraph::replace</a></div><div class="ttdeci">void replace(const Ptr&lt; ImportGraphWrapper &gt; &amp;net, const std::vector&lt; int &gt; &amp;matchedNodesIds)</div><div class="ttdef"><b>Definición</b> <a href="#l00188">graph_simplifier.cpp:188</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_a913402b7955cbf1ad80d434c348c324d"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#a913402b7955cbf1ad80d434c348c324d">cv::dnn::Subgraph::addNodeToMatch</a></div><div class="ttdeci">int addNodeToMatch(const std::string &amp;op, int input_0=-1, int input_1=-1, int input_2=-1, int input_3=-1)</div><div class="ttdef"><b>Definición</b> <a href="#l00018">graph_simplifier.cpp:18</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_accc4644a2ef4d8c7073d925c3cf8070d"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#accc4644a2ef4d8c7073d925c3cf8070d">cv::dnn::Subgraph::setFusedNode</a></div><div class="ttdeci">void setFusedNode(const std::string &amp;op, int input_0=-1, int input_1=-1, int input_2=-1, int input_3=-1, int input_4=-1, int input_5=-1)</div><div class="ttdef"><b>Definición</b> <a href="#l00041">graph_simplifier.cpp:41</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_adcd95b2c65ffc61b9575483f090e5521"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#adcd95b2c65ffc61b9575483f090e5521">cv::dnn::Subgraph::finalize</a></div><div class="ttdeci">virtual void finalize(const Ptr&lt; ImportGraphWrapper &gt; &amp;net, const Ptr&lt; ImportNodeWrapper &gt; &amp;fusedNode, std::vector&lt; Ptr&lt; ImportNodeWrapper &gt; &gt; &amp;inputs)</div><div class="ttdef"><b>Definición</b> <a href="#l00229">graph_simplifier.cpp:229</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_af068c8f4e31af38d8c0c0ffef6ecb60d"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#af068c8f4e31af38d8c0c0ffef6ecb60d">cv::dnn::Subgraph::match</a></div><div class="ttdeci">virtual bool match(const Ptr&lt; ImportGraphWrapper &gt; &amp;net, int nodeId, std::vector&lt; int &gt; &amp;matchedNodesIds)</div><div class="ttdef"><b>Definición</b> <a href="#l00079">graph_simplifier.cpp:79</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_subgraph_html_afd157918f5c0d358b144e13a578e7791"><div class="ttname"><a href="classcv_1_1dnn_1_1_subgraph.html#afd157918f5c0d358b144e13a578e7791">cv::dnn::Subgraph::getInputNodeId</a></div><div class="ttdeci">static int getInputNodeId(const Ptr&lt; ImportGraphWrapper &gt; &amp;net, const Ptr&lt; ImportNodeWrapper &gt; &amp;node, int inpId)</div><div class="ttdef"><b>Definición</b> <a href="#l00060">graph_simplifier.cpp:60</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agraph__simplifier_8hpp_html"><div class="ttname"><a href="graph__simplifier_8hpp.html">graph_simplifier.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">cv::Error::StsNotImplemented</a></div><div class="ttdeci">@ StsNotImplemented</div><div class="ttdoc">the requested function/feature is not implemented</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00063">exception.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a8d2a77fb545087834a32e282c514f7dc"><div class="ttname"><a href="namespacecv_1_1dnn.html#a8d2a77fb545087834a32e282c514f7dc">cv::dnn::simplifySubgraphs</a></div><div class="ttdeci">void simplifySubgraphs(const Ptr&lt; ImportGraphWrapper &gt; &amp;net, const std::vector&lt; Ptr&lt; Subgraph &gt; &gt; &amp;patterns)</div><div class="ttdef"><b>Definición</b> <a href="#l00233">graph_simplifier.cpp:233</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="graph__simplifier_8cpp.html">graph_simplifier.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

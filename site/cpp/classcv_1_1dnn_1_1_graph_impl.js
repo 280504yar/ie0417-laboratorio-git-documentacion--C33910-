@@ -1,0 +1,26 @@
+var classcv_1_1dnn_1_1_graph_impl =
+[
+    [ "GraphImpl", "classcv_1_1dnn_1_1_graph_impl.html#ac9ad96ebd642d67b03c6e0e408c31e60", null ],
+    [ "~GraphImpl", "classcv_1_1dnn_1_1_graph_impl.html#a3978f526da9d4eccbf08ef711a78aa49", null ],
+    [ "append", "classcv_1_1dnn_1_1_graph_impl.html#a0ceae3457309bf2fc55410be46edaf3f", null ],
+    [ "append", "classcv_1_1dnn_1_1_graph_impl.html#a617ebb5c6544febcf3c1bc9acb2bdc48", null ],
+    [ "clear", "classcv_1_1dnn_1_1_graph_impl.html#ac05b4eee7c832f2a49e5c1a707a619b0", null ],
+    [ "dump", "classcv_1_1dnn_1_1_graph_impl.html#a53a03e5f1e88503756f55aff7a4793fc", null ],
+    [ "empty", "classcv_1_1dnn_1_1_graph_impl.html#aa21b28ce621b8b4d6e9bb339a2dca62b", null ],
+    [ "inputs", "classcv_1_1dnn_1_1_graph_impl.html#a1029f82f6f1f4a73054ae3343e175d1b", null ],
+    [ "name", "classcv_1_1dnn_1_1_graph_impl.html#a040ac612268d65a55965ab1d3038dd20", null ],
+    [ "opBackend", "classcv_1_1dnn_1_1_graph_impl.html#a8005339f2aabe7b6955c106310566d83", null ],
+    [ "outputs", "classcv_1_1dnn_1_1_graph_impl.html#af0ab18df171223e1464ba35f64a62f2f", null ],
+    [ "prog", "classcv_1_1dnn_1_1_graph_impl.html#a4c127690a1a3c2b96d4f0bdd89a36529", null ],
+    [ "setOutputs", "classcv_1_1dnn_1_1_graph_impl.html#aa8ae9c06630106091ba3f42e075c0a4f", null ],
+    [ "setProg", "classcv_1_1dnn_1_1_graph_impl.html#abd19fd0fa664cb9f815aaf173b91631d", null ],
+    [ "exec_", "classcv_1_1dnn_1_1_graph_impl.html#ad3cdfdac677533cfa84c5df2f6749964", null ],
+    [ "execBackend_", "classcv_1_1dnn_1_1_graph_impl.html#af898f9e25b5e74b6b4c4e3ac92ccc7ac", null ],
+    [ "inH2D_", "classcv_1_1dnn_1_1_graph_impl.html#a452e334251cfdd88e7ed952c264a8b88", null ],
+    [ "inputs_", "classcv_1_1dnn_1_1_graph_impl.html#aee34b2813761c54ff1e4195398c8cfa4", null ],
+    [ "name_", "classcv_1_1dnn_1_1_graph_impl.html#aa60b9e32e92b6a3ed04003fb222040c6", null ],
+    [ "netimpl_", "classcv_1_1dnn_1_1_graph_impl.html#a7e6b38279d2771984a0abeff8333934c", null ],
+    [ "outD2H_", "classcv_1_1dnn_1_1_graph_impl.html#ac0c305a769140a4024e5f919ed892d2e", null ],
+    [ "outputs_", "classcv_1_1dnn_1_1_graph_impl.html#a1fe8d6ae88bafcde566ba556fa041344", null ],
+    [ "prog_", "classcv_1_1dnn_1_1_graph_impl.html#a253cf6117b0475adecd7a9adf59cca92", null ]
+];

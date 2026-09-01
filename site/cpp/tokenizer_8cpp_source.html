@@ -1,0 +1,648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/tokenizer/tokenizer.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tokenizer_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">tokenizer.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="tokenizer_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="dnn_2dnn_8hpp.html">opencv2/dnn/dnn.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2tokenizer_2utils_8hpp.html">utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="unicode_8hpp.html">unicode.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="core__bpe_8hpp.html">core_bpe.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="core__gemma_8hpp.html">core_gemma.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;unordered_set&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Registry of implementations (method -&gt; methodImpl)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#aa905038f3a3fcbb4d9776c4ef7a860b2">   18</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacecv_1_1dnn.html#aa905038f3a3fcbb4d9776c4ef7a860b2">ImplRegestry</a> = std::function&lt;Ptr&lt;Tokenizer::Impl&gt;(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a>&amp; cfg, <span class="keyword">const</span> std::string&amp; dir)&gt;;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a71f4ca123f68269e5b8d4b57d25d7782">   20</a></span><span class="keyword">static</span> std::unordered_map&lt;std::string, ImplRegestry&gt;&amp; <a class="code hl_function" href="namespacecv_1_1dnn.html#a71f4ca123f68269e5b8d4b57d25d7782">tokenizerRegistry</a>() {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">static</span> std::unordered_map&lt;std::string, ImplRegestry&gt; reg;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span> reg;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
+</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_class" href="classcv_1_1dnn_1_1_core_b_p_e.html">CoreBPE</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a096f6e49284493cb831ab2172c196223">buildTokenizerFromJson</a>(<span class="keyword">const</span> std::string&amp; model_type, <span class="keyword">const</span> std::string&amp; json_path,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                          std::unordered_set&lt;std::string&gt;* outSpecial = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html">   28</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html">Tokenizer::Impl</a> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#ab97950af183a5b71ee57301b624acd44">   29</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#ab97950af183a5b71ee57301b624acd44">~Impl</a>() {}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#a9ed0fa52328d500b786045a67d74258e">   30</a></span>    <span class="keyword">virtual</span> std::vector&lt;int&gt; <a class="code hl_function" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#a9ed0fa52328d500b786045a67d74258e">encode</a>(<span class="keyword">const</span> std::string&amp; text) = 0;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#ae854577cd069a5ebde757aaa6ac87f62">   31</a></span>    <span class="keyword">virtual</span> std::string <a class="code hl_function" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#ae854577cd069a5ebde757aaa6ac87f62">decode</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; tokens) = 0;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html">   34</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#aaa8e84afedabf3b0c42fc2b37eba6a8a">BpeTokenizerImpl</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html">Tokenizer::Impl</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">   35</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;CoreBPE&gt;</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">coreBPE</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a2fb0f4078c74e4f116d4c4c830de925d">   36</a></span>    std::unordered_set&lt;std::string&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a2fb0f4078c74e4f116d4c4c830de925d">allowedSpecial</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#aaa8e84afedabf3b0c42fc2b37eba6a8a">   38</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#aaa8e84afedabf3b0c42fc2b37eba6a8a">BpeTokenizerImpl</a>(<a class="code hl_class" href="classcv_1_1dnn_1_1_core_b_p_e.html">CoreBPE</a> core,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                              std::unordered_set&lt;std::string&gt; special = {})</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        : <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">coreBPE</a>(<a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr</a>&lt;<a class="code hl_class" href="classcv_1_1dnn_1_1_core_b_p_e.html">CoreBPE</a>&gt;(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(core)))</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        , <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a2fb0f4078c74e4f116d4c4c830de925d">allowedSpecial</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(special)) {}</div>
+</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a8ca9c44f1e1f430f4d8aa7cd29219334">   43</a></span>    std::vector&lt;int&gt; <a class="code hl_function" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a8ca9c44f1e1f430f4d8aa7cd29219334">encode</a>(<span class="keyword">const</span> std::string&amp; text)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">coreBPE</a>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        std::vector&lt;uint32_t&gt; tok = <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">coreBPE</a>-&gt;encode(text, <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a2fb0f4078c74e4f116d4c4c830de925d">allowedSpecial</a>).first;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> std::vector&lt;int&gt;(tok.begin(), tok.end());</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a299cdc1537cd3cb91c89500f6451ff2c">   49</a></span>    std::string <a class="code hl_function" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a299cdc1537cd3cb91c89500f6451ff2c">decode</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; tokens)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">coreBPE</a>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        std::vector&lt;uint32_t&gt; t32(tokens.begin(), tokens.end());</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">const</span> std::vector&lt;std::uint8_t&gt; opt_bytes = <a class="code hl_variable" href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">coreBPE</a>-&gt;decodeBytes(t32);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">if</span> (opt_bytes.empty())</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Invalid decode.&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> std::string(<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(opt_bytes.data()), opt_bytes.size());</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>};</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="};">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html">   59</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a37a87f1350bd6d65e1e28620b60d27ba">GemmaBpeTokenizerImpl</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html">Tokenizer::Impl</a> {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a6be226c3a4944ac46397c969b61a615d">   60</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">CoreGemmaBPE</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a6be226c3a4944ac46397c969b61a615d">model</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a86d4262fa680c7e4c527024f91081a73">   61</a></span>    std::unordered_set&lt;std::string&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a86d4262fa680c7e4c527024f91081a73">allowedSpecial</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a37a87f1350bd6d65e1e28620b60d27ba">   63</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a37a87f1350bd6d65e1e28620b60d27ba">GemmaBpeTokenizerImpl</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">CoreGemmaBPE</a> m,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                                   std::unordered_set&lt;std::string&gt; special = {})</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        : <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a6be226c3a4944ac46397c969b61a615d">model</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(m)), <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a86d4262fa680c7e4c527024f91081a73">allowedSpecial</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(special)) {}</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a3fb21821c969302dcb28ee5adf7937a0">   67</a></span>    std::vector&lt;int&gt; <a class="code hl_function" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a3fb21821c969302dcb28ee5adf7937a0">encode</a>(<span class="keyword">const</span> std::string&amp; text)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a6be226c3a4944ac46397c969b61a615d">model</a>.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a19e23246557b659f5c87165fc64c497f">encode</a>(text, <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a86d4262fa680c7e4c527024f91081a73">allowedSpecial</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#ab9e4e7ad45532c6d7b7e88d80c0cbed5">   71</a></span>    std::string <a class="code hl_function" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#ab9e4e7ad45532c6d7b7e88d80c0cbed5">decode</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; tokens)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a6be226c3a4944ac46397c969b61a615d">model</a>.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a418468d054547b6dc46b39b2aab45de6">decode</a>(tokens);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="};">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html">   76</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a297db635da74912c2f57408732a1e0f6">SentencePieceTokenizerImpl</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html">Tokenizer::Impl</a> {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">   77</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">CoreGemmaBPE</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">model</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a24be7b2caf289fb4d7022ff4d7756f00">   78</a></span>    std::unordered_set&lt;std::string&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a24be7b2caf289fb4d7022ff4d7756f00">allowedSpecial</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">   79</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">bosTokenId</a>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a297db635da74912c2f57408732a1e0f6">   81</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a297db635da74912c2f57408732a1e0f6">SentencePieceTokenizerImpl</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">CoreGemmaBPE</a> m,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                                        std::unordered_set&lt;std::string&gt; special = {},</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                                        <span class="keywordtype">int</span> bos = -1)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        : <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">model</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(m)), <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a24be7b2caf289fb4d7022ff4d7756f00">allowedSpecial</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(special)), <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">bosTokenId</a>(bos) {}</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a204fc6c587f421c505be0d467c925952">   86</a></span>    std::vector&lt;int&gt; <a class="code hl_function" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a204fc6c587f421c505be0d467c925952">encode</a>(<span class="keyword">const</span> std::string&amp; text)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        std::vector&lt;int&gt; ids = <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">model</a>.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a19e23246557b659f5c87165fc64c497f">encode</a>(text, <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a24be7b2caf289fb4d7022ff4d7756f00">allowedSpecial</a>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="comment">// HuggingFace SentencePiece tokenizers (Gemma2) prepend &lt;bos&gt; automatically</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">bosTokenId</a> &gt;= 0) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            ids.insert(ids.begin(), <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">bosTokenId</a>);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">return</span> ids;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#ad032fb50039697dbf277e46628af17c9">   95</a></span>    std::string <a class="code hl_function" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#ad032fb50039697dbf277e46628af17c9">decode</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; tokens)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="comment">// Skip the bos token if present at the beginning</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">bosTokenId</a> &gt;= 0 &amp;&amp; !tokens.empty() &amp;&amp; tokens.front() == <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">bosTokenId</a>) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            std::vector&lt;int&gt; stripped(tokens.begin() + 1, tokens.end());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">model</a>.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a418468d054547b6dc46b39b2aab45de6">decode</a>(stripped);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">model</a>.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a418468d054547b6dc46b39b2aab45de6">decode</a>(tokens);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
+</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a431c0b2b8cdef4e181b70571e001135b">  105</a></span><span class="keyword">static</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;GemmaBpeTokenizerImpl&gt;</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a431c0b2b8cdef4e181b70571e001135b">buildGemmaFromJson</a>(</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keyword">const</span> std::string&amp; json_path,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        std::unordered_set&lt;std::string&gt;* outSpecial = <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    cv::FileStorage <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>(json_path, <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">cv::FileStorage::READ</a> | <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da65cebec1331fd20338511b2f5f31efe4">cv::FileStorage::FORMAT_JSON</a>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">if</span> (!<a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>.isOpened())</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Failed to open tokenizer.json: &quot;</span> + json_path);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> model_node = <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>[<span class="stringliteral">&quot;model&quot;</span>];</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <a class="code hl_define" href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a>(model_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>(), <span class="stringliteral">&quot;tokenizer.json missing &#39;model&#39;&quot;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    std::string model_type;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    model_node[<span class="stringliteral">&quot;type&quot;</span>] &gt;&gt; model_type;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">if</span> (model_type != <span class="stringliteral">&quot;BPE&quot;</span>)</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="stringliteral">&quot;Expected BPE model in tokenizer.json for Gemma3, got: &quot;</span> + model_type);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">CoreGemmaBPE</a> gemma;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> vocab_node = model_node[<span class="stringliteral">&quot;vocab&quot;</span>];</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_define" href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a>(vocab_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>(), <span class="stringliteral">&quot;tokenizer.json model missing &#39;vocab&#39;&quot;</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">int</span> maxId = -1;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = vocab_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != vocab_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> entry = *it;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        std::string piece = entry.<a class="code hl_function" href="classcv_1_1_file_node.html#a95a49dbbedd455d780cf8dd220f6addc">name</a>();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordtype">int</span> <span class="keywordtype">id</span> = (int)entry;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt; maxId) maxId = id;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a11ae04887f8ac6fc770343f6f0401fac">pieceToId</a>[piece] = id;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a45da2360f48dcdf9cc654269790bad14">idToPiece</a>.resize(maxId + 1);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; kv : gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a11ae04887f8ac6fc770343f6f0401fac">pieceToId</a>)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a45da2360f48dcdf9cc654269790bad14">idToPiece</a>[kv.second] = kv.first;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> merges_node = model_node[<span class="stringliteral">&quot;merges&quot;</span>];</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span> (!merges_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>()) {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        uint32_t rank = 0;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = merges_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != merges_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> entry = *it;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(entry.<a class="code hl_function" href="classcv_1_1_file_node.html#a05c11e00d20223cde61677de91c71197">size</a>()) != 2) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                ++rank;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            std::string a, b;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            entry[0] &gt;&gt; a;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            entry[1] &gt;&gt; b;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            gemma.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a80cec4f039dea550fd3b59badbef5a07">addMerge</a>(a, b, rank);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            ++rank;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    std::unordered_set&lt;std::string&gt; special;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> added = <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>[<span class="stringliteral">&quot;added_tokens&quot;</span>];</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">if</span> (!added.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>()) {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = added.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != added.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> t = *it;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordtype">int</span> <span class="keywordtype">id</span> = -1;         t[<span class="stringliteral">&quot;id&quot;</span>]      &gt;&gt; id;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            std::string content; t[<span class="stringliteral">&quot;content&quot;</span>] &gt;&gt; content;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keywordtype">bool</span> is_special = <span class="keyword">false</span>; t[<span class="stringliteral">&quot;special&quot;</span>] &gt;&gt; is_special;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt;= 0 &amp;&amp; !content.empty()) {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a7d91f3e84e175d89c8c703e266273237">specialToId</a>[content] = id;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#adc61b2a36b987bd4506731b87af0ec5e">idToSpecial</a>[id]      = content;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                <span class="comment">// All added tokens bypass BPE (matching HuggingFace behavior),</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                <span class="comment">// not just those marked special.</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                special.insert(content);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                <span class="keywordflow">if</span> (outSpecial) outSpecial-&gt;insert(content);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;GemmaBpeTokenizerImpl&gt;</a>(std::move(gemma), std::move(special));</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="foldopen" id="foldopen00179" data-start="{" data-end="}">
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a4762221844bbe2564d42d387ce65eea7">  179</a></span><span class="keyword">static</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;SentencePieceTokenizerImpl&gt;</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a4762221844bbe2564d42d387ce65eea7">buildSentencePieceFromJson</a>(</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keyword">const</span> std::string&amp; json_path,</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        std::unordered_set&lt;std::string&gt;* outSpecial = <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    cv::FileStorage <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>(json_path, <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">cv::FileStorage::READ</a> | <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da65cebec1331fd20338511b2f5f31efe4">cv::FileStorage::FORMAT_JSON</a>);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">if</span> (!<a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>.isOpened())</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Failed to open tokenizer.json: &quot;</span> + json_path);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> model_node = <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>[<span class="stringliteral">&quot;model&quot;</span>];</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_define" href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a>(model_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>(), <span class="stringliteral">&quot;tokenizer.json missing &#39;model&#39;&quot;</span>);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    std::string model_type;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    model_node[<span class="stringliteral">&quot;type&quot;</span>] &gt;&gt; model_type;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">if</span> (model_type != <span class="stringliteral">&quot;BPE&quot;</span>)</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>,</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="stringliteral">&quot;Expected BPE model in tokenizer.json for SentencePiece, got: &quot;</span> + model_type);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">CoreGemmaBPE</a> gemma;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> vocab_node = model_node[<span class="stringliteral">&quot;vocab&quot;</span>];</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <a class="code hl_define" href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a>(vocab_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>(), <span class="stringliteral">&quot;tokenizer.json model missing &#39;vocab&#39;&quot;</span>);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordtype">int</span> maxId = -1;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = vocab_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != vocab_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> entry = *it;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        std::string piece = entry.<a class="code hl_function" href="classcv_1_1_file_node.html#a95a49dbbedd455d780cf8dd220f6addc">name</a>();</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordtype">int</span> <span class="keywordtype">id</span> = (int)entry;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt; maxId) maxId = id;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a11ae04887f8ac6fc770343f6f0401fac">pieceToId</a>[piece] = id;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a45da2360f48dcdf9cc654269790bad14">idToPiece</a>.resize(maxId + 1);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; kv : gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a11ae04887f8ac6fc770343f6f0401fac">pieceToId</a>)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a45da2360f48dcdf9cc654269790bad14">idToPiece</a>[kv.second] = kv.first;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> merges_node = model_node[<span class="stringliteral">&quot;merges&quot;</span>];</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">if</span> (!merges_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>()) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        uint32_t rank = 0;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = merges_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != merges_node.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> entry = *it;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            std::string a, b;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">if</span> (entry.<a class="code hl_function" href="classcv_1_1_file_node.html#abbc622e50535692d0ca5f2e70589a175">isString</a>()) {</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                <span class="comment">// SentencePiece format: &quot;a b&quot; (single string with space separator)</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                std::string merge_str;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                entry &gt;&gt; merge_str;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                <span class="keywordtype">size_t</span> sp = merge_str.find(<span class="charliteral">&#39; &#39;</span>);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                <span class="keywordflow">if</span> (sp == std::string::npos) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                    ++rank;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>                }</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                a = merge_str.substr(0, sp);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                b = merge_str.substr(sp + 1);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (entry.<a class="code hl_function" href="classcv_1_1_file_node.html#a05c11e00d20223cde61677de91c71197">size</a>() == 2) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>                <span class="comment">// Array format: [&quot;a&quot;, &quot;b&quot;]</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>                entry[0] &gt;&gt; a;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>                entry[1] &gt;&gt; b;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                ++rank;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            gemma.<a class="code hl_function" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a80cec4f039dea550fd3b59badbef5a07">addMerge</a>(a, b, rank);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            ++rank;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    }</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    std::unordered_set&lt;std::string&gt; special;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordtype">int</span> bosId = -1;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> added = <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>[<span class="stringliteral">&quot;added_tokens&quot;</span>];</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">if</span> (!added.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>()) {</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = added.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != added.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> t = *it;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            <span class="keywordtype">int</span> <span class="keywordtype">id</span> = -1;         t[<span class="stringliteral">&quot;id&quot;</span>]      &gt;&gt; id;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            std::string content; t[<span class="stringliteral">&quot;content&quot;</span>] &gt;&gt; content;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt;= 0 &amp;&amp; !content.empty()) {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a7d91f3e84e175d89c8c703e266273237">specialToId</a>[content] = id;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                gemma.<a class="code hl_variable" href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#adc61b2a36b987bd4506731b87af0ec5e">idToSpecial</a>[id]      = content;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                special.insert(content);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                <span class="keywordflow">if</span> (outSpecial) outSpecial-&gt;insert(content);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                <span class="comment">// Capture &lt;bos&gt; token id for SentencePiece auto-prepend</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                <span class="keywordflow">if</span> (content == <span class="stringliteral">&quot;&lt;bos&gt;&quot;</span>) bosId = id;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;SentencePieceTokenizerImpl&gt;</a>(std::move(gemma), std::move(special), bosId);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>}</div>
+</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="foldopen" id="foldopen00266" data-start="{" data-end="}">
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#adca2a8a947b6df5086be86f33197294b">  266</a></span><span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#adca2a8a947b6df5086be86f33197294b">registerDefaultTokenizers</a>() {</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keyword">auto</span>&amp; reg = <a class="code hl_function" href="namespacecv_1_1dnn.html#a71f4ca123f68269e5b8d4b57d25d7782">tokenizerRegistry</a>();</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">if</span> (reg.find(<span class="stringliteral">&quot;BPE&quot;</span>) == reg.end()) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        reg[<span class="stringliteral">&quot;BPE&quot;</span>] = [](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a>&amp; cfg, <span class="keyword">const</span> std::string&amp; dir) -&gt; <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Tokenizer::Impl&gt;</a> {</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            std::string model_type;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            cfg[<span class="stringliteral">&quot;model_type&quot;</span>] &gt;&gt; model_type;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            std::string tok_json = dir + <span class="stringliteral">&quot;tokenizer.json&quot;</span>;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1_core_b_p_e.html">CoreBPE</a> core;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            std::unordered_set&lt;std::string&gt; special;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">if</span> (model_type == <span class="stringliteral">&quot;gpt2&quot;</span> || model_type == <span class="stringliteral">&quot;gpt4&quot;</span>) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                core = <a class="code hl_function" href="namespacecv_1_1dnn.html#a096f6e49284493cb831ab2172c196223">buildTokenizerFromJson</a>(model_type, tok_json);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == <span class="stringliteral">&quot;qwen2&quot;</span> || model_type == <span class="stringliteral">&quot;qwen2.5&quot;</span>) {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                core = <a class="code hl_function" href="namespacecv_1_1dnn.html#a096f6e49284493cb831ab2172c196223">buildTokenizerFromJson</a>(model_type, tok_json, &amp;special);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Unsupported model_type for BPE: &quot;</span> + model_type);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;BpeTokenizerImpl&gt;</a>(std::move(core), std::move(special));</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        };</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">if</span> (reg.find(<span class="stringliteral">&quot;Gemma&quot;</span>) == reg.end()) {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        reg[<span class="stringliteral">&quot;Gemma&quot;</span>] = [](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a>&amp; <span class="comment">/*cfg*/</span>, <span class="keyword">const</span> std::string&amp; dir) -&gt; <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Tokenizer::Impl&gt;</a> {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>            std::string tok_json = dir + <span class="stringliteral">&quot;tokenizer.json&quot;</span>;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            std::unordered_set&lt;std::string&gt; special;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a431c0b2b8cdef4e181b70571e001135b">buildGemmaFromJson</a>(tok_json, &amp;special);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        };</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    }</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordflow">if</span> (reg.find(<span class="stringliteral">&quot;SentencePiece&quot;</span>) == reg.end()) {</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        reg[<span class="stringliteral">&quot;SentencePiece&quot;</span>] = [](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a>&amp; <span class="comment">/*cfg*/</span>, <span class="keyword">const</span> std::string&amp; dir) -&gt; <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Tokenizer::Impl&gt;</a> {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>            std::string tok_json = dir + <span class="stringliteral">&quot;tokenizer.json&quot;</span>;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            std::unordered_set&lt;std::string&gt; special;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a4762221844bbe2564d42d387ce65eea7">buildSentencePieceFromJson</a>(tok_json, &amp;special);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        };</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>}</div>
+</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_tokenizer.html#a5d1eaea4e2c80b94e533c870561b6093">  304</a></span><a class="code hl_function" href="classcv_1_1dnn_1_1_tokenizer.html#a5d1eaea4e2c80b94e533c870561b6093">Tokenizer::Tokenizer</a>() : impl_(nullptr) {}</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="foldopen" id="foldopen00306" data-start="{" data-end="}">
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_tokenizer.html#ac9ddf3e6da7e1d4096aee7494dbc19f2">  306</a></span>std::vector&lt;int&gt; <a class="code hl_function" href="classcv_1_1dnn_1_1_tokenizer.html#ac9ddf3e6da7e1d4096aee7494dbc19f2">Tokenizer::encode</a>(<span class="keyword">const</span> std::string&amp; text) {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keywordflow">if</span> (!impl_) <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Tokenizer impl null&quot;</span>);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">return</span> impl_-&gt;encode(text);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>}</div>
+</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="foldopen" id="foldopen00311" data-start="{" data-end="}">
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_tokenizer.html#a28086f2c0929fe291cf486f8719573a8">  311</a></span>std::string <a class="code hl_function" href="classcv_1_1dnn_1_1_tokenizer.html#a28086f2c0929fe291cf486f8719573a8">Tokenizer::decode</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; tokens) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <span class="keywordflow">if</span> (!impl_) <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Tokenizer impl null&quot;</span>);</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">return</span> impl_-&gt;decode(tokens);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>};</div>
+</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="foldopen" id="foldopen00316" data-start="{" data-end="}">
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a096f6e49284493cb831ab2172c196223">  316</a></span><a class="code hl_class" href="classcv_1_1dnn_1_1_core_b_p_e.html">CoreBPE</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a096f6e49284493cb831ab2172c196223">buildTokenizerFromJson</a>(<span class="keyword">const</span> std::string&amp; model_type, <span class="keyword">const</span> std::string&amp; json_path,</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>                          std::unordered_set&lt;std::string&gt;* outSpecial) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    cv::FileStorage <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>(json_path, <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">cv::FileStorage::READ</a> | <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da65cebec1331fd20338511b2f5f31efe4">cv::FileStorage::FORMAT_JSON</a>);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordflow">if</span> (!<a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>.isOpened())</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Failed to open tokenizer.json: &quot;</span> + json_path);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> model = <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>[<span class="stringliteral">&quot;model&quot;</span>];</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <a class="code hl_define" href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a>(model.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>(), <span class="stringliteral">&quot;tokenizer.json missing &#39;model&#39;&quot;</span>);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> vocab = model[<span class="stringliteral">&quot;vocab&quot;</span>];</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <a class="code hl_define" href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a>(vocab.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>(), <span class="stringliteral">&quot;tokenizer.json missing model.vocab&quot;</span>);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    std::string pattern;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    std::unordered_set&lt;std::string&gt; skip_tokens;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordflow">if</span> (model_type == <span class="stringliteral">&quot;gpt2&quot;</span> || model_type == <span class="stringliteral">&quot;r50k_base&quot;</span>) {</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        pattern = R50K_UTF8;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        skip_tokens.insert(<span class="stringliteral">&quot;&lt;|endoftext|&gt;&quot;</span>);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == <span class="stringliteral">&quot;gpt4&quot;</span> || model_type == <span class="stringliteral">&quot;cl100k_base&quot;</span>) {</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        pattern = CL100K_BASE;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == <span class="stringliteral">&quot;qwen2&quot;</span> || model_type == <span class="stringliteral">&quot;qwen2.5&quot;</span>) {</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        pattern = QWEN2_5;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>,</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            <span class="stringliteral">&quot;Unsupported model_type: &quot;</span> + model_type + <span class="stringliteral">&quot; (expected gpt2/r50k_base, gpt4/cl100k_base, or qwen2/qwen2.5)&quot;</span>);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    }</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    <span class="keyword">auto</span> token_to_bytes = [&amp;](<span class="keyword">const</span> std::string&amp; token_utf8) -&gt; std::vector&lt;uint8_t&gt; {</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        std::vector&lt;std::uint8_t&gt; out;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keyword">auto</span> cps = <a class="code hl_function" href="namespacecv_1_1dnn.html#a4ce51d79e1f8d894d794e99f547461db">unicode_cpts_from_utf8</a>(token_utf8);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        out.reserve(cps.size());</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordflow">for</span> (uint32_t cp : cps) {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>            <span class="keyword">const</span> std::string one = <a class="code hl_function" href="namespacecv_1_1dnn.html#a47e6e178639c5fb1c0ed4dac702350d6">unicode_cpt_to_utf8</a>(cp);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>            out.push_back(<a class="code hl_function" href="namespacecv_1_1dnn.html#a6923be83de1b573eb07958e6cbf288ee">unicode_utf8_to_byte</a>(one));</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keywordflow">return</span> out;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    };</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <a class="code hl_typedef" href="namespacecv_1_1dnn.html#a2a7a1b79b7534bf6a086f5932ba9ffa8">ByteVecRankMap</a> mergeableRanks;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    mergeableRanks.reserve((<span class="keywordtype">size_t</span>)vocab.<a class="code hl_function" href="classcv_1_1_file_node.html#a05c11e00d20223cde61677de91c71197">size</a>());</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keywordtype">int</span> max_id = -1;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="classcv_1_1_file_node_iterator.html">cv::FileNodeIterator</a> it = vocab.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != vocab.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <a class="code hl_class" href="classcv_1_1_file_node.html">FileNode</a> val = *it;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        std::string token = val.name();</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="keywordflow">if</span> (skip_tokens.find(token) != skip_tokens.end()) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="keywordtype">int</span> <span class="keywordtype">id</span> = (int)val;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        mergeableRanks.emplace(token_to_bytes(token), (uint32_t)<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt; max_id) max_id = id;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    }</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    std::unordered_map&lt;std::string, uint32_t&gt; specialTokens;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <a class="code hl_class" href="classcv_1_1_file_node.html">FileNode</a> added = <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>[<span class="stringliteral">&quot;added_tokens&quot;</span>];</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    <span class="keywordflow">if</span> (!added.<a class="code hl_function" href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">empty</a>()) {</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = added.<a class="code hl_function" href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">begin</a>(); it != added.<a class="code hl_function" href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">end</a>(); ++it) {</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a> t = *it;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>            <span class="keywordtype">bool</span> special = <span class="keyword">false</span>; t[<span class="stringliteral">&quot;special&quot;</span>] &gt;&gt; special;</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            <span class="keywordtype">int</span> <span class="keywordtype">id</span> = -1;          t[<span class="stringliteral">&quot;id&quot;</span>]      &gt;&gt; id;</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>            std::string content;  t[<span class="stringliteral">&quot;content&quot;</span>] &gt;&gt; content;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            <span class="keywordflow">if</span> (special &amp;&amp; <span class="keywordtype">id</span> &gt;= 0 &amp;&amp; !content.empty()) {</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                specialTokens.emplace(content, (uint32_t)<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>                <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt; max_id) max_id = id;</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                <span class="keywordflow">if</span> (outSpecial) outSpecial-&gt;insert(content);</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>            }</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        }</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    }</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_core_b_p_e.html#af935b9a4486e4d64c136a56fb67769cf">CoreBPE</a>(std::move(mergeableRanks), std::move(specialTokens), pattern);</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>}</div>
+</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
+<div class="foldopen" id="foldopen00384" data-start="{" data-end="}">
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_tokenizer.html#ac8f8069964cd2af3ea016a3be084af8f">  384</a></span><a class="code hl_function" href="classcv_1_1dnn_1_1_tokenizer.html#a5d1eaea4e2c80b94e533c870561b6093">Tokenizer</a> <a class="code hl_function" href="classcv_1_1dnn_1_1_tokenizer.html#ac8f8069964cd2af3ea016a3be084af8f">Tokenizer::load</a>(<span class="keyword">const</span> std::string&amp; model_config) {</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    cv::FileStorage cfg(model_config, <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">cv::FileStorage::READ</a> | <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da65cebec1331fd20338511b2f5f31efe4">cv::FileStorage::FORMAT_JSON</a>);</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    <span class="keywordflow">if</span> (!cfg.<a class="code hl_function" href="classcv_1_1_file_storage.html#a07a7378ef879d5e40630f0adbdaa0836">isOpened</a>())</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <span class="stringliteral">&quot;Could not open config.json: &quot;</span> + model_config);</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    std::string dir = model_config;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keywordtype">size_t</span> pos = dir.find_last_of(<span class="stringliteral">&quot;/\\&quot;</span>);</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    dir = (pos == std::string::npos) ? std::string() : dir.substr(0, pos + 1);</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    std::string methodType = <span class="stringliteral">&quot;BPE&quot;</span>;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <span class="keywordflow">if</span> (!cfg[<span class="stringliteral">&quot;method&quot;</span>].empty())</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        cfg[<span class="stringliteral">&quot;method&quot;</span>] &gt;&gt; methodType;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <a class="code hl_function" href="namespacecv_1_1dnn.html#adca2a8a947b6df5086be86f33197294b">registerDefaultTokenizers</a>();</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    <span class="keyword">auto</span>&amp; reg = <a class="code hl_function" href="namespacecv_1_1dnn.html#a71f4ca123f68269e5b8d4b57d25d7782">tokenizerRegistry</a>();</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    <span class="keyword">auto</span> it = reg.find(methodType);</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    <span class="keywordflow">if</span> (it == reg.end())</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>,</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>            <span class="stringliteral">&quot;Unsupported tokenizer method: &#39;&quot;</span> + methodType + <span class="stringliteral">&quot;&#39;. Supported: BPE, Gemma, SentencePiece&quot;</span>);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    <a class="code hl_function" href="classcv_1_1dnn_1_1_tokenizer.html#a5d1eaea4e2c80b94e533c870561b6093">Tokenizer</a> tok;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    tok.impl_ = it-&gt;second(cfg, dir);</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    <span class="keywordflow">return</span> tok;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>}</div>
+</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>}}</div>
+<div class="ttc" id="acheck_8hpp_html_a9759e0e717223337883a7d20402bf2e7"><div class="ttname"><a href="check_8hpp.html#a9759e0e717223337883a7d20402bf2e7">CV_CheckFalse</a></div><div class="ttdeci">#define CV_CheckFalse(v, msg)</div><div class="ttdoc">Example: v == false.</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00150">check.hpp:150</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html"><div class="ttname"><a href="classcv_1_1_file_node.html">cv::FileNode</a></div><div class="ttdoc">File Storage Node class.</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00447">persistence.hpp:448</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html_a05c11e00d20223cde61677de91c71197"><div class="ttname"><a href="classcv_1_1_file_node.html#a05c11e00d20223cde61677de91c71197">cv::FileNode::size</a></div><div class="ttdeci">CV_WRAP size_t size() const</div><div class="ttdoc">returns the number of elements in the node, if it is a sequence or mapping, or 1 otherwise.</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02508">persistence.cpp:2508</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html_a0f299820227506079f5b9013dd8c3558"><div class="ttname"><a href="classcv_1_1_file_node.html#a0f299820227506079f5b9013dd8c3558">cv::FileNode::begin</a></div><div class="ttdeci">FileNodeIterator begin() const</div><div class="ttdoc">returns iterator pointing to the first node element</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02499">persistence.cpp:2499</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html_a58b033e34726eb73f0238a1bfbe0c8e9"><div class="ttname"><a href="classcv_1_1_file_node.html#a58b033e34726eb73f0238a1bfbe0c8e9">cv::FileNode::end</a></div><div class="ttdeci">FileNodeIterator end() const</div><div class="ttdoc">returns iterator pointing to the element following the last node element</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02500">persistence.cpp:2500</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html_a82d59aab4765da6140c238c54aadfa92"><div class="ttname"><a href="classcv_1_1_file_node.html#a82d59aab4765da6140c238c54aadfa92">cv::FileNode::empty</a></div><div class="ttdeci">CV_WRAP bool empty() const</div><div class="ttdoc">returns true if the node is empty</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02378">persistence.cpp:2378</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html_a95a49dbbedd455d780cf8dd220f6addc"><div class="ttname"><a href="classcv_1_1_file_node.html#a95a49dbbedd455d780cf8dd220f6addc">cv::FileNode::name</a></div><div class="ttdeci">CV_WRAP std::string name() const</div><div class="ttdoc">returns the node name or an empty string if the node is nameless</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02393">persistence.cpp:2393</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html_abbc622e50535692d0ca5f2e70589a175"><div class="ttname"><a href="classcv_1_1_file_node.html#abbc622e50535692d0ca5f2e70589a175">cv::FileNode::isString</a></div><div class="ttdeci">CV_WRAP bool isString() const</div><div class="ttdoc">returns true if the node is a text string</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02384">persistence.cpp:2384</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_iterator_html"><div class="ttname"><a href="classcv_1_1_file_node_iterator.html">cv::FileNodeIterator</a></div><div class="ttdoc">used to iterate through sequences and mappings.</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00601">persistence.hpp:602</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html"><div class="ttname"><a href="classcv_1_1_file_storage.html">cv::FileStorage</a></div><div class="ttdoc">XML/YAML/JSON file storage class that encapsulates all the information necessary for writing or readi...</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00260">persistence.hpp:261</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html_a07a7378ef879d5e40630f0adbdaa0836"><div class="ttname"><a href="classcv_1_1_file_storage.html#a07a7378ef879d5e40630f0adbdaa0836">cv::FileStorage::isOpened</a></div><div class="ttdeci">virtual CV_WRAP bool isOpened() const</div><div class="ttdoc">Checks whether the file is opened.</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02044">persistence.cpp:2044</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html_a973e41cb75ef6230412a567723b7482da65cebec1331fd20338511b2f5f31efe4"><div class="ttname"><a href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da65cebec1331fd20338511b2f5f31efe4">cv::FileStorage::FORMAT_JSON</a></div><div class="ttdeci">@ FORMAT_JSON</div><div class="ttdoc">flag, JSON format</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00275">persistence.hpp:275</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html_a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed"><div class="ttname"><a href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">cv::FileStorage::READ</a></div><div class="ttdeci">@ READ</div><div class="ttdoc">value, open the file for reading</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00266">persistence.hpp:266</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_core_b_p_e_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_core_b_p_e.html">cv::dnn::CoreBPE</a></div><div class="ttdoc">Core Byte Pair Encoding (BPE) engine (mergeable-ranks model).</div><div class="ttdef"><b>Definición</b> <a href="core__bpe_8hpp_source.html#l00120">core_bpe.hpp:120</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_core_b_p_e_html_af935b9a4486e4d64c136a56fb67769cf"><div class="ttname"><a href="classcv_1_1dnn_1_1_core_b_p_e.html#af935b9a4486e4d64c136a56fb67769cf">cv::dnn::CoreBPE::CoreBPE</a></div><div class="ttdeci">CoreBPE()</div><div class="ttdef"><b>Definición</b> <a href="core__bpe_8cpp_source.html#l00110">core_bpe.cpp:110</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_tokenizer_html_a28086f2c0929fe291cf486f8719573a8"><div class="ttname"><a href="classcv_1_1dnn_1_1_tokenizer.html#a28086f2c0929fe291cf486f8719573a8">cv::dnn::Tokenizer::decode</a></div><div class="ttdeci">CV_WRAP std::string decode(const std::vector&lt; int &gt; &amp;tokens)</div><div class="ttdef"><b>Definición</b> <a href="#l00311">tokenizer.cpp:311</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_tokenizer_html_a5d1eaea4e2c80b94e533c870561b6093"><div class="ttname"><a href="classcv_1_1dnn_1_1_tokenizer.html#a5d1eaea4e2c80b94e533c870561b6093">cv::dnn::Tokenizer::Tokenizer</a></div><div class="ttdeci">Tokenizer()</div><div class="ttdoc">Construct a tokenizer with a given method default BPE. For BPE method you normally call Tokenizer::lo...</div><div class="ttdef"><b>Definición</b> <a href="#l00304">tokenizer.cpp:304</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_tokenizer_html_ac8f8069964cd2af3ea016a3be084af8f"><div class="ttname"><a href="classcv_1_1dnn_1_1_tokenizer.html#ac8f8069964cd2af3ea016a3be084af8f">cv::dnn::Tokenizer::load</a></div><div class="ttdeci">static CV_WRAP Tokenizer load(CV_WRAP_FILE_PATH const std::string &amp;model_config)</div><div class="ttdoc">Load a tokenizer from a model directory.</div><div class="ttdef"><b>Definición</b> <a href="#l00384">tokenizer.cpp:384</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_tokenizer_html_ac9ddf3e6da7e1d4096aee7494dbc19f2"><div class="ttname"><a href="classcv_1_1dnn_1_1_tokenizer.html#ac9ddf3e6da7e1d4096aee7494dbc19f2">cv::dnn::Tokenizer::encode</a></div><div class="ttdeci">CV_WRAP std::vector&lt; int &gt; encode(const std::string &amp;text)</div><div class="ttdoc">Encode UTF-8 text to token ids (special tokens currently disabled).</div><div class="ttdef"><b>Definición</b> <a href="#l00306">tokenizer.cpp:306</a></div></div>
+<div class="ttc" id="acore__bpe_8hpp_html"><div class="ttname"><a href="core__bpe_8hpp.html">core_bpe.hpp</a></div></div>
+<div class="ttc" id="acore__gemma_8hpp_html"><div class="ttname"><a href="core__gemma_8hpp.html">core_gemma.hpp</a></div></div>
+<div class="ttc" id="adnn_2dnn_8hpp_html"><div class="ttname"><a href="dnn_2dnn_8hpp.html">dnn.hpp</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="adnn_2src_2tokenizer_2utils_8hpp_html"><div class="ttname"><a href="dnn_2src_2tokenizer_2utils_8hpp.html">utils.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaec778c746f8b965d8218f150599239de"><div class="ttname"><a href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::cv::FileNode</a></div><div class="ttdeci">class CV_EXPORTS FileNode</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00149">templmatch.cpp:149</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a></div><div class="ttdeci">@ StsError</div><div class="ttdoc">unknown /unspecified error</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00021">exception.hpp:21</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a096f6e49284493cb831ab2172c196223"><div class="ttname"><a href="namespacecv_1_1dnn.html#a096f6e49284493cb831ab2172c196223">cv::dnn::buildTokenizerFromJson</a></div><div class="ttdeci">CoreBPE buildTokenizerFromJson(const std::string &amp;model_type, const std::string &amp;json_path, std::unordered_set&lt; std::string &gt; *outSpecial=nullptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00316">tokenizer.cpp:316</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2a7a1b79b7534bf6a086f5932ba9ffa8"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2a7a1b79b7534bf6a086f5932ba9ffa8">cv::dnn::ByteVecRankMap</a></div><div class="ttdeci">std::unordered_map&lt; std::vector&lt; std::uint8_t &gt;, std::uint32_t, ByteVecHash &gt; ByteVecRankMap</div><div class="ttdoc">Map from raw byte-sequence tokens to their merge rank / token id.</div><div class="ttdef"><b>Definición</b> <a href="core__bpe_8hpp_source.html#l00074">core_bpe.hpp:74</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a431c0b2b8cdef4e181b70571e001135b"><div class="ttname"><a href="namespacecv_1_1dnn.html#a431c0b2b8cdef4e181b70571e001135b">cv::dnn::buildGemmaFromJson</a></div><div class="ttdeci">static Ptr&lt; GemmaBpeTokenizerImpl &gt; buildGemmaFromJson(const std::string &amp;json_path, std::unordered_set&lt; std::string &gt; *outSpecial=nullptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00105">tokenizer.cpp:105</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a4762221844bbe2564d42d387ce65eea7"><div class="ttname"><a href="namespacecv_1_1dnn.html#a4762221844bbe2564d42d387ce65eea7">cv::dnn::buildSentencePieceFromJson</a></div><div class="ttdeci">static Ptr&lt; SentencePieceTokenizerImpl &gt; buildSentencePieceFromJson(const std::string &amp;json_path, std::unordered_set&lt; std::string &gt; *outSpecial=nullptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00179">tokenizer.cpp:179</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a47e6e178639c5fb1c0ed4dac702350d6"><div class="ttname"><a href="namespacecv_1_1dnn.html#a47e6e178639c5fb1c0ed4dac702350d6">cv::dnn::unicode_cpt_to_utf8</a></div><div class="ttdeci">std::string unicode_cpt_to_utf8(uint32_t cpt)</div><div class="ttdef"><b>Definición</b> <a href="unicode_8cpp_source.html#l00518">unicode.cpp:518</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a4ce51d79e1f8d894d794e99f547461db"><div class="ttname"><a href="namespacecv_1_1dnn.html#a4ce51d79e1f8d894d794e99f547461db">cv::dnn::unicode_cpts_from_utf8</a></div><div class="ttdeci">std::vector&lt; uint32_t &gt; unicode_cpts_from_utf8(const std::string &amp;utf8)</div><div class="ttdef"><b>Definición</b> <a href="unicode_8cpp_source.html#l00547">unicode.cpp:547</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a6923be83de1b573eb07958e6cbf288ee"><div class="ttname"><a href="namespacecv_1_1dnn.html#a6923be83de1b573eb07958e6cbf288ee">cv::dnn::unicode_utf8_to_byte</a></div><div class="ttdeci">uint8_t unicode_utf8_to_byte(const std::string &amp;utf8)</div><div class="ttdef"><b>Definición</b> <a href="unicode_8cpp_source.html#l00575">unicode.cpp:575</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a71f4ca123f68269e5b8d4b57d25d7782"><div class="ttname"><a href="namespacecv_1_1dnn.html#a71f4ca123f68269e5b8d4b57d25d7782">cv::dnn::tokenizerRegistry</a></div><div class="ttdeci">static std::unordered_map&lt; std::string, ImplRegestry &gt; &amp; tokenizerRegistry()</div><div class="ttdef"><b>Definición</b> <a href="#l00020">tokenizer.cpp:20</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_aa905038f3a3fcbb4d9776c4ef7a860b2"><div class="ttname"><a href="namespacecv_1_1dnn.html#aa905038f3a3fcbb4d9776c4ef7a860b2">cv::dnn::ImplRegestry</a></div><div class="ttdeci">std::function&lt; Ptr&lt; Tokenizer::Impl &gt;(const FileStorage &amp;cfg, const std::string &amp;dir)&gt; ImplRegestry</div><div class="ttdef"><b>Definición</b> <a href="#l00018">tokenizer.cpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_adca2a8a947b6df5086be86f33197294b"><div class="ttname"><a href="namespacecv_1_1dnn.html#adca2a8a947b6df5086be86f33197294b">cv::dnn::registerDefaultTokenizers</a></div><div class="ttdeci">static void registerDefaultTokenizers()</div><div class="ttdef"><b>Definición</b> <a href="#l00266">tokenizer.cpp:266</a></div></div>
+<div class="ttc" id="anamespacecv_1_1fs_html"><div class="ttname"><a href="namespacecv_1_1fs.html">cv::fs</a></div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l00019">persistence.cpp:20</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_bpe_tokenizer_impl_html_a00f8bf8a6a450c752cbfc81995dbedc5"><div class="ttname"><a href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a00f8bf8a6a450c752cbfc81995dbedc5">cv::dnn::BpeTokenizerImpl::coreBPE</a></div><div class="ttdeci">Ptr&lt; CoreBPE &gt; coreBPE</div><div class="ttdef"><b>Definición</b> <a href="#l00035">tokenizer.cpp:35</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_bpe_tokenizer_impl_html_a299cdc1537cd3cb91c89500f6451ff2c"><div class="ttname"><a href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a299cdc1537cd3cb91c89500f6451ff2c">cv::dnn::BpeTokenizerImpl::decode</a></div><div class="ttdeci">std::string decode(const std::vector&lt; int &gt; &amp;tokens) override</div><div class="ttdef"><b>Definición</b> <a href="#l00049">tokenizer.cpp:49</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_bpe_tokenizer_impl_html_a2fb0f4078c74e4f116d4c4c830de925d"><div class="ttname"><a href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a2fb0f4078c74e4f116d4c4c830de925d">cv::dnn::BpeTokenizerImpl::allowedSpecial</a></div><div class="ttdeci">std::unordered_set&lt; std::string &gt; allowedSpecial</div><div class="ttdef"><b>Definición</b> <a href="#l00036">tokenizer.cpp:36</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_bpe_tokenizer_impl_html_a8ca9c44f1e1f430f4d8aa7cd29219334"><div class="ttname"><a href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#a8ca9c44f1e1f430f4d8aa7cd29219334">cv::dnn::BpeTokenizerImpl::encode</a></div><div class="ttdeci">std::vector&lt; int &gt; encode(const std::string &amp;text) override</div><div class="ttdef"><b>Definición</b> <a href="#l00043">tokenizer.cpp:43</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_bpe_tokenizer_impl_html_aaa8e84afedabf3b0c42fc2b37eba6a8a"><div class="ttname"><a href="structcv_1_1dnn_1_1_bpe_tokenizer_impl.html#aaa8e84afedabf3b0c42fc2b37eba6a8a">cv::dnn::BpeTokenizerImpl::BpeTokenizerImpl</a></div><div class="ttdeci">BpeTokenizerImpl(CoreBPE core, std::unordered_set&lt; std::string &gt; special={})</div><div class="ttdef"><b>Definición</b> <a href="#l00038">tokenizer.cpp:38</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html">cv::dnn::CoreGemmaBPE</a></div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00023">core_gemma.hpp:23</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_a11ae04887f8ac6fc770343f6f0401fac"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a11ae04887f8ac6fc770343f6f0401fac">cv::dnn::CoreGemmaBPE::pieceToId</a></div><div class="ttdeci">std::unordered_map&lt; std::string, int &gt; pieceToId</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00024">core_gemma.hpp:24</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_a19e23246557b659f5c87165fc64c497f"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a19e23246557b659f5c87165fc64c497f">cv::dnn::CoreGemmaBPE::encode</a></div><div class="ttdeci">std::vector&lt; int &gt; encode(const std::string &amp;text, const std::unordered_set&lt; std::string &gt; &amp;allowedSpecial={}) const</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00130">core_gemma.hpp:130</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_a418468d054547b6dc46b39b2aab45de6"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a418468d054547b6dc46b39b2aab45de6">cv::dnn::CoreGemmaBPE::decode</a></div><div class="ttdeci">std::string decode(const std::vector&lt; int &gt; &amp;ids) const</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00172">core_gemma.hpp:172</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_a45da2360f48dcdf9cc654269790bad14"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a45da2360f48dcdf9cc654269790bad14">cv::dnn::CoreGemmaBPE::idToPiece</a></div><div class="ttdeci">std::vector&lt; std::string &gt; idToPiece</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00025">core_gemma.hpp:25</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_a7d91f3e84e175d89c8c703e266273237"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a7d91f3e84e175d89c8c703e266273237">cv::dnn::CoreGemmaBPE::specialToId</a></div><div class="ttdeci">std::unordered_map&lt; std::string, int &gt; specialToId</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00027">core_gemma.hpp:27</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_a80cec4f039dea550fd3b59badbef5a07"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#a80cec4f039dea550fd3b59badbef5a07">cv::dnn::CoreGemmaBPE::addMerge</a></div><div class="ttdeci">void addMerge(const std::string &amp;a, const std::string &amp;b, uint32_t rank)</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00030">core_gemma.hpp:30</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_core_gemma_b_p_e_html_adc61b2a36b987bd4506731b87af0ec5e"><div class="ttname"><a href="structcv_1_1dnn_1_1_core_gemma_b_p_e.html#adc61b2a36b987bd4506731b87af0ec5e">cv::dnn::CoreGemmaBPE::idToSpecial</a></div><div class="ttdeci">std::unordered_map&lt; int, std::string &gt; idToSpecial</div><div class="ttdef"><b>Definición</b> <a href="core__gemma_8hpp_source.html#l00028">core_gemma.hpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl_html_a37a87f1350bd6d65e1e28620b60d27ba"><div class="ttname"><a href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a37a87f1350bd6d65e1e28620b60d27ba">cv::dnn::GemmaBpeTokenizerImpl::GemmaBpeTokenizerImpl</a></div><div class="ttdeci">GemmaBpeTokenizerImpl(CoreGemmaBPE m, std::unordered_set&lt; std::string &gt; special={})</div><div class="ttdef"><b>Definición</b> <a href="#l00063">tokenizer.cpp:63</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl_html_a3fb21821c969302dcb28ee5adf7937a0"><div class="ttname"><a href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a3fb21821c969302dcb28ee5adf7937a0">cv::dnn::GemmaBpeTokenizerImpl::encode</a></div><div class="ttdeci">std::vector&lt; int &gt; encode(const std::string &amp;text) override</div><div class="ttdef"><b>Definición</b> <a href="#l00067">tokenizer.cpp:67</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl_html_a6be226c3a4944ac46397c969b61a615d"><div class="ttname"><a href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a6be226c3a4944ac46397c969b61a615d">cv::dnn::GemmaBpeTokenizerImpl::model</a></div><div class="ttdeci">CoreGemmaBPE model</div><div class="ttdef"><b>Definición</b> <a href="#l00060">tokenizer.cpp:60</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl_html_a86d4262fa680c7e4c527024f91081a73"><div class="ttname"><a href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#a86d4262fa680c7e4c527024f91081a73">cv::dnn::GemmaBpeTokenizerImpl::allowedSpecial</a></div><div class="ttdeci">std::unordered_set&lt; std::string &gt; allowedSpecial</div><div class="ttdef"><b>Definición</b> <a href="#l00061">tokenizer.cpp:61</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl_html_ab9e4e7ad45532c6d7b7e88d80c0cbed5"><div class="ttname"><a href="structcv_1_1dnn_1_1_gemma_bpe_tokenizer_impl.html#ab9e4e7ad45532c6d7b7e88d80c0cbed5">cv::dnn::GemmaBpeTokenizerImpl::decode</a></div><div class="ttdeci">std::string decode(const std::vector&lt; int &gt; &amp;tokens) override</div><div class="ttdef"><b>Definición</b> <a href="#l00071">tokenizer.cpp:71</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_sentence_piece_tokenizer_impl_html_a204fc6c587f421c505be0d467c925952"><div class="ttname"><a href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a204fc6c587f421c505be0d467c925952">cv::dnn::SentencePieceTokenizerImpl::encode</a></div><div class="ttdeci">std::vector&lt; int &gt; encode(const std::string &amp;text) override</div><div class="ttdef"><b>Definición</b> <a href="#l00086">tokenizer.cpp:86</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_sentence_piece_tokenizer_impl_html_a24be7b2caf289fb4d7022ff4d7756f00"><div class="ttname"><a href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a24be7b2caf289fb4d7022ff4d7756f00">cv::dnn::SentencePieceTokenizerImpl::allowedSpecial</a></div><div class="ttdeci">std::unordered_set&lt; std::string &gt; allowedSpecial</div><div class="ttdef"><b>Definición</b> <a href="#l00078">tokenizer.cpp:78</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_sentence_piece_tokenizer_impl_html_a297db635da74912c2f57408732a1e0f6"><div class="ttname"><a href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a297db635da74912c2f57408732a1e0f6">cv::dnn::SentencePieceTokenizerImpl::SentencePieceTokenizerImpl</a></div><div class="ttdeci">SentencePieceTokenizerImpl(CoreGemmaBPE m, std::unordered_set&lt; std::string &gt; special={}, int bos=-1)</div><div class="ttdef"><b>Definición</b> <a href="#l00081">tokenizer.cpp:81</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_sentence_piece_tokenizer_impl_html_a6e40f4bf3da8265ad4d352d2fd430ec5"><div class="ttname"><a href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#a6e40f4bf3da8265ad4d352d2fd430ec5">cv::dnn::SentencePieceTokenizerImpl::model</a></div><div class="ttdeci">CoreGemmaBPE model</div><div class="ttdef"><b>Definición</b> <a href="#l00077">tokenizer.cpp:77</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_sentence_piece_tokenizer_impl_html_abe477bf91437a4a10f2a9e740e06c884"><div class="ttname"><a href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#abe477bf91437a4a10f2a9e740e06c884">cv::dnn::SentencePieceTokenizerImpl::bosTokenId</a></div><div class="ttdeci">int bosTokenId</div><div class="ttdef"><b>Definición</b> <a href="#l00079">tokenizer.cpp:79</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_sentence_piece_tokenizer_impl_html_ad032fb50039697dbf277e46628af17c9"><div class="ttname"><a href="structcv_1_1dnn_1_1_sentence_piece_tokenizer_impl.html#ad032fb50039697dbf277e46628af17c9">cv::dnn::SentencePieceTokenizerImpl::decode</a></div><div class="ttdeci">std::string decode(const std::vector&lt; int &gt; &amp;tokens) override</div><div class="ttdef"><b>Definición</b> <a href="#l00095">tokenizer.cpp:95</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_tokenizer_1_1_impl_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html">cv::dnn::Tokenizer::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="#l00028">tokenizer.cpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_tokenizer_1_1_impl_html_a9ed0fa52328d500b786045a67d74258e"><div class="ttname"><a href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#a9ed0fa52328d500b786045a67d74258e">cv::dnn::Tokenizer::Impl::encode</a></div><div class="ttdeci">virtual std::vector&lt; int &gt; encode(const std::string &amp;text)=0</div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_tokenizer_1_1_impl_html_ab97950af183a5b71ee57301b624acd44"><div class="ttname"><a href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#ab97950af183a5b71ee57301b624acd44">cv::dnn::Tokenizer::Impl::~Impl</a></div><div class="ttdeci">virtual ~Impl()</div><div class="ttdef"><b>Definición</b> <a href="#l00029">tokenizer.cpp:29</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_tokenizer_1_1_impl_html_ae854577cd069a5ebde757aaa6ac87f62"><div class="ttname"><a href="structcv_1_1dnn_1_1_tokenizer_1_1_impl.html#ae854577cd069a5ebde757aaa6ac87f62">cv::dnn::Tokenizer::Impl::decode</a></div><div class="ttdeci">virtual std::string decode(const std::vector&lt; int &gt; &amp;tokens)=0</div></div>
+<div class="ttc" id="aunicode_8hpp_html"><div class="ttname"><a href="unicode_8hpp.html">unicode.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_b13ec2e4a2f1666747947725e11fa035.html">tokenizer</a></li><li class="navelem"><a href="tokenizer_8cpp.html">tokenizer.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

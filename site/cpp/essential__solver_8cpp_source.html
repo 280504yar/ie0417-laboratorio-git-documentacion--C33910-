@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/geometry/src/usac/essential_solver.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('essential__solver_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">essential_solver.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="essential__solver_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="geometry_2src_2precomp_8hpp.html">../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="usac_8hpp.html">../usac.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#if defined(HAVE_EIGEN)</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;Eigen/Eigen&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#elif defined(HAVE_LAPACK)</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;opencv_lapack.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#if defined(__APPLE__) &amp;&amp; defined(__clang__)</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#pragma clang diagnostic push</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#pragma clang diagnostic ignored &quot;-Wdeprecated-declarations&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1usac.html">usac</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">* H. Stewenius, C. Engels, and D. Nister. Recent developments on direct relative orientation.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">* ISPRS J. of Photogrammetry and Remote Sensing, 60:284,294, 2006</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">* http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.61.9329&amp;rep=rep1&amp;type=pdf</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">*</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">* D. Nister. An efficient solution to the five-point relative pose problem</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">* IEEE Transactions on Pattern Analysis and Machine Intelligence</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">* https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.8769&amp;rep=rep1&amp;type=pdf</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">*/</span></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html">   27</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a85d119245bf110686d2f30cfd3c48dc7">EssentialMinimalSolver5ptsImpl</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1usac_1_1_essential_minimal_solver5pts.html">EssentialMinimalSolver5pts</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">// Points must be calibrated K^-1 x</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> points_mat;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> use_svd, is_nister;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a85d119245bf110686d2f30cfd3c48dc7">   33</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a85d119245bf110686d2f30cfd3c48dc7">EssentialMinimalSolver5ptsImpl</a> (<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;points_, <span class="keywordtype">bool</span> use_svd_=<span class="keyword">false</span>, <span class="keywordtype">bool</span> is_nister_=<span class="keyword">false</span>) :</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        points_mat(points_), use_svd(use_svd_), is_nister(is_nister_)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_define" href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a>(!points_mat.empty() &amp;&amp; points_mat.isContinuous());</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a192eef69f2241cf409cce31770984cde">   39</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a192eef69f2241cf409cce31770984cde">estimate</a> (<span class="keyword">const</span> std::vector&lt;int&gt; &amp;sample, std::vector&lt;Mat&gt; &amp;<a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> * pts = points_mat.ptr&lt;<span class="keywordtype">float</span>&gt;();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="comment">// (1) Extract 4 null vectors from linear equations of epipolar constraint</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::vector&lt;double&gt; coefficients(45); <span class="comment">// 5 pts=rows, 9 columns</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">auto</span> *coefficients_ = &amp;coefficients[0];</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> smpl = 4 * sample[i];</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keyword">const</span> <span class="keyword">auto</span> x1 = pts[smpl], y1 = pts[smpl+1], x2 = pts[smpl+2], y2 = pts[smpl+3];</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            (*coefficients_++) = x2 * x1;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            (*coefficients_++) = x2 * y1;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            (*coefficients_++) = x2;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            (*coefficients_++) = y2 * x1;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            (*coefficients_++) = y2 * y1;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            (*coefficients_++) = y2;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            (*coefficients_++) = x1;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            (*coefficients_++) = y1;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            (*coefficients_++) = 1;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> num_cols = 9, num_e_mat = 4;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">double</span> ee[36]; <span class="comment">// 9*4</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">if</span> (use_svd) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 5, 9&gt;</a> coeffs (&amp;coefficients[0]);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> D, U, Vt;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <a class="code hl_function" href="group__core__array.html#gab477b5b7b39b370bb03e75b19d2d5109">SVDecomp</a>(coeffs, D, U, Vt, <a class="code hl_enumvalue" href="classcv_1_1_s_v_d.html#a4700f5207e66cdd9924bf64e34911832a312212af9fa27d5560981e24f845434a">SVD::FULL_UV</a> + <a class="code hl_enumvalue" href="classcv_1_1_s_v_d.html#a4700f5207e66cdd9924bf64e34911832afb6aab7965c8f601696b10fa109e2789">SVD::MODIFY_A</a>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keyword">const</span> <span class="keyword">auto</span> * <span class="keyword">const</span> vt = (<span class="keywordtype">double</span> *) Vt.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_e_mat; i++)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; num_cols; j++)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    ee[i * num_cols + j] = vt[(8-i)*num_cols+j];</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="comment">// eliminate linear equations</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">if</span> (!<a class="code hl_function" href="namespacecv_1_1usac_1_1_math.html#a6f755c3e5688acdc4db7e573466c1482">Math::eliminateUpperTriangular</a>(coefficients, 5, num_cols))</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_e_mat; i++)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 5; j &lt; num_cols; j++)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                    ee[num_cols * i + j] = (i + 5 == j) ? 1 : 0;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="comment">// use back-substitution</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> e = 0; e &lt; num_e_mat; e++) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <span class="keyword">const</span> <span class="keywordtype">int</span> curr_e = num_cols * e;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="comment">// start from the last row</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 4; i &gt;= 0; i--) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    <span class="keyword">const</span> <span class="keywordtype">int</span> row_i = i * num_cols;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    <span class="keywordtype">double</span> acc = 0;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; num_cols; j++)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        acc -= coefficients[row_i + j] * ee[curr_e + j];</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    ee[curr_e + i] = acc / coefficients[row_i + i];</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    <span class="comment">// due to numerical errors return 0 solutions</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    <span class="keywordflow">if</span> (std::isnan(ee[curr_e + i]))</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 4, 9&gt;</a> null_space(ee);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 4, 1&gt;</a> null_space_mat[3][3] = {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                {null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(0), null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(3), null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(6)},</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                {null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(1), null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(4), null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(7)},</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                {null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(2), null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(5), null_space.<a class="code hl_function" href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">col</a>(8)}};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_class" href="classcv_1_1_mat__.html">Mat_&lt;double&gt;</a> constraint_mat(10, 20);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 1, 10&gt;</a> eet[3][3];</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="comment">// (2) Use the rank constraint and the trace constraint to build ten third-order polynomial</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="comment">// equations in the three unknowns. The monomials are ordered in GrLex order and</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="comment">// represented in a 10×20 matrix, where each row corresponds to an equation and each column</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="comment">// corresponds to a monomial</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">if</span> (is_nister) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; i++)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 3; j++)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    <span class="comment">// compute EE Transpose</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    <span class="comment">// Shorthand for multiplying the Essential matrix with its transpose.</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    eet[i][j] = multPolysDegOne(null_space_mat[i][0].val, null_space_mat[j][0].val) +</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                                multPolysDegOne(null_space_mat[i][1].val, null_space_mat[j][1].val) +</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                                multPolysDegOne(null_space_mat[i][2].val, null_space_mat[j][2].val);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 1, 10&gt;</a> <a class="code hl_function" href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">trace</a> = 0.5*(eet[0][0] + eet[1][1] + eet[2][2]);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="comment">// Trace constraint</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; i++)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 3; j++)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(multPolysDegOneAndTwoNister(i == 0 ? (eet[i][0] - <a class="code hl_function" href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">trace</a>).val : eet[i][0].val, null_space_mat[0][j].val) +</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                        multPolysDegOneAndTwoNister(i == 1 ? (eet[i][1] - <a class="code hl_function" href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">trace</a>).val : eet[i][1].val, null_space_mat[1][j].val) +</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                        multPolysDegOneAndTwoNister(i == 2 ? (eet[i][2] - <a class="code hl_function" href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">trace</a>).val : eet[i][2].val, null_space_mat[2][j].val)).copyTo(constraint_mat.<a class="code hl_function" href="classcv_1_1_mat__.html#a957f24ad0e833a3a145499289331277e">row</a>(1+3 * j + i));</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="comment">// Rank = zero determinant constraint</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(multPolysDegOneAndTwoNister(</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    (multPolysDegOne(null_space_mat[0][1].val, null_space_mat[1][2].val) -</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                     multPolysDegOne(null_space_mat[0][2].val, null_space_mat[1][1].val)).val,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                        null_space_mat[2][0].val) +</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                multPolysDegOneAndTwoNister(</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                    (multPolysDegOne(null_space_mat[0][2].val, null_space_mat[1][0].val) -</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                     multPolysDegOne(null_space_mat[0][0].val, null_space_mat[1][2].val)).val,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                        null_space_mat[2][1].val) +</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                multPolysDegOneAndTwoNister(</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                    (multPolysDegOne(null_space_mat[0][0].val, null_space_mat[1][1].val) -</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                     multPolysDegOne(null_space_mat[0][1].val, null_space_mat[1][0].val)).val,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                        null_space_mat[2][2].val)).copyTo(constraint_mat.<a class="code hl_function" href="classcv_1_1_mat__.html#a957f24ad0e833a3a145499289331277e">row</a>(0));</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 10, 10&gt;</a> Acoef = constraint_mat.<a class="code hl_function" href="classcv_1_1_mat.html#aadc8f9210fe4dec50513746c246fa8d9">colRange</a>(0, 10),</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                                 Bcoef = constraint_mat.<a class="code hl_function" href="classcv_1_1_mat.html#aadc8f9210fe4dec50513746c246fa8d9">colRange</a>(10, 20), A_;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            <span class="keywordflow">if</span> (!<a class="code hl_function" href="group__core__array.html#ga12b43690dbd31fed96f213eefead2373">solve</a>(Acoef, Bcoef, A_, <a class="code hl_enumvalue" href="group__core__array.html#ggaaf9ea5dcc392d5ae04eacb9920b9674ca247a3455cd64973152e17e26999dc024">DECOMP_LU</a>)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordtype">double</span> b[3 * 13];</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keyword">const</span> <span class="keyword">auto</span> * <span class="keyword">const</span> a = A_.val;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; i++) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                <span class="keyword">const</span> <span class="keywordtype">int</span> r1_idx = i * 2 + 4, r2_idx = i * 2 + 5; <span class="comment">// process from 4th row</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0, r1_j = 0, r2_j = 0; j &lt; 13; j++)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                    b[i*13+j] = ((j == 0 || j == 4 || j == 8) ? 0 : a[r1_idx*A_.cols+r1_j++]) - ((j == 3 || j == 7 || j == 12) ? 0 : a[r2_idx*A_.cols+r2_j++]);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            std::vector&lt;double&gt; c(11), rs;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="comment">// filling coefficients of 10-degree polynomial satisfying zero-determinant constraint of essential matrix, ie., det(E) = 0</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="comment">// based on &quot;An Efficient Solution to the Five-Point Relative Pose Problem&quot; (David Nister)</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <span class="comment">// same as in five-point.cpp</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            c[10] = (b[0]*b[17]*b[34]+b[26]*b[4]*b[21]-b[26]*b[17]*b[8]-b[13]*b[4]*b[34]-b[0]*b[21]*b[30]+b[13]*b[30]*b[8]);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            c[9] = (b[26]*b[4]*b[22]+b[14]*b[30]*b[8]+b[13]*b[31]*b[8]+b[1]*b[17]*b[34]-b[13]*b[5]*b[34]+b[26]*b[5]*b[21]-b[0]*b[21]*b[31]-b[26]*b[17]*b[9]-b[1]*b[21]*b[30]+b[27]*b[4]*b[21]+b[0]*b[17]*b[35]-b[0]*b[22]*b[30]+b[13]*b[30]*b[9]+b[0]*b[18]*b[34]-b[27]*b[17]*b[8]-b[14]*b[4]*b[34]-b[13]*b[4]*b[35]-b[26]*b[18]*b[8]);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            c[8] = (b[14]*b[30]*b[9]+b[14]*b[31]*b[8]+b[13]*b[31]*b[9]-b[13]*b[4]*b[36]-b[13]*b[5]*b[35]+b[15]*b[30]*b[8]-b[13]*b[6]*b[34]+b[13]*b[30]*b[10]+b[13]*b[32]*b[8]-b[14]*b[4]*b[35]-b[14]*b[5]*b[34]+b[26]*b[4]*b[23]+b[26]*b[5]*b[22]+b[26]*b[6]*b[21]-b[26]*b[17]*b[10]-b[15]*b[4]*b[34]-b[26]*b[18]*b[9]-b[26]*b[19]*b[8]+b[27]*b[4]*b[22]+b[27]*b[5]*b[21]-b[27]*b[17]*b[9]-b[27]*b[18]*b[8]-b[1]*b[21]*b[31]-b[0]*b[23]*b[30]-b[0]*b[21]*b[32]+b[28]*b[4]*b[21]-b[28]*b[17]*b[8]+b[2]*b[17]*b[34]+b[0]*b[18]*b[35]-b[0]*b[22]*b[31]+b[0]*b[17]*b[36]+b[0]*b[19]*b[34]-b[1]*b[22]*b[30]+b[1]*b[18]*b[34]+b[1]*b[17]*b[35]-b[2]*b[21]*b[30]);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            c[7] = (b[14]*b[30]*b[10]+b[14]*b[32]*b[8]-b[3]*b[21]*b[30]+b[3]*b[17]*b[34]+b[13]*b[32]*b[9]+b[13]*b[33]*b[8]-b[13]*b[4]*b[37]-b[13]*b[5]*b[36]+b[15]*b[30]*b[9]+b[15]*b[31]*b[8]-b[16]*b[4]*b[34]-b[13]*b[6]*b[35]-b[13]*b[7]*b[34]+b[13]*b[30]*b[11]+b[13]*b[31]*b[10]+b[14]*b[31]*b[9]-b[14]*b[4]*b[36]-b[14]*b[5]*b[35]-b[14]*b[6]*b[34]+b[16]*b[30]*b[8]-b[26]*b[20]*b[8]+b[26]*b[4]*b[24]+b[26]*b[5]*b[23]+b[26]*b[6]*b[22]+b[26]*b[7]*b[21]-b[26]*b[17]*b[11]-b[15]*b[4]*b[35]-b[15]*b[5]*b[34]-b[26]*b[18]*b[10]-b[26]*b[19]*b[9]+b[27]*b[4]*b[23]+b[27]*b[5]*b[22]+b[27]*b[6]*b[21]-b[27]*b[17]*b[10]-b[27]*b[18]*b[9]-b[27]*b[19]*b[8]+b[0]*b[17]*b[37]-b[0]*b[23]*b[31]-b[0]*b[24]*b[30]-b[0]*b[21]*b[33]-b[29]*b[17]*b[8]+b[28]*b[4]*b[22]+b[28]*b[5]*b[21]-b[28]*b[17]*b[9]-b[28]*b[18]*b[8]+b[29]*b[4]*b[21]+b[1]*b[19]*b[34]-b[2]*b[21]*b[31]+b[0]*b[20]*b[34]+b[0]*b[19]*b[35]+b[0]*b[18]*b[36]-b[0]*b[22]*b[32]-b[1]*b[23]*b[30]-b[1]*b[21]*b[32]+b[1]*b[18]*b[35]-b[1]*b[22]*b[31]-b[2]*b[22]*b[30]+b[2]*b[17]*b[35]+b[1]*b[17]*b[36]+b[2]*b[18]*b[34]);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            c[6] = (-b[14]*b[6]*b[35]-b[14]*b[7]*b[34]-b[3]*b[22]*b[30]-b[3]*b[21]*b[31]+b[3]*b[17]*b[35]+b[3]*b[18]*b[34]+b[13]*b[32]*b[10]+b[13]*b[33]*b[9]-b[13]*b[4]*b[38]-b[13]*b[5]*b[37]-b[15]*b[6]*b[34]+b[15]*b[30]*b[10]+b[15]*b[32]*b[8]-b[16]*b[4]*b[35]-b[13]*b[6]*b[36]-b[13]*b[7]*b[35]+b[13]*b[31]*b[11]+b[13]*b[30]*b[12]+b[14]*b[32]*b[9]+b[14]*b[33]*b[8]-b[14]*b[4]*b[37]-b[14]*b[5]*b[36]+b[16]*b[30]*b[9]+b[16]*b[31]*b[8]-b[26]*b[20]*b[9]+b[26]*b[4]*b[25]+b[26]*b[5]*b[24]+b[26]*b[6]*b[23]+b[26]*b[7]*b[22]-b[26]*b[17]*b[12]+b[14]*b[30]*b[11]+b[14]*b[31]*b[10]+b[15]*b[31]*b[9]-b[15]*b[4]*b[36]-b[15]*b[5]*b[35]-b[26]*b[18]*b[11]-b[26]*b[19]*b[10]-b[27]*b[20]*b[8]+b[27]*b[4]*b[24]+b[27]*b[5]*b[23]+b[27]*b[6]*b[22]+b[27]*b[7]*b[21]-b[27]*b[17]*b[11]-b[27]*b[18]*b[10]-b[27]*b[19]*b[9]-b[16]*b[5]*b[34]-b[29]*b[17]*b[9]-b[29]*b[18]*b[8]+b[28]*b[4]*b[23]+b[28]*b[5]*b[22]+b[28]*b[6]*b[21]-b[28]*b[17]*b[10]-b[28]*b[18]*b[9]-b[28]*b[19]*b[8]+b[29]*b[4]*b[22]+b[29]*b[5]*b[21]-b[2]*b[23]*b[30]+b[2]*b[18]*b[35]-b[1]*b[22]*b[32]-b[2]*b[21]*b[32]+b[2]*b[19]*b[34]+b[0]*b[19]*b[36]-b[0]*b[22]*b[33]+b[0]*b[20]*b[35]-b[0]*b[23]*b[32]-b[0]*b[25]*b[30]+b[0]*b[17]*b[38]+b[0]*b[18]*b[37]-b[0]*b[24]*b[31]+b[1]*b[17]*b[37]-b[1]*b[23]*b[31]-b[1]*b[24]*b[30]-b[1]*b[21]*b[33]+b[1]*b[20]*b[34]+b[1]*b[19]*b[35]+b[1]*b[18]*b[36]+b[2]*b[17]*b[36]-b[2]*b[22]*b[31]);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            c[5] = (-b[14]*b[6]*b[36]-b[14]*b[7]*b[35]+b[14]*b[31]*b[11]-b[3]*b[23]*b[30]-b[3]*b[21]*b[32]+b[3]*b[18]*b[35]-b[3]*b[22]*b[31]+b[3]*b[17]*b[36]+b[3]*b[19]*b[34]+b[13]*b[32]*b[11]+b[13]*b[33]*b[10]-b[13]*b[5]*b[38]-b[15]*b[6]*b[35]-b[15]*b[7]*b[34]+b[15]*b[30]*b[11]+b[15]*b[31]*b[10]+b[16]*b[31]*b[9]-b[13]*b[6]*b[37]-b[13]*b[7]*b[36]+b[13]*b[31]*b[12]+b[14]*b[32]*b[10]+b[14]*b[33]*b[9]-b[14]*b[4]*b[38]-b[14]*b[5]*b[37]-b[16]*b[6]*b[34]+b[16]*b[30]*b[10]+b[16]*b[32]*b[8]-b[26]*b[20]*b[10]+b[26]*b[5]*b[25]+b[26]*b[6]*b[24]+b[26]*b[7]*b[23]+b[14]*b[30]*b[12]+b[15]*b[32]*b[9]+b[15]*b[33]*b[8]-b[15]*b[4]*b[37]-b[15]*b[5]*b[36]+b[29]*b[5]*b[22]+b[29]*b[6]*b[21]-b[26]*b[18]*b[12]-b[26]*b[19]*b[11]-b[27]*b[20]*b[9]+b[27]*b[4]*b[25]+b[27]*b[5]*b[24]+b[27]*b[6]*b[23]+b[27]*b[7]*b[22]-b[27]*b[17]*b[12]-b[27]*b[18]*b[11]-b[27]*b[19]*b[10]-b[28]*b[20]*b[8]-b[16]*b[4]*b[36]-b[16]*b[5]*b[35]-b[29]*b[17]*b[10]-b[29]*b[18]*b[9]-b[29]*b[19]*b[8]+b[28]*b[4]*b[24]+b[28]*b[5]*b[23]+b[28]*b[6]*b[22]+b[28]*b[7]*b[21]-b[28]*b[17]*b[11]-b[28]*b[18]*b[10]-b[28]*b[19]*b[9]+b[29]*b[4]*b[23]-b[2]*b[22]*b[32]-b[2]*b[21]*b[33]-b[1]*b[24]*b[31]+b[0]*b[18]*b[38]-b[0]*b[24]*b[32]+b[0]*b[19]*b[37]+b[0]*b[20]*b[36]-b[0]*b[25]*b[31]-b[0]*b[23]*b[33]+b[1]*b[19]*b[36]-b[1]*b[22]*b[33]+b[1]*b[20]*b[35]+b[2]*b[19]*b[35]-b[2]*b[24]*b[30]-b[2]*b[23]*b[31]+b[2]*b[20]*b[34]+b[2]*b[17]*b[37]-b[1]*b[25]*b[30]+b[1]*b[18]*b[37]+b[1]*b[17]*b[38]-b[1]*b[23]*b[32]+b[2]*b[18]*b[36]);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            c[4] = (-b[14]*b[6]*b[37]-b[14]*b[7]*b[36]+b[14]*b[31]*b[12]+b[3]*b[17]*b[37]-b[3]*b[23]*b[31]-b[3]*b[24]*b[30]-b[3]*b[21]*b[33]+b[3]*b[20]*b[34]+b[3]*b[19]*b[35]+b[3]*b[18]*b[36]-b[3]*b[22]*b[32]+b[13]*b[32]*b[12]+b[13]*b[33]*b[11]-b[15]*b[6]*b[36]-b[15]*b[7]*b[35]+b[15]*b[31]*b[11]+b[15]*b[30]*b[12]+b[16]*b[32]*b[9]+b[16]*b[33]*b[8]-b[13]*b[6]*b[38]-b[13]*b[7]*b[37]+b[14]*b[32]*b[11]+b[14]*b[33]*b[10]-b[14]*b[5]*b[38]-b[16]*b[6]*b[35]-b[16]*b[7]*b[34]+b[16]*b[30]*b[11]+b[16]*b[31]*b[10]-b[26]*b[19]*b[12]-b[26]*b[20]*b[11]+b[26]*b[6]*b[25]+b[26]*b[7]*b[24]+b[15]*b[32]*b[10]+b[15]*b[33]*b[9]-b[15]*b[4]*b[38]-b[15]*b[5]*b[37]+b[29]*b[5]*b[23]+b[29]*b[6]*b[22]+b[29]*b[7]*b[21]-b[27]*b[20]*b[10]+b[27]*b[5]*b[25]+b[27]*b[6]*b[24]+b[27]*b[7]*b[23]-b[27]*b[18]*b[12]-b[27]*b[19]*b[11]-b[28]*b[20]*b[9]-b[16]*b[4]*b[37]-b[16]*b[5]*b[36]+b[0]*b[19]*b[38]-b[0]*b[24]*b[33]+b[0]*b[20]*b[37]-b[29]*b[17]*b[11]-b[29]*b[18]*b[10]-b[29]*b[19]*b[9]+b[28]*b[4]*b[25]+b[28]*b[5]*b[24]+b[28]*b[6]*b[23]+b[28]*b[7]*b[22]-b[28]*b[17]*b[12]-b[28]*b[18]*b[11]-b[28]*b[19]*b[10]-b[29]*b[20]*b[8]+b[29]*b[4]*b[24]+b[2]*b[18]*b[37]-b[0]*b[25]*b[32]+b[1]*b[18]*b[38]-b[1]*b[24]*b[32]+b[1]*b[19]*b[37]+b[1]*b[20]*b[36]-b[1]*b[25]*b[31]+b[2]*b[17]*b[38]+b[2]*b[19]*b[36]-b[2]*b[24]*b[31]-b[2]*b[22]*b[33]-b[2]*b[23]*b[32]+b[2]*b[20]*b[35]-b[1]*b[23]*b[33]-b[2]*b[25]*b[30]);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            c[3] = (-b[14]*b[6]*b[38]-b[14]*b[7]*b[37]+b[3]*b[19]*b[36]-b[3]*b[22]*b[33]+b[3]*b[20]*b[35]-b[3]*b[23]*b[32]-b[3]*b[25]*b[30]+b[3]*b[17]*b[38]+b[3]*b[18]*b[37]-b[3]*b[24]*b[31]-b[15]*b[6]*b[37]-b[15]*b[7]*b[36]+b[15]*b[31]*b[12]+b[16]*b[32]*b[10]+b[16]*b[33]*b[9]+b[13]*b[33]*b[12]-b[13]*b[7]*b[38]+b[14]*b[32]*b[12]+b[14]*b[33]*b[11]-b[16]*b[6]*b[36]-b[16]*b[7]*b[35]+b[16]*b[31]*b[11]+b[16]*b[30]*b[12]+b[15]*b[32]*b[11]+b[15]*b[33]*b[10]-b[15]*b[5]*b[38]+b[29]*b[5]*b[24]+b[29]*b[6]*b[23]-b[26]*b[20]*b[12]+b[26]*b[7]*b[25]-b[27]*b[19]*b[12]-b[27]*b[20]*b[11]+b[27]*b[6]*b[25]+b[27]*b[7]*b[24]-b[28]*b[20]*b[10]-b[16]*b[4]*b[38]-b[16]*b[5]*b[37]+b[29]*b[7]*b[22]-b[29]*b[17]*b[12]-b[29]*b[18]*b[11]-b[29]*b[19]*b[10]+b[28]*b[5]*b[25]+b[28]*b[6]*b[24]+b[28]*b[7]*b[23]-b[28]*b[18]*b[12]-b[28]*b[19]*b[11]-b[29]*b[20]*b[9]+b[29]*b[4]*b[25]-b[2]*b[24]*b[32]+b[0]*b[20]*b[38]-b[0]*b[25]*b[33]+b[1]*b[19]*b[38]-b[1]*b[24]*b[33]+b[1]*b[20]*b[37]-b[2]*b[25]*b[31]+b[2]*b[20]*b[36]-b[1]*b[25]*b[32]+b[2]*b[19]*b[37]+b[2]*b[18]*b[38]-b[2]*b[23]*b[33]);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            c[2] = (b[3]*b[18]*b[38]-b[3]*b[24]*b[32]+b[3]*b[19]*b[37]+b[3]*b[20]*b[36]-b[3]*b[25]*b[31]-b[3]*b[23]*b[33]-b[15]*b[6]*b[38]-b[15]*b[7]*b[37]+b[16]*b[32]*b[11]+b[16]*b[33]*b[10]-b[16]*b[5]*b[38]-b[16]*b[6]*b[37]-b[16]*b[7]*b[36]+b[16]*b[31]*b[12]+b[14]*b[33]*b[12]-b[14]*b[7]*b[38]+b[15]*b[32]*b[12]+b[15]*b[33]*b[11]+b[29]*b[5]*b[25]+b[29]*b[6]*b[24]-b[27]*b[20]*b[12]+b[27]*b[7]*b[25]-b[28]*b[19]*b[12]-b[28]*b[20]*b[11]+b[29]*b[7]*b[23]-b[29]*b[18]*b[12]-b[29]*b[19]*b[11]+b[28]*b[6]*b[25]+b[28]*b[7]*b[24]-b[29]*b[20]*b[10]+b[2]*b[19]*b[38]-b[1]*b[25]*b[33]+b[2]*b[20]*b[37]-b[2]*b[24]*b[33]-b[2]*b[25]*b[32]+b[1]*b[20]*b[38]);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            c[1] = (b[29]*b[7]*b[24]-b[29]*b[20]*b[11]+b[2]*b[20]*b[38]-b[2]*b[25]*b[33]-b[28]*b[20]*b[12]+b[28]*b[7]*b[25]-b[29]*b[19]*b[12]-b[3]*b[24]*b[33]+b[15]*b[33]*b[12]+b[3]*b[19]*b[38]-b[16]*b[6]*b[38]+b[3]*b[20]*b[37]+b[16]*b[32]*b[12]+b[29]*b[6]*b[25]-b[16]*b[7]*b[37]-b[3]*b[25]*b[32]-b[15]*b[7]*b[38]+b[16]*b[33]*b[11]);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            c[0] = -b[29]*b[20]*b[12]+b[29]*b[7]*b[25]+b[16]*b[33]*b[12]-b[16]*b[7]*b[38]+b[3]*b[20]*b[38]-b[3]*b[25]*b[33];</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keyword">const</span> <span class="keyword">auto</span> poly_solver = <a class="code hl_function" href="classcv_1_1usac_1_1_solver_poly.html#a6f03ec84c5bbde48a65f27c53356aa1a">SolverPoly::create</a>();</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> num_roots = poly_solver-&gt;getRealRoots(c, rs);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a> = std::vector&lt;Mat&gt;(); <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.reserve(num_roots);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_roots; i++) {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                <span class="keyword">const</span> <span class="keywordtype">double</span> z1 = rs[i], z2 = z1*z1, z3 = z2*z1, z4 = z3*z1;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                <span class="keywordtype">double</span> bz[9], norm_bz = 0;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 3; j++) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    <span class="keywordtype">double</span> * <span class="keyword">const</span> br = b + j * 13, * Bz = bz + 3*j;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                    Bz[0] = br[0] * z3 + br[1] * z2 + br[2] * z1 + br[3];</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                    Bz[1] = br[4] * z3 + br[5] * z2 + br[6] * z1 + br[7];</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                    Bz[2] = br[8] * z4 + br[9] * z3 + br[10] * z2 + br[11] * z1 + br[12];</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    norm_bz += Bz[0]*Bz[0] + Bz[1]*Bz[1] + Bz[2]*Bz[2];</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                <a class="code hl_typedef" href="group__core__basic.html#gaff0100a48f049fb15584a4a657eae838">Matx33d</a> Bz(bz);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                <span class="comment">// Bz is rank 2, matrix, so epipole is its null-vector</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a> xy1 = <a class="code hl_function" href="namespacecv_1_1usac_1_1_utils.html#a83dba8e29564d4eebaab1ad0f84e7bdd">Utils::getRightEpipole</a>(<a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(Bz * (1/<a class="code hl_function" href="group__core__array.html#ga186222c3919657890f88df5a1f64a7d7">sqrt</a>(norm_bz))));</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                <span class="keyword">const</span> <span class="keywordtype">double</span> one_over_xy1_norm = 1 / <a class="code hl_function" href="group__core__array.html#ga186222c3919657890f88df5a1f64a7d7">sqrt</a>(xy1[0] * xy1[0] + xy1[1] * xy1[1] + xy1[2] * xy1[2]);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                xy1 *= one_over_xy1_norm;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                <span class="keywordflow">if</span> (fabs(xy1(2)) &lt; 1e-10) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                <a class="code hl_class" href="classcv_1_1_mat__.html">Mat_&lt;double&gt;</a> <a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>(3,3);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                <span class="keywordtype">double</span> * e_arr = (<span class="keywordtype">double</span> *)<a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>.data, <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = xy1(0) / xy1(2), <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> = xy1(1) / xy1(2);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> e_i = 0; e_i &lt; 9; e_i++)</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                    e_arr[e_i] = ee[e_i] * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> + ee[9+e_i] * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> + ee[18+e_i]*z1 + ee[27+e_i];</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.emplace_back(<a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="preprocessor">#if defined(HAVE_EIGEN) || defined(HAVE_LAPACK)</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; i++)</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 3; j++)</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                    <span class="comment">// compute EE Transpose</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                    <span class="comment">// Shorthand for multiplying the Essential matrix with its transpose.</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                    eet[i][j] = 2 * (multPolysDegOne(null_space_mat[i][0].val, null_space_mat[j][0].val) +</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                                     multPolysDegOne(null_space_mat[i][1].val, null_space_mat[j][1].val) +</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>                                     multPolysDegOne(null_space_mat[i][2].val, null_space_mat[j][2].val));</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 1, 10&gt;</a> <a class="code hl_function" href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">trace</a> = eet[0][0] + eet[1][1] + eet[2][2];</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="comment">// Trace constraint</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; i++)</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 3; j++)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                    <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(multPolysDegOneAndTwo(eet[i][0].val, null_space_mat[0][j].val) +</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                        multPolysDegOneAndTwo(eet[i][1].val, null_space_mat[1][j].val) +</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                        multPolysDegOneAndTwo(eet[i][2].val, null_space_mat[2][j].val) -</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                        0.5 * multPolysDegOneAndTwo(<a class="code hl_function" href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">trace</a>.val, null_space_mat[i][j].<a class="code hl_variable" href="classcv_1_1_matx.html#afa9ad3bc5b09ebcdfc6f98f44c15191d">val</a>))</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                            .<a class="code hl_function" href="classcv_1_1_matx.html#af3a34bb5c063a59025b25abc13da4a2d">copyTo</a>(constraint_mat.<a class="code hl_function" href="classcv_1_1_mat__.html#a957f24ad0e833a3a145499289331277e">row</a>(3 * i + j));</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="comment">// Rank = zero determinant constraint</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(multPolysDegOneAndTwo(</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                    (multPolysDegOne(null_space_mat[0][1].val, null_space_mat[1][2].val) -</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                     multPolysDegOne(null_space_mat[0][2].val, null_space_mat[1][1].val)).val,</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                        null_space_mat[2][0].val) +</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                multPolysDegOneAndTwo(</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                    (multPolysDegOne(null_space_mat[0][2].val, null_space_mat[1][0].val) -</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                     multPolysDegOne(null_space_mat[0][0].val, null_space_mat[1][2].val)).val,</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                        null_space_mat[2][1].val) +</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                multPolysDegOneAndTwo(</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                    (multPolysDegOne(null_space_mat[0][0].val, null_space_mat[1][1].val) -</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                     multPolysDegOne(null_space_mat[0][1].val, null_space_mat[1][0].val)).val,</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                        null_space_mat[2][2].val)).copyTo(constraint_mat.<a class="code hl_function" href="classcv_1_1_mat__.html#a957f24ad0e833a3a145499289331277e">row</a>(9));</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="preprocessor">#ifdef HAVE_EIGEN</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <span class="keyword">const</span> Eigen::Matrix&lt;double, 10, 20, Eigen::RowMajor&gt; constraint_mat_eig((<span class="keywordtype">double</span> *) constraint_mat.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="comment">// (3) Compute the Gröbner basis. This turns out to be as simple as performing a</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="comment">// Gauss-Jordan elimination on the 10×20 matrix</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            <span class="keyword">const</span> Eigen::Matrix&lt;double, 10, 10&gt; eliminated_mat_eig = constraint_mat_eig.block&lt;10, 10&gt;(0, 0)</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                    .fullPivLu().solve(constraint_mat_eig.block&lt;10, 10&gt;(0, 10));</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="comment">// (4) Compute the 10×10 action matrix for multiplication by one of the unknowns.</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <span class="comment">// This is a simple matter of extracting the correct elements from the eliminated</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="comment">// 10×20 matrix and organising them to form the action matrix.</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            Eigen::Matrix&lt;double, 10, 10&gt; action_mat_eig = Eigen::Matrix&lt;double, 10, 10&gt;::Zero();</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            action_mat_eig.block&lt;3, 10&gt;(0, 0) = eliminated_mat_eig.block&lt;3, 10&gt;(0, 0);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            action_mat_eig.block&lt;2, 10&gt;(3, 0) = eliminated_mat_eig.block&lt;2, 10&gt;(4, 0);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            action_mat_eig.row(5) = eliminated_mat_eig.row(7);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            action_mat_eig(6, 0) = -1.0;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            action_mat_eig(7, 1) = -1.0;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            action_mat_eig(8, 3) = -1.0;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            action_mat_eig(9, 6) = -1.0;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            <span class="comment">// (5) Compute the left eigenvectors of the action matrix</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            Eigen::EigenSolver&lt;Eigen::Matrix&lt;double, 10, 10&gt;&gt; eigensolver(action_mat_eig);</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            <span class="keyword">const</span> Eigen::VectorXcd &amp;<a class="code hl_variable" href="group__core__array.html#ga0d4721014851558cd1d90ef17ea6f94b">eigenvalues</a> = eigensolver.eigenvalues();</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            <span class="keyword">const</span> Eigen::MatrixXcd <a class="code hl_variable" href="group__core__array.html#gac5e93604079307f1b21a1429c06fb1a5">eigenvectors</a> = eigensolver.eigenvectors();</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            <span class="keyword">const</span> <span class="keyword">auto</span> * <span class="keyword">const</span> eig_vecs_ = (<span class="keywordtype">double</span> *) <a class="code hl_variable" href="group__core__array.html#gac5e93604079307f1b21a1429c06fb1a5">eigenvectors</a>.data();</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double, 10, 10&gt;</a> A = constraint_mat.<a class="code hl_function" href="classcv_1_1_mat.html#aadc8f9210fe4dec50513746c246fa8d9">colRange</a>(0, 10),</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                             B = constraint_mat.<a class="code hl_function" href="classcv_1_1_mat.html#aadc8f9210fe4dec50513746c246fa8d9">colRange</a>(10, 20), eliminated_mat;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            <span class="keywordflow">if</span> (!<a class="code hl_function" href="group__core__array.html#ga12b43690dbd31fed96f213eefead2373">solve</a>(A, B, eliminated_mat, <a class="code hl_enumvalue" href="group__core__array.html#ggaaf9ea5dcc392d5ae04eacb9920b9674ca247a3455cd64973152e17e26999dc024">DECOMP_LU</a>)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> eliminated_mat_dyn = <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(eliminated_mat);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> action_mat = <a class="code hl_function" href="classcv_1_1_mat__.html#a8fdd1fd9f5d8ddee319f03f58ef2aef4">Mat_&lt;double&gt;::zeros</a>(10, 10);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            eliminated_mat_dyn.<a class="code hl_function" href="classcv_1_1_mat.html#aa6542193430356ad631a9beabc624107">rowRange</a>(0,3).<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(action_mat.<a class="code hl_function" href="classcv_1_1_mat.html#aa6542193430356ad631a9beabc624107">rowRange</a>(0,3));</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            eliminated_mat_dyn.<a class="code hl_function" href="classcv_1_1_mat.html#aa6542193430356ad631a9beabc624107">rowRange</a>(4,6).<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(action_mat.<a class="code hl_function" href="classcv_1_1_mat.html#aa6542193430356ad631a9beabc624107">rowRange</a>(3,5));</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            eliminated_mat_dyn.<a class="code hl_function" href="classcv_1_1_mat.html#a4b22e1c23af7a7f2eef8fa478cfa7434">row</a>(7).<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(action_mat.<a class="code hl_function" href="classcv_1_1_mat.html#a4b22e1c23af7a7f2eef8fa478cfa7434">row</a>(5));</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            <span class="keyword">auto</span> * action_mat_data = (<span class="keywordtype">double</span> *) action_mat.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            action_mat_data[60] = -1.0; <span class="comment">// 6 row, 0 col</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            action_mat_data[71] = -1.0; <span class="comment">// 7 row, 1 col</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            action_mat_data[83] = -1.0; <span class="comment">// 8 row, 3 col</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            action_mat_data[96] = -1.0; <span class="comment">// 9 row, 6 col</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="preprocessor">#if defined (ACCELERATE_NEW_LAPACK) &amp;&amp; defined (ACCELERATE_LAPACK_ILP64)</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            <span class="keywordtype">long</span> mat_order = 10, info, lda = 10, ldvl = 10, ldvr = 1, lwork = 100;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="keywordtype">int</span> mat_order = 10, info, lda = 10, ldvl = 10, ldvr = 1, lwork = 100;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <span class="keywordtype">double</span> wr[10], wi[10] = {0}, eig_vecs[100], work[100]; <span class="comment">// 10 = mat_order, 100 = lwork</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keywordtype">char</span> jobvl = <span class="charliteral">&#39;V&#39;</span>, jobvr = <span class="charliteral">&#39;N&#39;</span>; <span class="comment">// only left eigen vectors are computed</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            OCV_LAPACK_FUNC(dgeev)(&amp;jobvl, &amp;jobvr, &amp;mat_order, action_mat_data, &amp;lda, wr, wi, eig_vecs, &amp;ldvl,</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                    <span class="keyword">nullptr</span>, &amp;ldvr, work, &amp;lwork, &amp;info);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">if</span> (info != 0) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a> = std::vector&lt;Mat&gt;(); <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.reserve(10);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            <span class="comment">// Read off the values for the three unknowns at all the solution points and</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            <span class="comment">// back-substitute to obtain the solutions for the essential matrix.</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 10; i++)</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                <span class="comment">// process only real solutions</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>#ifdef HAVE_EIGEN</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="group__core__array.html#ga0d4721014851558cd1d90ef17ea6f94b">eigenvalues</a>(i).imag() == 0) {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                    <a class="code hl_class" href="classcv_1_1_mat__.html">Mat_&lt;double&gt;</a> model(3, 3);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                    <span class="keyword">auto</span> * model_data = (<span class="keywordtype">double</span> *) model.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                    <span class="keyword">const</span> <span class="keywordtype">int</span> eig_i = 20 * i + 12; <span class="comment">// eigen stores imaginary values too</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 9; j++)</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                        model_data[j] = ee[j   ] * eig_vecs_[eig_i  ] + ee[j+9 ] * eig_vecs_[eig_i+2] +</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                                        ee[j+18] * eig_vecs_[eig_i+4] + ee[j+27] * eig_vecs_[eig_i+6];</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                <span class="keywordflow">if</span> (wi[i] == 0) {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                    <a class="code hl_class" href="classcv_1_1_mat__.html">Mat_&lt;double&gt;</a> model (3,3);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                    <span class="keyword">auto</span> * model_data = (<span class="keywordtype">double</span> *) model.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                    <span class="keyword">const</span> <span class="keywordtype">int</span> eig_i = 10 * i + 6;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 9; j++)</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>                        model_data[j] = ee[j   ]*eig_vecs[eig_i  ] + ee[j+9 ]*eig_vecs[eig_i+1] +</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>                                        ee[j+18]*eig_vecs[eig_i+2] + ee[j+27]*eig_vecs[eig_i+3];</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>                    <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.emplace_back(model);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>                }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">cv::Error::StsNotImplemented</a>, <span class="stringliteral">&quot;To run essential matrix estimation of Stewenius method you need to have either Eigen or LAPACK installed! Or switch to Nister algorithm&quot;</span>);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        }</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.size());</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    }</div>
+</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="comment">// number of possible solutions is 0,2,4,6,8,10</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#afae0569c17dc19865a54763f00c03d87">  311</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#afae0569c17dc19865a54763f00c03d87">getMaxNumberOfSolutions</a> ()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> 10; }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a545d7dde7b37a3d8ddbc49bb4c2d13da">  312</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a545d7dde7b37a3d8ddbc49bb4c2d13da">getSampleSize</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> 5; }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment">     * Multiply two polynomials of degree one with unknowns x y z</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment">     * @p = (p1 x + p2 y + p3 z + p4) [p1 p2 p3 p4]</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">     * @q = (q1 x + q2 y + q3 z + q4) [q1 q2 q3 a4]</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">     * @result is a new polynomial in x^2 xy y^2 xz yz z^2 x y z 1 of size 10</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;double,1,10&gt;</a> multPolysDegOne(<span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> p,</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>                                                    <span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> q) {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">return</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            {p[0]*q[0], p[0]*q[1]+p[1]*q[0], p[1]*q[1], p[0]*q[2]+p[2]*q[0], p[1]*q[2]+p[2]*q[1],</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>             p[2]*q[2], p[0]*q[3]+p[3]*q[0], p[1]*q[3]+p[3]*q[1], p[2]*q[3]+p[3]*q[2], p[3]*q[3]};</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="comment">     * Multiply two polynomials with unknowns x y z</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="comment">     * @p is of size 10 and @q is of size 4</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="comment">     * @p = (p1 x^2 + p2 xy + p3 y^2 + p4 xz + p5 yz + p6 z^2 + p7 x + p8 y + p9 z + p10)</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment">     * @q = (q1 x + q2 y + q3 z + a4) [q1 q2 q3 q4]</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment">     * @result is a new polynomial of size 20</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment">     * x^3 x^2y xy^2 y^3 x^2z xyz y^2z xz^2 yz^2 z^3 x^2 xy y^2 xz yz z^2 x y z 1</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="keyword">static</span> <span class="keyword">inline</span> Matx&lt;double, 1, 20&gt; multPolysDegOneAndTwo(<span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> p,</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                                                            <span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> q) {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_matx.html#a03e916d291e4922a0e96ea638b32066e">Matx&lt;double, 1, 20&gt;</a></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>           ({p[0]*q[0], p[0]*q[1]+p[1]*q[0], p[1]*q[1]+p[2]*q[0], p[2]*q[1], p[0]*q[2]+p[3]*q[0],</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                  p[1]*q[2]+p[3]*q[1]+p[4]*q[0], p[2]*q[2]+p[4]*q[1], p[3]*q[2]+p[5]*q[0],</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                  p[4]*q[2]+p[5]*q[1], p[5]*q[2], p[0]*q[3]+p[6]*q[0], p[1]*q[3]+p[6]*q[1]+p[7]*q[0],</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                  p[2]*q[3]+p[7]*q[1], p[3]*q[3]+p[6]*q[2]+p[8]*q[0], p[4]*q[3]+p[7]*q[2]+p[8]*q[1],</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                  p[5]*q[3]+p[8]*q[2], p[6]*q[3]+p[9]*q[0], p[7]*q[3]+p[9]*q[1], p[8]*q[3]+p[9]*q[2],</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>                  p[9]*q[3]});</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keyword">static</span> <span class="keyword">inline</span> Matx&lt;double, 1, 20&gt; multPolysDegOneAndTwoNister(<span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> p,</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                                                            <span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> q) {</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="comment">// permutation {0, 3, 1, 2, 4, 10, 6, 12, 5, 11, 7, 13, 16, 8, 14, 17, 9, 15, 18, 19};</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_matx.html#a03e916d291e4922a0e96ea638b32066e">Matx&lt;double, 1, 20&gt;</a></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>           ({p[0]*q[0], p[2]*q[1], p[0]*q[1]+p[1]*q[0], p[1]*q[1]+p[2]*q[0], p[0]*q[2]+p[3]*q[0],</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            p[0]*q[3]+p[6]*q[0], p[2]*q[2]+p[4]*q[1], p[2]*q[3]+p[7]*q[1], p[1]*q[2]+p[3]*q[1]+p[4]*q[0],</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            p[1]*q[3]+p[6]*q[1]+p[7]*q[0], p[3]*q[2]+p[5]*q[0], p[3]*q[3]+p[6]*q[2]+p[8]*q[0],</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            p[6]*q[3]+p[9]*q[0], p[4]*q[2]+p[5]*q[1], p[4]*q[3]+p[7]*q[2]+p[8]*q[1], p[7]*q[3]+p[9]*q[1],</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            p[5]*q[2], p[5]*q[3]+p[8]*q[2], p[8]*q[3]+p[9]*q[2], p[9]*q[3]});</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    }</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>};</div>
+</div>
+<div class="foldopen" id="foldopen00356" data-start="{" data-end="}">
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_essential_minimal_solver5pts.html#a351f8fa28c076e4b74e9fc0694c10a73">  356</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;EssentialMinimalSolver5pts&gt;</a> <a class="code hl_function" href="classcv_1_1usac_1_1_essential_minimal_solver5pts.html#a351f8fa28c076e4b74e9fc0694c10a73">EssentialMinimalSolver5pts::create</a></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        (<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;points_, <span class="keywordtype">bool</span> use_svd, <span class="keywordtype">bool</span> is_nister) {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;EssentialMinimalSolver5ptsImpl&gt;</a>(points_, use_svd, is_nister);</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>}</div>
+</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}}</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="preprocessor">#if defined(__APPLE__) &amp;&amp; defined(__clang__)</span></div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="preprocessor">#pragma clang diagnostic pop</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasscv_1_1_mat___html"><div class="ttname"><a href="classcv_1_1_mat__.html">cv::Mat_</a></div><div class="ttdoc">Template matrix class derived from Mat.</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02582">mat.hpp:2583</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat___html_a8fdd1fd9f5d8ddee319f03f58ef2aef4"><div class="ttname"><a href="classcv_1_1_mat__.html#a8fdd1fd9f5d8ddee319f03f58ef2aef4">cv::Mat_::zeros</a></div><div class="ttdeci">static CV_NODISCARD_STD MatExpr zeros(int rows, int cols)</div><div class="ttdoc">overridden forms of Mat::zeros() etc. Data type is omitted, of course</div></div>
+<div class="ttc" id="aclasscv_1_1_mat___html_a957f24ad0e833a3a145499289331277e"><div class="ttname"><a href="classcv_1_1_mat__.html#a957f24ad0e833a3a145499289331277e">cv::Mat_::row</a></div><div class="ttdeci">Mat_ row(int y) const</div><div class="ttdoc">overridden forms of Mat::row() etc.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a2cc2a68970b85d50f3a4fac1b55ba7c8"><div class="ttname"><a href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">cv::Mat::copyTo</a></div><div class="ttdeci">void copyTo(OutputArray m) const</div><div class="ttdoc">Copies the matrix to another one.</div><div class="ttdef"><b>Definición</b> <a href="copy_8cpp_source.html#l00447">copy.cpp:447</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a4b22e1c23af7a7f2eef8fa478cfa7434"><div class="ttname"><a href="classcv_1_1_mat.html#a4b22e1c23af7a7f2eef8fa478cfa7434">cv::Mat::row</a></div><div class="ttdeci">Mat row(int y) const</div><div class="ttdoc">Creates a matrix header for the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a4d33bed1c850265370d2af0ff02e1564"><div class="ttname"><a href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">cv::Mat::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdoc">pointer to the data</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02493">mat.hpp:2493</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a666554613a268d1d7b51095501746652"><div class="ttname"><a href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">cv::Mat::Mat</a></div><div class="ttdeci">Mat() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00714">matrix.cpp:714</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa6542193430356ad631a9beabc624107"><div class="ttname"><a href="classcv_1_1_mat.html#aa6542193430356ad631a9beabc624107">cv::Mat::rowRange</a></div><div class="ttdeci">Mat rowRange(int startrow, int endrow) const</div><div class="ttdoc">Creates a matrix header for the specified row span.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aadc8f9210fe4dec50513746c246fa8d9"><div class="ttname"><a href="classcv_1_1_mat.html#aadc8f9210fe4dec50513746c246fa8d9">cv::Mat::colRange</a></div><div class="ttdeci">Mat colRange(int startcol, int endcol) const</div><div class="ttdoc">Creates a matrix header for the specified column span.</div></div>
+<div class="ttc" id="aclasscv_1_1_matx_html"><div class="ttname"><a href="classcv_1_1_matx.html">cv::Matx</a></div><div class="ttdoc">Template class for small matrices whose type and size are known at compilation time.</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00105">matx.hpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_matx_html_a03e916d291e4922a0e96ea638b32066e"><div class="ttname"><a href="classcv_1_1_matx.html#a03e916d291e4922a0e96ea638b32066e">cv::Matx::Matx</a></div><div class="ttdeci">Matx()</div><div class="ttdoc">default constructor</div><div class="ttdef"><b>Definición</b> <a href="matx_8inl_8hpp_source.html#l00148">matx.inl.hpp:148</a></div></div>
+<div class="ttc" id="aclasscv_1_1_matx_html_a84dbc64211cb37ab329cb01980aa1ed7"><div class="ttname"><a href="classcv_1_1_matx.html#a84dbc64211cb37ab329cb01980aa1ed7">cv::Matx::col</a></div><div class="ttdeci">Matx&lt; _Tp, m, 1 &gt; col(int i) const</div><div class="ttdoc">extract the matrix column</div><div class="ttdef"><b>Definición</b> <a href="matx_8inl_8hpp_source.html#l00387">matx.inl.hpp:387</a></div></div>
+<div class="ttc" id="aclasscv_1_1_matx_html_af3a34bb5c063a59025b25abc13da4a2d"><div class="ttname"><a href="classcv_1_1_matx.html#af3a34bb5c063a59025b25abc13da4a2d">cv::Matx::copyTo</a></div><div class="ttdeci">void copyTo(const _OutputArray &amp;dst) const</div><div class="ttdoc">copy &amp; convert</div></div>
+<div class="ttc" id="aclasscv_1_1_matx_html_afa9ad3bc5b09ebcdfc6f98f44c15191d"><div class="ttname"><a href="classcv_1_1_matx.html#afa9ad3bc5b09ebcdfc6f98f44c15191d">cv::Matx::val</a></div><div class="ttdeci">_Tp val[m *n]</div><div class="ttdoc">matrix elements</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00228">matx.hpp:228</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_v_d_html_a4700f5207e66cdd9924bf64e34911832a312212af9fa27d5560981e24f845434a"><div class="ttname"><a href="classcv_1_1_s_v_d.html#a4700f5207e66cdd9924bf64e34911832a312212af9fa27d5560981e24f845434a">cv::SVD::FULL_UV</a></div><div class="ttdeci">@ FULL_UV</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02712">core.hpp:2712</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_v_d_html_a4700f5207e66cdd9924bf64e34911832afb6aab7965c8f601696b10fa109e2789"><div class="ttname"><a href="classcv_1_1_s_v_d.html#a4700f5207e66cdd9924bf64e34911832afb6aab7965c8f601696b10fa109e2789">cv::SVD::MODIFY_A</a></div><div class="ttdeci">@ MODIFY_A</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02705">core.hpp:2705</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_essential_minimal_solver5pts_html"><div class="ttname"><a href="classcv_1_1usac_1_1_essential_minimal_solver5pts.html">cv::usac::EssentialMinimalSolver5pts</a></div><div class="ttdef"><b>Definición</b> <a href="usac_8hpp_source.html#l00114">usac.hpp:114</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_essential_minimal_solver5pts_html_a351f8fa28c076e4b74e9fc0694c10a73"><div class="ttname"><a href="classcv_1_1usac_1_1_essential_minimal_solver5pts.html#a351f8fa28c076e4b74e9fc0694c10a73">cv::usac::EssentialMinimalSolver5pts::create</a></div><div class="ttdeci">static Ptr&lt; EssentialMinimalSolver5pts &gt; create(const Mat &amp;points, bool use_svd, bool is_nister)</div><div class="ttdef"><b>Definición</b> <a href="#l00356">essential_solver.cpp:357</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_essential_minimal_solver5pts_impl_html_a192eef69f2241cf409cce31770984cde"><div class="ttname"><a href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a192eef69f2241cf409cce31770984cde">cv::usac::EssentialMinimalSolver5ptsImpl::estimate</a></div><div class="ttdeci">int estimate(const std::vector&lt; int &gt; &amp;sample, std::vector&lt; Mat &gt; &amp;models) const override</div><div class="ttdef"><b>Definición</b> <a href="#l00039">essential_solver.cpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_essential_minimal_solver5pts_impl_html_a545d7dde7b37a3d8ddbc49bb4c2d13da"><div class="ttname"><a href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a545d7dde7b37a3d8ddbc49bb4c2d13da">cv::usac::EssentialMinimalSolver5ptsImpl::getSampleSize</a></div><div class="ttdeci">int getSampleSize() const override</div><div class="ttdef"><b>Definición</b> <a href="#l00312">essential_solver.cpp:312</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_essential_minimal_solver5pts_impl_html_a85d119245bf110686d2f30cfd3c48dc7"><div class="ttname"><a href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#a85d119245bf110686d2f30cfd3c48dc7">cv::usac::EssentialMinimalSolver5ptsImpl::EssentialMinimalSolver5ptsImpl</a></div><div class="ttdeci">EssentialMinimalSolver5ptsImpl(const Mat &amp;points_, bool use_svd_=false, bool is_nister_=false)</div><div class="ttdef"><b>Definición</b> <a href="#l00033">essential_solver.cpp:33</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_essential_minimal_solver5pts_impl_html_afae0569c17dc19865a54763f00c03d87"><div class="ttname"><a href="classcv_1_1usac_1_1_essential_minimal_solver5pts_impl.html#afae0569c17dc19865a54763f00c03d87">cv::usac::EssentialMinimalSolver5ptsImpl::getMaxNumberOfSolutions</a></div><div class="ttdeci">int getMaxNumberOfSolutions() const override</div><div class="ttdef"><b>Definición</b> <a href="#l00311">essential_solver.cpp:311</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_solver_poly_html_a6f03ec84c5bbde48a65f27c53356aa1a"><div class="ttname"><a href="classcv_1_1usac_1_1_solver_poly.html#a6f03ec84c5bbde48a65f27c53356aa1a">cv::usac::SolverPoly::create</a></div><div class="ttdeci">static Ptr&lt; SolverPoly &gt; create()</div><div class="ttdef"><b>Definición</b> <a href="geometry_2src_2usac_2utils_8cpp_source.html#l00235">utils.cpp:235</a></div></div>
+<div class="ttc" id="ageometry_2src_2precomp_8hpp_html"><div class="ttname"><a href="geometry_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gaa9afdde73df2fc851c84cbd0f90c52ed"><div class="ttname"><a href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">cv::models</a></div><div class="ttdeci">const std::vector&lt; std::vector&lt; Mat &gt; &gt; const std::vector&lt; cv::Size &gt; InputArray InputArray models</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l01095">calib.hpp:1095</a></div></div>
+<div class="ttc" id="agroup__calib_html_gab2e5bbb3f797d988799adccbf60fb96e"><div class="ttname"><a href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">cv::E</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray OutputArray E</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga0d4721014851558cd1d90ef17ea6f94b"><div class="ttname"><a href="group__core__array.html#ga0d4721014851558cd1d90ef17ea6f94b">cv::eigenvalues</a></div><div class="ttdeci">InputOutputArray OutputArray OutputArray eigenvalues</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02077">core.hpp:2077</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga12b43690dbd31fed96f213eefead2373"><div class="ttname"><a href="group__core__array.html#ga12b43690dbd31fed96f213eefead2373">cv::solve</a></div><div class="ttdeci">CV_EXPORTS_W bool solve(InputArray src1, InputArray src2, OutputArray dst, int flags=DECOMP_LU)</div><div class="ttdoc">Solves one or more linear systems or least-squares problems.</div><div class="ttdef"><b>Definición</b> <a href="lapack_8cpp_source.html#l01032">lapack.cpp:1032</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga186222c3919657890f88df5a1f64a7d7"><div class="ttname"><a href="group__core__array.html#ga186222c3919657890f88df5a1f64a7d7">cv::sqrt</a></div><div class="ttdeci">CV_EXPORTS_W void sqrt(InputArray src, OutputArray dst)</div><div class="ttdoc">Calculates a square root of array elements.</div><div class="ttdef"><b>Definición</b> <a href="mathfuncs_8cpp_source.html#l01111">mathfuncs.cpp:1111</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gab477b5b7b39b370bb03e75b19d2d5109"><div class="ttname"><a href="group__core__array.html#gab477b5b7b39b370bb03e75b19d2d5109">cv::SVDecomp</a></div><div class="ttdeci">CV_EXPORTS_W void SVDecomp(InputArray src, OutputArray w, OutputArray u, OutputArray vt, int flags=0)</div><div class="ttdef"><b>Definición</b> <a href="lapack_8cpp_source.html#l01538">lapack.cpp:1538</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gac5e93604079307f1b21a1429c06fb1a5"><div class="ttname"><a href="group__core__array.html#gac5e93604079307f1b21a1429c06fb1a5">cv::eigenvectors</a></div><div class="ttdeci">InputOutputArray OutputArray eigenvectors</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02077">core.hpp:2077</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gad129acdac1067ea167e5a69c3b931352"><div class="ttname"><a href="group__core__array.html#gad129acdac1067ea167e5a69c3b931352">cv::trace</a></div><div class="ttdeci">CV_EXPORTS_W Scalar trace(InputArray mtx)</div><div class="ttdoc">Returns the trace of a matrix.</div><div class="ttdef"><b>Definición</b> <a href="matrix__operations_8cpp_source.html#l00231">matrix_operations.cpp:231</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ggaaf9ea5dcc392d5ae04eacb9920b9674ca247a3455cd64973152e17e26999dc024"><div class="ttname"><a href="group__core__array.html#ggaaf9ea5dcc392d5ae04eacb9920b9674ca247a3455cd64973152e17e26999dc024">cv::DECOMP_LU</a></div><div class="ttdeci">@ DECOMP_LU</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00069">base.hpp:69</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga370d94209693b5b13437ab4991cabf73"><div class="ttname"><a href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">cv::Vec3d</a></div><div class="ttdeci">Vec&lt; double, 3 &gt; Vec3d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00480">matx.hpp:480</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaff0100a48f049fb15584a4a657eae838"><div class="ttname"><a href="group__core__basic.html#gaff0100a48f049fb15584a4a657eae838">cv::Matx33d</a></div><div class="ttdeci">Matx&lt; double, 3, 3 &gt; Matx33d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00257">matx.hpp:257</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafbcb487cba05bd288dbe18c433de4f6f"><div class="ttname"><a href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a></div><div class="ttdeci">#define CV_DbgAssert(expr)</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00232">exception.hpp:232</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">cv::Error::StsNotImplemented</a></div><div class="ttdeci">@ StsNotImplemented</div><div class="ttdoc">the requested function/feature is not implemented</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00063">exception.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1usac_1_1_math_html_a6f755c3e5688acdc4db7e573466c1482"><div class="ttname"><a href="namespacecv_1_1usac_1_1_math.html#a6f755c3e5688acdc4db7e573466c1482">cv::usac::Math::eliminateUpperTriangular</a></div><div class="ttdeci">bool eliminateUpperTriangular(std::vector&lt; double &gt; &amp;a, int m, int n)</div><div class="ttdef"><b>Definición</b> <a href="geometry_2src_2usac_2utils_8cpp_source.html#l00428">utils.cpp:428</a></div></div>
+<div class="ttc" id="anamespacecv_1_1usac_1_1_utils_html_a83dba8e29564d4eebaab1ad0f84e7bdd"><div class="ttname"><a href="namespacecv_1_1usac_1_1_utils.html#a83dba8e29564d4eebaab1ad0f84e7bdd">cv::usac::Utils::getRightEpipole</a></div><div class="ttdeci">Vec3d getRightEpipole(const Mat &amp;F)</div><div class="ttdef"><b>Definición</b> <a href="geometry_2src_2usac_2utils_8cpp_source.html#l00373">utils.cpp:373</a></div></div>
+<div class="ttc" id="anamespacecv_1_1usac_html"><div class="ttname"><a href="namespacecv_1_1usac.html">cv::usac</a></div><div class="ttdef"><b>Definición</b> <a href="usac_8hpp_source.html#l00008">usac.hpp:8</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="ausac_8hpp_html"><div class="ttname"><a href="usac_8hpp.html">usac.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_a52c8a9fa86687e18a4a8ae268f10c32.html">geometry</a></li><li class="navelem"><a href="dir_02f85bb76821f8e71fba420137d549ef.html">src</a></li><li class="navelem"><a href="dir_c857fbc8e166e7f41a31ed1b3c05a7c1.html">usac</a></li><li class="navelem"><a href="essential__solver_8cpp.html">essential_solver.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

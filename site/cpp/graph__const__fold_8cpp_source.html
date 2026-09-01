@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/graph_const_fold.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('graph__const__fold_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">graph_const_fold.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="graph__const__fold_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="net__impl_8hpp.html">net_impl.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using </span>std::vector;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using </span>std::string;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">typedef</span> std::pair&lt;int, int&gt; <a class="code hl_typedef" href="namespacecv_1_1dnn.html#aa97802dfabbd1b61db4cc4173b8c9cfc">int_pair</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">typedef</span> std::pair&lt;int, Arg&gt; <a class="code hl_typedef" href="namespacecv_1_1dnn.html#a60270c97f3f61eed581339de3f4b0d1f">int_arg_pair</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html">   17</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#a8b05e36e369c2520fc5f35814d201fa3">ConstFolding</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">   19</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_net_1_1_impl.html">Net::Impl</a>* <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#a829ca7c68c6399afe0db157156055ced">   20</a></span>    std::vector&lt;int&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a829ca7c68c6399afe0db157156055ced">usecounts</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#a8b05e36e369c2520fc5f35814d201fa3">   22</a></span>    <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#a8b05e36e369c2520fc5f35814d201fa3">ConstFolding</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_net_1_1_impl.html">Net::Impl</a>* netimpl_) : <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>(netimpl_) {}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#abf53bb2af75945cf8977893d51024fdd">   24</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#abf53bb2af75945cf8977893d51024fdd">process</a>()</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">size_t</span> nargs = <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a2e3a7c961b567312f9dcf2e078f5fcfa">args</a>.size();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae3ddc1aef0ef451fd831210205feec63">__tensors__</a>.resize(nargs);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a16ae89b761bdd81ea7ba7e3edced2776">useCounts</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a829ca7c68c6399afe0db157156055ced">usecounts</a>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#ae70f867e33a6fe62a9ba16280c072055">processGraph</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ab3c8d9b2c03aa5da8a677488b6735cee">mainGraph</a>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ad03719bd2c1b6a185fe29e441e7762f1">scratchBufs</a>.clear();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#af08ea60a582824d901c383981af5d43c">   33</a></span>    <a class="code hl_class" href="classcv_1_1dnn_1_1_layer_info.html">LayerInfo</a>* <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#af08ea60a582824d901c383981af5d43c">getLayer</a>(std::vector&lt;<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;LayerInfo&gt;</a> &gt;&amp; newprog, <span class="keywordtype">int</span> op_idx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> op_idx &gt;= 0 ? newprog.at(op_idx).get() : 0;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#a7786f4d62d8b57d75411bc84fff82feb">   38</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#a7786f4d62d8b57d75411bc84fff82feb">unuse</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_arg.html">Arg</a> inp)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a829ca7c68c6399afe0db157156055ced">usecounts</a>[inp.idx] &gt; 0);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">if</span> (--<a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a829ca7c68c6399afe0db157156055ced">usecounts</a>[inp.idx] == 0 &amp;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae736b5527a480642c1a5f8893c0180e7">isConstArg</a>(inp)) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae3ddc1aef0ef451fd831210205feec63">__tensors__</a>[inp.idx] = <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(); <span class="comment">// deallocate unused tensor</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_const_folding.html#ae70f867e33a6fe62a9ba16280c072055">   46</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#ae70f867e33a6fe62a9ba16280c072055">processGraph</a>(<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Graph&gt;</a>&amp; graph)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ad03719bd2c1b6a185fe29e441e7762f1">scratchBufs</a>.clear();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">bool</span> modified = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">const</span> std::vector&lt;Ptr&lt;LayerInfo&gt; &gt;&amp; prog = graph-&gt;prog();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">size_t</span> i, nops = prog.size();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        std::vector&lt;Ptr&lt;LayerInfo&gt; &gt; newprog;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        std::vector&lt;Arg&gt; removed_args;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        std::vector&lt;Mat&gt; inpMats, tempMats;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        std::vector&lt;int&gt; inpTypes, outTypes, tempTypes;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        std::vector&lt;MatShape&gt; inpShapes, outShapes, tempShapes;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">for</span> (i = 0; i &lt; nops; i++) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;LayerInfo&gt;</a>&amp; layer = prog[i];</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            std::vector&lt;Ptr&lt;Graph&gt; &gt;* subgraphs = layer-&gt;subgraphs();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keywordflow">if</span> (subgraphs) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <span class="keywordflow">for</span> (<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Graph&gt;</a>&amp; g: *subgraphs) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#ae70f867e33a6fe62a9ba16280c072055">processGraph</a>(g))</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                        modified = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                newprog.push_back(layer);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keyword">const</span> std::vector&lt;Arg&gt;&amp; inputs = layer-&gt;inputs;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keyword">const</span> std::vector&lt;Arg&gt;&amp; outputs = layer-&gt;outputs;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordtype">size_t</span> j, ninputs = inputs.size(), noutputs = outputs.size();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordtype">bool</span> all_const = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            inpMats.assign(ninputs, <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>());</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            inpTypes.resize(ninputs);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            inpShapes.resize(ninputs);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">for</span> (j = 0; j &lt; ninputs; j++) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <a class="code hl_struct" href="structcv_1_1dnn_1_1_arg.html">Arg</a> inp = inputs[j];</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="keywordtype">bool</span> const_arg = <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae736b5527a480642c1a5f8893c0180e7">isConstArg</a>(inp);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                <span class="keywordflow">if</span> (!const_arg)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    all_const = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">if</span> (all_const) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; m = <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a5941b9671eed989b2664f031129db8dc">argTensor</a>(inp);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                    inpMats[j] = m;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    inpTypes[j] = m.type();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    inpShapes[j] = m.shape();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">if</span> (all_const <span class="comment">/*&amp;&amp;</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">                op-&gt;supportBlockLayout(0, (int)ninputs) &lt;= 0 // we don&#39;t currently support constant folding</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">                                               // for block-layout operations (Convolution, MaxPool, AveragePool)</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">                */</span>) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="comment">// Use a fresh vector of Mat&#39;s for outputs since we want to make these outputs the new constant tensors.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="comment">// So, they must be unique and don&#39;t interfere with other tensors.</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                std::vector&lt;Mat&gt; outMats(noutputs);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                std::vector&lt;std::pair&lt;uchar*, size_t&gt; &gt; outOrigData;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                <span class="keywordflow">if</span> (!layer-&gt;dynamicOutputShapes())</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#afac87742ecc900344164658efbc1fa75">allocateLayerOutputs</a>(layer, inpTypes, inpShapes, outTypes,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                                                  outShapes, outOrigData, outMats, tempTypes, tempShapes, tempMats,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                                                  <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ad03719bd2c1b6a185fe29e441e7762f1">scratchBufs</a>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Layer&gt;</a> execLayer = layer.dynamicCast&lt;<a class="code hl_class" href="classcv_1_1dnn_1_1_layer.html">Layer</a>&gt;();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(execLayer);  <span class="comment">// const-folded ops are CPU-executable (monolithic) layers</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                execLayer-&gt;finalize(inpMats, outMats);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                execLayer-&gt;forward(inpMats, outMats, tempMats);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(outMats.size() == noutputs);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">for</span> (j = 0; j &lt; noutputs; j++) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    <a class="code hl_struct" href="structcv_1_1dnn_1_1_arg.html">Arg</a> out = outputs[j];</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    <a class="code hl_struct" href="structcv_1_1dnn_1_1_arg_data.html">ArgData</a>&amp; out_data = <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a2e3a7c961b567312f9dcf2e078f5fcfa">args</a>.at(out.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">idx</a>);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; m = outMats[j];</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    out_data.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg_data.html#ae2c8c3b1cc5e23aa41cf8724fcccd8ae">type</a> = m.type();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    out_data.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg_data.html#afd5961d5a3c180850804bcb26ee77119">shape</a> = m.shape();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    out_data.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg_data.html#ad87f69e1f1043e3dd9dbd46806b72779">kind</a> = <a class="code hl_enumvalue" href="group__dnn.html#gga8182ad23e1eb3ce1c45fe4759b8a1990ad7f3c2c5168514133d2b69ec87722a90">DNN_ARG_CONST</a>; <span class="comment">// re-classify each output as constant</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    <a class="code hl_variable" href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae3ddc1aef0ef451fd831210205feec63">__tensors__</a>.at(out.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">idx</a>) = m;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                modified = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; ninputs; i++)</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                    <a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#a7786f4d62d8b57d75411bc84fff82feb">unuse</a>(inputs[i]);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="comment">//printf(&quot;folded %s: %s\n&quot;, op-&gt;name().data(), node-&gt;name().data());</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                <span class="comment">// we don&#39;t add operation into the new program,</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="comment">// because the output of the all-const inputs operation is now a constant,</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="comment">// stored in a separate tensor</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                newprog.push_back(layer);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">if</span> (modified) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            graph-&gt;setProg(newprog);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">return</span> modified;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>};</div>
+</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_net_1_1_impl.html#aa721e3ef382ded7b49557ce33ea84494">  136</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#aa721e3ef382ded7b49557ce33ea84494">Net::Impl::constFold</a>()</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>{</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_const_folding.html">ConstFolding</a> constfolder(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    constfolder.<a class="code hl_function" href="structcv_1_1dnn_1_1_const_folding.html#abf53bb2af75945cf8977893d51024fdd">process</a>();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}</div>
+</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}}</div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a666554613a268d1d7b51095501746652"><div class="ttname"><a href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">cv::Mat::Mat</a></div><div class="ttdeci">Mat() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00714">matrix.cpp:714</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer.html">cv::dnn::Layer</a></div><div class="ttdoc">This interface class allows to build new Layers - are building blocks of networks.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00349">dnn.hpp:350</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_info_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_info.html">cv::dnn::LayerInfo</a></div><div class="ttdoc">Backend-independent description of a graph operation (node).</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00277">dnn.hpp:278</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gga8182ad23e1eb3ce1c45fe4759b8a1990ad7f3c2c5168514133d2b69ec87722a90"><div class="ttname"><a href="group__dnn.html#gga8182ad23e1eb3ce1c45fe4759b8a1990ad7f3c2c5168514133d2b69ec87722a90">cv::dnn::DNN_ARG_CONST</a></div><div class="ttdeci">@ DNN_ARG_CONST</div><div class="ttdoc">a constant argument.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00243">dnn.hpp:243</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a60270c97f3f61eed581339de3f4b0d1f"><div class="ttname"><a href="namespacecv_1_1dnn.html#a60270c97f3f61eed581339de3f4b0d1f">cv::dnn::int_arg_pair</a></div><div class="ttdeci">std::pair&lt; int, Arg &gt; int_arg_pair</div><div class="ttdef"><b>Definición</b> <a href="graph__const__args_8cpp_source.html#l00015">graph_const_args.cpp:15</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_aa97802dfabbd1b61db4cc4173b8c9cfc"><div class="ttname"><a href="namespacecv_1_1dnn.html#aa97802dfabbd1b61db4cc4173b8c9cfc">cv::dnn::int_pair</a></div><div class="ttdeci">std::pair&lt; int, int &gt; int_pair</div><div class="ttdef"><b>Definición</b> <a href="graph__const__args_8cpp_source.html#l00014">graph_const_args.cpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anet__impl_8hpp_html"><div class="ttname"><a href="net__impl_8hpp.html">net_impl.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_data_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg_data.html">cv::dnn::ArgData</a></div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00252">dnn.hpp:253</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_data_html_ad87f69e1f1043e3dd9dbd46806b72779"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg_data.html#ad87f69e1f1043e3dd9dbd46806b72779">cv::dnn::ArgData::kind</a></div><div class="ttdeci">ArgKind kind</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00256">dnn.hpp:256</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_data_html_ae2c8c3b1cc5e23aa41cf8724fcccd8ae"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg_data.html#ae2c8c3b1cc5e23aa41cf8724fcccd8ae">cv::dnn::ArgData::type</a></div><div class="ttdeci">int type</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00258">dnn.hpp:258</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_data_html_afd5961d5a3c180850804bcb26ee77119"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg_data.html#afd5961d5a3c180850804bcb26ee77119">cv::dnn::ArgData::shape</a></div><div class="ttdeci">MatShape shape</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00257">dnn.hpp:257</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg.html">cv::dnn::Arg</a></div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00229">dnn.hpp:230</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_html_ab3291707c7982aa10edd66dd1fc1ff7a"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">cv::dnn::Arg::idx</a></div><div class="ttdeci">int idx</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00238">dnn.hpp:238</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html">cv::dnn::ConstFolding</a></div><div class="ttdef"><b>Definición</b> <a href="#l00017">graph_const_fold.cpp:18</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_a1a9ff7fe0787ca9b7fef351d38664584"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#a1a9ff7fe0787ca9b7fef351d38664584">cv::dnn::ConstFolding::netimpl</a></div><div class="ttdeci">Net::Impl * netimpl</div><div class="ttdef"><b>Definición</b> <a href="#l00019">graph_const_fold.cpp:19</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_a7786f4d62d8b57d75411bc84fff82feb"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#a7786f4d62d8b57d75411bc84fff82feb">cv::dnn::ConstFolding::unuse</a></div><div class="ttdeci">void unuse(Arg inp)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">graph_const_fold.cpp:38</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_a829ca7c68c6399afe0db157156055ced"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#a829ca7c68c6399afe0db157156055ced">cv::dnn::ConstFolding::usecounts</a></div><div class="ttdeci">std::vector&lt; int &gt; usecounts</div><div class="ttdef"><b>Definición</b> <a href="#l00020">graph_const_fold.cpp:20</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_a8b05e36e369c2520fc5f35814d201fa3"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#a8b05e36e369c2520fc5f35814d201fa3">cv::dnn::ConstFolding::ConstFolding</a></div><div class="ttdeci">ConstFolding(Net::Impl *netimpl_)</div><div class="ttdef"><b>Definición</b> <a href="#l00022">graph_const_fold.cpp:22</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_abf53bb2af75945cf8977893d51024fdd"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#abf53bb2af75945cf8977893d51024fdd">cv::dnn::ConstFolding::process</a></div><div class="ttdeci">void process()</div><div class="ttdef"><b>Definición</b> <a href="#l00024">graph_const_fold.cpp:24</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_ae70f867e33a6fe62a9ba16280c072055"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#ae70f867e33a6fe62a9ba16280c072055">cv::dnn::ConstFolding::processGraph</a></div><div class="ttdeci">bool processGraph(Ptr&lt; Graph &gt; &amp;graph)</div><div class="ttdef"><b>Definición</b> <a href="#l00046">graph_const_fold.cpp:46</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_const_folding_html_af08ea60a582824d901c383981af5d43c"><div class="ttname"><a href="structcv_1_1dnn_1_1_const_folding.html#af08ea60a582824d901c383981af5d43c">cv::dnn::ConstFolding::getLayer</a></div><div class="ttdeci">LayerInfo * getLayer(std::vector&lt; Ptr&lt; LayerInfo &gt; &gt; &amp;newprog, int op_idx) const</div><div class="ttdef"><b>Definición</b> <a href="#l00033">graph_const_fold.cpp:33</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html">cv::dnn::Net::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00088">net_impl.hpp:89</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a16ae89b761bdd81ea7ba7e3edced2776"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a16ae89b761bdd81ea7ba7e3edced2776">cv::dnn::Net::Impl::useCounts</a></div><div class="ttdeci">void useCounts(std::vector&lt; int &gt; &amp;usecounts) const</div><div class="ttdef"><b>Definición</b> <a href="net__impl2_8cpp_source.html#l01903">net_impl2.cpp:1903</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a2e3a7c961b567312f9dcf2e078f5fcfa"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a2e3a7c961b567312f9dcf2e078f5fcfa">cv::dnn::Net::Impl::args</a></div><div class="ttdeci">std::vector&lt; ArgData &gt; args</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00133">net_impl.hpp:133</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a5941b9671eed989b2664f031129db8dc"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a5941b9671eed989b2664f031129db8dc">cv::dnn::Net::Impl::argTensor</a></div><div class="ttdeci">Mat &amp; argTensor(Arg arg) const</div><div class="ttdef"><b>Definición</b> <a href="net__impl2_8cpp_source.html#l00462">net_impl2.cpp:462</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_aa721e3ef382ded7b49557ce33ea84494"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#aa721e3ef382ded7b49557ce33ea84494">cv::dnn::Net::Impl::constFold</a></div><div class="ttdeci">void constFold()</div><div class="ttdef"><b>Definición</b> <a href="#l00136">graph_const_fold.cpp:136</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_ab3c8d9b2c03aa5da8a677488b6735cee"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#ab3c8d9b2c03aa5da8a677488b6735cee">cv::dnn::Net::Impl::mainGraph</a></div><div class="ttdeci">Ptr&lt; Graph &gt; mainGraph</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00141">net_impl.hpp:141</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_ad03719bd2c1b6a185fe29e441e7762f1"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#ad03719bd2c1b6a185fe29e441e7762f1">cv::dnn::Net::Impl::scratchBufs</a></div><div class="ttdeci">std::vector&lt; Mat &gt; scratchBufs</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00137">net_impl.hpp:137</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_ae3ddc1aef0ef451fd831210205feec63"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae3ddc1aef0ef451fd831210205feec63">cv::dnn::Net::Impl::__tensors__</a></div><div class="ttdeci">std::vector&lt; Mat &gt; __tensors__</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00134">net_impl.hpp:134</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_ae736b5527a480642c1a5f8893c0180e7"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#ae736b5527a480642c1a5f8893c0180e7">cv::dnn::Net::Impl::isConstArg</a></div><div class="ttdeci">bool isConstArg(Arg arg) const</div><div class="ttdef"><b>Definición</b> <a href="net__impl2_8cpp_source.html#l00441">net_impl2.cpp:441</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_afac87742ecc900344164658efbc1fa75"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#afac87742ecc900344164658efbc1fa75">cv::dnn::Net::Impl::allocateLayerOutputs</a></div><div class="ttdeci">void allocateLayerOutputs(const Ptr&lt; LayerInfo &gt; &amp;layer, const std::vector&lt; int &gt; &amp;inpTypes, const std::vector&lt; MatShape &gt; &amp;inpShapes, std::vector&lt; int &gt; &amp;outTypes, std::vector&lt; MatShape &gt; &amp;outShapes, std::vector&lt; std::pair&lt; uchar *, size_t &gt; &gt; &amp;outOrigData, std::vector&lt; Mat &gt; &amp;outputs, std::vector&lt; int &gt; &amp;tempTypes, std::vector&lt; MatShape &gt; &amp;tempShapes, std::vector&lt; Mat &gt; &amp;temps, std::vector&lt; Mat &gt; &amp;globalTemps, bool useBufferPool)</div><div class="ttdef"><b>Definición</b> <a href="net__impl2_8cpp_source.html#l00747">net_impl2.cpp:747</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="graph__const__fold_8cpp.html">graph_const_fold.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

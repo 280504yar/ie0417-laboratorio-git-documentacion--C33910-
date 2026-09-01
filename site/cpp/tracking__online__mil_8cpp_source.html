@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/video/src/tracking/detail/tracking_online_mil.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tracking__online__mil_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">tracking_online_mil.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="tracking__online__mil_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="video_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="tracking__online__mil_8hpp.html">tracking_online_mil.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">inline</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail_1_1tracking.html">tracking</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="tracking__online__mil_8cpp.html#aaaf7a5b610c91b1d85784ec8b6ff66a8">   12</a></span><span class="preprocessor">#define sign(s) ((s &gt; 0) ? 1 : ((s &lt; 0) ? -1 : 0))</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html">SortableElementRev</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">   18</a></span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">_val</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a66d2a423e478b2e09ccdeff5a17bb7f0">   19</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a66d2a423e478b2e09ccdeff5a17bb7f0">_ind</a>;</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a55bef709696623ac86db06de147c7d80">   20</a></span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a55bef709696623ac86db06de147c7d80">SortableElementRev</a>()</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        : <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">_val</a>(), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a66d2a423e478b2e09ccdeff5a17bb7f0">_ind</a>(0)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a6df927c23932978f20dffd02bc484de7">   24</a></span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a6df927c23932978f20dffd02bc484de7">SortableElementRev</a>(<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> val, <span class="keywordtype">int</span> ind)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">_val</a> = val;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a66d2a423e478b2e09ccdeff5a17bb7f0">_ind</a> = ind;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a704a6db2b71493ff6678908ae9ad54b6">   29</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a704a6db2b71493ff6678908ae9ad54b6">operator&lt;</a>(<a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a55bef709696623ac86db06de147c7d80">SortableElementRev&lt;T&gt;</a>&amp; b)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">return</span> (<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">_val</a> &lt; b._val);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespacecv_1_1detail_1_1tracking.html#aaf3c6a3ed88f12e36ece2fa21f45b375">   35</a></span><span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacecv_1_1detail_1_1tracking.html#aaf3c6a3ed88f12e36ece2fa21f45b375">CompareSortableElementRev</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html">SortableElementRev&lt;float&gt;</a>&amp; i, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html">SortableElementRev&lt;float&gt;</a>&amp; j)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> i._val &lt; j.<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">_val</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="namespacecv_1_1detail_1_1tracking.html#a8c68ca106bbfcb47c8fdc9a829fe60ac">   41</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1detail_1_1tracking.html#a8c68ca106bbfcb47c8fdc9a829fe60ac">sort_order_des</a>(std::vector&lt;T&gt;&amp; v, std::vector&lt;int&gt;&amp; order)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> n = (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a>)v.size();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    std::vector&lt;SortableElementRev&lt;T&gt;&gt; v2;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    v2.resize(n);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    order.clear();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    order.resize(n);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> i = 0; i &lt; n; i++)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        v2[i]._ind = i;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        v2[i]._val = v[i];</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">//std::sort( v2.begin(), v2.end() );</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    std::sort(v2.begin(), v2.end(), <a class="code hl_function" href="namespacecv_1_1detail_1_1tracking.html#aaf3c6a3ed88f12e36ece2fa21f45b375">CompareSortableElementRev</a>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> i = 0; i &lt; n; i++)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        order[i] = v2[i]._ind;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        v[i] = v2[i]._val;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">//implementations for strong classifier</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#a995b833cc3d2ad70b8d8a19b356d9799">   64</a></span><a class="code hl_function" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#a995b833cc3d2ad70b8d8a19b356d9799">ClfMilBoost::Params::Params</a>()</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_variable" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#a0f41c10bdd14ba7c60d608f0ef8c6edd">_numSel</a> = 50;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_variable" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#aed1899907354c5b2f338201df175b97a">_numFeat</a> = 250;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_variable" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#aeae7104e08f634b6443f10d8518ff6a2">_lRate</a> = 0.85f;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#ac4f59d9e19c85e0d246a51c58c1f4313">   71</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#ac4f59d9e19c85e0d246a51c58c1f4313">ClfMilBoost::ClfMilBoost</a>()</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    : _numsamples(0)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    , _counter(0)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>{</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    _myParams = <a class="code hl_struct" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html">ClfMilBoost::Params</a>();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    _numsamples = 0;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#aba6634184d8e392d0b1049cf2f611981">   79</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#aba6634184d8e392d0b1049cf2f611981">ClfMilBoost::~ClfMilBoost</a>()</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>{</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    _selectors.clear();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _weakclf.size(); i++)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keyword">delete</span> _weakclf.at(i);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a635e121530c976f0b97fa101340bb7ee">   86</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a635e121530c976f0b97fa101340bb7ee">ClfMilBoost::init</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html">ClfMilBoost::Params</a>&amp; parameters)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    _myParams = parameters;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    _numsamples = 0;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">//_ftrs = Ftr::generate( _myParams-&gt;_ftrParams, _myParams-&gt;_numFeat );</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="comment">// if( params-&gt;_storeFtrHistory )</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">//  Ftr::toViz( _ftrs, &quot;haarftrs&quot; );</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    _weakclf.resize(_myParams._numFeat);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; _myParams._numFeat; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        _weakclf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = <span class="keyword">new</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ae21d5b2ed8d1ed985a8d11d3d8893743">ClfOnlineStump</a>(<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        _weakclf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>]-&gt;_lRate = _myParams._lRate;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    _counter = 0;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a5ec2d29ace71b4adff10feef20236e67">  103</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a5ec2d29ace71b4adff10feef20236e67">ClfMilBoost::update</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; posx, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; negx)</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>{</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">int</span> numneg = negx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">int</span> numpos = posx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">// compute ftrs</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="comment">//if( !posx.ftrsComputed() )</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="comment">//  Ftr::compute( posx, _ftrs );</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="comment">//if( !negx.ftrsComputed() )</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="comment">//  Ftr::compute( negx, _ftrs );</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="comment">// initialize H</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">static</span> std::vector&lt;float&gt; Hpos, Hneg;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    Hpos.clear();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    Hneg.clear();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    Hpos.resize(posx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>, 0.0f), Hneg.resize(negx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>, 0.0f);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    _selectors.clear();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    std::vector&lt;float&gt; posw(posx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>), negw(negx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    std::vector&lt;std::vector&lt;float&gt;&gt; pospred(_weakclf.size()), negpred(_weakclf.size());</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="comment">// train all weak classifiers without weights</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> m = 0; m &lt; _myParams._numFeat; m++)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        _weakclf[m]-&gt;update(posx, negx);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        pospred[m] = _weakclf[m]-&gt;classifySetF(posx);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        negpred[m] = _weakclf[m]-&gt;classifySetF(negx);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="comment">// pick the best features</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; _myParams._numSel; s++)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="comment">// compute errors/likl for all weak clfs</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        std::vector&lt;float&gt; poslikl(_weakclf.size(), 1.0f), neglikl(_weakclf.size()), likl(_weakclf.size());</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> w = 0; w &lt; (int)_weakclf.size(); w++)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <span class="keywordtype">float</span> lll = 1.0f;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; numpos; j++)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                lll *= (1 - <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a4f5caefc466db50c780086d8e7649442">sigmoid</a>(Hpos[j] + pospred[w][j]));</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            poslikl[w] = (float)-<a class="code hl_function" href="group__core__array.html#ga937ecdce4679a77168730830a955bea7">log</a>(1 - lll + 1e-5);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            lll = 0.0f;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; numneg; j++)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                lll += (<span class="keywordtype">float</span>)-<a class="code hl_function" href="group__core__array.html#ga937ecdce4679a77168730830a955bea7">log</a>(1e-5f + 1 - <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a4f5caefc466db50c780086d8e7649442">sigmoid</a>(Hneg[j] + negpred[w][j]));</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            neglikl[w] = lll;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            likl[w] = poslikl[w] / numpos + neglikl[w] / numneg;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="comment">// pick best weak clf</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        std::vector&lt;int&gt; order;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <a class="code hl_function" href="namespacecv_1_1detail_1_1tracking.html#a8c68ca106bbfcb47c8fdc9a829fe60ac">sort_order_des</a>(likl, order);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="comment">// find best weakclf that isn&#39;t already included</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; order.size(); <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <span class="keywordflow">if</span> (std::count(_selectors.begin(), _selectors.end(), order[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>]) == 0)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                _selectors.push_back(order[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>]);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            <span class="comment">// update H = H + h_m</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; posx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++)</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            Hpos[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] += pospred[_selectors[s]][<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; negx.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++)</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            Hneg[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] += negpred[_selectors[s]][<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="comment">//if( _myParams-&gt;_storeFtrHistory )</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="comment">//for ( uint j = 0; j &lt; _selectors.size(); j++ )</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="comment">// _ftrHist( _selectors[j], _counter ) = 1.0f / ( j + 1 );</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    _counter++;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="comment">/* */</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>}</div>
+</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a950eb5a60135cff0c9325db966860960">  193</a></span>std::vector&lt;float&gt; <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a950eb5a60135cff0c9325db966860960">ClfMilBoost::classify</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keywordtype">bool</span> logR)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>{</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">int</span> numsamples = <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>.rows;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    std::vector&lt;float&gt; res(numsamples);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    std::vector&lt;float&gt; tr;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> w = 0; w &lt; _selectors.size(); w++)</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        tr = _weakclf[_selectors[w]]-&gt;classifySetF(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; numsamples; j++)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            res[j] += tr[j];</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="comment">// return probabilities or log odds ratio</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">if</span> (!logR)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; (int)res.size(); j++)</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            res[j] = <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a4f5caefc466db50c780086d8e7649442">sigmoid</a>(res[j]);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>}</div>
+</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">//implementations for weak classifier</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="foldopen" id="foldopen00228" data-start="{" data-end="}">
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ae21d5b2ed8d1ed985a8d11d3d8893743">  228</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ae21d5b2ed8d1ed985a8d11d3d8893743">ClfOnlineStump::ClfOnlineStump</a>()</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    : <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a>(0)</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a47c8bc9d05b27b11b99cebd61159a62d">_q</a>(0)</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#aa665cc6eb4a9b2d4a793a38093b37040">_s</a>(0)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">_log_n1</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">_log_n0</a>(0)</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">_e1</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">_e0</a>(0)</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a>(0)</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>{</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    _trained = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    _ind = -1;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#afb83d1a2258d8c7c5f2ab7d50f1f40b7">init</a>();</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
+</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e6433dd1e129e23ebafada65166c15f">  241</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ae21d5b2ed8d1ed985a8d11d3d8893743">ClfOnlineStump::ClfOnlineStump</a>(<span class="keywordtype">int</span> ind)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    : <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a>(0)</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a47c8bc9d05b27b11b99cebd61159a62d">_q</a>(0)</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#aa665cc6eb4a9b2d4a793a38093b37040">_s</a>(0)</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">_log_n1</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">_log_n0</a>(0)</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">_e1</a>(0), <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">_e0</a>(0)</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    , <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a>(0)</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>{</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    _trained = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    _ind = ind;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#afb83d1a2258d8c7c5f2ab7d50f1f40b7">init</a>();</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>}</div>
+</div>
+<div class="foldopen" id="foldopen00253" data-start="{" data-end="}">
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#afb83d1a2258d8c7c5f2ab7d50f1f40b7">  253</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#afb83d1a2258d8c7c5f2ab7d50f1f40b7">ClfOnlineStump::init</a>()</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>{</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a> = 0;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> = 0;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a> = 1;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a> = 1;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a> = 0.85f;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    _trained = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>}</div>
+</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="foldopen" id="foldopen00263" data-start="{" data-end="}">
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad0824a2881c0e1ab87b916064f3458e6">  263</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad0824a2881c0e1ab87b916064f3458e6">ClfOnlineStump::update</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; posx, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; negx, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat__.html">Mat_&lt;float&gt;</a>&amp; <span class="comment">/*posw*/</span>, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat__.html">Mat_&lt;float&gt;</a>&amp; <span class="comment">/*negw*/</span>)</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>{</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="comment">//std::cout &lt;&lt; &quot; ClfOnlineStump::update&quot; &lt;&lt; _ind &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordtype">float</span> posmu = 0.0, negmu = 0.0;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordflow">if</span> (posx.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a> &gt; 0)</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        posmu = float(<a class="code hl_variable" href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">mean</a>(posx.<a class="code hl_function" href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">col</a>(_ind))[0]);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">if</span> (negx.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a> &gt; 0)</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        negmu = float(<a class="code hl_variable" href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">mean</a>(negx.<a class="code hl_function" href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">col</a>(_ind))[0]);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keywordflow">if</span> (_trained)</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    {</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">if</span> (posx.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a> &gt; 0)</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> = (<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a> * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> + (1 - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a>) * posmu);</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> diff = posx.<a class="code hl_function" href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">col</a>(_ind) - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a> = <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a> * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a> + (1 - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a>) * <span class="keywordtype">float</span>(<a class="code hl_variable" href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">mean</a>(diff.<a class="code hl_function" href="classcv_1_1_mat.html#a74da3f3e3004cf61b548f7bb2ef0742a">mul</a>(diff))[0]);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        }</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">if</span> (negx.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a> &gt; 0)</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        {</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a> = (<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a> * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a> + (1 - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a>) * negmu);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> diff = negx.<a class="code hl_function" href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">col</a>(_ind) - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a> = <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a> * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a> + (1 - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">_lRate</a>) * <span class="keywordtype">float</span>(<a class="code hl_variable" href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">mean</a>(diff.<a class="code hl_function" href="classcv_1_1_mat.html#a74da3f3e3004cf61b548f7bb2ef0742a">mul</a>(diff))[0]);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a47c8bc9d05b27b11b99cebd61159a62d">_q</a> = (<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>) / 2;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#aa665cc6eb4a9b2d4a793a38093b37040">_s</a> = <a class="code hl_define" href="tracking__online__mil_8cpp.html#aaaf7a5b610c91b1d85784ec8b6ff66a8">sign</a>(<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">_log_n0</a> = std::log(<span class="keywordtype">float</span>(1.0f / std::pow(<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a>, 0.5f)));</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">_log_n1</a> = std::log(<span class="keywordtype">float</span>(1.0f / std::pow(<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a>, 0.5f)));</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="comment">//_e1 = -1.0f/(2.0f*_sig1+1e-99f);</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="comment">//_e0 = -1.0f/(2.0f*_sig0+1e-99f);</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">_e1</a> = -1.0f / (2.0f * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a> + std::numeric_limits&lt;float&gt;::min());</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">_e0</a> = -1.0f / (2.0f * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a> + std::numeric_limits&lt;float&gt;::min());</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    }</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    {</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        _trained = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">if</span> (posx.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a> &gt; 0)</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> = posmu;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>            <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a> scal_mean, scal_std_dev;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            <a class="code hl_function" href="group__core__array.html#ga846c858f4004d59493d7c6a4354b301d">cv::meanStdDev</a>(posx.<a class="code hl_function" href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">col</a>(_ind), scal_mean, scal_std_dev);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a> = float(scal_std_dev[0]) * float(scal_std_dev[0]) + 1e-9f;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        }</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">if</span> (negx.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a> &gt; 0)</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a> = negmu;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a> scal_mean, scal_std_dev;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>            <a class="code hl_function" href="group__core__array.html#ga846c858f4004d59493d7c6a4354b301d">cv::meanStdDev</a>(negx.<a class="code hl_function" href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">col</a>(_ind), scal_mean, scal_std_dev);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a> = float(scal_std_dev[0]) * float(scal_std_dev[0]) + 1e-9f;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        }</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a47c8bc9d05b27b11b99cebd61159a62d">_q</a> = (<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>) / 2;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#aa665cc6eb4a9b2d4a793a38093b37040">_s</a> = <a class="code hl_define" href="tracking__online__mil_8cpp.html#aaaf7a5b610c91b1d85784ec8b6ff66a8">sign</a>(<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a> - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>);</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">_log_n0</a> = std::log(<span class="keywordtype">float</span>(1.0f / std::pow(<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a>, 0.5f)));</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">_log_n1</a> = std::log(<span class="keywordtype">float</span>(1.0f / std::pow(<a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a>, 0.5f)));</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="comment">//_e1 = -1.0f/(2.0f*_sig1+1e-99f);</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="comment">//_e0 = -1.0f/(2.0f*_sig0+1e-99f);</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">_e1</a> = -1.0f / (2.0f * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">_sig1</a> + std::numeric_limits&lt;float&gt;::min());</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">_e0</a> = -1.0f / (2.0f * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">_sig0</a> + std::numeric_limits&lt;float&gt;::min());</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    }</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>}</div>
+</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="foldopen" id="foldopen00326" data-start="{" data-end="}">
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a89afaca8987c477ac51b28a32d305200">  326</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a89afaca8987c477ac51b28a32d305200">ClfOnlineStump::classify</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keywordtype">int</span> i)</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>{</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordtype">float</span> xx = <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>.at&lt;<span class="keywordtype">float</span>&gt;(i, _ind);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordtype">double</span> log_p0 = (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>) * (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>) * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">_e0</a> + <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">_log_n0</a>;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordtype">double</span> log_p1 = (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>) * (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>) * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">_e1</a> + <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">_log_n1</a>;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">return</span> log_p1 &gt; log_p0;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>}</div>
+</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="foldopen" id="foldopen00334" data-start="{" data-end="}">
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a975ae8ece17e6986d82cd4dd58556592">  334</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a975ae8ece17e6986d82cd4dd58556592">ClfOnlineStump::classifyF</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keywordtype">int</span> i)</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>{</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <span class="keywordtype">float</span> xx = <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>.at&lt;<span class="keywordtype">float</span>&gt;(i, _ind);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="keywordtype">double</span> log_p0 = (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>) * (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">_mu0</a>) * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">_e0</a> + <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">_log_n0</a>;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keywordtype">double</span> log_p1 = (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>) * (xx - <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">_mu1</a>) * <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">_e1</a> + <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">_log_n1</a>;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">return</span> float(log_p1 - log_p0);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>}</div>
+</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="foldopen" id="foldopen00342" data-start="{" data-end="}">
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a33e7d13ac6106ccb779020d7ede8699d">  342</a></span><span class="keyword">inline</span> std::vector&lt;float&gt; <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a33e7d13ac6106ccb779020d7ede8699d">ClfOnlineStump::classifySetF</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>)</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>{</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    std::vector&lt;float&gt; res(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>.rows);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; (int)res.size(); <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++)</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    {</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        res[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a975ae8ece17e6986d82cd4dd58556592">classifyF</a>(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    }</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>}</div>
+</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>}}}  <span class="comment">// namespace cv::detail::tracking</span></div>
+<div class="ttc" id="aclasscv_1_1_mat___html"><div class="ttname"><a href="classcv_1_1_mat__.html">cv::Mat_</a></div><div class="ttdoc">Template matrix class derived from Mat.</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02582">mat.hpp:2583</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a23df02a07ffbfa4aa59c19bc003919fe"><div class="ttname"><a href="classcv_1_1_mat.html#a23df02a07ffbfa4aa59c19bc003919fe">cv::Mat::col</a></div><div class="ttdeci">Mat col(int x) const</div><div class="ttdoc">Creates a matrix header for the specified matrix column.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a74da3f3e3004cf61b548f7bb2ef0742a"><div class="ttname"><a href="classcv_1_1_mat.html#a74da3f3e3004cf61b548f7bb2ef0742a">cv::Mat::mul</a></div><div class="ttdeci">MatExpr mul(InputArray m, double scale=1) const</div><div class="ttdoc">Performs an element-wise multiplication or division of the two matrices.</div><div class="ttdef"><b>Definición</b> <a href="matrix__expressions_8cpp_source.html#l01734">matrix_expressions.cpp:1734</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa3e5a47585c9ef6a0842556739155e3e"><div class="ttname"><a href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cv::Mat::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_abed816466c45234254d25bc59c31245e"><div class="ttname"><a href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">cv::Mat::rows</a></div><div class="ttdeci">int rows</div><div class="ttdoc">the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_mil_boost_html_a4f5caefc466db50c780086d8e7649442"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a4f5caefc466db50c780086d8e7649442">cv::detail::tracking::ClfMilBoost::sigmoid</a></div><div class="ttdeci">float sigmoid(float x)</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00039">tracking_online_mil.hpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_mil_boost_html_a5ec2d29ace71b4adff10feef20236e67"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a5ec2d29ace71b4adff10feef20236e67">cv::detail::tracking::ClfMilBoost::update</a></div><div class="ttdeci">void update(const Mat &amp;posx, const Mat &amp;negx)</div><div class="ttdef"><b>Definición</b> <a href="#l00103">tracking_online_mil.cpp:103</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_mil_boost_html_a635e121530c976f0b97fa101340bb7ee"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a635e121530c976f0b97fa101340bb7ee">cv::detail::tracking::ClfMilBoost::init</a></div><div class="ttdeci">void init(const ClfMilBoost::Params &amp;parameters=ClfMilBoost::Params())</div><div class="ttdef"><b>Definición</b> <a href="#l00086">tracking_online_mil.cpp:86</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_mil_boost_html_a950eb5a60135cff0c9325db966860960"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#a950eb5a60135cff0c9325db966860960">cv::detail::tracking::ClfMilBoost::classify</a></div><div class="ttdeci">std::vector&lt; float &gt; classify(const Mat &amp;x, bool logR=true)</div><div class="ttdef"><b>Definición</b> <a href="#l00193">tracking_online_mil.cpp:193</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_mil_boost_html_aba6634184d8e392d0b1049cf2f611981"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#aba6634184d8e392d0b1049cf2f611981">cv::detail::tracking::ClfMilBoost::~ClfMilBoost</a></div><div class="ttdeci">~ClfMilBoost()</div><div class="ttdef"><b>Definición</b> <a href="#l00079">tracking_online_mil.cpp:79</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_mil_boost_html_ac4f59d9e19c85e0d246a51c58c1f4313"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_mil_boost.html#ac4f59d9e19c85e0d246a51c58c1f4313">cv::detail::tracking::ClfMilBoost::ClfMilBoost</a></div><div class="ttdeci">ClfMilBoost()</div><div class="ttdef"><b>Definición</b> <a href="#l00071">tracking_online_mil.cpp:71</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a33e7d13ac6106ccb779020d7ede8699d"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a33e7d13ac6106ccb779020d7ede8699d">cv::detail::tracking::ClfOnlineStump::classifySetF</a></div><div class="ttdeci">std::vector&lt; float &gt; classifySetF(const Mat &amp;x)</div><div class="ttdef"><b>Definición</b> <a href="#l00342">tracking_online_mil.cpp:342</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a47c8bc9d05b27b11b99cebd61159a62d"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a47c8bc9d05b27b11b99cebd61159a62d">cv::detail::tracking::ClfOnlineStump::_q</a></div><div class="ttdeci">float _q</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00056">tracking_online_mil.hpp:56</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a5205e884a4a573ef2e59fefbdea36231"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a5205e884a4a573ef2e59fefbdea36231">cv::detail::tracking::ClfOnlineStump::_lRate</a></div><div class="ttdeci">float _lRate</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00060">tracking_online_mil.hpp:60</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a656b3d4110d62632b83a06f2a3ec7cf5"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a656b3d4110d62632b83a06f2a3ec7cf5">cv::detail::tracking::ClfOnlineStump::_sig1</a></div><div class="ttdeci">float _sig1</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00055">tracking_online_mil.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a70ed777c6ea1842183503a2ae0cd1390"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a70ed777c6ea1842183503a2ae0cd1390">cv::detail::tracking::ClfOnlineStump::_e1</a></div><div class="ttdeci">float _e1</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00059">tracking_online_mil.hpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a743d771804f728fb6a665a44157a37a4"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a743d771804f728fb6a665a44157a37a4">cv::detail::tracking::ClfOnlineStump::_sig0</a></div><div class="ttdeci">float _sig0</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00055">tracking_online_mil.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a75a93b06f4b87bd1522c9db07747664c"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a75a93b06f4b87bd1522c9db07747664c">cv::detail::tracking::ClfOnlineStump::_mu1</a></div><div class="ttdeci">float _mu1</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00055">tracking_online_mil.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a89afaca8987c477ac51b28a32d305200"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a89afaca8987c477ac51b28a32d305200">cv::detail::tracking::ClfOnlineStump::classify</a></div><div class="ttdeci">bool classify(const Mat &amp;x, int i)</div><div class="ttdef"><b>Definición</b> <a href="#l00326">tracking_online_mil.cpp:326</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a8e5bfa98d15a8ef3b7326414a1c7ae27"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a8e5bfa98d15a8ef3b7326414a1c7ae27">cv::detail::tracking::ClfOnlineStump::_e0</a></div><div class="ttdeci">float _e0</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00059">tracking_online_mil.hpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a9314b12cfa058558e09315bc9d667c60"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a9314b12cfa058558e09315bc9d667c60">cv::detail::tracking::ClfOnlineStump::_log_n1</a></div><div class="ttdeci">float _log_n1</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00058">tracking_online_mil.hpp:58</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_a975ae8ece17e6986d82cd4dd58556592"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#a975ae8ece17e6986d82cd4dd58556592">cv::detail::tracking::ClfOnlineStump::classifyF</a></div><div class="ttdeci">float classifyF(const Mat &amp;x, int i)</div><div class="ttdef"><b>Definición</b> <a href="#l00334">tracking_online_mil.cpp:334</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_aa665cc6eb4a9b2d4a793a38093b37040"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#aa665cc6eb4a9b2d4a793a38093b37040">cv::detail::tracking::ClfOnlineStump::_s</a></div><div class="ttdeci">int _s</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00057">tracking_online_mil.hpp:57</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_ad0824a2881c0e1ab87b916064f3458e6"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad0824a2881c0e1ab87b916064f3458e6">cv::detail::tracking::ClfOnlineStump::update</a></div><div class="ttdeci">void update(const Mat &amp;posx, const Mat &amp;negx, const cv::Mat_&lt; float &gt; &amp;posw=cv::Mat_&lt; float &gt;(), const cv::Mat_&lt; float &gt; &amp;negw=cv::Mat_&lt; float &gt;())</div><div class="ttdef"><b>Definición</b> <a href="#l00263">tracking_online_mil.cpp:263</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_ad4d33f3ac3cab7f6df3e8ac6009b7924"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ad4d33f3ac3cab7f6df3e8ac6009b7924">cv::detail::tracking::ClfOnlineStump::_mu0</a></div><div class="ttdeci">float _mu0</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00055">tracking_online_mil.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_add98b77a2d9f42dea02ead3e8d6fec1a"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#add98b77a2d9f42dea02ead3e8d6fec1a">cv::detail::tracking::ClfOnlineStump::_log_n0</a></div><div class="ttdeci">float _log_n0</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00058">tracking_online_mil.hpp:58</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_ae21d5b2ed8d1ed985a8d11d3d8893743"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#ae21d5b2ed8d1ed985a8d11d3d8893743">cv::detail::tracking::ClfOnlineStump::ClfOnlineStump</a></div><div class="ttdeci">ClfOnlineStump()</div><div class="ttdef"><b>Definición</b> <a href="#l00228">tracking_online_mil.cpp:228</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_clf_online_stump_html_afb83d1a2258d8c7c5f2ab7d50f1f40b7"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_clf_online_stump.html#afb83d1a2258d8c7c5f2ab7d50f1f40b7">cv::detail::tracking::ClfOnlineStump::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definición</b> <a href="#l00253">tracking_online_mil.cpp:253</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_sortable_element_rev_html"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html">cv::detail::SortableElementRev</a></div><div class="ttdef"><b>Definición</b> <a href="#l00015">tracking_online_mil.cpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_sortable_element_rev_html_a3de48929aa06b0c7a791ccb8eab2a20b"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a3de48929aa06b0c7a791ccb8eab2a20b">cv::detail::tracking::SortableElementRev::_val</a></div><div class="ttdeci">T _val</div><div class="ttdef"><b>Definición</b> <a href="#l00018">tracking_online_mil.cpp:18</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_sortable_element_rev_html_a55bef709696623ac86db06de147c7d80"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a55bef709696623ac86db06de147c7d80">cv::detail::tracking::SortableElementRev::SortableElementRev</a></div><div class="ttdeci">SortableElementRev()</div><div class="ttdef"><b>Definición</b> <a href="#l00020">tracking_online_mil.cpp:20</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_sortable_element_rev_html_a66d2a423e478b2e09ccdeff5a17bb7f0"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a66d2a423e478b2e09ccdeff5a17bb7f0">cv::detail::tracking::SortableElementRev::_ind</a></div><div class="ttdeci">int _ind</div><div class="ttdef"><b>Definición</b> <a href="#l00019">tracking_online_mil.cpp:19</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_sortable_element_rev_html_a6df927c23932978f20dffd02bc484de7"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a6df927c23932978f20dffd02bc484de7">cv::detail::tracking::SortableElementRev::SortableElementRev</a></div><div class="ttdeci">SortableElementRev(T val, int ind)</div><div class="ttdef"><b>Definición</b> <a href="#l00024">tracking_online_mil.cpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_sortable_element_rev_html_a704a6db2b71493ff6678908ae9ad54b6"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_sortable_element_rev.html#a704a6db2b71493ff6678908ae9ad54b6">cv::detail::tracking::SortableElementRev::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(SortableElementRev&lt; T &gt; &amp;b)</div><div class="ttdef"><b>Definición</b> <a href="#l00029">tracking_online_mil.cpp:29</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga15228e80f647b305be84c24da909fea1"><div class="ttname"><a href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">cv::mean</a></div><div class="ttdeci">InputOutputArray mean</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02076">core.hpp:2076</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga846c858f4004d59493d7c6a4354b301d"><div class="ttname"><a href="group__core__array.html#ga846c858f4004d59493d7c6a4354b301d">cv::meanStdDev</a></div><div class="ttdeci">CV_EXPORTS_W void meanStdDev(InputArray src, OutputArray mean, OutputArray stddev, InputArray mask=noArray())</div><div class="ttdef"><b>Definición</b> <a href="mean_8dispatch_8cpp_source.html#l00227">mean.dispatch.cpp:227</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga937ecdce4679a77168730830a955bea7"><div class="ttname"><a href="group__core__array.html#ga937ecdce4679a77168730830a955bea7">cv::log</a></div><div class="ttdeci">CV_EXPORTS_W void log(InputArray src, OutputArray dst)</div><div class="ttdoc">Calculates the natural logarithm of every array element.</div><div class="ttdef"><b>Definición</b> <a href="mathfuncs_8cpp_source.html#l00498">mathfuncs.cpp:498</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa4ffa7f460d95bda4fd293dd4e337418"><div class="ttname"><a href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">cv::uint</a></div><div class="ttdeci">uint32_t uint</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00038">templmatch.cpp:38</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_1_1tracking_html"><div class="ttname"><a href="namespacecv_1_1detail_1_1tracking.html">cv::detail::tracking</a></div><div class="ttdef"><b>Definición</b> <a href="tracking_8detail_8hpp_source.html#l00022">tracking.detail.hpp:22</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_1_1tracking_html_a8c68ca106bbfcb47c8fdc9a829fe60ac"><div class="ttname"><a href="namespacecv_1_1detail_1_1tracking.html#a8c68ca106bbfcb47c8fdc9a829fe60ac">cv::detail::tracking::sort_order_des</a></div><div class="ttdeci">void sort_order_des(std::vector&lt; T &gt; &amp;v, std::vector&lt; int &gt; &amp;order)</div><div class="ttdef"><b>Definición</b> <a href="#l00041">tracking_online_mil.cpp:41</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_1_1tracking_html_aaf3c6a3ed88f12e36ece2fa21f45b375"><div class="ttname"><a href="namespacecv_1_1detail_1_1tracking.html#aaf3c6a3ed88f12e36ece2fa21f45b375">cv::detail::tracking::CompareSortableElementRev</a></div><div class="ttdeci">static bool CompareSortableElementRev(const SortableElementRev&lt; float &gt; &amp;i, const SortableElementRev&lt; float &gt; &amp;j)</div><div class="ttdef"><b>Definición</b> <a href="#l00035">tracking_online_mil.cpp:35</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html"><div class="ttname"><a href="namespacecv_1_1detail.html">cv::detail</a></div><div class="ttdef"><b>Definición</b> <a href="dualquaternion_8inl_8hpp_source.html#l00317">dualquaternion.inl.hpp:317</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params_html"><div class="ttname"><a href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html">cv::detail::tracking::ClfMilBoost::Params</a></div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00025">tracking_online_mil.hpp:26</a></div></div>
+<div class="ttc" id="astructcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params_html_a0f41c10bdd14ba7c60d608f0ef8c6edd"><div class="ttname"><a href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#a0f41c10bdd14ba7c60d608f0ef8c6edd">cv::detail::tracking::ClfMilBoost::Params::_numSel</a></div><div class="ttdeci">int _numSel</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00028">tracking_online_mil.hpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params_html_a995b833cc3d2ad70b8d8a19b356d9799"><div class="ttname"><a href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#a995b833cc3d2ad70b8d8a19b356d9799">cv::detail::tracking::ClfMilBoost::Params::Params</a></div><div class="ttdeci">Params()</div><div class="ttdef"><b>Definición</b> <a href="#l00064">tracking_online_mil.cpp:64</a></div></div>
+<div class="ttc" id="astructcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params_html_aeae7104e08f634b6443f10d8518ff6a2"><div class="ttname"><a href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#aeae7104e08f634b6443f10d8518ff6a2">cv::detail::tracking::ClfMilBoost::Params::_lRate</a></div><div class="ttdeci">float _lRate</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00030">tracking_online_mil.hpp:30</a></div></div>
+<div class="ttc" id="astructcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params_html_aed1899907354c5b2f338201df175b97a"><div class="ttname"><a href="structcv_1_1detail_1_1tracking_1_1_clf_mil_boost_1_1_params.html#aed1899907354c5b2f338201df175b97a">cv::detail::tracking::ClfMilBoost::Params::_numFeat</a></div><div class="ttdeci">int _numFeat</div><div class="ttdef"><b>Definición</b> <a href="tracking__online__mil_8hpp_source.html#l00029">tracking_online_mil.hpp:29</a></div></div>
+<div class="ttc" id="atracking__online__mil_8cpp_html_aaaf7a5b610c91b1d85784ec8b6ff66a8"><div class="ttname"><a href="tracking__online__mil_8cpp.html#aaaf7a5b610c91b1d85784ec8b6ff66a8">sign</a></div><div class="ttdeci">#define sign(s)</div><div class="ttdef"><b>Definición</b> <a href="#l00012">tracking_online_mil.cpp:12</a></div></div>
+<div class="ttc" id="atracking__online__mil_8hpp_html"><div class="ttname"><a href="tracking__online__mil_8hpp.html">tracking_online_mil.hpp</a></div></div>
+<div class="ttc" id="avideo_2src_2precomp_8hpp_html"><div class="ttname"><a href="video_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_2508e962348bdf6937b92f313b633ed9.html">video</a></li><li class="navelem"><a href="dir_e10036e501edf27ab5629bafc103e45e.html">src</a></li><li class="navelem"><a href="dir_b56a50f837f97c89175c87daafb7ae1e.html">tracking</a></li><li class="navelem"><a href="dir_a91f2a465a31ba171a1b9bef84670d7b.html">detail</a></li><li class="navelem"><a href="tracking__online__mil_8cpp.html">tracking_online_mil.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

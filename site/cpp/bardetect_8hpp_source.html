@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/barcode_detector/bardetect.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('bardetect_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bardetect.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bardetect_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (c) 2020-2021 darkliang wangberlinT Certseeds</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef OPENCV_BARCODE_BARDETECT_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define OPENCV_BARCODE_BARDETECT_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1barcode.html">barcode</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using </span>std::vector;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1barcode_1_1_detect.html">Detect</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;RotatedRect&gt;</a> localization_rects;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;RotatedRect&gt;</a> localization_bbox;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;float&gt;</a> bbox_scores;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;int&gt;</a> bbox_indices;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;vector&lt;Point2f&gt;</a>&gt; transformation_points;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#aacdcb82aa2bcc3d4ec351435243d3fc2">init</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;src, <span class="keywordtype">double</span> detectorThreshDownSamplingLimit);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#a68778ca09d6dd3ee106e50bfc85ec870">localization</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;float&gt;</a>&amp; detectorWindowSizes, <span class="keywordtype">double</span> detectorGradientMagnitudeThresh);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#a20196579c2ca8a33c92b74ab538d48e9">   31</a></span>    <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;vector&lt;Point2f&gt;</a>&gt; <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#a20196579c2ca8a33c92b74ab538d48e9">getTransformationPoints</a>()</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    { <span class="keywordflow">return</span> transformation_points; }</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#ac2164accc87040099de9c47e6dfa91f7">computeTransformationPoints</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892">   37</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892">resize_direction</a></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892a1b0903dabcbd76b1fdbc65a82159b68e">   39</a></span>        <a class="code hl_enumvalue" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892a138c34a5edd2127e84b9a4c66c7cc466">ZOOMING</a>, <a class="code hl_enumvalue" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892a1b0903dabcbd76b1fdbc65a82159b68e">SHRINKING</a>, <a class="code hl_enumvalue" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892ac7d67be298d5114e1d844a3f7dace9a1">UNCHANGED</a></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#a3b3c48169fd488975f333bbc5fd7ac05">   40</a></span>    } <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a3b3c48169fd488975f333bbc5fd7ac05">purpose</a> = <a class="code hl_enumvalue" href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892ac7d67be298d5114e1d844a3f7dace9a1">UNCHANGED</a>;</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#aaf346aace77d6b6acc34a0dd6f986dfe">   43</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#aaf346aace77d6b6acc34a0dd6f986dfe">coeff_expansion</a> = 1.0;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#a033ca79d7a277d80d7b7c8a2b340efbb">   44</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a033ca79d7a277d80d7b7c8a2b340efbb">height</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#ae6256088cd5d431f784f055d5848c861">width</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_detect.html#a62ca4779a7d35924a0a0fe6347252cff">   45</a></span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a6adfadbd730f8283951796baf94fc0cf">resized_barcode</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a446fe3b7e6959ef12ef6c975bb7e534e">gradient_magnitude</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a62ca4779a7d35924a0a0fe6347252cff">coherence</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a45bcff0fad4c2e60c0a0ded5a5487136">orientation</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#acd9e9b1356426241894f61d3d8da0848">edge_nums</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#ae850932a2ab8ed3784aca212866fb6d3">integral_x_sq</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a0b81fa3dbe42a719b7ad0080bd6b1b64">integral_y_sq</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a52069ab0a09c40d11d748ab270ff89d5">integral_xy</a>, <a class="code hl_variable" href="classcv_1_1barcode_1_1_detect.html#a8531e380b3c0d1ade812c613e17dc12e">integral_edges</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#a45346109979a8124de29c1a1a180242d">preprocess</a>(<span class="keywordtype">double</span> detectorThreshGradientMagnitude);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#a383251b74563c0f36928ae85c6e7118b">calCoherence</a>(<span class="keywordtype">int</span> window_size);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#ad1c7099c74b8277678bdfc3291c52324">isValidCoord</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> &amp;<a class="code hl_function" href="namespacecv.html#a864584b7e0fee7045aecf6a4ad359bc3">coord</a>, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> &amp;limit);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#a9e6f8616b04ad9cf6a1ba2a6ed3ae098">regionGrowing</a>(<span class="keywordtype">int</span> window_size);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_detect.html#a761ace60daaf71a760e83f759f437896">barcodeErode</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>};</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_BARCODE_BARDETECT_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html">cv::barcode::Detect</a></div><div class="ttdef"><b>Definición</b> <a href="#l00016">bardetect.hpp:17</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a033ca79d7a277d80d7b7c8a2b340efbb"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a033ca79d7a277d80d7b7c8a2b340efbb">cv::barcode::Detect::height</a></div><div class="ttdeci">int height</div><div class="ttdef"><b>Definición</b> <a href="#l00044">bardetect.hpp:44</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a0b81fa3dbe42a719b7ad0080bd6b1b64"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a0b81fa3dbe42a719b7ad0080bd6b1b64">cv::barcode::Detect::integral_y_sq</a></div><div class="ttdeci">Mat integral_y_sq</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a20196579c2ca8a33c92b74ab538d48e9"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a20196579c2ca8a33c92b74ab538d48e9">cv::barcode::Detect::getTransformationPoints</a></div><div class="ttdeci">vector&lt; vector&lt; Point2f &gt; &gt; getTransformationPoints()</div><div class="ttdef"><b>Definición</b> <a href="#l00031">bardetect.hpp:31</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a383251b74563c0f36928ae85c6e7118b"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a383251b74563c0f36928ae85c6e7118b">cv::barcode::Detect::calCoherence</a></div><div class="ttdeci">void calCoherence(int window_size)</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00287">bardetect.cpp:287</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a3b3c48169fd488975f333bbc5fd7ac05"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a3b3c48169fd488975f333bbc5fd7ac05">cv::barcode::Detect::purpose</a></div><div class="ttdeci">enum cv::barcode::Detect::resize_direction purpose</div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a446fe3b7e6959ef12ef6c975bb7e534e"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a446fe3b7e6959ef12ef6c975bb7e534e">cv::barcode::Detect::gradient_magnitude</a></div><div class="ttdeci">Mat gradient_magnitude</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a45346109979a8124de29c1a1a180242d"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a45346109979a8124de29c1a1a180242d">cv::barcode::Detect::preprocess</a></div><div class="ttdeci">void preprocess(double detectorThreshGradientMagnitude)</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00247">bardetect.cpp:247</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a45bcff0fad4c2e60c0a0ded5a5487136"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a45bcff0fad4c2e60c0a0ded5a5487136">cv::barcode::Detect::orientation</a></div><div class="ttdeci">Mat orientation</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a52069ab0a09c40d11d748ab270ff89d5"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a52069ab0a09c40d11d748ab270ff89d5">cv::barcode::Detect::integral_xy</a></div><div class="ttdeci">Mat integral_xy</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a62ca4779a7d35924a0a0fe6347252cff"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a62ca4779a7d35924a0a0fe6347252cff">cv::barcode::Detect::coherence</a></div><div class="ttdeci">Mat coherence</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a68778ca09d6dd3ee106e50bfc85ec870"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a68778ca09d6dd3ee106e50bfc85ec870">cv::barcode::Detect::localization</a></div><div class="ttdeci">void localization(const vector&lt; float &gt; &amp;detectorWindowSizes, double detectorGradientMagnitudeThresh)</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00174">bardetect.cpp:174</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a6adfadbd730f8283951796baf94fc0cf"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a6adfadbd730f8283951796baf94fc0cf">cv::barcode::Detect::resized_barcode</a></div><div class="ttdeci">Mat resized_barcode</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a761ace60daaf71a760e83f759f437896"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a761ace60daaf71a760e83f759f437896">cv::barcode::Detect::barcodeErode</a></div><div class="ttdeci">void barcodeErode()</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00493">bardetect.cpp:493</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a8531e380b3c0d1ade812c613e17dc12e"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a8531e380b3c0d1ade812c613e17dc12e">cv::barcode::Detect::integral_edges</a></div><div class="ttdeci">Mat integral_edges</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_a9e6f8616b04ad9cf6a1ba2a6ed3ae098"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#a9e6f8616b04ad9cf6a1ba2a6ed3ae098">cv::barcode::Detect::regionGrowing</a></div><div class="ttdeci">void regionGrowing(int window_size)</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00357">bardetect.cpp:357</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_aacdcb82aa2bcc3d4ec351435243d3fc2"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#aacdcb82aa2bcc3d4ec351435243d3fc2">cv::barcode::Detect::init</a></div><div class="ttdeci">void init(const Mat &amp;src, double detectorThreshDownSamplingLimit)</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00139">bardetect.cpp:139</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_aaf346aace77d6b6acc34a0dd6f986dfe"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#aaf346aace77d6b6acc34a0dd6f986dfe">cv::barcode::Detect::coeff_expansion</a></div><div class="ttdeci">double coeff_expansion</div><div class="ttdef"><b>Definición</b> <a href="#l00043">bardetect.hpp:43</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ab1914a5cc35fe9ebfe43568459d87892"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892">cv::barcode::Detect::resize_direction</a></div><div class="ttdeci">resize_direction</div><div class="ttdef"><b>Definición</b> <a href="#l00037">bardetect.hpp:38</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ab1914a5cc35fe9ebfe43568459d87892a138c34a5edd2127e84b9a4c66c7cc466"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892a138c34a5edd2127e84b9a4c66c7cc466">cv::barcode::Detect::ZOOMING</a></div><div class="ttdeci">@ ZOOMING</div><div class="ttdef"><b>Definición</b> <a href="#l00039">bardetect.hpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ab1914a5cc35fe9ebfe43568459d87892a1b0903dabcbd76b1fdbc65a82159b68e"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892a1b0903dabcbd76b1fdbc65a82159b68e">cv::barcode::Detect::SHRINKING</a></div><div class="ttdeci">@ SHRINKING</div><div class="ttdef"><b>Definición</b> <a href="#l00039">bardetect.hpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ab1914a5cc35fe9ebfe43568459d87892ac7d67be298d5114e1d844a3f7dace9a1"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892ac7d67be298d5114e1d844a3f7dace9a1">cv::barcode::Detect::UNCHANGED</a></div><div class="ttdeci">@ UNCHANGED</div><div class="ttdef"><b>Definición</b> <a href="#l00039">bardetect.hpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ac2164accc87040099de9c47e6dfa91f7"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ac2164accc87040099de9c47e6dfa91f7">cv::barcode::Detect::computeTransformationPoints</a></div><div class="ttdeci">bool computeTransformationPoints()</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00200">bardetect.cpp:200</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_acd9e9b1356426241894f61d3d8da0848"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#acd9e9b1356426241894f61d3d8da0848">cv::barcode::Detect::edge_nums</a></div><div class="ttdeci">Mat edge_nums</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ad1c7099c74b8277678bdfc3291c52324"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ad1c7099c74b8277678bdfc3291c52324">cv::barcode::Detect::isValidCoord</a></div><div class="ttdeci">static bool isValidCoord(const Point &amp;coord, const Size &amp;limit)</div><div class="ttdef"><b>Definición</b> <a href="bardetect_8cpp_source.html#l00023">bardetect.cpp:23</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ae6256088cd5d431f784f055d5848c861"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ae6256088cd5d431f784f055d5848c861">cv::barcode::Detect::width</a></div><div class="ttdeci">int width</div><div class="ttdef"><b>Definición</b> <a href="#l00044">bardetect.hpp:44</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_detect_html_ae850932a2ab8ed3784aca212866fb6d3"><div class="ttname"><a href="classcv_1_1barcode_1_1_detect.html#ae850932a2ab8ed3784aca212866fb6d3">cv::barcode::Detect::integral_x_sq</a></div><div class="ttdeci">Mat integral_x_sq</div><div class="ttdef"><b>Definición</b> <a href="#l00045">bardetect.hpp:45</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1vector_html"><div class="ttname"><a href="classcv_1_1barcode_1_1vector.html">cv::barcode::vector</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1e83eafb2d26b3c93f09e8338bcab192"><div class="ttname"><a href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">cv::Point</a></div><div class="ttdeci">Point2i Point</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00209">types.hpp:209</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html"><div class="ttname"><a href="namespacecv_1_1barcode.html">cv::barcode</a></div><div class="ttdef"><b>Definición</b> <a href="barcode_8hpp_source.html#l00013">barcode.hpp:13</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a864584b7e0fee7045aecf6a4ad359bc3"><div class="ttname"><a href="namespacecv.html#a864584b7e0fee7045aecf6a4ad359bc3">cv::coord</a></div><div class="ttdeci">void coord(const Mat &amp;volume, const RGBTsdfVoxel *volDataStart, std::vector&lt; ptype &gt; &amp;points, std::vector&lt; ptype &gt; &amp;normals, std::vector&lt; ptype &gt; &amp;colors, const Point3i volResolution, const Vec4i volDims, const Vec8i neighbourCoords, const Affine3f pose, const float voxelSize, const float voxelSizeInv, bool needNormals, bool needColors, int x, int y, int z, Point3f V, float v0, int axis)</div><div class="ttdef"><b>Definición</b> <a href="color__tsdf__functions_8cpp_source.html#l01064">color_tsdf_functions.cpp:1064</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_f78f302afffd38c9265d7051d477e8df.html">barcode_detector</a></li><li class="navelem"><a href="bardetect_8hpp.html">bardetect.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

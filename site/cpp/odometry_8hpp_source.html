@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/include/opencv2/ptcloud/odometry.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('odometry_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">odometry.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="odometry_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_3D_ODOMETRY_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_3D_ODOMETRY_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="odometry__frame_8hpp.html">odometry_frame.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="odometry__settings_8hpp.html">odometry_settings.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#ga04c2830b9af3b26e97499d6c99d3978b">   24</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga04c2830b9af3b26e97499d6c99d3978b">OdometryType</a></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#gga04c2830b9af3b26e97499d6c99d3978baaa1780b4fcce2d5d9af13dc25386d111">   26</a></span>    DEPTH     = 0,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#gga04c2830b9af3b26e97499d6c99d3978ba889574aebacda6bfd3e534e2b49b8028">   27</a></span>    RGB       = 1,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#gga04c2830b9af3b26e97499d6c99d3978ba471c515def6450d4ebfe0a21a23bc61d">   28</a></span>    <a class="code hl_enumvalue" href="group__ptcloud__rgbd.html#gga04c2830b9af3b26e97499d6c99d3978ba471c515def6450d4ebfe0a21a23bc61d">RGB_DEPTH</a> = 2</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#ga00cb8aaa0ed59dfe4ee956d769071a05">   35</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga00cb8aaa0ed59dfe4ee956d769071a05">OdometryAlgoType</a></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#gga00cb8aaa0ed59dfe4ee956d769071a05adda4b7de10e14445366494f0a76e1435">   37</a></span>    <a class="code hl_enumvalue" href="group__ptcloud__rgbd.html#gga00cb8aaa0ed59dfe4ee956d769071a05adda4b7de10e14445366494f0a76e1435">COMMON</a> = 0,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group__ptcloud__rgbd.html#gga00cb8aaa0ed59dfe4ee956d769071a05adca6e617f6fb54033deb311e7e7c93cc">   38</a></span>    <a class="code hl_function" href="group__features__main.html#gaea3b2b38bf1e1f4bf8479e6026c521af">FAST</a> = 1</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
+</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="};">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry.html">   41</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1_odometry.html#a4f350caca5c4c38a8bb2acc6e5c97a13">Odometry</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1_odometry.html#a4f350caca5c4c38a8bb2acc6e5c97a13">Odometry</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1_odometry.html#a4f350caca5c4c38a8bb2acc6e5c97a13">Odometry</a>(<a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga04c2830b9af3b26e97499d6c99d3978b">OdometryType</a> otype);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1_odometry.html#a4f350caca5c4c38a8bb2acc6e5c97a13">Odometry</a>(<a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga04c2830b9af3b26e97499d6c99d3978b">OdometryType</a> otype, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_odometry_settings.html">OdometrySettings</a>&amp; settings, <a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga00cb8aaa0ed59dfe4ee956d769071a05">OdometryAlgoType</a> algtype);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_function" href="classcv_1_1_odometry.html#a4f350caca5c4c38a8bb2acc6e5c97a13">~Odometry</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry.html#aeab190ef8ea2abffa8aa8b1da9076289">prepareFrame</a>(<a class="code hl_class" href="classcv_1_1_odometry_frame.html">OdometryFrame</a>&amp; frame) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry.html#ae3048f15a07f26776aea074928576cc3">prepareFrames</a>(<a class="code hl_class" href="classcv_1_1_odometry_frame.html">OdometryFrame</a>&amp; srcFrame, <a class="code hl_class" href="classcv_1_1_odometry_frame.html">OdometryFrame</a>&amp; dstFrame) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_odometry.html#abe0b2a489f2475b53dbe92bb257e5ef9">compute</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_odometry_frame.html">OdometryFrame</a>&amp; srcFrame, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_odometry_frame.html">OdometryFrame</a>&amp; dstFrame, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> Rt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_odometry.html#abe0b2a489f2475b53dbe92bb257e5ef9">compute</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> srcDepth, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> dstDepth, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> Rt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_odometry.html#abe0b2a489f2475b53dbe92bb257e5ef9">compute</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> srcDepth, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> srcRGB, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> dstDepth, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> dstRGB, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> Rt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;RgbdNormals&gt;</a> <a class="code hl_function" href="classcv_1_1_odometry.html#a057f70a8ca69fb1a7d2b8a6f8330d5c3">getNormalsComputer</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">class </span><a class="code hl_class" href="classcv_1_1_odometry_1_1_impl.html">Impl</a>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Impl&gt;</a> impl;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>};</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif </span><span class="comment">//OPENCV_3D_ODOMETRY_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_odometry_1_1_impl_html"><div class="ttname"><a href="classcv_1_1_odometry_1_1_impl.html">cv::Odometry::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="odometry_8cpp_source.html#l00013">odometry.cpp:14</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html"><div class="ttname"><a href="classcv_1_1_odometry_frame.html">cv::OdometryFrame</a></div><div class="ttdoc">An object that keeps per-frame data for Odometry algorithms from user-provided images to algorithm-sp...</div><div class="ttdef"><b>Definición</b> <a href="odometry__frame_8hpp_source.html#l00039">odometry_frame.hpp:40</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_html_a057f70a8ca69fb1a7d2b8a6f8330d5c3"><div class="ttname"><a href="classcv_1_1_odometry.html#a057f70a8ca69fb1a7d2b8a6f8330d5c3">cv::Odometry::getNormalsComputer</a></div><div class="ttdeci">CV_WRAP Ptr&lt; RgbdNormals &gt; getNormalsComputer() const</div><div class="ttdoc">Get the normals computer object used for normals calculation (if presented). The normals computer is ...</div><div class="ttdef"><b>Definición</b> <a href="odometry_8cpp_source.html#l00309">odometry.cpp:309</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_html_a4f350caca5c4c38a8bb2acc6e5c97a13"><div class="ttname"><a href="classcv_1_1_odometry.html#a4f350caca5c4c38a8bb2acc6e5c97a13">cv::Odometry::Odometry</a></div><div class="ttdeci">CV_WRAP Odometry()</div><div class="ttdef"><b>Definición</b> <a href="odometry_8cpp_source.html#l00232">odometry.cpp:232</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_html_abe0b2a489f2475b53dbe92bb257e5ef9"><div class="ttname"><a href="classcv_1_1_odometry.html#abe0b2a489f2475b53dbe92bb257e5ef9">cv::Odometry::compute</a></div><div class="ttdeci">CV_WRAP bool compute(const OdometryFrame &amp;srcFrame, const OdometryFrame &amp;dstFrame, OutputArray Rt) const</div><div class="ttdef"><b>Definición</b> <a href="odometry_8cpp_source.html#l00293">odometry.cpp:293</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_html_ae3048f15a07f26776aea074928576cc3"><div class="ttname"><a href="classcv_1_1_odometry.html#ae3048f15a07f26776aea074928576cc3">cv::Odometry::prepareFrames</a></div><div class="ttdeci">CV_WRAP void prepareFrames(OdometryFrame &amp;srcFrame, OdometryFrame &amp;dstFrame) const</div><div class="ttdef"><b>Definición</b> <a href="odometry_8cpp_source.html#l00288">odometry.cpp:288</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_html_aeab190ef8ea2abffa8aa8b1da9076289"><div class="ttname"><a href="classcv_1_1_odometry.html#aeab190ef8ea2abffa8aa8b1da9076289">cv::Odometry::prepareFrame</a></div><div class="ttdeci">CV_WRAP void prepareFrame(OdometryFrame &amp;frame) const</div><div class="ttdef"><b>Definición</b> <a href="odometry_8cpp_source.html#l00283">odometry.cpp:283</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_settings_html"><div class="ttname"><a href="classcv_1_1_odometry_settings.html">cv::OdometrySettings</a></div><div class="ttdef"><b>Definición</b> <a href="odometry__settings_8hpp_source.html#l00016">odometry_settings.hpp:17</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga67ea671a3582ce612ac3c281e067f480"><div class="ttname"><a href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a></div><div class="ttdeci">#define CV_EXPORTS_W</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00483">cvdef.h:483</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gae435babf3ce7cca990524b23adf6b4a3"><div class="ttname"><a href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a></div><div class="ttdeci">#define CV_WRAP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00493">cvdef.h:493</a></div></div>
+<div class="ttc" id="agroup__features__main_html_gaea3b2b38bf1e1f4bf8479e6026c521af"><div class="ttname"><a href="group__features__main.html#gaea3b2b38bf1e1f4bf8479e6026c521af">cv::FAST</a></div><div class="ttdeci">CV_EXPORTS void FAST(InputArray image, CV_OUT std::vector&lt; KeyPoint &gt; &amp;keypoints, int threshold, bool nonmaxSuppression=true, FastFeatureDetector::DetectorType type=FastFeatureDetector::TYPE_9_16)</div><div class="ttdoc">Detects corners using the FAST algorithm.</div></div>
+<div class="ttc" id="agroup__ptcloud__rgbd_html_ga00cb8aaa0ed59dfe4ee956d769071a05"><div class="ttname"><a href="group__ptcloud__rgbd.html#ga00cb8aaa0ed59dfe4ee956d769071a05">cv::OdometryAlgoType</a></div><div class="ttdeci">OdometryAlgoType</div><div class="ttdef"><b>Definición</b> <a href="#l00035">odometry.hpp:36</a></div></div>
+<div class="ttc" id="agroup__ptcloud__rgbd_html_ga04c2830b9af3b26e97499d6c99d3978b"><div class="ttname"><a href="group__ptcloud__rgbd.html#ga04c2830b9af3b26e97499d6c99d3978b">cv::OdometryType</a></div><div class="ttdeci">OdometryType</div><div class="ttdef"><b>Definición</b> <a href="#l00024">odometry.hpp:25</a></div></div>
+<div class="ttc" id="agroup__ptcloud__rgbd_html_gga00cb8aaa0ed59dfe4ee956d769071a05adda4b7de10e14445366494f0a76e1435"><div class="ttname"><a href="group__ptcloud__rgbd.html#gga00cb8aaa0ed59dfe4ee956d769071a05adda4b7de10e14445366494f0a76e1435">cv::OdometryAlgoType::COMMON</a></div><div class="ttdeci">@ COMMON</div><div class="ttdef"><b>Definición</b> <a href="#l00037">odometry.hpp:37</a></div></div>
+<div class="ttc" id="agroup__ptcloud__rgbd_html_gga04c2830b9af3b26e97499d6c99d3978ba471c515def6450d4ebfe0a21a23bc61d"><div class="ttname"><a href="group__ptcloud__rgbd.html#gga04c2830b9af3b26e97499d6c99d3978ba471c515def6450d4ebfe0a21a23bc61d">cv::OdometryType::RGB_DEPTH</a></div><div class="ttdeci">@ RGB_DEPTH</div><div class="ttdef"><b>Definición</b> <a href="#l00028">odometry.hpp:28</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aodometry__frame_8hpp_html"><div class="ttname"><a href="odometry__frame_8hpp.html">odometry_frame.hpp</a></div></div>
+<div class="ttc" id="aodometry__settings_8hpp_html"><div class="ttname"><a href="odometry__settings_8hpp.html">odometry_settings.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_a9037f4ed1ec75d0caf55d2711bc72b6.html">include</a></li><li class="navelem"><a href="dir_1de3aac8aad9fd9856fd56fd06b84f4c.html">opencv2</a></li><li class="navelem"><a href="dir_dd715dc039d82cfb809eded872f873c9.html">ptcloud</a></li><li class="navelem"><a href="odometry_8hpp.html">odometry.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

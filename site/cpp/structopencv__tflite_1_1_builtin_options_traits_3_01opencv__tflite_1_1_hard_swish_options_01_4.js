@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_hard_swish_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_hard_swish_options_01_4.html#a3f7192694158aa54c1d14f2f81741f4f", null ]
+];

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/imgproc/src/resize.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('resize_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo resize.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="imgproc_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &quot;opencl_kernels_imgproc.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="imgproc_2src_2hal__replacement_8hpp_source.html">hal_replacement.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="intrin_8hpp_source.html">opencv2/core/hal/intrin.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="buffer__area_8private_8hpp_source.html">opencv2/core/utils/buffer_area.private.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="imgproc_2src_2resize_8hpp_source.html">resize.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="softfloat_8hpp_source.html">opencv2/core/softfloat.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fixedpoint_8inl_8hpp_source.html">fixedpoint.inl.hpp</a>&quot;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en resize.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="resize_8cpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="resize_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:cv_3A_3ACast_3C_20ST_2C_20DT_20_3E" id="r_cv_3A_3ACast_3C_20ST_2C_20DT_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_cast.html">cv::Cast&lt; ST, DT &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AFixedPtCast_3C_20ST_2C_20DT_2C_20bits_20_3E" id="r_cv_3A_3AFixedPtCast_3C_20ST_2C_20DT_2C_20bits_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_fixed_pt_cast.html">cv::FixedPtCast&lt; ST, DT, bits &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AresizeNNInvoker" id="r_cv_3A_3AresizeNNInvoker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1resize_n_n_invoker.html">cv::resizeNNInvoker</a></td></tr>
+<tr class="memitem:cv_3A_3AresizeNN_5FbitexactInvoker" id="r_cv_3A_3AresizeNN_5FbitexactInvoker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1resize_n_n__bitexact_invoker.html">cv::resizeNN_bitexactInvoker</a></td></tr>
+<tr class="memitem:cv_3A_3AVResizeNoVec" id="r_cv_3A_3AVResizeNoVec"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_v_resize_no_vec.html">cv::VResizeNoVec</a></td></tr>
+<tr class="memitem:cv_3A_3AHResizeNoVec" id="r_cv_3A_3AHResizeNoVec"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_h_resize_no_vec.html">cv::HResizeNoVec</a></td></tr>
+<tr class="memitem:cv_3A_3AHResizeLinear_3C_20T_2C_20WT_2C_20AT_2C_20ONE_2C_20VecOp_20_3E" id="r_cv_3A_3AHResizeLinear_3C_20T_2C_20WT_2C_20AT_2C_20ONE_2C_20VecOp_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_h_resize_linear.html">cv::HResizeLinear&lt; T, WT, AT, ONE, VecOp &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AVResizeLinear_3C_20T_2C_20WT_2C_20AT_2C_20CastOp_2C_20VecOp_20_3E" id="r_cv_3A_3AVResizeLinear_3C_20T_2C_20WT_2C_20AT_2C_20CastOp_2C_20VecOp_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_v_resize_linear.html">cv::VResizeLinear&lt; T, WT, AT, CastOp, VecOp &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AVResizeLinear_3C_20uchar_2C_20int_2C_20short_2C_20FixedPtCast_3C_20int_2C_20uchar_2C_20INTER_5FRESIZE_5FCOEF_5FBITS_20_2A2_20_3E_2C_20VResizeLinearVec_5F32s8u_20_3E" id="r_cv_3A_3AVResizeLinear_3C_20uchar_2C_20int_2C_20short_2C_20FixedPtCast_3C_20int_2C_20uchar_2C_20INTER_5FRESIZE_5FCOEF_5FBITS_20_2A2_20_3E_2C_20VResizeLinearVec_5F32s8u_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_v_resize_linear_3_01uchar_00_01int_00_01short_00_01_fixed_pt_cast_3_01int_00_01uchafe3d3c6ffa65940fe16ecc34500b6c77.html">cv::VResizeLinear&lt; uchar, int, short, FixedPtCast&lt; int, uchar, INTER_RESIZE_COEF_BITS *2 &gt;, VResizeLinearVec_32s8u &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AHResizeCubic_3C_20T_2C_20WT_2C_20AT_20_3E" id="r_cv_3A_3AHResizeCubic_3C_20T_2C_20WT_2C_20AT_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_h_resize_cubic.html">cv::HResizeCubic&lt; T, WT, AT &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AVResizeCubic_3C_20T_2C_20WT_2C_20AT_2C_20CastOp_2C_20VecOp_20_3E" id="r_cv_3A_3AVResizeCubic_3C_20T_2C_20WT_2C_20AT_2C_20CastOp_2C_20VecOp_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_v_resize_cubic.html">cv::VResizeCubic&lt; T, WT, AT, CastOp, VecOp &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AHResizeLanczos4_3C_20T_2C_20WT_2C_20AT_20_3E" id="r_cv_3A_3AHResizeLanczos4_3C_20T_2C_20WT_2C_20AT_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_h_resize_lanczos4.html">cv::HResizeLanczos4&lt; T, WT, AT &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AVResizeLanczos4_3C_20T_2C_20WT_2C_20AT_2C_20CastOp_2C_20VecOp_20_3E" id="r_cv_3A_3AVResizeLanczos4_3C_20T_2C_20WT_2C_20AT_2C_20CastOp_2C_20VecOp_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_v_resize_lanczos4.html">cv::VResizeLanczos4&lt; T, WT, AT, CastOp, VecOp &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AresizeGeneric_5FInvoker_3C_20HResize_2C_20VResize_20_3E" id="r_cv_3A_3AresizeGeneric_5FInvoker_3C_20HResize_2C_20VResize_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1resize_generic___invoker.html">cv::resizeGeneric_Invoker&lt; HResize, VResize &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AResizeAreaFastNoVec_3C_20T_2C_20WT_20_3E" id="r_cv_3A_3AResizeAreaFastNoVec_3C_20T_2C_20WT_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_resize_area_fast_no_vec.html">cv::ResizeAreaFastNoVec&lt; T, WT &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AResizeAreaFastVec_3C_20T_2C_20SIMDVecOp_20_3E" id="r_cv_3A_3AResizeAreaFastVec_3C_20T_2C_20SIMDVecOp_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_resize_area_fast_vec.html">cv::ResizeAreaFastVec&lt; T, SIMDVecOp &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AresizeAreaFast_5FInvoker_3C_20T_2C_20WT_2C_20VecOp_20_3E" id="r_cv_3A_3AresizeAreaFast_5FInvoker_3C_20T_2C_20WT_2C_20VecOp_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1resize_area_fast___invoker.html">cv::resizeAreaFast_Invoker&lt; T, WT, VecOp &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3ADecimateAlpha" id="r_cv_3A_3ADecimateAlpha"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_decimate_alpha.html">cv::DecimateAlpha</a></td></tr>
+<tr class="memitem:cv_3A_3AResizeArea_5FInvoker_3C_20T_2C_20WT_20_3E" id="r_cv_3A_3AResizeArea_5FInvoker_3C_20T_2C_20WT_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_resize_area___invoker.html">cv::ResizeArea_Invoker&lt; T, WT &gt;</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Espacios de nombres</h2></td></tr>
+<tr class="memitem:cv" id="r_cv"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html">cv</a></td></tr>
+<tr class="memdesc:namespacecv"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file is part of OpenCV project. <br /></td></tr>
+<tr class="memitem:cv_3A_3Ainter_5Farea" id="r_cv_3A_3Ainter_5Farea"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html">cv::inter_area</a></td></tr>
+<tr class="memitem:cv_3A_3Ahal" id="r_cv_3A_3Ahal"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1hal.html">cv::hal</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+typedefs</h2></td></tr>
+<tr class="memitem:a4ca43d50fa684ddadf741ad5a2d336ce" id="r_a4ca43d50fa684ddadf741ad5a2d336ce"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a4ca43d50fa684ddadf741ad5a2d336ce">cv::VResizeLinearVec_32s8u</a></td></tr>
+<tr class="memitem:adf4984cfa81dde9d3f68a82d429526b4" id="r_adf4984cfa81dde9d3f68a82d429526b4"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#adf4984cfa81dde9d3f68a82d429526b4">cv::VResizeLinearVec_32f16u</a></td></tr>
+<tr class="memitem:ad3d403c6d318c8b24f2c2ef1bb2da811" id="r_ad3d403c6d318c8b24f2c2ef1bb2da811"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad3d403c6d318c8b24f2c2ef1bb2da811">cv::VResizeLinearVec_32f16s</a></td></tr>
+<tr class="memitem:a6d97f4d293a1826f52f807f4c98486d9" id="r_a6d97f4d293a1826f52f807f4c98486d9"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6d97f4d293a1826f52f807f4c98486d9">cv::VResizeLinearVec_32f</a></td></tr>
+<tr class="memitem:a9252097eef26c971a91cc8b9a75bfba8" id="r_a9252097eef26c971a91cc8b9a75bfba8"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a9252097eef26c971a91cc8b9a75bfba8">cv::VResizeCubicVec_32s8u</a></td></tr>
+<tr class="memitem:a2ce886d8dc4742330f18f2f5ffa2474e" id="r_a2ce886d8dc4742330f18f2f5ffa2474e"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a2ce886d8dc4742330f18f2f5ffa2474e">cv::VResizeCubicVec_32f16u</a></td></tr>
+<tr class="memitem:a0ba316eecd0006b7a2524efd20531c7c" id="r_a0ba316eecd0006b7a2524efd20531c7c"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a0ba316eecd0006b7a2524efd20531c7c">cv::VResizeCubicVec_32f16s</a></td></tr>
+<tr class="memitem:ae4a2791ad67ba2924a5fb5c3b6e9aec9" id="r_ae4a2791ad67ba2924a5fb5c3b6e9aec9"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ae4a2791ad67ba2924a5fb5c3b6e9aec9">cv::VResizeCubicVec_32f</a></td></tr>
+<tr class="memitem:a210faa8262448a3e5c1d13a28922cf5f" id="r_a210faa8262448a3e5c1d13a28922cf5f"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a210faa8262448a3e5c1d13a28922cf5f">cv::VResizeLanczos4Vec_32f16u</a></td></tr>
+<tr class="memitem:a4cf04776f122e1e6ab3afe784eda952a" id="r_a4cf04776f122e1e6ab3afe784eda952a"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a4cf04776f122e1e6ab3afe784eda952a">cv::VResizeLanczos4Vec_32f16s</a></td></tr>
+<tr class="memitem:a0fbbd01e589c2f6266ddbee869277f95" id="r_a0fbbd01e589c2f6266ddbee869277f95"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_v_resize_no_vec.html">VResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a0fbbd01e589c2f6266ddbee869277f95">cv::VResizeLanczos4Vec_32f</a></td></tr>
+<tr class="memitem:abaefb53c4ef10e7e2a289527582fe0d4" id="r_abaefb53c4ef10e7e2a289527582fe0d4"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_h_resize_no_vec.html">HResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#abaefb53c4ef10e7e2a289527582fe0d4">cv::HResizeLinearVec_8u32s</a></td></tr>
+<tr class="memitem:a7566bc722066e623e3e9bd8f2add5c31" id="r_a7566bc722066e623e3e9bd8f2add5c31"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_h_resize_no_vec.html">HResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a7566bc722066e623e3e9bd8f2add5c31">cv::HResizeLinearVec_16u32f</a></td></tr>
+<tr class="memitem:afc04a68db46003edcc3d38df053c7338" id="r_afc04a68db46003edcc3d38df053c7338"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_h_resize_no_vec.html">HResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#afc04a68db46003edcc3d38df053c7338">cv::HResizeLinearVec_16s32f</a></td></tr>
+<tr class="memitem:af64bb19f35595c737203b18bba70ee31" id="r_af64bb19f35595c737203b18bba70ee31"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_h_resize_no_vec.html">HResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#af64bb19f35595c737203b18bba70ee31">cv::HResizeLinearVec_32f</a></td></tr>
+<tr class="memitem:a6e9a347bdecb280e144adc4d1bf1c75c" id="r_a6e9a347bdecb280e144adc4d1bf1c75c"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_h_resize_no_vec.html">HResizeNoVec</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6e9a347bdecb280e144adc4d1bf1c75c">cv::HResizeLinearVec_64f</a></td></tr>
+<tr class="memitem:a6aabec472ffbc7cae03964b07152bc7c" id="r_a6aabec472ffbc7cae03964b07152bc7c"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_resize_area_fast_no_vec.html">ResizeAreaFastNoVec</a>&lt; <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>, <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6aabec472ffbc7cae03964b07152bc7c">cv::ResizeAreaFastVec_SIMD_8u</a></td></tr>
+<tr class="memitem:a2fd6e9d3bade0dc56382044157847eaf" id="r_a2fd6e9d3bade0dc56382044157847eaf"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_resize_area_fast_no_vec.html">ResizeAreaFastNoVec</a>&lt; <a class="el" href="group__core__hal__interface.html#gad2eb2ef84c45fa8d16ed89fba4dba16e">ushort</a>, <a class="el" href="group__core__hal__interface.html#gad2eb2ef84c45fa8d16ed89fba4dba16e">ushort</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a2fd6e9d3bade0dc56382044157847eaf">cv::ResizeAreaFastVec_SIMD_16u</a></td></tr>
+<tr class="memitem:a70e15eb539ff3a38e63f9f6e45abab20" id="r_a70e15eb539ff3a38e63f9f6e45abab20"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_resize_area_fast_no_vec.html">ResizeAreaFastNoVec</a>&lt; short, short &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a70e15eb539ff3a38e63f9f6e45abab20">cv::ResizeAreaFastVec_SIMD_16s</a></td></tr>
+<tr class="memitem:af49c4f26a5a1ebf145c5c079221c5343" id="r_af49c4f26a5a1ebf145c5c079221c5343"><td class="memItemLeft">typedef <a class="el" href="structcv_1_1_resize_area_fast_no_vec.html">ResizeAreaFastNoVec</a>&lt; float, float &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#af49c4f26a5a1ebf145c5c079221c5343">cv::ResizeAreaFastVec_SIMD_32f</a></td></tr>
+<tr class="memitem:a90ad6c3fe660b781d469c89cfc92c31a" id="r_a90ad6c3fe660b781d469c89cfc92c31a"><td class="memItemLeft">typedef <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>(*)&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a90ad6c3fe660b781d469c89cfc92c31a">cv::ResizeFunc</a>(const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, const int *xofs, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *alpha, const int *yofs, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *beta, int xmin, int xmax, int ksize)</td></tr>
+<tr class="memitem:a95712b2b1f0105207f7a6066a0d3da44" id="r_a95712b2b1f0105207f7a6066a0d3da44"><td class="memItemLeft">typedef <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>(*)&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a95712b2b1f0105207f7a6066a0d3da44">cv::ResizeAreaFastFunc</a>(const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, const int *ofs, const int *xofs, int scale_x, int scale_y)</td></tr>
+<tr class="memitem:a6d53c0c48e2a3d4d291f32ed730fb147" id="r_a6d53c0c48e2a3d4d291f32ed730fb147"><td class="memItemLeft">typedef <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>(*)&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6d53c0c48e2a3d4d291f32ed730fb147">cv::ResizeAreaFunc</a>(const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, const <a class="el" href="structcv_1_1_decimate_alpha.html">DecimateAlpha</a> *xtab, int xtab_size, const <a class="el" href="structcv_1_1_decimate_alpha.html">DecimateAlpha</a> *ytab, int ytab_size, const int *yofs)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a1fae65b69c143e3fa8143bfe7778c9f1" id="r_a1fae65b69c143e3fa8143bfe7778c9f1"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a1fae65b69c143e3fa8143bfe7778c9f1">cv::interpolateCubic</a> (float x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, float *coeffs)</td></tr>
+<tr class="memitem:aa17788002a617afe70063903b4aaae3d" id="r_aa17788002a617afe70063903b4aaae3d"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aa17788002a617afe70063903b4aaae3d">cv::interpolateLanczos4</a> (float x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, float *coeffs)</td></tr>
+<tr class="memitem:ad8a1d27eeb570a1f491d33e4a5221179" id="r_ad8a1d27eeb570a1f491d33e4a5221179"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad8a1d27eeb570a1f491d33e4a5221179">cv::resizeNN</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, double fx, double fy)</td></tr>
+<tr class="memitem:a3640a5161823344e9a3d433fb958d667" id="r_a3640a5161823344e9a3d433fb958d667"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a3640a5161823344e9a3d433fb958d667">cv::resizeNN_bitexact_tab</a> (int src_dim, int dst_dim, int *ofse)</td></tr>
+<tr class="memitem:a5e99053c96c5379713b60d4a1b5ed815" id="r_a5e99053c96c5379713b60d4a1b5ed815"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a5e99053c96c5379713b60d4a1b5ed815">cv::resizeNN_bitexact</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, double, double)</td></tr>
+<tr class="memitem:abb68112a494256408d075578132f3b1c" id="r_abb68112a494256408d075578132f3b1c"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#abb68112a494256408d075578132f3b1c">cv::clip</a> (int x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, int a, int b)</td></tr>
+<tr class="memitem:a293e8d9723317adfa878d143ae41b87a" id="r_a293e8d9723317adfa878d143ae41b87a"><td class="memTemplParams" colspan="2">template&lt;class HResize, class VResize&gt; </td></tr>
+<tr class="memitem:a293e8d9723317adfa878d143ae41b87a template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a293e8d9723317adfa878d143ae41b87a">cv::resizeGeneric_</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, const int *xofs, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *_alpha, const int *yofs, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *_beta, int xmin, int xmax, int ksize)</td></tr>
+<tr class="memitem:a12c884e2a2686f78967a629b976a83d1" id="r_a12c884e2a2686f78967a629b976a83d1"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, typename WT, typename VecOp&gt; </td></tr>
+<tr class="memitem:a12c884e2a2686f78967a629b976a83d1 template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a12c884e2a2686f78967a629b976a83d1">cv::resizeAreaFast_</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, const int *ofs, const int *xofs, int scale_x, int scale_y)</td></tr>
+<tr class="memitem:ab25609ace838e6efc4e310c40fdeef55" id="r_ab25609ace838e6efc4e310c40fdeef55"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html#ab25609ace838e6efc4e310c40fdeef55">cv::inter_area::mul</a> (const double *buf, int width, double beta, double *sum)</td></tr>
+<tr class="memitem:a69c305d17c387f364fcf784367b7d053" id="r_a69c305d17c387f364fcf784367b7d053"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html#a69c305d17c387f364fcf784367b7d053">cv::inter_area::muladd</a> (const double *buf, int width, double beta, double *sum)</td></tr>
+<tr class="memitem:aef548a196c22d1cb75a90cb150a74862" id="r_aef548a196c22d1cb75a90cb150a74862"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, typename WT&gt; </td></tr>
+<tr class="memitem:aef548a196c22d1cb75a90cb150a74862 template"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html#aef548a196c22d1cb75a90cb150a74862">cv::inter_area::saturate_store</a> (const WT *sum, int width, <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> *D)</td></tr>
+<tr class="memitem:a28b55ae6b31192fb1af38849a8b06d4c" id="r_a28b55ae6b31192fb1af38849a8b06d4c"><td class="memTemplParams" colspan="2">template&lt;typename WT&gt; </td></tr>
+<tr class="memitem:a28b55ae6b31192fb1af38849a8b06d4c template"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html#a28b55ae6b31192fb1af38849a8b06d4c">cv::inter_area::saturate_store</a> (const WT *sum, int width, WT *D)</td></tr>
+<tr class="memitem:aab84c885b2c4b1af7dcb0699d8cac32e" id="r_aab84c885b2c4b1af7dcb0699d8cac32e"><td class="memTemplParams" colspan="2">template&lt;typename WT&gt; </td></tr>
+<tr class="memitem:aab84c885b2c4b1af7dcb0699d8cac32e template"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html#aab84c885b2c4b1af7dcb0699d8cac32e">cv::inter_area::mul</a> (const WT *buf, int width, WT beta, WT *sum)</td></tr>
+<tr class="memitem:acaab6ba52d9770b75055fb6e75c024d6" id="r_acaab6ba52d9770b75055fb6e75c024d6"><td class="memTemplParams" colspan="2">template&lt;typename WT&gt; </td></tr>
+<tr class="memitem:acaab6ba52d9770b75055fb6e75c024d6 template"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1inter__area.html#acaab6ba52d9770b75055fb6e75c024d6">cv::inter_area::muladd</a> (const WT *buf, int width, WT beta, WT *sum)</td></tr>
+<tr class="memitem:a07ca030567b8cda243135fc935648c5d" id="r_a07ca030567b8cda243135fc935648c5d"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, typename WT&gt; </td></tr>
+<tr class="memitem:a07ca030567b8cda243135fc935648c5d template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a07ca030567b8cda243135fc935648c5d">cv::resizeArea_</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, const <a class="el" href="structcv_1_1_decimate_alpha.html">DecimateAlpha</a> *xtab, int xtab_size, const <a class="el" href="structcv_1_1_decimate_alpha.html">DecimateAlpha</a> *ytab, int ytab_size, const int *tabofs)</td></tr>
+<tr class="memitem:a7eb75265e70b3675c47e5a0c5a584ae1" id="r_a7eb75265e70b3675c47e5a0c5a584ae1"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a7eb75265e70b3675c47e5a0c5a584ae1">cv::computeResizeAreaTab</a> (int ssize, int dsize, int cn, double scale, <a class="el" href="structcv_1_1_decimate_alpha.html">DecimateAlpha</a> *tab)</td></tr>
+<tr class="memitem:ga2fe39d2201b12e1b961ca56b2aff9ff2" id="r_ga2fe39d2201b12e1b961ca56b2aff9ff2"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgproc__hal__functions.html#ga2fe39d2201b12e1b961ca56b2aff9ff2">cv::hal::resize</a> (int src_type, const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src_data, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src_step, int src_width, int src_height, <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *dst_data, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int dst_width, int dst_height, double inv_scale_x, double inv_scale_y, int interpolation)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a5165a2c4c009961eec317fa1c69bf00d" id="r_a5165a2c4c009961eec317fa1c69bf00d"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a5165a2c4c009961eec317fa1c69bf00d">cv::INTER_RESIZE_COEF_BITS</a> =11</td></tr>
+<tr class="memitem:ab1fcff45c1feac2c566f920999acf073" id="r_ab1fcff45c1feac2c566f920999acf073"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ab1fcff45c1feac2c566f920999acf073">cv::INTER_RESIZE_COEF_SCALE</a> =1 &lt;&lt; <a class="el" href="namespacecv.html#a5165a2c4c009961eec317fa1c69bf00d">INTER_RESIZE_COEF_BITS</a></td></tr>
+<tr class="memitem:ad9f6e1bb534d5c826977136fa56270b1" id="r_ad9f6e1bb534d5c826977136fa56270b1"><td class="memItemLeft">static const int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad9f6e1bb534d5c826977136fa56270b1">cv::MAX_ESIZE</a> =16</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_ff1242571287b720ea1174d525b8d38d.html">imgproc</a></li><li class="navelem"><a href="dir_3381323028adc7a7a76521f55c54fb57.html">src</a></li><li class="navelem"><a href="resize_8cpp.html">resize.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

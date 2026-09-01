@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda4dnn/csl/event.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('event_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">event.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="event_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA4DNN_CSL_EVENT_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA4DNN_CSL_EVENT_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="error_8hpp.html">error.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8hpp.html">stream.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">opencv2/core/utils/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cuda_runtime_api.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">csl</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html">   24</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">   26</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>() noexcept : event{ <span class="keyword">nullptr</span> } { }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0f2ab091ad7a516411d419d93062abec">   27</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0f2ab091ad7a516411d419d93062abec">Event</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa06a5d2582082942a6e938a288ead67e">   28</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa06a5d2582082942a6e938a288ead67e">Event</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            : <span class="keyword">event</span>{ other.event } {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            other.event = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        }</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a4e513e0f62d2c5a5b80cfea7d296dc82">   34</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a4e513e0f62d2c5a5b80cfea7d296dc82">Event</a>(<span class="keywordtype">bool</span> create, <span class="keywordtype">bool</span> timing_event = <span class="keyword">false</span>) : event{nullptr} {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">if</span> (create) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">flags</a> = (timing_event ? 0 : cudaEventDisableTiming);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaEventCreateWithFlags(&amp;event, <a class="code hl_variable" href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">flags</a>));</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
+</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a77b9bd2fe985deda4836ec2608cf6aa1">   41</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a77b9bd2fe985deda4836ec2608cf6aa1">~Event</a>() {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <span class="keywordflow">if</span> (event != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                    <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaEventDestroy(event));</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            } <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_c_u_d_a_exception.html">CUDAException</a>&amp; ex) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                std::ostringstream os;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                os &lt;&lt; <span class="stringliteral">&quot;Asynchronous exception caught during CUDA event destruction.\n&quot;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                os &lt;&lt; ex.<a class="code hl_function" href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">what</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                os &lt;&lt; <span class="stringliteral">&quot;Exception will be ignored.\n&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                <a class="code hl_define" href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a>(0, os.str().c_str());</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a93863114b17827cfb37ceb968fb98d20">   54</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a93863114b17827cfb37ceb968fb98d20">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>&amp;) <span class="keyword">noexcept</span> = <span class="keyword">delete</span>;</div>
+<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a2353dca9d2930fbece9f39e5b754a76e">   55</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a2353dca9d2930fbece9f39e5b754a76e">operator=</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">Event</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keyword">event</span> = other.event;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            other.event = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aad2fa8ce72e315643ac19e7864b103db">   62</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aad2fa8ce72e315643ac19e7864b103db">record</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">Stream</a>&amp; stream) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaEventRecord(event, stream.<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a8c1d98df4ccaa98b78a6bc6916943ec3">get</a>()));</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0c61c72f115c85a9b0a3f7e739e2c5c1">   68</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0c61c72f115c85a9b0a3f7e739e2c5c1">synchronize</a>()<span class="keyword"> const </span>{ <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaEventSynchronize(event)); }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0bb8047f77c23181867ec350a7754760">   71</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0bb8047f77c23181867ec350a7754760">busy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keyword">auto</span> status = cudaEventQuery(event);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">if</span> (status == cudaErrorNotReady)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(status);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa7ecb92bd60669577091543b4cda7385">   79</a></span>        cudaEvent_t <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa7ecb92bd60669577091543b4cda7385">get</a>() const noexcept { <span class="keywordflow">return</span> event; }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#ad489c1a38fb72b8e91061917bb83133c">   82</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept { <span class="keywordflow">return</span> event; }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        cudaEvent_t event;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    };</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#aa96e2e099820b20382ebd6a22e9a9307">   89</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#aa96e2e099820b20382ebd6a22e9a9307">StreamWaitOnEvent</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">Stream</a>&amp; stream, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html">Event</a>&amp; event) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaStreamWaitEvent(stream.<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a8c1d98df4ccaa98b78a6bc6916943ec3">get</a>(), event.<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa7ecb92bd60669577091543b4cda7385">get</a>(), 0));</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#ad3e42bac670225bbcf67856805872fe5">   95</a></span>    <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#ad3e42bac670225bbcf67856805872fe5">TimeElapsedBetweenEvents</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html">Event</a>&amp; start, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html">Event</a>&amp; end) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordtype">float</span> temp;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaEventElapsedTime(&amp;temp, start.get(), end.get()));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">return</span> temp;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}}}} <span class="comment">/* namespace cv::dnn::cuda4dnn::csl */</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA4DNN_CSL_EVENT_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1_exception_html_ac0f5570ab924b550575c2457a4b799ef"><div class="ttname"><a href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">cv::Exception::what</a></div><div class="ttdeci">virtual const char * what() const CV_NOEXCEPT CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l00337">system.cpp:337</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_c_u_d_a_exception_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_c_u_d_a_exception.html">cv::dnn::cuda4dnn::csl::CUDAException</a></div><div class="ttdoc">exception class for errors thrown by the CUDA APIs</div><div class="ttdef"><b>Definición</b> <a href="error_8hpp_source.html#l00017">error.hpp:17</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html">cv::dnn::cuda4dnn::csl::Event</a></div><div class="ttdoc">sharable CUDA event</div><div class="ttdef"><b>Definición</b> <a href="#l00024">event.hpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a0bb8047f77c23181867ec350a7754760"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0bb8047f77c23181867ec350a7754760">cv::dnn::cuda4dnn::csl::Event::busy</a></div><div class="ttdeci">bool busy() const</div><div class="ttdef"><b>Definición</b> <a href="#l00071">event.hpp:71</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a0c61c72f115c85a9b0a3f7e739e2c5c1"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0c61c72f115c85a9b0a3f7e739e2c5c1">cv::dnn::cuda4dnn::csl::Event::synchronize</a></div><div class="ttdeci">void synchronize() const</div><div class="ttdef"><b>Definición</b> <a href="#l00068">event.hpp:68</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a0f2ab091ad7a516411d419d93062abec"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a0f2ab091ad7a516411d419d93062abec">cv::dnn::cuda4dnn::csl::Event::Event</a></div><div class="ttdeci">Event(const Event &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a2353dca9d2930fbece9f39e5b754a76e"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a2353dca9d2930fbece9f39e5b754a76e">cv::dnn::cuda4dnn::csl::Event::operator=</a></div><div class="ttdeci">Event &amp; operator=(Event &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00055">event.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a4e513e0f62d2c5a5b80cfea7d296dc82"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a4e513e0f62d2c5a5b80cfea7d296dc82">cv::dnn::cuda4dnn::csl::Event::Event</a></div><div class="ttdeci">Event(bool create, bool timing_event=false)</div><div class="ttdef"><b>Definición</b> <a href="#l00034">event.hpp:34</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a77b9bd2fe985deda4836ec2608cf6aa1"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a77b9bd2fe985deda4836ec2608cf6aa1">cv::dnn::cuda4dnn::csl::Event::~Event</a></div><div class="ttdeci">~Event()</div><div class="ttdef"><b>Definición</b> <a href="#l00041">event.hpp:41</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_a93863114b17827cfb37ceb968fb98d20"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#a93863114b17827cfb37ceb968fb98d20">cv::dnn::cuda4dnn::csl::Event::operator=</a></div><div class="ttdeci">Event &amp; operator=(const Event &amp;) noexcept=delete</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_aa06a5d2582082942a6e938a288ead67e"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa06a5d2582082942a6e938a288ead67e">cv::dnn::cuda4dnn::csl::Event::Event</a></div><div class="ttdeci">Event(Event &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00028">event.hpp:28</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_aa7ecb92bd60669577091543b4cda7385"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aa7ecb92bd60669577091543b4cda7385">cv::dnn::cuda4dnn::csl::Event::get</a></div><div class="ttdeci">cudaEvent_t get() const noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00079">event.hpp:79</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_aad2fa8ce72e315643ac19e7864b103db"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#aad2fa8ce72e315643ac19e7864b103db">cv::dnn::cuda4dnn::csl::Event::record</a></div><div class="ttdeci">void record(const Stream &amp;stream)</div><div class="ttdef"><b>Definición</b> <a href="#l00062">event.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event_html_af84dc810f8e2e1e77d01a63f939d3fd1"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_event.html#af84dc810f8e2e1e77d01a63f939d3fd1">cv::dnn::cuda4dnn::csl::Event::Event</a></div><div class="ttdeci">Event() noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00026">event.hpp:26</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">cv::dnn::cuda4dnn::csl::Stream</a></div><div class="ttdoc">sharable smart CUDA stream</div><div class="ttdef"><b>Definición</b> <a href="stream_8hpp_source.html#l00116">stream.hpp:116</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_a8c1d98df4ccaa98b78a6bc6916943ec3"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a8c1d98df4ccaa98b78a6bc6916943ec3">cv::dnn::cuda4dnn::csl::Stream::get</a></div><div class="ttdeci">cudaStream_t get() const noexcept</div><div class="ttdef"><b>Definición</b> <a href="stream_8hpp_source.html#l00150">stream.hpp:150</a></div></div>
+<div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_a78eb7f9d6378d214ab43da4f1fcd28ae"><div class="ttname"><a href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a></div><div class="ttdeci">#define CUDA4DNN_CHECK_CUDA(call)</div><div class="ttdef"><b>Definición</b> <a href="error_8hpp_source.html#l00012">error.hpp:12</a></div></div>
+<div class="ttc" id="agroup__calib_html_gac28e35eb6aa1ca2fc43838e8bdd0dbdc"><div class="ttname"><a href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">cv::flags</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray InputOutputArray OutputArrayOfArrays OutputArrayOfArrays OutputArray OutputArray OutputArray int flags</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00697">calib.hpp:697</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga9a7297e347ba19830270825e5cbb6d0b"><div class="ttname"><a href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a></div><div class="ttdeci">#define CV_LOG_WARNING(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00169">logger.hpp:169</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">cv::dnn::cuda4dnn::csl</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html_aa96e2e099820b20382ebd6a22e9a9307"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#aa96e2e099820b20382ebd6a22e9a9307">cv::dnn::cuda4dnn::csl::StreamWaitOnEvent</a></div><div class="ttdeci">void StreamWaitOnEvent(const Stream &amp;stream, const Event &amp;event)</div><div class="ttdef"><b>Definición</b> <a href="#l00089">event.hpp:89</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html_ad3e42bac670225bbcf67856805872fe5"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html#ad3e42bac670225bbcf67856805872fe5">cv::dnn::cuda4dnn::csl::TimeElapsedBetweenEvents</a></div><div class="ttdeci">float TimeElapsedBetweenEvents(const Event &amp;start, const Event &amp;end)</div><div class="ttdef"><b>Definición</b> <a href="#l00095">event.hpp:95</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astream_8hpp_html"><div class="ttname"><a href="stream_8hpp.html">stream.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_329f8aeda4c94140e35f70be21279668.html">cuda4dnn</a></li><li class="navelem"><a href="dir_c1ab3ca0f95442b07db671d87c7a5644.html">csl</a></li><li class="navelem"><a href="event_8hpp.html">event.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

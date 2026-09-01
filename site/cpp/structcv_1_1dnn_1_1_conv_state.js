@@ -1,0 +1,25 @@
+var structcv_1_1dnn_1_1_conv_state =
+[
+    [ "dump", "structcv_1_1dnn_1_1_conv_state.html#aa9b24cb46d309be1b8c8728efda72603", null ],
+    [ "initConv", "structcv_1_1dnn_1_1_conv_state.html#a2403563692f69447bdf29d6583fd5d5f", null ],
+    [ "initDeconv", "structcv_1_1dnn_1_1_conv_state.html#a7aaaeaf4a7a992a5f959e0a475d278a2", null ],
+    [ "initOfs", "structcv_1_1dnn_1_1_conv_state.html#a9ab50b1a9ae25635ac243cee65df2ff2", null ],
+    [ "initPooling", "structcv_1_1dnn_1_1_conv_state.html#ae0e0df2baada4fde2128299cf9363d78", null ],
+    [ "sameShape", "structcv_1_1dnn_1_1_conv_state.html#ac2a2f342c74d6971921f4e233135049f", null ],
+    [ "activation", "structcv_1_1dnn_1_1_conv_state.html#a2f44dd0f547f433d6ed51ed667546b91", null ],
+    [ "activParams", "structcv_1_1dnn_1_1_conv_state.html#a8a713fcf17b8d00f14d8dea1aecd88b8", null ],
+    [ "coordtab", "structcv_1_1dnn_1_1_conv_state.html#a59ddd488b7a119123beaf5d39ce2808f", null ],
+    [ "depthwise", "structcv_1_1dnn_1_1_conv_state.html#a8b6407d1fbcbe8d58618975374055f53", null ],
+    [ "dilations", "structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76", null ],
+    [ "fastActivation", "structcv_1_1dnn_1_1_conv_state.html#afea424881f75976f6b646018cfb8ab17", null ],
+    [ "inner", "structcv_1_1dnn_1_1_conv_state.html#a47ce69d762a3e67b13373c83255164ac", null ],
+    [ "inpshape", "structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851", null ],
+    [ "kshape", "structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded", null ],
+    [ "ngroups", "structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b", null ],
+    [ "nspatialdims", "structcv_1_1dnn_1_1_conv_state.html#a1aa0028a234e06ec50fd49e6ec411b0e", null ],
+    [ "ofstab", "structcv_1_1dnn_1_1_conv_state.html#a18115313e8727278770ef857dc3d6c7d", null ],
+    [ "outshape", "structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb", null ],
+    [ "pads", "structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3", null ],
+    [ "strides", "structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da", null ],
+    [ "wshape", "structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c", null ]
+];

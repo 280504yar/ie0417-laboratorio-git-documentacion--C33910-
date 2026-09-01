@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/include/opencv2/objdetect/charuco_detector.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('charuco__detector_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">charuco_detector.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="charuco__detector_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifndef OPENCV_OBJDETECT_CHARUCO_DETECTOR_HPP</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define OPENCV_OBJDETECT_CHARUCO_DETECTOR_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="aruco__detector_8hpp.html">opencv2/objdetect/aruco_detector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1aruco.html">aruco</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html">   15</a></span><span class="keyword">struct </span><a class="code hl_define" href="group__core__utils.html#ga13d649e3f5582a106caaa98f187dd34b">CV_EXPORTS_W_SIMPLE</a> <a class="code hl_function" href="structcv_1_1aruco_1_1_charuco_parameters.html#af637c95285c7601c069c41a44bf2e329">CharucoParameters</a> {</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html#af637c95285c7601c069c41a44bf2e329">   16</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="structcv_1_1aruco_1_1_charuco_parameters.html#af637c95285c7601c069c41a44bf2e329">CharucoParameters</a>() {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#a737e375354dbe201a42b6e13836cf1c2">minMarkers</a> = 2;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#ac3c5bacf7e857a40635ae585dbd2fbbc">tryRefineMarkers</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#a2f9b3f2349a80b5db80e3fd07cc9e553">checkMarkers</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html#ae051956ea07ce7084f6643139495430f">   22</a></span>    <a class="code hl_define" href="group__core__utils.html#ga9e800d960e0fc30e7f83c67c98e69ed2">CV_PROP_RW</a> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#ae051956ea07ce7084f6643139495430f">cameraMatrix</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html#a9596ce759398c8538b6d6eb69df96e72">   25</a></span>    <a class="code hl_define" href="group__core__utils.html#ga9e800d960e0fc30e7f83c67c98e69ed2">CV_PROP_RW</a> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#a9596ce759398c8538b6d6eb69df96e72">distCoeffs</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html#a737e375354dbe201a42b6e13836cf1c2">   28</a></span>    <a class="code hl_define" href="group__core__utils.html#ga9e800d960e0fc30e7f83c67c98e69ed2">CV_PROP_RW</a> <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#a737e375354dbe201a42b6e13836cf1c2">minMarkers</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html#ac3c5bacf7e857a40635ae585dbd2fbbc">   31</a></span>    <a class="code hl_define" href="group__core__utils.html#ga9e800d960e0fc30e7f83c67c98e69ed2">CV_PROP_RW</a> <span class="keywordtype">bool</span> <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#ac3c5bacf7e857a40635ae585dbd2fbbc">tryRefineMarkers</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_charuco_parameters.html#a2f9b3f2349a80b5db80e3fd07cc9e553">   34</a></span>    <a class="code hl_define" href="group__core__utils.html#ga9e800d960e0fc30e7f83c67c98e69ed2">CV_PROP_RW</a> <span class="keywordtype">bool</span> <a class="code hl_variable" href="structcv_1_1aruco_1_1_charuco_parameters.html#a2f9b3f2349a80b5db80e3fd07cc9e553">checkMarkers</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcv_1_1aruco_1_1_charuco_detector.html">   37</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#ad7647d1c3d0e2db97bedc31f743e796b">CharucoDetector</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1_algorithm.html#a827c8b2781ed17574805f373e6054ff1">Algorithm</a> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#ad7647d1c3d0e2db97bedc31f743e796b">CharucoDetector</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1aruco_1_1_charuco_board.html">CharucoBoard</a>&amp; board,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                            <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_charuco_parameters.html">CharucoParameters</a>&amp; charucoParams = <a class="code hl_struct" href="structcv_1_1aruco_1_1_charuco_parameters.html">CharucoParameters</a>(),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                            <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_detector_parameters.html">DetectorParameters</a> &amp;detectorParams = <a class="code hl_struct" href="structcv_1_1aruco_1_1_detector_parameters.html">DetectorParameters</a>(),</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                            <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_refine_parameters.html">RefineParameters</a>&amp; refineParams = <a class="code hl_struct" href="structcv_1_1aruco_1_1_refine_parameters.html">RefineParameters</a>());</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1aruco_1_1_charuco_board.html">CharucoBoard</a>&amp; <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#a47ec43ea1e433f23910e9713ce239b03">getBoard</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#abfdfb61d12697d4bd77fbf9bc197e4e4">setBoard</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1aruco_1_1_charuco_board.html">CharucoBoard</a>&amp; board);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_charuco_parameters.html">CharucoParameters</a>&amp; <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#ac4b1e5800e41b374b709dd2878a3a5d5">getCharucoParameters</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#a6b1af24ce7ac8440275acb024f012f59">setCharucoParameters</a>(<a class="code hl_struct" href="structcv_1_1aruco_1_1_charuco_parameters.html">CharucoParameters</a>&amp; charucoParameters);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_detector_parameters.html">DetectorParameters</a>&amp; <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#a3dfe5aeaadb1c36145a61e51f9f5b182">getDetectorParameters</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#a6533a46c26f232d5b14dac586ddba07b">setDetectorParameters</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_detector_parameters.html">DetectorParameters</a>&amp; detectorParameters);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_refine_parameters.html">RefineParameters</a>&amp; <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#af0c6cf9983f6e7e97295c808cb81b304">getRefineParameters</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#ad6e2b73fb599dc802b98e98ed8a1a542">setRefineParameters</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1aruco_1_1_refine_parameters.html">RefineParameters</a>&amp; refineParameters);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#aacbea601612a3a0feaa45ebb7fb255fd">detectBoard</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> charucoCorners, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> charucoIds,</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                             <a class="code hl_typedef" href="group__core__basic.html#ga8899575c0929a56ab8bdd01cf34ebcb1">InputOutputArrayOfArrays</a> markerCorners = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(),</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                             <a class="code hl_typedef" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> markerIds = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>()) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1aruco_1_1_charuco_detector.html#a7c8f2d11dd861f8071c5362d9c1fd0e7">detectDiamonds</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, <a class="code hl_typedef" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> diamondCorners, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> diamondIds,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                                <a class="code hl_typedef" href="group__core__basic.html#ga8899575c0929a56ab8bdd01cf34ebcb1">InputOutputArrayOfArrays</a> markerCorners = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(),</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                                <a class="code hl_typedef" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> markerIds = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>()) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1aruco_1_1_charuco_detector_1_1_charuco_detector_impl.html">CharucoDetectorImpl</a>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classcv_1_1aruco_1_1_charuco_detector.html#acb1d53d9e2142d7864c0dc7225be18d0">  117</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;CharucoDetectorImpl&gt;</a> <a class="code hl_variable" href="classcv_1_1aruco_1_1_charuco_detector.html#acb1d53d9e2142d7864c0dc7225be18d0">charucoDetectorImpl</a>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <span class="keywordtype">void</span> <a class="code hl_function" href="group__objdetect__aruco.html#ga7225eee644190f791e1583c499b7ab10">drawDetectedCornersCharuco</a>(<a class="code hl_typedef" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> image, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> charucoCorners,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                                             <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> charucoIds = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> cornerColor = <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a>(255, 0, 0));</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <span class="keywordtype">void</span> <a class="code hl_function" href="group__objdetect__aruco.html#ga0dbf27203267fb8e9f282554cf0d3433">drawDetectedDiamonds</a>(<a class="code hl_typedef" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> image, <a class="code hl_typedef" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> diamondCorners,</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                                       <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> diamondIds = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(),</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                                       <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> borderColor = <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a>(0, 0, 255));</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>}</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aaruco__detector_8hpp_html"><div class="ttname"><a href="aruco__detector_8hpp.html">aruco_detector.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1_algorithm_html_a827c8b2781ed17574805f373e6054ff1"><div class="ttname"><a href="classcv_1_1_algorithm.html#a827c8b2781ed17574805f373e6054ff1">cv::Algorithm::Algorithm</a></div><div class="ttdeci">Algorithm()</div><div class="ttdef"><b>Definición</b> <a href="algorithm_8cpp_source.html#l00048">algorithm.cpp:48</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_board_html"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_board.html">cv::aruco::CharucoBoard</a></div><div class="ttdoc">ChArUco board is a planar chessboard where the markers are placed inside the white squares of a chess...</div><div class="ttdef"><b>Definición</b> <a href="aruco__board_8hpp_source.html#l00135">aruco_board.hpp:135</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_a3dfe5aeaadb1c36145a61e51f9f5b182"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#a3dfe5aeaadb1c36145a61e51f9f5b182">cv::aruco::CharucoDetector::getDetectorParameters</a></div><div class="ttdeci">CV_WRAP const DetectorParameters &amp; getDetectorParameters() const</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00377">charuco_detector.cpp:377</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_a47ec43ea1e433f23910e9713ce239b03"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#a47ec43ea1e433f23910e9713ce239b03">cv::aruco::CharucoDetector::getBoard</a></div><div class="ttdeci">CV_WRAP const CharucoBoard &amp; getBoard() const</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00360">charuco_detector.cpp:360</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_a6533a46c26f232d5b14dac586ddba07b"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#a6533a46c26f232d5b14dac586ddba07b">cv::aruco::CharucoDetector::setDetectorParameters</a></div><div class="ttdeci">CV_WRAP void setDetectorParameters(const DetectorParameters &amp;detectorParameters)</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00381">charuco_detector.cpp:381</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_a6b1af24ce7ac8440275acb024f012f59"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#a6b1af24ce7ac8440275acb024f012f59">cv::aruco::CharucoDetector::setCharucoParameters</a></div><div class="ttdeci">CV_WRAP void setCharucoParameters(CharucoParameters &amp;charucoParameters)</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00373">charuco_detector.cpp:373</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_a7c8f2d11dd861f8071c5362d9c1fd0e7"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#a7c8f2d11dd861f8071c5362d9c1fd0e7">cv::aruco::CharucoDetector::detectDiamonds</a></div><div class="ttdeci">CV_WRAP void detectDiamonds(InputArray image, OutputArrayOfArrays diamondCorners, OutputArray diamondIds, InputOutputArrayOfArrays markerCorners=noArray(), InputOutputArray markerIds=noArray()) const</div><div class="ttdoc">Detect ChArUco Diamond markers.</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00398">charuco_detector.cpp:398</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_aacbea601612a3a0feaa45ebb7fb255fd"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#aacbea601612a3a0feaa45ebb7fb255fd">cv::aruco::CharucoDetector::detectBoard</a></div><div class="ttdeci">CV_WRAP void detectBoard(InputArray image, OutputArray charucoCorners, OutputArray charucoIds, InputOutputArrayOfArrays markerCorners=noArray(), InputOutputArray markerIds=noArray()) const</div><div class="ttdoc">detect aruco markers and interpolate position of ChArUco board corners</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00393">charuco_detector.cpp:393</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_abfdfb61d12697d4bd77fbf9bc197e4e4"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#abfdfb61d12697d4bd77fbf9bc197e4e4">cv::aruco::CharucoDetector::setBoard</a></div><div class="ttdeci">CV_WRAP void setBoard(const CharucoBoard &amp;board)</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00364">charuco_detector.cpp:364</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_ac4b1e5800e41b374b709dd2878a3a5d5"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#ac4b1e5800e41b374b709dd2878a3a5d5">cv::aruco::CharucoDetector::getCharucoParameters</a></div><div class="ttdeci">CV_WRAP const CharucoParameters &amp; getCharucoParameters() const</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00369">charuco_detector.cpp:369</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_acb1d53d9e2142d7864c0dc7225be18d0"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#acb1d53d9e2142d7864c0dc7225be18d0">cv::aruco::CharucoDetector::charucoDetectorImpl</a></div><div class="ttdeci">Ptr&lt; CharucoDetectorImpl &gt; charucoDetectorImpl</div><div class="ttdef"><b>Definición</b> <a href="#l00117">charuco_detector.hpp:117</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_ad6e2b73fb599dc802b98e98ed8a1a542"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#ad6e2b73fb599dc802b98e98ed8a1a542">cv::aruco::CharucoDetector::setRefineParameters</a></div><div class="ttdeci">CV_WRAP void setRefineParameters(const RefineParameters &amp;refineParameters)</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00389">charuco_detector.cpp:389</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_ad7647d1c3d0e2db97bedc31f743e796b"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#ad7647d1c3d0e2db97bedc31f743e796b">cv::aruco::CharucoDetector::CharucoDetector</a></div><div class="ttdeci">CV_WRAP CharucoDetector(const CharucoBoard &amp;board, const CharucoParameters &amp;charucoParams=CharucoParameters(), const DetectorParameters &amp;detectorParams=DetectorParameters(), const RefineParameters &amp;refineParams=RefineParameters())</div><div class="ttdoc">Basic CharucoDetector constructor.</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00355">charuco_detector.cpp:355</a></div></div>
+<div class="ttc" id="aclasscv_1_1aruco_1_1_charuco_detector_html_af0c6cf9983f6e7e97295c808cb81b304"><div class="ttname"><a href="classcv_1_1aruco_1_1_charuco_detector.html#af0c6cf9983f6e7e97295c808cb81b304">cv::aruco::CharucoDetector::getRefineParameters</a></div><div class="ttdeci">CV_WRAP const RefineParameters &amp; getRefineParameters() const</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00385">charuco_detector.cpp:385</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga606feabe3b50ab6838f1ba89727aa07a"><div class="ttname"><a href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">cv::InputArrayOfArrays</a></div><div class="ttdeci">InputArray InputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00588">mat.hpp:588</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga8899575c0929a56ab8bdd01cf34ebcb1"><div class="ttname"><a href="group__core__basic.html#ga8899575c0929a56ab8bdd01cf34ebcb1">cv::InputOutputArrayOfArrays</a></div><div class="ttdeci">InputOutputArray InputOutputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00592">mat.hpp:592</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga889a09549b98223016170d9b613715de"><div class="ttname"><a href="group__core__basic.html#ga889a09549b98223016170d9b613715de">cv::OutputArrayOfArrays</a></div><div class="ttdeci">OutputArray OutputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00590">mat.hpp:590</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gad9287b23bba2fed753b36ef561ae7346"><div class="ttname"><a href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">cv::noArray</a></div><div class="ttdeci">CV_EXPORTS InputOutputArray noArray()</div><div class="ttdoc">Returns an empty InputArray or OutputArray.</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l02476">matrix_wrap.cpp:2476</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaf77c9a14ef956c50c1efd4547f444e63"><div class="ttname"><a href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">cv::InputOutputArray</a></div><div class="ttdeci">const _InputOutputArray &amp; InputOutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00591">mat.hpp:591</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga13d649e3f5582a106caaa98f187dd34b"><div class="ttname"><a href="group__core__utils.html#ga13d649e3f5582a106caaa98f187dd34b">CV_EXPORTS_W_SIMPLE</a></div><div class="ttdeci">#define CV_EXPORTS_W_SIMPLE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00484">cvdef.h:484</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga67ea671a3582ce612ac3c281e067f480"><div class="ttname"><a href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a></div><div class="ttdeci">#define CV_EXPORTS_W</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00483">cvdef.h:483</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga9e800d960e0fc30e7f83c67c98e69ed2"><div class="ttname"><a href="group__core__utils.html#ga9e800d960e0fc30e7f83c67c98e69ed2">CV_PROP_RW</a></div><div class="ttdeci">#define CV_PROP_RW</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00491">cvdef.h:491</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gae435babf3ce7cca990524b23adf6b4a3"><div class="ttname"><a href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a></div><div class="ttdeci">#define CV_WRAP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00493">cvdef.h:493</a></div></div>
+<div class="ttc" id="agroup__objdetect__aruco_html_ga0dbf27203267fb8e9f282554cf0d3433"><div class="ttname"><a href="group__objdetect__aruco.html#ga0dbf27203267fb8e9f282554cf0d3433">cv::aruco::drawDetectedDiamonds</a></div><div class="ttdeci">CV_EXPORTS_W void drawDetectedDiamonds(InputOutputArray image, InputArrayOfArrays diamondCorners, InputArray diamondIds=noArray(), Scalar borderColor=Scalar(0, 0, 255))</div><div class="ttdoc">Draw a set of detected ChArUco Diamond markers.</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00583">charuco_detector.cpp:583</a></div></div>
+<div class="ttc" id="agroup__objdetect__aruco_html_ga7225eee644190f791e1583c499b7ab10"><div class="ttname"><a href="group__objdetect__aruco.html#ga7225eee644190f791e1583c499b7ab10">cv::aruco::drawDetectedCornersCharuco</a></div><div class="ttdeci">CV_EXPORTS_W void drawDetectedCornersCharuco(InputOutputArray image, InputArray charucoCorners, InputArray charucoIds=noArray(), Scalar cornerColor=Scalar(255, 0, 0))</div><div class="ttdoc">Draws a set of Charuco corners.</div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00553">charuco_detector.cpp:553</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html"><div class="ttname"><a href="namespacecv_1_1aruco.html">cv::aruco</a></div><div class="ttdef"><b>Definición</b> <a href="aruco__board_8hpp_source.html#l00010">aruco_board.hpp:10</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_detector_1_1_charuco_detector_impl_html"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_detector_1_1_charuco_detector_impl.html">cv::aruco::CharucoDetector::CharucoDetectorImpl</a></div><div class="ttdef"><b>Definición</b> <a href="charuco__detector_8cpp_source.html#l00017">charuco_detector.cpp:17</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html">cv::aruco::CharucoParameters</a></div><div class="ttdef"><b>Definición</b> <a href="#l00015">charuco_detector.hpp:15</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html_a2f9b3f2349a80b5db80e3fd07cc9e553"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html#a2f9b3f2349a80b5db80e3fd07cc9e553">cv::aruco::CharucoParameters::checkMarkers</a></div><div class="ttdeci">CV_PROP_RW bool checkMarkers</div><div class="ttdoc">run check to verify that markers belong to the same board, default true</div><div class="ttdef"><b>Definición</b> <a href="#l00034">charuco_detector.hpp:34</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html_a737e375354dbe201a42b6e13836cf1c2"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html#a737e375354dbe201a42b6e13836cf1c2">cv::aruco::CharucoParameters::minMarkers</a></div><div class="ttdeci">CV_PROP_RW int minMarkers</div><div class="ttdoc">minMarkers number of adjacent markers that must be detected to return a charuco corner,...</div><div class="ttdef"><b>Definición</b> <a href="#l00028">charuco_detector.hpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html_a9596ce759398c8538b6d6eb69df96e72"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html#a9596ce759398c8538b6d6eb69df96e72">cv::aruco::CharucoParameters::distCoeffs</a></div><div class="ttdeci">CV_PROP_RW Mat distCoeffs</div><div class="ttdoc">distCoeffs optional vector of distortion coefficients</div><div class="ttdef"><b>Definición</b> <a href="#l00025">charuco_detector.hpp:25</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html_ac3c5bacf7e857a40635ae585dbd2fbbc"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html#ac3c5bacf7e857a40635ae585dbd2fbbc">cv::aruco::CharucoParameters::tryRefineMarkers</a></div><div class="ttdeci">CV_PROP_RW bool tryRefineMarkers</div><div class="ttdoc">try to use refine board, default false</div><div class="ttdef"><b>Definición</b> <a href="#l00031">charuco_detector.hpp:31</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html_ae051956ea07ce7084f6643139495430f"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html#ae051956ea07ce7084f6643139495430f">cv::aruco::CharucoParameters::cameraMatrix</a></div><div class="ttdeci">CV_PROP_RW Mat cameraMatrix</div><div class="ttdoc">cameraMatrix optional 3x3 floating-point camera matrix</div><div class="ttdef"><b>Definición</b> <a href="#l00022">charuco_detector.hpp:22</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_charuco_parameters_html_af637c95285c7601c069c41a44bf2e329"><div class="ttname"><a href="structcv_1_1aruco_1_1_charuco_parameters.html#af637c95285c7601c069c41a44bf2e329">cv::aruco::CharucoParameters::CharucoParameters</a></div><div class="ttdeci">CV_WRAP CharucoParameters()</div><div class="ttdef"><b>Definición</b> <a href="#l00016">charuco_detector.hpp:16</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_detector_parameters_html"><div class="ttname"><a href="structcv_1_1aruco_1_1_detector_parameters.html">cv::aruco::DetectorParameters</a></div><div class="ttdoc">struct DetectorParameters is used by ArucoDetector</div><div class="ttdef"><b>Definición</b> <a href="aruco__detector_8hpp_source.html#l00027">aruco_detector.hpp:27</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_refine_parameters_html"><div class="ttname"><a href="structcv_1_1aruco_1_1_refine_parameters.html">cv::aruco::RefineParameters</a></div><div class="ttdoc">struct RefineParameters is used by ArucoDetector</div><div class="ttdef"><b>Definición</b> <a href="aruco__detector_8hpp_source.html#l00244">aruco_detector.hpp:244</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_9dbde1edafb7a9bb9d78cf83f0be24af.html">include</a></li><li class="navelem"><a href="dir_00d4540ccdc7ec96c0dd1898c5069300.html">opencv2</a></li><li class="navelem"><a href="dir_ce54f0d335b65079d3aced25a66762dc.html">objdetect</a></li><li class="navelem"><a href="charuco__detector_8hpp.html">charuco_detector.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/geometry/src/usac/plane_solver.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('plane__solver_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">plane_solver.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="plane__solver_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="geometry_2src_2precomp_8hpp.html">../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud__wrapper_8hpp.html">../ptcloud/ptcloud_wrapper.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="usac_8hpp.html">../usac.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud__utils_8hpp.html">../ptcloud/ptcloud_utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1usac.html">usac</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html">   12</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a4a4f736321c1c765ee7ec24b65bc02bb">PlaneModelMinimalSolverImpl</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1usac_1_1_plane_model_minimal_solver.html">PlaneModelMinimalSolver</a>, <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1_point_cloud_wrapper.html#a5c45d903ab991e53c2d0ec25b9e097f3">PointCloudWrapper</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a4a4f736321c1c765ee7ec24b65bc02bb">   16</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a4a4f736321c1c765ee7ec24b65bc02bb">PlaneModelMinimalSolverImpl</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;points_)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            : <a class="code hl_function" href="classcv_1_1_point_cloud_wrapper.html#a5c45d903ab991e53c2d0ec25b9e097f3">PointCloudWrapper</a>(points_)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
+</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a79bdd20d26875b2b6287afce07fe1789">   21</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a79bdd20d26875b2b6287afce07fe1789">getSampleSize</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">return</span> 3;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a2e970d306cec7db1259cd3ef58e346ff">   26</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a2e970d306cec7db1259cd3ef58e346ff">getMaxNumberOfSolutions</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a559be08da35fd2ab4e7ca2e3f33b57a1">   35</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a559be08da35fd2ab4e7ca2e3f33b57a1">estimate</a>(<span class="keyword">const</span> std::vector&lt;int&gt; &amp;sample, std::vector&lt;Mat&gt; &amp;<a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>)<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.clear();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="comment">// Get point data</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> p1_idx = sample[0], p2_idx = sample[1], p3_idx = sample[2];</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">float</span> x1 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a22ff661c1b02efd0de59a461eeba039c">pts_ptr_x</a>[p1_idx], y1 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a54557194dd611e23d2f4d2d0d9f9a751">pts_ptr_y</a>[p1_idx], z1 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a30e431dba48bf97599cb0bfcbd1c118f">pts_ptr_z</a>[p1_idx];</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">float</span> x2 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a22ff661c1b02efd0de59a461eeba039c">pts_ptr_x</a>[p2_idx], y2 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a54557194dd611e23d2f4d2d0d9f9a751">pts_ptr_y</a>[p2_idx], z2 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a30e431dba48bf97599cb0bfcbd1c118f">pts_ptr_z</a>[p2_idx];</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">float</span> x3 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a22ff661c1b02efd0de59a461eeba039c">pts_ptr_x</a>[p3_idx], y3 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a54557194dd611e23d2f4d2d0d9f9a751">pts_ptr_y</a>[p3_idx], z3 = <a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a30e431dba48bf97599cb0bfcbd1c118f">pts_ptr_z</a>[p3_idx];</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="comment">// v1 = p1p2  v2 = p1p3</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">float</span> a1 = x2 - x1;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">float</span> b1 = y2 - y1;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">float</span> c1 = z2 - z1;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">float</span> a2 = x3 - x1;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">float</span> b2 = y3 - y1;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">float</span> c2 = z3 - z1;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="comment">// Get the plane normal vector v = v1 x v2</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">float</span> a = b1 * c2 - b2 * c1;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">float</span> b = a2 * c1 - a1 * c2;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">float</span> c = a1 * b2 - b1 * a2;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">float</span> d = (-a * x1 - b * y1 - c * z1);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">double</span> plane_coeff[4] = {a, b, c, d};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.emplace_back(<a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a>(1, 4, <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>, plane_coeff).clone());</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="comment">//        models = std::vector&lt;Mat&gt;{Mat_&lt;double&gt;(3, 3)};</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">//        auto *f = (double *) models[0].data;</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="comment">//        f[0] = a, f[1] = b, f[2] = c, f[3] = d;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
+</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_minimal_solver.html#a041d41b3b7f692d84da46ff4c6f5e862">   71</a></span>Ptr &lt;PlaneModelMinimalSolver&gt; <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_minimal_solver.html#a041d41b3b7f692d84da46ff4c6f5e862">PlaneModelMinimalSolver::create</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;points_)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>{</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;PlaneModelMinimalSolverImpl&gt;</a>(points_);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="};">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html">   77</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a748c6e0e41992080e08b777fc0eb92e1">PlaneModelNonMinimalSolverImpl</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver.html">PlaneModelNonMinimalSolver</a>, <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1_point_cloud_wrapper.html#a5c45d903ab991e53c2d0ec25b9e097f3">PointCloudWrapper</a></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a748c6e0e41992080e08b777fc0eb92e1">   81</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a748c6e0e41992080e08b777fc0eb92e1">PlaneModelNonMinimalSolverImpl</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;points_)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            : <a class="code hl_function" href="classcv_1_1_point_cloud_wrapper.html#a5c45d903ab991e53c2d0ec25b9e097f3">PointCloudWrapper</a>(points_)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a192b09d0ab2211136856a7c49f1052ba">   86</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a192b09d0ab2211136856a7c49f1052ba">getMinimumRequiredSampleSize</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span> 3;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a02d37eb901f04dc9b083bacbc661f86d">   91</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a02d37eb901f04dc9b083bacbc661f86d">getMaxNumberOfSolutions</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a21b97000e11af2a8647d2d194cf2e135">   99</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a21b97000e11af2a8647d2d194cf2e135">estimate</a>(<span class="keyword">const</span> std::vector&lt;int&gt; &amp;sample, <span class="keywordtype">int</span> sample_size, std::vector&lt;Mat&gt; &amp;<a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keyword">const</span> std::vector&lt;double&gt; &amp;<span class="comment">/*weights*/</span>)<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.clear();</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> pcaset;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_function" href="namespacecv.html#a1af58e1f9b195ed85d1e69d0a601e131">copyPointDataByIdxs</a>(*<a class="code hl_variable" href="classcv_1_1_point_cloud_wrapper.html#a8a7b14911222f9a6f631f188dd807c0e">points_mat</a>, pcaset, sample, sample_size);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <a class="code hl_class" href="classcv_1_1_p_c_a.html">cv::PCA</a> pca(pcaset, <span class="comment">// pass the data</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a>(), <span class="comment">// we do not have a pre-computed mean vector,</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="comment">// so let the PCA engine to compute it</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                <a class="code hl_enumvalue" href="classcv_1_1_p_c_a.html#ae8a94a2add0555b0414e85c08ff67f50a2c52b7c4c9721a3e04a1d6699e738093">cv::PCA::DATA_AS_COL</a>, <span class="comment">// indicate that the vectors</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                <span class="comment">// are stored as matrix columns (3xN Mat, points are arranged in columns)</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                3 <span class="comment">// specify, how many principal components to retain</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        );</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__core__array.html#gac5e93604079307f1b21a1429c06fb1a5">eigenvectors</a> = pca.<a class="code hl_variable" href="classcv_1_1_p_c_a.html#a8fed85cf5f9d8bb9b17f031398cb74a0">eigenvectors</a>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> *eig_ptr = (<span class="keywordtype">float</span> *) <a class="code hl_variable" href="group__core__array.html#gac5e93604079307f1b21a1429c06fb1a5">eigenvectors</a>.data;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordtype">float</span> a = eig_ptr[6], b = eig_ptr[7], c = eig_ptr[8];</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">if</span> (std::isinf(a) || std::isinf(b) || std::isinf(c) || (a == 0 &amp;&amp; b == 0 &amp;&amp; c == 0))</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">mean</a> = pca.<a class="code hl_variable" href="classcv_1_1_p_c_a.html#a1bca9d1cc7808b7d08b2a046ee92cd11">mean</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> *mean_ptr = (<span class="keywordtype">float</span> *) <a class="code hl_variable" href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">mean</a>.data;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordtype">float</span> d = (-a * mean_ptr[0] - b * mean_ptr[1] - c * mean_ptr[2]);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordtype">double</span> plane_coeffs[4] = {a, b, c, d};</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_variable" href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">models</a>.emplace_back(<a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a>(1, 4, <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>, plane_coeffs).clone());</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a153c8e1111ca90e5e31fdbbd7a64c826">  132</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a153c8e1111ca90e5e31fdbbd7a64c826">estimate</a> (<span class="keyword">const</span> std::vector&lt;bool&gt; &amp;<span class="comment">/*mask*/</span>, std::vector&lt;Mat&gt; &amp;<span class="comment">/*models*/</span>,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                  <span class="keyword">const</span> std::vector&lt;double&gt; &amp;<span class="comment">/*weights*/</span>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a5d742da30da9ecb522c8d84da0e295bd">  136</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a5d742da30da9ecb522c8d84da0e295bd">enforceRankConstraint</a> (<span class="keywordtype">bool</span> <span class="comment">/*enforce*/</span>)<span class="keyword"> override </span>{}</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>};</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver.html#ae0b74f8d40da9d1b8a505a9d88ce8520">  139</a></span>Ptr &lt;PlaneModelNonMinimalSolver&gt; <a class="code hl_function" href="classcv_1_1usac_1_1_plane_model_non_minimal_solver.html#ae0b74f8d40da9d1b8a505a9d88ce8520">PlaneModelNonMinimalSolver::create</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;points_)</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>{</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;PlaneModelNonMinimalSolverImpl&gt;</a>(points_);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
+</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}}</div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_p_c_a_html"><div class="ttname"><a href="classcv_1_1_p_c_a.html">cv::PCA</a></div><div class="ttdoc">Principal Component Analysis.</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02462">core.hpp:2463</a></div></div>
+<div class="ttc" id="aclasscv_1_1_p_c_a_html_a1bca9d1cc7808b7d08b2a046ee92cd11"><div class="ttname"><a href="classcv_1_1_p_c_a.html#a1bca9d1cc7808b7d08b2a046ee92cd11">cv::PCA::mean</a></div><div class="ttdeci">Mat mean</div><div class="ttdoc">mean value subtracted before the projection and added after the back projection</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02603">core.hpp:2603</a></div></div>
+<div class="ttc" id="aclasscv_1_1_p_c_a_html_a8fed85cf5f9d8bb9b17f031398cb74a0"><div class="ttname"><a href="classcv_1_1_p_c_a.html#a8fed85cf5f9d8bb9b17f031398cb74a0">cv::PCA::eigenvectors</a></div><div class="ttdeci">Mat eigenvectors</div><div class="ttdoc">eigenvectors of the covariation matrix</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02601">core.hpp:2601</a></div></div>
+<div class="ttc" id="aclasscv_1_1_p_c_a_html_ae8a94a2add0555b0414e85c08ff67f50a2c52b7c4c9721a3e04a1d6699e738093"><div class="ttname"><a href="classcv_1_1_p_c_a.html#ae8a94a2add0555b0414e85c08ff67f50a2c52b7c4c9721a3e04a1d6699e738093">cv::PCA::DATA_AS_COL</a></div><div class="ttdeci">@ DATA_AS_COL</div><div class="ttdoc">indicates that the input samples are stored as matrix columns</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02466">core.hpp:2466</a></div></div>
+<div class="ttc" id="aclasscv_1_1_point_cloud_wrapper_html_a22ff661c1b02efd0de59a461eeba039c"><div class="ttname"><a href="classcv_1_1_point_cloud_wrapper.html#a22ff661c1b02efd0de59a461eeba039c">cv::PointCloudWrapper::pts_ptr_x</a></div><div class="ttdeci">const float * pts_ptr_x</div><div class="ttdef"><b>Definición</b> <a href="ptcloud__wrapper_8hpp_source.html#l00025">ptcloud_wrapper.hpp:25</a></div></div>
+<div class="ttc" id="aclasscv_1_1_point_cloud_wrapper_html_a30e431dba48bf97599cb0bfcbd1c118f"><div class="ttname"><a href="classcv_1_1_point_cloud_wrapper.html#a30e431dba48bf97599cb0bfcbd1c118f">cv::PointCloudWrapper::pts_ptr_z</a></div><div class="ttdeci">const float * pts_ptr_z</div><div class="ttdef"><b>Definición</b> <a href="ptcloud__wrapper_8hpp_source.html#l00027">ptcloud_wrapper.hpp:27</a></div></div>
+<div class="ttc" id="aclasscv_1_1_point_cloud_wrapper_html_a54557194dd611e23d2f4d2d0d9f9a751"><div class="ttname"><a href="classcv_1_1_point_cloud_wrapper.html#a54557194dd611e23d2f4d2d0d9f9a751">cv::PointCloudWrapper::pts_ptr_y</a></div><div class="ttdeci">const float * pts_ptr_y</div><div class="ttdef"><b>Definición</b> <a href="ptcloud__wrapper_8hpp_source.html#l00026">ptcloud_wrapper.hpp:26</a></div></div>
+<div class="ttc" id="aclasscv_1_1_point_cloud_wrapper_html_a5c45d903ab991e53c2d0ec25b9e097f3"><div class="ttname"><a href="classcv_1_1_point_cloud_wrapper.html#a5c45d903ab991e53c2d0ec25b9e097f3">cv::PointCloudWrapper::PointCloudWrapper</a></div><div class="ttdeci">PointCloudWrapper(const Mat &amp;points_)</div><div class="ttdef"><b>Definición</b> <a href="ptcloud__wrapper_8hpp_source.html#l00030">ptcloud_wrapper.hpp:30</a></div></div>
+<div class="ttc" id="aclasscv_1_1_point_cloud_wrapper_html_a8a7b14911222f9a6f631f188dd807c0e"><div class="ttname"><a href="classcv_1_1_point_cloud_wrapper.html#a8a7b14911222f9a6f631f188dd807c0e">cv::PointCloudWrapper::points_mat</a></div><div class="ttdeci">const Mat * points_mat</div><div class="ttdef"><b>Definición</b> <a href="ptcloud__wrapper_8hpp_source.html#l00023">ptcloud_wrapper.hpp:23</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_minimal_solver_html"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_minimal_solver.html">cv::usac::PlaneModelMinimalSolver</a></div><div class="ttdef"><b>Definición</b> <a href="usac_8hpp_source.html#l01016">usac.hpp:1016</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_minimal_solver_html_a041d41b3b7f692d84da46ff4c6f5e862"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_minimal_solver.html#a041d41b3b7f692d84da46ff4c6f5e862">cv::usac::PlaneModelMinimalSolver::create</a></div><div class="ttdeci">static Ptr&lt; PlaneModelMinimalSolver &gt; create(const Mat &amp;points_)</div><div class="ttdef"><b>Definición</b> <a href="#l00071">plane_solver.cpp:71</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_minimal_solver_impl_html_a2e970d306cec7db1259cd3ef58e346ff"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a2e970d306cec7db1259cd3ef58e346ff">cv::usac::PlaneModelMinimalSolverImpl::getMaxNumberOfSolutions</a></div><div class="ttdeci">int getMaxNumberOfSolutions() const override</div><div class="ttdef"><b>Definición</b> <a href="#l00026">plane_solver.cpp:26</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_minimal_solver_impl_html_a4a4f736321c1c765ee7ec24b65bc02bb"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a4a4f736321c1c765ee7ec24b65bc02bb">cv::usac::PlaneModelMinimalSolverImpl::PlaneModelMinimalSolverImpl</a></div><div class="ttdeci">PlaneModelMinimalSolverImpl(const Mat &amp;points_)</div><div class="ttdef"><b>Definición</b> <a href="#l00016">plane_solver.cpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_minimal_solver_impl_html_a559be08da35fd2ab4e7ca2e3f33b57a1"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a559be08da35fd2ab4e7ca2e3f33b57a1">cv::usac::PlaneModelMinimalSolverImpl::estimate</a></div><div class="ttdeci">int estimate(const std::vector&lt; int &gt; &amp;sample, std::vector&lt; Mat &gt; &amp;models) const override</div><div class="ttdef"><b>Definición</b> <a href="#l00035">plane_solver.cpp:35</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_minimal_solver_impl_html_a79bdd20d26875b2b6287afce07fe1789"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_minimal_solver_impl.html#a79bdd20d26875b2b6287afce07fe1789">cv::usac::PlaneModelMinimalSolverImpl::getSampleSize</a></div><div class="ttdeci">int getSampleSize() const override</div><div class="ttdef"><b>Definición</b> <a href="#l00021">plane_solver.cpp:21</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_html"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver.html">cv::usac::PlaneModelNonMinimalSolver</a></div><div class="ttdef"><b>Definición</b> <a href="usac_8hpp_source.html#l01028">usac.hpp:1028</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_html_ae0b74f8d40da9d1b8a505a9d88ce8520"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver.html#ae0b74f8d40da9d1b8a505a9d88ce8520">cv::usac::PlaneModelNonMinimalSolver::create</a></div><div class="ttdeci">static Ptr&lt; PlaneModelNonMinimalSolver &gt; create(const Mat &amp;points_)</div><div class="ttdef"><b>Definición</b> <a href="#l00139">plane_solver.cpp:139</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_impl_html_a02d37eb901f04dc9b083bacbc661f86d"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a02d37eb901f04dc9b083bacbc661f86d">cv::usac::PlaneModelNonMinimalSolverImpl::getMaxNumberOfSolutions</a></div><div class="ttdeci">int getMaxNumberOfSolutions() const override</div><div class="ttdef"><b>Definición</b> <a href="#l00091">plane_solver.cpp:91</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_impl_html_a153c8e1111ca90e5e31fdbbd7a64c826"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a153c8e1111ca90e5e31fdbbd7a64c826">cv::usac::PlaneModelNonMinimalSolverImpl::estimate</a></div><div class="ttdeci">int estimate(const std::vector&lt; bool &gt; &amp;, std::vector&lt; Mat &gt; &amp;, const std::vector&lt; double &gt; &amp;) override</div><div class="ttdef"><b>Definición</b> <a href="#l00132">plane_solver.cpp:132</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_impl_html_a192b09d0ab2211136856a7c49f1052ba"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a192b09d0ab2211136856a7c49f1052ba">cv::usac::PlaneModelNonMinimalSolverImpl::getMinimumRequiredSampleSize</a></div><div class="ttdeci">int getMinimumRequiredSampleSize() const override</div><div class="ttdef"><b>Definición</b> <a href="#l00086">plane_solver.cpp:86</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_impl_html_a21b97000e11af2a8647d2d194cf2e135"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a21b97000e11af2a8647d2d194cf2e135">cv::usac::PlaneModelNonMinimalSolverImpl::estimate</a></div><div class="ttdeci">int estimate(const std::vector&lt; int &gt; &amp;sample, int sample_size, std::vector&lt; Mat &gt; &amp;models, const std::vector&lt; double &gt; &amp;) const override</div><div class="ttdef"><b>Definición</b> <a href="#l00099">plane_solver.cpp:99</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_impl_html_a5d742da30da9ecb522c8d84da0e295bd"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a5d742da30da9ecb522c8d84da0e295bd">cv::usac::PlaneModelNonMinimalSolverImpl::enforceRankConstraint</a></div><div class="ttdeci">void enforceRankConstraint(bool) override</div><div class="ttdef"><b>Definición</b> <a href="#l00136">plane_solver.cpp:136</a></div></div>
+<div class="ttc" id="aclasscv_1_1usac_1_1_plane_model_non_minimal_solver_impl_html_a748c6e0e41992080e08b777fc0eb92e1"><div class="ttname"><a href="classcv_1_1usac_1_1_plane_model_non_minimal_solver_impl.html#a748c6e0e41992080e08b777fc0eb92e1">cv::usac::PlaneModelNonMinimalSolverImpl::PlaneModelNonMinimalSolverImpl</a></div><div class="ttdeci">PlaneModelNonMinimalSolverImpl(const Mat &amp;points_)</div><div class="ttdef"><b>Definición</b> <a href="#l00081">plane_solver.cpp:81</a></div></div>
+<div class="ttc" id="ageometry_2src_2precomp_8hpp_html"><div class="ttname"><a href="geometry_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gaa9afdde73df2fc851c84cbd0f90c52ed"><div class="ttname"><a href="group__calib.html#gaa9afdde73df2fc851c84cbd0f90c52ed">cv::models</a></div><div class="ttdeci">const std::vector&lt; std::vector&lt; Mat &gt; &gt; const std::vector&lt; cv::Size &gt; InputArray InputArray models</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l01095">calib.hpp:1095</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga15228e80f647b305be84c24da909fea1"><div class="ttname"><a href="group__core__array.html#ga15228e80f647b305be84c24da909fea1">cv::mean</a></div><div class="ttdeci">InputOutputArray mean</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02076">core.hpp:2076</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gac5e93604079307f1b21a1429c06fb1a5"><div class="ttname"><a href="group__core__array.html#gac5e93604079307f1b21a1429c06fb1a5">cv::eigenvectors</a></div><div class="ttdeci">InputOutputArray OutputArray eigenvectors</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l02077">core.hpp:2077</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="anamespacecv_1_1usac_html"><div class="ttname"><a href="namespacecv_1_1usac.html">cv::usac</a></div><div class="ttdef"><b>Definición</b> <a href="usac_8hpp_source.html#l00008">usac.hpp:8</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a1af58e1f9b195ed85d1e69d0a601e131"><div class="ttname"><a href="namespacecv.html#a1af58e1f9b195ed85d1e69d0a601e131">cv::copyPointDataByIdxs</a></div><div class="ttdeci">void copyPointDataByIdxs(const Mat &amp;src, Mat &amp;dst, const std::vector&lt; int &gt; &amp;idxs, int dst_size, int arrangement_of_points, bool is_parallel)</div><div class="ttdoc">Copy the data xyz of the point by specifying the indexs.</div><div class="ttdef"><b>Definición</b> <a href="ptcloud__utils_8cpp_source.html#l00061">ptcloud_utils.cpp:61</a></div></div>
+<div class="ttc" id="aptcloud__utils_8hpp_html"><div class="ttname"><a href="ptcloud__utils_8hpp.html">ptcloud_utils.hpp</a></div></div>
+<div class="ttc" id="aptcloud__wrapper_8hpp_html"><div class="ttname"><a href="ptcloud__wrapper_8hpp.html">ptcloud_wrapper.hpp</a></div></div>
+<div class="ttc" id="ausac_8hpp_html"><div class="ttname"><a href="usac_8hpp.html">usac.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_a52c8a9fa86687e18a4a8ae268f10c32.html">geometry</a></li><li class="navelem"><a href="dir_02f85bb76821f8e71fba420137d549ef.html">src</a></li><li class="navelem"><a href="dir_c857fbc8e166e7f41a31ed1b3c05a7c1.html">usac</a></li><li class="navelem"><a href="plane__solver_8cpp.html">plane_solver.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

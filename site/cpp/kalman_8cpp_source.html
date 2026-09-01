@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/video/src/kalman.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('kalman_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">kalman.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="kalman_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                        Intel License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//   * The name of Intel Corporation may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;<a class="code" href="video_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classcv_1_1_kalman_filter.html#ac0799f0611baee9e7e558f016e4a7b40">   46</a></span><a class="code hl_function" href="classcv_1_1_kalman_filter.html#ac0799f0611baee9e7e558f016e4a7b40">KalmanFilter::KalmanFilter</a>() {}</div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classcv_1_1_kalman_filter.html#abac82ecfa530611a163255bc7d91c088">   47</a></span><a class="code hl_function" href="classcv_1_1_kalman_filter.html#ac0799f0611baee9e7e558f016e4a7b40">KalmanFilter::KalmanFilter</a>(<span class="keywordtype">int</span> dynamParams, <span class="keywordtype">int</span> measureParams, <span class="keywordtype">int</span> controlParams, <span class="keywordtype">int</span> type)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="classcv_1_1_kalman_filter.html#a4f136c39c016d3530c7c5801dd1ddb3b">init</a>(dynamParams, measureParams, controlParams, type);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classcv_1_1_kalman_filter.html#a4f136c39c016d3530c7c5801dd1ddb3b">   52</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_kalman_filter.html#a4f136c39c016d3530c7c5801dd1ddb3b">KalmanFilter::init</a>(<span class="keywordtype">int</span> DP, <span class="keywordtype">int</span> MP, <span class="keywordtype">int</span> CP, <span class="keywordtype">int</span> type)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>{</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( DP &gt; 0 &amp;&amp; MP &gt; 0 );</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( type == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a> || type == <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a> );</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    CP = std::max(CP, 0);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(DP, 1, type);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a29dc3ac940dbce14a0824017395994b4">statePost</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(DP, 1, type);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aed23bd543479c99dd03b88c6c964aad2">transitionMatrix</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a527006bf90810ef5c6b6f3cb7d67d4b4">Mat::eye</a>(DP, DP, type);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a09290054b1cd30baa89fc7768e68a806">processNoiseCov</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a527006bf90810ef5c6b6f3cb7d67d4b4">Mat::eye</a>(DP, DP, type);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a44b6f3e23cc21b5b4fe7d62e4eb9d3d6">measurementMatrix</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(MP, DP, type);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#ac99ba610755d681b9f57fd772c91f798">measurementNoiseCov</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a527006bf90810ef5c6b6f3cb7d67d4b4">Mat::eye</a>(MP, MP, type);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a02618fb7e9b00d41f995881e8928abdb">errorCovPre</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(DP, DP, type);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a1c2b134601f674ef8e244901fd5b9270">errorCovPost</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(DP, DP, type);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a9707479d87cb792ff7395342db2da120">gain</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(DP, MP, type);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">if</span>( CP &gt; 0 )</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aee161cf5a49e185226b26f7eb8d23507">controlMatrix</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(DP, CP, type);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aee161cf5a49e185226b26f7eb8d23507">controlMatrix</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a720a7e1aaa23fb42d0fbc80be44f1f89">release</a>();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aa3d064a9194c2815dbe19c056b6dc763">temp1</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(DP, DP, type);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a14866bd506668eb0ed57b3974b3a1ee7">temp2</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(MP, DP, type);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#afdbe36066a7d7f560aa02abe6be114d8">temp3</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(MP, MP, type);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a84342f2d9dec1e6389025ad229401809">temp4</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(MP, DP, type);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a846c2a6222c6e5d8b1385dfbccc83ae0">temp5</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(MP, 1, type);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classcv_1_1_kalman_filter.html#ae682426262f3001e324d6a8d757679ba">   82</a></span><span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_function" href="classcv_1_1_kalman_filter.html#ae682426262f3001e324d6a8d757679ba">KalmanFilter::predict</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; control)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// update the state: x&#39;(k) = A*x(k)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a> = <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aed23bd543479c99dd03b88c6c964aad2">transitionMatrix</a>*<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a29dc3ac940dbce14a0824017395994b4">statePost</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span>( !control.<a class="code hl_function" href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">empty</a>() )</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="comment">// x&#39;(k) = x&#39;(k) + B*u(k)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a> += <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aee161cf5a49e185226b26f7eb8d23507">controlMatrix</a>*control;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">// update error covariance matrices: temp1 = A*P(k)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aa3d064a9194c2815dbe19c056b6dc763">temp1</a> = <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aed23bd543479c99dd03b88c6c964aad2">transitionMatrix</a>*<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a1c2b134601f674ef8e244901fd5b9270">errorCovPost</a>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">// P&#39;(k) = temp1*At + Q</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_function" href="group__core__array.html#gacb6e64071dffe36434e1e7ee79e7cb35">gemm</a>(<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aa3d064a9194c2815dbe19c056b6dc763">temp1</a>, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#aed23bd543479c99dd03b88c6c964aad2">transitionMatrix</a>, 1, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a09290054b1cd30baa89fc7768e68a806">processNoiseCov</a>, 1, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a02618fb7e9b00d41f995881e8928abdb">errorCovPre</a>, <a class="code hl_enumvalue" href="group__core__array.html#gga66643400559695a653d08e2000809060a188bdf58e57b4b8f0685451ba15cdd2d">GEMM_2_T</a>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">// handle the case when there will be no measurement before the next predict.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a29dc3ac940dbce14a0824017395994b4">statePost</a>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a02618fb7e9b00d41f995881e8928abdb">errorCovPre</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a1c2b134601f674ef8e244901fd5b9270">errorCovPost</a>);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classcv_1_1_kalman_filter.html#ad2b05172fe48be090c0d82a32d0bb40f">  106</a></span><span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_function" href="classcv_1_1_kalman_filter.html#ad2b05172fe48be090c0d82a32d0bb40f">KalmanFilter::correct</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; measurement)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>{</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="comment">// temp2 = H*P&#39;(k)</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a14866bd506668eb0ed57b3974b3a1ee7">temp2</a> = <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a44b6f3e23cc21b5b4fe7d62e4eb9d3d6">measurementMatrix</a> * <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a02618fb7e9b00d41f995881e8928abdb">errorCovPre</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="comment">// temp3 = temp2*Ht + R</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <a class="code hl_function" href="group__core__array.html#gacb6e64071dffe36434e1e7ee79e7cb35">gemm</a>(<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a14866bd506668eb0ed57b3974b3a1ee7">temp2</a>, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a44b6f3e23cc21b5b4fe7d62e4eb9d3d6">measurementMatrix</a>, 1, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#ac99ba610755d681b9f57fd772c91f798">measurementNoiseCov</a>, 1, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#afdbe36066a7d7f560aa02abe6be114d8">temp3</a>, <a class="code hl_enumvalue" href="group__core__array.html#gga66643400559695a653d08e2000809060a188bdf58e57b4b8f0685451ba15cdd2d">GEMM_2_T</a>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// temp4 = inv(temp3)*temp2 = Kt(k)</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_function" href="group__core__array.html#ga12b43690dbd31fed96f213eefead2373">solve</a>(<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#afdbe36066a7d7f560aa02abe6be114d8">temp3</a>, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a14866bd506668eb0ed57b3974b3a1ee7">temp2</a>, <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a84342f2d9dec1e6389025ad229401809">temp4</a>, <a class="code hl_enumvalue" href="group__core__array.html#ggaaf9ea5dcc392d5ae04eacb9920b9674ca523b676c90c7a1d2841b1267ba9ba614">DECOMP_SVD</a>);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="comment">// K(k)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a9707479d87cb792ff7395342db2da120">gain</a> = <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a84342f2d9dec1e6389025ad229401809">temp4</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a40a1cad14a3da388296341104b957801">t</a>();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="comment">// temp5 = z(k) - H*x&#39;(k)</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a846c2a6222c6e5d8b1385dfbccc83ae0">temp5</a> = measurement - <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a44b6f3e23cc21b5b4fe7d62e4eb9d3d6">measurementMatrix</a>*<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// x(k) = x&#39;(k) + K(k)*temp5</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a29dc3ac940dbce14a0824017395994b4">statePost</a> = <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">statePre</a> + <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a9707479d87cb792ff7395342db2da120">gain</a>*<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a846c2a6222c6e5d8b1385dfbccc83ae0">temp5</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="comment">// P(k) = P&#39;(k) - K(k)*temp2</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a1c2b134601f674ef8e244901fd5b9270">errorCovPost</a> = <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a02618fb7e9b00d41f995881e8928abdb">errorCovPre</a> - <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a9707479d87cb792ff7395342db2da120">gain</a>*<a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a14866bd506668eb0ed57b3974b3a1ee7">temp2</a>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_kalman_filter.html#a29dc3ac940dbce14a0824017395994b4">statePost</a>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}</div>
+</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a02618fb7e9b00d41f995881e8928abdb"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a02618fb7e9b00d41f995881e8928abdb">cv::KalmanFilter::errorCovPre</a></div><div class="ttdeci">CV_PROP_RW Mat errorCovPre</div><div class="ttdoc">priori error estimate covariance matrix (P&#39;(k)): P&#39;(k)=A*P(k-1)*At + Q)*‍/</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00570">tracking.hpp:570</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a09290054b1cd30baa89fc7768e68a806"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a09290054b1cd30baa89fc7768e68a806">cv::KalmanFilter::processNoiseCov</a></div><div class="ttdeci">CV_PROP_RW Mat processNoiseCov</div><div class="ttdoc">process noise covariance matrix (Q)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00568">tracking.hpp:568</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a14866bd506668eb0ed57b3974b3a1ee7"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a14866bd506668eb0ed57b3974b3a1ee7">cv::KalmanFilter::temp2</a></div><div class="ttdeci">Mat temp2</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00576">tracking.hpp:576</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a1c2b134601f674ef8e244901fd5b9270"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a1c2b134601f674ef8e244901fd5b9270">cv::KalmanFilter::errorCovPost</a></div><div class="ttdeci">CV_PROP_RW Mat errorCovPost</div><div class="ttdoc">posteriori error estimate covariance matrix (P(k)): P(k)=(I-K(k)*H)*P&#39;(k)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00572">tracking.hpp:572</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a29dc3ac940dbce14a0824017395994b4"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a29dc3ac940dbce14a0824017395994b4">cv::KalmanFilter::statePost</a></div><div class="ttdeci">CV_PROP_RW Mat statePost</div><div class="ttdoc">corrected state (x(k)): x(k)=x&#39;(k)+K(k)*(z(k)-H*x&#39;(k))</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00564">tracking.hpp:564</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a3d261f125a6bce49730a30b4e3635698"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a3d261f125a6bce49730a30b4e3635698">cv::KalmanFilter::statePre</a></div><div class="ttdeci">CV_PROP_RW Mat statePre</div><div class="ttdoc">predicted state (x&#39;(k)): x(k)=A*x(k-1)+B*u(k)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00563">tracking.hpp:563</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a44b6f3e23cc21b5b4fe7d62e4eb9d3d6"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a44b6f3e23cc21b5b4fe7d62e4eb9d3d6">cv::KalmanFilter::measurementMatrix</a></div><div class="ttdeci">CV_PROP_RW Mat measurementMatrix</div><div class="ttdoc">measurement matrix (H)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00567">tracking.hpp:567</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a4f136c39c016d3530c7c5801dd1ddb3b"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a4f136c39c016d3530c7c5801dd1ddb3b">cv::KalmanFilter::init</a></div><div class="ttdeci">void init(int dynamParams, int measureParams, int controlParams=0, int type=CV_32F)</div><div class="ttdoc">Re-initializes Kalman filter. The previous content is destroyed.</div><div class="ttdef"><b>Definición</b> <a href="#l00052">kalman.cpp:52</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a84342f2d9dec1e6389025ad229401809"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a84342f2d9dec1e6389025ad229401809">cv::KalmanFilter::temp4</a></div><div class="ttdeci">Mat temp4</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00578">tracking.hpp:578</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a846c2a6222c6e5d8b1385dfbccc83ae0"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a846c2a6222c6e5d8b1385dfbccc83ae0">cv::KalmanFilter::temp5</a></div><div class="ttdeci">Mat temp5</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00579">tracking.hpp:579</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_a9707479d87cb792ff7395342db2da120"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#a9707479d87cb792ff7395342db2da120">cv::KalmanFilter::gain</a></div><div class="ttdeci">CV_PROP_RW Mat gain</div><div class="ttdoc">Kalman gain matrix (K(k)): K(k)=P&#39;(k)*Ht*inv(H*P&#39;(k)*Ht+R).</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00571">tracking.hpp:571</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_aa3d064a9194c2815dbe19c056b6dc763"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#aa3d064a9194c2815dbe19c056b6dc763">cv::KalmanFilter::temp1</a></div><div class="ttdeci">Mat temp1</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00575">tracking.hpp:575</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_ac0799f0611baee9e7e558f016e4a7b40"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#ac0799f0611baee9e7e558f016e4a7b40">cv::KalmanFilter::KalmanFilter</a></div><div class="ttdeci">CV_WRAP KalmanFilter()</div><div class="ttdef"><b>Definición</b> <a href="#l00046">kalman.cpp:46</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_ac99ba610755d681b9f57fd772c91f798"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#ac99ba610755d681b9f57fd772c91f798">cv::KalmanFilter::measurementNoiseCov</a></div><div class="ttdeci">CV_PROP_RW Mat measurementNoiseCov</div><div class="ttdoc">measurement noise covariance matrix (R)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00569">tracking.hpp:569</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_ad2b05172fe48be090c0d82a32d0bb40f"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#ad2b05172fe48be090c0d82a32d0bb40f">cv::KalmanFilter::correct</a></div><div class="ttdeci">CV_WRAP const Mat &amp; correct(const Mat &amp;measurement)</div><div class="ttdoc">Updates the predicted state from the measurement.</div><div class="ttdef"><b>Definición</b> <a href="#l00106">kalman.cpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_ae682426262f3001e324d6a8d757679ba"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#ae682426262f3001e324d6a8d757679ba">cv::KalmanFilter::predict</a></div><div class="ttdeci">CV_WRAP const Mat &amp; predict(const Mat &amp;control=Mat())</div><div class="ttdoc">Computes a predicted state.</div><div class="ttdef"><b>Definición</b> <a href="#l00082">kalman.cpp:82</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_aed23bd543479c99dd03b88c6c964aad2"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#aed23bd543479c99dd03b88c6c964aad2">cv::KalmanFilter::transitionMatrix</a></div><div class="ttdeci">CV_PROP_RW Mat transitionMatrix</div><div class="ttdoc">state transition matrix (A)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00565">tracking.hpp:565</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_aee161cf5a49e185226b26f7eb8d23507"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#aee161cf5a49e185226b26f7eb8d23507">cv::KalmanFilter::controlMatrix</a></div><div class="ttdeci">CV_PROP_RW Mat controlMatrix</div><div class="ttdoc">control matrix (B) (not used if there is no control)</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00566">tracking.hpp:566</a></div></div>
+<div class="ttc" id="aclasscv_1_1_kalman_filter_html_afdbe36066a7d7f560aa02abe6be114d8"><div class="ttname"><a href="classcv_1_1_kalman_filter.html#afdbe36066a7d7f560aa02abe6be114d8">cv::KalmanFilter::temp3</a></div><div class="ttdeci">Mat temp3</div><div class="ttdef"><b>Definición</b> <a href="tracking_8hpp_source.html#l00577">tracking.hpp:577</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a2cc2a68970b85d50f3a4fac1b55ba7c8"><div class="ttname"><a href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">cv::Mat::copyTo</a></div><div class="ttdeci">void copyTo(OutputArray m) const</div><div class="ttdoc">Copies the matrix to another one.</div><div class="ttdef"><b>Definición</b> <a href="copy_8cpp_source.html#l00447">copy.cpp:447</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a3c38e95b4221550d5ef81d83b80afc57"><div class="ttname"><a href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">cv::Mat::zeros</a></div><div class="ttdeci">static CV_NODISCARD_STD MatExpr zeros(int rows, int cols, int type)</div><div class="ttdoc">Returns a zero array of the specified size and type.</div><div class="ttdef"><b>Definición</b> <a href="matrix__expressions_8cpp_source.html#l01751">matrix_expressions.cpp:1751</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a40a1cad14a3da388296341104b957801"><div class="ttname"><a href="classcv_1_1_mat.html#a40a1cad14a3da388296341104b957801">cv::Mat::t</a></div><div class="ttdeci">MatExpr t() const</div><div class="ttdoc">Transposes a matrix.</div><div class="ttdef"><b>Definición</b> <a href="matrix__expressions_8cpp_source.html#l01714">matrix_expressions.cpp:1714</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a527006bf90810ef5c6b6f3cb7d67d4b4"><div class="ttname"><a href="classcv_1_1_mat.html#a527006bf90810ef5c6b6f3cb7d67d4b4">cv::Mat::eye</a></div><div class="ttdeci">static CV_NODISCARD_STD MatExpr eye(int rows, int cols, int type)</div><div class="ttdoc">Returns an identity matrix of the specified size and type.</div><div class="ttdef"><b>Definición</b> <a href="matrix__expressions_8cpp_source.html#l01823">matrix_expressions.cpp:1823</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a6c1bf08cec827af2f571fa222ed8ba2c"><div class="ttname"><a href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">cv::Mat::create</a></div><div class="ttdeci">void create(int rows, int cols, int type)</div><div class="ttdoc">Allocates new array data if needed.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00923">matrix.cpp:923</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a720a7e1aaa23fb42d0fbc80be44f1f89"><div class="ttname"><a href="classcv_1_1_mat.html#a720a7e1aaa23fb42d0fbc80be44f1f89">cv::Mat::release</a></div><div class="ttdeci">void release()</div><div class="ttdoc">Decrements the reference counter and deallocates the matrix if needed.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01010">matrix.cpp:1010</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af855717faf149c9ec128896a7a6c7711"><div class="ttname"><a href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">cv::Mat::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">Returns true if the array has no elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01028">matrix.cpp:1028</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga12b43690dbd31fed96f213eefead2373"><div class="ttname"><a href="group__core__array.html#ga12b43690dbd31fed96f213eefead2373">cv::solve</a></div><div class="ttdeci">CV_EXPORTS_W bool solve(InputArray src1, InputArray src2, OutputArray dst, int flags=DECOMP_LU)</div><div class="ttdoc">Solves one or more linear systems or least-squares problems.</div><div class="ttdef"><b>Definición</b> <a href="lapack_8cpp_source.html#l01032">lapack.cpp:1032</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gacb6e64071dffe36434e1e7ee79e7cb35"><div class="ttname"><a href="group__core__array.html#gacb6e64071dffe36434e1e7ee79e7cb35">cv::gemm</a></div><div class="ttdeci">CV_EXPORTS_W void gemm(InputArray src1, InputArray src2, double alpha, InputArray src3, double beta, OutputArray dst, int flags=0)</div><div class="ttdoc">Performs generalized matrix multiplication.</div><div class="ttdef"><b>Definición</b> <a href="matmul_8dispatch_8cpp_source.html#l00338">matmul.dispatch.cpp:338</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga66643400559695a653d08e2000809060a188bdf58e57b4b8f0685451ba15cdd2d"><div class="ttname"><a href="group__core__array.html#gga66643400559695a653d08e2000809060a188bdf58e57b4b8f0685451ba15cdd2d">cv::GEMM_2_T</a></div><div class="ttdeci">@ GEMM_2_T</div><div class="ttdoc">transposes src2</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00155">base.hpp:155</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ggaaf9ea5dcc392d5ae04eacb9920b9674ca523b676c90c7a1d2841b1267ba9ba614"><div class="ttname"><a href="group__core__array.html#ggaaf9ea5dcc392d5ae04eacb9920b9674ca523b676c90c7a1d2841b1267ba9ba614">cv::DECOMP_SVD</a></div><div class="ttdeci">@ DECOMP_SVD</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00072">base.hpp:72</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="avideo_2src_2precomp_8hpp_html"><div class="ttname"><a href="video_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_2508e962348bdf6937b92f313b633ed9.html">video</a></li><li class="navelem"><a href="dir_e10036e501edf27ab5629bafc103e45e.html">src</a></li><li class="navelem"><a href="kalman_8cpp.html">kalman.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

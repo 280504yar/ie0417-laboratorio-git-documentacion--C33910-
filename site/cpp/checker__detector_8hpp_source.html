@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/mcc/checker_detector.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('checker__detector_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">checker_detector.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="checker__detector_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * MIT License</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * Copyright (c) 2018 Pedro Diamel Marrero Fernández</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> * Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> * of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * SOFTWARE.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifndef _MCC_CHECKER_DETECTOR_HPP</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define _MCC_CHECKER_DETECTOR_HPP</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="objdetect_8hpp.html">opencv2/objdetect.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="charts_8hpp.html">charts.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1mcc.html">mcc</a></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html">   40</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a62c10d69fac323d916cf26f0efee6290">CCheckerDetectorImpl</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1mcc_1_1_c_checker_detector.html">CCheckerDetector</a></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">typedef</span> std::vector&lt;Point&gt; PointsVector;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">typedef</span> std::vector&lt;PointsVector&gt; ContoursVector;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a62c10d69fac323d916cf26f0efee6290">CCheckerDetectorImpl</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#ifdef HAVE_OPENCV_DNN</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a62c10d69fac323d916cf26f0efee6290">CCheckerDetectorImpl</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1_net.html">dnn::Net</a>&amp; _net){</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        net = _net;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a62c10d69fac323d916cf26f0efee6290">~CCheckerDetectorImpl</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aaed25b06aa2677514d4894244f7b9fdd">process</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, <span class="keyword">const</span> std::vector&lt;Rect&gt; &amp;<a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector.html#a9daf0a692a403eaafb24f874d998a38c">regionsOfInterest</a>,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector.html#a444af57079aa79073165857338835fe4">nc</a> = 1) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aaed25b06aa2677514d4894244f7b9fdd">process</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector.html#a444af57079aa79073165857338835fe4">nc</a> = 1) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#ad13e594ba75fd454cbf5e98cee14182e">   60</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;CChecker&gt;</a> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#ad13e594ba75fd454cbf5e98cee14182e">getBestColorChecker</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af0bd21c4d4a778b417fdde9d03feefe7">m_checkers</a>.size())</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af0bd21c4d4a778b417fdde9d03feefe7">m_checkers</a>[0];</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#ac97bf88dceb7369952964ac9f206b053">   67</a></span>    std::vector&lt;Ptr&lt;CChecker&gt;&gt; <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#ac97bf88dceb7369952964ac9f206b053">getListColorChecker</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af0bd21c4d4a778b417fdde9d03feefe7">m_checkers</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a3be5f6a3d45c1c7aea16060ad62d6207">getRefColors</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a2bd439ce75584fc67b435f73da8bb7a2">setDetectionParams</a>(const <a class="code hl_struct" href="structcv_1_1mcc_1_1_detector_parameters_m_c_c.html">DetectorParametersMCC</a> &amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#abf7ac51d556ed4ccf423507b28364fb1">setColorChartType</a>(<a class="code hl_enumeration" href="group__mcc.html#ga47914d7e788ccd052659d14349caf131">ColorChart</a> chartType) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#ifdef HAVE_OPENCV_DNN</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setUseDnnModel(<span class="keywordtype">bool</span> useDnn) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> getUseDnnModel() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1mcc_1_1_detector_parameters_m_c_c.html">DetectorParametersMCC</a>&amp; <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a5ac814db35087888fa47955da35b8240">getDetectionParams</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    virtual <a class="code hl_enumeration" href="group__mcc.html#ga47914d7e788ccd052659d14349caf131">ColorChart</a> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a6761dc91290f93e6fe8460a0d3c52b38">getColorChartType</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a92c6bb5dbe6bf1ab8cee8c5417eaa4aa">draw</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr</a>&lt;<a class="code hl_class" href="classcv_1_1mcc_1_1_c_checker.html">CChecker</a>&gt;&gt;&amp; checkers, <a class="code hl_typedef" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> img, const <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> <a class="code hl_namespace" href="namespacecolor.html">color</a> = <a class="code hl_define" href="group__imgproc__draw.html#ga16fe14b01ea8dffdf2405dc5534e5f15">CV_RGB</a>(0,250,0), const <span class="keywordtype">int</span> thickness = 2) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>protected: <span class="comment">// methods pipeline</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a7b447a129976b68e62e62342810cceef">_no_net_process</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, const <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector.html#a444af57079aa79073165857338835fe4">nc</a>, <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a>&gt; <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector.html#a9daf0a692a403eaafb24f874d998a38c">regionsOfInterest</a>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a8502e8b557395ab0a8d23d9c87ef5aaf">prepareImage</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> bgr, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> grayOut, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> bgrOut, <span class="keywordtype">float</span> &amp;aspOut) const;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aba01ce70ec49c867b83853e61741d6e4">performThreshold</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> grayscaleImg, <a class="code hl_typedef" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> thresholdImg) const;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <a class="code hl_function" href="group__imgproc__shape.html#ga55fc3fd86cc65fc1e97d0b81b5c69101">findContours</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> srcImg, ContoursVector &amp;contours) const;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a226612c423078336a9c944d3a351930a">findCandidates</a>(const ContoursVector &amp;contours, <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1mcc_1_1_c_chart.html">CChart</a>&gt; &amp;detectedCharts);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af1c5487561bfa30ff99ed032151f6f04">clustersAnalysis</a>(const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1mcc_1_1_c_chart.html">CChart</a>&gt; &amp;detectedCharts, <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">int</span>&gt; &amp;groups);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a821954cb748e2b4739156fe671c732c1">checkerRecognize</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> img, const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1mcc_1_1_c_chart.html">CChart</a>&gt; &amp;detectedCharts, const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">int</span>&gt; &amp;G,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                     <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>&gt;&gt; &amp;colorChartsOut);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a04ff0f7035f7fa2c7d27f6d7244a5c14">checkerAnalysis</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> img_rgb_f, const <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector.html#a444af57079aa79073165857338835fe4">nc</a>,</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                    const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>&gt;&gt; &amp;colorCharts,</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                    <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr</a>&lt;<a class="code hl_class" href="classcv_1_1mcc_1_1_c_checker.html">CChecker</a>&gt;&gt; &amp;checkers, <span class="keywordtype">float</span> asp,</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                    const <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;img_rgb_org,</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                    const <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;img_ycbcr_org,</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&gt; &amp;rgb_planes,</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&gt; &amp;ycbcr_planes,</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    const <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>&amp; offset);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    virtual <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_function" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a722e6126e10a1e3c7787441e7c7f3086">removeTooCloseDetections</a>();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>protected:</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af0bd21c4d4a778b417fdde9d03feefe7">  171</a></span>    <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr</a>&lt;<a class="code hl_class" href="classcv_1_1mcc_1_1_c_checker.html">CChecker</a>&gt;&gt; <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af0bd21c4d4a778b417fdde9d03feefe7">m_checkers</a>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">#ifdef HAVE_OPENCV_DNN</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <a class="code hl_class" href="classcv_1_1dnn_1_1_net.html">dnn::Net</a> net;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a346caa415f6f1df5a75b567356ae873f">m_useDnn</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a346caa415f6f1df5a75b567356ae873f">  176</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a346caa415f6f1df5a75b567356ae873f">m_useDnn</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aaea4423ef09345977b2e5368c4c1f076">  178</a></span>    <a class="code hl_struct" href="structcv_1_1mcc_1_1_detector_parameters_m_c_c.html">DetectorParametersMCC</a> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aaea4423ef09345977b2e5368c4c1f076">m_params</a> = <a class="code hl_function" href="structcv_1_1mcc_1_1_detector_parameters_m_c_c.html#aecc5c0cc0f5bcb4b64a66ca42b6da736">DetectorParametersMCC</a>();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a5975f17cbc4b882ff64ac9c9984564df">  179</a></span>    <a class="code hl_enumeration" href="group__mcc.html#ga47914d7e788ccd052659d14349caf131">ColorChart</a> <a class="code hl_variable" href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a5975f17cbc4b882ff64ac9c9984564df">m_chartType</a>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="keyword">private</span>: <span class="comment">// methods aux</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">void</span> get_subbox_chart_physical(</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keyword">const</span> std::vector&lt;Point2f&gt; &amp;points,</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        std::vector&lt;Point2f&gt; &amp;chartPhy);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">void</span> reduce_array(</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keyword">const</span> std::vector&lt;float&gt; &amp;<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>,</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        std::vector&lt;float&gt; &amp;x_new,</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordtype">float</span> tol);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordtype">void</span> transform_points_inverse(</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>,</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keyword">const</span> std::vector&lt;Point2f&gt; &amp;X,</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        std::vector&lt;Point2f&gt; &amp;Xt);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">void</span> get_profile(</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keyword">const</span> std::vector&lt;Point2f&gt; &amp;ibox,</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> charts_rgb,</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> charts_ycbcr,</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> im_rgb,</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> im_ycbcr,</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        std::vector&lt;Mat&gt; &amp;rgb_planes,</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        std::vector&lt;Mat&gt; &amp;ycbcr_planes);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordtype">float</span> cost_function(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> img, <a class="code hl_typedef" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> lab,</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                        <span class="keyword">const</span> std::vector&lt;Point2f&gt; &amp;ibox);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>};</div>
+</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>} <span class="comment">// namespace mcc</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="preprocessor">#endif </span><span class="comment">//_MCC_CHECKER_DETECTOR_HPP</span></div>
+<div class="ttc" id="acharts_8hpp_html"><div class="ttname"><a href="charts_8hpp.html">charts.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_net_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_net.html">cv::dnn::Net</a></div><div class="ttdoc">This class allows to create and manipulate comprehensive artificial neural networks.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00566">dnn.hpp:567</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_chart_html"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_chart.html">cv::mcc::CChart</a></div><div class="ttdoc">Chart model.</div><div class="ttdef"><b>Definición</b> <a href="charts_8hpp_source.html#l00049">charts.hpp:50</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_html"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector.html">cv::mcc::CCheckerDetector</a></div><div class="ttdoc">A class to find the positions of the ColorCharts in the image.</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00190">mcc_checker_detector.hpp:191</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_html_a444af57079aa79073165857338835fe4"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector.html#a444af57079aa79073165857338835fe4">cv::mcc::CCheckerDetector::nc</a></div><div class="ttdeci">const std::vector&lt; Rect &gt; const int nc</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00209">mcc_checker_detector.hpp:209</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_html_a9daf0a692a403eaafb24f874d998a38c"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector.html#a9daf0a692a403eaafb24f874d998a38c">cv::mcc::CCheckerDetector::regionsOfInterest</a></div><div class="ttdeci">const std::vector&lt; Rect &gt; &amp; regionsOfInterest</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00208">mcc_checker_detector.hpp:208</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a04ff0f7035f7fa2c7d27f6d7244a5c14"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a04ff0f7035f7fa2c7d27f6d7244a5c14">cv::mcc::CCheckerDetectorImpl::checkerAnalysis</a></div><div class="ttdeci">virtual void checkerAnalysis(InputArray img_rgb_f, const unsigned int nc, const std::vector&lt; std::vector&lt; Point2f &gt; &gt; &amp;colorCharts, std::vector&lt; Ptr&lt; CChecker &gt; &gt; &amp;checkers, float asp, const Mat &amp;img_rgb_org, const Mat &amp;img_ycbcr_org, std::vector&lt; Mat &gt; &amp;rgb_planes, std::vector&lt; Mat &gt; &amp;ycbcr_planes, const Point2f &amp;offset)</div><div class="ttdoc">checkerAnalysis</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l01197">checker_detector.cpp:1198</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a226612c423078336a9c944d3a351930a"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a226612c423078336a9c944d3a351930a">cv::mcc::CCheckerDetectorImpl::findCandidates</a></div><div class="ttdeci">virtual void findCandidates(const ContoursVector &amp;contours, std::vector&lt; CChart &gt; &amp;detectedCharts)</div><div class="ttdoc">findCandidates</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00608">checker_detector.cpp:609</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a2bd439ce75584fc67b435f73da8bb7a2"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a2bd439ce75584fc67b435f73da8bb7a2">cv::mcc::CCheckerDetectorImpl::setDetectionParams</a></div><div class="ttdeci">virtual void setDetectionParams(const DetectorParametersMCC &amp;params) CV_OVERRIDE</div><div class="ttdoc">Sets the detection paramaters for mcc.</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00480">checker_detector.cpp:480</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a346caa415f6f1df5a75b567356ae873f"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a346caa415f6f1df5a75b567356ae873f">cv::mcc::CCheckerDetectorImpl::m_useDnn</a></div><div class="ttdeci">bool m_useDnn</div><div class="ttdef"><b>Definición</b> <a href="#l00176">checker_detector.hpp:176</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a3be5f6a3d45c1c7aea16060ad62d6207"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a3be5f6a3d45c1c7aea16060ad62d6207">cv::mcc::CCheckerDetectorImpl::getRefColors</a></div><div class="ttdeci">virtual Mat getRefColors() CV_OVERRIDE</div><div class="ttdoc">Gets the reference color for chart.</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00967">checker_detector.cpp:967</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a5975f17cbc4b882ff64ac9c9984564df"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a5975f17cbc4b882ff64ac9c9984564df">cv::mcc::CCheckerDetectorImpl::m_chartType</a></div><div class="ttdeci">ColorChart m_chartType</div><div class="ttdef"><b>Definición</b> <a href="#l00179">checker_detector.hpp:179</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a5ac814db35087888fa47955da35b8240"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a5ac814db35087888fa47955da35b8240">cv::mcc::CCheckerDetectorImpl::getDetectionParams</a></div><div class="ttdeci">virtual const DetectorParametersMCC &amp; getDetectionParams() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00500">checker_detector.cpp:500</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a62c10d69fac323d916cf26f0efee6290"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a62c10d69fac323d916cf26f0efee6290">cv::mcc::CCheckerDetectorImpl::CCheckerDetectorImpl</a></div><div class="ttdeci">CCheckerDetectorImpl()</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00055">checker_detector.cpp:56</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a6761dc91290f93e6fe8460a0d3c52b38"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a6761dc91290f93e6fe8460a0d3c52b38">cv::mcc::CCheckerDetectorImpl::getColorChartType</a></div><div class="ttdeci">virtual ColorChart getColorChartType() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00505">checker_detector.cpp:505</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a722e6126e10a1e3c7787441e7c7f3086"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a722e6126e10a1e3c7787441e7c7f3086">cv::mcc::CCheckerDetectorImpl::removeTooCloseDetections</a></div><div class="ttdeci">virtual void removeTooCloseDetections()</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l01265">checker_detector.cpp:1266</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a7b447a129976b68e62e62342810cceef"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a7b447a129976b68e62e62342810cceef">cv::mcc::CCheckerDetectorImpl::_no_net_process</a></div><div class="ttdeci">bool _no_net_process(InputArray image, const int nc, std::vector&lt; Rect &gt; regionsOfInterest)</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00064">checker_detector.cpp:65</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a821954cb748e2b4739156fe671c732c1"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a821954cb748e2b4739156fe671c732c1">cv::mcc::CCheckerDetectorImpl::checkerRecognize</a></div><div class="ttdeci">virtual void checkerRecognize(InputArray img, const std::vector&lt; CChart &gt; &amp;detectedCharts, const std::vector&lt; int &gt; &amp;G, std::vector&lt; std::vector&lt; Point2f &gt; &gt; &amp;colorChartsOut)</div><div class="ttdoc">checkerRecognize</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00744">checker_detector.cpp:745</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a8502e8b557395ab0a8d23d9c87ef5aaf"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a8502e8b557395ab0a8d23d9c87ef5aaf">cv::mcc::CCheckerDetectorImpl::prepareImage</a></div><div class="ttdeci">virtual void prepareImage(InputArray bgr, OutputArray grayOut, OutputArray bgrOut, float &amp;aspOut) const</div><div class="ttdoc">prepareImage</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00510">checker_detector.cpp:511</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_a92c6bb5dbe6bf1ab8cee8c5417eaa4aa"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#a92c6bb5dbe6bf1ab8cee8c5417eaa4aa">cv::mcc::CCheckerDetectorImpl::draw</a></div><div class="ttdeci">virtual void draw(std::vector&lt; Ptr&lt; CChecker &gt; &gt; &amp;checkers, InputOutputArray img, const Scalar color=CV_RGB(0, 250, 0), const int thickness=2) CV_OVERRIDE</div><div class="ttdoc">Draws the checker to the given image.</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00953">checker_detector.cpp:953</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_aaea4423ef09345977b2e5368c4c1f076"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aaea4423ef09345977b2e5368c4c1f076">cv::mcc::CCheckerDetectorImpl::m_params</a></div><div class="ttdeci">DetectorParametersMCC m_params</div><div class="ttdef"><b>Definición</b> <a href="#l00178">checker_detector.hpp:178</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_aaed25b06aa2677514d4894244f7b9fdd"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aaed25b06aa2677514d4894244f7b9fdd">cv::mcc::CCheckerDetectorImpl::process</a></div><div class="ttdeci">bool process(InputArray image, const std::vector&lt; Rect &gt; &amp;regionsOfInterest, const int nc=1) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00245">checker_detector.cpp:246</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_aba01ce70ec49c867b83853e61741d6e4"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#aba01ce70ec49c867b83853e61741d6e4">cv::mcc::CCheckerDetectorImpl::performThreshold</a></div><div class="ttdeci">virtual void performThreshold(InputArray grayscaleImg, OutputArrayOfArrays thresholdImg) const</div><div class="ttdoc">performThreshold</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00545">checker_detector.cpp:546</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_abf7ac51d556ed4ccf423507b28364fb1"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#abf7ac51d556ed4ccf423507b28364fb1">cv::mcc::CCheckerDetectorImpl::setColorChartType</a></div><div class="ttdeci">virtual void setColorChartType(ColorChart chartType) CV_OVERRIDE</div><div class="ttdoc">Sets the color chart type for MCC detection.</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00485">checker_detector.cpp:485</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_ac97bf88dceb7369952964ac9f206b053"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#ac97bf88dceb7369952964ac9f206b053">cv::mcc::CCheckerDetectorImpl::getListColorChecker</a></div><div class="ttdeci">std::vector&lt; Ptr&lt; CChecker &gt; &gt; getListColorChecker() CV_OVERRIDE</div><div class="ttdoc">Get the list of all detected colorcheckers.</div><div class="ttdef"><b>Definición</b> <a href="#l00067">checker_detector.hpp:67</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_ad13e594ba75fd454cbf5e98cee14182e"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#ad13e594ba75fd454cbf5e98cee14182e">cv::mcc::CCheckerDetectorImpl::getBestColorChecker</a></div><div class="ttdeci">Ptr&lt; CChecker &gt; getBestColorChecker() CV_OVERRIDE</div><div class="ttdoc">Get the best color checker. By the best it means the one detected with the highest confidence.</div><div class="ttdef"><b>Definición</b> <a href="#l00060">checker_detector.hpp:60</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_af0bd21c4d4a778b417fdde9d03feefe7"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af0bd21c4d4a778b417fdde9d03feefe7">cv::mcc::CCheckerDetectorImpl::m_checkers</a></div><div class="ttdeci">std::vector&lt; Ptr&lt; CChecker &gt; &gt; m_checkers</div><div class="ttdef"><b>Definición</b> <a href="#l00171">checker_detector.hpp:171</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_detector_impl_html_af1c5487561bfa30ff99ed032151f6f04"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker_detector_impl.html#af1c5487561bfa30ff99ed032151f6f04">cv::mcc::CCheckerDetectorImpl::clustersAnalysis</a></div><div class="ttdeci">virtual void clustersAnalysis(const std::vector&lt; CChart &gt; &amp;detectedCharts, std::vector&lt; int &gt; &amp;groups)</div><div class="ttdoc">clustersAnalysis</div><div class="ttdef"><b>Definición</b> <a href="checker__detector_8cpp_source.html#l00714">checker_detector.cpp:715</a></div></div>
+<div class="ttc" id="aclasscv_1_1mcc_1_1_c_checker_html"><div class="ttname"><a href="classcv_1_1mcc_1_1_c_checker.html">cv::mcc::CChecker</a></div><div class="ttdoc">checker object</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00067">mcc_checker_detector.hpp:68</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga7d080aa40de011e4410bca63385ffe2a"><div class="ttname"><a href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">cv::Point2f</a></div><div class="ttdeci">Point_&lt; float &gt; Point2f</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00207">types.hpp:207</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga889a09549b98223016170d9b613715de"><div class="ttname"><a href="group__core__basic.html#ga889a09549b98223016170d9b613715de">cv::OutputArrayOfArrays</a></div><div class="ttdeci">OutputArray OutputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00590">mat.hpp:590</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaf77c9a14ef956c50c1efd4547f444e63"><div class="ttname"><a href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">cv::InputOutputArray</a></div><div class="ttdeci">const _InputOutputArray &amp; InputOutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00591">mat.hpp:591</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__imgproc__draw_html_ga16fe14b01ea8dffdf2405dc5534e5f15"><div class="ttname"><a href="group__imgproc__draw.html#ga16fe14b01ea8dffdf2405dc5534e5f15">CV_RGB</a></div><div class="ttdeci">#define CV_RGB(r, g, b)</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l03871">imgproc.hpp:3871</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="agroup__imgproc__shape_html_ga55fc3fd86cc65fc1e97d0b81b5c69101"><div class="ttname"><a href="group__imgproc__shape.html#ga55fc3fd86cc65fc1e97d0b81b5c69101">cv::findContours</a></div><div class="ttdeci">CV_EXPORTS_W void findContours(InputArray image, OutputArrayOfArrays contours, OutputArray hierarchy, int mode, int method, Point offset=Point())</div><div class="ttdoc">Finds contours in a binary image.</div><div class="ttdef"><b>Definición</b> <a href="contours__new_8cpp_source.html#l00629">contours_new.cpp:629</a></div></div>
+<div class="ttc" id="agroup__mcc_html_ga47914d7e788ccd052659d14349caf131"><div class="ttname"><a href="group__mcc.html#ga47914d7e788ccd052659d14349caf131">cv::mcc::ColorChart</a></div><div class="ttdeci">ColorChart</div><div class="ttdoc">enum to hold the type of the checker</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00052">mcc_checker_detector.hpp:53</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecolor_html"><div class="ttname"><a href="namespacecolor.html">color</a></div><div class="ttdef"><b>Definición</b> <a href="color_8py_source.html#l00001">color.py:1</a></div></div>
+<div class="ttc" id="anamespacecv_1_1mcc_html"><div class="ttname"><a href="namespacecv_1_1mcc.html">cv::mcc</a></div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00043">mcc_checker_detector.hpp:44</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="aobjdetect_8hpp_html"><div class="ttname"><a href="objdetect_8hpp.html">objdetect.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1mcc_1_1_detector_parameters_m_c_c_html"><div class="ttname"><a href="structcv_1_1mcc_1_1_detector_parameters_m_c_c.html">cv::mcc::DetectorParametersMCC</a></div><div class="ttdoc">struct DetectorParametersMCC is used by CCheckerDetector</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00104">mcc_checker_detector.hpp:105</a></div></div>
+<div class="ttc" id="astructcv_1_1mcc_1_1_detector_parameters_m_c_c_html_aecc5c0cc0f5bcb4b64a66ca42b6da736"><div class="ttname"><a href="structcv_1_1mcc_1_1_detector_parameters_m_c_c.html#aecc5c0cc0f5bcb4b64a66ca42b6da736">cv::mcc::DetectorParametersMCC::DetectorParametersMCC</a></div><div class="ttdeci">CV_WRAP DetectorParametersMCC()</div><div class="ttdef"><b>Definición</b> <a href="mcc__checker__detector_8hpp_source.html#l00106">mcc_checker_detector.hpp:106</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_93e111b3dda3d581aacd8170354710e0.html">mcc</a></li><li class="navelem"><a href="checker__detector_8hpp.html">checker_detector.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

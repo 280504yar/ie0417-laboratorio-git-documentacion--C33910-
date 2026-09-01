@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['z_0',['z',['../classcv_1_1_dual_quat.html#ad26885c85d72c4b9bc42d229b76e3790',1,'cv::DualQuat::z'],['../classcv_1_1_quat.html#a6836f50dd74292ad753a51a906200af2',1,'cv::Quat::z'],['../classcv_1_1_point3__.html#a1af9c182772a3c082e505f50eb5d2ee1',1,'cv::Point3_::z'],['../classorg_1_1opencv_1_1core_1_1_point3.html#a33ea5f571ce60b8941861ac273352c0b',1,'org.opencv.core.Point3.z'],['../namespacegl.html#a7ad534c2842bbc139bb40afbc51b6bc9',1,'gl::z']]],
+  ['z_5f_1',['z_',['../classcv_1_1_dual_quat.html#a38eccd00b69906fa7c72a7a81b8f5c0e',1,'cv::DualQuat']]],
+  ['z_5fkey_2',['z_key',['../classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83',1,'cv::OctreeKey']]],
+  ['zerodev_3',['zeroDev',['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a32c2bb30073c16b27db0ed347eb70d21',1,'cv::dnn::CV_FINAL']]],
+  ['zeropoint_4',['zeropoint',['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a8cd2acda5695a307b8afe929850af111',1,'cv::dnn::CV_FINAL']]],
+  ['zeropoints_5',['zeropoints',['../classcv_1_1dnn_1_1_quantize_layer.html#ab02724956d681e24f7272f6eb3b7848e',1,'cv::dnn::QuantizeLayer::zeropoints'],['../classcv_1_1dnn_1_1_dequantize_layer.html#a6313c3a0409e15d5206aa2b73ddfc528',1,'cv::dnn::DequantizeLayer::zeropoints'],['../classcv_1_1dnn_1_1_eltwise_layer_int8.html#a1588d52f95ac54e7c8d0f1bcce003103',1,'cv::dnn::EltwiseLayerInt8::zeropoints'],['../classcv_1_1dnn_1_1_eltwise2_int8_layer.html#ab1e48081442884d1a06b8f8e477cc57a',1,'cv::dnn::Eltwise2Int8Layer::zeropoints']]],
+  ['zeropointsmat_6',['zeropointsMat',['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a2dea4a051ec8c8d13256b8d0e94db023',1,'cv::dnn::CV_FINAL']]],
+  ['zerotickcount_7',['zeroTickCount',['../classcv_1_1internal_1_1_timestamp.html#a32d07f6a494894249bdcf7bb9c3ea406',1,'cv::internal::Timestamp']]],
+  ['zeta_8',['zeta',['../classcv_1_1_c_v___f_i_n_a_l.html#ad3812bfcf329358c33ed35723706e5c5',1,'cv::CV_FINAL']]],
+  ['zfail_9',['zfail',['../namespacegl.html#afb185a109c6aafaafaebf9e85fbefe03',1,'gl']]],
+  ['zfar_10',['zFar',['../classtest__raster_1_1raster__test.html#a790cdf9c62d08d03dac5c69c2a29b596',1,'test_raster::raster_test']]],
+  ['zfirstmemorder_11',['zFirstMemOrder',['../classcv_1_1_volume_settings_impl_1_1_default_tsdf_sets.html#a049a5498e7ab08d8dd44969ae4bf1554',1,'cv::VolumeSettingsImpl::DefaultTsdfSets::zFirstMemOrder'],['../classcv_1_1_volume_settings_impl_1_1_default_hash_tsdf_sets.html#a474597f82d6d316a6a32bfdcfbc029cc',1,'cv::VolumeSettingsImpl::DefaultHashTsdfSets::zFirstMemOrder'],['../classcv_1_1_volume_settings_impl_1_1_default_color_tsdf_sets.html#a1c47930ba780174218cb8331fd63cdb3',1,'cv::VolumeSettingsImpl::DefaultColorTsdfSets::zFirstMemOrder'],['../classcv_1_1_volume_settings_impl_1_1_default_color_hash_tsdf_sets.html#aefa6bf7cf6ecf06d08cbbce4d0a9667b',1,'cv::VolumeSettingsImpl::DefaultColorHashTsdfSets::zFirstMemOrder']]],
+  ['zigzag_12',['zigzag',['../namespacecv_1_1mjpeg.html#a86a5dc023272e84047efef8580316326',1,'cv::mjpeg']]],
+  ['znear_13',['zNear',['../classtest__raster_1_1raster__test.html#a92762e020119a44d3e0cd7ccd238facd',1,'test_raster::raster_test']]],
+  ['zoffset_14',['zoffset',['../namespacegl.html#a7215c0fde53da131269c33f9ffd61297',1,'gl']]],
+  ['zoomfactorheight_15',['zoomFactorHeight',['../classcv_1_1dnn_1_1_resize2_layer_impl.html#a866d75979a420e4c89c27aa3a5cbfa35',1,'cv::dnn::Resize2LayerImpl::zoomFactorHeight'],['../classcv_1_1dnn_1_1_resize_layer_impl.html#af92b910764b1ee0ffcdda10a40d2c108',1,'cv::dnn::ResizeLayerImpl::zoomFactorHeight']]],
+  ['zoomfactorwidth_16',['zoomFactorWidth',['../classcv_1_1dnn_1_1_resize2_layer_impl.html#a9fb87a59322c0e3979fb09e989f99333',1,'cv::dnn::Resize2LayerImpl::zoomFactorWidth'],['../classcv_1_1dnn_1_1_resize_layer_impl.html#a42a738f85f22c0e87c6fe0809b044bb1',1,'cv::dnn::ResizeLayerImpl::zoomFactorWidth']]],
+  ['zpass_17',['zpass',['../namespacegl.html#ad21a4774a341288079f0dfa7be51851b',1,'gl']]]
+];

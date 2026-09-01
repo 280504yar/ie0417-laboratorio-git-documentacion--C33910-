@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/cpu_kernels/conv2_deconv.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('conv2__deconv_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">conv2_deconv.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="conv2__deconv_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="conv2__common_8hpp.html">../conv2_common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="intrin_8hpp.html">opencv2/core/hal/intrin.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a6262b1b0b2b8a9771692f7e0df2e45c7">   14</a></span><span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a6262b1b0b2b8a9771692f7e0df2e45c7">deconvBlock32f</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* inp__, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="comment">/*residual*/</span>,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                           <span class="keywordtype">void</span>* out__, <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_conv_state.html">ConvState</a>&amp; cs,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>                           <span class="keyword">const</span> <span class="keywordtype">void</span>* weights__, <span class="keyword">const</span> <span class="keywordtype">float</span>* <span class="comment">/*scale*/</span>,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                           <span class="keyword">const</span> <span class="keywordtype">float</span>* bias__)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>.<a class="code hl_variable" href="structcv_1_1_mat_shape.html#a0936749ebd48f06bed02a78c6f17e0e9">layout</a> == <a class="code hl_enumvalue" href="group__core__basic.html#gga294b6ad3bb4c238e5d9f71a034adb211ad3e3f109c7eabbe11399456fbb7a7841">DATA_LAYOUT_BLOCK</a>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>.<a class="code hl_variable" href="structcv_1_1_mat_shape.html#a0936749ebd48f06bed02a78c6f17e0e9">layout</a> == <a class="code hl_enumvalue" href="group__core__basic.html#gga294b6ad3bb4c238e5d9f71a034adb211ad3e3f109c7eabbe11399456fbb7a7841">DATA_LAYOUT_BLOCK</a>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>.<a class="code hl_variable" href="structcv_1_1_mat_shape.html#a303edd6baa425e46e847c5249fdd07cb">dims</a> == 5);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">enum</span> { MAX_DIMS = <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">ConvState::MAX_CONV_DIMS</a> };</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> sdims = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a1aa0028a234e06ec50fd49e6ec411b0e">nspatialdims</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> C0    = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>.<a class="code hl_function" href="structcv_1_1_mat_shape.html#a3cbdf25d9f0fef0c4b1b5776d704bc32">back</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> K0    = C0;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>  = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>[0];</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> C1 = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>[1];</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> K1 = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>[1];</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> C  = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>.<a class="code hl_variable" href="structcv_1_1_mat_shape.html#a501acaa30e4640c8be178aecfc563f1f">C</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> K  = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>.<a class="code hl_variable" href="structcv_1_1_mat_shape.html#a501acaa30e4640c8be178aecfc563f1f">C</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> ngroups = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">ngroups</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> Kg  = K / ngroups;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> Cg  = C / ngroups;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> Kblk  = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>[1];</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> ksize = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>[2];</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> C1Max = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>[3];</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">int</span> ispatial = 1, ospatial = 1;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; sdims; i++) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        ispatial *= cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>[2 + i];</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        ospatial *= cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>[2 + i];</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> oDims[MAX_DIMS], iDims[MAX_DIMS];</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; MAX_DIMS; i++) oDims[i] = iDims[i] = 1;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; sdims; i++) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        oDims[MAX_DIMS - sdims + i] = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>[2 + i];</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        iDims[MAX_DIMS - sdims + i] = cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>[2 + i];</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    std::vector&lt;std::array&lt;int, MAX_DIMS&gt;&gt; kcoords_tab(ksize);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ks = 0; ks &lt; ksize; ks++) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">int</span> ktmp = ks;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = sdims - 1; i &gt;= 0; i--) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordtype">int</span> di = MAX_DIMS - sdims + i;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            kcoords_tab[ks][di] = ktmp % cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded">kshape</a>[di];</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            ktmp /= cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded">kshape</a>[di];</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">const</span> <span class="keywordtype">float</span>* wdata = (<span class="keyword">const</span> <span class="keywordtype">float</span>*)weights__;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">const</span> <span class="keywordtype">float</span>* bias  = bias__;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">// SIMD path is safe when ngroups==1 or Kg%C0==0; repackDeconvWeights()</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">// zero-fills padded lanes.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> simd_ok =</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        ((ngroups == 1) || (Kg % C0 == 0)) &amp;&amp; (C0 % VTraits&lt;v_float32&gt;::vlanes() == 0);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> NK1 = <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a> * K1;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">Range</a>(0, NK1), [&amp;](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">Range</a>&amp; range) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nk1 = range.<a class="code hl_variable" href="classcv_1_1_range.html#ad7ce51f1d8797236c97bec49d2b25522">start</a>; nk1 &lt; range.<a class="code hl_variable" href="classcv_1_1_range.html#aba16789fec81858a31c9685d399b62fc">end</a>; nk1++) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> n  = nk1 / K1;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> k1 = nk1 % K1;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> k_base = k1 * C0;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> currK0 = std::min(C0, K - k_base);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">if</span> (currK0 &lt;= 0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordtype">float</span>* out_k1 = (<span class="keywordtype">float</span>*)out__ + ((int64_t)n * K1 + k1) * ospatial * C0;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keyword">const</span> <span class="keywordtype">float</span>* inp_n = (<span class="keyword">const</span> <span class="keywordtype">float</span>*)inp__ + (int64_t)n * C1 * ispatial * C0;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="comment">// Precompute the shared (g, kblk, c1_abs_base) for the SIMD path.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordtype">int</span> simd_g = 0, simd_kblk = 0, simd_c1_abs_base = 0;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">if</span> (simd_ok) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                simd_g          = k_base / Kg;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                simd_kblk       = (k_base - simd_g * Kg) / K0;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keyword">const</span> <span class="keywordtype">int</span> c_start = simd_g * Cg;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                simd_c1_abs_base  = c_start / C0;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> opos_flat = 0; opos_flat &lt; ospatial; opos_flat++) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                <span class="keywordtype">float</span>* out_ptr = out_k1 + opos_flat * C0;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="comment">// Bias init: write currK0 valid lanes + zero-pad the rest.</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="keywordflow">if</span> (bias) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k0 = 0; k0 &lt; currK0; k0++) out_ptr[k0] = bias[k_base + k0];</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k0 = 0; k0 &lt; currK0; k0++) out_ptr[k0] = 0.f;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k0 = currK0; k0 &lt; C0; k0++) out_ptr[k0] = 0.f;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                <span class="keywordtype">int</span> ocoords[MAX_DIMS];</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    <span class="keywordtype">int</span> tmp = opos_flat;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = sdims - 1; i &gt;= 0; i--) {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                        <span class="keywordtype">int</span> di = MAX_DIMS - sdims + i;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                        ocoords[di] = tmp % oDims[di];</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                        tmp /= oDims[di];</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="keywordflow">if</span> (simd_ok) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    <span class="keyword">const</span> <span class="keywordtype">int</span> VLANES = VTraits&lt;v_float32&gt;::vlanes();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                    <span class="keyword">const</span> <span class="keywordtype">int</span> v_per_block = C0 / VLANES;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    <span class="keyword">const</span> <span class="keywordtype">bool</span> two_vecs = (v_per_block == 2);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    <span class="keywordflow">if</span> (v_per_block == 1 || two_vecs) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                        v_float32 acc0 = vx_load(out_ptr);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                        v_float32 acc1 = two_vecs ? vx_load(out_ptr + VLANES)</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                                                  : vx_setzero_f32();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ks = 0; ks &lt; ksize; ks++) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                            <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                            <span class="keywordtype">int</span> ipos_flat = 0;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; sdims; i++) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                                <span class="keywordtype">int</span> di = MAX_DIMS - sdims + i;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                                <span class="keywordtype">int</span> raw = ocoords[di] + cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">pads</a>[di]</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                                          - kcoords_tab[ks][di] * cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">dilations</a>[di];</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                                <span class="keywordflow">if</span> (raw &lt; 0 || raw % cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>[di] != 0) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                                    valid = <span class="keyword">false</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                                }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                                <span class="keywordtype">int</span> ic = raw / cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>[di];</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                                <span class="keywordflow">if</span> (ic &gt;= iDims[di]) { valid = <span class="keyword">false</span>; <span class="keywordflow">break</span>; }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                                ipos_flat = ipos_flat * iDims[di] + ic;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                            }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                            <span class="keywordflow">if</span> (!valid) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                            <span class="keyword">const</span> <span class="keywordtype">float</span>* w_base = wdata +</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                                ((int64_t)(simd_g * Kblk + simd_kblk) * ksize + ks)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                                * C1Max * C0 * K0;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c1p = 0; c1p &lt; C1Max; c1p++) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                                <span class="keyword">const</span> <span class="keywordtype">int</span> c1_abs = simd_c1_abs_base + c1p;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                                <span class="keywordflow">if</span> (c1_abs &gt;= C1) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                                <span class="keyword">const</span> <span class="keywordtype">float</span>* inp_ptr = inp_n +</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                                    (int64_t)(c1_abs * ispatial + ipos_flat) * C0;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                                <span class="keyword">const</span> <span class="keywordtype">float</span>* w_c1p = w_base + (int64_t)c1p * C0 * K0;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c0 = 0; c0 &lt; C0; c0++) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                                    v_float32 inp_v = vx_setall_f32(inp_ptr[c0]);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                                    v_float32 w0 = vx_load(w_c1p + c0 * K0);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                                    acc0 = <a class="code hl_function" href="group__core__hal__intrin.html#gaa5aa4bc7f178b3cc0e6b11781003dd77">v_fma</a>(inp_v, w0, acc0);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                                    <span class="keywordflow">if</span> (two_vecs) {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                                        v_float32 w1 = vx_load(w_c1p + c0 * K0 + VLANES);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                                        acc1 = <a class="code hl_function" href="group__core__hal__intrin.html#gaa5aa4bc7f178b3cc0e6b11781003dd77">v_fma</a>(inp_v, w1, acc1);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                                    }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                                }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                            }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                        }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                        vx_store(out_ptr, acc0);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                        <span class="keywordflow">if</span> (two_vecs) vx_store(out_ptr + VLANES, acc1);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                    }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                <span class="comment">// Scalar fallback.</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ks = 0; ks &lt; ksize; ks++) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                    <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                    <span class="keywordtype">int</span> ipos_flat = 0;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; sdims; i++) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                        <span class="keywordtype">int</span> di = MAX_DIMS - sdims + i;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                        <span class="keywordtype">int</span> raw = ocoords[di] + cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">pads</a>[di]</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                                  - kcoords_tab[ks][di] * cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">dilations</a>[di];</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                        <span class="keywordflow">if</span> (raw &lt; 0 || raw % cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>[di] != 0) {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                            valid = <span class="keyword">false</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                        }</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                        <span class="keywordtype">int</span> ic = raw / cs.<a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>[di];</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                        <span class="keywordflow">if</span> (ic &gt;= iDims[di]) { valid = <span class="keyword">false</span>; <span class="keywordflow">break</span>; }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                        ipos_flat = ipos_flat * iDims[di] + ic;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                    }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                    <span class="keywordflow">if</span> (!valid) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k0 = 0; k0 &lt; currK0; k0++) {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>    = k_base + k0;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> g    = <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> / Kg;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> kin  = <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> - g * Kg;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> kblk = kin / K0;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> k0l  = kin &amp; (K0 - 1);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                        <span class="keyword">const</span> <span class="keywordtype">float</span>* w_base = wdata +</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>                            ((int64_t)(g * Kblk + kblk) * ksize + ks) * C1Max * C0 * K0;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> c_start     = g * Cg;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                        <span class="keyword">const</span> <span class="keywordtype">int</span> c1_abs_base = c_start / C0;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                        <span class="keywordtype">float</span> <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a> = 0.f;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c1p = 0; c1p &lt; C1Max; c1p++) {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                            <span class="keyword">const</span> <span class="keywordtype">int</span> c1_abs = c1_abs_base + c1p;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                            <span class="keywordflow">if</span> (c1_abs &gt;= C1) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                            <span class="keyword">const</span> <span class="keywordtype">float</span>* inp_ptr = inp_n +</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                                (int64_t)(c1_abs * ispatial + ipos_flat) * C0;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                            <span class="keyword">const</span> <span class="keywordtype">float</span>* w_c1p = w_base + (int64_t)c1p * C0 * K0;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c0 = 0; c0 &lt; C0; c0++)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                                <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a> += w_c1p[c0 * K0 + k0l] * inp_ptr[c0];</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                        }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                        out_ptr[k0] += <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                    }</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    });</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>}</div>
+</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="foldopen" id="foldopen00225" data-start="{" data-end="}">
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a0baf1b46d401d65e628c3a7297826e7e">  225</a></span><a class="code hl_typedef" href="namespacecv_1_1dnn.html#a92e281c23a5773aa412b135d03377f84">DeconvFunc</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a0baf1b46d401d65e628c3a7297826e7e">getDeconvFunc</a>(<span class="keywordtype">int</span> depth)</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>{</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">if</span> (depth == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a6262b1b0b2b8a9771692f7e0df2e45c7">deconvBlock32f</a>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>}</div>
+</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>}}</div>
+<div class="ttc" id="aclasscv_1_1_range_html"><div class="ttname"><a href="classcv_1_1_range.html">cv::Range</a></div><div class="ttdoc">Template class specifying a continuous subsequence (slice) of a sequence.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00632">types.hpp:633</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aafab1fe471bac7c314dcd0d678ac4e2d"><div class="ttname"><a href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">cv::Range::Range</a></div><div class="ttdeci">Range()</div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aba16789fec81858a31c9685d399b62fc"><div class="ttname"><a href="classcv_1_1_range.html#aba16789fec81858a31c9685d399b62fc">cv::Range::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_ad7ce51f1d8797236c97bec49d2b25522"><div class="ttname"><a href="classcv_1_1_range.html#ad7ce51f1d8797236c97bec49d2b25522">cv::Range::start</a></div><div class="ttdeci">int start</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aconv2__common_8hpp_html"><div class="ttname"><a href="conv2__common_8hpp.html">conv2_common.hpp</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gga294b6ad3bb4c238e5d9f71a034adb211ad3e3f109c7eabbe11399456fbb7a7841"><div class="ttname"><a href="group__core__basic.html#gga294b6ad3bb4c238e5d9f71a034adb211ad3e3f109c7eabbe11399456fbb7a7841">cv::DATA_LAYOUT_BLOCK</a></div><div class="ttdeci">@ DATA_LAYOUT_BLOCK</div><div class="ttdoc">Block layout (also referred to as &#39;NC1HWC0&#39;), which some accelerators need and even on CPU a better p...</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00084">mat.hpp:84</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gaa5aa4bc7f178b3cc0e6b11781003dd77"><div class="ttname"><a href="group__core__hal__intrin.html#gaa5aa4bc7f178b3cc0e6b11781003dd77">cv::v_fma</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_fma(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b, const v_reg&lt; _Tp, n &gt; &amp;c)</div><div class="ttdoc">Multiply and add.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01116">intrin_cpp.hpp:1116</a></div></div>
+<div class="ttc" id="agroup__core__parallel_html_gaa42ec9937b847cb52a97c613fc894c4a"><div class="ttname"><a href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">cv::parallel_for_</a></div><div class="ttdeci">CV_EXPORTS void parallel_for_(const Range &amp;range, const ParallelLoopBody &amp;body, double nstripes=-1.)</div><div class="ttdoc">Parallel data processor.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00503">parallel.cpp:503</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gaa012757b1a6536a1a3ef813a0aba1c1e"><div class="ttname"><a href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">cv::sum</a></div><div class="ttdeci">OutputArray sum</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l02650">imgproc.hpp:2650</a></div></div>
+<div class="ttc" id="aintrin_8hpp_html"><div class="ttname"><a href="intrin_8hpp.html">intrin.hpp</a></div></div>
+<div class="ttc" id="amedian__blur_8simd_8hpp_html_a0240ac851181b84ac374872dc5434ee4"><div class="ttname"><a href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a></div><div class="ttdeci">#define N</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a0baf1b46d401d65e628c3a7297826e7e"><div class="ttname"><a href="namespacecv_1_1dnn.html#a0baf1b46d401d65e628c3a7297826e7e">cv::dnn::getDeconvFunc</a></div><div class="ttdeci">DeconvFunc getDeconvFunc(int depth)</div><div class="ttdef"><b>Definición</b> <a href="#l00225">conv2_deconv.cpp:225</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a6262b1b0b2b8a9771692f7e0df2e45c7"><div class="ttname"><a href="namespacecv_1_1dnn.html#a6262b1b0b2b8a9771692f7e0df2e45c7">cv::dnn::deconvBlock32f</a></div><div class="ttdeci">static CV__DNN_INLINE_NS_BEGIN void deconvBlock32f(const void *inp__, const void *, void *out__, const ConvState &amp;cs, const void *weights__, const float *, const float *bias__)</div><div class="ttdef"><b>Definición</b> <a href="#l00014">conv2_deconv.cpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a92e281c23a5773aa412b135d03377f84"><div class="ttname"><a href="namespacecv_1_1dnn.html#a92e281c23a5773aa412b135d03377f84">cv::dnn::DeconvFunc</a></div><div class="ttdeci">void(*) DeconvFunc(const void *inp, const void *residual, void *out, const ConvState &amp;cs, const void *weights, const float *scale, const float *bias)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00110">conv2_common.hpp:110</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html_a0936749ebd48f06bed02a78c6f17e0e9"><div class="ttname"><a href="structcv_1_1_mat_shape.html#a0936749ebd48f06bed02a78c6f17e0e9">cv::MatShape::layout</a></div><div class="ttdeci">DataLayout layout</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00172">mat.hpp:172</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html_a303edd6baa425e46e847c5249fdd07cb"><div class="ttname"><a href="structcv_1_1_mat_shape.html#a303edd6baa425e46e847c5249fdd07cb">cv::MatShape::dims</a></div><div class="ttdeci">int dims</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00171">mat.hpp:171</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html_a3cbdf25d9f0fef0c4b1b5776d704bc32"><div class="ttname"><a href="structcv_1_1_mat_shape.html#a3cbdf25d9f0fef0c4b1b5776d704bc32">cv::MatShape::back</a></div><div class="ttdeci">int &amp; back()</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00108">matrix.cpp:108</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html_a501acaa30e4640c8be178aecfc563f1f"><div class="ttname"><a href="structcv_1_1_mat_shape.html#a501acaa30e4640c8be178aecfc563f1f">cv::MatShape::C</a></div><div class="ttdeci">int C</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00173">mat.hpp:173</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html">cv::dnn::ConvState</a></div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00036">conv2_common.hpp:37</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a0270fb222ae9678eaf4a1de065970851"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">cv::dnn::ConvState::inpshape</a></div><div class="ttdeci">MatShape inpshape</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00045">conv2_common.hpp:45</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a1aa0028a234e06ec50fd49e6ec411b0e"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a1aa0028a234e06ec50fd49e6ec411b0e">cv::dnn::ConvState::nspatialdims</a></div><div class="ttdeci">int nspatialdims</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00040">conv2_common.hpp:40</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a3effaa9fb64d5ba5e6a9110bbe3551d3"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">cv::dnn::ConvState::pads</a></div><div class="ttdeci">int pads[MAX_CONV_DIMS *2]</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00044">conv2_common.hpp:44</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a5c772fcece9a9da79e2fe31000f2fb76"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">cv::dnn::ConvState::dilations</a></div><div class="ttdeci">int dilations[MAX_CONV_DIMS]</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00043">conv2_common.hpp:43</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a728e602e60c63cfa3780874946bf3cfb"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">cv::dnn::ConvState::outshape</a></div><div class="ttdeci">MatShape outshape</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00045">conv2_common.hpp:45</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_aa105342568314c2285a606109488376b"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">cv::dnn::ConvState::ngroups</a></div><div class="ttdeci">int ngroups</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00040">conv2_common.hpp:40</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_ac86413b8a2d7348d68447677a3a3bded"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded">cv::dnn::ConvState::kshape</a></div><div class="ttdeci">int kshape[MAX_CONV_DIMS]</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00041">conv2_common.hpp:41</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_ae6ef732540f668d7c356b59f6ac0348c"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">cv::dnn::ConvState::wshape</a></div><div class="ttdeci">MatShape wshape</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00046">conv2_common.hpp:46</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_aec011cf37f6b07d420c1fb08293d09da"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">cv::dnn::ConvState::strides</a></div><div class="ttdeci">int strides[MAX_CONV_DIMS]</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00042">conv2_common.hpp:42</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">cv::dnn::ConvState::MAX_CONV_DIMS</a></div><div class="ttdeci">@ MAX_CONV_DIMS</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8hpp_source.html#l00038">conv2_common.hpp:38</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="dir_f4f7c9f64246e7a78cb90b1cc26742b7.html">cpu_kernels</a></li><li class="navelem"><a href="conv2__deconv_8cpp.html">conv2_deconv.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

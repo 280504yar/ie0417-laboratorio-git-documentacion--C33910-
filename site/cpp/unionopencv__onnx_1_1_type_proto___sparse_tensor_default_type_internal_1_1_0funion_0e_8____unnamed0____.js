@@ -1,0 +1,4 @@
+var unionopencv__onnx_1_1_type_proto___sparse_tensor_default_type_internal_1_1_0funion_0e_8____unnamed0____ =
+[
+    [ "_instance", "unionopencv__onnx_1_1_type_proto___sparse_tensor_default_type_internal_1_1_0funion_0e_8____unnamed0____.html#a8c1fd83fac86309ff3a10a6bb5dabd8b", null ]
+];

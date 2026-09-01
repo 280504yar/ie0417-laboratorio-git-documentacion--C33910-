@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['rectanglesintersecttypes_0',['RectanglesIntersectTypes',['../group__geometry__shape.html#gaaf0eb9e10bd5adcbd446cd31fea2db68',1,'cv']]],
+  ['reducemode_1',['ReduceMode',['../minmax_8dispatch_8cpp.html#a1af74d1a4e017193317ce2a49229f64f',1,'minmax.dispatch.cpp']]],
+  ['reducetype_2',['ReduceType',['../classcv_1_1dnn_1_1_reduce2_layer.html#a595fc5c11802848837de6c6e17d0be48',1,'cv::dnn::Reduce2Layer']]],
+  ['reducetypes_3',['ReduceTypes',['../group__core__array.html#ga14cdedf2933367eb9395ec16798af994',1,'cv']]],
+  ['reduction_4',['REDUCTION',['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a0d3a2e4486ae5fe73e93ca66652c9660',1,'cv::dnn::CV_FINAL::REDUCTION'],['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a0d3a2e4486ae5fe73e93ca66652c9660',1,'cv::dnn::CV_FINAL::REDUCTION']]],
+  ['rendermode_5',['RenderMode',['../namespacecv_1_1viz3d.html#a058338adb51e335f1a42138ae39d83d0',1,'cv::viz3d']]],
+  ['rendermodes_6',['RenderModes',['../group__core__opengl.html#gaf53526c205a92260f356fe6589460aab',1,'cv::ogl']]],
+  ['resize_5fdirection_7',['resize_direction',['../classcv_1_1barcode_1_1_detect.html#ab1914a5cc35fe9ebfe43568459d87892',1,'cv::barcode::Detect::resize_direction'],['../classcv_1_1_q_r_detect.html#aa4f914b6912c2091e8c2550eb5bdf5e9',1,'cv::QRDetect::resize_direction']]],
+  ['retrievalmodes_8',['RetrievalModes',['../group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71',1,'cv']]],
+  ['rgbdnormalsmethod_9',['RgbdNormalsMethod',['../classcv_1_1_rgbd_normals.html#a0d1a2cf1002c2217cb152b5e90323513',1,'cv::RgbdNormals']]],
+  ['rgbdplanemethod_10',['RgbdPlaneMethod',['../group__ptcloud__rgbd.html#ga0ed971e04df96090db4ed7395089fc50',1,'cv']]],
+  ['rgbe_5ferror_5fcodes_11',['rgbe_error_codes',['../rgbe_8cpp.html#a67a2b210aff1ed8fd7e338aa322c3272',1,'rgbe.cpp']]],
+  ['rnnmode_12',['RNNMode',['../classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_r_n_n_descriptor.html#a0f45c1cdd9a803c9f8817d92a54808f2',1,'cv::dnn::cuda4dnn::csl::cudnn::RNNDescriptor']]],
+  ['robotworldhandeyecalibrationmethod_13',['RobotWorldHandEyeCalibrationMethod',['../group__calib.html#ga7874b7e33b597c56994974a7ee532285',1,'cv']]],
+  ['rotateflags_14',['RotateFlags',['../group__core__array.html#ga6f45d55c0b1cc9d97f5353a7c8a7aac2',1,'cv']]],
+  ['roundingmode_15',['RoundingMode',['../structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382b',1,'cv::dnn::cuda4dnn::PoolingConfiguration']]]
+];

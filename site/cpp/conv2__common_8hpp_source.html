@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/conv2_common.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('conv2__common_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">conv2_common.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="conv2__common_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef __OPENCV_DNN_LAYERS_CONV2_COMMON_HPP__</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define __OPENCV_DNN_LAYERS_CONV2_COMMON_HPP__</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="all__layers_8hpp.html">opencv2/dnn/all_layers.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// computes shape of the output tensor of convolution</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// (including depth-wise convolution), max pooling or average pooling operations</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>MatShape <a class="code hl_function" href="namespacecv_1_1dnn.html#a8740ab2f006e34addabe511c7a2436c5">convInferShape</a>(<span class="keyword">const</span> MatShape&amp; inpshape, <span class="keyword">const</span> MatShape&amp; wshape,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                        <span class="keyword">const</span> std::vector&lt;int&gt;&amp; kernel_shape, <span class="keywordtype">int</span> ngroups,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                        <span class="keyword">const</span> std::vector&lt;int&gt;&amp; strides,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                        <span class="keyword">const</span> std::vector&lt;int&gt;&amp; dilations,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                        <span class="keyword">const</span> std::vector&lt;int&gt;&amp; pads,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                        <a class="code hl_enumeration" href="group__dnn_layer_list.html#ga41267aabce78589996cc64ec007bf775">AutoPadding</a> auto_pad, <span class="keywordtype">bool</span> ceil_mode);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521">   26</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521">FastActivation</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a1cdeabcdda9c384ebfe23c0dfe90a43a">   27</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a1cdeabcdda9c384ebfe23c0dfe90a43a">FAST_ACTIV_NONE</a>=0,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a03b45db25f216b67505bba08b1eaed45">   28</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a03b45db25f216b67505bba08b1eaed45">FAST_ACTIV_RELU</a>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a470e1d4529edc11ea067ec8198a5b82d">   29</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a470e1d4529edc11ea067ec8198a5b82d">FAST_ACTIV_LEAKY_RELU</a>,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521aca73a3ef6d7739ac1ba047967b225448">   30</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521aca73a3ef6d7739ac1ba047967b225448">FAST_ACTIV_PRELU</a>,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a726f335452cb5b76e171262f26222829">   31</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a726f335452cb5b76e171262f26222829">FAST_ACTIV_CLIP</a></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>std::string <a class="code hl_function" href="namespacecv_1_1dnn.html#a3b004cb835156aea3fcec0043851abf8">fastActivationToString</a>(<a class="code hl_enumeration" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521">FastActivation</a> fastActivation);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html">   36</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1_conv_state.html">ConvState</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">   38</a></span>    <span class="keyword">enum</span> { <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">MAX_CONV_DIMS</a> = 3 };</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a8b6407d1fbcbe8d58618975374055f53">   39</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a8b6407d1fbcbe8d58618975374055f53">depthwise</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">   40</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">ngroups</a>, <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a1aa0028a234e06ec50fd49e6ec411b0e">nspatialdims</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded">   41</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded">kshape</a>[<a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">MAX_CONV_DIMS</a>];</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">   42</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>[<a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">MAX_CONV_DIMS</a>];</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">   43</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">dilations</a>[<a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">MAX_CONV_DIMS</a>];</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">   44</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">pads</a>[<a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">MAX_CONV_DIMS</a>*2];</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">   45</a></span>    <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>, <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">   46</a></span>    <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>; <span class="comment">// (ngroups, Kblk, ksize, C1Max, C0*K0) in the case of non-depthwise convolution</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a47ce69d762a3e67b13373c83255164ac">   47</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a47ce69d762a3e67b13373c83255164ac">inner</a>[<a class="code hl_enumvalue" href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">MAX_CONV_DIMS</a>*2];</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a59ddd488b7a119123beaf5d39ce2808f">   48</a></span>    std::vector&lt;int&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a59ddd488b7a119123beaf5d39ce2808f">coordtab</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a18115313e8727278770ef857dc3d6c7d">   49</a></span>    std::vector&lt;int&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a18115313e8727278770ef857dc3d6c7d">ofstab</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#afea424881f75976f6b646018cfb8ab17">   51</a></span>    <a class="code hl_enumeration" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521">FastActivation</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#afea424881f75976f6b646018cfb8ab17">fastActivation</a> = <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a1cdeabcdda9c384ebfe23c0dfe90a43a">FAST_ACTIV_NONE</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a2f44dd0f547f433d6ed51ed667546b91">   52</a></span>    <a class="code hl_typedef" href="group__dnn_layer_list.html#ga79332addb589a2b927c58ddf509adbca">ActivationFunc</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a2f44dd0f547f433d6ed51ed667546b91">activation</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#a8a713fcf17b8d00f14d8dea1aecd88b8">   53</a></span>    std::vector&lt;float&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a8a713fcf17b8d00f14d8dea1aecd88b8">activParams</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_conv_state.html#aa9b24cb46d309be1b8c8728efda72603">   55</a></span>    std::ostream&amp; <a class="code hl_function" href="structcv_1_1dnn_1_1_conv_state.html#aa9b24cb46d309be1b8c8728efda72603">dump</a>(std::ostream&amp; strm);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_conv_state.html#ac2a2f342c74d6971921f4e233135049f">sameShape</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_conv_state.html">ConvState</a>&amp; cs) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_conv_state.html#a2403563692f69447bdf29d6583fd5d5f">initConv</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; inpShape,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                  <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                  <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; outShape,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                  <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">ngroups</a>,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                  <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                  <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">dilations</a>,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                  <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">pads</a>,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                  <a class="code hl_enumeration" href="group__dnn_layer_list.html#ga41267aabce78589996cc64ec007bf775">AutoPadding</a> autoPad, <span class="keywordtype">bool</span> ceilMode,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                  <a class="code hl_enumeration" href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521">FastActivation</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#afea424881f75976f6b646018cfb8ab17">fastActivation</a>,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                  <a class="code hl_typedef" href="group__dnn_layer_list.html#ga79332addb589a2b927c58ddf509adbca">ActivationFunc</a> activationFunc,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                  <span class="keyword">const</span> std::vector&lt;float&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a8a713fcf17b8d00f14d8dea1aecd88b8">activParams</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="comment">// initializes the structure of parameters for 1D/2D/3D</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="comment">// depth-wise convolution, max pooling or average pooling</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_conv_state.html#ae0e0df2baada4fde2128299cf9363d78">initPooling</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">inpshape</a>, <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">outshape</a>,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                     <span class="keyword">const</span> std::vector&lt;int&gt;&amp; kernel_shape,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                     <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                     <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">dilations</a>,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                     <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">pads</a>,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                     <a class="code hl_enumeration" href="group__dnn_layer_list.html#ga41267aabce78589996cc64ec007bf775">AutoPadding</a> auto_pad, <span class="keywordtype">bool</span> ceil_mode);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_conv_state.html#a9ab50b1a9ae25635ac243cee65df2ff2">initOfs</a>();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_conv_state.html#a7aaaeaf4a7a992a5f959e0a475d278a2">initDeconv</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; inpShape,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                    <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">wshape</a>,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                    <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; outShape,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">ngroups</a>,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">strides</a>,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">dilations</a>,</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">pads</a>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>};</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><a class="code hl_enumeration" href="group__dnn_layer_list.html#ga41267aabce78589996cc64ec007bf775">AutoPadding</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#ae3acc5ec14431b87b24aa80a4f175c67">getAutoPadding</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1_layer_params.html">LayerParams</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a6663411b2d620b2b86255b682a9bd7cb">   92</a></span><span class="keyword">typedef</span> <a class="code hl_function" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> (*<a class="code hl_typedef" href="namespacecv_1_1dnn.html#a6663411b2d620b2b86255b682a9bd7cb">ConvFunc</a>)(<span class="keyword">const</span> <span class="keywordtype">void</span>* inp, <span class="keyword">const</span> <span class="keywordtype">void</span>* residual, <span class="keywordtype">void</span>* out,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                         <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_conv_state.html">ConvState</a>&amp; cs, <span class="keyword">const</span> <span class="keywordtype">void</span>* weights,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                         <span class="keyword">const</span> <span class="keywordtype">float</span>* scale, <span class="keyword">const</span> <span class="keywordtype">float</span>* bias);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><a class="code hl_typedef" href="namespacecv_1_1dnn.html#a6663411b2d620b2b86255b682a9bd7cb">ConvFunc</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a19edf927c2484a322fb8baf0bf7e0d48">getConvFunc</a>(<span class="keywordtype">int</span> depth, <span class="keywordtype">int</span> C0);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><a class="code hl_typedef" href="namespacecv_1_1dnn.html#a6663411b2d620b2b86255b682a9bd7cb">ConvFunc</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#ae846bd6aa6746120116aa2f2d088d8c1">getDepthwiseConvFunc</a>(<span class="keywordtype">int</span> depth);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#acc9d6d50f5c2fe73b7c2664ad7d247e3">repackDepthwiseConvWeights</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; weights, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; Wpack, <span class="keywordtype">int</span> outtype, <span class="keywordtype">int</span> C0);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a6b3cbf8a049434fd236b4f65b28f395f">repackConvWeights</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; weights, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; Wpack, <span class="keywordtype">int</span> outtype, <span class="keywordtype">int</span> ngroups, <span class="keywordtype">int</span> C0);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#aafe2cc2f4acc26e1dd4de82da42ac846">deconvInferShape</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; inpShape, <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; wshape,</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                          <span class="keyword">const</span> std::vector&lt;int&gt;&amp; kernelShape, <span class="keywordtype">int</span> ngroups,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                          <span class="keyword">const</span> std::vector&lt;int&gt;&amp; strides,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                          <span class="keyword">const</span> std::vector&lt;int&gt;&amp; dilations,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                          <span class="keyword">const</span> std::vector&lt;int&gt;&amp; pads,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                          <span class="keyword">const</span> std::vector&lt;int&gt;&amp; adjustPads,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                          <a class="code hl_enumeration" href="group__dnn_layer_list.html#ga41267aabce78589996cc64ec007bf775">AutoPadding</a> autoPad);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a92e281c23a5773aa412b135d03377f84">  110</a></span><span class="keyword">typedef</span> <a class="code hl_function" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> (*<a class="code hl_typedef" href="namespacecv_1_1dnn.html#a92e281c23a5773aa412b135d03377f84">DeconvFunc</a>)(<span class="keyword">const</span> <span class="keywordtype">void</span>* inp, <span class="keyword">const</span> <span class="keywordtype">void</span>* residual, <span class="keywordtype">void</span>* out,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                           <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1_conv_state.html">ConvState</a>&amp; cs, <span class="keyword">const</span> <span class="keywordtype">void</span>* weights,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                           <span class="keyword">const</span> <span class="keywordtype">float</span>* scale, <span class="keyword">const</span> <span class="keywordtype">float</span>* bias);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><a class="code hl_typedef" href="namespacecv_1_1dnn.html#a92e281c23a5773aa412b135d03377f84">DeconvFunc</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a0baf1b46d401d65e628c3a7297826e7e">getDeconvFunc</a>(<span class="keywordtype">int</span> depth);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ab9a696a05b44af45e9a9ec3410a7e416">repackDeconvWeights</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; weights, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; Wpack, <span class="keywordtype">int</span> outtype, <span class="keywordtype">int</span> ngroups, <span class="keywordtype">int</span> C0);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aall__layers_8hpp_html"><div class="ttname"><a href="all__layers_8hpp.html">all_layers.hpp</a></div></div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a1dabed62d2d603302ed85878c743e251"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void(CL_CALLBACK *)(cl_program</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_params_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_params.html">cv::dnn::LayerParams</a></div><div class="ttdoc">This class provides all data needed to initialize layer.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00153">dnn.hpp:154</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="agroup__dnn_layer_list_html_ga41267aabce78589996cc64ec007bf775"><div class="ttname"><a href="group__dnn_layer_list.html#ga41267aabce78589996cc64ec007bf775">cv::dnn::AutoPadding</a></div><div class="ttdeci">AutoPadding</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00360">all_layers.hpp:361</a></div></div>
+<div class="ttc" id="agroup__dnn_layer_list_html_ga79332addb589a2b927c58ddf509adbca"><div class="ttname"><a href="group__dnn_layer_list.html#ga79332addb589a2b927c58ddf509adbca">cv::dnn::ActivationFunc</a></div><div class="ttdeci">void(*) ActivationFunc(const void *input, void *output, size_t len, const float *params)</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l01047">all_layers.hpp:1047</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a0baf1b46d401d65e628c3a7297826e7e"><div class="ttname"><a href="namespacecv_1_1dnn.html#a0baf1b46d401d65e628c3a7297826e7e">cv::dnn::getDeconvFunc</a></div><div class="ttdeci">DeconvFunc getDeconvFunc(int depth)</div><div class="ttdef"><b>Definición</b> <a href="conv2__deconv_8cpp_source.html#l00225">conv2_deconv.cpp:225</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a19edf927c2484a322fb8baf0bf7e0d48"><div class="ttname"><a href="namespacecv_1_1dnn.html#a19edf927c2484a322fb8baf0bf7e0d48">cv::dnn::getConvFunc</a></div><div class="ttdeci">ConvFunc getConvFunc(int depth, int C0)</div><div class="ttdef"><b>Definición</b> <a href="conv2__kernels_8cpp_source.html#l00014">conv2_kernels.cpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a3b004cb835156aea3fcec0043851abf8"><div class="ttname"><a href="namespacecv_1_1dnn.html#a3b004cb835156aea3fcec0043851abf8">cv::dnn::fastActivationToString</a></div><div class="ttdeci">CV__DNN_INLINE_NS_BEGIN std::string fastActivationToString(FastActivation fastActivation)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00014">conv2_common.cpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a6663411b2d620b2b86255b682a9bd7cb"><div class="ttname"><a href="namespacecv_1_1dnn.html#a6663411b2d620b2b86255b682a9bd7cb">cv::dnn::ConvFunc</a></div><div class="ttdeci">void(*) ConvFunc(const void *inp, const void *residual, void *out, const ConvState &amp;cs, const void *weights, const float *scale, const float *bias)</div><div class="ttdef"><b>Definición</b> <a href="#l00092">conv2_common.hpp:92</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a6b3cbf8a049434fd236b4f65b28f395f"><div class="ttname"><a href="namespacecv_1_1dnn.html#a6b3cbf8a049434fd236b4f65b28f395f">cv::dnn::repackConvWeights</a></div><div class="ttdeci">void repackConvWeights(const Mat &amp;weights, Mat &amp;Wpack, int outtype, int ngroups, int C0_)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00261">conv2_common.cpp:261</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a8740ab2f006e34addabe511c7a2436c5"><div class="ttname"><a href="namespacecv_1_1dnn.html#a8740ab2f006e34addabe511c7a2436c5">cv::dnn::convInferShape</a></div><div class="ttdeci">MatShape convInferShape(const MatShape &amp;inpShape, const MatShape &amp;wshape, const std::vector&lt; int &gt; &amp;kernelShape, int ngroups, const std::vector&lt; int &gt; &amp;strides, const std::vector&lt; int &gt; &amp;dilations, const std::vector&lt; int &gt; &amp;pads, AutoPadding autoPad, bool ceilMode)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00050">conv2_common.cpp:50</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a92e281c23a5773aa412b135d03377f84"><div class="ttname"><a href="namespacecv_1_1dnn.html#a92e281c23a5773aa412b135d03377f84">cv::dnn::DeconvFunc</a></div><div class="ttdeci">void(*) DeconvFunc(const void *inp, const void *residual, void *out, const ConvState &amp;cs, const void *weights, const float *scale, const float *bias)</div><div class="ttdef"><b>Definición</b> <a href="#l00110">conv2_common.hpp:110</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_aafe2cc2f4acc26e1dd4de82da42ac846"><div class="ttname"><a href="namespacecv_1_1dnn.html#aafe2cc2f4acc26e1dd4de82da42ac846">cv::dnn::deconvInferShape</a></div><div class="ttdeci">MatShape deconvInferShape(const MatShape &amp;inpShape, const MatShape &amp;wshape, const std::vector&lt; int &gt; &amp;kernelShape, int ngroups, const std::vector&lt; int &gt; &amp;strides, const std::vector&lt; int &gt; &amp;dilations, const std::vector&lt; int &gt; &amp;pads, const std::vector&lt; int &gt; &amp;adjustPads, AutoPadding autoPad)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00391">conv2_common.cpp:391</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ab9a696a05b44af45e9a9ec3410a7e416"><div class="ttname"><a href="namespacecv_1_1dnn.html#ab9a696a05b44af45e9a9ec3410a7e416">cv::dnn::repackDeconvWeights</a></div><div class="ttdeci">void repackDeconvWeights(const Mat &amp;weights, Mat &amp;Wpack, int outtype, int ngroups, int C0_)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00450">conv2_common.cpp:450</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_acc9d6d50f5c2fe73b7c2664ad7d247e3"><div class="ttname"><a href="namespacecv_1_1dnn.html#acc9d6d50f5c2fe73b7c2664ad7d247e3">cv::dnn::repackDepthwiseConvWeights</a></div><div class="ttdeci">void repackDepthwiseConvWeights(const Mat &amp;weights, Mat &amp;Wpack, int outtype, int C0)</div><div class="ttdef"><b>Definición</b> <a href="conv2__depthwise_8cpp_source.html#l00031">conv2_depthwise.cpp:31</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ae3acc5ec14431b87b24aa80a4f175c67"><div class="ttname"><a href="namespacecv_1_1dnn.html#ae3acc5ec14431b87b24aa80a4f175c67">cv::dnn::getAutoPadding</a></div><div class="ttdeci">AutoPadding getAutoPadding(const LayerParams &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00026">conv2_common.cpp:26</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ae846bd6aa6746120116aa2f2d088d8c1"><div class="ttname"><a href="namespacecv_1_1dnn.html#ae846bd6aa6746120116aa2f2d088d8c1">cv::dnn::getDepthwiseConvFunc</a></div><div class="ttdeci">ConvFunc getDepthwiseConvFunc(int depth)</div><div class="ttdef"><b>Definición</b> <a href="conv2__depthwise_8cpp_source.html#l00014">conv2_depthwise.cpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_afb38ea78b91a1dd5d81bb576508d4521"><div class="ttname"><a href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521">cv::dnn::FastActivation</a></div><div class="ttdeci">FastActivation</div><div class="ttdef"><b>Definición</b> <a href="#l00026">conv2_common.hpp:26</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_afb38ea78b91a1dd5d81bb576508d4521a03b45db25f216b67505bba08b1eaed45"><div class="ttname"><a href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a03b45db25f216b67505bba08b1eaed45">cv::dnn::FAST_ACTIV_RELU</a></div><div class="ttdeci">@ FAST_ACTIV_RELU</div><div class="ttdef"><b>Definición</b> <a href="#l00028">conv2_common.hpp:28</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_afb38ea78b91a1dd5d81bb576508d4521a1cdeabcdda9c384ebfe23c0dfe90a43a"><div class="ttname"><a href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a1cdeabcdda9c384ebfe23c0dfe90a43a">cv::dnn::FAST_ACTIV_NONE</a></div><div class="ttdeci">@ FAST_ACTIV_NONE</div><div class="ttdef"><b>Definición</b> <a href="#l00027">conv2_common.hpp:27</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_afb38ea78b91a1dd5d81bb576508d4521a470e1d4529edc11ea067ec8198a5b82d"><div class="ttname"><a href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a470e1d4529edc11ea067ec8198a5b82d">cv::dnn::FAST_ACTIV_LEAKY_RELU</a></div><div class="ttdeci">@ FAST_ACTIV_LEAKY_RELU</div><div class="ttdef"><b>Definición</b> <a href="#l00029">conv2_common.hpp:29</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_afb38ea78b91a1dd5d81bb576508d4521a726f335452cb5b76e171262f26222829"><div class="ttname"><a href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521a726f335452cb5b76e171262f26222829">cv::dnn::FAST_ACTIV_CLIP</a></div><div class="ttdeci">@ FAST_ACTIV_CLIP</div><div class="ttdef"><b>Definición</b> <a href="#l00031">conv2_common.hpp:31</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_afb38ea78b91a1dd5d81bb576508d4521aca73a3ef6d7739ac1ba047967b225448"><div class="ttname"><a href="namespacecv_1_1dnn.html#afb38ea78b91a1dd5d81bb576508d4521aca73a3ef6d7739ac1ba047967b225448">cv::dnn::FAST_ACTIV_PRELU</a></div><div class="ttdeci">@ FAST_ACTIV_PRELU</div><div class="ttdef"><b>Definición</b> <a href="#l00030">conv2_common.hpp:30</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html"><div class="ttname"><a href="structcv_1_1_mat_shape.html">cv::MatShape</a></div><div class="ttdoc">Represents shape of a matrix/tensor. Previously, MatShape was defined as an alias of std::vector&lt;int&gt;...</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00107">mat.hpp:108</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html">cv::dnn::ConvState</a></div><div class="ttdef"><b>Definición</b> <a href="#l00036">conv2_common.hpp:37</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a0270fb222ae9678eaf4a1de065970851"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a0270fb222ae9678eaf4a1de065970851">cv::dnn::ConvState::inpshape</a></div><div class="ttdeci">MatShape inpshape</div><div class="ttdef"><b>Definición</b> <a href="#l00045">conv2_common.hpp:45</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a18115313e8727278770ef857dc3d6c7d"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a18115313e8727278770ef857dc3d6c7d">cv::dnn::ConvState::ofstab</a></div><div class="ttdeci">std::vector&lt; int &gt; ofstab</div><div class="ttdef"><b>Definición</b> <a href="#l00049">conv2_common.hpp:49</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a1aa0028a234e06ec50fd49e6ec411b0e"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a1aa0028a234e06ec50fd49e6ec411b0e">cv::dnn::ConvState::nspatialdims</a></div><div class="ttdeci">int nspatialdims</div><div class="ttdef"><b>Definición</b> <a href="#l00040">conv2_common.hpp:40</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a2403563692f69447bdf29d6583fd5d5f"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a2403563692f69447bdf29d6583fd5d5f">cv::dnn::ConvState::initConv</a></div><div class="ttdeci">void initConv(const MatShape &amp;inpShape, const MatShape &amp;wshape, const MatShape &amp;outShape, int ngroups, const std::vector&lt; int &gt; &amp;strides, const std::vector&lt; int &gt; &amp;dilations, const std::vector&lt; int &gt; &amp;pads, AutoPadding autoPad, bool ceilMode, FastActivation fastActivation, ActivationFunc activationFunc, const std::vector&lt; float &gt; &amp;activParams)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00177">conv2_common.cpp:177</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a2f44dd0f547f433d6ed51ed667546b91"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a2f44dd0f547f433d6ed51ed667546b91">cv::dnn::ConvState::activation</a></div><div class="ttdeci">ActivationFunc activation</div><div class="ttdef"><b>Definición</b> <a href="#l00052">conv2_common.hpp:52</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a3effaa9fb64d5ba5e6a9110bbe3551d3"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a3effaa9fb64d5ba5e6a9110bbe3551d3">cv::dnn::ConvState::pads</a></div><div class="ttdeci">int pads[MAX_CONV_DIMS *2]</div><div class="ttdef"><b>Definición</b> <a href="#l00044">conv2_common.hpp:44</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a47ce69d762a3e67b13373c83255164ac"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a47ce69d762a3e67b13373c83255164ac">cv::dnn::ConvState::inner</a></div><div class="ttdeci">int inner[MAX_CONV_DIMS *2]</div><div class="ttdef"><b>Definición</b> <a href="#l00047">conv2_common.hpp:47</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a59ddd488b7a119123beaf5d39ce2808f"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a59ddd488b7a119123beaf5d39ce2808f">cv::dnn::ConvState::coordtab</a></div><div class="ttdeci">std::vector&lt; int &gt; coordtab</div><div class="ttdef"><b>Definición</b> <a href="#l00048">conv2_common.hpp:48</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a5c772fcece9a9da79e2fe31000f2fb76"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a5c772fcece9a9da79e2fe31000f2fb76">cv::dnn::ConvState::dilations</a></div><div class="ttdeci">int dilations[MAX_CONV_DIMS]</div><div class="ttdef"><b>Definición</b> <a href="#l00043">conv2_common.hpp:43</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a728e602e60c63cfa3780874946bf3cfb"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a728e602e60c63cfa3780874946bf3cfb">cv::dnn::ConvState::outshape</a></div><div class="ttdeci">MatShape outshape</div><div class="ttdef"><b>Definición</b> <a href="#l00045">conv2_common.hpp:45</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a7aaaeaf4a7a992a5f959e0a475d278a2"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a7aaaeaf4a7a992a5f959e0a475d278a2">cv::dnn::ConvState::initDeconv</a></div><div class="ttdeci">void initDeconv(const MatShape &amp;inpShape, const MatShape &amp;wshape, const MatShape &amp;outShape, int ngroups, const std::vector&lt; int &gt; &amp;strides, const std::vector&lt; int &gt; &amp;dilations, const std::vector&lt; int &gt; &amp;pads)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00502">conv2_common.cpp:502</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a8a713fcf17b8d00f14d8dea1aecd88b8"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a8a713fcf17b8d00f14d8dea1aecd88b8">cv::dnn::ConvState::activParams</a></div><div class="ttdeci">std::vector&lt; float &gt; activParams</div><div class="ttdef"><b>Definición</b> <a href="#l00053">conv2_common.hpp:53</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a8b6407d1fbcbe8d58618975374055f53"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a8b6407d1fbcbe8d58618975374055f53">cv::dnn::ConvState::depthwise</a></div><div class="ttdeci">bool depthwise</div><div class="ttdef"><b>Definición</b> <a href="#l00039">conv2_common.hpp:39</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_a9ab50b1a9ae25635ac243cee65df2ff2"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#a9ab50b1a9ae25635ac243cee65df2ff2">cv::dnn::ConvState::initOfs</a></div><div class="ttdeci">void initOfs()</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00549">conv2_common.cpp:549</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_aa105342568314c2285a606109488376b"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#aa105342568314c2285a606109488376b">cv::dnn::ConvState::ngroups</a></div><div class="ttdeci">int ngroups</div><div class="ttdef"><b>Definición</b> <a href="#l00040">conv2_common.hpp:40</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_aa9b24cb46d309be1b8c8728efda72603"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#aa9b24cb46d309be1b8c8728efda72603">cv::dnn::ConvState::dump</a></div><div class="ttdeci">std::ostream &amp; dump(std::ostream &amp;strm)</div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_ac2a2f342c74d6971921f4e233135049f"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#ac2a2f342c74d6971921f4e233135049f">cv::dnn::ConvState::sameShape</a></div><div class="ttdeci">bool sameShape(const ConvState &amp;cs) const</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00145">conv2_common.cpp:145</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_ac86413b8a2d7348d68447677a3a3bded"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#ac86413b8a2d7348d68447677a3a3bded">cv::dnn::ConvState::kshape</a></div><div class="ttdeci">int kshape[MAX_CONV_DIMS]</div><div class="ttdef"><b>Definición</b> <a href="#l00041">conv2_common.hpp:41</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_ae0e0df2baada4fde2128299cf9363d78"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#ae0e0df2baada4fde2128299cf9363d78">cv::dnn::ConvState::initPooling</a></div><div class="ttdeci">void initPooling(const MatShape &amp;inpshape, const MatShape &amp;outshape, const std::vector&lt; int &gt; &amp;kernel_shape, const std::vector&lt; int &gt; &amp;strides, const std::vector&lt; int &gt; &amp;dilations, const std::vector&lt; int &gt; &amp;pads, AutoPadding auto_pad, bool ceil_mode)</div><div class="ttdef"><b>Definición</b> <a href="conv2__common_8cpp_source.html#l00313">conv2_common.cpp:313</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_ae6ef732540f668d7c356b59f6ac0348c"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#ae6ef732540f668d7c356b59f6ac0348c">cv::dnn::ConvState::wshape</a></div><div class="ttdeci">MatShape wshape</div><div class="ttdef"><b>Definición</b> <a href="#l00046">conv2_common.hpp:46</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_aec011cf37f6b07d420c1fb08293d09da"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#aec011cf37f6b07d420c1fb08293d09da">cv::dnn::ConvState::strides</a></div><div class="ttdeci">int strides[MAX_CONV_DIMS]</div><div class="ttdef"><b>Definición</b> <a href="#l00042">conv2_common.hpp:42</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#af055d311222b4a91101d894be91b64cda6695a639987f18efbc2041d1289fecf0">cv::dnn::ConvState::MAX_CONV_DIMS</a></div><div class="ttdeci">@ MAX_CONV_DIMS</div><div class="ttdef"><b>Definición</b> <a href="#l00038">conv2_common.hpp:38</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_conv_state_html_afea424881f75976f6b646018cfb8ab17"><div class="ttname"><a href="structcv_1_1dnn_1_1_conv_state.html#afea424881f75976f6b646018cfb8ab17">cv::dnn::ConvState::fastActivation</a></div><div class="ttdeci">FastActivation fastActivation</div><div class="ttdef"><b>Definición</b> <a href="#l00051">conv2_common.hpp:51</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="conv2__common_8hpp.html">conv2_common.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

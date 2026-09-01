@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_non_max_suppression_v5_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_non_max_suppression_v5_options_01_4.html#ab4481e761b68b7223ce037dedec38014", null ]
+];

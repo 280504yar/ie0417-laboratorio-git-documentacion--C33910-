@@ -1,0 +1,28 @@
+var structcv_1_1dnn_1_1_model_1_1_impl =
+[
+    [ "~Impl", "structcv_1_1dnn_1_1_model_1_1_impl.html#ad7544c778f7907e68c3969e831bfbfc5", null ],
+    [ "Impl", "structcv_1_1dnn_1_1_model_1_1_impl.html#a4cc3661f4dbff3de5c6a636324f107e6", null ],
+    [ "Impl", "structcv_1_1dnn_1_1_model_1_1_impl.html#a8938f541ee870c2a3303bfcd06d63c2d", null ],
+    [ "Impl", "structcv_1_1dnn_1_1_model_1_1_impl.html#ad4fbeb087e0b794116623a51e7ec3f67", null ],
+    [ "enableWinograd", "structcv_1_1dnn_1_1_model_1_1_impl.html#ac813bcdc7f98d31a35ccadd31fdad1af", null ],
+    [ "getNetwork", "structcv_1_1dnn_1_1_model_1_1_impl.html#a545b5abcf7ce6051b85776621c399422", null ],
+    [ "initNet", "structcv_1_1dnn_1_1_model_1_1_impl.html#a45f5cf01dc353e9f699e3b15b0545940", null ],
+    [ "processFrame", "structcv_1_1dnn_1_1_model_1_1_impl.html#a45b0d6b4e92438cd28aaa7e6ebb6f975", null ],
+    [ "setInputCrop", "structcv_1_1dnn_1_1_model_1_1_impl.html#aec050236d44587308f73f5b2eaf7fb66", null ],
+    [ "setInputMean", "structcv_1_1dnn_1_1_model_1_1_impl.html#a15bc1a22bc30e6810b462dfdb5d67f9a", null ],
+    [ "setInputParams", "structcv_1_1dnn_1_1_model_1_1_impl.html#a6626e76cde1518892425fd206d140ba7", null ],
+    [ "setInputScale", "structcv_1_1dnn_1_1_model_1_1_impl.html#a6f7933e7f16bb5a7dd2b228089e01dc7", null ],
+    [ "setInputSize", "structcv_1_1dnn_1_1_model_1_1_impl.html#ae38978fcd467195bec0dd630b90c64bf", null ],
+    [ "setInputSwapRB", "structcv_1_1dnn_1_1_model_1_1_impl.html#a1e9f1f60a4ed2d6d2ee41a08b54f71b8", null ],
+    [ "setOutputNames", "structcv_1_1dnn_1_1_model_1_1_impl.html#a413ee83d09b16babeda3e2d14cd6aa11", null ],
+    [ "setPreferableBackend", "structcv_1_1dnn_1_1_model_1_1_impl.html#a843e071b25956c28b22bfe258faadd00", null ],
+    [ "setPreferableTarget", "structcv_1_1dnn_1_1_model_1_1_impl.html#aedfcff0987ce1bc6254dbe79126c32df", null ],
+    [ "blob", "structcv_1_1dnn_1_1_model_1_1_impl.html#a829295f4308bda0f354ad8d5297eb1cf", null ],
+    [ "crop", "structcv_1_1dnn_1_1_model_1_1_impl.html#a2966e725471448db3891ee6d27bed4bc", null ],
+    [ "mean", "structcv_1_1dnn_1_1_model_1_1_impl.html#aeadfff5edf8a016876e926c3cb6db2df", null ],
+    [ "net", "structcv_1_1dnn_1_1_model_1_1_impl.html#a282e2b744a7d44cd1212b603e781de2a", null ],
+    [ "outNames", "structcv_1_1dnn_1_1_model_1_1_impl.html#ae6296729c3c6b66c6f04dc2d8302b0c6", null ],
+    [ "scale", "structcv_1_1dnn_1_1_model_1_1_impl.html#ad69df36740c7995e984c01784180a1a5", null ],
+    [ "size", "structcv_1_1dnn_1_1_model_1_1_impl.html#ac8448f74a915188a402bfb05ea75030a", null ],
+    [ "swapRB", "structcv_1_1dnn_1_1_model_1_1_impl.html#a483230c597060b7393545e9d0d077b17", null ]
+];

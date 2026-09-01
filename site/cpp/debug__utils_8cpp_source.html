@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/debug_utils.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('debug__utils_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">debug_utils.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="debug__utils_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="layer__reg_8private_8hpp.html">opencv2/dnn/layer_reg.private.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="debug__utils_8hpp.html">opencv2/dnn/utils/debug_utils.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">opencv2/core/utils/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a98478e8870996b5b389ebbb2ea4857b6">   16</a></span><span class="keywordtype">bool</span> <a class="code hl_variable" href="namespacecv_1_1dnn.html#a98478e8870996b5b389ebbb2ea4857b6">DNN_DIAGNOSTICS_RUN</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a0b1864314f6560a50da304763c4ecf9a">   17</a></span><span class="keywordtype">bool</span> <a class="code hl_variable" href="namespacecv_1_1dnn.html#a0b1864314f6560a50da304763c4ecf9a">DNN_SKIP_REAL_IMPORT</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group__dnn.html#ga9c06b170a462e97b413163aadb9869f9">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__dnn.html#ga9c06b170a462e97b413163aadb9869f9">enableModelDiagnostics</a>(<span class="keywordtype">bool</span> isDiagnosticsMode)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_variable" href="namespacecv_1_1dnn.html#a98478e8870996b5b389ebbb2ea4857b6">DNN_DIAGNOSTICS_RUN</a> = isDiagnosticsMode;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespacecv_1_1dnn.html#a98478e8870996b5b389ebbb2ea4857b6">DNN_DIAGNOSTICS_RUN</a>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_not_implemented.html#a1766ad102ef9a0f395cbbbd7a058195a">detail::NotImplemented::Register</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_not_implemented.html#a3940ee1050b1201e3201eb8e32fdd34b">detail::NotImplemented::unRegister</a>();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a3878c43aaf01990a2cc07b90efc3168d">   33</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a3878c43aaf01990a2cc07b90efc3168d">skipModelImport</a>(<span class="keywordtype">bool</span> skip)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_variable" href="namespacecv_1_1dnn.html#a0b1864314f6560a50da304763c4ecf9a">DNN_SKIP_REAL_IMPORT</a> = skip;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
+</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#abbbdc1e029f27fd9b486e6fd99f7a04a">   38</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#abbbdc1e029f27fd9b486e6fd99f7a04a">detail::LayerHandler::addMissing</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keyword">const</span> std::string&amp; type)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="comment">// If we didn&#39;t add it, but can create it, it&#39;s custom and not missing.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#ad641f97e261911516791017a00300eea">contains</a>(type) &amp;&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1_layer_factory.html#a0437b820fe1f19cc536df53f9cbc2ad7">LayerFactory::isLayerRegistered</a>(type))</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    layers[type].insert(name);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#ad641f97e261911516791017a00300eea">   49</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#ad641f97e261911516791017a00300eea">detail::LayerHandler::contains</a>(<span class="keyword">const</span> std::string&amp; type)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">return</span> layers.count(type) != 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#a9d1a5e19ac55a6915baeedcf7107c6d5">   54</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#a9d1a5e19ac55a6915baeedcf7107c6d5">detail::LayerHandler::printMissing</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">if</span> (layers.empty())</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::ostringstream ss;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    ss &lt;&lt; <span class="stringliteral">&quot;DNN: Not supported types:\n&quot;</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; type_names : layers)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; type = type_names.first;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        ss &lt;&lt; <span class="stringliteral">&quot;Type=&#39;&quot;</span> &lt;&lt; type &lt;&lt; <span class="stringliteral">&quot;&#39;, affected nodes:\n[&quot;</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; name : type_names.second)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            ss &lt;&lt; <span class="stringliteral">&quot;&#39;&quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;&#39;, &quot;</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        ss.seekp(-2, std::ios_base::end);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        ss &lt;&lt; <span class="stringliteral">&quot;]\n&quot;</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_define" href="group__core__logging.html#ga61945c827c7bc921bbabfd415d0f126d">CV_LOG_ERROR</a>(NULL, ss.str());</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#a75381d5ebc3a125b381d1c49f3436f5f">   77</a></span><a class="code hl_class" href="classcv_1_1dnn_1_1_layer_params.html">LayerParams</a> <a class="code hl_function" href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#a75381d5ebc3a125b381d1c49f3436f5f">detail::LayerHandler::getNotImplementedParams</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keyword">const</span> std::string&amp; op)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_class" href="classcv_1_1dnn_1_1_layer_params.html">LayerParams</a> lp;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    lp.<a class="code hl_variable" href="classcv_1_1dnn_1_1_layer_params.html#a4b8f725e1fef3654d9608fad85429816">name</a> = name;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    lp.<a class="code hl_variable" href="classcv_1_1dnn_1_1_layer_params.html#a0dbcba5635f513704ca7adc9cf6eff78">type</a> = <span class="stringliteral">&quot;NotImplemented&quot;</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    lp.<a class="code hl_function" href="classcv_1_1dnn_1_1_dict.html#a3c65b58b7bdad376dca3b3b050e304dd">set</a>(<span class="stringliteral">&quot;type&quot;</span>, op);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> lp;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}} <span class="comment">// namespace</span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_dict_html_a3c65b58b7bdad376dca3b3b050e304dd"><div class="ttname"><a href="classcv_1_1dnn_1_1_dict.html#a3c65b58b7bdad376dca3b3b050e304dd">cv::dnn::Dict::set</a></div><div class="ttdeci">const T &amp; set(const String &amp;key, const T &amp;value)</div><div class="ttdoc">Sets new value for the key, or adds new key-value pair into the dictionary.</div><div class="ttdef"><b>Definición</b> <a href="dnn_8inl_8hpp_source.html#l00395">dnn.inl.hpp:395</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_factory_html_a0437b820fe1f19cc536df53f9cbc2ad7"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_factory.html#a0437b820fe1f19cc536df53f9cbc2ad7">cv::dnn::LayerFactory::isLayerRegistered</a></div><div class="ttdeci">static bool isLayerRegistered(const std::string &amp;type)</div><div class="ttdoc">Check if layer is registered.</div><div class="ttdef"><b>Definición</b> <a href="layer__factory_8cpp_source.html#l00081">layer_factory.cpp:81</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_params_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_params.html">cv::dnn::LayerParams</a></div><div class="ttdoc">This class provides all data needed to initialize layer.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00153">dnn.hpp:154</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_params_html_a0dbcba5635f513704ca7adc9cf6eff78"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_params.html#a0dbcba5635f513704ca7adc9cf6eff78">cv::dnn::LayerParams::type</a></div><div class="ttdeci">String type</div><div class="ttdoc">Type name which was used for creating layer by layer factory (optional).</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00160">dnn.hpp:160</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_params_html_a4b8f725e1fef3654d9608fad85429816"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_params.html#a4b8f725e1fef3654d9608fad85429816">cv::dnn::LayerParams::name</a></div><div class="ttdeci">String name</div><div class="ttdoc">Name of the layer instance (optional, can be used internal purposes).</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00159">dnn.hpp:159</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1detail_1_1_layer_handler_html_a75381d5ebc3a125b381d1c49f3436f5f"><div class="ttname"><a href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#a75381d5ebc3a125b381d1c49f3436f5f">cv::dnn::detail::LayerHandler::getNotImplementedParams</a></div><div class="ttdeci">LayerParams getNotImplementedParams(const std::string &amp;name, const std::string &amp;op)</div><div class="ttdef"><b>Definición</b> <a href="#l00077">debug_utils.cpp:77</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1detail_1_1_layer_handler_html_a9d1a5e19ac55a6915baeedcf7107c6d5"><div class="ttname"><a href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#a9d1a5e19ac55a6915baeedcf7107c6d5">cv::dnn::detail::LayerHandler::printMissing</a></div><div class="ttdeci">void printMissing() const</div><div class="ttdef"><b>Definición</b> <a href="#l00054">debug_utils.cpp:54</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1detail_1_1_layer_handler_html_abbbdc1e029f27fd9b486e6fd99f7a04a"><div class="ttname"><a href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#abbbdc1e029f27fd9b486e6fd99f7a04a">cv::dnn::detail::LayerHandler::addMissing</a></div><div class="ttdeci">void addMissing(const std::string &amp;name, const std::string &amp;type)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">debug_utils.cpp:38</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1detail_1_1_layer_handler_html_ad641f97e261911516791017a00300eea"><div class="ttname"><a href="classcv_1_1dnn_1_1detail_1_1_layer_handler.html#ad641f97e261911516791017a00300eea">cv::dnn::detail::LayerHandler::contains</a></div><div class="ttdeci">bool contains(const std::string &amp;type) const</div><div class="ttdef"><b>Definición</b> <a href="#l00049">debug_utils.cpp:49</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1detail_1_1_not_implemented_html_a1766ad102ef9a0f395cbbbd7a058195a"><div class="ttname"><a href="classcv_1_1dnn_1_1detail_1_1_not_implemented.html#a1766ad102ef9a0f395cbbbd7a058195a">cv::dnn::detail::NotImplemented::Register</a></div><div class="ttdeci">static void Register()</div><div class="ttdef"><b>Definición</b> <a href="not__implemented__layer_8cpp_source.html#l00159">not_implemented_layer.cpp:159</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1detail_1_1_not_implemented_html_a3940ee1050b1201e3201eb8e32fdd34b"><div class="ttname"><a href="classcv_1_1dnn_1_1detail_1_1_not_implemented.html#a3940ee1050b1201e3201eb8e32fdd34b">cv::dnn::detail::NotImplemented::unRegister</a></div><div class="ttdeci">static void unRegister()</div><div class="ttdef"><b>Definición</b> <a href="not__implemented__layer_8cpp_source.html#l00164">not_implemented_layer.cpp:164</a></div></div>
+<div class="ttc" id="adebug__utils_8hpp_html"><div class="ttname"><a href="debug__utils_8hpp.html">debug_utils.hpp</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga61945c827c7bc921bbabfd415d0f126d"><div class="ttname"><a href="group__core__logging.html#ga61945c827c7bc921bbabfd415d0f126d">CV_LOG_ERROR</a></div><div class="ttdeci">#define CV_LOG_ERROR(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00168">logger.hpp:168</a></div></div>
+<div class="ttc" id="agroup__dnn_html_ga9c06b170a462e97b413163aadb9869f9"><div class="ttname"><a href="group__dnn.html#ga9c06b170a462e97b413163aadb9869f9">cv::dnn::enableModelDiagnostics</a></div><div class="ttdeci">CV_EXPORTS void enableModelDiagnostics(bool isDiagnosticsMode)</div><div class="ttdoc">Enables detailed logging of the DNN model loading with CV DNN API.</div><div class="ttdef"><b>Definición</b> <a href="#l00019">debug_utils.cpp:19</a></div></div>
+<div class="ttc" id="alayer__reg_8private_8hpp_html"><div class="ttname"><a href="layer__reg_8private_8hpp.html">layer_reg.private.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a0b1864314f6560a50da304763c4ecf9a"><div class="ttname"><a href="namespacecv_1_1dnn.html#a0b1864314f6560a50da304763c4ecf9a">cv::dnn::DNN_SKIP_REAL_IMPORT</a></div><div class="ttdeci">bool DNN_SKIP_REAL_IMPORT</div><div class="ttdef"><b>Definición</b> <a href="#l00017">debug_utils.cpp:17</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a3878c43aaf01990a2cc07b90efc3168d"><div class="ttname"><a href="namespacecv_1_1dnn.html#a3878c43aaf01990a2cc07b90efc3168d">cv::dnn::skipModelImport</a></div><div class="ttdeci">CV__DNN_INLINE_NS_BEGIN CV_EXPORTS void skipModelImport(bool skip)</div><div class="ttdoc">Skip model import after diagnostic run in readNet() functions.</div><div class="ttdef"><b>Definición</b> <a href="#l00033">debug_utils.cpp:33</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a98478e8870996b5b389ebbb2ea4857b6"><div class="ttname"><a href="namespacecv_1_1dnn.html#a98478e8870996b5b389ebbb2ea4857b6">cv::dnn::DNN_DIAGNOSTICS_RUN</a></div><div class="ttdeci">CV__DNN_INLINE_NS_BEGIN bool DNN_DIAGNOSTICS_RUN</div><div class="ttdef"><b>Definición</b> <a href="#l00016">debug_utils.cpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="debug__utils_8cpp.html">debug_utils.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

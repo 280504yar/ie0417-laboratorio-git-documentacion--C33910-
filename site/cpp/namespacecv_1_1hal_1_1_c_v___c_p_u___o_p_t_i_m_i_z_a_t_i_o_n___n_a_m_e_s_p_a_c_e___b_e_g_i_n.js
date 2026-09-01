@@ -1,0 +1,4 @@
+var namespacecv_1_1hal_1_1_c_v___c_p_u___o_p_t_i_m_i_z_a_t_i_o_n___n_a_m_e_s_p_a_c_e___b_e_g_i_n =
+[
+    [ "IntegralCalculator", "classcv_1_1hal_1_1_c_v___c_p_u___o_p_t_i_m_i_z_a_t_i_o_n___n_a_m_e_s_p_a_c_e___b_e_g_i_n_1_1_integral_calculator.html", "classcv_1_1hal_1_1_c_v___c_p_u___o_p_t_i_m_i_z_a_t_i_o_n___n_a_m_e_s_p_a_c_e___b_e_g_i_n_1_1_integral_calculator" ]
+];

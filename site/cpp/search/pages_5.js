@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['a_20b_0',['RGB &amp;lt;-&amp;gt; CIE L*a*b*',['../imgproc_color_conversions.html#autotoc_md67',1,'']]],
+  ['a_20backend_20in_1',['Plugging a Backend In',['../api_hal.html#autotoc_md8',1,'']]],
+  ['a_20custom_20hal_2',['Implementing a Custom HAL',['../api_hal.html#autotoc_md9',1,'']]],
+  ['a_20file_20storage_3',['a file storage',['../group__core__xml.html#autotoc_md38',1,'Reading data from a file storage.'],['../group__core__xml.html#autotoc_md37',1,'Writing to a file storage.']]],
+  ['acceleration_20layer_20hal_4',['OpenCV Hardware Acceleration Layer (HAL)',['../api_hal.html',1,'']]],
+  ['alcance_20de_20esta_20documentación_5',['Alcance de esta documentación',['../index.html#autotoc_md89',1,'']]],
+  ['allocation_20of_20the_20output_20data_6',['Automatic Allocation of the Output Data',['../intro.html#autotoc_md18',1,'']]],
+  ['also_3a_7',['See also:',['../group__videoio.html#autotoc_md87',1,'']]],
+  ['an_20engine_8',['Selecting an Engine',['../api_dnn_engine_selection.html#autotoc_md49',1,'']]],
+  ['and_20comparison_20operations_9',['Arithmetic, bitwise and comparison operations',['../group__core__hal__intrin.html#autotoc_md27',1,'']]],
+  ['and_20mask_10',['Reduce and mask',['../group__core__hal__intrin.html#autotoc_md28',1,'']]],
+  ['and_20outputarray_11',['InputArray and OutputArray',['../intro.html#autotoc_md21',1,'']]],
+  ['and_20re_20enterability_12',['Multi-threading and Re-enterability',['../intro.html#autotoc_md23',1,'']]],
+  ['and_20set_20the_20environment_20variable_13',['Build WebNN-native and set the environment variable',['../dir_f6ad9f5eb7677a3cab0ca27461c8fdd6.html#autotoc_md52',1,'']]],
+  ['and_20store_20operations_14',['Load and store operations',['../group__core__hal__intrin.html#autotoc_md25',1,'']]],
+  ['api_20concepts_15',['API Concepts',['../intro.html#autotoc_md15',1,'']]],
+  ['api_20usage_20examples_16',['Backend API usage examples',['../group__core__parallel__backend.html#autotoc_md33',1,'']]],
+  ['architecture_20the_20call_20chain_17',['Architecture &amp;amp; The Call Chain',['../api_hal.html#autotoc_md5',1,'']]],
+  ['arithmetic_20bitwise_20and_20comparison_20operations_18',['Arithmetic, bitwise and comparison operations',['../group__core__hal__intrin.html#autotoc_md27',1,'']]],
+  ['arithmetics_19',['Saturation Arithmetics',['../intro.html#autotoc_md19',1,'']]],
+  ['at_20runtime_20',['Select the backend at runtime',['../videoio_overview.html#autotoc_md83',1,'']]],
+  ['atribución_21',['Atribución',['../index.html#autotoc_md91',1,'']]],
+  ['automatic_20allocation_20of_20the_20output_20data_22',['Automatic Allocation of the Output Data',['../intro.html#autotoc_md18',1,'']]],
+  ['automatic_20memory_20management_23',['Automatic Memory Management',['../intro.html#autotoc_md17',1,'']]]
+];

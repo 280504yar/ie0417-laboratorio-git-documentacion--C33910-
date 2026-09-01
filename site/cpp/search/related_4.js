@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['conjugate_0',['conjugate',['../classcv_1_1_dual_quat.html#aa499e1df122da89bf182aed3f4831633',1,'cv::DualQuat']]],
+  ['cos_1',['cos',['../classcv_1_1_quat.html#aeba9889ea732889c2234536809e1a743',1,'cv::Quat']]],
+  ['cosh_2',['cosh',['../classcv_1_1_quat.html#a0f8644e26eb9955e9f3440efbebf2e09',1,'cv::Quat']]],
+  ['crossproduct_3',['crossProduct',['../classcv_1_1_quat.html#ad8fc511aeca98b2026580ef4722726bb',1,'cv::Quat']]],
+  ['cv_3a_3adetails_3a_3atlsstorage_4',['TlsStorage',['../classcv_1_1_t_l_s_data_container.html#aa3eac24e60c6a2312e113759cb3ed391',1,'cv::TLSDataContainer']]],
+  ['cv_3a_3afilestorage_5',['FileStorage',['../classcv_1_1_file_storage___a_p_i.html#aa6fa8776cd7af00b011de7d2ef4df5bc',1,'cv::FileStorage_API']]],
+  ['cv_3a_3afilestorage_3a_3aimpl_6',['Impl',['../classcv_1_1_file_storage___a_p_i.html#a90916f01f3cf171a9929fc6265c4ac56',1,'cv::FileStorage_API']]],
+  ['cv_3a_3aoperator_2a_7',['cv::operator*',['../classcv_1_1_dual_quat.html#a621c1076a5394f2b875aa64655a78f93',1,'cv::DualQuat::operator*(const T s, const DualQuat&lt; T &gt; &amp;)'],['../classcv_1_1_dual_quat.html#a71ed873e5bf341acc9653dbe231886c7',1,'cv::DualQuat::operator*(const DualQuat&lt; T &gt; &amp;, const T s)'],['../classcv_1_1_quat.html#aec452a192332dad4514471b3bc65279c',1,'cv::Quat::operator*(const T s, const Quat&lt; T &gt; &amp;)'],['../classcv_1_1_quat.html#af6d67f0780da8b80433476831c3c1505',1,'cv::Quat::operator*(const Quat&lt; T &gt; &amp;, const T s)']]],
+  ['cv_3a_3aoperator_2b_8',['cv::operator+',['../classcv_1_1_dual_quat.html#a068803328f60ac4971b937e2a1657f24',1,'cv::DualQuat::operator+(const T s, const DualQuat&lt; T &gt; &amp;)'],['../classcv_1_1_dual_quat.html#a72aadbbf76f57b02b1678b5dbc970ef9',1,'cv::DualQuat::operator+(const DualQuat&lt; T &gt; &amp;, const T s)'],['../classcv_1_1_quat.html#a5fa835a2ce59a8e79810fc8b41119f6d',1,'cv::Quat::operator+(const T s, const Quat&lt; T &gt; &amp;)'],['../classcv_1_1_quat.html#a2d270633978e7e8c36dd50644dedc9a7',1,'cv::Quat::operator+(const Quat&lt; T &gt; &amp;, const T s)']]],
+  ['cv_3a_3aoperator_2d_9',['cv::operator-',['../classcv_1_1_dual_quat.html#a643454b9d2c6a728d3c45d0bb51a6ee5',1,'cv::DualQuat::operator-(const DualQuat&lt; T &gt; &amp;, const T s)'],['../classcv_1_1_dual_quat.html#aa8b67ab1d2174219427f6f040d6596b2',1,'cv::DualQuat::operator-(const T s, const DualQuat&lt; T &gt; &amp;)'],['../classcv_1_1_quat.html#a5a44922e48308129e68102ffe3ec6052',1,'cv::Quat::operator-(const T s, const Quat&lt; T &gt; &amp;)'],['../classcv_1_1_quat.html#a5ff16d6fb779634b8004c70d784dee8e',1,'cv::Quat::operator-(const Quat&lt; T &gt; &amp;, const T s)']]],
+  ['cv_3a_3aoperator_3c_3c_10',['cv::operator&lt;&lt;',['../classcv_1_1_dual_quat.html#a4bce662972803b11cf647e80c2bb3021',1,'cv::DualQuat::operator&lt;&lt;()'],['../classcv_1_1_quat.html#a9362e57dbf5ead069c553ca0f4233f26',1,'cv::Quat::operator&lt;&lt;()']]]
+];

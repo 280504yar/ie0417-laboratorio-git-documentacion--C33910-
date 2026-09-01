@@ -1,0 +1,25 @@
+var classcv_1_1_q_r_detect_multi =
+[
+    [ "compareDistanse_y", "structcv_1_1_q_r_detect_multi_1_1compare_distanse__y.html", "structcv_1_1_q_r_detect_multi_1_1compare_distanse__y" ],
+    [ "compareSquare", "structcv_1_1_q_r_detect_multi_1_1compare_square.html", "structcv_1_1_q_r_detect_multi_1_1compare_square" ],
+    [ "ParallelSearch", "classcv_1_1_q_r_detect_multi_1_1_parallel_search.html", "classcv_1_1_q_r_detect_multi_1_1_parallel_search" ],
+    [ "checkPoints", "classcv_1_1_q_r_detect_multi.html#acd7be2894a91ca0760446e6408dd53cd", null ],
+    [ "checkPointsInsideQuadrangle", "classcv_1_1_q_r_detect_multi.html#aa8d79dc88cfe6483f5147f1828034946", null ],
+    [ "checkPointsInsideTriangle", "classcv_1_1_q_r_detect_multi.html#a9e802a91b9c493828a49b95bb00c4f82", null ],
+    [ "checkSets", "classcv_1_1_q_r_detect_multi.html#acc4550a36f8a33e25fe42577e90686ee", null ],
+    [ "computeTransformationPoints", "classcv_1_1_q_r_detect_multi.html#a9b966dc1a1d465237c51760d43f8b9ec", null ],
+    [ "deleteUsedPoints", "classcv_1_1_q_r_detect_multi.html#a5d2e19fcd5b057dedfbd8890e529db75", null ],
+    [ "findNumberLocalizationPoints", "classcv_1_1_q_r_detect_multi.html#a6fdc85885aa8123c3727bf044d7b764d", null ],
+    [ "findQRCodeContours", "classcv_1_1_q_r_detect_multi.html#a4306cc7e4e8d35735f657c9e0be6c0e1", null ],
+    [ "fixationPoints", "classcv_1_1_q_r_detect_multi.html#adff62aaf0fbe91017c28ab63d4c233e9", null ],
+    [ "getTransformationPoints", "classcv_1_1_q_r_detect_multi.html#a0c705ed695148986599aed1bb36c7e54", null ],
+    [ "init", "classcv_1_1_q_r_detect_multi.html#a49c712ea9538efbfa7a8b19b95b6452a", null ],
+    [ "localization", "classcv_1_1_q_r_detect_multi.html#aba7d204d85941fa0ed9dc5054f40ca76", null ],
+    [ "bin_barcode_fullsize", "classcv_1_1_q_r_detect_multi.html#ac0e43eda2648b0c0df0f210f51077217", null ],
+    [ "bin_barcode_temp", "classcv_1_1_q_r_detect_multi.html#a5fd5b1890fb215cb13304e79aa51f414", null ],
+    [ "localization_points", "classcv_1_1_q_r_detect_multi.html#a5338d299cf85f974d092336bd690e512", null ],
+    [ "not_resized_loc_points", "classcv_1_1_q_r_detect_multi.html#afe92d2421e7a14d75941cb7a7abed72b", null ],
+    [ "original", "classcv_1_1_q_r_detect_multi.html#a37ecda2927adcf906f4ebf5d3d01d217", null ],
+    [ "resized_loc_points", "classcv_1_1_q_r_detect_multi.html#a5ccf8cff332150fc847a5d5a29fe88e7", null ],
+    [ "transformation_points", "classcv_1_1_q_r_detect_multi.html#a553c000e1a283d0cdb14853f968dbb23", null ]
+];

@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/convert_scale.dispatch.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('convert__scale_8dispatch_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">convert_scale.dispatch.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="convert__scale_8dispatch_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;opencl_kernels_core.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="convert__scale_8simd_8hpp.html">convert_scale.simd.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;convert_scale.simd_declarations.hpp&quot;</span> <span class="comment">// defines CV_CPU_DISPATCH_MODES_ALL=AVX2,...,BASELINE based on CMakeLists.txt content</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacecv.html#afdbe488b5cd8a519c5ca9a94d60e69bc">   15</a></span><span class="keyword">static</span> <a class="code hl_typedef" href="namespacecv.html#a271790ff848ae804c6b3a3a597922f6b">BinaryFunc</a> <a class="code hl_function" href="namespacecv.html#afdbe488b5cd8a519c5ca9a94d60e69bc">getCvtScaleAbsFunc</a>(<span class="keywordtype">int</span> depth)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    CV_CPU_DISPATCH(<a class="code hl_function" href="namespacecv.html#afdbe488b5cd8a519c5ca9a94d60e69bc">getCvtScaleAbsFunc</a>, (depth),</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        CV_CPU_DISPATCH_MODES_ALL);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespacecv.html#ab0e0861a106444707eae1d078544b016">   22</a></span><a class="code hl_typedef" href="namespacecv.html#a271790ff848ae804c6b3a3a597922f6b">BinaryFunc</a> <a class="code hl_function" href="namespacecv.html#ab0e0861a106444707eae1d078544b016">getConvertScaleFunc</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="group__imgproc__misc.html#gaa75d4eff7ee90ae5731b827eb720557f">sdepth</a>, <span class="keywordtype">int</span> ddepth)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    CV_CPU_DISPATCH(<a class="code hl_function" href="namespacecv.html#ab0e0861a106444707eae1d078544b016">getConvertScaleFunc</a>, (<a class="code hl_variable" href="group__imgproc__misc.html#gaa75d4eff7ee90ae5731b827eb720557f">sdepth</a>, ddepth),</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        CV_CPU_DISPATCH_MODES_ALL);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifdef HAVE_OPENCL</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">static</span> <span class="keywordtype">bool</span> ocl_convertScaleAbs( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> beta )</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">const</span> <a class="code hl_variable" href="group__core__opencl.html#ga157cb03840c1a3186916c9805abacf50">ocl::Device</a> &amp; d = <a class="code hl_function" href="classcv_1_1ocl_1_1_device.html#a9e5b75c8b02d10050864af4e6c4b6768">ocl::Device::getDefault</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">int</span> type = _src.type(), depth = <a class="code hl_define" href="group__core__hal__interface.html#ga39f3412d63cac68d4f1d138ab52a6fc8">CV_MAT_DEPTH</a>(type), cn = <a class="code hl_define" href="group__core__utils.html#ga645f5d1efbab7bb8fdd460df6e633ebc">CV_MAT_CN</a>(type);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">bool</span> doubleSupport = d.doubleFPConfig() &gt; 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">if</span> (!doubleSupport &amp;&amp; depth == <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    _dst.createSameSize(_src, <a class="code hl_define" href="group__core__hal__interface.html#ga78c5506f62d99edd7e83aba259250394">CV_8UC</a>(cn));</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">int</span> kercn = 1;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (d.isIntel())</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> vectorWidths[] = {4, 4, 4, 4, 4, 4, 4, -1};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        kercn = <a class="code hl_function" href="group__core__opencl.html#ga293c0b13a39f10465e3ea67a018d6779">ocl::checkOptimalVectorWidth</a>( vectorWidths, _src, _dst,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                                              <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(),</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                                              <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                                              <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <a class="code hl_enumvalue" href="group__core__opencl.html#ggae601ac868b72015b583ccbbdd0dec587a3340448a36ad842065ad35c3586a754e">ocl::OCL_VECTOR_MAX</a>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        kercn = <a class="code hl_function" href="group__core__opencl.html#ga8b96cd547eac1e787cf50e22820bc4b9">ocl::predictOptimalVectorWidthMax</a>(_src, _dst);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span> rowsPerWI = d.isIntel() ? 4 : 1;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">char</span> cvt[2][50];</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">int</span> wdepth = std::max(depth, <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> build_opt = <a class="code hl_function" href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">format</a>(<span class="stringliteral">&quot;-D OP_CONVERT_SCALE_ABS -D UNARY_OP -D dstT=%s -D DEPTH_dst=%d -D srcT1=%s&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                         <span class="stringliteral">&quot; -D workT=%s -D wdepth=%d -D convertToWT1=%s -D convertToDT=%s&quot;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                         <span class="stringliteral">&quot; -D workT1=%s -D rowsPerWI=%d%s&quot;</span>,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(<a class="code hl_define" href="group__core__hal__interface.html#ga78c5506f62d99edd7e83aba259250394">CV_8UC</a>(kercn)), <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(<a class="code hl_define" href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a>(depth, kercn)),</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(<a class="code hl_define" href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a>(wdepth, kercn)), wdepth,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                         <a class="code hl_function" href="group__core__opencl.html#ga5f148c32937ac94c6d39b34377849bbe">ocl::convertTypeStr</a>(depth, wdepth, kercn, cvt[0], <span class="keyword">sizeof</span>(cvt[0])),</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                         <a class="code hl_function" href="group__core__opencl.html#ga5f148c32937ac94c6d39b34377849bbe">ocl::convertTypeStr</a>(wdepth, <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>, kercn, cvt[1], <span class="keyword">sizeof</span>(cvt[1])),</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(wdepth), rowsPerWI,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                         doubleSupport ? <span class="stringliteral">&quot; -D DOUBLE_SUPPORT&quot;</span> : <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_class" href="classcv_1_1ocl_1_1_kernel.html">ocl::Kernel</a> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>(<span class="stringliteral">&quot;KF&quot;</span>, ocl::core::arithm_oclsrc, build_opt);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#aca4fc0e916419225f18026bdc7b1b180">empty</a>())</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_class" href="classcv_1_1_u_mat.html">UMat</a> src = _src.getUMat();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_class" href="classcv_1_1_u_mat.html">UMat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#af38304bf253a127c66685593237dee29">getUMat</a>();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_class" href="classcv_1_1ocl_1_1_kernel_arg.html">ocl::KernelArg</a> srcarg = <a class="code hl_function" href="classcv_1_1ocl_1_1_kernel_arg.html#a221bd893d50d9d0ec9b0b9e4eb3bb78e">ocl::KernelArg::ReadOnlyNoSize</a>(src),</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            dstarg = <a class="code hl_function" href="classcv_1_1ocl_1_1_kernel_arg.html#afb748ac6d3d227ab05d49a39b5d66726">ocl::KernelArg::WriteOnly</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, cn, kercn);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (wdepth == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.args(srcarg, dstarg, (<span class="keywordtype">float</span>)alpha, (<span class="keywordtype">float</span>)beta);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (wdepth == <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.args(srcarg, dstarg, alpha, beta);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">size_t</span> globalsize[2] = { (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)src.cols * cn / kercn, ((<span class="keywordtype">size_t</span>)src.rows + rowsPerWI - 1) / rowsPerWI };</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.run(2, globalsize, NULL, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group__core__array.html#ga3460e9c9f37b563ab9dd550c4d8c4e7d">   87</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__core__array.html#ga3460e9c9f37b563ab9dd550c4d8c4e7d">convertScaleAbs</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> beta)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_define" href="ocl__defs_8hpp.html#ad4a119e8ac03c4cb04a58aba1ecbac74">CV_OCL_RUN</a>(_src.dims() &lt;= 2 &amp;&amp; _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a7e1555ee58814435df26535ff9380e2e">isUMat</a>(),</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>               ocl_convertScaleAbs(_src, _dst, alpha, beta))</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src = _src.getMat();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">int</span> cn = src.<a class="code hl_function" href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">channels</a>();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">double</span> scale[] = {alpha, beta};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    _dst.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>( src.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>, <a class="code hl_define" href="group__core__hal__interface.html#ga78c5506f62d99edd7e83aba259250394">CV_8UC</a>(cn) );</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <a class="code hl_typedef" href="namespacecv.html#a271790ff848ae804c6b3a3a597922f6b">BinaryFunc</a> func = <a class="code hl_function" href="namespacecv.html#afdbe488b5cd8a519c5ca9a94d60e69bc">getCvtScaleAbsFunc</a>(src.<a class="code hl_function" href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">depth</a>());</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( func != 0 );</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span>( src.<a class="code hl_variable" href="classcv_1_1_mat.html#a39cf614aa52567e9a945cd2609bd767b">dims</a> &lt;= 2 )</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> sz = <a class="code hl_function" href="namespacecv.html#ad1c76acda5f9a26a449eea56af61095f">getContinuousSize2D</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, cn);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        func( src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>(), src.<a class="code hl_variable" href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">step</a>, 0, 0, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.ptr(), <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#aa91e7e76c9247f7192ab70d0c0be4783">step</a>, sz, scale );</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>* arrays[] = {&amp;src, &amp;<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, 0};</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* ptrs[2] = {};</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <a class="code hl_class" href="classcv_1_1_n_ary_mat_iterator.html">NAryMatIterator</a> it(arrays, ptrs);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> sz((<span class="keywordtype">int</span>)it.<a class="code hl_variable" href="classcv_1_1_n_ary_mat_iterator.html#a42ec820537c8749494a65784dbb44261">size</a>*cn, 1);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> i = 0; i &lt; it.<a class="code hl_variable" href="classcv_1_1_n_ary_mat_iterator.html#a94ba374a7e5a004d19060a522893e09d">nplanes</a>; i++, ++it )</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            func( ptrs[0], 0, 0, 0, ptrs[1], 0, sz, scale );</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>} <span class="comment">// namespace</span></div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a8d1a237453cad869d11df90f8279651a"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void void *CL_RUNTIME_EXPORT const cl_device_id const char const cl_program const char void void *CL_RUNTIME_EXPORT size_t</div><div class="ttdef"><b>Definición</b> <a href="autogenerated_2opencl__core_8hpp_source.html#l00286">opencl_core.hpp:286</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a7e1555ee58814435df26535ff9380e2e"><div class="ttname"><a href="classcv_1_1___input_array.html#a7e1555ee58814435df26535ff9380e2e">cv::_InputArray::isUMat</a></div><div class="ttdeci">bool isUMat() const</div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a9c09739ca3e0ce212e2ab8374aa2f195"><div class="ttname"><a href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">cv::_InputArray::getMat</a></div><div class="ttdeci">Mat getMat(int idx=-1) const</div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_aa91e7e76c9247f7192ab70d0c0be4783"><div class="ttname"><a href="classcv_1_1___input_array.html#aa91e7e76c9247f7192ab70d0c0be4783">cv::_InputArray::step</a></div><div class="ttdeci">size_t step(int i=-1) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01343">matrix_wrap.cpp:1343</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_aca4fc0e916419225f18026bdc7b1b180"><div class="ttname"><a href="classcv_1_1___input_array.html#aca4fc0e916419225f18026bdc7b1b180">cv::_InputArray::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01123">matrix_wrap.cpp:1123</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_af38304bf253a127c66685593237dee29"><div class="ttname"><a href="classcv_1_1___input_array.html#af38304bf253a127c66685593237dee29">cv::_InputArray::getUMat</a></div><div class="ttdeci">UMat getUMat(int idx=-1) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l00182">matrix_wrap.cpp:182</a></div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4eb2daf4732c371c7565db49f76c63ce"><div class="ttname"><a href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">cv::_OutputArray::create</a></div><div class="ttdeci">void create(Size sz, int type, int i=-1, bool allowTransposed=false, _OutputArray::DepthMask fixedDepthMask=static_cast&lt; _OutputArray::DepthMask &gt;(0)) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01466">matrix_wrap.cpp:1466</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a146f8e8dda07d1365a575ab83d9828d1"><div class="ttname"><a href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">cv::Mat::size</a></div><div class="ttdeci">MatSize size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02513">mat.hpp:2513</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a39cf614aa52567e9a945cd2609bd767b"><div class="ttname"><a href="classcv_1_1_mat.html#a39cf614aa52567e9a945cd2609bd767b">cv::Mat::dims</a></div><div class="ttdeci">int dims</div><div class="ttdoc">the matrix dimensionality, &gt;= 2</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02488">mat.hpp:2488</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8b2912f6a6f5d55a3c9a7aae9134d862"><div class="ttname"><a href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">cv::Mat::ptr</a></div><div class="ttdeci">uchar * ptr(int i0=0)</div><div class="ttdoc">Returns a pointer to the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8da9f853b6f3a29d738572fd1ffc44c0"><div class="ttname"><a href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">cv::Mat::depth</a></div><div class="ttdeci">int depth() const</div><div class="ttdoc">Returns the depth of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa11336b9ac538e0475d840657ce164be"><div class="ttname"><a href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">cv::Mat::channels</a></div><div class="ttdeci">int channels() const</div><div class="ttdoc">Returns the number of matrix channels.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ab4b0843e64328eb2a026b5b9ede726fe"><div class="ttname"><a href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">cv::Mat::step</a></div><div class="ttdeci">MatStep step</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02514">mat.hpp:2514</a></div></div>
+<div class="ttc" id="aclasscv_1_1_n_ary_mat_iterator_html"><div class="ttname"><a href="classcv_1_1_n_ary_mat_iterator.html">cv::NAryMatIterator</a></div><div class="ttdoc">n-ary multi-dimensional array iterator.</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l03860">mat.hpp:3861</a></div></div>
+<div class="ttc" id="aclasscv_1_1_n_ary_mat_iterator_html_a42ec820537c8749494a65784dbb44261"><div class="ttname"><a href="classcv_1_1_n_ary_mat_iterator.html#a42ec820537c8749494a65784dbb44261">cv::NAryMatIterator::size</a></div><div class="ttdeci">size_t size</div><div class="ttdoc">the size of each segment (in elements)</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l03888">mat.hpp:3888</a></div></div>
+<div class="ttc" id="aclasscv_1_1_n_ary_mat_iterator_html_a94ba374a7e5a004d19060a522893e09d"><div class="ttname"><a href="classcv_1_1_n_ary_mat_iterator.html#a94ba374a7e5a004d19060a522893e09d">cv::NAryMatIterator::nplanes</a></div><div class="ttdeci">size_t nplanes</div><div class="ttdoc">the number of hyper-planes that the iterator steps through</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l03886">mat.hpp:3886</a></div></div>
+<div class="ttc" id="aclasscv_1_1_u_mat_html"><div class="ttname"><a href="classcv_1_1_u_mat.html">cv::UMat</a></div><div class="ttdoc">Matrix class whose data may reside outside host memory..</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02813">mat.hpp:2814</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_device_html_a9e5b75c8b02d10050864af4e6c4b6768"><div class="ttname"><a href="classcv_1_1ocl_1_1_device.html#a9e5b75c8b02d10050864af4e6c4b6768">cv::ocl::Device::getDefault</a></div><div class="ttdeci">static CV_WRAP const Device &amp; getDefault()</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00146">ocl_disabled.impl.hpp:146</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_arg_html"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel_arg.html">cv::ocl::KernelArg</a></div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00417">ocl.hpp:418</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_arg_html_a221bd893d50d9d0ec9b0b9e4eb3bb78e"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel_arg.html#a221bd893d50d9d0ec9b0b9e4eb3bb78e">cv::ocl::KernelArg::ReadOnlyNoSize</a></div><div class="ttdeci">static KernelArg ReadOnlyNoSize(const UMat &amp;m, int wscale=1, int iwscale=1)</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00440">ocl.hpp:440</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_arg_html_afb748ac6d3d227ab05d49a39b5d66726"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel_arg.html#afb748ac6d3d227ab05d49a39b5d66726">cv::ocl::KernelArg::WriteOnly</a></div><div class="ttdeci">static KernelArg WriteOnly(const UMat &amp;m, int wscale=1, int iwscale=1)</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00438">ocl.hpp:438</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_html"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel.html">cv::ocl::Kernel</a></div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00456">ocl.hpp:457</a></div></div>
+<div class="ttc" id="aconvert__scale_8simd_8hpp_html"><div class="ttname"><a href="convert__scale_8simd_8hpp.html">convert_scale.simd.hpp</a></div></div>
+<div class="ttc" id="acore_2src_2precomp_8hpp_html"><div class="ttname"><a href="core_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga3460e9c9f37b563ab9dd550c4d8c4e7d"><div class="ttname"><a href="group__core__array.html#ga3460e9c9f37b563ab9dd550c4d8c4e7d">cv::convertScaleAbs</a></div><div class="ttdeci">CV_EXPORTS_W void convertScaleAbs(InputArray src, OutputArray dst, double alpha=1, double beta=0)</div><div class="ttdoc">Scales, calculates absolute values, and converts the result to 8-bit.</div><div class="ttdef"><b>Definición</b> <a href="#l00087">convert_scale.dispatch.cpp:87</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gad9287b23bba2fed753b36ef561ae7346"><div class="ttname"><a href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">cv::noArray</a></div><div class="ttdeci">CV_EXPORTS InputOutputArray noArray()</div><div class="ttdoc">Returns an empty InputArray or OutputArray.</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l02476">matrix_wrap.cpp:2476</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga39f3412d63cac68d4f1d138ab52a6fc8"><div class="ttname"><a href="group__core__hal__interface.html#ga39f3412d63cac68d4f1d138ab52a6fc8">CV_MAT_DEPTH</a></div><div class="ttdeci">#define CV_MAT_DEPTH(flags)</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00073">interface.h:73</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga78c5506f62d99edd7e83aba259250394"><div class="ttname"><a href="group__core__hal__interface.html#ga78c5506f62d99edd7e83aba259250394">CV_8UC</a></div><div class="ttdeci">#define CV_8UC(n)</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00085">interface.h:85</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gac0f2281e91c4e610de4f450eb0a39993"><div class="ttname"><a href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a></div><div class="ttdeci">#define CV_MAKE_TYPE</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00079">interface.h:79</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga157cb03840c1a3186916c9805abacf50"><div class="ttname"><a href="group__core__opencl.html#ga157cb03840c1a3186916c9805abacf50">cv::ocl::Device</a></div><div class="ttdeci">class CV_EXPORTS_W_SIMPLE Device</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00064">ocl.hpp:64</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga293c0b13a39f10465e3ea67a018d6779"><div class="ttname"><a href="group__core__opencl.html#ga293c0b13a39f10465e3ea67a018d6779">cv::ocl::checkOptimalVectorWidth</a></div><div class="ttdeci">CV_EXPORTS int checkOptimalVectorWidth(const int *vectorWidths, InputArray src1, InputArray src2=noArray(), InputArray src3=noArray(), InputArray src4=noArray(), InputArray src5=noArray(), InputArray src6=noArray(), InputArray src7=noArray(), InputArray src8=noArray(), InputArray src9=noArray(), OclVectorStrategy strat=OCL_VECTOR_DEFAULT)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00355">ocl_disabled.impl.hpp:355</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga5f148c32937ac94c6d39b34377849bbe"><div class="ttname"><a href="group__core__opencl.html#ga5f148c32937ac94c6d39b34377849bbe">cv::ocl::convertTypeStr</a></div><div class="ttdeci">CV_EXPORTS CV_DEPRECATED const char * convertTypeStr(int sdepth, int ddepth, int cn, char *buf)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00340">ocl_disabled.impl.hpp:340</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga7f2f248d37cfa3e1e4122249f7dc8c49"><div class="ttname"><a href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">cv::ocl::typeToStr</a></div><div class="ttdeci">CV_EXPORTS const char * typeToStr(int t)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00341">ocl_disabled.impl.hpp:341</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga8b96cd547eac1e787cf50e22820bc4b9"><div class="ttname"><a href="group__core__opencl.html#ga8b96cd547eac1e787cf50e22820bc4b9">cv::ocl::predictOptimalVectorWidthMax</a></div><div class="ttdeci">CV_EXPORTS int predictOptimalVectorWidthMax(InputArray src1, InputArray src2=noArray(), InputArray src3=noArray(), InputArray src4=noArray(), InputArray src5=noArray(), InputArray src6=noArray(), InputArray src7=noArray(), InputArray src8=noArray(), InputArray src9=noArray())</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00362">ocl_disabled.impl.hpp:362</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ggae601ac868b72015b583ccbbdd0dec587a3340448a36ad842065ad35c3586a754e"><div class="ttname"><a href="group__core__opencl.html#ggae601ac868b72015b583ccbbdd0dec587a3340448a36ad842065ad35c3586a754e">cv::ocl::OCL_VECTOR_MAX</a></div><div class="ttdeci">@ OCL_VECTOR_MAX</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00716">ocl.hpp:716</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga645f5d1efbab7bb8fdd460df6e633ebc"><div class="ttname"><a href="group__core__utils.html#ga645f5d1efbab7bb8fdd460df6e633ebc">CV_MAT_CN</a></div><div class="ttdeci">#define CV_MAT_CN(flags)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00507">cvdef.h:507</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaea1b569d6ac0c23308304824f059ff50"><div class="ttname"><a href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">cv::format</a></div><div class="ttdeci">CV_EXPORTS String format(const char *fmt,...) CV_FORMAT_PRINTF(1</div><div class="ttdoc">Returns a text string formatted using the printf-like expression.</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l01115">system.cpp:1115</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gaa75d4eff7ee90ae5731b827eb720557f"><div class="ttname"><a href="group__imgproc__misc.html#gaa75d4eff7ee90ae5731b827eb720557f">cv::sdepth</a></div><div class="ttdeci">OutputArray OutputArray OutputArray int sdepth</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l02652">imgproc.hpp:2652</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a271790ff848ae804c6b3a3a597922f6b"><div class="ttname"><a href="namespacecv.html#a271790ff848ae804c6b3a3a597922f6b">cv::BinaryFunc</a></div><div class="ttdeci">void(*) BinaryFunc(const uchar *src1, size_t step1, const uchar *src2, size_t step2, uchar *dst, size_t step, Size sz, void *)</div><div class="ttdef"><b>Definición</b> <a href="core_2src_2precomp_8hpp_source.html#l00254">precomp.hpp:254</a></div></div>
+<div class="ttc" id="anamespacecv_html_ab0e0861a106444707eae1d078544b016"><div class="ttname"><a href="namespacecv.html#ab0e0861a106444707eae1d078544b016">cv::getConvertScaleFunc</a></div><div class="ttdeci">BinaryFunc getConvertScaleFunc(int sdepth, int ddepth)</div><div class="ttdef"><b>Definición</b> <a href="#l00022">convert_scale.dispatch.cpp:22</a></div></div>
+<div class="ttc" id="anamespacecv_html_ad1c76acda5f9a26a449eea56af61095f"><div class="ttname"><a href="namespacecv.html#ad1c76acda5f9a26a449eea56af61095f">cv::getContinuousSize2D</a></div><div class="ttdeci">Size getContinuousSize2D(Mat &amp;m1, int widthScale)</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01881">matrix.cpp:1881</a></div></div>
+<div class="ttc" id="anamespacecv_html_afdbe488b5cd8a519c5ca9a94d60e69bc"><div class="ttname"><a href="namespacecv.html#afdbe488b5cd8a519c5ca9a94d60e69bc">cv::getCvtScaleAbsFunc</a></div><div class="ttdeci">static BinaryFunc getCvtScaleAbsFunc(int depth)</div><div class="ttdef"><b>Definición</b> <a href="#l00015">convert_scale.dispatch.cpp:15</a></div></div>
+<div class="ttc" id="aocl__defs_8hpp_html_ad4a119e8ac03c4cb04a58aba1ecbac74"><div class="ttname"><a href="ocl__defs_8hpp.html#ad4a119e8ac03c4cb04a58aba1ecbac74">CV_OCL_RUN</a></div><div class="ttdeci">#define CV_OCL_RUN(condition, func)</div><div class="ttdef"><b>Definición</b> <a href="ocl__defs_8hpp_source.html#l00080">ocl_defs.hpp:80</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="convert__scale_8dispatch_8cpp.html">convert_scale.dispatch.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

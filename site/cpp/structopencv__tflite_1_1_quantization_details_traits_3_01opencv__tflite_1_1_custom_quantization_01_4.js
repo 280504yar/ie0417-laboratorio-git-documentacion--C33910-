@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_quantization_details_traits_3_01opencv__tflite_1_1_custom_quantization_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_quantization_details_traits_3_01opencv__tflite_1_1_custom_quantization_01_4.html#add88a20e4610b853d399268c27cd3d86", null ]
+];

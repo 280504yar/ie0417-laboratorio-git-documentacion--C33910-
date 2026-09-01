@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/photo/src/ccm/linearize.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('linearize_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">linearize.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="linearize_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Author: Longbu Wang &lt;wanglongbu@huawei.com.com&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//         Jinheng Zhang &lt;zhangjinheng1@huawei.com&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//         Chenqi Shan &lt;shanchenqi@huawei.com&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef __OPENCV_CCM_LINEARIZE_HPP__</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define __OPENCV_CCM_LINEARIZE_HPP__</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="photo_2src_2ccm_2color_8hpp.html">color.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="photo_8hpp.html">opencv2/photo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1ccm.html">ccm</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_polyfit.html">   21</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1ccm_1_1_polyfit.html#aae07f9fda5fa012d5432ce315e5a725d">Polyfit</a></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_polyfit.html#a13b9c3d63f95d162b8b4d6ee74e26552">   24</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_polyfit.html#a13b9c3d63f95d162b8b4d6ee74e26552">deg</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_polyfit.html#aa2d80bdb1ad6dca81da17bbfabd619e5">   25</a></span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="classcv_1_1ccm_1_1_polyfit.html#aa2d80bdb1ad6dca81da17bbfabd619e5">p</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_polyfit.html#aae07f9fda5fa012d5432ce315e5a725d">Polyfit</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_polyfit.html#aae07f9fda5fa012d5432ce315e5a725d">Polyfit</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_polyfit.html#a13b9c3d63f95d162b8b4d6ee74e26552">deg</a>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_polyfit.html#a513f80a679ced91009baf5b0ecf8c1c3">   34</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_polyfit.html#a513f80a679ced91009baf5b0ecf8c1c3">~Polyfit</a>() {}</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1ccm_1_1_polyfit.html#accdd4e9398a0d6cf244067b2cf547137">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; inp);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">// Serialization support</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">double</span> fromEW(<span class="keywordtype">double</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">// Global functions for FileStorage for Polyfit</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> Polyfit&amp; polyfit);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, Polyfit&amp; polyfit, <span class="keyword">const</span> Polyfit&amp; defaultValue = <a class="code hl_function" href="classcv_1_1ccm_1_1_polyfit.html#aae07f9fda5fa012d5432ce315e5a725d">Polyfit</a>());</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="};">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_log_polyfit.html">   51</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1ccm_1_1_log_polyfit.html#af0b47847715eb58c51fdd618140462ce">LogPolyfit</a></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>{</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_log_polyfit.html#a6ddf861a1c32c2f7497376eb24bde7d8">   54</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_log_polyfit.html#a6ddf861a1c32c2f7497376eb24bde7d8">deg</a>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_log_polyfit.html#a65cf6288f85721e898dac1e88f3de377">   55</a></span>    <a class="code hl_class" href="classcv_1_1ccm_1_1_polyfit.html">Polyfit</a> <a class="code hl_variable" href="classcv_1_1ccm_1_1_log_polyfit.html#a65cf6288f85721e898dac1e88f3de377">p</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_log_polyfit.html#af0b47847715eb58c51fdd618140462ce">LogPolyfit</a>();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_log_polyfit.html#af0b47847715eb58c51fdd618140462ce">LogPolyfit</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_log_polyfit.html#a6ddf861a1c32c2f7497376eb24bde7d8">deg</a>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_log_polyfit.html#ac1ea6c3ef7dc9e09db3ddc78f157258f">   62</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_log_polyfit.html#ac1ea6c3ef7dc9e09db3ddc78f157258f">~LogPolyfit</a>() {}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1ccm_1_1_log_polyfit.html#ae5aec29d92640de395cbf2dd7ebeb312">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; inp);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">// Serialization support</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
+</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">// Global functions for FileStorage for LogPolyfit</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> LogPolyfit&amp; logpolyfit);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, LogPolyfit&amp; logpolyfit, <span class="keyword">const</span> LogPolyfit&amp; defaultValue = <a class="code hl_function" href="classcv_1_1ccm_1_1_log_polyfit.html#af0b47847715eb58c51fdd618140462ce">LogPolyfit</a>());</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="};">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear.html">   77</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">   80</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a>() {}</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear.html#af578bff184258f4a827f58cc1f724bfe">   81</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#af578bff184258f4a827f58cc1f724bfe">~Linear</a>() {}</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a0588788544fc480c8be6dd2360dfeb07">linearize</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> inp);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear.html#ad2f4c4a87d9e879e1775f216d186ae2a">   89</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#ad2f4c4a87d9e879e1775f216d186ae2a">value</a>(<span class="keywordtype">void</span>) {}</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">// Serialization support</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>};</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">// Global functions for FileStorage for Linear</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> Linear&amp; linear);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, Linear&amp; linear, <span class="keyword">const</span> Linear&amp; defaultValue = <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a>());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="};">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_identity.html">  103</a></span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1ccm_1_1_linear_identity.html">LinearIdentity</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>{</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_identity.html#aa785266fc872924b5218f2f9f7240400">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_identity.html#afbf6a3626e5b6fdb2f4d83b0a3379dac">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>};</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">// Global functions for FileStorage for LinearIdentity</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1ccm_1_1_linear_identity.html">LinearIdentity</a>&amp; linearidentity);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, <a class="code hl_class" href="classcv_1_1ccm_1_1_linear_identity.html">LinearIdentity</a>&amp; linearidentity, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1ccm_1_1_linear_identity.html">LinearIdentity</a>&amp; defaultValue = <a class="code hl_class" href="classcv_1_1ccm_1_1_linear_identity.html">LinearIdentity</a>());</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="};">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gamma.html">  116</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gamma.html#a30362e1890ec2f63546af3909379f025">LinearGamma</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>{</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gamma.html#a5e86ddf73f04589951a8e561d9cbf033">  119</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gamma.html#a5e86ddf73f04589951a8e561d9cbf033">gamma</a>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gamma.html#a30362e1890ec2f63546af3909379f025">  121</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gamma.html#a30362e1890ec2f63546af3909379f025">LinearGamma</a>()</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        : <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gamma.html#a5e86ddf73f04589951a8e561d9cbf033">gamma</a>(1.0) {}</div>
+</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gamma.html#a41857214967a4419607adebca499ca2e">  124</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gamma.html#a41857214967a4419607adebca499ca2e">LinearGamma</a>(<span class="keywordtype">double</span> gamma_)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        : <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gamma.html#a5e86ddf73f04589951a8e561d9cbf033">gamma</a>(gamma_) {}</div>
+</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gamma.html#a569d4e7be9c90c10bd002616eb58a176">linearize</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> inp) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// Serialization support</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>};</div>
+</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">// Global functions for FileStorage for LinearGamma</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> LinearGamma&amp; lineargamma);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, LinearGamma&amp; lineargamma, <span class="keyword">const</span> LinearGamma&amp; defaultValue = <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gamma.html#a30362e1890ec2f63546af3909379f025">LinearGamma</a>());</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="};">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html">  142</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gray.html#a3c1552ba52f7df5fc9816078c93249dd">LinearGray</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>{</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html#a4ab45f4d69e03a0a32c0174a44b8f6ff">  145</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#a4ab45f4d69e03a0a32c0174a44b8f6ff">deg</a>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html#aa21067ed9a34749809c0f411aa16b394">  146</a></span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#aa21067ed9a34749809c0f411aa16b394">p</a>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html#a3c1552ba52f7df5fc9816078c93249dd">  148</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gray.html#a3c1552ba52f7df5fc9816078c93249dd">LinearGray</a>(): <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#a4ab45f4d69e03a0a32c0174a44b8f6ff">deg</a>(3) {}</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html#a2c22da34299561800b669f320ba87676">  150</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gray.html#a2c22da34299561800b669f320ba87676">LinearGray</a>(<span class="keywordtype">int</span> deg_, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src, <a class="code hl_class" href="classcv_1_1ccm_1_1_color.html">Color</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <a class="code hl_class" href="classcv_1_1ccm_1_1_r_g_b_base__.html">RGBBase_</a> cs)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        : <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#a4ab45f4d69e03a0a32c0174a44b8f6ff">deg</a>(deg_)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.getGray();</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> lear_gray_mask = <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a> &amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.grays;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="comment">// the grayscale function is approximate for src is in relative color space.</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> gray;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cvtColor</a>(src, gray, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0ae50d0c66ee53e974234ac84cf51d1d4e">COLOR_RGB2GRAY</a>);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        gray.<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(src);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> dst_ = <a class="code hl_function" href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">maskCopyTo</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.toGray(cs.<a class="code hl_variable" href="classcv_1_1ccm_1_1_color_space_base.html#a572368c2590702872d000e60ba1fd644">illumobserver</a>), lear_gray_mask);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gray.html#ad947d7422bb86d451abadecbe97e0052">calc</a>(src, dst_);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
+<div class="foldopen" id="foldopen00169" data-start="{" data-end="}">
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html#ad947d7422bb86d451abadecbe97e0052">  169</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gray.html#ad947d7422bb86d451abadecbe97e0052">calc</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>)</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#aa21067ed9a34749809c0f411aa16b394">p</a> = <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#a4ab45f4d69e03a0a32c0174a44b8f6ff">deg</a>);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
+</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="foldopen" id="foldopen00174" data-start="{" data-end="}">
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_gray.html#a19189b9307897741838a4e8183010335">  174</a></span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_gray.html#a19189b9307897741838a4e8183010335">linearize</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> inp) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_gray.html#aa21067ed9a34749809c0f411aa16b394">p</a>(inp);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="comment">// Serialization support</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>};</div>
+</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">// Global functions for FileStorage for LinearGray</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> LinearGray&lt;T&gt;&amp; lineargray);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, LinearGray&lt;T&gt;&amp; lineargray, <span class="keyword">const</span> LinearGray&lt;T&gt;&amp; defaultValue = LinearGray&lt;T&gt;());</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00194" data-start="{" data-end="};">
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html">  194</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1ccm_1_1_linear_color.html#a96eac0c0bae54125d6c9f5a2b4046d5e">LinearColor</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">Linear</a></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>{</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">  197</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">deg</a>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#a7533be7eaec3a37b64473ddd6cfaebb2">  198</a></span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a7533be7eaec3a37b64473ddd6cfaebb2">pr</a>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#a9b3f5b995cbae21858c68f5f685eb5ea">  199</a></span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a9b3f5b995cbae21858c68f5f685eb5ea">pg</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#a77a527c6e9f1e4bbdac6bd2a40a2946e">  200</a></span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a77a527c6e9f1e4bbdac6bd2a40a2946e">pb</a>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#a96eac0c0bae54125d6c9f5a2b4046d5e">  202</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_color.html#a96eac0c0bae54125d6c9f5a2b4046d5e">LinearColor</a>(): <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">deg</a>(3) {}</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="foldopen" id="foldopen00204" data-start="{" data-end="}">
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#aac791c30d83cef5f258e08b3d1d7b604">  204</a></span>    <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_color.html#aac791c30d83cef5f258e08b3d1d7b604">LinearColor</a>(<span class="keywordtype">int</span> deg_, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src_, <a class="code hl_class" href="classcv_1_1ccm_1_1_color.html">Color</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <a class="code hl_class" href="classcv_1_1ccm_1_1_r_g_b_base__.html">RGBBase_</a> cs)</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        : <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">deg</a>(deg_)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src = <a class="code hl_function" href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">maskCopyTo</a>(src_, <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> dst_ = <a class="code hl_function" href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">maskCopyTo</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.to(*cs.<a class="code hl_variable" href="classcv_1_1ccm_1_1_color_space_base.html#aae1bf067a36b2187d87b68059d8fc4b4">l</a>).colors, <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_color.html#aa29f296120a2cf2ee600a4b2186888b1">calc</a>(src, dst_);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
+</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="foldopen" id="foldopen00212" data-start="{" data-end="}">
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#aa29f296120a2cf2ee600a4b2186888b1">  212</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_color.html#aa29f296120a2cf2ee600a4b2186888b1">calc</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> schannels[3];</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> dchannels[3];</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <a class="code hl_function" href="group__core__array.html#ga0547c7fed86152d7e9d0096029c8518a">split</a>(src, schannels);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <a class="code hl_function" href="group__core__array.html#ga0547c7fed86152d7e9d0096029c8518a">split</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, dchannels);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a7533be7eaec3a37b64473ddd6cfaebb2">pr</a> = <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>(schannels[0], dchannels[0], <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">deg</a>);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a9b3f5b995cbae21858c68f5f685eb5ea">pg</a> = <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>(schannels[1], dchannels[1], <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">deg</a>);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a77a527c6e9f1e4bbdac6bd2a40a2946e">pb</a> = <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>(schannels[2], dchannels[2], <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">deg</a>);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    }</div>
+</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classcv_1_1ccm_1_1_linear_color.html#aa0a401722203a571f2a4765d36c24e80">  223</a></span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1ccm_1_1_linear_color.html#aa0a401722203a571f2a4765d36c24e80">linearize</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> inp) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> channels[3];</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <a class="code hl_function" href="group__core__array.html#ga0547c7fed86152d7e9d0096029c8518a">split</a>(inp, channels);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        std::vector&lt;Mat&gt; channel;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> res;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <a class="code hl_function" href="group__core__array.html#ga7d7b4d6c6ee504b30a20b1680029c7b4">merge</a>(std::vector&lt;Mat&gt; { <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a7533be7eaec3a37b64473ddd6cfaebb2">pr</a>(channels[0]), <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a9b3f5b995cbae21858c68f5f685eb5ea">pg</a>(channels[1]), <a class="code hl_variable" href="classcv_1_1ccm_1_1_linear_color.html#a77a527c6e9f1e4bbdac6bd2a40a2946e">pb</a>(channels[2]) }, res);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    }</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">// Serialization support</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>};</div>
+</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">// Global functions for FileStorage for LinearColor</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">write</a>(cv::FileStorage&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> LinearColor&lt;T&gt;&amp; linearcolor);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">read</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::FileNode</a>&amp; node, LinearColor&lt;T&gt;&amp; linearcolor, <span class="keyword">const</span> LinearColor&lt;T&gt;&amp; defaultValue = LinearColor&lt;T&gt;());</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>std::shared_ptr&lt;Linear&gt; <a class="code hl_function" href="namespacecv_1_1ccm.html#aa5401f92f71021c828cc460b28cb7b86">getLinear</a>(<span class="keywordtype">double</span> gamma, <span class="keywordtype">int</span> deg, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src, Color <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, RGBBase_ cs, <a class="code hl_enumeration" href="group__ccm.html#gac6dec0a74a2cab2b9aa2b0cc6731c5cc">LinearizationType</a> linearizationType);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>}</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>}  <span class="comment">// namespace cv::ccm</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a2cc2a68970b85d50f3a4fac1b55ba7c8"><div class="ttname"><a href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">cv::Mat::copyTo</a></div><div class="ttdeci">void copyTo(OutputArray m) const</div><div class="ttdoc">Copies the matrix to another one.</div><div class="ttdef"><b>Definición</b> <a href="copy_8cpp_source.html#l00447">copy.cpp:447</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_color_html"><div class="ttname"><a href="classcv_1_1ccm_1_1_color.html">cv::ccm::Color</a></div><div class="ttdoc">Color defined by color_values and color space.</div><div class="ttdef"><b>Definición</b> <a href="photo_2src_2ccm_2color_8hpp_source.html#l00022">color.hpp:23</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_color_space_base_html_a572368c2590702872d000e60ba1fd644"><div class="ttname"><a href="classcv_1_1ccm_1_1_color_space_base.html#a572368c2590702872d000e60ba1fd644">cv::ccm::ColorSpaceBase::illumobserver</a></div><div class="ttdeci">IllumObserver illumobserver</div><div class="ttdef"><b>Definición</b> <a href="colorspace_8hpp_source.html#l00025">colorspace.hpp:25</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_color_space_base_html_aae1bf067a36b2187d87b68059d8fc4b4"><div class="ttname"><a href="classcv_1_1ccm_1_1_color_space_base.html#aae1bf067a36b2187d87b68059d8fc4b4">cv::ccm::ColorSpaceBase::l</a></div><div class="ttdeci">ColorSpaceBase * l</div><div class="ttdef"><b>Definición</b> <a href="colorspace_8hpp_source.html#l00030">colorspace.hpp:30</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_a7533be7eaec3a37b64473ddd6cfaebb2"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#a7533be7eaec3a37b64473ddd6cfaebb2">cv::ccm::LinearColor::pr</a></div><div class="ttdeci">T pr</div><div class="ttdef"><b>Definición</b> <a href="#l00198">linearize.hpp:198</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_a77a527c6e9f1e4bbdac6bd2a40a2946e"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#a77a527c6e9f1e4bbdac6bd2a40a2946e">cv::ccm::LinearColor::pb</a></div><div class="ttdeci">T pb</div><div class="ttdef"><b>Definición</b> <a href="#l00200">linearize.hpp:200</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_a794afcca4d277a4c588b844653ed3b0d"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#a794afcca4d277a4c588b844653ed3b0d">cv::ccm::LinearColor::deg</a></div><div class="ttdeci">int deg</div><div class="ttdef"><b>Definición</b> <a href="#l00197">linearize.hpp:197</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_a96eac0c0bae54125d6c9f5a2b4046d5e"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#a96eac0c0bae54125d6c9f5a2b4046d5e">cv::ccm::LinearColor::LinearColor</a></div><div class="ttdeci">LinearColor()</div><div class="ttdef"><b>Definición</b> <a href="#l00202">linearize.hpp:202</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_a9b3f5b995cbae21858c68f5f685eb5ea"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#a9b3f5b995cbae21858c68f5f685eb5ea">cv::ccm::LinearColor::pg</a></div><div class="ttdeci">T pg</div><div class="ttdef"><b>Definición</b> <a href="#l00199">linearize.hpp:199</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_aa0a401722203a571f2a4765d36c24e80"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#aa0a401722203a571f2a4765d36c24e80">cv::ccm::LinearColor::linearize</a></div><div class="ttdeci">Mat linearize(Mat inp) CV_OVERRIDE</div><div class="ttdoc">Inference.</div><div class="ttdef"><b>Definición</b> <a href="#l00223">linearize.hpp:223</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_aa29f296120a2cf2ee600a4b2186888b1"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#aa29f296120a2cf2ee600a4b2186888b1">cv::ccm::LinearColor::calc</a></div><div class="ttdeci">void calc(const Mat &amp;src, const Mat &amp;dst)</div><div class="ttdef"><b>Definición</b> <a href="#l00212">linearize.hpp:212</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_color_html_aac791c30d83cef5f258e08b3d1d7b604"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_color.html#aac791c30d83cef5f258e08b3d1d7b604">cv::ccm::LinearColor::LinearColor</a></div><div class="ttdeci">LinearColor(int deg_, Mat src_, Color dst, Mat mask, RGBBase_ cs)</div><div class="ttdef"><b>Definición</b> <a href="#l00204">linearize.hpp:204</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gamma_html_a30362e1890ec2f63546af3909379f025"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gamma.html#a30362e1890ec2f63546af3909379f025">cv::ccm::LinearGamma::LinearGamma</a></div><div class="ttdeci">LinearGamma()</div><div class="ttdef"><b>Definición</b> <a href="#l00121">linearize.hpp:121</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gamma_html_a41857214967a4419607adebca499ca2e"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gamma.html#a41857214967a4419607adebca499ca2e">cv::ccm::LinearGamma::LinearGamma</a></div><div class="ttdeci">LinearGamma(double gamma_)</div><div class="ttdef"><b>Definición</b> <a href="#l00124">linearize.hpp:124</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gamma_html_a569d4e7be9c90c10bd002616eb58a176"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gamma.html#a569d4e7be9c90c10bd002616eb58a176">cv::ccm::LinearGamma::linearize</a></div><div class="ttdeci">Mat linearize(Mat inp) CV_OVERRIDE</div><div class="ttdoc">Inference.</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00246">linearize.cpp:246</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gamma_html_a5e86ddf73f04589951a8e561d9cbf033"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gamma.html#a5e86ddf73f04589951a8e561d9cbf033">cv::ccm::LinearGamma::gamma</a></div><div class="ttdeci">double gamma</div><div class="ttdef"><b>Definición</b> <a href="#l00119">linearize.hpp:119</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gray_html_a19189b9307897741838a4e8183010335"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gray.html#a19189b9307897741838a4e8183010335">cv::ccm::LinearGray::linearize</a></div><div class="ttdeci">Mat linearize(Mat inp) CV_OVERRIDE</div><div class="ttdoc">Inference.</div><div class="ttdef"><b>Definición</b> <a href="#l00174">linearize.hpp:174</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gray_html_a2c22da34299561800b669f320ba87676"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gray.html#a2c22da34299561800b669f320ba87676">cv::ccm::LinearGray::LinearGray</a></div><div class="ttdeci">LinearGray(int deg_, Mat src, Color dst, Mat mask, RGBBase_ cs)</div><div class="ttdef"><b>Definición</b> <a href="#l00150">linearize.hpp:150</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gray_html_a3c1552ba52f7df5fc9816078c93249dd"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gray.html#a3c1552ba52f7df5fc9816078c93249dd">cv::ccm::LinearGray::LinearGray</a></div><div class="ttdeci">LinearGray()</div><div class="ttdef"><b>Definición</b> <a href="#l00148">linearize.hpp:148</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gray_html_a4ab45f4d69e03a0a32c0174a44b8f6ff"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gray.html#a4ab45f4d69e03a0a32c0174a44b8f6ff">cv::ccm::LinearGray::deg</a></div><div class="ttdeci">int deg</div><div class="ttdef"><b>Definición</b> <a href="#l00145">linearize.hpp:145</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gray_html_aa21067ed9a34749809c0f411aa16b394"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gray.html#aa21067ed9a34749809c0f411aa16b394">cv::ccm::LinearGray::p</a></div><div class="ttdeci">T p</div><div class="ttdef"><b>Definición</b> <a href="#l00146">linearize.hpp:146</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_gray_html_ad947d7422bb86d451abadecbe97e0052"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_gray.html#ad947d7422bb86d451abadecbe97e0052">cv::ccm::LinearGray::calc</a></div><div class="ttdeci">void calc(const Mat &amp;src, const Mat &amp;dst)</div><div class="ttdoc">monotonically increase is not guaranteed.</div><div class="ttdef"><b>Definición</b> <a href="#l00169">linearize.hpp:169</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_html_a0588788544fc480c8be6dd2360dfeb07"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear.html#a0588788544fc480c8be6dd2360dfeb07">cv::ccm::Linear::linearize</a></div><div class="ttdeci">virtual Mat linearize(Mat inp)</div><div class="ttdoc">Inference.</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00241">linearize.cpp:241</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_html_a5dcfc4dc3c26827a7158040e1888cd64"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear.html#a5dcfc4dc3c26827a7158040e1888cd64">cv::ccm::Linear::Linear</a></div><div class="ttdeci">Linear()</div><div class="ttdef"><b>Definición</b> <a href="#l00080">linearize.hpp:80</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_html_ad2f4c4a87d9e879e1775f216d186ae2a"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear.html#ad2f4c4a87d9e879e1775f216d186ae2a">cv::ccm::Linear::value</a></div><div class="ttdeci">virtual void value(void)</div><div class="ttdoc">Evaluate linearization model.</div><div class="ttdef"><b>Definición</b> <a href="#l00089">linearize.hpp:89</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_html_af578bff184258f4a827f58cc1f724bfe"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear.html#af578bff184258f4a827f58cc1f724bfe">cv::ccm::Linear::~Linear</a></div><div class="ttdeci">virtual ~Linear()</div><div class="ttdef"><b>Definición</b> <a href="#l00081">linearize.hpp:81</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_identity_html"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_identity.html">cv::ccm::LinearIdentity</a></div><div class="ttdoc">Linearization identity. make no change.</div><div class="ttdef"><b>Definición</b> <a href="#l00103">linearize.hpp:104</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_identity_html_aa785266fc872924b5218f2f9f7240400"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_identity.html#aa785266fc872924b5218f2f9f7240400">cv::ccm::LinearIdentity::write</a></div><div class="ttdeci">void write(cv::FileStorage &amp;fs) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00115">linearize.cpp:115</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_linear_identity_html_afbf6a3626e5b6fdb2f4d83b0a3379dac"><div class="ttname"><a href="classcv_1_1ccm_1_1_linear_identity.html#afbf6a3626e5b6fdb2f4d83b0a3379dac">cv::ccm::LinearIdentity::read</a></div><div class="ttdeci">void read(const cv::FileNode &amp;node) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00120">linearize.cpp:120</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_log_polyfit_html_a65cf6288f85721e898dac1e88f3de377"><div class="ttname"><a href="classcv_1_1ccm_1_1_log_polyfit.html#a65cf6288f85721e898dac1e88f3de377">cv::ccm::LogPolyfit::p</a></div><div class="ttdeci">Polyfit p</div><div class="ttdef"><b>Definición</b> <a href="#l00055">linearize.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_log_polyfit_html_a6ddf861a1c32c2f7497376eb24bde7d8"><div class="ttname"><a href="classcv_1_1ccm_1_1_log_polyfit.html#a6ddf861a1c32c2f7497376eb24bde7d8">cv::ccm::LogPolyfit::deg</a></div><div class="ttdeci">int deg</div><div class="ttdef"><b>Definición</b> <a href="#l00054">linearize.hpp:54</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_log_polyfit_html_ac1ea6c3ef7dc9e09db3ddc78f157258f"><div class="ttname"><a href="classcv_1_1ccm_1_1_log_polyfit.html#ac1ea6c3ef7dc9e09db3ddc78f157258f">cv::ccm::LogPolyfit::~LogPolyfit</a></div><div class="ttdeci">virtual ~LogPolyfit()</div><div class="ttdef"><b>Definición</b> <a href="#l00062">linearize.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_log_polyfit_html_ae5aec29d92640de395cbf2dd7ebeb312"><div class="ttname"><a href="classcv_1_1ccm_1_1_log_polyfit.html#ae5aec29d92640de395cbf2dd7ebeb312">cv::ccm::LogPolyfit::operator()</a></div><div class="ttdeci">Mat operator()(const Mat &amp;inp)</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00104">linearize.cpp:104</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_log_polyfit_html_af0b47847715eb58c51fdd618140462ce"><div class="ttname"><a href="classcv_1_1ccm_1_1_log_polyfit.html#af0b47847715eb58c51fdd618140462ce">cv::ccm::LogPolyfit::LogPolyfit</a></div><div class="ttdeci">LogPolyfit()</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00070">linearize.cpp:70</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_polyfit_html"><div class="ttname"><a href="classcv_1_1ccm_1_1_polyfit.html">cv::ccm::Polyfit</a></div><div class="ttdoc">Polyfit model.</div><div class="ttdef"><b>Definición</b> <a href="#l00021">linearize.hpp:22</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_polyfit_html_a13b9c3d63f95d162b8b4d6ee74e26552"><div class="ttname"><a href="classcv_1_1ccm_1_1_polyfit.html#a13b9c3d63f95d162b8b4d6ee74e26552">cv::ccm::Polyfit::deg</a></div><div class="ttdeci">int deg</div><div class="ttdef"><b>Definición</b> <a href="#l00024">linearize.hpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_polyfit_html_a513f80a679ced91009baf5b0ecf8c1c3"><div class="ttname"><a href="classcv_1_1ccm_1_1_polyfit.html#a513f80a679ced91009baf5b0ecf8c1c3">cv::ccm::Polyfit::~Polyfit</a></div><div class="ttdeci">virtual ~Polyfit()</div><div class="ttdef"><b>Definición</b> <a href="#l00034">linearize.hpp:34</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_polyfit_html_aa2d80bdb1ad6dca81da17bbfabd619e5"><div class="ttname"><a href="classcv_1_1ccm_1_1_polyfit.html#aa2d80bdb1ad6dca81da17bbfabd619e5">cv::ccm::Polyfit::p</a></div><div class="ttdeci">Mat p</div><div class="ttdef"><b>Definición</b> <a href="#l00025">linearize.hpp:25</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_polyfit_html_aae07f9fda5fa012d5432ce315e5a725d"><div class="ttname"><a href="classcv_1_1ccm_1_1_polyfit.html#aae07f9fda5fa012d5432ce315e5a725d">cv::ccm::Polyfit::Polyfit</a></div><div class="ttdeci">Polyfit()</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00014">linearize.cpp:14</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_polyfit_html_accdd4e9398a0d6cf244067b2cf547137"><div class="ttname"><a href="classcv_1_1ccm_1_1_polyfit.html#accdd4e9398a0d6cf244067b2cf547137">cv::ccm::Polyfit::operator()</a></div><div class="ttdeci">Mat operator()(const Mat &amp;inp)</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00054">linearize.cpp:54</a></div></div>
+<div class="ttc" id="aclasscv_1_1ccm_1_1_r_g_b_base___html"><div class="ttname"><a href="classcv_1_1ccm_1_1_r_g_b_base__.html">cv::ccm::RGBBase_</a></div><div class="ttdoc">Base of RGB color space; the argument values are from AdobeRGB; Data from https://en....</div><div class="ttdef"><b>Definición</b> <a href="colorspace_8hpp_source.html#l00057">colorspace.hpp:58</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__ccm_html_ga32fe233eb4f5a6ac8e42c4a6632aed59"><div class="ttname"><a href="group__ccm.html#ga32fe233eb4f5a6ac8e42c4a6632aed59">cv::ccm::write</a></div><div class="ttdeci">CV_EXPORTS void write(cv::FileStorage &amp;fs, const std::string &amp;, const ColorCorrectionModel &amp;ccm)</div><div class="ttdef"><b>Definición</b> <a href="ccm_8cpp_source.html#l00543">ccm.cpp:543</a></div></div>
+<div class="ttc" id="agroup__ccm_html_gac6dec0a74a2cab2b9aa2b0cc6731c5cc"><div class="ttname"><a href="group__ccm.html#gac6dec0a74a2cab2b9aa2b0cc6731c5cc">cv::ccm::LinearizationType</a></div><div class="ttdeci">LinearizationType</div><div class="ttdoc">Linearization transformation type.</div><div class="ttdef"><b>Definición</b> <a href="ccm_8hpp_source.html#l00105">ccm.hpp:106</a></div></div>
+<div class="ttc" id="agroup__ccm_html_gae064f8f89d28fb5a77a9c26de2c798d5"><div class="ttname"><a href="group__ccm.html#gae064f8f89d28fb5a77a9c26de2c798d5">cv::ccm::read</a></div><div class="ttdeci">CV_EXPORTS void read(const cv::FileNode &amp;node, ColorCorrectionModel &amp;ccm, const ColorCorrectionModel &amp;defaultValue=ColorCorrectionModel())</div><div class="ttdef"><b>Definición</b> <a href="ccm_8cpp_source.html#l00548">ccm.cpp:548</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga0547c7fed86152d7e9d0096029c8518a"><div class="ttname"><a href="group__core__array.html#ga0547c7fed86152d7e9d0096029c8518a">cv::split</a></div><div class="ttdeci">CV_EXPORTS void split(const Mat &amp;src, Mat *mvbegin)</div><div class="ttdoc">Divides a multi-channel array into several single-channel arrays.</div><div class="ttdef"><b>Definición</b> <a href="split_8dispatch_8cpp_source.html#l00122">split.dispatch.cpp:122</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga7d7b4d6c6ee504b30a20b1680029c7b4"><div class="ttname"><a href="group__core__array.html#ga7d7b4d6c6ee504b30a20b1680029c7b4">cv::merge</a></div><div class="ttdeci">CV_EXPORTS void merge(const Mat *mv, size_t count, OutputArray dst)</div><div class="ttdoc">Creates one multi-channel array out of several single-channel ones.</div><div class="ttdef"><b>Definición</b> <a href="merge_8dispatch_8cpp_source.html#l00119">merge.dispatch.cpp:119</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaec778c746f8b965d8218f150599239de"><div class="ttname"><a href="group__core__basic.html#gaec778c746f8b965d8218f150599239de">cv::cv::FileNode</a></div><div class="ttdeci">class CV_EXPORTS FileNode</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00149">templmatch.cpp:149</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gaf86c09fe702ed037c03c2bc603ceab14"><div class="ttname"><a href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a></div><div class="ttdeci">CV_EXPORTS_W void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0, AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Converts an image from one color space to another.</div><div class="ttdef"><b>Definición</b> <a href="imgproc_2src_2color_8cpp_source.html#l00192">color.cpp:192</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0ae50d0c66ee53e974234ac84cf51d1d4e"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0ae50d0c66ee53e974234ac84cf51d1d4e">cv::COLOR_RGB2GRAY</a></div><div class="ttdeci">@ COLOR_RGB2GRAY</div><div class="ttdoc">[8U/16U/32F]</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00548">imgproc.hpp:548</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html"><div class="ttname"><a href="namespacecv_1_1ccm.html">cv::ccm</a></div><div class="ttdef"><b>Definición</b> <a href="ccm_8hpp_source.html#l00017">ccm.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a82c2831efa4d69c17d84fc88fd8410f5"><div class="ttname"><a href="namespacecv_1_1ccm.html#a82c2831efa4d69c17d84fc88fd8410f5">cv::ccm::maskCopyTo</a></div><div class="ttdeci">Mat maskCopyTo(const Mat &amp;src, const Mat &amp;mask)</div><div class="ttdoc">maskCopyTo a function to delete unsatisfied elementwise.</div><div class="ttdef"><b>Definición</b> <a href="photo_2src_2ccm_2utils_8cpp_source.html#l00059">utils.cpp:59</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_aa5401f92f71021c828cc460b28cb7b86"><div class="ttname"><a href="namespacecv_1_1ccm.html#aa5401f92f71021c828cc460b28cb7b86">cv::ccm::getLinear</a></div><div class="ttdeci">std::shared_ptr&lt; Linear &gt; getLinear(double gamma, int deg, Mat src, Color dst, Mat mask, RGBBase_ cs, LinearizationType linearizationType)</div><div class="ttdoc">Get linearization method. used in ccm model.</div><div class="ttdef"><b>Definición</b> <a href="linearize_8cpp_source.html#l00253">linearize.cpp:253</a></div></div>
+<div class="ttc" id="anamespacecv_1_1fs_html"><div class="ttname"><a href="namespacecv_1_1fs.html">cv::fs</a></div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l00019">persistence.cpp:20</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_aafb41e5e0479356788e3936075fbad2c"><div class="ttname"><a href="namespacecv.html#aafb41e5e0479356788e3936075fbad2c">cv::write</a></div><div class="ttdeci">CV_EXPORTS void write(FileStorage &amp;fs, const String &amp;name, int value)</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02170">persistence.cpp:2170</a></div></div>
+<div class="ttc" id="anamespacecv_html_ae0e331a4e4c5f52a314726adad22abbb"><div class="ttname"><a href="namespacecv.html#ae0e331a4e4c5f52a314726adad22abbb">cv::read</a></div><div class="ttdeci">CV_EXPORTS void read(const FileNode &amp;node, int &amp;value, int default_value)</div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l02911">persistence.cpp:2911</a></div></div>
+<div class="ttc" id="aphoto_2src_2ccm_2color_8hpp_html"><div class="ttname"><a href="photo_2src_2ccm_2color_8hpp.html">color.hpp</a></div></div>
+<div class="ttc" id="aphoto_8hpp_html"><div class="ttname"><a href="photo_8hpp.html">photo.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_847b99370ed06e1072f8b8059d2f9ef8.html">photo</a></li><li class="navelem"><a href="dir_8ce04962efed91e20e757beca4d6ab49.html">src</a></li><li class="navelem"><a href="dir_d0b5b1b6af9e9720589246207b511d01.html">ccm</a></li><li class="navelem"><a href="linearize_8hpp.html">linearize.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

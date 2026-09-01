@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_mjpeg_decoder.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__mjpeg__decoder_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">cap_mjpeg_decoder.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="cap__mjpeg__decoder_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2015, OpenCV Foundation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//   * The name of Intel Corporation may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &quot;<a class="code" href="videoio_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="container__avi_8private_8hpp.html">opencv2/videoio/container_avi.private.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html">   48</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">MotionJpegCapture</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_i_video_capture.html">IVideoCapture</a></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">~MotionJpegCapture</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#ad8c5c0704e6b334177db734099c2ac38">getProperty</a>(<span class="keywordtype">int</span>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a3c8c0ff87ccf5cda019a5e9db3d52188">setProperty</a>(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#ab3ca3267cc4381261ba682adefe6419d">grabFrame</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a03b3184548ba08b9fd0f812834b76719">retrieveFrame</a>(<span class="keywordtype">int</span>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a>) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#acc7de9acf50bf7c6dcc482dd8faa0f81">isOpened</a>() <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a9c16a678d2dd12291ce6e48a97e26375">   57</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a9c16a678d2dd12291ce6e48a97e26375">getCaptureDomain</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#gga023786be1ee68a9105bf2e48c700294da30dc8f8843e26aa10d401799f62eaa25">CAP_OPENCV_MJPEG</a>; }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">MotionJpegCapture</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp;);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a0c5a0b7356901c71c3a318c9a54eee66">open</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp;);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">close</a>();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">inline</span> uint64_t <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">getFramePos</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">   66</a></span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;AVIReadContainer&gt;</a> <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">   67</a></span>    <span class="keywordtype">bool</span>             <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">   68</a></span>    <a class="code hl_typedef" href="namespacecv.html#a3fb9078b88bc768c9ac355e3aaebefb1">frame_list</a>       <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">   70</a></span>    <a class="code hl_typedef" href="namespacecv.html#a0986d6317590c33f1b45e669d02d112b">frame_iterator</a>   <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a746f98ffbdd6cf3e9e8ab675da77765f">   71</a></span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>              <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a746f98ffbdd6cf3e9e8ab675da77765f">m_current_frame</a>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="comment">//frame width/height and fps could be different for</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="comment">//each frame/stream. At the moment we suppose that they</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="comment">//stays the same within single avi file.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a3db92affe42f38f988b6f84ebf36e423">   76</a></span>    uint32_t         <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a3db92affe42f38f988b6f84ebf36e423">m_frame_width</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a12d37633470891d3e580f106cf862b46">   77</a></span>    uint32_t         <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a12d37633470891d3e580f106cf862b46">m_frame_height</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#abf5eac9a36141962c0b7dbb1f5296d06">   78</a></span>    <span class="keywordtype">double</span>           <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abf5eac9a36141962c0b7dbb1f5296d06">m_fps</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>};</div>
+</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">   81</a></span>uint64_t <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">MotionJpegCapture::getFramePos</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a>)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> == <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end())</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.size();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> - <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.begin() + 1;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a3c8c0ff87ccf5cda019a5e9db3d52188">   92</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a3c8c0ff87ccf5cda019a5e9db3d52188">MotionJpegCapture::setProperty</a>(<span class="keywordtype">int</span> property, <span class="keywordtype">double</span> value)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>{</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">if</span>(property == <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068">CAP_PROP_POS_FRAMES</a>)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">if</span>(<span class="keywordtype">int</span>(value) == 0)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.size() &gt; value)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.begin() + int(value - 1);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#ad8c5c0704e6b334177db734099c2ac38">  113</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#ad8c5c0704e6b334177db734099c2ac38">MotionJpegCapture::getProperty</a>(<span class="keywordtype">int</span> property)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">switch</span>(property)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068">CAP_PROP_POS_FRAMES</a>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)<a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">getFramePos</a>();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0">CAP_PROP_POS_MSEC</a>:</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)<a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">getFramePos</a>() * (1000. / <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abf5eac9a36141962c0b7dbb1f5296d06">m_fps</a>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf">CAP_PROP_POS_AVI_RATIO</a>:</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <span class="keywordflow">return</span> double(<a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">getFramePos</a>())/<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.size();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">CAP_PROP_FRAME_WIDTH</a>:</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a3db92affe42f38f988b6f84ebf36e423">m_frame_width</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">CAP_PROP_FRAME_HEIGHT</a>:</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a12d37633470891d3e580f106cf862b46">m_frame_height</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">CAP_PROP_FPS</a>:</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abf5eac9a36141962c0b7dbb1f5296d06">m_fps</a>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da53e1c28d4c2ca10732af106f3bf00613">CAP_PROP_FOURCC</a>:</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)<a class="code hl_function" href="group__core__utils.html#ga7cc961769f8e8ac57064d8165ff2fdc7">CV_FOURCC</a>(<span class="charliteral">&#39;M&#39;</span>,<span class="charliteral">&#39;J&#39;</span>,<span class="charliteral">&#39;P&#39;</span>,<span class="charliteral">&#39;G&#39;</span>);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dadadc646b31cfd2194794a3a80b8fa6c2">CAP_PROP_FRAME_COUNT</a>:</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.size();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da171e1ed33a7c1280a9d2c869732f226c">CAP_PROP_FORMAT</a>:</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#ab3ca3267cc4381261ba682adefe6419d">  139</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#ab3ca3267cc4381261ba682adefe6419d">MotionJpegCapture::grabFrame</a>()</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>{</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span>(<a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#acc7de9acf50bf7c6dcc482dd8faa0f81">isOpened</a>())</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">if</span>(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a>)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.begin();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> == <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end())</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            ++<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> != <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end();</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>}</div>
+</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="foldopen" id="foldopen00160" data-start="{" data-end="}">
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a03b3184548ba08b9fd0f812834b76719">  160</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a03b3184548ba08b9fd0f812834b76719">MotionJpegCapture::retrieveFrame</a>(<span class="keywordtype">int</span>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> output_frame)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>{</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> != <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end())</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        std::vector&lt;char&gt; data = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;readFrame(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">if</span>(data.size())</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        {</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a746f98ffbdd6cf3e9e8ab675da77765f">m_current_frame</a> = <a class="code hl_function" href="group__imgcodecs.html#gaad518fe65098fd32446bd5b9c4f8b531">imdecode</a>(data, <a class="code hl_enumvalue" href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a0b486c93c25e8a0b0712681bb7254c18">IMREAD_ANYDEPTH</a> | <a class="code hl_enumvalue" href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822">IMREAD_COLOR</a> | <a class="code hl_enumvalue" href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a34f91a514cd95127d8ba900840af548e">IMREAD_IGNORE_ORIENTATION</a>);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a746f98ffbdd6cf3e9e8ab675da77765f">m_current_frame</a>.<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(output_frame);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="foldopen" id="foldopen00179" data-start="{" data-end="}">
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a5f3df66e186ff1cd10bbc0e6494789bd">  179</a></span><a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a5f3df66e186ff1cd10bbc0e6494789bd">MotionJpegCapture::~MotionJpegCapture</a>()</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>{</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">close</a>();</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>}</div>
+</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="foldopen" id="foldopen00184" data-start="{" data-end="}">
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">  184</a></span><a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">MotionJpegCapture::MotionJpegCapture</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp; filename)</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>{</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a> = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;AVIReadContainer&gt;</a>();</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;initStream(filename);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a0c5a0b7356901c71c3a318c9a54eee66">open</a>(filename);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>}</div>
+</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#acc7de9acf50bf7c6dcc482dd8faa0f81">  191</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#acc7de9acf50bf7c6dcc482dd8faa0f81">MotionJpegCapture::isOpened</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.size() &gt; 0;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>}</div>
+</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="foldopen" id="foldopen00196" data-start="{" data-end="}">
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">  196</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">MotionJpegCapture::close</a>()</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>{</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;close();</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end();</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>}</div>
+</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="foldopen" id="foldopen00202" data-start="{" data-end="}">
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classcv_1_1_motion_jpeg_capture.html#a0c5a0b7356901c71c3a318c9a54eee66">  202</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a0c5a0b7356901c71c3a318c9a54eee66">MotionJpegCapture::open</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp; filename)</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>{</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">close</a>();</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a> = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;AVIReadContainer&gt;</a>();</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;initStream(filename);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">m_frame_iterator</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>.end();</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">m_is_first_frame</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">if</span>(!<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;parseRiff(<a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">m_mjpeg_frames</a>))</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">close</a>();</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    } <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a3db92affe42f38f988b6f84ebf36e423">m_frame_width</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;getWidth();</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#a12d37633470891d3e580f106cf862b46">m_frame_height</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;getHeight();</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abf5eac9a36141962c0b7dbb1f5296d06">m_fps</a> = <a class="code hl_variable" href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">m_avi_container</a>-&gt;getFps();</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#acc7de9acf50bf7c6dcc482dd8faa0f81">isOpened</a>();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>}</div>
+</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="foldopen" id="foldopen00225" data-start="{" data-end="}">
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno"><a class="line" href="namespacecv.html#aa1ed8e1ec56387146286a0b420aa6e16">  225</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> <a class="code hl_function" href="namespacecv.html#aa1ed8e1ec56387146286a0b420aa6e16">createMotionJpegCapture</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp; filename)</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>{</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;MotionJpegCapture&gt;</a> mjdecoder(<span class="keyword">new</span> <a class="code hl_function" href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">MotionJpegCapture</a>(filename));</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">if</span>( mjdecoder-&gt;isOpened() )</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordflow">return</span> mjdecoder;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">Ptr&lt;MotionJpegCapture&gt;</a>();</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>}</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>}</div>
+<div class="ttc" id="aclasscv_1_1_i_video_capture_html"><div class="ttname"><a href="classcv_1_1_i_video_capture.html">cv::IVideoCapture</a></div><div class="ttdef"><b>Definición</b> <a href="cap__interface_8hpp_source.html#l00189">cap_interface.hpp:190</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a2cc2a68970b85d50f3a4fac1b55ba7c8"><div class="ttname"><a href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">cv::Mat::copyTo</a></div><div class="ttdeci">void copyTo(OutputArray m) const</div><div class="ttdoc">Copies the matrix to another one.</div><div class="ttdef"><b>Definición</b> <a href="copy_8cpp_source.html#l00447">copy.cpp:447</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a03b3184548ba08b9fd0f812834b76719"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a03b3184548ba08b9fd0f812834b76719">cv::MotionJpegCapture::retrieveFrame</a></div><div class="ttdeci">virtual bool retrieveFrame(int, OutputArray) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00160">cap_mjpeg_decoder.cpp:160</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a0c5a0b7356901c71c3a318c9a54eee66"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a0c5a0b7356901c71c3a318c9a54eee66">cv::MotionJpegCapture::open</a></div><div class="ttdeci">bool open(const String &amp;)</div><div class="ttdef"><b>Definición</b> <a href="#l00202">cap_mjpeg_decoder.cpp:202</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a12d37633470891d3e580f106cf862b46"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a12d37633470891d3e580f106cf862b46">cv::MotionJpegCapture::m_frame_height</a></div><div class="ttdeci">uint32_t m_frame_height</div><div class="ttdef"><b>Definición</b> <a href="#l00077">cap_mjpeg_decoder.cpp:77</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a200a34d18757e4ff0d52aa8a2bf7def6"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a200a34d18757e4ff0d52aa8a2bf7def6">cv::MotionJpegCapture::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definición</b> <a href="#l00196">cap_mjpeg_decoder.cpp:196</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a364e39d3d6337159e955b59d1208e593"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a364e39d3d6337159e955b59d1208e593">cv::MotionJpegCapture::m_is_first_frame</a></div><div class="ttdeci">bool m_is_first_frame</div><div class="ttdef"><b>Definición</b> <a href="#l00067">cap_mjpeg_decoder.cpp:67</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a3c8c0ff87ccf5cda019a5e9db3d52188"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a3c8c0ff87ccf5cda019a5e9db3d52188">cv::MotionJpegCapture::setProperty</a></div><div class="ttdeci">virtual bool setProperty(int, double) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00092">cap_mjpeg_decoder.cpp:92</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a3db92affe42f38f988b6f84ebf36e423"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a3db92affe42f38f988b6f84ebf36e423">cv::MotionJpegCapture::m_frame_width</a></div><div class="ttdeci">uint32_t m_frame_width</div><div class="ttdef"><b>Definición</b> <a href="#l00076">cap_mjpeg_decoder.cpp:76</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a5f3df66e186ff1cd10bbc0e6494789bd"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a5f3df66e186ff1cd10bbc0e6494789bd">cv::MotionJpegCapture::~MotionJpegCapture</a></div><div class="ttdeci">virtual ~MotionJpegCapture() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00179">cap_mjpeg_decoder.cpp:179</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a746f98ffbdd6cf3e9e8ab675da77765f"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a746f98ffbdd6cf3e9e8ab675da77765f">cv::MotionJpegCapture::m_current_frame</a></div><div class="ttdeci">Mat m_current_frame</div><div class="ttdef"><b>Definición</b> <a href="#l00071">cap_mjpeg_decoder.cpp:71</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a972d6712fb8e0bdd39d7bf8ecd58c9ec"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a972d6712fb8e0bdd39d7bf8ecd58c9ec">cv::MotionJpegCapture::MotionJpegCapture</a></div><div class="ttdeci">MotionJpegCapture(const String &amp;)</div><div class="ttdef"><b>Definición</b> <a href="#l00184">cap_mjpeg_decoder.cpp:184</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_a9c16a678d2dd12291ce6e48a97e26375"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#a9c16a678d2dd12291ce6e48a97e26375">cv::MotionJpegCapture::getCaptureDomain</a></div><div class="ttdeci">virtual int getCaptureDomain() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00057">cap_mjpeg_decoder.cpp:57</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_aadcd21b34eb99e0ec2bd06c908bffc44"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#aadcd21b34eb99e0ec2bd06c908bffc44">cv::MotionJpegCapture::m_frame_iterator</a></div><div class="ttdeci">frame_iterator m_frame_iterator</div><div class="ttdef"><b>Definición</b> <a href="#l00070">cap_mjpeg_decoder.cpp:70</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_ab3ca3267cc4381261ba682adefe6419d"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#ab3ca3267cc4381261ba682adefe6419d">cv::MotionJpegCapture::grabFrame</a></div><div class="ttdeci">virtual bool grabFrame() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00139">cap_mjpeg_decoder.cpp:139</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_abb2668b403dff7131862b042b7d7e121"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#abb2668b403dff7131862b042b7d7e121">cv::MotionJpegCapture::m_avi_container</a></div><div class="ttdeci">Ptr&lt; AVIReadContainer &gt; m_avi_container</div><div class="ttdef"><b>Definición</b> <a href="#l00066">cap_mjpeg_decoder.cpp:66</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_abf5eac9a36141962c0b7dbb1f5296d06"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#abf5eac9a36141962c0b7dbb1f5296d06">cv::MotionJpegCapture::m_fps</a></div><div class="ttdeci">double m_fps</div><div class="ttdef"><b>Definición</b> <a href="#l00078">cap_mjpeg_decoder.cpp:78</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_ac31a576787fc88d0a79ca557aeeb7a73"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#ac31a576787fc88d0a79ca557aeeb7a73">cv::MotionJpegCapture::m_mjpeg_frames</a></div><div class="ttdeci">frame_list m_mjpeg_frames</div><div class="ttdef"><b>Definición</b> <a href="#l00068">cap_mjpeg_decoder.cpp:68</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_acc7de9acf50bf7c6dcc482dd8faa0f81"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#acc7de9acf50bf7c6dcc482dd8faa0f81">cv::MotionJpegCapture::isOpened</a></div><div class="ttdeci">virtual bool isOpened() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00191">cap_mjpeg_decoder.cpp:191</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_ad8c5c0704e6b334177db734099c2ac38"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#ad8c5c0704e6b334177db734099c2ac38">cv::MotionJpegCapture::getProperty</a></div><div class="ttdeci">virtual double getProperty(int) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00113">cap_mjpeg_decoder.cpp:113</a></div></div>
+<div class="ttc" id="aclasscv_1_1_motion_jpeg_capture_html_af0510a29308aa9e228b61724384dfaeb"><div class="ttname"><a href="classcv_1_1_motion_jpeg_capture.html#af0510a29308aa9e228b61724384dfaeb">cv::MotionJpegCapture::getFramePos</a></div><div class="ttdeci">uint64_t getFramePos() const</div><div class="ttdef"><b>Definición</b> <a href="#l00081">cap_mjpeg_decoder.cpp:81</a></div></div>
+<div class="ttc" id="acontainer__avi_8private_8hpp_html"><div class="ttname"><a href="container__avi_8private_8hpp.html">container_avi.private.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga7cc961769f8e8ac57064d8165ff2fdc7"><div class="ttname"><a href="group__core__utils.html#ga7cc961769f8e8ac57064d8165ff2fdc7">cv::CV_FOURCC</a></div><div class="ttdeci">int CV_FOURCC(char c1, char c2, char c3, char c4)</div><div class="ttdoc">Constructs the &#39;fourcc&#39; code, used in video codecs and many other places. Simply call it with 4 chars...</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l01069">templmatch.cpp:1069</a></div></div>
+<div class="ttc" id="agroup__imgcodecs__flags_html_gga61d9b0126a3e57d9277ac48327799c80a0b486c93c25e8a0b0712681bb7254c18"><div class="ttname"><a href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a0b486c93c25e8a0b0712681bb7254c18">cv::IMREAD_ANYDEPTH</a></div><div class="ttdeci">@ IMREAD_ANYDEPTH</div><div class="ttdoc">If set, return 16-bit/32-bit image when the input has the corresponding depth, otherwise convert it t...</div><div class="ttdef"><b>Definición</b> <a href="imgcodecs_8hpp_source.html#l00074">imgcodecs.hpp:74</a></div></div>
+<div class="ttc" id="agroup__imgcodecs__flags_html_gga61d9b0126a3e57d9277ac48327799c80a34f91a514cd95127d8ba900840af548e"><div class="ttname"><a href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a34f91a514cd95127d8ba900840af548e">cv::IMREAD_IGNORE_ORIENTATION</a></div><div class="ttdeci">@ IMREAD_IGNORE_ORIENTATION</div><div class="ttdoc">If set, do not rotate the image according to EXIF&#39;s orientation flag.</div><div class="ttdef"><b>Definición</b> <a href="imgcodecs_8hpp_source.html#l00083">imgcodecs.hpp:83</a></div></div>
+<div class="ttc" id="agroup__imgcodecs__flags_html_gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822"><div class="ttname"><a href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822">cv::IMREAD_COLOR</a></div><div class="ttdeci">@ IMREAD_COLOR</div><div class="ttdoc">Same as IMREAD_COLOR_BGR.</div><div class="ttdef"><b>Definición</b> <a href="imgcodecs_8hpp_source.html#l00073">imgcodecs.hpp:73</a></div></div>
+<div class="ttc" id="agroup__imgcodecs_html_gaad518fe65098fd32446bd5b9c4f8b531"><div class="ttname"><a href="group__imgcodecs.html#gaad518fe65098fd32446bd5b9c4f8b531">cv::imdecode</a></div><div class="ttdeci">CV_EXPORTS_W Mat imdecode(InputArray buf, int flags)</div><div class="ttdoc">Reads an image from a buffer in memory.</div><div class="ttdef"><b>Definición</b> <a href="loadsave_8cpp_source.html#l01434">loadsave.cpp:1434</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_gga023786be1ee68a9105bf2e48c700294da30dc8f8843e26aa10d401799f62eaa25"><div class="ttname"><a href="group__videoio__flags__base.html#gga023786be1ee68a9105bf2e48c700294da30dc8f8843e26aa10d401799f62eaa25">cv::CAP_OPENCV_MJPEG</a></div><div class="ttdeci">@ CAP_OPENCV_MJPEG</div><div class="ttdoc">Built-in OpenCV MotionJPEG codec.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00117">videoio.hpp:117</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da171e1ed33a7c1280a9d2c869732f226c"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da171e1ed33a7c1280a9d2c869732f226c">cv::CAP_PROP_FORMAT</a></div><div class="ttdeci">@ CAP_PROP_FORMAT</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00141">videoio.hpp:141</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">cv::CAP_PROP_UNKNOWN</a></div><div class="ttdeci">@ CAP_PROP_UNKNOWN</div><div class="ttdoc">Returned by VideoCapture::get if the requested property is unknown or unsupported.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00132">videoio.hpp:132</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da53e1c28d4c2ca10732af106f3bf00613"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da53e1c28d4c2ca10732af106f3bf00613">cv::CAP_PROP_FOURCC</a></div><div class="ttdeci">@ CAP_PROP_FOURCC</div><div class="ttdoc">4-character code of codec. see VideoWriter::fourcc .</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00139">videoio.hpp:139</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da6223452891755166a4fd5173ea257068">cv::CAP_PROP_POS_FRAMES</a></div><div class="ttdeci">@ CAP_PROP_POS_FRAMES</div><div class="ttdoc">0-based index of the frame to be decoded/captured next. When the index i is set in RAW mode (CAP_PROP...</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00134">videoio.hpp:134</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7b235a04f50a444bc2dc72f5ae394aaf">cv::CAP_PROP_POS_AVI_RATIO</a></div><div class="ttdeci">@ CAP_PROP_POS_AVI_RATIO</div><div class="ttdoc">Relative position of the video file: 0=start of the film, 1=end of the film.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00135">videoio.hpp:135</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da7c2fa550ba270713fca1405397b90ae0">cv::CAP_PROP_POS_MSEC</a></div><div class="ttdeci">@ CAP_PROP_POS_MSEC</div><div class="ttdoc">Current position of the video file in milliseconds.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00133">videoio.hpp:133</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">cv::CAP_PROP_FRAME_WIDTH</a></div><div class="ttdeci">@ CAP_PROP_FRAME_WIDTH</div><div class="ttdoc">Width of the frames in the video stream.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00136">videoio.hpp:136</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">cv::CAP_PROP_FRAME_HEIGHT</a></div><div class="ttdeci">@ CAP_PROP_FRAME_HEIGHT</div><div class="ttdoc">Height of the frames in the video stream.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00137">videoio.hpp:137</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dadadc646b31cfd2194794a3a80b8fa6c2"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dadadc646b31cfd2194794a3a80b8fa6c2">cv::CAP_PROP_FRAME_COUNT</a></div><div class="ttdeci">@ CAP_PROP_FRAME_COUNT</div><div class="ttdoc">Number of frames in the video file.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00140">videoio.hpp:140</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">cv::CAP_PROP_FPS</a></div><div class="ttdeci">@ CAP_PROP_FPS</div><div class="ttdoc">Frame rate.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00138">videoio.hpp:138</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a0986d6317590c33f1b45e669d02d112b"><div class="ttname"><a href="namespacecv.html#a0986d6317590c33f1b45e669d02d112b">cv::frame_iterator</a></div><div class="ttdeci">frame_list::iterator frame_iterator</div><div class="ttdef"><b>Definición</b> <a href="container__avi_8private_8hpp_source.html#l00071">container_avi.private.hpp:71</a></div></div>
+<div class="ttc" id="anamespacecv_html_a3fb9078b88bc768c9ac355e3aaebefb1"><div class="ttname"><a href="namespacecv.html#a3fb9078b88bc768c9ac355e3aaebefb1">cv::frame_list</a></div><div class="ttdeci">std::deque&lt; std::pair&lt; uint64_t, uint32_t &gt; &gt; frame_list</div><div class="ttdef"><b>Definición</b> <a href="container__avi_8private_8hpp_source.html#l00070">container_avi.private.hpp:70</a></div></div>
+<div class="ttc" id="anamespacecv_html_aa1ed8e1ec56387146286a0b420aa6e16"><div class="ttname"><a href="namespacecv.html#aa1ed8e1ec56387146286a0b420aa6e16">cv::createMotionJpegCapture</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt; createMotionJpegCapture(const std::string &amp;filename)</div><div class="ttdef"><b>Definición</b> <a href="#l00225">cap_mjpeg_decoder.cpp:225</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html_ac18c0d5defdf2b5653649393d563cce7"><div class="ttname"><a href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">cv::Ptr::Ptr</a></div><div class="ttdeci">Ptr() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00073">cvstd_wrapper.hpp:73</a></div></div>
+<div class="ttc" id="avideoio_2src_2precomp_8hpp_html"><div class="ttname"><a href="videoio_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__mjpeg__decoder_8cpp.html">cap_mjpeg_decoder.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

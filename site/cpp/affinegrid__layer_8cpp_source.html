@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/affinegrid_layer.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('affinegrid__layer_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">affinegrid_layer.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="affinegrid__layer_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2025, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="net__impl_8hpp.html">../net_impl.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="layers_2layers__common_8hpp.html">layers_common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="shape__utils_8hpp.html">opencv2/dnn/shape_utils.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// ONNX operator: AffineGrid</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Spec: https://onnx.ai/onnx/operators/onnx__AffineGrid.html</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Supported opsets: 20</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> computeGrid2D(<span class="keyword">const</span> Mat&amp; theta, Mat&amp; grid, <span class="keywordtype">int</span> <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, <span class="keywordtype">int</span> H, <span class="keywordtype">int</span> W,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                   <span class="keywordtype">float</span> xs, <span class="keywordtype">float</span> xd, <span class="keywordtype">float</span> ys, <span class="keywordtype">float</span> yd)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a> * H;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">Range</a>(0, <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>), [&amp;](<span class="keyword">const</span> Range&amp; range){</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> H_ = H;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> W_ = W;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> xs_ = xs, xd_ = xd, ys_ = ys, yd_ = yd;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">const</span> Mat theta_ = theta;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        Mat grid_ = grid;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordtype">int</span> lastN = -1;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* T0 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* T1 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordtype">float</span> T0_0 = 0.f, T1_0 = 0.f;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nyi = range.<a class="code hl_property" href="interface_range.html#afbb98f5d1cbe46d8b49f75322a2f253f">start</a>; nyi &lt; range.<a class="code hl_property" href="interface_range.html#a680587bf22a9bf01b6662c53de90ea97">end</a>; nyi++)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordtype">int</span> n = nyi / H_;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> = nyi - n * H_;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">if</span> (n != lastN)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                <span class="keywordtype">int</span> i0[3] = {n, 0, 0};</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <span class="keywordtype">int</span> i1[3] = {n, 1, 0};</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                T0 = theta_.ptr&lt;<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt;(i0);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                T1 = theta_.ptr&lt;<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt;(i1);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                T0_0 = (float)T0[0];</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                T1_0 = (float)T1[0];</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                lastN = n;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordtype">float</span> ny = yd_ + ys_ * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordtype">float</span> base0 = (float)T0[1]*ny + (<span class="keywordtype">float</span>)T0[2];</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordtype">float</span> base1 = (float)T1[1]*ny + (<span class="keywordtype">float</span>)T1[2];</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordtype">float</span>* out = grid_.ptr&lt;<span class="keywordtype">float</span>&gt;(n, <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, 0);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 0; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; W_; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                <span class="keywordtype">float</span> nx = xd_ + xs_ * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                out[2*<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> + 0] = T0_0*nx + base0;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                out[2*<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> + 1] = T1_0*nx + base1;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    });</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordtype">void</span> computeGrid3D(<span class="keyword">const</span> Mat&amp; theta, Mat&amp; grid, <span class="keywordtype">int</span> <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, <span class="keywordtype">int</span> D, <span class="keywordtype">int</span> H, <span class="keywordtype">int</span> W,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                   <span class="keywordtype">float</span> xs, <span class="keywordtype">float</span> xd, <span class="keywordtype">float</span> ys, <span class="keywordtype">float</span> yd, <span class="keywordtype">float</span> zs, <span class="keywordtype">float</span> zd)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#a2ef5b2bdd22196b3dc88a7709d8d35c4">stride</a> = D * H;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a> * <a class="code hl_variable" href="namespacegl.html#a2ef5b2bdd22196b3dc88a7709d8d35c4">stride</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">Range</a>(0, <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>), [&amp;](<span class="keyword">const</span> Range&amp; range){</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> H_ = H;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> W_ = W;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> stride_ = <a class="code hl_variable" href="namespacegl.html#a2ef5b2bdd22196b3dc88a7709d8d35c4">stride</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> xs_ = xs, xd_ = xd, ys_ = ys, yd_ = yd, zs_ = zs, zd_ = zd;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keyword">const</span> Mat theta_ = theta;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        Mat grid_ = grid;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordtype">int</span> lastN = -1;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* T0 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* T1 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* T2 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">float</span> T0_0 = 0.f, T1_0 = 0.f, T2_0 = 0.f;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ndz = range.<a class="code hl_property" href="interface_range.html#afbb98f5d1cbe46d8b49f75322a2f253f">start</a>; ndz &lt; range.<a class="code hl_property" href="interface_range.html#a680587bf22a9bf01b6662c53de90ea97">end</a>; ndz++)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordtype">int</span> n = ndz / stride_;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordtype">int</span> rem = ndz - n * stride_;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#a7ad534c2842bbc139bb40afbc51b6bc9">z</a> = rem / H_;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> = rem - <a class="code hl_variable" href="namespacegl.html#a7ad534c2842bbc139bb40afbc51b6bc9">z</a> * H_;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">if</span> (n != lastN)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <span class="keywordtype">int</span> i0[3] = {n, 0, 0};</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="keywordtype">int</span> i1[3] = {n, 1, 0};</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keywordtype">int</span> i2[3] = {n, 2, 0};</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                T0 = theta_.ptr&lt;<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt;(i0);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                T1 = theta_.ptr&lt;<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt;(i1);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                T2 = theta_.ptr&lt;<a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt;(i2);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                T0_0 = (float)T0[0];</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                T1_0 = (float)T1[0];</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                T2_0 = (float)T2[0];</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                lastN = n;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordtype">float</span> ny = yd_ + ys_ * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordtype">float</span> nz = zd_ + zs_ * <a class="code hl_variable" href="namespacegl.html#a7ad534c2842bbc139bb40afbc51b6bc9">z</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keywordtype">float</span> base0 = (float)T0[1]*ny + (<span class="keywordtype">float</span>)T0[2]*nz + (float)T0[3];</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordtype">float</span> base1 = (float)T1[1]*ny + (<span class="keywordtype">float</span>)T1[2]*nz + (float)T1[3];</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordtype">float</span> base2 = (float)T2[1]*ny + (<span class="keywordtype">float</span>)T2[2]*nz + (float)T2[3];</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keywordtype">int</span> idx[5] = {n, <a class="code hl_variable" href="namespacegl.html#a7ad534c2842bbc139bb40afbc51b6bc9">z</a>, <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, 0, 0};</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="keywordtype">float</span>* out = grid_.ptr&lt;<span class="keywordtype">float</span>&gt;(idx);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 0; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; W_; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="keywordtype">float</span> nx = xd_ + xs_ * <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                <span class="keywordtype">int</span> o = 3*<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                out[o + 0] = T0_0*nx + base0;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                out[o + 1] = T1_0*nx + base1;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                out[o + 2] = T2_0*nx + base2;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    });</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keyword">class </span>AffineGridLayerImpl <a class="code hl_class" href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html">CV_FINAL</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1dnn_1_1_affine_grid_layer.html">AffineGridLayer</a></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>{</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a4e1005dcec11d9b886480e8f59f57654">  124</a></span>    <a class="code hl_function" href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a4e1005dcec11d9b886480e8f59f57654">AffineGridLayerImpl</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1_layer_params.html">LayerParams</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_layer_info.html#aac8209a60208d1f09e38d1dfe435525a">setParamsFrom</a>(<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <a class="code hl_variable" href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a693cc49584c527eb8096ea79ff5e253d">align_corners</a> = <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.get&lt;<span class="keywordtype">bool</span>&gt;(<span class="stringliteral">&quot;align_corners&quot;</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">void</span> resolveSizeAndShape(<span class="keywordtype">int</span> <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, <span class="keywordtype">bool</span> is3d, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>* explicitSz,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                         <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; outShape, <span class="keywordtype">int</span>&amp; D, <span class="keywordtype">int</span>&amp; H, <span class="keywordtype">int</span>&amp; W)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        outShape = is3d ? <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>{<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, -1, -1, -1, 3} : <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>{<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, -1, -1, 2};</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        D = 1; H = -1; W = -1;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_class" href="interface_mat.html">Mat</a> sz;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">if</span> (explicitSz)</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            sz = *explicitSz;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            Net::Impl* netimpl_ = <a class="code hl_function" href="namespacecv_1_1dnn.html#a22950df3856dccc049473e7399092545">getNetImpl</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordflow">if</span> (!netimpl_)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                sz = netimpl_-&gt;argTensor(this-&gt;inputs[1]);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <span class="keywordflow">catch</span> (<span class="keyword">const</span> cv::Exception&amp; e)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>,</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                        <a class="code hl_function" href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">cv::format</a>(<span class="stringliteral">&quot;DNN/AffineGrid: failed to resolve output shape from &#39;size&#39; tensor: %s&quot;</span>, e.<a class="code hl_function" href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">what</a>()));</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keywordflow">if</span> (sz.<a class="code hl_function" href="interface_mat.html#a7a3f04f235e4a12588bb7bd3b31698fb">empty</a>())</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        std::vector&lt;int&gt; sizeVec;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_function" href="namespacecv_1_1dnn.html#a27ee7e3f747f75bad4ebea5b1986eebb">tensorToIntVec</a>(sz, sizeVec);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <a class="code hl_define" href="check_8hpp.html#ad9a8586b90957a14e0d2888fd1d2659c">CV_CheckTrue</a>((<span class="keywordtype">int</span>)sizeVec.size() == (is3d ? 5 : 4), <span class="stringliteral">&quot;size input must have 4 (2D) or 5 (3D) elements&quot;</span>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">if</span> (is3d) {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            D = sizeVec[2];</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            H = sizeVec[3];</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            W = sizeVec[4];</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            <span class="keywordflow">if</span> (D &gt; 0 &amp;&amp; H &gt; 0 &amp;&amp; W &gt; 0)</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                outShape = MatShape{<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, D, H, W, 3};</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            H = sizeVec[2];</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            W = sizeVec[3];</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">if</span> (H &gt; 0 &amp;&amp; W &gt; 0)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                outShape = MatShape{<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, H, W, 2};</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">bool</span> getMemoryShapes(<span class="keyword">const</span> std::vector&lt;MatShape&gt; &amp;inputs,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                         <span class="keyword">const</span> <span class="keywordtype">int</span> requiredOutputs,</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                         std::vector&lt;MatShape&gt; &amp;outputs,</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                         std::vector&lt;MatShape&gt; &amp;internals) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>((<span class="keywordtype">int</span>)inputs.size(), 2, <span class="stringliteral">&quot;AffineGrid requires two inputs: theta and size&quot;</span>);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keyword">const</span> MatShape thetaShape = inputs[0];</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>((<span class="keywordtype">int</span>)thetaShape.size(), 3, <span class="stringliteral">&quot;theta must be at least 3D [N, r, c]&quot;</span>);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordtype">int</span> <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a> = thetaShape[0];</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#aaa813f59532257ed092c4fad1b443fa5">r</a> = thetaShape[1];</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordtype">int</span> c = thetaShape[2];</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <a class="code hl_define" href="check_8hpp.html#ad9a8586b90957a14e0d2888fd1d2659c">CV_CheckTrue</a>((r == 2 &amp;&amp; c == 3) || (r == 3 &amp;&amp; c == 4), <span class="stringliteral">&quot;theta must be [N,2,3] or [N,3,4]&quot;</span>);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is3d = (<a class="code hl_variable" href="namespacegl.html#aaa813f59532257ed092c4fad1b443fa5">r</a> == 3);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        MatShape outShape;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keyword">const</span> MatShape sizeShape = inputs[1];</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <a class="code hl_define" href="check_8hpp.html#ad9a8586b90957a14e0d2888fd1d2659c">CV_CheckTrue</a>(sizeShape.size() == 1, <span class="stringliteral">&quot;size input must be 1D tensor&quot;</span>);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> dims = (int)sizeShape[0];</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <a class="code hl_define" href="check_8hpp.html#ad9a8586b90957a14e0d2888fd1d2659c">CV_CheckTrue</a>(dims == (is3d ? 5 : 4), <span class="stringliteral">&quot;size input must have 4 (2D) or 5 (3D) elements&quot;</span>);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordtype">int</span> D, H, W;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        resolveSizeAndShape(<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, is3d, <span class="comment">/*explicitSz*/</span><span class="keyword">nullptr</span>, outShape, D, H, W);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        outputs.assign(1, outShape);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordtype">bool</span> dynamicOutputShapes() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        Net::Impl* netimpl_ = <a class="code hl_function" href="namespacecv_1_1dnn.html#a22950df3856dccc049473e7399092545">getNetImpl</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">if</span> (!netimpl_) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>((<span class="keywordtype">int</span>)this-&gt;inputs.size(), 2, <span class="stringliteral">&quot;AffineGrid requires two inputs: theta and size&quot;</span>);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">if</span> (netimpl_-&gt;isConstArg(this-&gt;inputs[1])) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <span class="keyword">const</span> Mat&amp; sz = netimpl_-&gt;argTensor(this-&gt;inputs[1]);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <span class="keywordflow">return</span> sz.<a class="code hl_function" href="interface_mat.html#a7a3f04f235e4a12588bb7bd3b31698fb">empty</a>();</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        } <span class="keywordflow">catch</span> (<span class="keyword">const</span> cv::Exception&amp; e) {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a>, <a class="code hl_function" href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">cv::format</a>(<span class="stringliteral">&quot;DNN/AffineGrid: cannot query &#39;size&#39; tensor at runtime: %s&quot;</span>, e.<a class="code hl_function" href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">what</a>()));</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        }</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">void</span> getTypes(<span class="keyword">const</span> std::vector&lt;MatType&gt;&amp; inputs,</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                  <span class="keyword">const</span> <span class="keywordtype">int</span> requiredOutputs,</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                  <span class="keyword">const</span> <span class="keywordtype">int</span> requiredInternals,</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                  std::vector&lt;MatType&gt;&amp; outputs,</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                  std::vector&lt;MatType&gt;&amp; internals) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>((<span class="keywordtype">int</span>)inputs.size(), 2, <span class="stringliteral">&quot;AffineGrid requires two inputs: theta and size&quot;</span>);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> allow_fp16 = (preferableTarget == <a class="code hl_enumvalue" href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5ab6d2643e6e5a3d0dfaca2ec69fd041b6">DNN_TARGET_OPENCL_FP16</a> || preferableTarget == <a class="code hl_enumvalue" href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5a4326aee044f0566815af0770784a5ec0">DNN_TARGET_CPU_FP16</a>);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> thetaType = inputs[0];</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is_float_ok = thetaType == <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a> || thetaType == <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a> || thetaType == <a class="code hl_define" href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a> || (allow_fp16 &amp;&amp; thetaType == <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>) || thetaType == <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <a class="code hl_define" href="check_8hpp.html#a3e56a7211a27b1b41d5068727ab5c1e7">CV_CheckType</a>(thetaType, is_float_ok, <span class="stringliteral">&quot;AffineGrid: theta must be a floating tensor&quot;</span>);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <a class="code hl_define" href="check_8hpp.html#a3e56a7211a27b1b41d5068727ab5c1e7">CV_CheckType</a>(inputs[1], inputs[1] == <a class="code hl_define" href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a> || inputs[1] == <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        outputs.assign(std::max(1, requiredOutputs), <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        internals.assign(requiredInternals, <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordtype">void</span> forward(InputArrayOfArrays inputs_arr, OutputArrayOfArrays outputs_arr, OutputArrayOfArrays internals_arr) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    {</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="keyword">auto</span> outKind = outputs_arr.kind();</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(outKind == _InputArray::STD_VECTOR_MAT || outKind == _InputArray::STD_VECTOR_UMAT);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        std::vector&lt;Mat&gt; inMats;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        inputs_arr.getMatVector(inMats);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>((<span class="keywordtype">int</span>)inMats.size(), 2, <span class="stringliteral">&quot;AffineGrid requires two inputs: theta and size&quot;</span>);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        Mat theta = inMats[0];</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        Mat sz = inMats[1];</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <a class="code hl_define" href="check_8hpp.html#ad9a8586b90957a14e0d2888fd1d2659c">CV_CheckTrue</a>(theta.<a class="code hl_function" href="interface_mat.html#ae44c475184fbff4e231bc2fe38030107">dims</a> == 3, <span class="stringliteral">&quot;theta must be 3D [N, r, c]&quot;</span>);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a> = theta.<a class="code hl_function" href="interface_mat.html#a62ca577abd595e8117fcfba5e8fa0686">size</a>[0];</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#aaa813f59532257ed092c4fad1b443fa5">r</a> = theta.<a class="code hl_function" href="interface_mat.html#a62ca577abd595e8117fcfba5e8fa0686">size</a>[1];</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is3d = (<a class="code hl_variable" href="namespacegl.html#aaa813f59532257ed092c4fad1b443fa5">r</a> == 3);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="keywordtype">int</span> D = 1, H = 0, W = 0;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        MatShape dummy;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        resolveSizeAndShape(<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, is3d, &amp;sz, dummy, D, H, W);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <a class="code hl_define" href="check_8hpp.html#aaf54777de4a98f3bdf8766521f751597">CV_CheckGT</a>(H, 0, <span class="stringliteral">&quot;H must be &gt; 0&quot;</span>);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <a class="code hl_define" href="check_8hpp.html#aaf54777de4a98f3bdf8766521f751597">CV_CheckGT</a>(W, 0, <span class="stringliteral">&quot;W must be &gt; 0&quot;</span>);</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">if</span> (is3d) <a class="code hl_define" href="check_8hpp.html#aaf54777de4a98f3bdf8766521f751597">CV_CheckGT</a>(D, 0, <span class="stringliteral">&quot;D must be &gt; 0&quot;</span>);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        std::vector&lt;int&gt; outShape = is3d ? std::vector&lt;int&gt;{<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, D, H, W, 3}</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                                         : std::vector&lt;int&gt;{<a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, H, W, 2};</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        MatShape fitShape(outShape.begin(), outShape.end());</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        Mat grid;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <span class="keywordflow">if</span> (outKind == _InputArray::STD_VECTOR_MAT) {</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            std::vector&lt;Mat&gt;&amp; outs = outputs_arr.getMatVecRef();</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            outs.resize(1);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            outs[0].fit(fitShape, <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            grid = outs[0];</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            std::vector&lt;UMat&gt;&amp; uouts = outputs_arr.getUMatVecRef();</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            uouts.resize(1);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            uouts[0].fit(fitShape, <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            grid = uouts[0].getMat(ACCESS_WRITE);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        }</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordtype">float</span> xs, xd, ys, yd, zs=0.f, zd=0.f;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <span class="keywordflow">if</span> (align_corners) {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            xs = W &gt; 1 ? 2.f / float(W - 1) : 0.f;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            xd = -1.f;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            ys = H &gt; 1 ? 2.f / float(H - 1) : 0.f;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            yd = -1.f;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>            <span class="keywordflow">if</span> (is3d) {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                zs = D &gt; 1 ? 2.f / float(D - 1) : 0.f;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                zd = -1.f;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>            xs = 2.f / float(W);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            xd = xs * 0.5f - 1.f;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            ys = 2.f / float(H);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>            yd = ys * 0.5f - 1.f;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            <span class="keywordflow">if</span> (is3d) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                zs = 2.f / float(D);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                zd = zs * 0.5f - 1.f;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            }</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        }</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#a957806c1ecff586e5987e364d2381aa5">depth</a> = theta.<a class="code hl_function" href="interface_mat.html#a6dbdec57792a94b3576944cd57d4dd11">depth</a>();</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        <span class="keywordflow">if</span> (!is3d){</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            <span class="keywordflow">switch</span> (depth) {</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>: computeGrid2D&lt;float&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, H, W, xs, xd, ys, yd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>: computeGrid2D&lt;double&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, H, W, xs, xd, ys, yd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>: computeGrid2D&lt;hfloat&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, H, W, xs, xd, ys, yd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a>: computeGrid2D&lt;bfloat&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, H, W, xs, xd, ys, yd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>                <span class="keywordflow">default</span>: <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa0352ae733e9b76f6ad0162d49b3b6b25">cv::Error::BadDepth</a>, <span class="stringliteral">&quot;AffineGrid: unsupported theta depth&quot;</span>);</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>            }</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        }</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            <span class="keywordflow">switch</span> (depth) {</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>: computeGrid3D&lt;float&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, D, H, W, xs, xd, ys, yd, zs, zd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>: computeGrid3D&lt;double&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, D, H, W, xs, xd, ys, yd, zs, zd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>: computeGrid3D&lt;hfloat&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, D, H, W, xs, xd, ys, yd, zs, zd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a>: computeGrid3D&lt;bfloat&gt;(theta, grid, <a class="code hl_define" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>, D, H, W, xs, xd, ys, yd, zs, zd); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>                <span class="keywordflow">default</span>: <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa0352ae733e9b76f6ad0162d49b3b6b25">cv::Error::BadDepth</a>, <span class="stringliteral">&quot;AffineGrid: unsupported theta depth&quot;</span>);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        }</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    }</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>};</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="foldopen" id="foldopen00321" data-start="{" data-end="}">
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_affine_grid_layer.html#accd9a4b7715628516cf10d7e7d5b7c64">  321</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;AffineGridLayer&gt;</a> <a class="code hl_function" href="classcv_1_1dnn_1_1_affine_grid_layer.html#accd9a4b7715628516cf10d7e7d5b7c64">AffineGridLayer::create</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1_layer_params.html">LayerParams</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>)</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>{</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">Ptr&lt;AffineGridLayer&gt;</a>(<span class="keyword">new</span> AffineGridLayerImpl(<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>));</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>}</div>
+</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}} <span class="comment">// namespace cv::dnn</span></div>
+<div class="ttc" id="acheck_8hpp_html_a3e56a7211a27b1b41d5068727ab5c1e7"><div class="ttname"><a href="check_8hpp.html#a3e56a7211a27b1b41d5068727ab5c1e7">CV_CheckType</a></div><div class="ttdeci">#define CV_CheckType(t, test_expr, msg)</div><div class="ttdoc">Example: type == CV_8UC1 || type == CV_8UC3.</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00135">check.hpp:135</a></div></div>
+<div class="ttc" id="acheck_8hpp_html_aaf54777de4a98f3bdf8766521f751597"><div class="ttname"><a href="check_8hpp.html#aaf54777de4a98f3bdf8766521f751597">CV_CheckGT</a></div><div class="ttdeci">#define CV_CheckGT(v1, v2, msg)</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00125">check.hpp:125</a></div></div>
+<div class="ttc" id="acheck_8hpp_html_ad9a8586b90957a14e0d2888fd1d2659c"><div class="ttname"><a href="check_8hpp.html#ad9a8586b90957a14e0d2888fd1d2659c">CV_CheckTrue</a></div><div class="ttdeci">#define CV_CheckTrue(v, msg)</div><div class="ttdoc">Example: v == true.</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00147">check.hpp:147</a></div></div>
+<div class="ttc" id="acheck_8hpp_html_afb73e9363834035c36b766de56650a2e"><div class="ttname"><a href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a></div><div class="ttdeci">#define CV_CheckGE(v1, v2, msg)</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00124">check.hpp:124</a></div></div>
+<div class="ttc" id="aclasscv_1_1_exception_html_ac0f5570ab924b550575c2457a4b799ef"><div class="ttname"><a href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">cv::Exception::what</a></div><div class="ttdeci">virtual const char * what() const CV_NOEXCEPT CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l00337">system.cpp:337</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aafab1fe471bac7c314dcd0d678ac4e2d"><div class="ttname"><a href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">cv::Range::Range</a></div><div class="ttdeci">Range()</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_affine_grid_layer_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_affine_grid_layer.html">cv::dnn::AffineGridLayer</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00745">all_layers.hpp:746</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_affine_grid_layer_html_accd9a4b7715628516cf10d7e7d5b7c64"><div class="ttname"><a href="classcv_1_1dnn_1_1_affine_grid_layer.html#accd9a4b7715628516cf10d7e7d5b7c64">cv::dnn::AffineGridLayer::create</a></div><div class="ttdeci">static Ptr&lt; AffineGridLayer &gt; create(const LayerParams &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00321">affinegrid_layer.cpp:321</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_c_v___f_i_n_a_l_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html">cv::dnn::CV_FINAL</a></div><div class="ttdef"><b>Definición</b> <a href="int8layers_2batch__norm__layer_8cpp_source.html#l00015">batch_norm_layer.cpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_c_v___f_i_n_a_l_html_a4e1005dcec11d9b886480e8f59f57654"><div class="ttname"><a href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a4e1005dcec11d9b886480e8f59f57654">cv::dnn::CV_FINAL::AffineGridLayerImpl</a></div><div class="ttdeci">AffineGridLayerImpl(const LayerParams &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00124">affinegrid_layer.cpp:124</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_c_v___f_i_n_a_l_html_a693cc49584c527eb8096ea79ff5e253d"><div class="ttname"><a href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#a693cc49584c527eb8096ea79ff5e253d">cv::dnn::CV_FINAL::align_corners</a></div><div class="ttdeci">bool align_corners</div><div class="ttdef"><b>Definición</b> <a href="gridsample__layer_8cpp_source.html#l00444">gridsample_layer.cpp:444</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_info_html_aac8209a60208d1f09e38d1dfe435525a"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_info.html#aac8209a60208d1f09e38d1dfe435525a">cv::dnn::LayerInfo::setParamsFrom</a></div><div class="ttdeci">void setParamsFrom(const LayerParams &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="layer_8cpp_source.html#l00027">layer.cpp:27</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_layer_params_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_layer_params.html">cv::dnn::LayerParams</a></div><div class="ttdoc">This class provides all data needed to initialize layer.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00153">dnn.hpp:154</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga2b02a49f1f211e23c1fc11705a1f0ce7"><div class="ttname"><a href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a></div><div class="ttdeci">#define CV_16F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00061">interface.h:61</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabee4806a5f37b92d6c3dff4d97780a35"><div class="ttname"><a href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a></div><div class="ttdeci">#define CV_16BF</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00062">interface.h:62</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabfa4c421815900f05d712345a0e808a7"><div class="ttname"><a href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a></div><div class="ttdeci">#define CV_64S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00065">interface.h:65</a></div></div>
+<div class="ttc" id="agroup__core__parallel_html_gaa42ec9937b847cb52a97c613fc894c4a"><div class="ttname"><a href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">cv::parallel_for_</a></div><div class="ttdeci">CV_EXPORTS void parallel_for_(const Range &amp;range, const ParallelLoopBody &amp;body, double nstripes=-1.)</div><div class="ttdoc">Parallel data processor.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00503">parallel.cpp:503</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaea1b569d6ac0c23308304824f059ff50"><div class="ttname"><a href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">cv::format</a></div><div class="ttdeci">CV_EXPORTS String format(const char *fmt,...) CV_FORMAT_PRINTF(1</div><div class="ttdoc">Returns a text string formatted using the printf-like expression.</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l01115">system.cpp:1115</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gga709af7692ba29788182cf573531b0ff5a4326aee044f0566815af0770784a5ec0"><div class="ttname"><a href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5a4326aee044f0566815af0770784a5ec0">cv::dnn::DNN_TARGET_CPU_FP16</a></div><div class="ttdeci">@ DNN_TARGET_CPU_FP16</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00107">dnn.hpp:107</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gga709af7692ba29788182cf573531b0ff5ab6d2643e6e5a3d0dfaca2ec69fd041b6"><div class="ttname"><a href="group__dnn.html#gga709af7692ba29788182cf573531b0ff5ab6d2643e6e5a3d0dfaca2ec69fd041b6">cv::dnn::DNN_TARGET_OPENCL_FP16</a></div><div class="ttdeci">@ DNN_TARGET_OPENCL_FP16</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00099">dnn.hpp:99</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ainterface_mat_html"><div class="ttname"><a href="interface_mat.html">Mat</a></div><div class="ttdef"><b>Definición</b> <a href="_mat_8h_source.html#l00048">Mat.h:49</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a62ca577abd595e8117fcfba5e8fa0686"><div class="ttname"><a href="interface_mat.html#a62ca577abd595e8117fcfba5e8fa0686">-[Mat size]</a></div><div class="ttdeci">Size2i * size()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00456">Mat.mm:456</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a6dbdec57792a94b3576944cd57d4dd11"><div class="ttname"><a href="interface_mat.html#a6dbdec57792a94b3576944cd57d4dd11">-[Mat depth]</a></div><div class="ttdeci">int depth()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00301">Mat.mm:301</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a7a3f04f235e4a12588bb7bd3b31698fb"><div class="ttname"><a href="interface_mat.html#a7a3f04f235e4a12588bb7bd3b31698fb">-[Mat empty]</a></div><div class="ttdeci">BOOL empty()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00329">Mat.mm:329</a></div></div>
+<div class="ttc" id="ainterface_mat_html_ae44c475184fbff4e231bc2fe38030107"><div class="ttname"><a href="interface_mat.html#ae44c475184fbff4e231bc2fe38030107">-[Mat dims]</a></div><div class="ttdeci">int dims()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00244">Mat.mm:244</a></div></div>
+<div class="ttc" id="ainterface_range_html_a680587bf22a9bf01b6662c53de90ea97"><div class="ttname"><a href="interface_range.html#a680587bf22a9bf01b6662c53de90ea97">Range::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definición</b> <a href="_range_8mm_source.html#l00021">Range.mm:21</a></div></div>
+<div class="ttc" id="ainterface_range_html_afbb98f5d1cbe46d8b49f75322a2f253f"><div class="ttname"><a href="interface_range.html#afbb98f5d1cbe46d8b49f75322a2f253f">Range::start</a></div><div class="ttdeci">int start</div><div class="ttdef"><b>Definición</b> <a href="_range_8mm_source.html#l00013">Range.mm:13</a></div></div>
+<div class="ttc" id="alayers_2layers__common_8hpp_html"><div class="ttname"><a href="layers_2layers__common_8hpp.html">layers_common.hpp</a></div></div>
+<div class="ttc" id="amedian__blur_8simd_8hpp_html_a0240ac851181b84ac374872dc5434ee4"><div class="ttname"><a href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a></div><div class="ttdeci">#define N</div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa0352ae733e9b76f6ad0162d49b3b6b25"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa0352ae733e9b76f6ad0162d49b3b6b25">cv::Error::BadDepth</a></div><div class="ttdeci">@ BadDepth</div><div class="ttdoc">input image depth is not supported by the function</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00036">exception.hpp:36</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaacf93e97abba2e7defa74fe5b99e122ac">cv::Error::StsError</a></div><div class="ttdeci">@ StsError</div><div class="ttdoc">unknown /unspecified error</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00021">exception.hpp:21</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a22950df3856dccc049473e7399092545"><div class="ttname"><a href="namespacecv_1_1dnn.html#a22950df3856dccc049473e7399092545">cv::dnn::getNetImpl</a></div><div class="ttdeci">Net::Impl * getNetImpl(const LayerInfo *op)</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00567">net_impl.hpp:567</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a27ee7e3f747f75bad4ebea5b1986eebb"><div class="ttname"><a href="namespacecv_1_1dnn.html#a27ee7e3f747f75bad4ebea5b1986eebb">cv::dnn::tensorToIntVec</a></div><div class="ttdeci">void tensorToIntVec(const Mat &amp;tensor, std::vector&lt; int &gt; &amp;vec)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00267">layers_common.cpp:267</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ad0ae34c58960d6781fd8ceb895524722"><div class="ttname"><a href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">cv::dnn::total</a></div><div class="ttdeci">size_t total(const MatShape &amp;shape, int start=-1, int end=-1)</div><div class="ttdef"><b>Definición</b> <a href="shape__utils_8hpp_source.html#l00155">shape_utils.hpp:155</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_a2ef5b2bdd22196b3dc88a7709d8d35c4"><div class="ttname"><a href="namespacegl.html#a2ef5b2bdd22196b3dc88a7709d8d35c4">gl::stride</a></div><div class="ttdeci">GLint GLenum GLboolean GLsizei stride</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01239">gl_core_3_1.hpp:1239</a></div></div>
+<div class="ttc" id="anamespacegl_html_a7ad534c2842bbc139bb40afbc51b6bc9"><div class="ttname"><a href="namespacegl.html#a7ad534c2842bbc139bb40afbc51b6bc9">gl::z</a></div><div class="ttdeci">GLint GLint GLint z</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01302">gl_core_3_1.hpp:1302</a></div></div>
+<div class="ttc" id="anamespacegl_html_a957806c1ecff586e5987e364d2381aa5"><div class="ttname"><a href="namespacegl.html#a957806c1ecff586e5987e364d2381aa5">gl::depth</a></div><div class="ttdeci">GLint GLint GLint GLint GLsizei GLsizei GLsizei depth</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01138">gl_core_3_1.hpp:1138</a></div></div>
+<div class="ttc" id="anamespacegl_html_aaa813f59532257ed092c4fad1b443fa5"><div class="ttname"><a href="namespacegl.html#aaa813f59532257ed092c4fad1b443fa5">gl::r</a></div><div class="ttdeci">GLboolean r</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01282">gl_core_3_1.hpp:1282</a></div></div>
+<div class="ttc" id="anet__impl_8hpp_html"><div class="ttname"><a href="net__impl_8hpp.html">net_impl.hpp</a></div></div>
+<div class="ttc" id="ashape__utils_8hpp_html"><div class="ttname"><a href="shape__utils_8hpp.html">shape_utils.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html"><div class="ttname"><a href="structcv_1_1_mat_shape.html">cv::MatShape</a></div><div class="ttdoc">Represents shape of a matrix/tensor. Previously, MatShape was defined as an alias of std::vector&lt;int&gt;...</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00107">mat.hpp:108</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html_ac18c0d5defdf2b5653649393d563cce7"><div class="ttname"><a href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">cv::Ptr::Ptr</a></div><div class="ttdeci">Ptr() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00073">cvstd_wrapper.hpp:73</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="affinegrid__layer_8cpp.html">affinegrid_layer.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['o_20with_20opencv_20overview_0',['Video I/O with OpenCV Overview',['../videoio_overview.html',1,'']]],
+  ['objective_20c_20example_1',['Objective-C Example',['../interface_mat.html#autotoc_md44',1,'']]],
+  ['obsoletos_2',['Lista de obsoletos',['../deprecated.html',1,'']]],
+  ['of_20interceptable_20operations_3',['Scope of Interceptable Operations',['../api_hal.html#autotoc_md6',1,'']]],
+  ['of_20rects_4',['of rects',['../structcv_1_1tracking_1_1impl_1_1_tracker_feature_h_a_a_r_1_1_params.html#autotoc_md81',1,'']]],
+  ['of_20templates_5',['Fixed Pixel Types. Limited Use of Templates',['../intro.html#autotoc_md20',1,'']]],
+  ['of_20the_20output_20data_6',['Automatic Allocation of the Output Data',['../intro.html#autotoc_md18',1,'']]],
+  ['of_20the_20replaceable_20interface_7',['Design Principles of the Replaceable Interface',['../api_hal.html#autotoc_md7',1,'']]],
+  ['opencv_20documentación_20técnica_8',['OpenCV - Documentación técnica',['../index.html',1,'']]],
+  ['opencv_20hardware_20acceleration_20layer_20hal_9',['OpenCV Hardware Acceleration Layer (HAL)',['../api_hal.html',1,'']]],
+  ['opencv_20overview_10',['Video I/O with OpenCV Overview',['../videoio_overview.html',1,'']]],
+  ['opencv_20with_20your_20hal_11',['4. Build OpenCV with Your HAL',['../api_hal.html#autotoc_md13',1,'']]],
+  ['openmp_12',['OpenMP',['../group__core__parallel__backend.html#autotoc_md35',1,'']]],
+  ['operations_13',['Operations',['../group__core__utils__softfloat.html#autotoc_md40',1,'Operations'],['../api_hal.html#autotoc_md6',1,'Scope of Interceptable Operations']]],
+  ['operations_14',['operations',['../group__core__hal__intrin.html#autotoc_md27',1,'Arithmetic, bitwise and comparison operations'],['../group__core__hal__intrin.html#autotoc_md25',1,'Load and store operations'],['../group__core__hal__intrin.html#autotoc_md31',1,'Matrix operations']]],
+  ['or_20cameras_15',['Use 3rd party drivers or cameras',['../videoio_overview.html#autotoc_md85',1,'']]],
+  ['or_20ycc_16',['RGB &amp;lt;-&amp;gt; YCrCb JPEG (or YCC)',['../imgproc_color_conversions.html#autotoc_md63',1,'']]],
+  ['original_17',['Proyecto original',['../index.html#autotoc_md88',1,'']]],
+  ['other_20math_18',['Other math',['../group__core__hal__intrin.html#autotoc_md29',1,'']]],
+  ['output_20data_19',['Automatic Allocation of the Output Data',['../intro.html#autotoc_md18',1,'']]],
+  ['outputarray_20',['InputArray and OutputArray',['../intro.html#autotoc_md21',1,'']]],
+  ['overview_21',['Video I/O with OpenCV Overview',['../videoio_overview.html',1,'']]],
+  ['overview_22',['Pose computation overview',['../calib3d_solve_pn_p.html#autotoc_md54',1,'']]]
+];

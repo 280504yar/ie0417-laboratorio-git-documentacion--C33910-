@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/src/octree.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('octree_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">octree.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="octree_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2021, Huawei Technologies Co., Ltd. All rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// Author: Zihao Mu &lt;zihaomu6@gmail.com&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//         Liangqian Kong &lt;chargerKong@126.com&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//         Longbu Wang &lt;riskiest@gmail.com&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef OPENCV_3D_SRC_OCTREE_HPP</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define OPENCV_3D_SRC_OCTREE_HPP</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// Forward declaration</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1_octree_key.html">OctreeKey</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html">   48</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_octree_node.html#a8a070954f39d5bcb0948976beece422e">OctreeNode</a></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_function" href="classcv_1_1_octree_node.html#a8a070954f39d5bcb0948976beece422e">OctreeNode</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_function" href="classcv_1_1_octree_node.html#a8a070954f39d5bcb0948976beece422e">OctreeNode</a>(<span class="keywordtype">int</span> _depth, <span class="keywordtype">double</span> _size, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">Point3f</a>&amp; _origin, <span class="keywordtype">int</span> _parentIndex);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_octree_node.html#acd493de9b8b2b08d5725f01cafcb17c0">empty</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_octree_node.html#abe301500bbf33ed1238818a8cf7c2dad">isPointInBound</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">Point3f</a>&amp; _point) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_octree_node.html#a0911bcad0a5667d715d0497ca2af0d81">overlap</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">Point3f</a>&amp; query, <span class="keywordtype">float</span> squareRadius) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_octree_node.html#a229879f7166e7b20ab470742e8116854">KNNSearchRecurse</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">Point3f</a>&amp; query, <span class="keyword">const</span> <span class="keywordtype">int</span> K, <span class="keywordtype">float</span>&amp; smallestDist, std::vector&lt;std::tuple&lt;float, Point3f, Point3f&gt;&gt;&amp; candidatePoint) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#afee7ecadd14dae0800c35022835181ba">   78</a></span>    std::array&lt;Ptr&lt;OctreeNode&gt;, 8&gt; <a class="code hl_variable" href="classcv_1_1_octree_node.html#afee7ecadd14dae0800c35022835181ba">children</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#aa5827525124009c8dd576510ba3e6f02">   81</a></span>    <a class="code hl_function" href="classcv_1_1_octree_node.html#a8a070954f39d5bcb0948976beece422e">OctreeNode</a>* <a class="code hl_variable" href="classcv_1_1_octree_node.html#aa5827525124009c8dd576510ba3e6f02">parent</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#aedd98843f00bea0c86f51f5b38c3866f">   84</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_octree_node.html#aedd98843f00bea0c86f51f5b38c3866f">depth</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#a28d7ad5eb3a2556d2c8b4e9b610d4dc3">   87</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classcv_1_1_octree_node.html#a28d7ad5eb3a2556d2c8b4e9b610d4dc3">size</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#afe38160f5c76e123068a70cfd8d1fdea">   91</a></span>    <a class="code hl_typedef" href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">Point3f</a> <a class="code hl_variable" href="classcv_1_1_octree_node.html#afe38160f5c76e123068a70cfd8d1fdea">origin</a>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#aca42384366c1f050eda135aa2a03a271">   94</a></span>    <a class="code hl_typedef" href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">Point3f</a> <a class="code hl_variable" href="classcv_1_1_octree_node.html#aca42384366c1f050eda135aa2a03a271">RAHTCoefficient</a> = { };</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#a147698fcc221c544e039e4f217c3a71c">  107</a></span>    std::array&lt;Ptr&lt;OctreeNode&gt;, 8&gt; <a class="code hl_variable" href="classcv_1_1_octree_node.html#a147698fcc221c544e039e4f217c3a71c">neigh</a>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#a4bf96f3cc40e0188831358e60a60cfbf">  112</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_octree_node.html#a4bf96f3cc40e0188831358e60a60cfbf">parentIndex</a>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#ad18946ef864fcdff05ea86cf16a72907">  115</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcv_1_1_octree_node.html#ad18946ef864fcdff05ea86cf16a72907">isLeaf</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#a7ec7dd0d79245364f8435f0e788d22b3">  118</a></span>    std::vector&lt;Point3f&gt; <a class="code hl_variable" href="classcv_1_1_octree_node.html#a7ec7dd0d79245364f8435f0e788d22b3">pointList</a>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_node.html#adfaf7040cab8b315fe1d55ade8496a9d">  121</a></span>    std::vector&lt;Point3f&gt; <a class="code hl_variable" href="classcv_1_1_octree_node.html#adfaf7040cab8b315fe1d55ade8496a9d">colorList</a>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>};</div>
+</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="};">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html">  141</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_octree_key.html#a27ba4ef54e6f4c4400b5a5be314c20a8">OctreeKey</a></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>{</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#a9a19a4f677063a9b0e18dfc0870f2ced">  144</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classcv_1_1_octree_key.html#a9a19a4f677063a9b0e18dfc0870f2ced">x_key</a>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#a2a578927a6986998cea68e9c7e3e5a6d">  145</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classcv_1_1_octree_key.html#a2a578927a6986998cea68e9c7e3e5a6d">y_key</a>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83">  146</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83">z_key</a>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#a27ba4ef54e6f4c4400b5a5be314c20a8">  149</a></span>    <a class="code hl_function" href="classcv_1_1_octree_key.html#a27ba4ef54e6f4c4400b5a5be314c20a8">OctreeKey</a>() : <a class="code hl_variable" href="classcv_1_1_octree_key.html#a9a19a4f677063a9b0e18dfc0870f2ced">x_key</a>(0), <a class="code hl_variable" href="classcv_1_1_octree_key.html#a2a578927a6986998cea68e9c7e3e5a6d">y_key</a>(0), <a class="code hl_variable" href="classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83">z_key</a>(0) { }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#aac1cc3cec2e85be18f487c20c7982ae5">  150</a></span>    <a class="code hl_function" href="classcv_1_1_octree_key.html#aac1cc3cec2e85be18f487c20c7982ae5">OctreeKey</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, <span class="keywordtype">size_t</span> z) : <a class="code hl_variable" href="classcv_1_1_octree_key.html#a9a19a4f677063a9b0e18dfc0870f2ced">x_key</a>(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>), <a class="code hl_variable" href="classcv_1_1_octree_key.html#a2a578927a6986998cea68e9c7e3e5a6d">y_key</a>(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>), <a class="code hl_variable" href="classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83">z_key</a>(z) { }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
+<div class="foldopen" id="foldopen00157" data-start="{" data-end="}">
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#aed8f23284f3f32f22a7036310ec3beb0">  157</a></span>    <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code hl_function" href="classcv_1_1_octree_key.html#aed8f23284f3f32f22a7036310ec3beb0">findChildIdxByMask</a>(<span class="keywordtype">size_t</span> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>((!!(<a class="code hl_variable" href="classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83">z_key</a> &amp; <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>))&lt;&lt;2) | ((!!(<a class="code hl_variable" href="classcv_1_1_octree_key.html#a2a578927a6986998cea68e9c7e3e5a6d">y_key</a> &amp; <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>))&lt;&lt;1) | (!!(<a class="code hl_variable" href="classcv_1_1_octree_key.html#a9a19a4f677063a9b0e18dfc0870f2ced">x_key</a> &amp; <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>));</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
+</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span></div>
+<div class="foldopen" id="foldopen00169" data-start="{" data-end="}">
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="classcv_1_1_octree_key.html#aa7d4080a34f5fc19e79be9aab881f188">  169</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code hl_function" href="classcv_1_1_octree_key.html#aa7d4080a34f5fc19e79be9aab881f188">getBitPattern</a>(<a class="code hl_class" href="classcv_1_1_octree_node.html">OctreeNode</a> &amp;node)</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> res = 0;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> i = 0; i &lt; node.<a class="code hl_variable" href="classcv_1_1_octree_node.html#afee7ecadd14dae0800c35022835181ba">children</a>.size(); i++)</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            res |= <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>((!node.<a class="code hl_variable" href="classcv_1_1_octree_node.html#afee7ecadd14dae0800c35022835181ba">children</a>[i].empty()) &lt;&lt; i);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>};</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>}</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#endif </span><span class="comment">//OPENCV_3D_SRC_OCTREE_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html"><div class="ttname"><a href="classcv_1_1_octree_key.html">cv::OctreeKey</a></div><div class="ttdoc">Key for pointCloud, used to compute the child node index through bit operations.</div><div class="ttdef"><b>Definición</b> <a href="#l00141">octree.hpp:142</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_a049bd22fcd4d255f1406069fbe3e9e83"><div class="ttname"><a href="classcv_1_1_octree_key.html#a049bd22fcd4d255f1406069fbe3e9e83">cv::OctreeKey::z_key</a></div><div class="ttdeci">size_t z_key</div><div class="ttdef"><b>Definición</b> <a href="#l00146">octree.hpp:146</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_a27ba4ef54e6f4c4400b5a5be314c20a8"><div class="ttname"><a href="classcv_1_1_octree_key.html#a27ba4ef54e6f4c4400b5a5be314c20a8">cv::OctreeKey::OctreeKey</a></div><div class="ttdeci">OctreeKey()</div><div class="ttdef"><b>Definición</b> <a href="#l00149">octree.hpp:149</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_a2a578927a6986998cea68e9c7e3e5a6d"><div class="ttname"><a href="classcv_1_1_octree_key.html#a2a578927a6986998cea68e9c7e3e5a6d">cv::OctreeKey::y_key</a></div><div class="ttdeci">size_t y_key</div><div class="ttdef"><b>Definición</b> <a href="#l00145">octree.hpp:145</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_a9a19a4f677063a9b0e18dfc0870f2ced"><div class="ttname"><a href="classcv_1_1_octree_key.html#a9a19a4f677063a9b0e18dfc0870f2ced">cv::OctreeKey::x_key</a></div><div class="ttdeci">size_t x_key</div><div class="ttdef"><b>Definición</b> <a href="#l00144">octree.hpp:144</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_aa7d4080a34f5fc19e79be9aab881f188"><div class="ttname"><a href="classcv_1_1_octree_key.html#aa7d4080a34f5fc19e79be9aab881f188">cv::OctreeKey::getBitPattern</a></div><div class="ttdeci">static unsigned char getBitPattern(OctreeNode &amp;node)</div><div class="ttdoc">get occupancy code from node.</div><div class="ttdef"><b>Definición</b> <a href="#l00169">octree.hpp:169</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_aac1cc3cec2e85be18f487c20c7982ae5"><div class="ttname"><a href="classcv_1_1_octree_key.html#aac1cc3cec2e85be18f487c20c7982ae5">cv::OctreeKey::OctreeKey</a></div><div class="ttdeci">OctreeKey(size_t x, size_t y, size_t z)</div><div class="ttdef"><b>Definición</b> <a href="#l00150">octree.hpp:150</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_key_html_aed8f23284f3f32f22a7036310ec3beb0"><div class="ttname"><a href="classcv_1_1_octree_key.html#aed8f23284f3f32f22a7036310ec3beb0">cv::OctreeKey::findChildIdxByMask</a></div><div class="ttdeci">unsigned char findChildIdxByMask(size_t mask) const</div><div class="ttdoc">compute the child node index through bit operations.</div><div class="ttdef"><b>Definición</b> <a href="#l00157">octree.hpp:157</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html"><div class="ttname"><a href="classcv_1_1_octree_node.html">cv::OctreeNode</a></div><div class="ttdoc">OctreeNode for Octree.</div><div class="ttdef"><b>Definición</b> <a href="#l00048">octree.hpp:49</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a0911bcad0a5667d715d0497ca2af0d81"><div class="ttname"><a href="classcv_1_1_octree_node.html#a0911bcad0a5667d715d0497ca2af0d81">cv::OctreeNode::overlap</a></div><div class="ttdeci">bool overlap(const Point3f &amp;query, float squareRadius) const</div><div class="ttdef"><b>Definición</b> <a href="octree_8cpp_source.html#l00483">octree.cpp:483</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a147698fcc221c544e039e4f217c3a71c"><div class="ttname"><a href="classcv_1_1_octree_node.html#a147698fcc221c544e039e4f217c3a71c">cv::OctreeNode::neigh</a></div><div class="ttdeci">std::array&lt; Ptr&lt; OctreeNode &gt;, 8 &gt; neigh</div><div class="ttdef"><b>Definición</b> <a href="#l00107">octree.hpp:107</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a229879f7166e7b20ab470742e8116854"><div class="ttname"><a href="classcv_1_1_octree_node.html#a229879f7166e7b20ab470742e8116854">cv::OctreeNode::KNNSearchRecurse</a></div><div class="ttdeci">void KNNSearchRecurse(const Point3f &amp;query, const int K, float &amp;smallestDist, std::vector&lt; std::tuple&lt; float, Point3f, Point3f &gt; &gt; &amp;candidatePoint) const</div><div class="ttdef"><b>Definición</b> <a href="octree_8cpp_source.html#l00575">octree.cpp:575</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a28d7ad5eb3a2556d2c8b4e9b610d4dc3"><div class="ttname"><a href="classcv_1_1_octree_node.html#a28d7ad5eb3a2556d2c8b4e9b610d4dc3">cv::OctreeNode::size</a></div><div class="ttdeci">double size</div><div class="ttdoc">The length of the OctreeNode. In space, every OctreeNode represents a cube.</div><div class="ttdef"><b>Definición</b> <a href="#l00087">octree.hpp:87</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a4bf96f3cc40e0188831358e60a60cfbf"><div class="ttname"><a href="classcv_1_1_octree_node.html#a4bf96f3cc40e0188831358e60a60cfbf">cv::OctreeNode::parentIndex</a></div><div class="ttdeci">int parentIndex</div><div class="ttdef"><b>Definición</b> <a href="#l00112">octree.hpp:112</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a7ec7dd0d79245364f8435f0e788d22b3"><div class="ttname"><a href="classcv_1_1_octree_node.html#a7ec7dd0d79245364f8435f0e788d22b3">cv::OctreeNode::pointList</a></div><div class="ttdeci">std::vector&lt; Point3f &gt; pointList</div><div class="ttdoc">Contains pointers to all point cloud data in this node.</div><div class="ttdef"><b>Definición</b> <a href="#l00118">octree.hpp:118</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_a8a070954f39d5bcb0948976beece422e"><div class="ttname"><a href="classcv_1_1_octree_node.html#a8a070954f39d5bcb0948976beece422e">cv::OctreeNode::OctreeNode</a></div><div class="ttdeci">OctreeNode()</div><div class="ttdef"><b>Definición</b> <a href="octree_8cpp_source.html#l00011">octree.cpp:11</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_aa5827525124009c8dd576510ba3e6f02"><div class="ttname"><a href="classcv_1_1_octree_node.html#aa5827525124009c8dd576510ba3e6f02">cv::OctreeNode::parent</a></div><div class="ttdeci">OctreeNode * parent</div><div class="ttdoc">Point to the parent node of the current node. The root node has no parent node and the value is NULL.</div><div class="ttdef"><b>Definición</b> <a href="#l00081">octree.hpp:81</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_abe301500bbf33ed1238818a8cf7c2dad"><div class="ttname"><a href="classcv_1_1_octree_node.html#abe301500bbf33ed1238818a8cf7c2dad">cv::OctreeNode::isPointInBound</a></div><div class="ttdeci">bool isPointInBound(const Point3f &amp;_point) const</div><div class="ttdef"><b>Definición</b> <a href="octree_8cpp_source.html#l00052">octree.cpp:52</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_aca42384366c1f050eda135aa2a03a271"><div class="ttname"><a href="classcv_1_1_octree_node.html#aca42384366c1f050eda135aa2a03a271">cv::OctreeNode::RAHTCoefficient</a></div><div class="ttdeci">Point3f RAHTCoefficient</div><div class="ttdoc">RAHTCoefficient of octree node, used for color attribute compression.</div><div class="ttdef"><b>Definición</b> <a href="#l00094">octree.hpp:94</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_acd493de9b8b2b08d5725f01cafcb17c0"><div class="ttname"><a href="classcv_1_1_octree_node.html#acd493de9b8b2b08d5725f01cafcb17c0">cv::OctreeNode::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">returns true if the rootNode is NULL.</div><div class="ttdef"><b>Definición</b> <a href="octree_8cpp_source.html#l00029">octree.cpp:29</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_ad18946ef864fcdff05ea86cf16a72907"><div class="ttname"><a href="classcv_1_1_octree_node.html#ad18946ef864fcdff05ea86cf16a72907">cv::OctreeNode::isLeaf</a></div><div class="ttdeci">bool isLeaf</div><div class="ttdoc">If the OctreeNode is LeafNode.</div><div class="ttdef"><b>Definición</b> <a href="#l00115">octree.hpp:115</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_adfaf7040cab8b315fe1d55ade8496a9d"><div class="ttname"><a href="classcv_1_1_octree_node.html#adfaf7040cab8b315fe1d55ade8496a9d">cv::OctreeNode::colorList</a></div><div class="ttdeci">std::vector&lt; Point3f &gt; colorList</div><div class="ttdoc">color attribute of octree node.</div><div class="ttdef"><b>Definición</b> <a href="#l00121">octree.hpp:121</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_aedd98843f00bea0c86f51f5b38c3866f"><div class="ttname"><a href="classcv_1_1_octree_node.html#aedd98843f00bea0c86f51f5b38c3866f">cv::OctreeNode::depth</a></div><div class="ttdeci">int depth</div><div class="ttdoc">The depth of the current node. The depth of the root node is 0, and the leaf node is equal to the dep...</div><div class="ttdef"><b>Definición</b> <a href="#l00084">octree.hpp:84</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_afe38160f5c76e123068a70cfd8d1fdea"><div class="ttname"><a href="classcv_1_1_octree_node.html#afe38160f5c76e123068a70cfd8d1fdea">cv::OctreeNode::origin</a></div><div class="ttdeci">Point3f origin</div><div class="ttdef"><b>Definición</b> <a href="#l00091">octree.hpp:91</a></div></div>
+<div class="ttc" id="aclasscv_1_1_octree_node_html_afee7ecadd14dae0800c35022835181ba"><div class="ttname"><a href="classcv_1_1_octree_node.html#afee7ecadd14dae0800c35022835181ba">cv::OctreeNode::children</a></div><div class="ttdeci">std::array&lt; Ptr&lt; OctreeNode &gt;, 8 &gt; children</div><div class="ttdoc">Contains 8 pointers to its 8 children.</div><div class="ttdef"><b>Definición</b> <a href="#l00078">octree.hpp:78</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga3d79ceeb4419bccd0308dfdf1cd31435"><div class="ttname"><a href="group__core__basic.html#ga3d79ceeb4419bccd0308dfdf1cd31435">cv::Point3f</a></div><div class="ttdeci">Point3_&lt; float &gt; Point3f</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00290">types.hpp:290</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_e585da6166ee98e0160b5c7acdfa2558.html">src</a></li><li class="navelem"><a href="octree_8hpp.html">octree.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

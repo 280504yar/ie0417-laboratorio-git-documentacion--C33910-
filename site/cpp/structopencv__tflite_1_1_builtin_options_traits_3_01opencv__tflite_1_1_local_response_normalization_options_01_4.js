@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_local_response_normalization_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_local_response_normalization_options_01_4.html#a5eb04a35f83a6bf4ba4ed737a150af54", null ]
+];

@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/backend.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('videoio_2src_2backend_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">backend.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="videoio_2src_2backend_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef BACKEND_HPP_DEFINED</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define BACKEND_HPP_DEFINED</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="cap__interface_8hpp.html">cap_interface.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="videoio_2include_2opencv2_2videoio_2registry_8hpp.html">opencv2/videoio/registry.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// TODO: move to public interface</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// TODO: allow runtime backend registration</span></div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1_i_backend.html">IBackend</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend.html#ab6f8df9b1b4c10258f085ca9bb2c3469">   18</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1_i_backend.html#ab6f8df9b1b4c10258f085ca9bb2c3469">~IBackend</a>() {}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend.html#a8af61f83797d89a113b2b4c3b1bb22c9">   19</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> <a class="code hl_function" href="classcv_1_1_i_backend.html#a8af61f83797d89a113b2b4c3b1bb22c9">createCapture</a>(<span class="keywordtype">int</span> camera, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend.html#af990948c398723825309e4aea254c2ef">   20</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> <a class="code hl_function" href="classcv_1_1_i_backend.html#af990948c398723825309e4aea254c2ef">createCapture</a>(<span class="keyword">const</span> std::string &amp;filename, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend.html#afd342634a911da3b26db2b34fa38f6d6">   21</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> <a class="code hl_function" href="classcv_1_1_i_backend.html#afd342634a911da3b26db2b34fa38f6d6">createCapture</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IStreamReader&gt;</a>&amp;stream, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend.html#ac88c478442f0288e018f090d6db4f2da">   22</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoWriter&gt;</a> <a class="code hl_function" href="classcv_1_1_i_backend.html#ac88c478442f0288e018f090d6db4f2da">createWriter</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">int</span> fourcc, <span class="keywordtype">double</span> fps, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a>&amp; sz,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                                           <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_writer_parameters.html">VideoWriterParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
+</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend_factory.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1_i_backend_factory.html">IBackendFactory</a></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend_factory.html#a066121fff49090eef1d116b63c185718">   29</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1_i_backend_factory.html#a066121fff49090eef1d116b63c185718">~IBackendFactory</a>() {}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend_factory.html#a147be67b9181301eee8d639055c6547b">   30</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IBackend&gt;</a> <a class="code hl_function" href="classcv_1_1_i_backend_factory.html#a147be67b9181301eee8d639055c6547b">getBackend</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classcv_1_1_i_backend_factory.html#a7ea88377bdbee34703eb2d413bb773b3">   31</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_i_backend_factory.html#a7ea88377bdbee34703eb2d413bb773b3">isBuiltIn</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">//=============================================================================</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespacecv.html#a6f12a0f449865081b37b01f195af994f">   36</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> (*<a class="code hl_typedef" href="namespacecv.html#a6f12a0f449865081b37b01f195af994f">FN_createCaptureFile</a>)(<span class="keyword">const</span> std::string &amp; filename);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="namespacecv.html#aa0d7061428fb4561bf52d2d027acc509">   37</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> (*<a class="code hl_typedef" href="namespacecv.html#aa0d7061428fb4561bf52d2d027acc509">FN_createCaptureCamera</a>)(<span class="keywordtype">int</span> camera);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="namespacecv.html#a7be76ad666f330075e43396c00e82317">   38</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> (*<a class="code hl_typedef" href="namespacecv.html#a7be76ad666f330075e43396c00e82317">FN_createCaptureStream</a>)(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IStreamReader&gt;</a>&amp; stream);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="namespacecv.html#aa1e4ebaf2b2150c5c9a0ce3872195125">   39</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> (*<a class="code hl_typedef" href="namespacecv.html#aa1e4ebaf2b2150c5c9a0ce3872195125">FN_createCaptureFileWithParams</a>)(<span class="keyword">const</span> std::string &amp; filename, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="namespacecv.html#a2001f6d1ba97d742c9c255f4b0c5ace3">   40</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> (*<a class="code hl_typedef" href="namespacecv.html#a2001f6d1ba97d742c9c255f4b0c5ace3">FN_createCaptureCameraWithParams</a>)(<span class="keywordtype">int</span> camera, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="namespacecv.html#a9145f5bf8067605be43b479af2e6be2a">   41</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a> (*<a class="code hl_typedef" href="namespacecv.html#a9145f5bf8067605be43b479af2e6be2a">FN_createCaptureStreamWithParams</a>)(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IStreamReader&gt;</a>&amp; stream, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="namespacecv.html#ac9a88488cf0900f525402594470b578b">   42</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoWriter&gt;</a>  (*<a class="code hl_typedef" href="namespacecv.html#ac9a88488cf0900f525402594470b578b">FN_createWriter</a>)(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">int</span> fourcc, <span class="keywordtype">double</span> fps, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>&amp; sz,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                                              <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_writer_parameters.html">VideoWriterParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IBackendFactory&gt;</a> <a class="code hl_function" href="namespacecv.html#a04ff112f28ec19c6a0bf1c11de3814b1">createBackendFactory</a>(<a class="code hl_typedef" href="namespacecv.html#a6f12a0f449865081b37b01f195af994f">FN_createCaptureFile</a> createCaptureFile,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                                          <a class="code hl_typedef" href="namespacecv.html#aa0d7061428fb4561bf52d2d027acc509">FN_createCaptureCamera</a> createCaptureCamera,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                                          <a class="code hl_typedef" href="namespacecv.html#a7be76ad666f330075e43396c00e82317">FN_createCaptureStream</a> createCaptureStream,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                                          <a class="code hl_typedef" href="namespacecv.html#ac9a88488cf0900f525402594470b578b">FN_createWriter</a> createWriter);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IBackendFactory&gt;</a> <a class="code hl_function" href="namespacecv.html#a04ff112f28ec19c6a0bf1c11de3814b1">createBackendFactory</a>(<a class="code hl_typedef" href="namespacecv.html#aa1e4ebaf2b2150c5c9a0ce3872195125">FN_createCaptureFileWithParams</a> createCaptureFile,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                                          <a class="code hl_typedef" href="namespacecv.html#a2001f6d1ba97d742c9c255f4b0c5ace3">FN_createCaptureCameraWithParams</a> createCaptureCamera,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                                          <a class="code hl_typedef" href="namespacecv.html#a9145f5bf8067605be43b479af2e6be2a">FN_createCaptureStreamWithParams</a> createCaptureStream,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                                          <a class="code hl_typedef" href="namespacecv.html#ac9a88488cf0900f525402594470b578b">FN_createWriter</a> createWriter);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IBackendFactory&gt;</a> <a class="code hl_function" href="namespacecv.html#aafcfdeeace93a374e7d91ef18f62b267">createPluginBackendFactory</a>(<a class="code hl_enumeration" href="group__videoio__flags__base.html#ga023786be1ee68a9105bf2e48c700294d">VideoCaptureAPIs</a> <span class="keywordtype">id</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* baseName);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#af05a1fcacc6f2c8315f3c52fbc1f6250">applyParametersFallback</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoCapture&gt;</a>&amp; cap, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>std::string <a class="code hl_function" href="namespacecv.html#a8aecf4adba8dd1b8d2a2995e41b057ae">getCapturePluginVersion</a>(</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IBackendFactory&gt;</a>&amp; backend_factory,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <span class="keywordtype">int</span>&amp; version_ABI,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <span class="keywordtype">int</span>&amp; version_API</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>std::string <a class="code hl_function" href="namespacecv.html#aa6309013f5dc7312f849381cc7fc87a1">getWriterPluginVersion</a>(</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IBackendFactory&gt;</a>&amp; backend_factory,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <span class="keywordtype">int</span>&amp; version_ABI,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <span class="keywordtype">int</span>&amp; version_API</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>} <span class="comment">// namespace cv::</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">// BACKEND_HPP_DEFINED</span></div>
+<div class="ttc" id="acap__interface_8hpp_html"><div class="ttname"><a href="cap__interface_8hpp.html">cap_interface.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_factory_html"><div class="ttname"><a href="classcv_1_1_i_backend_factory.html">cv::IBackendFactory</a></div><div class="ttdef"><b>Definición</b> <a href="#l00026">backend.hpp:27</a></div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_factory_html_a066121fff49090eef1d116b63c185718"><div class="ttname"><a href="classcv_1_1_i_backend_factory.html#a066121fff49090eef1d116b63c185718">cv::IBackendFactory::~IBackendFactory</a></div><div class="ttdeci">virtual ~IBackendFactory()</div><div class="ttdef"><b>Definición</b> <a href="#l00029">backend.hpp:29</a></div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_factory_html_a147be67b9181301eee8d639055c6547b"><div class="ttname"><a href="classcv_1_1_i_backend_factory.html#a147be67b9181301eee8d639055c6547b">cv::IBackendFactory::getBackend</a></div><div class="ttdeci">virtual Ptr&lt; IBackend &gt; getBackend() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_factory_html_a7ea88377bdbee34703eb2d413bb773b3"><div class="ttname"><a href="classcv_1_1_i_backend_factory.html#a7ea88377bdbee34703eb2d413bb773b3">cv::IBackendFactory::isBuiltIn</a></div><div class="ttdeci">virtual bool isBuiltIn() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_html"><div class="ttname"><a href="classcv_1_1_i_backend.html">cv::IBackend</a></div><div class="ttdef"><b>Definición</b> <a href="#l00015">backend.hpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_html_a8af61f83797d89a113b2b4c3b1bb22c9"><div class="ttname"><a href="classcv_1_1_i_backend.html#a8af61f83797d89a113b2b4c3b1bb22c9">cv::IBackend::createCapture</a></div><div class="ttdeci">virtual Ptr&lt; IVideoCapture &gt; createCapture(int camera, const VideoCaptureParameters &amp;params) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_html_ab6f8df9b1b4c10258f085ca9bb2c3469"><div class="ttname"><a href="classcv_1_1_i_backend.html#ab6f8df9b1b4c10258f085ca9bb2c3469">cv::IBackend::~IBackend</a></div><div class="ttdeci">virtual ~IBackend()</div><div class="ttdef"><b>Definición</b> <a href="#l00018">backend.hpp:18</a></div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_html_ac88c478442f0288e018f090d6db4f2da"><div class="ttname"><a href="classcv_1_1_i_backend.html#ac88c478442f0288e018f090d6db4f2da">cv::IBackend::createWriter</a></div><div class="ttdeci">virtual Ptr&lt; IVideoWriter &gt; createWriter(const std::string &amp;filename, int fourcc, double fps, const cv::Size &amp;sz, const VideoWriterParameters &amp;params) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_html_af990948c398723825309e4aea254c2ef"><div class="ttname"><a href="classcv_1_1_i_backend.html#af990948c398723825309e4aea254c2ef">cv::IBackend::createCapture</a></div><div class="ttdeci">virtual Ptr&lt; IVideoCapture &gt; createCapture(const std::string &amp;filename, const VideoCaptureParameters &amp;params) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1_i_backend_html_afd342634a911da3b26db2b34fa38f6d6"><div class="ttname"><a href="classcv_1_1_i_backend.html#afd342634a911da3b26db2b34fa38f6d6">cv::IBackend::createCapture</a></div><div class="ttdeci">virtual Ptr&lt; IVideoCapture &gt; createCapture(const Ptr&lt; IStreamReader &gt; &amp;stream, const VideoCaptureParameters &amp;params) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1_video_capture_parameters_html"><div class="ttname"><a href="classcv_1_1_video_capture_parameters.html">cv::VideoCaptureParameters</a></div><div class="ttdef"><b>Definición</b> <a href="cap__interface_8hpp_source.html#l00183">cap_interface.hpp:184</a></div></div>
+<div class="ttc" id="aclasscv_1_1_video_writer_parameters_html"><div class="ttname"><a href="classcv_1_1_video_writer_parameters.html">cv::VideoWriterParameters</a></div><div class="ttdef"><b>Definición</b> <a href="cap__interface_8hpp_source.html#l00177">cap_interface.hpp:178</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4e999bc21cb894d3ed789f3f0bc26778"><div class="ttname"><a href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a></div><div class="ttdeci">#define CV_OUT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00489">cvdef.h:489</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ga023786be1ee68a9105bf2e48c700294d"><div class="ttname"><a href="group__videoio__flags__base.html#ga023786be1ee68a9105bf2e48c700294d">cv::VideoCaptureAPIs</a></div><div class="ttdeci">VideoCaptureAPIs</div><div class="ttdoc">cv::VideoCapture API backends identifier.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00091">videoio.hpp:91</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a04ff112f28ec19c6a0bf1c11de3814b1"><div class="ttname"><a href="namespacecv.html#a04ff112f28ec19c6a0bf1c11de3814b1">cv::createBackendFactory</a></div><div class="ttdeci">Ptr&lt; IBackendFactory &gt; createBackendFactory(FN_createCaptureFile createCaptureFile, FN_createCaptureCamera createCaptureCamera, FN_createCaptureStream createCaptureStream, FN_createWriter createWriter)</div><div class="ttdef"><b>Definición</b> <a href="backend__static_8cpp_source.html#l00121">backend_static.cpp:121</a></div></div>
+<div class="ttc" id="anamespacecv_html_a2001f6d1ba97d742c9c255f4b0c5ace3"><div class="ttname"><a href="namespacecv.html#a2001f6d1ba97d742c9c255f4b0c5ace3">cv::FN_createCaptureCameraWithParams</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt;(*) FN_createCaptureCameraWithParams(int camera, const VideoCaptureParameters &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00040">backend.hpp:40</a></div></div>
+<div class="ttc" id="anamespacecv_html_a6f12a0f449865081b37b01f195af994f"><div class="ttname"><a href="namespacecv.html#a6f12a0f449865081b37b01f195af994f">cv::FN_createCaptureFile</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt;(*) FN_createCaptureFile(const std::string &amp;filename)</div><div class="ttdef"><b>Definición</b> <a href="#l00036">backend.hpp:36</a></div></div>
+<div class="ttc" id="anamespacecv_html_a7be76ad666f330075e43396c00e82317"><div class="ttname"><a href="namespacecv.html#a7be76ad666f330075e43396c00e82317">cv::FN_createCaptureStream</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt;(*) FN_createCaptureStream(const Ptr&lt; IStreamReader &gt; &amp;stream)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">backend.hpp:38</a></div></div>
+<div class="ttc" id="anamespacecv_html_a8aecf4adba8dd1b8d2a2995e41b057ae"><div class="ttname"><a href="namespacecv.html#a8aecf4adba8dd1b8d2a2995e41b057ae">cv::getCapturePluginVersion</a></div><div class="ttdeci">std::string getCapturePluginVersion(const Ptr&lt; IBackendFactory &gt; &amp;backend_factory, CV_OUT int &amp;version_ABI, CV_OUT int &amp;version_API)</div><div class="ttdef"><b>Definición</b> <a href="backend__plugin_8cpp_source.html#l00803">backend_plugin.cpp:803</a></div></div>
+<div class="ttc" id="anamespacecv_html_a9145f5bf8067605be43b479af2e6be2a"><div class="ttname"><a href="namespacecv.html#a9145f5bf8067605be43b479af2e6be2a">cv::FN_createCaptureStreamWithParams</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt;(*) FN_createCaptureStreamWithParams(const Ptr&lt; IStreamReader &gt; &amp;stream, const VideoCaptureParameters &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00041">backend.hpp:41</a></div></div>
+<div class="ttc" id="anamespacecv_html_aa0d7061428fb4561bf52d2d027acc509"><div class="ttname"><a href="namespacecv.html#aa0d7061428fb4561bf52d2d027acc509">cv::FN_createCaptureCamera</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt;(*) FN_createCaptureCamera(int camera)</div><div class="ttdef"><b>Definición</b> <a href="#l00037">backend.hpp:37</a></div></div>
+<div class="ttc" id="anamespacecv_html_aa1e4ebaf2b2150c5c9a0ce3872195125"><div class="ttname"><a href="namespacecv.html#aa1e4ebaf2b2150c5c9a0ce3872195125">cv::FN_createCaptureFileWithParams</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt;(*) FN_createCaptureFileWithParams(const std::string &amp;filename, const VideoCaptureParameters &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00039">backend.hpp:39</a></div></div>
+<div class="ttc" id="anamespacecv_html_aa6309013f5dc7312f849381cc7fc87a1"><div class="ttname"><a href="namespacecv.html#aa6309013f5dc7312f849381cc7fc87a1">cv::getWriterPluginVersion</a></div><div class="ttdeci">std::string getWriterPluginVersion(const Ptr&lt; IBackendFactory &gt; &amp;backend_factory, CV_OUT int &amp;version_ABI, CV_OUT int &amp;version_API)</div><div class="ttdef"><b>Definición</b> <a href="backend__plugin_8cpp_source.html#l00823">backend_plugin.cpp:823</a></div></div>
+<div class="ttc" id="anamespacecv_html_aafcfdeeace93a374e7d91ef18f62b267"><div class="ttname"><a href="namespacecv.html#aafcfdeeace93a374e7d91ef18f62b267">cv::createPluginBackendFactory</a></div><div class="ttdeci">Ptr&lt; IBackendFactory &gt; createPluginBackendFactory(VideoCaptureAPIs id, const char *baseName)</div><div class="ttdef"><b>Definición</b> <a href="backend__plugin_8cpp_source.html#l00791">backend_plugin.cpp:791</a></div></div>
+<div class="ttc" id="anamespacecv_html_ac9a88488cf0900f525402594470b578b"><div class="ttname"><a href="namespacecv.html#ac9a88488cf0900f525402594470b578b">cv::FN_createWriter</a></div><div class="ttdeci">Ptr&lt; IVideoWriter &gt;(*) FN_createWriter(const std::string &amp;filename, int fourcc, double fps, const Size &amp;sz, const VideoWriterParameters &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00042">backend.hpp:42</a></div></div>
+<div class="ttc" id="anamespacecv_html_af05a1fcacc6f2c8315f3c52fbc1f6250"><div class="ttname"><a href="namespacecv.html#af05a1fcacc6f2c8315f3c52fbc1f6250">cv::applyParametersFallback</a></div><div class="ttdeci">void applyParametersFallback(const Ptr&lt; IVideoCapture &gt; &amp;cap, const VideoCaptureParameters &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="backend__static_8cpp_source.html#l00012">backend_static.cpp:12</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="avideoio_2include_2opencv2_2videoio_2registry_8hpp_html"><div class="ttname"><a href="videoio_2include_2opencv2_2videoio_2registry_8hpp.html">registry.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="videoio_2src_2backend_8hpp.html">backend.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

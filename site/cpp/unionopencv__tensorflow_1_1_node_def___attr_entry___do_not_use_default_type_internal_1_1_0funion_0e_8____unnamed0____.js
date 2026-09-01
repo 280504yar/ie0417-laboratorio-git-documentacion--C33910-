@@ -1,0 +1,4 @@
+var unionopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal_1_1_0funion_0e_8____unnamed0____ =
+[
+    [ "_instance", "unionopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal_1_1_0funion_0e_8____unnamed0____.html#a647f4c27a3f65b0b4c697236935f9888", null ]
+];

@@ -1,0 +1,26 @@
+var fast__nlmeans__denoising__invoker__commons_8hpp =
+[
+    [ "pixelInfo_&lt; T &gt;", "structpixel_info__.html", "structpixel_info__" ],
+    [ "pixelInfo_&lt; Vec&lt; ET, n &gt; &gt;", "structpixel_info___3_01_vec_3_01_e_t_00_01n_01_4_01_4.html", "structpixel_info___3_01_vec_3_01_e_t_00_01n_01_4_01_4" ],
+    [ "pixelInfo&lt; T &gt;", "structpixel_info.html", "structpixel_info" ],
+    [ "DistAbs", "class_dist_abs.html", "class_dist_abs" ],
+    [ "DistSquared", "class_dist_squared.html", "class_dist_squared" ],
+    [ "incWithWeight_&lt; T, IT, WT &gt;", "structinc_with_weight__.html", "structinc_with_weight__" ],
+    [ "incWithWeight_&lt; Vec&lt; ET, 2 &gt;, IT, WT &gt;", "structinc_with_weight___3_01_vec_3_01_e_t_00_012_01_4_00_01_i_t_00_01_w_t_01_4.html", "structinc_with_weight___3_01_vec_3_01_e_t_00_012_01_4_00_01_i_t_00_01_w_t_01_4" ],
+    [ "incWithWeight_&lt; Vec&lt; ET, 3 &gt;, IT, WT &gt;", "structinc_with_weight___3_01_vec_3_01_e_t_00_013_01_4_00_01_i_t_00_01_w_t_01_4.html", "structinc_with_weight___3_01_vec_3_01_e_t_00_013_01_4_00_01_i_t_00_01_w_t_01_4" ],
+    [ "incWithWeight_&lt; Vec&lt; ET, 4 &gt;, IT, WT &gt;", "structinc_with_weight___3_01_vec_3_01_e_t_00_014_01_4_00_01_i_t_00_01_w_t_01_4.html", "structinc_with_weight___3_01_vec_3_01_e_t_00_014_01_4_00_01_i_t_00_01_w_t_01_4" ],
+    [ "incWithWeight_&lt; Vec&lt; ET, 2 &gt;, IT, Vec&lt; EW, 2 &gt; &gt;", "structinc_with_weight___3_01_vec_3_01_e_t_00_012_01_4_00_01_i_t_00_01_vec_3_01_e_w_00_012_01_4_01_4.html", "structinc_with_weight___3_01_vec_3_01_e_t_00_012_01_4_00_01_i_t_00_01_vec_3_01_e_w_00_012_01_4_01_4" ],
+    [ "incWithWeight_&lt; Vec&lt; ET, 3 &gt;, IT, Vec&lt; EW, 3 &gt; &gt;", "structinc_with_weight___3_01_vec_3_01_e_t_00_013_01_4_00_01_i_t_00_01_vec_3_01_e_w_00_013_01_4_01_4.html", "structinc_with_weight___3_01_vec_3_01_e_t_00_013_01_4_00_01_i_t_00_01_vec_3_01_e_w_00_013_01_4_01_4" ],
+    [ "incWithWeight_&lt; Vec&lt; ET, 4 &gt;, IT, Vec&lt; EW, 4 &gt; &gt;", "structinc_with_weight___3_01_vec_3_01_e_t_00_014_01_4_00_01_i_t_00_01_vec_3_01_e_w_00_014_01_4_01_4.html", "structinc_with_weight___3_01_vec_3_01_e_t_00_014_01_4_00_01_i_t_00_01_vec_3_01_e_w_00_014_01_4_01_4" ],
+    [ "divByWeightsSum_&lt; IT, UIT, nc, nw &gt;", "structdiv_by_weights_sum__.html", "structdiv_by_weights_sum__" ],
+    [ "divByWeightsSum_&lt; IT, UIT, 1, 1 &gt;", "structdiv_by_weights_sum___3_01_i_t_00_01_u_i_t_00_011_00_011_01_4.html", "structdiv_by_weights_sum___3_01_i_t_00_01_u_i_t_00_011_00_011_01_4" ],
+    [ "divByWeightsSum_&lt; IT, UIT, n, 1 &gt;", "structdiv_by_weights_sum___3_01_i_t_00_01_u_i_t_00_01n_00_011_01_4.html", "structdiv_by_weights_sum___3_01_i_t_00_01_u_i_t_00_01n_00_011_01_4" ],
+    [ "divByWeightsSum_&lt; IT, UIT, n, n &gt;", "structdiv_by_weights_sum___3_01_i_t_00_01_u_i_t_00_01n_00_01n_01_4.html", "structdiv_by_weights_sum___3_01_i_t_00_01_u_i_t_00_01n_00_01n_01_4" ],
+    [ "saturateCastFromArray_&lt; T, IT &gt;", "structsaturate_cast_from_array__.html", "structsaturate_cast_from_array__" ],
+    [ "saturateCastFromArray_&lt; Vec&lt; ET, 2 &gt;, IT &gt;", "structsaturate_cast_from_array___3_01_vec_3_01_e_t_00_012_01_4_00_01_i_t_01_4.html", "structsaturate_cast_from_array___3_01_vec_3_01_e_t_00_012_01_4_00_01_i_t_01_4" ],
+    [ "saturateCastFromArray_&lt; Vec&lt; ET, 3 &gt;, IT &gt;", "structsaturate_cast_from_array___3_01_vec_3_01_e_t_00_013_01_4_00_01_i_t_01_4.html", "structsaturate_cast_from_array___3_01_vec_3_01_e_t_00_013_01_4_00_01_i_t_01_4" ],
+    [ "saturateCastFromArray_&lt; Vec&lt; ET, 4 &gt;, IT &gt;", "structsaturate_cast_from_array___3_01_vec_3_01_e_t_00_014_01_4_00_01_i_t_01_4.html", "structsaturate_cast_from_array___3_01_vec_3_01_e_t_00_014_01_4_00_01_i_t_01_4" ],
+    [ "divByWeightsSum", "fast__nlmeans__denoising__invoker__commons_8hpp.html#a83cf56f1b9f292808de956b559fd9bb8", null ],
+    [ "incWithWeight", "fast__nlmeans__denoising__invoker__commons_8hpp.html#a4f091c64961ab475c8697fc8fea8d0d0", null ],
+    [ "saturateCastFromArray", "fast__nlmeans__denoising__invoker__commons_8hpp.html#af84b51359f072e0093d7376bb9facb78", null ]
+];

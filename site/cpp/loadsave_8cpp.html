@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/imgcodecs/src/loadsave.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('loadsave_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo loadsave.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="imgcodecs_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="grfmts_8hpp_source.html">grfmts.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="imgcodecs_2src_2utils_8hpp_source.html">utils.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="exif_8hpp_source.html">exif.hpp</a>&quot;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;cerrno&gt;</code><br />
+<code>#include &lt;<a class="el" href="logger_8hpp_source.html">opencv2/core/utils/logger.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="configuration_8private_8hpp_source.html">opencv2/core/utils/configuration.private.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="imgcodecs_8hpp_source.html">opencv2/imgcodecs.hpp</a>&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en loadsave.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="loadsave_8cpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="loadsave_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:cv_3A_3AImageCodecInitializer" id="r_cv_3A_3AImageCodecInitializer"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_image_codec_initializer.html">cv::ImageCodecInitializer</a></td></tr>
+<tr class="memitem:cv_3A_3AImageCollection_3A_3AImpl" id="r_cv_3A_3AImageCollection_3A_3AImpl"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_image_collection_1_1_impl.html">cv::ImageCollection::Impl</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Espacios de nombres</h2></td></tr>
+<tr class="memitem:cv" id="r_cv"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html">cv</a></td></tr>
+<tr class="memdesc:namespacecv"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file is part of OpenCV project. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a9e42ba748be7d2466a32056e188f593d" id="r_a9e42ba748be7d2466a32056e188f593d"><td class="memItemLeft">static <a class="el" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a9e42ba748be7d2466a32056e188f593d">cv::validateInputImageSize</a> (const <a class="el" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> &amp;size)</td></tr>
+<tr class="memitem:a6ffaf6aea4cd40ba19beeadf78a43a38" id="r_a6ffaf6aea4cd40ba19beeadf78a43a38"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6ffaf6aea4cd40ba19beeadf78a43a38">cv::calcType</a> (int type, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:aedbb6fa98efbbc69d38848636425aa76" id="r_aedbb6fa98efbbc69d38848636425aa76"><td class="memItemLeft">static <a class="el" href="structcv_1_1_image_codec_initializer.html">ImageCodecInitializer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aedbb6fa98efbbc69d38848636425aa76">cv::getCodecs</a> ()</td></tr>
+<tr class="memitem:aae34eddf7a4960870e6f044fac4d7e4f" id="r_aae34eddf7a4960870e6f044fac4d7e4f"><td class="memItemLeft">static <a class="el" href="namespacecv.html#af25df10beb39c11c7ee137e60c2544ce">ImageDecoder</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aae34eddf7a4960870e6f044fac4d7e4f">cv::findDecoder</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename)</td></tr>
+<tr class="memitem:aaa6e26fedf5cef35153bd0946f8ce794" id="r_aaa6e26fedf5cef35153bd0946f8ce794"><td class="memItemLeft">static <a class="el" href="namespacecv.html#af25df10beb39c11c7ee137e60c2544ce">ImageDecoder</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aaa6e26fedf5cef35153bd0946f8ce794">cv::findDecoder</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;buf)</td></tr>
+<tr class="memitem:a37c07d6ca9ffef764d4604e0bb34145f" id="r_a37c07d6ca9ffef764d4604e0bb34145f"><td class="memItemLeft">static <a class="el" href="namespacecv.html#a399831a9b99870d57ed38e6e316c47e8">ImageEncoder</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a37c07d6ca9ffef764d4604e0bb34145f">cv::findEncoder</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;_ext)</td></tr>
+<tr class="memitem:ae891d8984368cc0a8886827abcb3be8e" id="r_ae891d8984368cc0a8886827abcb3be8e"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ae891d8984368cc0a8886827abcb3be8e">cv::isValidEncodeKeyAtAll</a> (const int key)</td></tr>
+<tr class="memitem:a132579c0903c6b48262472e058970001" id="r_a132579c0903c6b48262472e058970001"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a132579c0903c6b48262472e058970001">cv::ExifTransform</a> (int orientation, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> img)</td></tr>
+<tr class="memitem:af37d8fe9df16356a5d3cccf50c72a4d6" id="r_af37d8fe9df16356a5d3cccf50c72a4d6"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#af37d8fe9df16356a5d3cccf50c72a4d6">cv::ApplyExifOrientation</a> (<a class="el" href="structcv_1_1_exif_entry__t.html">ExifEntry_t</a> orientationTag, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> img)</td></tr>
+<tr class="memitem:ad14271859b4c1e8a4c218135019e9d20" id="r_ad14271859b4c1e8a4c218135019e9d20"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad14271859b4c1e8a4c218135019e9d20">cv::readMetadata</a> (<a class="el" href="namespacecv.html#af25df10beb39c11c7ee137e60c2544ce">ImageDecoder</a> &amp;decoder, std::vector&lt; int &gt; *metadata_types, <a class="el" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> metadata)</td></tr>
+<tr class="memitem:a3b3af819a377a77555f0d081786ab374" id="r_a3b3af819a377a77555f0d081786ab374"><td class="memItemLeft">static const char *&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a3b3af819a377a77555f0d081786ab374">cv::metadataTypeToString</a> (<a class="el" href="group__imgcodecs__flags.html#ga6896891174b021ea6d9a6f4b2c933ac3">ImageMetadataType</a> type)</td></tr>
+<tr class="memitem:ae05ecfbccf687377bbdd2786d2ea3780" id="r_ae05ecfbccf687377bbdd2786d2ea3780"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ae05ecfbccf687377bbdd2786d2ea3780">cv::addMetadata</a> (<a class="el" href="namespacecv.html#a399831a9b99870d57ed38e6e316c47e8">ImageEncoder</a> &amp;encoder, const std::vector&lt; int &gt; &amp;metadata_types, <a class="el" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> metadata)</td></tr>
+<tr class="memitem:a77199b25a25a66f41cd154e3e2db3984" id="r_a77199b25a25a66f41cd154e3e2db3984"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a77199b25a25a66f41cd154e3e2db3984">cv::imread_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> mat, std::vector&lt; int &gt; *metadata_types, <a class="el" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> metadata)</td></tr>
+<tr class="memitem:a8316b0aa14864ef896135a2c0ceda056" id="r_a8316b0aa14864ef896135a2c0ceda056"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a8316b0aa14864ef896135a2c0ceda056">cv::imreadmulti_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, std::vector&lt; <a class="el" href="interface_mat.html">Mat</a> &gt; &amp;mats, int start, int count)</td></tr>
+<tr class="memitem:gacbaa02cffc4ec2422dfa2e24412a99e2" id="r_gacbaa02cffc4ec2422dfa2e24412a99e2"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="interface_mat.html">Mat</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#gacbaa02cffc4ec2422dfa2e24412a99e2">cv::imread</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>=<a class="el" href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a27f321425cc2e42ab85f2f46d4e0fc31">IMREAD_COLOR_BGR</a>)</td></tr>
+<tr class="memdesc:gacbaa02cffc4ec2422dfa2e24412a99e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an image from a file.  <br /></td></tr>
+<tr class="memitem:aef0d4f65090e1c016e7331ef51242a34" id="r_aef0d4f65090e1c016e7331ef51242a34"><td class="memItemLeft"><a class="el" href="interface_mat.html">Mat</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aef0d4f65090e1c016e7331ef51242a34">cv::imreadWithMetadata</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, std::vector&lt; int &gt; &amp;metadata_types, <a class="el" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> metadata, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:ga384030628244491e687668b7da7cac94" id="r_ga384030628244491e687668b7da7cac94"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga384030628244491e687668b7da7cac94">cv::imread</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> dst, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>=<a class="el" href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a27f321425cc2e42ab85f2f46d4e0fc31">IMREAD_COLOR_BGR</a>)</td></tr>
+<tr class="memdesc:ga384030628244491e687668b7da7cac94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an image from a file.  <br /></td></tr>
+<tr class="memitem:a14a95a73abada72ff5349cc9ecff106f" id="r_a14a95a73abada72ff5349cc9ecff106f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a14a95a73abada72ff5349cc9ecff106f">cv::imreadmulti</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, std::vector&lt; <a class="el" href="interface_mat.html">Mat</a> &gt; &amp;mats, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:a3026d0fe2059bd4a405169718402aa47" id="r_a3026d0fe2059bd4a405169718402aa47"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a3026d0fe2059bd4a405169718402aa47">cv::imreadmulti</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, std::vector&lt; <a class="el" href="interface_mat.html">Mat</a> &gt; &amp;mats, int start, int count, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:a42fc0a7f3c5087d6694e8e703ace3487" id="r_a42fc0a7f3c5087d6694e8e703ace3487"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a42fc0a7f3c5087d6694e8e703ace3487">cv::imreadanimation_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, int start, int count, <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation)</td></tr>
+<tr class="memitem:ga8461019a29039115828db6be00593776" id="r_ga8461019a29039115828db6be00593776"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> bool&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga8461019a29039115828db6be00593776">cv::imreadanimation</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, <a class="el" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation, int start=0, int count=INT16_MAX)</td></tr>
+<tr class="memdesc:ga8461019a29039115828db6be00593776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads frames from an animated image file into an <a class="el" href="structcv_1_1_animation.html" title="Represents an animation with multiple frames. The Animation struct is designed to store and manage da...">Animation</a> structure.  <br /></td></tr>
+<tr class="memitem:aaf7711d42237197434c16d4c23f14269" id="r_aaf7711d42237197434c16d4c23f14269"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aaf7711d42237197434c16d4c23f14269">cv::imdecodeanimation_</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> buf, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, int start, int count, <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation)</td></tr>
+<tr class="memitem:a29089c5ba888c030790220fc9c9db538" id="r_a29089c5ba888c030790220fc9c9db538"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a29089c5ba888c030790220fc9c9db538">cv::imdecodeanimation</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> buf, <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation, int start, int count)</td></tr>
+<tr class="memitem:a1a3a0e8bf04651429d8cb0838fb91b24" id="r_a1a3a0e8bf04651429d8cb0838fb91b24"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a1a3a0e8bf04651429d8cb0838fb91b24">cv::imcount_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:ga46cb7e5c787b0811aa5fa383f5377a1d" id="r_ga46cb7e5c787b0811aa5fa383f5377a1d"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga46cb7e5c787b0811aa5fa383f5377a1d">cv::imcount</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>=<a class="el" href="group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80a27f321425cc2e42ab85f2f46d4e0fc31">IMREAD_COLOR_BGR</a>)</td></tr>
+<tr class="memdesc:ga46cb7e5c787b0811aa5fa383f5377a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of images inside the given file.  <br /></td></tr>
+<tr class="memitem:a030f8900f5546970ee6c13ee8333f615" id="r_a030f8900f5546970ee6c13ee8333f615"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a030f8900f5546970ee6c13ee8333f615">cv::fallbackToCV8U</a> (<a class="el" href="interface_mat.html">Mat</a> &amp;image, <a class="el" href="interface_mat.html">Mat</a> &amp;temp)</td></tr>
+<tr class="memitem:ad88c77bbf10bdc0d0f9e8d8ad3f051ea" id="r_ad88c77bbf10bdc0d0f9e8d8ad3f051ea"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad88c77bbf10bdc0d0f9e8d8ad3f051ea">cv::imwrite_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, const std::vector&lt; <a class="el" href="interface_mat.html">Mat</a> &gt; &amp;img_vec, const std::vector&lt; int &gt; &amp;metadata_types, <a class="el" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> metadata, const std::vector&lt; int &gt; &amp;params, bool flipv)</td></tr>
+<tr class="memitem:gabbc7ef1aa2edfaa87772f1202d67e0ce" id="r_gabbc7ef1aa2edfaa87772f1202d67e0ce"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> bool&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce">cv::imwrite</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> img, const std::vector&lt; int &gt; &amp;params=std::vector&lt; int &gt;())</td></tr>
+<tr class="memdesc:gabbc7ef1aa2edfaa87772f1202d67e0ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves an image to a specified file.  <br /></td></tr>
+<tr class="memitem:ad8bdd4a26cd4cd88be9d2cd6e1b3f326" id="r_ad8bdd4a26cd4cd88be9d2cd6e1b3f326"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad8bdd4a26cd4cd88be9d2cd6e1b3f326">cv::imwriteWithMetadata</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _img, const std::vector&lt; int &gt; &amp;metadata_types, <a class="el" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> metadata, const std::vector&lt; int &gt; &amp;params)</td></tr>
+<tr class="memitem:aecd72b42e99e9130ff8c7502f8b94f45" id="r_aecd72b42e99e9130ff8c7502f8b94f45"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aecd72b42e99e9130ff8c7502f8b94f45">cv::imwriteanimation_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, const <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation, const std::vector&lt; int &gt; &amp;params)</td></tr>
+<tr class="memitem:ga65ab73b6bab4e55d9f8a264f0373878f" id="r_ga65ab73b6bab4e55d9f8a264f0373878f"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> bool&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga65ab73b6bab4e55d9f8a264f0373878f">cv::imwriteanimation</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, const <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation, const std::vector&lt; int &gt; &amp;params=std::vector&lt; int &gt;())</td></tr>
+<tr class="memdesc:ga65ab73b6bab4e55d9f8a264f0373878f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves an <a class="el" href="structcv_1_1_animation.html" title="Represents an animation with multiple frames. The Animation struct is designed to store and manage da...">Animation</a> to a specified file.  <br /></td></tr>
+<tr class="memitem:ad0f10e2e23a36b9f65db599e6089c4be" id="r_ad0f10e2e23a36b9f65db599e6089c4be"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad0f10e2e23a36b9f65db599e6089c4be">cv::imencodeanimation_</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;ext, const <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation, std::vector&lt; <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> &gt; &amp;buf, const std::vector&lt; int &gt; &amp;params)</td></tr>
+<tr class="memitem:aa5264c47ece460b9a58544351529a101" id="r_aa5264c47ece460b9a58544351529a101"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aa5264c47ece460b9a58544351529a101">cv::imencodeanimation</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;ext, const <a class="el" href="structcv_1_1_animation.html">Animation</a> &amp;animation, std::vector&lt; <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> &gt; &amp;buf, const std::vector&lt; int &gt; &amp;params)</td></tr>
+<tr class="memitem:a9b739f1e4f3fcfd903b532fb892175b3" id="r_a9b739f1e4f3fcfd903b532fb892175b3"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a9b739f1e4f3fcfd903b532fb892175b3">cv::imdecode_</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;buf, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, <a class="el" href="interface_mat.html">Mat</a> &amp;mat, std::vector&lt; int &gt; *metadata_types, <a class="el" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> metadata)</td></tr>
+<tr class="memitem:gaad518fe65098fd32446bd5b9c4f8b531" id="r_gaad518fe65098fd32446bd5b9c4f8b531"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="interface_mat.html">Mat</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#gaad518fe65098fd32446bd5b9c4f8b531">cv::imdecode</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> buf, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memdesc:gaad518fe65098fd32446bd5b9c4f8b531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads an image from a buffer in memory.  <br /></td></tr>
+<tr class="memitem:ga5a0acefe5cbe0a81e904e452ec7ca733" id="r_ga5a0acefe5cbe0a81e904e452ec7ca733"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="interface_mat.html">Mat</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga5a0acefe5cbe0a81e904e452ec7ca733">cv::imdecode</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> buf, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, <a class="el" href="interface_mat.html">Mat</a> *dst)</td></tr>
+<tr class="memitem:a08480d668d532dfcc82550d31122c687" id="r_a08480d668d532dfcc82550d31122c687"><td class="memItemLeft"><a class="el" href="interface_mat.html">Mat</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a08480d668d532dfcc82550d31122c687">cv::imdecodeWithMetadata</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _buf, std::vector&lt; int &gt; &amp;metadata_types, <a class="el" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> metadata, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:af8621ba49d84cd777159fb944298e4b7" id="r_af8621ba49d84cd777159fb944298e4b7"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#af8621ba49d84cd777159fb944298e4b7">cv::imdecodemulti_</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;buf, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, std::vector&lt; <a class="el" href="interface_mat.html">Mat</a> &gt; &amp;mats, int start, int count)</td></tr>
+<tr class="memitem:gab529e38abd9c0ec1e52e43602f5a3ebf" id="r_gab529e38abd9c0ec1e52e43602f5a3ebf"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> bool&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#gab529e38abd9c0ec1e52e43602f5a3ebf">cv::imdecodemulti</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> buf, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, <a class="el" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> std::vector&lt; <a class="el" href="interface_mat.html">Mat</a> &gt; &amp;mats, const <a class="el" href="classcv_1_1_range.html">cv::Range</a> &amp;range=<a class="el" href="classcv_1_1_range.html#af5a0207f6f98a69077db8e77898abc0f">Range::all</a>())</td></tr>
+<tr class="memdesc:gab529e38abd9c0ec1e52e43602f5a3ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a multi-page image from a buffer in memory.  <br /></td></tr>
+<tr class="memitem:ad9bb77e56618b739827525bba1f2e9c4" id="r_ad9bb77e56618b739827525bba1f2e9c4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad9bb77e56618b739827525bba1f2e9c4">cv::imencodeWithMetadata</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;ext, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _img, const std::vector&lt; int &gt; &amp;metadata_types, <a class="el" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> metadata, std::vector&lt; <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> &gt; &amp;buf, const std::vector&lt; int &gt; &amp;params)</td></tr>
+<tr class="memitem:aeee6352c8f6f8f5ef54fb8850851eb3c" id="r_aeee6352c8f6f8f5ef54fb8850851eb3c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aeee6352c8f6f8f5ef54fb8850851eb3c">cv::imencode</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;ext, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> img, std::vector&lt; <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> &gt; &amp;buf, const std::vector&lt; int &gt; &amp;params_)</td></tr>
+<tr class="memitem:ad9f07096c1c6be45087894c70b9fd3e4" id="r_ad9f07096c1c6be45087894c70b9fd3e4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad9f07096c1c6be45087894c70b9fd3e4">cv::imencodemulti</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;ext, <a class="el" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> imgs, std::vector&lt; <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> &gt; &amp;buf, const std::vector&lt; int &gt; &amp;params)</td></tr>
+<tr class="memitem:ga0c3f60f18ed3a139e5a9926f9315e3bc" id="r_ga0c3f60f18ed3a139e5a9926f9315e3bc"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> bool&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga0c3f60f18ed3a139e5a9926f9315e3bc">cv::haveImageReader</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename)</td></tr>
+<tr class="memdesc:ga0c3f60f18ed3a139e5a9926f9315e3bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified image file can be decoded by OpenCV.  <br /></td></tr>
+<tr class="memitem:ga0ca4e24f5435a81dfeec720a6e32d852" id="r_ga0ca4e24f5435a81dfeec720a6e32d852"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> bool&#160;</td><td class="memItemRight"><a class="el" href="group__imgcodecs.html#ga0ca4e24f5435a81dfeec720a6e32d852">cv::haveImageWriter</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename)</td></tr>
+<tr class="memdesc:ga0ca4e24f5435a81dfeec720a6e32d852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the specified image file or specified file extension can be encoded by OpenCV.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a95edbb211d6162e2737a78f4258db8b5" id="r_a95edbb211d6162e2737a78f4258db8b5"><td class="memItemLeft">static const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a95edbb211d6162e2737a78f4258db8b5">cv::CV_IO_MAX_IMAGE_PARAMS</a> = <a class="el" href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">cv::utils::getConfigurationParameterSizeT</a>(&quot;OPENCV_IO_MAX_IMAGE_PARAMS&quot;, 50)</td></tr>
+<tr class="memitem:aaffcce75ba2bbe02833580a121cc077a" id="r_aaffcce75ba2bbe02833580a121cc077a"><td class="memItemLeft">static const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aaffcce75ba2bbe02833580a121cc077a">cv::CV_IO_MAX_IMAGE_WIDTH</a> = <a class="el" href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">utils::getConfigurationParameterSizeT</a>(&quot;OPENCV_IO_MAX_IMAGE_WIDTH&quot;, 1 &lt;&lt; 20)</td></tr>
+<tr class="memitem:ada9fa45d642b3ffdcc95c74d8630e60d" id="r_ada9fa45d642b3ffdcc95c74d8630e60d"><td class="memItemLeft">static const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ada9fa45d642b3ffdcc95c74d8630e60d">cv::CV_IO_MAX_IMAGE_HEIGHT</a> = <a class="el" href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">utils::getConfigurationParameterSizeT</a>(&quot;OPENCV_IO_MAX_IMAGE_HEIGHT&quot;, 1 &lt;&lt; 20)</td></tr>
+<tr class="memitem:a881e307ff52b6a910d0b41012069db57" id="r_a881e307ff52b6a910d0b41012069db57"><td class="memItemLeft">static const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a881e307ff52b6a910d0b41012069db57">cv::CV_IO_MAX_IMAGE_PIXELS</a> = <a class="el" href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">utils::getConfigurationParameterSizeT</a>(&quot;OPENCV_IO_MAX_IMAGE_PIXELS&quot;, 1 &lt;&lt; 30)</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_26d0a741bc21e7b978cdc652ade2f25c.html">imgcodecs</a></li><li class="navelem"><a href="dir_f9db06f3de9524254c631c466ec8007c.html">src</a></li><li class="navelem"><a href="loadsave_8cpp.html">loadsave.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

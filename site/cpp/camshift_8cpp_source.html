@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/video/src/camshift.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('camshift_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">camshift.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="camshift_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2013, OpenCV Foundation, all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of Intel Corporation may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &quot;<a class="code" href="video_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__video__track.html#ga7d73bea676486ed2607d80f7970bc01a">cv::meanShift</a>( InputArray _probImage, Rect&amp; window, <a class="code hl_class" href="interface_term_criteria.html">TermCriteria</a> criteria )</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">int</span> cn;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="interface_mat.html">Mat</a> mat;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    UMat umat;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">bool</span> isUMat = _probImage.isUMat();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (isUMat)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        umat = _probImage.getUMat(), cn = umat.<a class="code hl_function" href="interface_mat.html#a58d809cf7a192497a8dd4bc4774fca0a">channels</a>(), <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a> = umat.size();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        mat = _probImage.getMat(), cn = mat.<a class="code hl_function" href="interface_mat.html#a58d809cf7a192497a8dd4bc4774fca0a">channels</a>(), <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a> = mat.<a class="code hl_function" href="interface_mat.html#a62ca577abd595e8117fcfba5e8fa0686">size</a>();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> cur_rect = window;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( cn == 1 );</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span>( window.height &lt;= 0 || window.width &lt;= 0 )</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>( Error::StsBadArg, <span class="stringliteral">&quot;Input window has non-positive sizes&quot;</span> );</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    window = window &amp; <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a>(0, 0, <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width, <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">double</span> eps = (<a class="code hl_variable" href="group__calib.html#ga6df421bf34545709f4dd9e94c6120a17">criteria</a>.type &amp; <a class="code hl_property" href="interface_term_criteria.html#a089833e724281b10c7ae1dd61b7698cd">TermCriteria::EPS</a>) ? std::max(<a class="code hl_variable" href="group__calib.html#ga6df421bf34545709f4dd9e94c6120a17">criteria</a>.epsilon, 0.) : 1.;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    eps = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>(eps*eps);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>, niters = (<a class="code hl_variable" href="group__calib.html#ga6df421bf34545709f4dd9e94c6120a17">criteria</a>.type &amp; <a class="code hl_property" href="interface_term_criteria.html#a09c28c3960f46802a35f466a28aec46e">TermCriteria::MAX_ITER</a>) ? std::max(<a class="code hl_variable" href="group__calib.html#ga6df421bf34545709f4dd9e94c6120a17">criteria</a>.maxCount, 1) : 100;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">for</span>( i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; niters; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++ )</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        cur_rect = cur_rect &amp; <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a>(0, 0, <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width, <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span>( cur_rect == <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a>() )</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            cur_rect.x = <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width/2;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            cur_rect.y = <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height/2;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        cur_rect.width = std::max(cur_rect.width, 1);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        cur_rect.height = std::max(cur_rect.height, 1);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_class" href="interface_moments.html">Moments</a> <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a> = isUMat ? <a class="code hl_function" href="group__geometry__shape.html#ga2e16aed4b484af86700fbbcebb109534">moments</a>(umat(cur_rect)) : <a class="code hl_function" href="group__geometry__shape.html#ga2e16aed4b484af86700fbbcebb109534">moments</a>(mat(cur_rect));</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="comment">// Calculating center of mass</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">if</span>( fabs(<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m00) &lt; DBL_EPSILON )</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordtype">int</span> dx = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m10/<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m00 - window.width*0.5 );</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordtype">int</span> dy = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m01/<a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m00 - window.height*0.5 );</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">int</span> nx = std::min(std::max(cur_rect.x + dx, 0), <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width - cur_rect.width);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">int</span> ny = std::min(std::max(cur_rect.y + dy, 0), <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height - cur_rect.height);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        dx = nx - cur_rect.x;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        dy = ny - cur_rect.y;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        cur_rect.x = nx;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        cur_rect.y = ny;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="comment">// Check for coverage centers mass &amp; window</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">if</span>( dx*dx + dy*dy &lt; eps )</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    window = cur_rect;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><a class="code hl_class" href="classcv_1_1_rotated_rect.html">cv::RotatedRect</a> <a class="code hl_function" href="group__video__track.html#ga05dd4cddf6c65245acd02db17e33b229">cv::CamShift</a>( InputArray _probImage, Rect&amp; window,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                              <a class="code hl_class" href="interface_term_criteria.html">TermCriteria</a> criteria )</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>{</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> TOLERANCE = 10;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_class" href="interface_mat.html">Mat</a> mat;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    UMat umat;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">bool</span> isUMat = _probImage.isUMat();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">if</span> (isUMat)</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        umat = _probImage.getUMat(), <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a> = umat.size();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        mat = _probImage.getMat(), <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a> = mat.<a class="code hl_function" href="interface_mat.html#a62ca577abd595e8117fcfba5e8fa0686">size</a>();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <a class="code hl_function" href="group__video__track.html#ga7d73bea676486ed2607d80f7970bc01a">meanShift</a>( _probImage, window, criteria );</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    window.x -= TOLERANCE;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">if</span>( window.x &lt; 0 )</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        window.x = 0;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    window.y -= TOLERANCE;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">if</span>( window.y &lt; 0 )</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        window.y = 0;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    window.width += 2 * TOLERANCE;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">if</span>( window.x + window.width &gt; <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width )</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        window.width = <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width - window.x;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    window.height += 2 * TOLERANCE;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span>( window.y + window.height &gt; <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height )</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        window.height = <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height - window.y;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="comment">// Calculating moments in new center mass</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <a class="code hl_class" href="interface_moments.html">Moments</a> <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a> = isUMat ? <a class="code hl_function" href="group__geometry__shape.html#ga2e16aed4b484af86700fbbcebb109534">moments</a>(umat(window)) : <a class="code hl_function" href="group__geometry__shape.html#ga2e16aed4b484af86700fbbcebb109534">moments</a>(mat(window));</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">double</span> m00 = <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m00, m10 = <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m10, m01 = <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.m01;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordtype">double</span> mu11 = <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.mu11, mu20 = <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.mu20, mu02 = <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>.mu02;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">if</span>( fabs(m00) &lt; DBL_EPSILON )</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="interface_rotated_rect.html">RotatedRect</a>();</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordtype">double</span> inv_m00 = 1. / m00;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordtype">int</span> xc = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( m10 * inv_m00 + window.x );</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">int</span> yc = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( m01 * inv_m00 + window.y );</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a> = mu20 * inv_m00, <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a> = mu11 * inv_m00, c = mu02 * inv_m00;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="comment">// Calculating width &amp; height</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">double</span> square = std::sqrt( 4 * b * b + (a - c) * (a - c) );</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="comment">// Calculating orientation</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">double</span> theta = atan2( 2 * b, a - c + square );</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="comment">// Calculating width &amp; length of figure</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">double</span> cs = <a class="code hl_function" href="group__core__quaternion.html#ga78d86db4e197c605a15ed8be03c5b4bd">cos</a>( theta );</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> = <a class="code hl_function" href="group__core__quaternion.html#gae1f619cdf97d0527bb816ef1c6537911">sin</a>( theta );</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordtype">double</span> rotate_a = cs * cs * mu20 + 2 * cs * <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> * mu11 + <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> * <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> * mu02;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">double</span> rotate_c = <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> * <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> * mu20 - 2 * cs * <a class="code hl_variable" href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">sn</a> * mu11 + cs * cs * mu02;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    rotate_a = std::max(0.0, rotate_a);  <span class="comment">// avoid negative result due calculation numeric errors</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    rotate_c = std::max(0.0, rotate_c);  <span class="comment">// avoid negative result due calculation numeric errors</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacegl.html#ae60e590c4668d94993ac69a6d77395d5">length</a> = std::sqrt( rotate_a * inv_m00 ) * 4;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacegl.html#a38d82e61432caf77221daa817da6cd3e">width</a> = std::sqrt( rotate_c * inv_m00 ) * 4;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="comment">// In case, when tetta is 0 or 1.57... the Length &amp; Width may be exchanged</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">if</span>( length &lt; width )</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        std::swap( length, width );</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        std::swap( cs, sn );</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        theta = <a class="code hl_define" href="group__core__utils.html#ga677b89fae9308b340ddaebf0dba8455f">CV_PI</a>*0.5 - theta;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    }</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="comment">// Saving results</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordtype">int</span> _xc = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( xc );</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordtype">int</span> _yc = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( yc );</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">int</span> t0 = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( fabs( length * cs ));</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">int</span> t1 = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( fabs( width * sn ));</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    t0 = <a class="code hl_define" href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>( t0, t1 ) + 2;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    window.width = <a class="code hl_define" href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a>( t0, (<a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width - _xc) * 2 );</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    t0 = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( fabs( length * sn ));</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    t1 = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>( fabs( width * cs ));</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    t0 = <a class="code hl_define" href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>( t0, t1 ) + 2;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    window.height = <a class="code hl_define" href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a>( t0, (<a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height - _yc) * 2 );</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    window.x = <a class="code hl_define" href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>( 0, _xc - window.width / 2 );</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    window.y = <a class="code hl_define" href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>( 0, _yc - window.height / 2 );</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    window.width = <a class="code hl_define" href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a>( <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.width - window.x, window.width );</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    window.height = <a class="code hl_define" href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a>( <a class="code hl_variable" href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">size</a>.height - window.y, window.height );</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <a class="code hl_class" href="interface_rotated_rect.html">RotatedRect</a> box;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    box.<a class="code hl_property" href="interface_rotated_rect.html#a265b5807b48267763772dc29718fb44e">size</a>.<a class="code hl_property" href="interface_size2f.html#a1ff49310369fcb352bb2a474b509158e">height</a> = (float)length;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    box.<a class="code hl_property" href="interface_rotated_rect.html#a265b5807b48267763772dc29718fb44e">size</a>.<a class="code hl_property" href="interface_size2f.html#ad1037da2334aaf1b38c53e3e1b817662">width</a> = (float)width;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> = (float)((<a class="code hl_define" href="group__core__utils.html#ga677b89fae9308b340ddaebf0dba8455f">CV_PI</a>*0.5+theta)*180./<a class="code hl_define" href="group__core__utils.html#ga677b89fae9308b340ddaebf0dba8455f">CV_PI</a>);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordflow">while</span>(box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> &lt; 0)</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> += 360;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">while</span>(box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> &gt;= 360)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> -= 360;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordflow">if</span>(box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> &gt;= 180)</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        box.<a class="code hl_property" href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">angle</a> -= 180;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    box.<a class="code hl_property" href="interface_rotated_rect.html#aca41974bd25adad37a78b4443c18d3aa">center</a> = <a class="code hl_class" href="interface_point2f.html">Point2f</a>( window.x + window.width*0.5f, window.y + window.height*0.5f);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">return</span> box;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>}</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">/* End of file. */</span></div>
+<div class="ttc" id="aclasscv_1_1_rotated_rect_html"><div class="ttname"><a href="classcv_1_1_rotated_rect.html">cv::RotatedRect</a></div><div class="ttdoc">The class represents rotated (i.e. not up-right) rectangles on a plane.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00540">types.hpp:541</a></div></div>
+<div class="ttc" id="agroup__calib_html_ga6df421bf34545709f4dd9e94c6120a17"><div class="ttname"><a href="group__calib.html#ga6df421bf34545709f4dd9e94c6120a17">cv::criteria</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray InputOutputArray OutputArrayOfArrays OutputArrayOfArrays OutputArray OutputArray OutputArray int TermCriteria criteria</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00697">calib.hpp:697</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__quaternion_html_ga78d86db4e197c605a15ed8be03c5b4bd"><div class="ttname"><a href="group__core__quaternion.html#ga78d86db4e197c605a15ed8be03c5b4bd">cv::cos</a></div><div class="ttdeci">Quat&lt; T &gt; cos(const Quat&lt; T &gt; &amp;q)</div></div>
+<div class="ttc" id="agroup__core__quaternion_html_gae1f619cdf97d0527bb816ef1c6537911"><div class="ttname"><a href="group__core__quaternion.html#gae1f619cdf97d0527bb816ef1c6537911">cv::sin</a></div><div class="ttdeci">Quat&lt; T &gt; sin(const Quat&lt; T &gt; &amp;q)</div></div>
+<div class="ttc" id="agroup__core__utils_html_ga085eca238176984a0b72df2818598d85"><div class="ttname"><a href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a></div><div class="ttdeci">int cvRound(double value)</div><div class="ttdoc">Rounds floating-point number to the nearest integer.</div><div class="ttdef"><b>Definición</b> <a href="fast__math_8hpp_source.html#l00200">fast_math.hpp:200</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga3acffbd305ee72dcd4593c0d8af64a4f"><div class="ttname"><a href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a></div><div class="ttdeci">#define MIN(a, b)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00535">cvdef.h:535</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga677b89fae9308b340ddaebf0dba8455f"><div class="ttname"><a href="group__core__utils.html#ga677b89fae9308b340ddaebf0dba8455f">CV_PI</a></div><div class="ttdeci">#define CV_PI</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00386">cvdef.h:386</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafa99ec4acc4ecb2dc3c2d05da15d0e3f"><div class="ttname"><a href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a></div><div class="ttdeci">#define MAX(a, b)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00539">cvdef.h:539</a></div></div>
+<div class="ttc" id="agroup__geometry__shape_html_ga2e16aed4b484af86700fbbcebb109534"><div class="ttname"><a href="group__geometry__shape.html#ga2e16aed4b484af86700fbbcebb109534">cv::moments</a></div><div class="ttdeci">CV_EXPORTS_W Moments moments(InputArray array, bool binaryImage=false)</div><div class="ttdoc">Calculates all of the moments up to the third order of a polygon or rasterized shape.</div><div class="ttdef"><b>Definición</b> <a href="moments_8cpp_source.html#l00605">moments.cpp:605</a></div></div>
+<div class="ttc" id="agroup__video__track_html_ga05dd4cddf6c65245acd02db17e33b229"><div class="ttname"><a href="group__video__track.html#ga05dd4cddf6c65245acd02db17e33b229">cv::CamShift</a></div><div class="ttdeci">CV_EXPORTS_W RotatedRect CamShift(InputArray probImage, CV_IN_OUT Rect &amp;window, TermCriteria criteria)</div><div class="ttdoc">Finds an object center, size, and orientation.</div></div>
+<div class="ttc" id="agroup__video__track_html_ga7d73bea676486ed2607d80f7970bc01a"><div class="ttname"><a href="group__video__track.html#ga7d73bea676486ed2607d80f7970bc01a">cv::meanShift</a></div><div class="ttdeci">CV_EXPORTS_W int meanShift(InputArray probImage, CV_IN_OUT Rect &amp;window, TermCriteria criteria)</div><div class="ttdoc">Finds an object on a back projection image.</div></div>
+<div class="ttc" id="ainterface_mat_html"><div class="ttname"><a href="interface_mat.html">Mat</a></div><div class="ttdef"><b>Definición</b> <a href="_mat_8h_source.html#l00048">Mat.h:49</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a58d809cf7a192497a8dd4bc4774fca0a"><div class="ttname"><a href="interface_mat.html#a58d809cf7a192497a8dd4bc4774fca0a">-[Mat channels]</a></div><div class="ttdeci">int channels()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00212">Mat.mm:212</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a62ca577abd595e8117fcfba5e8fa0686"><div class="ttname"><a href="interface_mat.html#a62ca577abd595e8117fcfba5e8fa0686">-[Mat size]</a></div><div class="ttdeci">Size2i * size()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00456">Mat.mm:456</a></div></div>
+<div class="ttc" id="ainterface_moments_html"><div class="ttname"><a href="interface_moments.html">Moments</a></div><div class="ttdef"><b>Definición</b> <a href="_moments_8h_source.html#l00019">Moments.h:20</a></div></div>
+<div class="ttc" id="ainterface_point2f_html"><div class="ttname"><a href="interface_point2f.html">Point2f</a></div><div class="ttdef"><b>Definición</b> <a href="_point2f_8h_source.html#l00024">Point2f.h:25</a></div></div>
+<div class="ttc" id="ainterface_rotated_rect_html"><div class="ttname"><a href="interface_rotated_rect.html">RotatedRect</a></div><div class="ttdef"><b>Definición</b> <a href="_rotated_rect_8h_source.html#l00026">RotatedRect.h:27</a></div></div>
+<div class="ttc" id="ainterface_rotated_rect_html_a265b5807b48267763772dc29718fb44e"><div class="ttname"><a href="interface_rotated_rect.html#a265b5807b48267763772dc29718fb44e">RotatedRect::size</a></div><div class="ttdeci">Size2f * size</div><div class="ttdef"><b>Definición</b> <a href="_rotated_rect_8h_source.html#l00031">RotatedRect.h:31</a></div></div>
+<div class="ttc" id="ainterface_rotated_rect_html_a4c77283885a473a9ac58857701e91638"><div class="ttname"><a href="interface_rotated_rect.html#a4c77283885a473a9ac58857701e91638">RotatedRect::angle</a></div><div class="ttdeci">double angle</div><div class="ttdef"><b>Definición</b> <a href="_rotated_rect_8h_source.html#l00032">RotatedRect.h:32</a></div></div>
+<div class="ttc" id="ainterface_rotated_rect_html_aca41974bd25adad37a78b4443c18d3aa"><div class="ttname"><a href="interface_rotated_rect.html#aca41974bd25adad37a78b4443c18d3aa">RotatedRect::center</a></div><div class="ttdeci">Point2f * center</div><div class="ttdef"><b>Definición</b> <a href="_rotated_rect_8h_source.html#l00030">RotatedRect.h:30</a></div></div>
+<div class="ttc" id="ainterface_size2f_html_a1ff49310369fcb352bb2a474b509158e"><div class="ttname"><a href="interface_size2f.html#a1ff49310369fcb352bb2a474b509158e">Size2f::height</a></div><div class="ttdeci">float height</div><div class="ttdef"><b>Definición</b> <a href="_size2f_8mm_source.html#l00022">Size2f.mm:22</a></div></div>
+<div class="ttc" id="ainterface_size2f_html_ad1037da2334aaf1b38c53e3e1b817662"><div class="ttname"><a href="interface_size2f.html#ad1037da2334aaf1b38c53e3e1b817662">Size2f::width</a></div><div class="ttdeci">float width</div><div class="ttdef"><b>Definición</b> <a href="_size2f_8mm_source.html#l00014">Size2f.mm:14</a></div></div>
+<div class="ttc" id="ainterface_term_criteria_html"><div class="ttname"><a href="interface_term_criteria.html">TermCriteria</a></div><div class="ttdef"><b>Definición</b> <a href="_term_criteria_8h_source.html#l00022">TermCriteria.h:23</a></div></div>
+<div class="ttc" id="ainterface_term_criteria_html_a089833e724281b10c7ae1dd61b7698cd"><div class="ttname"><a href="interface_term_criteria.html#a089833e724281b10c7ae1dd61b7698cd">TermCriteria::EPS</a></div><div class="ttdeci">int EPS</div><div class="ttdef"><b>Definición</b> <a href="_term_criteria_8mm_source.html#l00017">TermCriteria.mm:17</a></div></div>
+<div class="ttc" id="ainterface_term_criteria_html_a09c28c3960f46802a35f466a28aec46e"><div class="ttname"><a href="interface_term_criteria.html#a09c28c3960f46802a35f466a28aec46e">TermCriteria::MAX_ITER</a></div><div class="ttdeci">int MAX_ITER</div><div class="ttdef"><b>Definición</b> <a href="_term_criteria_8mm_source.html#l00021">TermCriteria.mm:21</a></div></div>
+<div class="ttc" id="anamespacechart_html_a25c29a7dfead240cfc20a5f934d648da"><div class="ttname"><a href="namespacechart.html#a25c29a7dfead240cfc20a5f934d648da">chart.sn</a></div><div class="ttdeci">sn</div><div class="ttdef"><b>Definición</b> <a href="chart_8py_source.html#l00194">chart.py:194</a></div></div>
+<div class="ttc" id="anamespacegl_html_a38d82e61432caf77221daa817da6cd3e"><div class="ttname"><a href="namespacegl.html#a38d82e61432caf77221daa817da6cd3e">gl::width</a></div><div class="ttdeci">GLint GLsizei width</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01075">gl_core_3_1.hpp:1075</a></div></div>
+<div class="ttc" id="anamespacegl_html_aaab0b7d37c1775a965012c32b5037bda"><div class="ttname"><a href="namespacegl.html#aaab0b7d37c1775a965012c32b5037bda">gl::size</a></div><div class="ttdeci">GLsizeiptr size</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01174">gl_core_3_1.hpp:1174</a></div></div>
+<div class="ttc" id="anamespacegl_html_abffb406910610800948b016e2fd690c7"><div class="ttname"><a href="namespacegl.html#abffb406910610800948b016e2fd690c7">gl::b</a></div><div class="ttdeci">GLboolean GLboolean GLboolean b</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01282">gl_core_3_1.hpp:1282</a></div></div>
+<div class="ttc" id="anamespacegl_html_ae60e590c4668d94993ac69a6d77395d5"><div class="ttname"><a href="namespacegl.html#ae60e590c4668d94993ac69a6d77395d5">gl::length</a></div><div class="ttdeci">GLuint GLsizei GLsizei * length</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01198">gl_core_3_1.hpp:1198</a></div></div>
+<div class="ttc" id="anamespacegl_html_af2753ee7944d450bb463309a8537bfc3"><div class="ttname"><a href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">gl::a</a></div><div class="ttdeci">GLboolean GLboolean GLboolean GLboolean a</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01282">gl_core_3_1.hpp:1282</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a3f4c9888bcfa4a6e9150cbcfb39fc480"><div class="ttname"><a href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">parser_cl.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00052">parser_cl.py:52</a></div></div>
+<div class="ttc" id="anamespacereport_html_a0b2a055171c088a511a6dc6d9b622b68"><div class="ttname"><a href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">report.m</a></div><div class="ttdeci">m</div><div class="ttdef"><b>Definición</b> <a href="report_8py_source.html#l00116">report.py:116</a></div></div>
+<div class="ttc" id="avideo_2src_2precomp_8hpp_html"><div class="ttname"><a href="video_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_2508e962348bdf6937b92f313b633ed9.html">video</a></li><li class="navelem"><a href="dir_e10036e501edf27ab5629bafc103e45e.html">src</a></li><li class="navelem"><a href="camshift_8cpp.html">camshift.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

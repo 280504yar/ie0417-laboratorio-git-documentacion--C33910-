@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/photo/src/ccm/distance.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('distance_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">distance.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="distance_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Author: Longbu Wang &lt;wanglongbu@huawei.com.com&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//         Jinheng Zhang &lt;zhangjinheng1@huawei.com&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//         Chenqi Shan &lt;shanchenqi@huawei.com&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef __OPENCV_CCM_DISTANCE_HPP__</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define __OPENCV_CCM_DISTANCE_HPP__</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="photo_2src_2ccm_2utils_8hpp.html">utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="photo_8hpp.html">opencv2/photo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1ccm.html">ccm</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#aa6e6f99405a9e613801a5f1bc9a66658">deltaCIE76</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#acd77a6ee90b244d31e1cd03bb231fba0">deltaCIE94</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2, <span class="keywordtype">double</span> kH = 1.0,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">double</span> kC = 1.0, <span class="keywordtype">double</span> kL = 1.0, <span class="keywordtype">double</span> k1 = 0.045,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">double</span> k2 = 0.015);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#ac7aa88011f400b0659d29bb73b165cdb">deltaCIE94GraphicArts</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#ac936b628ebffbee5d231710d353eecd5">toRad</a>(<span class="keywordtype">double</span> degree);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#a2e79a5e009e19086ca778bf633649c8e">deltaCIE94Textiles</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#adaeb25e02d9ae9f03f070675c6adf0bd">deltaCIEDE2000_</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2, <span class="keywordtype">double</span> kL = 1.0,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">double</span> kC = 1.0, <span class="keywordtype">double</span> kH = 1.0);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#a8e8fab23166baa476bcf2cb22d8092ef">deltaCIEDE2000</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#ada5516bc01e8c9ccc32a2abfbc1ec0d8">deltaCMC</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2, <span class="keywordtype">double</span> kL = 1, <span class="keywordtype">double</span> kC = 1);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#a30edd4d1171b5da7ebbb4c5dc0c2c4e9">deltaCMC1To1</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1ccm.html#a0b312c36d411b1b5e8971bce5e354042">deltaCMC2To1</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab1, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">Vec3d</a>&amp; lab2);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>Mat <a class="code hl_function" href="namespacecv_1_1ccm.html#a5a7f1e8018de25f07791ea6eb8640a51">distance</a>(Mat src,Mat ref, <a class="code hl_enumeration" href="group__ccm.html#ga16844d1f354b6c5f101c7011efdf2e72">DistanceType</a> <a class="code hl_variable" href="group__imgproc__misc.html#ga9c6d4e411e56286cff1b6713af55ee37">distanceType</a>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}  <span class="comment">// namespace cv::ccm</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="agroup__ccm_html_ga16844d1f354b6c5f101c7011efdf2e72"><div class="ttname"><a href="group__ccm.html#ga16844d1f354b6c5f101c7011efdf2e72">cv::ccm::DistanceType</a></div><div class="ttdeci">DistanceType</div><div class="ttdoc">Enum of possible functions to calculate the distance between colors.</div><div class="ttdef"><b>Definición</b> <a href="ccm_8hpp_source.html#l00120">ccm.hpp:121</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga370d94209693b5b13437ab4991cabf73"><div class="ttname"><a href="group__core__basic.html#ga370d94209693b5b13437ab4991cabf73">cv::Vec3d</a></div><div class="ttdeci">Vec&lt; double, 3 &gt; Vec3d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00480">matx.hpp:480</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_ga9c6d4e411e56286cff1b6713af55ee37"><div class="ttname"><a href="group__imgproc__misc.html#ga9c6d4e411e56286cff1b6713af55ee37">cv::distanceType</a></div><div class="ttdeci">OutputArray OutputArray int distanceType</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l03362">imgproc.hpp:3362</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html"><div class="ttname"><a href="namespacecv_1_1ccm.html">cv::ccm</a></div><div class="ttdef"><b>Definición</b> <a href="ccm_8hpp_source.html#l00017">ccm.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a0b312c36d411b1b5e8971bce5e354042"><div class="ttname"><a href="namespacecv_1_1ccm.html#a0b312c36d411b1b5e8971bce5e354042">cv::ccm::deltaCMC2To1</a></div><div class="ttdeci">double deltaCMC2To1(const Vec3d &amp;lab1, const Vec3d &amp;lab2)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00172">distance.cpp:172</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a2e79a5e009e19086ca778bf633649c8e"><div class="ttname"><a href="namespacecv_1_1ccm.html#a2e79a5e009e19086ca778bf633649c8e">cv::ccm::deltaCIE94Textiles</a></div><div class="ttdeci">double deltaCIE94Textiles(const Vec3d &amp;lab1, const Vec3d &amp;lab2)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00041">distance.cpp:41</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a30edd4d1171b5da7ebbb4c5dc0c2c4e9"><div class="ttname"><a href="namespacecv_1_1ccm.html#a30edd4d1171b5da7ebbb4c5dc0c2c4e9">cv::ccm::deltaCMC1To1</a></div><div class="ttdeci">double deltaCMC1To1(const Vec3d &amp;lab1, const Vec3d &amp;lab2)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00167">distance.cpp:167</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a5a7f1e8018de25f07791ea6eb8640a51"><div class="ttname"><a href="namespacecv_1_1ccm.html#a5a7f1e8018de25f07791ea6eb8640a51">cv::ccm::distance</a></div><div class="ttdeci">Mat distance(Mat src, Mat ref, DistanceType distanceType)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00177">distance.cpp:177</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_a8e8fab23166baa476bcf2cb22d8092ef"><div class="ttname"><a href="namespacecv_1_1ccm.html#a8e8fab23166baa476bcf2cb22d8092ef">cv::ccm::deltaCIEDE2000</a></div><div class="ttdeci">double deltaCIEDE2000(const Vec3d &amp;lab1, const Vec3d &amp;lab2)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00129">distance.cpp:129</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_aa6e6f99405a9e613801a5f1bc9a66658"><div class="ttname"><a href="namespacecv_1_1ccm.html#aa6e6f99405a9e613801a5f1bc9a66658">cv::ccm::deltaCIE76</a></div><div class="ttdeci">double deltaCIE76(const Vec3d &amp;lab1, const Vec3d &amp;lab2)</div><div class="ttdoc">distance between two points in formula CIE76</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00014">distance.cpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_ac7aa88011f400b0659d29bb73b165cdb"><div class="ttname"><a href="namespacecv_1_1ccm.html#ac7aa88011f400b0659d29bb73b165cdb">cv::ccm::deltaCIE94GraphicArts</a></div><div class="ttdeci">double deltaCIE94GraphicArts(const Vec3d &amp;lab1, const Vec3d &amp;lab2)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00034">distance.cpp:34</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_ac936b628ebffbee5d231710d353eecd5"><div class="ttname"><a href="namespacecv_1_1ccm.html#ac936b628ebffbee5d231710d353eecd5">cv::ccm::toRad</a></div><div class="ttdeci">double toRad(double degree)</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00039">distance.cpp:39</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_acd77a6ee90b244d31e1cd03bb231fba0"><div class="ttname"><a href="namespacecv_1_1ccm.html#acd77a6ee90b244d31e1cd03bb231fba0">cv::ccm::deltaCIE94</a></div><div class="ttdeci">double deltaCIE94(const Vec3d &amp;lab1, const Vec3d &amp;lab2, double kH, double kC, double kL, double k1, double k2)</div><div class="ttdoc">distance between two points in formula CIE94</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00016">distance.cpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_ada5516bc01e8c9ccc32a2abfbc1ec0d8"><div class="ttname"><a href="namespacecv_1_1ccm.html#ada5516bc01e8c9ccc32a2abfbc1ec0d8">cv::ccm::deltaCMC</a></div><div class="ttdeci">double deltaCMC(const Vec3d &amp;lab1, const Vec3d &amp;lab2, double kL, double kC)</div><div class="ttdoc">distance between two points in formula CMC</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00134">distance.cpp:134</a></div></div>
+<div class="ttc" id="anamespacecv_1_1ccm_html_adaeb25e02d9ae9f03f070675c6adf0bd"><div class="ttname"><a href="namespacecv_1_1ccm.html#adaeb25e02d9ae9f03f070675c6adf0bd">cv::ccm::deltaCIEDE2000_</a></div><div class="ttdeci">double deltaCIEDE2000_(const Vec3d &amp;lab1, const Vec3d &amp;lab2, double kL, double kC, double kH)</div><div class="ttdoc">distance between two points in formula CIE2000</div><div class="ttdef"><b>Definición</b> <a href="distance_8cpp_source.html#l00046">distance.cpp:46</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aphoto_2src_2ccm_2utils_8hpp_html"><div class="ttname"><a href="photo_2src_2ccm_2utils_8hpp.html">utils.hpp</a></div></div>
+<div class="ttc" id="aphoto_8hpp_html"><div class="ttname"><a href="photo_8hpp.html">photo.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_847b99370ed06e1072f8b8059d2f9ef8.html">photo</a></li><li class="navelem"><a href="dir_8ce04962efed91e20e757beca4d6ab49.html">src</a></li><li class="navelem"><a href="dir_d0b5b1b6af9e9720589246207b511d01.html">ccm</a></li><li class="navelem"><a href="distance_8hpp.html">distance.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

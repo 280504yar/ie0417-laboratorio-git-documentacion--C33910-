@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/highgui/src/window_framebuffer.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('window__framebuffer_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">window_framebuffer.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="window__framebuffer_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_HIGHGUI_WINDOWS_FRAMEBUFFER_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_HIGHGUI_WINDOWS_FRAMEBUFFER_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="highgui_2src_2backend_8hpp.html">backend.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;linux/fb.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;linux/input.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1highgui__backend.html">highgui_backend</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17">   18</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17">OpenCVFBMode</a>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17a8da28e52085caa99ebc1f27b6a777876">   19</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17a8da28e52085caa99ebc1f27b6a777876">FB_MODE_EMU</a>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17ab5c6ada56050ffda36d06e593aa7a5e8">   20</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17ab5c6ada56050ffda36d06e593aa7a5e8">FB_MODE_FB</a>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17aa22a96815f07120f4fa04b765d90f32c">   21</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17aa22a96815f07120f4fa04b765d90f32c">FB_MODE_XVFB</a></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
+</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html">FramebufferBackend</a>;</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html">   25</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#ac6cbf69bb8b5631bee712564d9095975">FramebufferWindow</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window.html">UIWindow</a></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html">FramebufferBackend</a> &amp;backend;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    std::string FB_ID;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> windowRect;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">int</span> flags;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> currentImg;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#ac6cbf69bb8b5631bee712564d9095975">FramebufferWindow</a>(<a class="code hl_class" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html">FramebufferBackend</a> &amp;backend, <span class="keywordtype">int</span> flags);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#ac6cbf69bb8b5631bee712564d9095975">~FramebufferWindow</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a716a3073bcb1fc3e4fd316805f94ec1e">imshow</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#abc2f0ac8f8523cb982e0f46547edb54a">getProperty</a>(<span class="keywordtype">int</span> prop) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#aa0741421cda7fb2e805b4a9803dee1c5">setProperty</a>(<span class="keywordtype">int</span> prop, <span class="keywordtype">double</span> value) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#abaa1f93de94227783c128cecd46f9678">resize</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a27af79431a01c5e2829ce0f8e6b43471">move</a>(<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">virtual</span> <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a43693e91594bf127a5725bc628dc3630">getImageRect</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a49a51e06255de0ac5951f5d9c14b1d8c">setTitle</a>(<span class="keyword">const</span> std::string&amp; title) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a4ca4dc3f92842fd57a49e0749088b22b">setMouseCallback</a>(<a class="code hl_typedef" href="group__highgui.html#ga12a3c2ca79231ca158d30bf8ed892bc1">MouseCallback</a> onMouse, <span class="keywordtype">void</span>* userdata <span class="comment">/*= 0*/</span>) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">virtual</span> std::shared_ptr&lt;UITrackbar&gt; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#ac12072fbc95e467c046fcae8a5e38def">createTrackbar</a>(</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordtype">int</span> count,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <a class="code hl_typedef" href="group__highgui.html#gaa84183880fdb1de4f7f0cf6fed63c213">TrackbarCallback</a> onChange <span class="comment">/*= 0*/</span>,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordtype">void</span>* userdata <span class="comment">/*= 0*/</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">virtual</span> std::shared_ptr&lt;UITrackbar&gt; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a83a050b454f7611d0acf41c703f65eb9">findTrackbar</a>(<span class="keyword">const</span> std::string&amp; name) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">virtual</span> <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a88652472b0763c35ad42ced98693b4bb">getID</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a3c0e5c9230bcc60afaa70b36c8ce8735">isActive</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a2f28c6dcaeca6774a262daa5a9934992">destroy</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}; <span class="comment">// FramebufferWindow</span></div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="};">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html">   68</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a6cd29fdfe19aa7fb69be2bcdecb398ae">FramebufferBackend</a>: <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_backend.html">UIBackend</a></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_enumeration" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17">OpenCVFBMode</a> mode;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">struct </span>termios old, current;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">void</span> initTermios(<span class="keywordtype">int</span> echo, <span class="keywordtype">int</span> wait);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> resetTermios(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">int</span> getch_(<span class="keywordtype">int</span> echo, <span class="keywordtype">int</span> wait);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">bool</span> kbhit();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    fb_var_screeninfo varInfo;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    fb_fix_screeninfo fixInfo;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">int</span> fbWidth;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">int</span> fbHeight;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">int</span> fbXOffset;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">int</span> fbYOffset;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">int</span> fbBitsPerPixel;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">int</span> fbLineLength;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">long</span> <span class="keywordtype">int</span> fbScreenSize;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* fbPointer;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fbPointer_dist;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> backgroundBuff;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">int</span> fbOpenAndGetInfo();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">int</span> fbID;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> xvfb_len_header;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> xvfb_len_colors;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> xvfb_len_pixmap;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">int</span> XvfbOpenAndGetInfo();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    fb_var_screeninfo &amp;<a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a784c66c407538e0ef95c3bea05015ec0">getVarInfo</a>();</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    fb_fix_screeninfo &amp;<a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#af8c2756617fac87c41a701a59aff8ce6">getFixInfo</a>();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a938fec4d2d37a680ad9e1eb8cd1e0e48">getFramebufferID</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a41ea23c3a908dde3212d3e7e60bed425">getFBWidth</a>();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#aa9729a875f0388db98236d1a52064764">getFBHeight</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a439c070cb5692c996b1e8c0d6eaaf770">getFBXOffset</a>();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a1961595da6bc298c58508233e517474b">getFBYOffset</a>();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#aa1ac40ef8a6eeb90de104ebcf9882440">getFBBitsPerPixel</a>();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#ad7b8b0eaa56646e11920d1bbe060b645">getFBLineLength</a>();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#ab2dbe53f97df957378e6c57654bf08fd">getFBPointer</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a008be2e3c9865a7c9f024ccdc5f6fdd6">getBackgroundBuff</a>();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_enumeration" href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17">OpenCVFBMode</a> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a77dd78fbfe92bf6af3493e5444a0e69a">getMode</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a6cd29fdfe19aa7fb69be2bcdecb398ae">FramebufferBackend</a>();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a6cd29fdfe19aa7fb69be2bcdecb398ae">~FramebufferBackend</a>();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a79d9aaa1a8dd2b7ad5b72f14cce15643">destroyAllWindows</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">// namedWindow</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">virtual</span> std::shared_ptr&lt;UIWindow&gt; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a9a310e6dfc3d0be8ac359306bb925e10">createWindow</a>(</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keyword">const</span> std::string&amp; winname,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">flags</a></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    )<span class="keyword">override</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a488e8715d371dd4fcbaead10181a6b5f">waitKeyEx</a>(<span class="keywordtype">int</span> delay <span class="comment">/*= 0*/</span>)<span class="keyword">override</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a26cebf4d37e3e49b1ba5afd948dccbb2">pollKey</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">virtual</span> <span class="keyword">const</span> std::string <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a4ba4ed8c6d94e289a6ab72e2a066223f">getName</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>};</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}} <span class="comment">// cv::highgui_backend::</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html">cv::highgui_backend::FramebufferBackend</a></div><div class="ttdef"><b>Definición</b> <a href="#l00068">window_framebuffer.hpp:69</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a008be2e3c9865a7c9f024ccdc5f6fdd6"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a008be2e3c9865a7c9f024ccdc5f6fdd6">cv::highgui_backend::FramebufferBackend::getBackgroundBuff</a></div><div class="ttdeci">Mat &amp; getBackgroundBuff()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00562">window_framebuffer.cpp:562</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a1961595da6bc298c58508233e517474b"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a1961595da6bc298c58508233e517474b">cv::highgui_backend::FramebufferBackend::getFBYOffset</a></div><div class="ttdeci">int getFBYOffset()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00542">window_framebuffer.cpp:542</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a26cebf4d37e3e49b1ba5afd948dccbb2"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a26cebf4d37e3e49b1ba5afd948dccbb2">cv::highgui_backend::FramebufferBackend::pollKey</a></div><div class="ttdeci">virtual int pollKey() override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00767">window_framebuffer.cpp:767</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a41ea23c3a908dde3212d3e7e60bed425"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a41ea23c3a908dde3212d3e7e60bed425">cv::highgui_backend::FramebufferBackend::getFBWidth</a></div><div class="ttdeci">int getFBWidth()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00527">window_framebuffer.cpp:527</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a439c070cb5692c996b1e8c0d6eaaf770"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a439c070cb5692c996b1e8c0d6eaaf770">cv::highgui_backend::FramebufferBackend::getFBXOffset</a></div><div class="ttdeci">int getFBXOffset()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00537">window_framebuffer.cpp:537</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a488e8715d371dd4fcbaead10181a6b5f"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a488e8715d371dd4fcbaead10181a6b5f">cv::highgui_backend::FramebufferBackend::waitKeyEx</a></div><div class="ttdeci">virtual int waitKeyEx(int delay) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00719">window_framebuffer.cpp:719</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a4ba4ed8c6d94e289a6ab72e2a066223f"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a4ba4ed8c6d94e289a6ab72e2a066223f">cv::highgui_backend::FramebufferBackend::getName</a></div><div class="ttdeci">virtual const std::string getName() const override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00793">window_framebuffer.cpp:793</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a6cd29fdfe19aa7fb69be2bcdecb398ae"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a6cd29fdfe19aa7fb69be2bcdecb398ae">cv::highgui_backend::FramebufferBackend::FramebufferBackend</a></div><div class="ttdeci">FramebufferBackend()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00572">window_framebuffer.cpp:572</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a77dd78fbfe92bf6af3493e5444a0e69a"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a77dd78fbfe92bf6af3493e5444a0e69a">cv::highgui_backend::FramebufferBackend::getMode</a></div><div class="ttdeci">OpenCVFBMode getMode()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00567">window_framebuffer.cpp:567</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a784c66c407538e0ef95c3bea05015ec0"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a784c66c407538e0ef95c3bea05015ec0">cv::highgui_backend::FramebufferBackend::getVarInfo</a></div><div class="ttdeci">fb_var_screeninfo &amp; getVarInfo()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00512">window_framebuffer.cpp:512</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a79d9aaa1a8dd2b7ad5b72f14cce15643"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a79d9aaa1a8dd2b7ad5b72f14cce15643">cv::highgui_backend::FramebufferBackend::destroyAllWindows</a></div><div class="ttdeci">virtual void destroyAllWindows() override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00656">window_framebuffer.cpp:656</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a938fec4d2d37a680ad9e1eb8cd1e0e48"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a938fec4d2d37a680ad9e1eb8cd1e0e48">cv::highgui_backend::FramebufferBackend::getFramebufferID</a></div><div class="ttdeci">int getFramebufferID()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00522">window_framebuffer.cpp:522</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_a9a310e6dfc3d0be8ac359306bb925e10"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#a9a310e6dfc3d0be8ac359306bb925e10">cv::highgui_backend::FramebufferBackend::createWindow</a></div><div class="ttdeci">virtual std::shared_ptr&lt; UIWindow &gt; createWindow(const std::string &amp;winname, int flags) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00661">window_framebuffer.cpp:661</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_aa1ac40ef8a6eeb90de104ebcf9882440"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#aa1ac40ef8a6eeb90de104ebcf9882440">cv::highgui_backend::FramebufferBackend::getFBBitsPerPixel</a></div><div class="ttdeci">int getFBBitsPerPixel()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00547">window_framebuffer.cpp:547</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_aa9729a875f0388db98236d1a52064764"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#aa9729a875f0388db98236d1a52064764">cv::highgui_backend::FramebufferBackend::getFBHeight</a></div><div class="ttdeci">int getFBHeight()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00532">window_framebuffer.cpp:532</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_ab2dbe53f97df957378e6c57654bf08fd"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#ab2dbe53f97df957378e6c57654bf08fd">cv::highgui_backend::FramebufferBackend::getFBPointer</a></div><div class="ttdeci">unsigned char * getFBPointer()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00557">window_framebuffer.cpp:557</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_ad7b8b0eaa56646e11920d1bbe060b645"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#ad7b8b0eaa56646e11920d1bbe060b645">cv::highgui_backend::FramebufferBackend::getFBLineLength</a></div><div class="ttdeci">int getFBLineLength()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00552">window_framebuffer.cpp:552</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_backend_html_af8c2756617fac87c41a701a59aff8ce6"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_backend.html#af8c2756617fac87c41a701a59aff8ce6">cv::highgui_backend::FramebufferBackend::getFixInfo</a></div><div class="ttdeci">fb_fix_screeninfo &amp; getFixInfo()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00517">window_framebuffer.cpp:517</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a27af79431a01c5e2829ce0f8e6b43471"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a27af79431a01c5e2829ce0f8e6b43471">cv::highgui_backend::FramebufferWindow::move</a></div><div class="ttdeci">virtual void move(int x, int y) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00298">window_framebuffer.cpp:298</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a2f28c6dcaeca6774a262daa5a9934992"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a2f28c6dcaeca6774a262daa5a9934992">cv::highgui_backend::FramebufferWindow::destroy</a></div><div class="ttdeci">virtual void destroy() override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00355">window_framebuffer.cpp:355</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a3c0e5c9230bcc60afaa70b36c8ce8735"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a3c0e5c9230bcc60afaa70b36c8ce8735">cv::highgui_backend::FramebufferWindow::isActive</a></div><div class="ttdeci">virtual bool isActive() const override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00349">window_framebuffer.cpp:349</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a43693e91594bf127a5725bc628dc3630"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a43693e91594bf127a5725bc628dc3630">cv::highgui_backend::FramebufferWindow::getImageRect</a></div><div class="ttdeci">virtual Rect getImageRect() const override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00311">window_framebuffer.cpp:311</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a49a51e06255de0ac5951f5d9c14b1d8c"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a49a51e06255de0ac5951f5d9c14b1d8c">cv::highgui_backend::FramebufferWindow::setTitle</a></div><div class="ttdeci">virtual void setTitle(const std::string &amp;title) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00317">window_framebuffer.cpp:317</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a4ca4dc3f92842fd57a49e0749088b22b"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a4ca4dc3f92842fd57a49e0749088b22b">cv::highgui_backend::FramebufferWindow::setMouseCallback</a></div><div class="ttdeci">virtual void setMouseCallback(MouseCallback onMouse, void *userdata) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00322">window_framebuffer.cpp:322</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a716a3073bcb1fc3e4fd316805f94ec1e"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a716a3073bcb1fc3e4fd316805f94ec1e">cv::highgui_backend::FramebufferWindow::imshow</a></div><div class="ttdeci">virtual void imshow(InputArray image) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00078">window_framebuffer.cpp:78</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a83a050b454f7611d0acf41c703f65eb9"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a83a050b454f7611d0acf41c703f65eb9">cv::highgui_backend::FramebufferWindow::findTrackbar</a></div><div class="ttdeci">virtual std::shared_ptr&lt; UITrackbar &gt; findTrackbar(const std::string &amp;name) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00337">window_framebuffer.cpp:337</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_a88652472b0763c35ad42ced98693b4bb"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#a88652472b0763c35ad42ced98693b4bb">cv::highgui_backend::FramebufferWindow::getID</a></div><div class="ttdeci">virtual const std::string &amp; getID() const override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00343">window_framebuffer.cpp:343</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_aa0741421cda7fb2e805b4a9803dee1c5"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#aa0741421cda7fb2e805b4a9803dee1c5">cv::highgui_backend::FramebufferWindow::setProperty</a></div><div class="ttdeci">virtual bool setProperty(int prop, double value) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00272">window_framebuffer.cpp:272</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_abaa1f93de94227783c128cecd46f9678"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#abaa1f93de94227783c128cecd46f9678">cv::highgui_backend::FramebufferWindow::resize</a></div><div class="ttdeci">virtual void resize(int width, int height) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00278">window_framebuffer.cpp:278</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_abc2f0ac8f8523cb982e0f46547edb54a"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#abc2f0ac8f8523cb982e0f46547edb54a">cv::highgui_backend::FramebufferWindow::getProperty</a></div><div class="ttdeci">virtual double getProperty(int prop) const override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00266">window_framebuffer.cpp:266</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_ac12072fbc95e467c046fcae8a5e38def"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#ac12072fbc95e467c046fcae8a5e38def">cv::highgui_backend::FramebufferWindow::createTrackbar</a></div><div class="ttdeci">virtual std::shared_ptr&lt; UITrackbar &gt; createTrackbar(const std::string &amp;name, int count, TrackbarCallback onChange, void *userdata) override</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00327">window_framebuffer.cpp:327</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_framebuffer_window_html_ac6cbf69bb8b5631bee712564d9095975"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_framebuffer_window.html#ac6cbf69bb8b5631bee712564d9095975">cv::highgui_backend::FramebufferWindow::FramebufferWindow</a></div><div class="ttdeci">FramebufferWindow(FramebufferBackend &amp;backend, int flags)</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00065">window_framebuffer.cpp:65</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html">cv::highgui_backend::UIBackend</a></div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2backend_8hpp_source.html#l00094">backend.hpp:95</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html">cv::highgui_backend::UIWindow</a></div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2backend_8hpp_source.html#l00029">backend.hpp:30</a></div></div>
+<div class="ttc" id="agroup__calib_html_gac28e35eb6aa1ca2fc43838e8bdd0dbdc"><div class="ttname"><a href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">cv::flags</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray InputOutputArray OutputArrayOfArrays OutputArrayOfArrays OutputArray OutputArray OutputArray int flags</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00697">calib.hpp:697</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__highgui_html_ga12a3c2ca79231ca158d30bf8ed892bc1"><div class="ttname"><a href="group__highgui.html#ga12a3c2ca79231ca158d30bf8ed892bc1">cv::MouseCallback</a></div><div class="ttdeci">void(*) MouseCallback(int event, int x, int y, int flags, void *userdata)</div><div class="ttdoc">Callback function for mouse events. see cv::setMouseCallback.</div><div class="ttdef"><b>Definición</b> <a href="highgui_8hpp_source.html#l00191">highgui.hpp:191</a></div></div>
+<div class="ttc" id="agroup__highgui_html_gaa84183880fdb1de4f7f0cf6fed63c213"><div class="ttname"><a href="group__highgui.html#gaa84183880fdb1de4f7f0cf6fed63c213">cv::TrackbarCallback</a></div><div class="ttdeci">void(*) TrackbarCallback(int pos, void *userdata)</div><div class="ttdoc">Callback function for Trackbar see cv::createTrackbar.</div><div class="ttdef"><b>Definición</b> <a href="highgui_8hpp_source.html#l00197">highgui.hpp:197</a></div></div>
+<div class="ttc" id="ahighgui_2src_2backend_8hpp_html"><div class="ttname"><a href="highgui_2src_2backend_8hpp.html">backend.hpp</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html">cv::highgui_backend</a></div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2backend_8cpp_source.html#l00024">backend.cpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a534ed68dbcb339e3a0e9f22070cffd17"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17">cv::highgui_backend::OpenCVFBMode</a></div><div class="ttdeci">OpenCVFBMode</div><div class="ttdef"><b>Definición</b> <a href="#l00018">window_framebuffer.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a534ed68dbcb339e3a0e9f22070cffd17a8da28e52085caa99ebc1f27b6a777876"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17a8da28e52085caa99ebc1f27b6a777876">cv::highgui_backend::FB_MODE_EMU</a></div><div class="ttdeci">@ FB_MODE_EMU</div><div class="ttdef"><b>Definición</b> <a href="#l00019">window_framebuffer.hpp:19</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a534ed68dbcb339e3a0e9f22070cffd17aa22a96815f07120f4fa04b765d90f32c"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17aa22a96815f07120f4fa04b765d90f32c">cv::highgui_backend::FB_MODE_XVFB</a></div><div class="ttdeci">@ FB_MODE_XVFB</div><div class="ttdef"><b>Definición</b> <a href="#l00021">window_framebuffer.hpp:21</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a534ed68dbcb339e3a0e9f22070cffd17ab5c6ada56050ffda36d06e593aa7a5e8"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17ab5c6ada56050ffda36d06e593aa7a5e8">cv::highgui_backend::FB_MODE_FB</a></div><div class="ttdeci">@ FB_MODE_FB</div><div class="ttdef"><b>Definición</b> <a href="#l00020">window_framebuffer.hpp:20</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_be6337095d1b912ed3c4152eac0324ca.html">highgui</a></li><li class="navelem"><a href="dir_bdc7ac64697320a9da1908273e53045d.html">src</a></li><li class="navelem"><a href="window__framebuffer_8hpp.html">window_framebuffer.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+var group__features__match =
+[
+    [ "cv::DescriptorMatcher", "classcv_1_1_descriptor_matcher.html", [
+      [ "DescriptorCollection", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html", [
+        [ "DescriptorCollection", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a38c134797d73b03f1fad50dc70b924b3", null ],
+        [ "DescriptorCollection", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a74e17960bca4e1343f0111ecb844309a", null ],
+        [ "~DescriptorCollection", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a707204af915167165b51eb841f0084ec", null ],
+        [ "clear", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a5f5ff62a486368ea99264467031ca0e1", null ],
+        [ "getDescriptor", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a4f79ff6cd36a9b9394dc336917918432", null ],
+        [ "getDescriptor", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#addeb2cc6057488215326e32e5afcb488", null ],
+        [ "getDescriptors", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a222f5a0c871ad312e079a5983c4ac1cb", null ],
+        [ "getLocalIdx", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#af71f9842e4cba2ae5c00b3174104dd35", null ],
+        [ "set", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a97f006742147ad210284e401673d0887", null ],
+        [ "size", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a18e35a5bce978c5729ef5ea58b1fee28", null ],
+        [ "mergedDescriptors", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#af89f9c161a310152714934252aef681f", null ],
+        [ "startIdxs", "classcv_1_1_descriptor_matcher_1_1_descriptor_collection.html#a2612b67a491c05d726db05492c45476f", null ]
+      ] ],
+      [ "MatcherType", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3b", [
+        [ "FLANNBASED", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3baf73d671c6860c24f44b2880a77fadcdc", null ],
+        [ "BRUTEFORCE", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3baddf99aae344c73b63d77764440711b76", null ],
+        [ "BRUTEFORCE_L1", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3bac4f170ff27df2f2cadabd75c129ec468", null ],
+        [ "BRUTEFORCE_HAMMING", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3ba7362dae849e477ed4b1bc862c8ebb5c4", null ],
+        [ "BRUTEFORCE_HAMMINGLUT", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3bae93477eddb9309e995b78a4eb677b9fe", null ],
+        [ "BRUTEFORCE_SL2", "classcv_1_1_descriptor_matcher.html#af8b6f4acb8f1a9ea6b73bfcb86b80c3baf88193b09daf077fec5015a9906a67e8", null ]
+      ] ],
+      [ "~DescriptorMatcher", "classcv_1_1_descriptor_matcher.html#a10eae34e74685d27785e60bee49dcd5e", null ],
+      [ "add", "classcv_1_1_descriptor_matcher.html#aad06698cc7f2694a2bd158a0bb350bc4", null ],
+      [ "checkMasks", "classcv_1_1_descriptor_matcher.html#acbcaa368465fd3924c8bb70851a98944", null ],
+      [ "clear", "classcv_1_1_descriptor_matcher.html#a209e56e04f86d13f241466bf26804fbe", null ],
+      [ "clone", "classcv_1_1_descriptor_matcher.html#a8180fc360ee9e11f25d2cec250eb3a4b", null ],
+      [ "clone_op", "classcv_1_1_descriptor_matcher.html#a15d4752ca0a3bc546f56629bf8185d64", null ],
+      [ "create", "classcv_1_1_descriptor_matcher.html#aff94ed5209c95b20b397db72b0a99125", null ],
+      [ "create", "classcv_1_1_descriptor_matcher.html#a97a8642249fdf03dca7698904657128a", null ],
+      [ "empty", "classcv_1_1_descriptor_matcher.html#a1d49cbbae30a1cfa5c1dace8e086afbe", null ],
+      [ "getTrainDescriptors", "classcv_1_1_descriptor_matcher.html#a93d741fbc352ae5dfa3df27b52f9cdf2", null ],
+      [ "isMaskedOut", "classcv_1_1_descriptor_matcher.html#a700dba15b5923f795886d76bede57d05", null ],
+      [ "isMaskSupported", "classcv_1_1_descriptor_matcher.html#a234a9891ff2f01ffbc963966eb1680fd", null ],
+      [ "isPossibleMatch", "classcv_1_1_descriptor_matcher.html#a33c9edd4ce1af4e5d8482117cdefbb7b", null ],
+      [ "knnMatch", "classcv_1_1_descriptor_matcher.html#ab3981f7708cc8d27b45d083705217080", null ],
+      [ "knnMatch", "classcv_1_1_descriptor_matcher.html#a821832c7f790f7cad22922e8623186cd", null ],
+      [ "knnMatchImpl", "classcv_1_1_descriptor_matcher.html#a38f18a66b3498fa5c960e29ed0056d44", null ],
+      [ "match", "classcv_1_1_descriptor_matcher.html#aea9d2edc594c2f761ed6212a37c29b0b", null ],
+      [ "match", "classcv_1_1_descriptor_matcher.html#a218b58e60039a2bb803e61ffcbfc4a50", null ],
+      [ "radiusMatch", "classcv_1_1_descriptor_matcher.html#ab37926ece6f84469330c2c0735dd7f44", null ],
+      [ "radiusMatch", "classcv_1_1_descriptor_matcher.html#a6ecbdc354f48b743456b30d9f3e15218", null ],
+      [ "radiusMatchImpl", "classcv_1_1_descriptor_matcher.html#afc03bcd8e385f4b3684b7a7d42810ff6", null ],
+      [ "read", "classcv_1_1_descriptor_matcher.html#aa6ae38fa9863a5a5f3ae764945452fd5", null ],
+      [ "read", "classcv_1_1_descriptor_matcher.html#ae00183f8766f9b778c4939b8d459bdfc", null ],
+      [ "setImagePairInfo", "classcv_1_1_descriptor_matcher.html#abed156f55dce7fae09e5fff22a9acded", null ],
+      [ "train", "classcv_1_1_descriptor_matcher.html#a558e2e29f0e756c9abf4ffb40584a6cf", null ],
+      [ "write", "classcv_1_1_descriptor_matcher.html#ac921506f2862b292b41de95546319174", null ],
+      [ "write", "classcv_1_1_descriptor_matcher.html#a46e84bb810e07a96ef29dafead6cf1ae", null ],
+      [ "write", "classcv_1_1_descriptor_matcher.html#ad9eb424c4e6a320786a1e49c6e9f80a6", null ],
+      [ "write", "classcv_1_1_descriptor_matcher.html#aef7cc894787373970617257d8384fcee", null ],
+      [ "trainDescCollection", "classcv_1_1_descriptor_matcher.html#a6c1d27bb1cea2a46e0a5c7d297368edd", null ],
+      [ "utrainDescCollection", "classcv_1_1_descriptor_matcher.html#a66bd1ba0753ab3ebb792e7b4bf5af2ab", null ]
+    ] ],
+    [ "cv::BFMatcher", "classcv_1_1_b_f_matcher.html", [
+      [ "BFMatcher", "classcv_1_1_b_f_matcher.html#abe0bb11749b30d97f60d6ade665617bd", null ],
+      [ "~BFMatcher", "classcv_1_1_b_f_matcher.html#a79f2b4fcc18ce9c9791e0601d71e62e5", null ],
+      [ "clone", "classcv_1_1_b_f_matcher.html#add8bba93e6a613b134918a920635b92d", null ],
+      [ "create", "classcv_1_1_b_f_matcher.html#ac3c82bd25d77ba6b699a089b69c62278", null ],
+      [ "isMaskSupported", "classcv_1_1_b_f_matcher.html#a15bc508b250c96ecd49e153dfcbf019a", null ],
+      [ "knnMatchImpl", "classcv_1_1_b_f_matcher.html#af51f955faba1137f1ca3288579cb8110", null ],
+      [ "radiusMatchImpl", "classcv_1_1_b_f_matcher.html#afd17bd3045548b9fdc467911236773a9", null ],
+      [ "crossCheck", "classcv_1_1_b_f_matcher.html#a4fd61f0e8a770d4a23c47e7f6240c6ba", null ],
+      [ "normType", "classcv_1_1_b_f_matcher.html#a613c8ce6b5f9477398ad901fda9c3976", null ]
+    ] ],
+    [ "cv::LightGlueMatcher", "classcv_1_1_light_glue_matcher.html", [
+      [ "LightGlueMatcher", "classcv_1_1_light_glue_matcher.html#ab8ea166b3d77b0cdf3cbfaf92a1f558a", null ],
+      [ "~LightGlueMatcher", "classcv_1_1_light_glue_matcher.html#a9a1f86c6c6dcbd81ec5f6332c02d69bb", null ],
+      [ "clearPairInfo", "classcv_1_1_light_glue_matcher.html#a02dafb6d9a37181acff9c696b931ebd5", null ],
+      [ "create", "classcv_1_1_light_glue_matcher.html#afe20f05fa223d63f95a53232c02971bb", null ],
+      [ "setImagePairInfo", "classcv_1_1_light_glue_matcher.html#a28121821ac4ba188fa41d69d227c9577", null ],
+      [ "setPairInfo", "classcv_1_1_light_glue_matcher.html#a773863ef5e4e6e1e0be5b6e1c1c67c3c", null ]
+    ] ]
+];

@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/ocl4dnn/src/common.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('dnn_2src_2ocl4dnn_2src_2common_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">common.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="dnn_2src_2ocl4dnn_2src_2common_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2017, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (c) 2016-2017 Fabian David Tschopp, all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html">../include/common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;opencl_kernels_dnn.hpp&quot;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html#a6b2c2423f505c11fcbb647b66270e691">   49</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html#a6b2c2423f505c11fcbb647b66270e691">clOptionSupport</a>(<a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a> option)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a> errmsg;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="classcv_1_1ocl_1_1_program.html">ocl::Program</a> program = <a class="code hl_function" href="classcv_1_1ocl_1_1_context.html#a0da0c303e97c2aed478734b0cbfa3ee4">ocl::Context::getDefault</a>().<a class="code hl_function" href="classcv_1_1ocl_1_1_context.html#a9b16748ebf8a27a343c3d702606f5a28">getProg</a>(ocl::dnn::dummy_oclsrc, option, errmsg);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> program.<a class="code hl_function" href="classcv_1_1ocl_1_1_program.html#aabd50053a089b18932f1662d63db7598">ptr</a>() ? true : <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html#a47ecca2f58c88fbcfe4dd930ee3eb409">   56</a></span><a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a> <a class="code hl_function" href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html#a47ecca2f58c88fbcfe4dd930ee3eb409">matTypeToOclType</a>(<span class="keywordtype">int</span> cvMatType)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>{</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a> oclType;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">switch</span>(cvMatType)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>:  oclType =  <span class="stringliteral">&quot;half&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>:  oclType = <span class="stringliteral">&quot;float&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a>: oclType =  <span class="stringliteral">&quot;bool&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>:   oclType = <span class="stringliteral">&quot;uchar&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a>:   oclType =  <span class="stringliteral">&quot;char&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>:  oclType =   <span class="stringliteral">&quot;int&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a>:  oclType =  <span class="stringliteral">&quot;long&quot;</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">Error::StsBadArg</a>, <span class="stringliteral">&quot;Unsupported mat type&quot;</span>);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> oclType;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
+</div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_context_html_a0da0c303e97c2aed478734b0cbfa3ee4"><div class="ttname"><a href="classcv_1_1ocl_1_1_context.html#a0da0c303e97c2aed478734b0cbfa3ee4">cv::ocl::Context::getDefault</a></div><div class="ttdeci">static Context &amp; getDefault()</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00171">ocl_disabled.impl.hpp:171</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_context_html_a9b16748ebf8a27a343c3d702606f5a28"><div class="ttname"><a href="classcv_1_1ocl_1_1_context.html#a9b16748ebf8a27a343c3d702606f5a28">cv::ocl::Context::getProg</a></div><div class="ttdeci">Program getProg(const ProgramSource &amp;prog, const String &amp;buildopt, String &amp;errmsg)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00167">ocl_disabled.impl.hpp:167</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_program_html"><div class="ttname"><a href="classcv_1_1ocl_1_1_program.html">cv::ocl::Program</a></div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00549">ocl.hpp:550</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_program_html_aabd50053a089b18932f1662d63db7598"><div class="ttname"><a href="classcv_1_1ocl_1_1_program.html#aabd50053a089b18932f1662d63db7598">cv::ocl::Program::ptr</a></div><div class="ttdeci">void * ptr() const</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00297">ocl_disabled.impl.hpp:297</a></div></div>
+<div class="ttc" id="adnn_2src_2ocl4dnn_2include_2common_8hpp_html"><div class="ttname"><a href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html">common.hpp</a></div></div>
+<div class="ttc" id="adnn_2src_2ocl4dnn_2include_2common_8hpp_html_a47ecca2f58c88fbcfe4dd930ee3eb409"><div class="ttname"><a href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html#a47ecca2f58c88fbcfe4dd930ee3eb409">matTypeToOclType</a></div><div class="ttdeci">cv::String matTypeToOclType(int cvMatType)</div><div class="ttdef"><b>Definición</b> <a href="#l00056">common.cpp:56</a></div></div>
+<div class="ttc" id="adnn_2src_2ocl4dnn_2include_2common_8hpp_html_a6b2c2423f505c11fcbb647b66270e691"><div class="ttname"><a href="dnn_2src_2ocl4dnn_2include_2common_8hpp.html#a6b2c2423f505c11fcbb647b66270e691">clOptionSupport</a></div><div class="ttdeci">bool clOptionSupport(cv::String option)</div><div class="ttdef"><b>Definición</b> <a href="#l00049">common.cpp:49</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga21111882276c49470604662f036151e6"><div class="ttname"><a href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a></div><div class="ttdeci">#define CV_Bool</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00063">interface.h:63</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3"><div class="ttname"><a href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a></div><div class="ttdeci">#define CV_8S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00055">interface.h:55</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga2b02a49f1f211e23c1fc11705a1f0ce7"><div class="ttname"><a href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a></div><div class="ttdeci">#define CV_16F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00061">interface.h:61</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabfa4c421815900f05d712345a0e808a7"><div class="ttname"><a href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a></div><div class="ttdeci">#define CV_64S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00065">interface.h:65</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">cv::Error::StsBadArg</a></div><div class="ttdeci">@ StsBadArg</div><div class="ttdoc">function arg/param is bad</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00024">exception.hpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_fc54d4cd5e203dc1c0c13761f8d10773.html">ocl4dnn</a></li><li class="navelem"><a href="dir_4f1396e44d22344b3bf65cb2ab5f03e0.html">src</a></li><li class="navelem"><a href="dnn_2src_2ocl4dnn_2src_2common_8cpp.html">common.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

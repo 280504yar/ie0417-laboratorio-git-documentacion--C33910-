@@ -1,0 +1,28 @@
+var arithm__expr_8cpp =
+[
+    [ "cv::ew::EwBody", "structcv_1_1ew_1_1_ew_body.html", "structcv_1_1ew_1_1_ew_body" ],
+    [ "cv::ew::absdiffResultDepth", "namespacecv_1_1ew.html#aa76c6c2035b59396f998743c8da4ee3e", null ],
+    [ "cv::ew::appendConstBuf", "namespacecv_1_1ew.html#a59889ce638bf3b5e72606b98ff9aa41d", null ],
+    [ "cv::ew::broadcastShape", "namespacecv_1_1ew.html#a5b1265ac6c2715580b1660cd32f93960", null ],
+    [ "cv::ew::constDoubles", "namespacecv_1_1ew.html#a16ce44f5b7b19e93829c473f602f8f18", null ],
+    [ "cv::ew::constFits", "namespacecv_1_1ew.html#aa4c31e75479eef48eac8ba8128c8c0cb", null ],
+    [ "cv::ew::depthRepresents", "namespacecv_1_1ew.html#a74169b48266081331cf6a9adb75bd4d7", null ],
+    [ "cv::ew::intRange", "namespacecv_1_1ew.html#a7f0121b32fbc3c58a478e3a5a3fa0479", null ],
+    [ "cv::ew::isFlexConst", "namespacecv_1_1ew.html#af8c8cf0db31da11fc4043a98487eb04e", null ],
+    [ "cv::ew::isFloatDepth", "namespacecv_1_1ew.html#a477e82eb25ac32b0715099b56cef5838", null ],
+    [ "cv::ew::makeAddWeightedProgram", "namespacecv_1_1ew.html#a53cc1324a5e6e2e16f0ce5cf93b3ebf0", null ],
+    [ "cv::ew::makeBinaryArithProgram", "namespacecv_1_1ew.html#a4d42e9e9220b9cbf01085820b1a6563e", null ],
+    [ "cv::ew::matLogical", "namespacecv_1_1ew.html#a79ee36d6c59de1cbb9ad9f2f853cc2e0", null ],
+    [ "cv::ew::opCategory", "namespacecv_1_1ew.html#af14c1ef28c8724398319ec906827f1ea", null ],
+    [ "cv::ew::opCost", "namespacecv_1_1ew.html#a1700be6fa73cd0d44ad6a0d023312f3b", null ],
+    [ "cv::ew::opName", "namespacecv_1_1ew.html#a26f0e2a55833382ebc6dc3cdcd1d1fe0", null ],
+    [ "cv::ew::promote2", "namespacecv_1_1ew.html#ac4953ebb258ec7ac3ad66ec6410a228f", null ],
+    [ "cv::ew::promoteArith", "namespacecv_1_1ew.html#ab9b2f813fe5361ccab7fef00c48b5f34", null ],
+    [ "cv::ew::promoteBitwise", "namespacecv_1_1ew.html#a9fb7719003d437e13f1d88ee2a1b32b5", null ],
+    [ "cv::ew::runInsn", "namespacecv_1_1ew.html#a500d670fc354cec2581a886e3aee17f1", null ],
+    [ "cv::ew::safeWide", "namespacecv_1_1ew.html#a181be440a61a6634fd05fea1c44f17c3", null ],
+    [ "cv::texpr", "group__core__array.html#ga0c1b99a63dbf8ff0ff5455b91c54b070", null ],
+    [ "cv::ew::LOCAL_CONSTS", "namespacecv_1_1ew.html#a99c607f8824ab25733fae48f939fe76b", null ],
+    [ "cv::ew::LOCAL_HDRS", "namespacecv_1_1ew.html#a688e3560e23465f9a1a9521cc876bbc4", null ],
+    [ "cv::ew::LOCAL_OPS", "namespacecv_1_1ew.html#a74cb4164068c966e9246aa915ac85fe6", null ]
+];

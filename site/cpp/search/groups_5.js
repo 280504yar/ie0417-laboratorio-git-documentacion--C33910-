@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['d_20and_20volumetric_20reconstruction_0',['RGB-D and Volumetric Reconstruction',['../group__ptcloud__rgbd.html',1,'']]],
+  ['data_20structures_1',['Data Structures',['../group__cudacore__struct.html',1,'']]],
+  ['decoding_2',['Barcode detection and decoding',['../group__objdetect__barcode.html',1,'']]],
+  ['decoding_20and_20encoding_3',['Hardware-accelerated video decoding and encoding',['../group__videoio__hwaccel.html',1,'']]],
+  ['decolorization_4',['Contrast Preserving Decolorization',['../group__photo__decolor.html',1,'']]],
+  ['decomposition_5',['decomposition',['../group__core__hal__interface__decomp__cholesky.html',1,'Cholesky matrix decomposition'],['../group__core__hal__interface__decomp__lu.html',1,'LU matrix decomposition'],['../group__core__hal__interface__decomp__qr.html',1,'QR matrix decomposition'],['../group__core__hal__interface__decomp__svd.html',1,'Singular value matrix decomposition']]],
+  ['deep_20neural_20network_20module_6',['Deep Neural Network module',['../group__dnn.html',1,'']]],
+  ['denoising_7',['Denoising',['../group__photo__denoise.html',1,'']]],
+  ['description_8',['Feature Detection and Description',['../group__features__main.html',1,'']]],
+  ['descriptor_20matchers_9',['Descriptor Matchers',['../group__features__match.html',1,'']]],
+  ['descriptors_10',['Structural Analysis and Shape Descriptors',['../group__imgproc__shape.html',1,'']]],
+  ['detection_11',['Detection',['../group__imgproc__feature.html',1,'Feature Detection'],['../group__imgproc__object.html',1,'Object Detection'],['../group__objdetect.html',1,'Object Detection']]],
+  ['detection_20and_20decoding_12',['Barcode detection and decoding',['../group__objdetect__barcode.html',1,'']]],
+  ['detection_20and_20description_13',['Feature Detection and Description',['../group__features__main.html',1,'']]],
+  ['detection_20and_20encoding_14',['QRCode detection and encoding',['../group__objdetect__qrcode.html',1,'']]],
+  ['detection_20and_20recognition_15',['DNN-based face detection and recognition',['../group__objdetect__dnn__face.html',1,'']]],
+  ['detection_20for_20robust_20camera_20pose_20estimation_16',['ArUco markers and boards detection for robust camera pose estimation',['../group__objdetect__aruco.html',1,'']]],
+  ['difference_17',['Element-wise absolute difference',['../group__core__hal__interface__absdiff.html',1,'']]],
+  ['dimensional_20spaces_18',['Dimensional Spaces',['../group__features__annoy.html',1,'Approximate Nearest Neighbors Search in Multi-Dimensional Spaces'],['../group__flann.html',1,'Clustering and Search in Multi-Dimensional Spaces']]],
+  ['directx_20interoperability_19',['DirectX interoperability',['../group__core__directx.html',1,'']]],
+  ['distance_20',['Hamming distance',['../group__core__hal__interface__hamming.html',1,'']]],
+  ['divide_21',['Element-wise divide',['../group__core__hal__interface__divide.html',1,'']]],
+  ['dnn_20based_20face_20detection_20and_20recognition_22',['DNN-based face detection and recognition',['../group__objdetect__dnn__face.html',1,'']]],
+  ['drawing_20function_20of_20keypoints_20and_20matches_23',['Drawing Function of Keypoints and Matches',['../group__features__draw.html',1,'']]],
+  ['drawing_20functions_24',['Drawing Functions',['../group__imgproc__draw.html',1,'']]]
+];

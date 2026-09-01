@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['qrcodedecoder_0',['QRCodeDecoder',['../classcv_1_1_q_r_code_decoder.html',1,'cv']]],
+  ['qrcodedecoderimpl_1',['QRCodeDecoderImpl',['../classcv_1_1_q_r_code_decoder_impl.html',1,'cv']]],
+  ['qrcodedetector_2',['QRCodeDetector',['../classcv_1_1_q_r_code_detector.html',1,'cv']]],
+  ['qrcodedetectoraruco_3',['QRCodeDetectorAruco',['../classcv_1_1_q_r_code_detector_aruco.html',1,'cv']]],
+  ['qrcodeencoder_4',['QRCodeEncoder',['../classcv_1_1_q_r_code_encoder.html',1,'cv']]],
+  ['qrcodeencoderimpl_5',['QRCodeEncoderImpl',['../classcv_1_1_q_r_code_encoder_impl.html',1,'cv']]],
+  ['qrdecode_6',['QRDecode',['../classcv_1_1_q_r_decode.html',1,'cv']]],
+  ['qrdetect_7',['QRDetect',['../classcv_1_1_q_r_detect.html',1,'cv']]],
+  ['qrdetectmulti_8',['QRDetectMulti',['../classcv_1_1_q_r_detect_multi.html',1,'cv']]],
+  ['qtfont_9',['QtFont',['../structcv_1_1_qt_font.html',1,'cv']]],
+  ['quadcountour_10',['QuadCountour',['../structcv_1_1_quad_countour.html',1,'cv']]],
+  ['quadedge_11',['QuadEdge',['../structcv_1_1_subdiv2_d_1_1_quad_edge.html',1,'cv::Subdiv2D']]],
+  ['quality_12',['Quality',['../classcv_1_1usac_1_1_quality.html',1,'cv::usac']]],
+  ['quantizationdetailstraits_13',['QuantizationDetailsTraits',['../structopencv__tflite_1_1_quantization_details_traits.html',1,'opencv_tflite']]],
+  ['quantizationdetailstraits_3c_20opencv_5ftflite_3a_3acustomquantization_20_3e_14',['QuantizationDetailsTraits&lt; opencv_tflite::CustomQuantization &gt;',['../structopencv__tflite_1_1_quantization_details_traits_3_01opencv__tflite_1_1_custom_quantization_01_4.html',1,'opencv_tflite']]],
+  ['quantizationparametersbuilder_15',['QuantizationParametersBuilder',['../structopencv__tflite_1_1_quantization_parameters_builder.html',1,'opencv_tflite']]],
+  ['quantizelayer_16',['QuantizeLayer',['../classcv_1_1dnn_1_1_quantize_layer.html',1,'cv::dnn']]],
+  ['quantizelinearlayer_17',['QuantizeLinearLayer',['../classcv_1_1dnn_1_1_quantize_linear_layer.html',1,'cv::dnn']]],
+  ['quantizeoptionsbuilder_18',['QuantizeOptionsBuilder',['../structopencv__tflite_1_1_quantize_options_builder.html',1,'opencv_tflite']]],
+  ['quat_19',['Quat',['../classcv_1_1_quat.html',1,'cv']]],
+  ['quat_3c_20double_20_3e_20',['Quat&lt; double &gt;',['../classcv_1_1_quat.html',1,'cv']]],
+  ['quat_3c_20float_20_3e_21',['Quat&lt; float &gt;',['../classcv_1_1_quat.html',1,'cv']]],
+  ['quatenum_22',['QuatEnum',['../classcv_1_1_quat_enum.html',1,'cv']]],
+  ['queue_23',['Queue',['../classcv_1_1ocl_1_1_queue.html',1,'cv::ocl']]]
+];

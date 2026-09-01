@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda/block_stride_range.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('block__stride__range_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">block_stride_range.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="block__stride__range_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA_BLOCK_STRIDE_RANGE_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA_BLOCK_STRIDE_RANGE_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2cuda_2types_8hpp.html">types.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="index__helpers_8hpp.html">index_helpers.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cuda_runtime.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">csl</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html">device</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> BLOCK_SIZE = 0, <span class="keyword">class</span> index_type = device::index_type, <span class="keyword">class</span> <span class="keywordtype">size_t</span>ype = device::<span class="keywordtype">size_t</span>ype&gt;</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html">   16</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a7587961e3ede5fd7fda3cfbbed7a87b5">block_stride_range_generic</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a7587961e3ede5fd7fda3cfbbed7a87b5">   18</a></span>    __device__ <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a7587961e3ede5fd7fda3cfbbed7a87b5">block_stride_range_generic</a>(<a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> to_) : from(0), to(to_) { }</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a53c45aaa73440fab2db343592ec5a9d9">   19</a></span>    __device__ <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a53c45aaa73440fab2db343592ec5a9d9">block_stride_range_generic</a>(<a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> from_, <a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> to_) : from(from_), to(to_) { }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html">   21</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">iterator</a></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">   24</a></span>        __device__ <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">iterator</a>(<a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> pos_) : pos(pos_) {}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="comment">/* these iterators return the index when dereferenced; this allows us to loop</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">         * through the indices using a range based for loop</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a5af0e00e64a97af83f13a379e5172b70">   29</a></span>        __device__ <a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a5af0e00e64a97af83f13a379e5172b70">operator*</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> pos; }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a94954a85d39583e5ddd1c61421d56285">   31</a></span>        __device__ <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">iterator</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a94954a85d39583e5ddd1c61421d56285">operator++</a>() {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> block_size = <a class="code hl_enumvalue" href="namespacecv.html#af8840012f782af0d38c174c3ccdd376fabc2f3aa0a398ba716fad5d969773d65f">BLOCK_SIZE</a> == 0 ? <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a7f3652f7e2bd8d74623fea09d14a32c7">getBlockDim&lt;dim&gt;</a>() : <a class="code hl_enumvalue" href="namespacecv.html#af8840012f782af0d38c174c3ccdd376fabc2f3aa0a398ba716fad5d969773d65f">BLOCK_SIZE</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            pos += block_size;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        }</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a1b0a421a309b6393cbd3f217cd7965ed">   37</a></span>        __device__ <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a1b0a421a309b6393cbd3f217cd7965ed">operator!=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">iterator</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="comment">/* NOTE HACK</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">             * &#39;pos&#39; can move in large steps (see operator++)</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">             * expansion of range for loop uses != as the loop conditioion</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">             * =&gt; operator!= must return false if &#39;pos&#39; crosses the end</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordflow">return</span> pos &lt; other.pos;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> pos;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
+</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#ad03ba2ead5f127ce4e2b7cb977846995">   50</a></span>    __device__ iterator <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#ad03ba2ead5f127ce4e2b7cb977846995">begin</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">iterator</a>(from + <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#ae941940da4776eb02f08c9ac746443f8">getThreadIdx&lt;dim&gt;</a>());</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a53469732729b5d1e54bec4be4fa69398">   54</a></span>    __device__ iterator <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a53469732729b5d1e54bec4be4fa69398">end</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">iterator</a>(to);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">index_type</a> from, to;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>};</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a1ddab51cff8ef9ea73c6153ab9a0dc44">   62</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a1ddab51cff8ef9ea73c6153ab9a0dc44">block_stride_range_x</a> = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html">block_stride_range_generic&lt;0&gt;</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a219f3d37c464730065498c7cddd3cea0">   63</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a219f3d37c464730065498c7cddd3cea0">block_stride_range_y</a> = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html">block_stride_range_generic&lt;1&gt;</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a3da34f15a94dd768eb7422844b100d9f">   64</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a3da34f15a94dd768eb7422844b100d9f">block_stride_range_z</a> = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html">block_stride_range_generic&lt;2&gt;</a>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span>ype BLOCK_SIZE = 0&gt;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa68e9f208dbd57866fe03071d554dc9e">   67</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa68e9f208dbd57866fe03071d554dc9e">block_stride_range</a> = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html">block_stride_range_generic&lt;0, BLOCK_SIZE&gt;</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}}}}} <span class="comment">/* namespace cv::dnn::cuda4dnn::csl::device */</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA_BLOCK_STRIDE_RANGE_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator_html_a1b0a421a309b6393cbd3f217cd7965ed"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a1b0a421a309b6393cbd3f217cd7965ed">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::iterator::operator!=</a></div><div class="ttdeci">__device__ bool operator!=(const iterator &amp;other) const</div><div class="ttdef"><b>Definición</b> <a href="#l00037">block_stride_range.hpp:37</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator_html_a5af0e00e64a97af83f13a379e5172b70"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a5af0e00e64a97af83f13a379e5172b70">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::iterator::operator*</a></div><div class="ttdeci">__device__ index_type operator*() const</div><div class="ttdef"><b>Definición</b> <a href="#l00029">block_stride_range.hpp:29</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator_html_a94954a85d39583e5ddd1c61421d56285"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#a94954a85d39583e5ddd1c61421d56285">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::iterator::operator++</a></div><div class="ttdeci">__device__ iterator &amp; operator++()</div><div class="ttdef"><b>Definición</b> <a href="#l00031">block_stride_range.hpp:31</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator_html_adc382fcaf3cf7e173cf54b7554e13bac"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_1_1iterator.html#adc382fcaf3cf7e173cf54b7554e13bac">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::iterator::iterator</a></div><div class="ttdeci">__device__ iterator(index_type pos_)</div><div class="ttdef"><b>Definición</b> <a href="#l00024">block_stride_range.hpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic</a></div><div class="ttdef"><b>Definición</b> <a href="#l00016">block_stride_range.hpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_html_a53469732729b5d1e54bec4be4fa69398"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a53469732729b5d1e54bec4be4fa69398">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::end</a></div><div class="ttdeci">__device__ iterator end() const</div><div class="ttdef"><b>Definición</b> <a href="#l00054">block_stride_range.hpp:54</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_html_a53c45aaa73440fab2db343592ec5a9d9"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a53c45aaa73440fab2db343592ec5a9d9">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::block_stride_range_generic</a></div><div class="ttdeci">__device__ block_stride_range_generic(index_type from_, index_type to_)</div><div class="ttdef"><b>Definición</b> <a href="#l00019">block_stride_range.hpp:19</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_html_a7587961e3ede5fd7fda3cfbbed7a87b5"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#a7587961e3ede5fd7fda3cfbbed7a87b5">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::block_stride_range_generic</a></div><div class="ttdeci">__device__ block_stride_range_generic(index_type to_)</div><div class="ttdef"><b>Definición</b> <a href="#l00018">block_stride_range.hpp:18</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic_html_ad03ba2ead5f127ce4e2b7cb977846995"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_1_1block__stride__range__generic.html#ad03ba2ead5f127ce4e2b7cb977846995">cv::dnn::cuda4dnn::csl::device::block_stride_range_generic::begin</a></div><div class="ttdeci">__device__ iterator begin() const</div><div class="ttdef"><b>Definición</b> <a href="#l00050">block_stride_range.hpp:50</a></div></div>
+<div class="ttc" id="adnn_2src_2cuda_2types_8hpp_html"><div class="ttname"><a href="dnn_2src_2cuda_2types_8hpp.html">types.hpp</a></div></div>
+<div class="ttc" id="aindex__helpers_8hpp_html"><div class="ttname"><a href="index__helpers_8hpp.html">index_helpers.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html">cv::dnn::cuda4dnn::csl::device</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_a1ddab51cff8ef9ea73c6153ab9a0dc44"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a1ddab51cff8ef9ea73c6153ab9a0dc44">cv::dnn::cuda4dnn::csl::device::block_stride_range_x</a></div><div class="ttdeci">block_stride_range_generic&lt; 0 &gt; block_stride_range_x</div><div class="ttdef"><b>Definición</b> <a href="#l00062">block_stride_range.hpp:62</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_a219f3d37c464730065498c7cddd3cea0"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a219f3d37c464730065498c7cddd3cea0">cv::dnn::cuda4dnn::csl::device::block_stride_range_y</a></div><div class="ttdeci">block_stride_range_generic&lt; 1 &gt; block_stride_range_y</div><div class="ttdef"><b>Definición</b> <a href="#l00063">block_stride_range.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_a3da34f15a94dd768eb7422844b100d9f"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a3da34f15a94dd768eb7422844b100d9f">cv::dnn::cuda4dnn::csl::device::block_stride_range_z</a></div><div class="ttdeci">block_stride_range_generic&lt; 2 &gt; block_stride_range_z</div><div class="ttdef"><b>Definición</b> <a href="#l00064">block_stride_range.hpp:64</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_a7f3652f7e2bd8d74623fea09d14a32c7"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#a7f3652f7e2bd8d74623fea09d14a32c7">cv::dnn::cuda4dnn::csl::device::getBlockDim</a></div><div class="ttdeci">__device__ detail::dim3_member_type getBlockDim()</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_aa5b7ad8ee4e617558d1856b34d32b3ce"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa5b7ad8ee4e617558d1856b34d32b3ce">cv::dnn::cuda4dnn::csl::device::index_type</a></div><div class="ttdeci">std::int32_t index_type</div><div class="ttdef"><b>Definición</b> <a href="dnn_2src_2cuda_2types_8hpp_source.html#l00022">types.hpp:22</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_aa68e9f208dbd57866fe03071d554dc9e"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#aa68e9f208dbd57866fe03071d554dc9e">cv::dnn::cuda4dnn::csl::device::block_stride_range</a></div><div class="ttdeci">block_stride_range_generic&lt; 0, BLOCK_SIZE &gt; block_stride_range</div><div class="ttdef"><b>Definición</b> <a href="#l00067">block_stride_range.hpp:67</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device_html_ae941940da4776eb02f08c9ac746443f8"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1device.html#ae941940da4776eb02f08c9ac746443f8">cv::dnn::cuda4dnn::csl::device::getThreadIdx</a></div><div class="ttdeci">__device__ detail::uint3_member_type getThreadIdx()</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">cv::dnn::cuda4dnn::csl</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_af8840012f782af0d38c174c3ccdd376fabc2f3aa0a398ba716fad5d969773d65f"><div class="ttname"><a href="namespacecv.html#af8840012f782af0d38c174c3ccdd376fabc2f3aa0a398ba716fad5d969773d65f">cv::BLOCK_SIZE</a></div><div class="ttdeci">@ BLOCK_SIZE</div><div class="ttdef"><b>Definición</b> <a href="core_2src_2precomp_8hpp_source.html#l00299">precomp.hpp:299</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_9095b0da6c527c598e930c4bc036305d.html">cuda</a></li><li class="navelem"><a href="block__stride__range_8hpp.html">block_stride_range.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

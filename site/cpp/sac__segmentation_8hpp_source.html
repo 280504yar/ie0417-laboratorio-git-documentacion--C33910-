@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/geometry/src/ptcloud/sac_segmentation.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('sac__segmentation_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sac_segmentation.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sac__segmentation_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2021, Yechun Ruan &lt;ruanyc@mail.sustech.edu.cn&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef OPENCV_3D_SAC_SEGMENTATION_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define OPENCV_3D_SAC_SEGMENTATION_HPP</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="segment_8hpp.html">opencv2/geometry/segment.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html">   14</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a42ae57d045e23bf36425672943245cdd">SACSegmentationImpl</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation.html#a1750068154a560627d054bb9e8d6f8b2">SACSegmentation</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumeration" href="group____3d.html#ga8bf7d401a22335aedd7ebadacdcb1664">SacModelType</a> sac_model_type;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_enumeration" href="group____3d.html#ga55e2f0d893662d0640118b8ea9d67129">SacMethod</a> sac_method;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">double</span> threshold;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">double</span> radius_min, radius_max;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">int</span> max_iterations;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">double</span> confidence;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">int</span> number_of_models_expected;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> is_parallel;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a> rng_state;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_typedef" href="classcv_1_1_s_a_c_segmentation.html#a11b16886a2acbf7fb0c6e7323e6b3f2b">ModelConstraintFunction</a> custom_model_constraints;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">int</span> segmentSingle(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;model_coeffs, std::vector&lt;bool&gt; &amp;label, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;model_coefficients);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a42ae57d045e23bf36425672943245cdd">   59</a></span>    <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a42ae57d045e23bf36425672943245cdd">SACSegmentationImpl</a>(<a class="code hl_enumeration" href="group____3d.html#ga8bf7d401a22335aedd7ebadacdcb1664">SacModelType</a> sac_model_type_, <a class="code hl_enumeration" href="group____3d.html#ga55e2f0d893662d0640118b8ea9d67129">SacMethod</a> sac_method_,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordtype">double</span> threshold_, <span class="keywordtype">int</span> max_iterations_)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            : sac_model_type(sac_model_type_), sac_method(sac_method_), threshold(threshold_),</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>              radius_min(DBL_MIN), radius_max(DBL_MAX),</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>              max_iterations(max_iterations_), confidence(0.999), number_of_models_expected(1),</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>              is_parallel(false), rng_state(0),</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>              custom_model_constraints()</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a299d63849ea5d93a53bbbef7e8d8f00d">segment</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> input_pts, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__misc.html#gaa75358e6ed91336d607ff7a9a5991251">labels</a>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> models_coefficients) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">//-------------------------- Getter and Setter -----------------------</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a628dc3716ff7cb2e1beec1e9b14559b5">   74</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a628dc3716ff7cb2e1beec1e9b14559b5">setSacModelType</a>(<a class="code hl_enumeration" href="group____3d.html#ga8bf7d401a22335aedd7ebadacdcb1664">SacModelType</a> sac_model_type_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">    </span>{ sac_model_type = sac_model_type_; }</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#af4e7faee17a21bacc2ee29d1bdd541cc">   77</a></span>    <a class="code hl_enumeration" href="group____3d.html#ga8bf7d401a22335aedd7ebadacdcb1664">SacModelType</a> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#af4e7faee17a21bacc2ee29d1bdd541cc">getSacModelType</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> sac_model_type; }</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a616a541c090f2e9745d70e15725d0940">   80</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a616a541c090f2e9745d70e15725d0940">setSacMethodType</a>(<a class="code hl_enumeration" href="group____3d.html#ga55e2f0d893662d0640118b8ea9d67129">SacMethod</a> sac_method_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">    </span>{ sac_method = sac_method_; }</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a4f11c10769998f92f3fbc885505034a1">   83</a></span>    <a class="code hl_enumeration" href="group____3d.html#ga55e2f0d893662d0640118b8ea9d67129">SacMethod</a> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a4f11c10769998f92f3fbc885505034a1">getSacMethodType</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> sac_method; }</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#aa5f20b472ba8d87e16466f664d8d43fd">   86</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#aa5f20b472ba8d87e16466f664d8d43fd">setDistanceThreshold</a>(<span class="keywordtype">double</span> threshold_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">    </span>{ threshold = threshold_; }</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a5636432901329e3b2ac13ae236dbb9c3">   89</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a5636432901329e3b2ac13ae236dbb9c3">getDistanceThreshold</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> threshold; }</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a2d5b8a50f54004fa3bb42688d54808a0">   92</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a2d5b8a50f54004fa3bb42688d54808a0">setRadiusLimits</a>(<span class="keywordtype">double</span> radius_min_, <span class="keywordtype">double</span> radius_max_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">    </span>{ radius_min = radius_min_;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        radius_max = radius_max_; }</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a87f2eb9d973b8569bba781cdc9a6e256">   96</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a87f2eb9d973b8569bba781cdc9a6e256">getRadiusLimits</a>(<span class="keywordtype">double</span> &amp;radius_min_, <span class="keywordtype">double</span> &amp;radius_max_)<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">    </span>{ radius_min_ = radius_min;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        radius_max_ = radius_max; }</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a82f72cf0edcedfe476e2935fceef0487">  100</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a82f72cf0edcedfe476e2935fceef0487">setMaxIterations</a>(<span class="keywordtype">int</span> max_iterations_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">    </span>{ max_iterations = max_iterations_; }</div>
+</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a71b523336d85ef65956274a69d82f329">  103</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a71b523336d85ef65956274a69d82f329">getMaxIterations</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> max_iterations; }</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a5a60678df3af2eeed5654a650097a6bd">  106</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a5a60678df3af2eeed5654a650097a6bd">setConfidence</a>(<span class="keywordtype">double</span> confidence_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">    </span>{ confidence = confidence_; }</div>
+</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#aa49165c8ea3021357293c310e1b07884">  109</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#aa49165c8ea3021357293c310e1b07884">getConfidence</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> confidence; }</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#ab38b281460531b92d9488f34115d8aab">  112</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#ab38b281460531b92d9488f34115d8aab">setNumberOfModelsExpected</a>(<span class="keywordtype">int</span> number_of_models_expected_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">    </span>{ number_of_models_expected = number_of_models_expected_; }</div>
+</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="foldopen" id="foldopen00115" data-start="{" data-end="}">
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a9acc75e7183e365b51535fd54c6ad393">  115</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a9acc75e7183e365b51535fd54c6ad393">getNumberOfModelsExpected</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> number_of_models_expected; }</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a78f768fbf9176dd5bea0694fef31ce8a">  118</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a78f768fbf9176dd5bea0694fef31ce8a">setParallel</a>(<span class="keywordtype">bool</span> is_parallel_)<span class="keyword"> override </span>{ is_parallel = is_parallel_; }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#ad6653c032f7321d9c0d2bf28a3f170db">  120</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#ad6653c032f7321d9c0d2bf28a3f170db">isParallel</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> is_parallel; }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#ada4eaa13a0091de3c99416fd9baaa709">  122</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#ada4eaa13a0091de3c99416fd9baaa709">setRandomGeneratorState</a>(<a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a> rng_state_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keyword">    </span>{ rng_state = rng_state_; }</div>
+</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a2153ffdb1a79820b5568e415cd0de3e8">  125</a></span>    <a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a> <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a2153ffdb1a79820b5568e415cd0de3e8">getRandomGeneratorState</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> rng_state; }</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">void</span></div>
+<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#a9ccc5e23c1aa0bc5701cafb9eefba450">  129</a></span>    <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#a9ccc5e23c1aa0bc5701cafb9eefba450">setCustomModelConstraints</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classcv_1_1_s_a_c_segmentation.html#a11b16886a2acbf7fb0c6e7323e6b3f2b">ModelConstraintFunction</a> &amp;custom_model_constraints_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keyword">    </span>{ custom_model_constraints = custom_model_constraints_; }</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation_impl.html#aad6f286bc3cf095a66c8c903f3b322fc">  132</a></span>    <span class="keyword">const</span> <a class="code hl_typedef" href="classcv_1_1_s_a_c_segmentation.html#a11b16886a2acbf7fb0c6e7323e6b3f2b">ModelConstraintFunction</a> &amp;<a class="code hl_function" href="classcv_1_1_s_a_c_segmentation_impl.html#aad6f286bc3cf095a66c8c903f3b322fc">getCustomModelConstraints</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">    </span>{ <span class="keywordflow">return</span> custom_model_constraints; }</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>};</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classcv_1_1_s_a_c_segmentation.html#ae4b37b321761d050785e916d903a58f3">  137</a></span>Ptr &lt;SACSegmentation&gt; <a class="code hl_function" href="classcv_1_1_s_a_c_segmentation.html#ae4b37b321761d050785e916d903a58f3">SACSegmentation::create</a>(<a class="code hl_enumeration" href="group____3d.html#ga8bf7d401a22335aedd7ebadacdcb1664">SacModelType</a> sac_model_type_, <a class="code hl_enumeration" href="group____3d.html#ga55e2f0d893662d0640118b8ea9d67129">SacMethod</a> sac_method_,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordtype">double</span> threshold_, <span class="keywordtype">int</span> max_iterations_)</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>{</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;SACSegmentationImpl&gt;</a>(sac_model_type_, sac_method_, threshold_, max_iterations_);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>} <span class="comment">//end namespace cv</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">#endif </span><span class="comment">//OPENCV_3D_SAC_SEGMENTATION_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_html_a11b16886a2acbf7fb0c6e7323e6b3f2b"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation.html#a11b16886a2acbf7fb0c6e7323e6b3f2b">cv::SACSegmentation::ModelConstraintFunction</a></div><div class="ttdeci">std::function&lt; bool(const std::vector&lt; double &gt; &amp;)&gt; ModelConstraintFunction</div><div class="ttdoc">Custom function that take the model coefficients and return whether the model is acceptable or not.</div><div class="ttdef"><b>Definición</b> <a href="segment_8hpp_source.html#l00067">segment.hpp:67</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_html_a1750068154a560627d054bb9e8d6f8b2"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation.html#a1750068154a560627d054bb9e8d6f8b2">cv::SACSegmentation::SACSegmentation</a></div><div class="ttdeci">SACSegmentation()=default</div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_html_ae4b37b321761d050785e916d903a58f3"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation.html#ae4b37b321761d050785e916d903a58f3">cv::SACSegmentation::create</a></div><div class="ttdeci">static Ptr&lt; SACSegmentation &gt; create(SacModelType sac_model_type=SAC_MODEL_PLANE, SacMethod sac_method=SAC_METHOD_RANSAC, double threshold=0.5, int max_iterations=1000)</div><div class="ttdef"><b>Definición</b> <a href="#l00137">sac_segmentation.hpp:137</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a2153ffdb1a79820b5568e415cd0de3e8"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a2153ffdb1a79820b5568e415cd0de3e8">cv::SACSegmentationImpl::getRandomGeneratorState</a></div><div class="ttdeci">uint64 getRandomGeneratorState() const override</div><div class="ttdoc">Get state used to initialize the RNG(Random Number Generator).</div><div class="ttdef"><b>Definición</b> <a href="#l00125">sac_segmentation.hpp:125</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a299d63849ea5d93a53bbbef7e8d8f00d"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a299d63849ea5d93a53bbbef7e8d8f00d">cv::SACSegmentationImpl::segment</a></div><div class="ttdeci">int segment(InputArray input_pts, OutputArray labels, OutputArray models_coefficients) override</div><div class="ttdoc">Execute segmentation using the sample consensus method.</div><div class="ttdef"><b>Definición</b> <a href="sac__segmentation_8cpp_source.html#l00159">sac_segmentation.cpp:159</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a2d5b8a50f54004fa3bb42688d54808a0"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a2d5b8a50f54004fa3bb42688d54808a0">cv::SACSegmentationImpl::setRadiusLimits</a></div><div class="ttdeci">void setRadiusLimits(double radius_min_, double radius_max_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00092">sac_segmentation.hpp:92</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a42ae57d045e23bf36425672943245cdd"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a42ae57d045e23bf36425672943245cdd">cv::SACSegmentationImpl::SACSegmentationImpl</a></div><div class="ttdeci">SACSegmentationImpl(SacModelType sac_model_type_, SacMethod sac_method_, double threshold_, int max_iterations_)</div><div class="ttdoc">No-argument constructor using default configuration.</div><div class="ttdef"><b>Definición</b> <a href="#l00059">sac_segmentation.hpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a4f11c10769998f92f3fbc885505034a1"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a4f11c10769998f92f3fbc885505034a1">cv::SACSegmentationImpl::getSacMethodType</a></div><div class="ttdeci">SacMethod getSacMethodType() const override</div><div class="ttdoc">Get the type of sample consensus method used.</div><div class="ttdef"><b>Definición</b> <a href="#l00083">sac_segmentation.hpp:83</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a5636432901329e3b2ac13ae236dbb9c3"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a5636432901329e3b2ac13ae236dbb9c3">cv::SACSegmentationImpl::getDistanceThreshold</a></div><div class="ttdeci">double getDistanceThreshold() const override</div><div class="ttdoc">Get the distance to the model threshold.</div><div class="ttdef"><b>Definición</b> <a href="#l00089">sac_segmentation.hpp:89</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a5a60678df3af2eeed5654a650097a6bd"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a5a60678df3af2eeed5654a650097a6bd">cv::SACSegmentationImpl::setConfidence</a></div><div class="ttdeci">void setConfidence(double confidence_) override</div><div class="ttdoc">Set the confidence that ensure at least one of selections is an error-free set of data points.</div><div class="ttdef"><b>Definición</b> <a href="#l00106">sac_segmentation.hpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a616a541c090f2e9745d70e15725d0940"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a616a541c090f2e9745d70e15725d0940">cv::SACSegmentationImpl::setSacMethodType</a></div><div class="ttdeci">void setSacMethodType(SacMethod sac_method_) override</div><div class="ttdoc">Set the type of sample consensus method to use.</div><div class="ttdef"><b>Definición</b> <a href="#l00080">sac_segmentation.hpp:80</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a628dc3716ff7cb2e1beec1e9b14559b5"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a628dc3716ff7cb2e1beec1e9b14559b5">cv::SACSegmentationImpl::setSacModelType</a></div><div class="ttdeci">void setSacModelType(SacModelType sac_model_type_) override</div><div class="ttdoc">Set the type of sample consensus model to use.</div><div class="ttdef"><b>Definición</b> <a href="#l00074">sac_segmentation.hpp:74</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a71b523336d85ef65956274a69d82f329"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a71b523336d85ef65956274a69d82f329">cv::SACSegmentationImpl::getMaxIterations</a></div><div class="ttdeci">int getMaxIterations() const override</div><div class="ttdoc">Get the maximum number of iterations to attempt.</div><div class="ttdef"><b>Definición</b> <a href="#l00103">sac_segmentation.hpp:103</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a78f768fbf9176dd5bea0694fef31ce8a"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a78f768fbf9176dd5bea0694fef31ce8a">cv::SACSegmentationImpl::setParallel</a></div><div class="ttdeci">void setParallel(bool is_parallel_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00118">sac_segmentation.hpp:118</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a82f72cf0edcedfe476e2935fceef0487"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a82f72cf0edcedfe476e2935fceef0487">cv::SACSegmentationImpl::setMaxIterations</a></div><div class="ttdeci">void setMaxIterations(int max_iterations_) override</div><div class="ttdoc">Set the maximum number of iterations to attempt.</div><div class="ttdef"><b>Definición</b> <a href="#l00100">sac_segmentation.hpp:100</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a87f2eb9d973b8569bba781cdc9a6e256"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a87f2eb9d973b8569bba781cdc9a6e256">cv::SACSegmentationImpl::getRadiusLimits</a></div><div class="ttdeci">void getRadiusLimits(double &amp;radius_min_, double &amp;radius_max_) const override</div><div class="ttdoc">Get the minimum and maximum radius limits for the model.</div><div class="ttdef"><b>Definición</b> <a href="#l00096">sac_segmentation.hpp:96</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a9acc75e7183e365b51535fd54c6ad393"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a9acc75e7183e365b51535fd54c6ad393">cv::SACSegmentationImpl::getNumberOfModelsExpected</a></div><div class="ttdeci">int getNumberOfModelsExpected() const override</div><div class="ttdoc">Get the expected number of models.</div><div class="ttdef"><b>Definición</b> <a href="#l00115">sac_segmentation.hpp:115</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_a9ccc5e23c1aa0bc5701cafb9eefba450"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#a9ccc5e23c1aa0bc5701cafb9eefba450">cv::SACSegmentationImpl::setCustomModelConstraints</a></div><div class="ttdeci">void setCustomModelConstraints(const ModelConstraintFunction &amp;custom_model_constraints_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00129">sac_segmentation.hpp:129</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_aa49165c8ea3021357293c310e1b07884"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#aa49165c8ea3021357293c310e1b07884">cv::SACSegmentationImpl::getConfidence</a></div><div class="ttdeci">double getConfidence() const override</div><div class="ttdoc">Get the confidence that ensure at least one of selections is an error-free set of data points.</div><div class="ttdef"><b>Definición</b> <a href="#l00109">sac_segmentation.hpp:109</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_aa5f20b472ba8d87e16466f664d8d43fd"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#aa5f20b472ba8d87e16466f664d8d43fd">cv::SACSegmentationImpl::setDistanceThreshold</a></div><div class="ttdeci">void setDistanceThreshold(double threshold_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00086">sac_segmentation.hpp:86</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_aad6f286bc3cf095a66c8c903f3b322fc"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#aad6f286bc3cf095a66c8c903f3b322fc">cv::SACSegmentationImpl::getCustomModelConstraints</a></div><div class="ttdeci">const ModelConstraintFunction &amp; getCustomModelConstraints() const override</div><div class="ttdoc">Get custom model coefficient constraint function.</div><div class="ttdef"><b>Definición</b> <a href="#l00132">sac_segmentation.hpp:132</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_ab38b281460531b92d9488f34115d8aab"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#ab38b281460531b92d9488f34115d8aab">cv::SACSegmentationImpl::setNumberOfModelsExpected</a></div><div class="ttdeci">void setNumberOfModelsExpected(int number_of_models_expected_) override</div><div class="ttdoc">Set the number of models expected.</div><div class="ttdef"><b>Definición</b> <a href="#l00112">sac_segmentation.hpp:112</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_ad6653c032f7321d9c0d2bf28a3f170db"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#ad6653c032f7321d9c0d2bf28a3f170db">cv::SACSegmentationImpl::isParallel</a></div><div class="ttdeci">bool isParallel() const override</div><div class="ttdoc">Get whether to use parallelism or not.</div><div class="ttdef"><b>Definición</b> <a href="#l00120">sac_segmentation.hpp:120</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_ada4eaa13a0091de3c99416fd9baaa709"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#ada4eaa13a0091de3c99416fd9baaa709">cv::SACSegmentationImpl::setRandomGeneratorState</a></div><div class="ttdeci">void setRandomGeneratorState(uint64 rng_state_) override</div><div class="ttdoc">Set state used to initialize the RNG(Random Number Generator).</div><div class="ttdef"><b>Definición</b> <a href="#l00122">sac_segmentation.hpp:122</a></div></div>
+<div class="ttc" id="aclasscv_1_1_s_a_c_segmentation_impl_html_af4e7faee17a21bacc2ee29d1bdd541cc"><div class="ttname"><a href="classcv_1_1_s_a_c_segmentation_impl.html#af4e7faee17a21bacc2ee29d1bdd541cc">cv::SACSegmentationImpl::getSacModelType</a></div><div class="ttdeci">SacModelType getSacModelType() const override</div><div class="ttdoc">Get the type of sample consensus model used.</div><div class="ttdef"><b>Definición</b> <a href="#l00077">sac_segmentation.hpp:77</a></div></div>
+<div class="ttc" id="agroup____3d_html_ga55e2f0d893662d0640118b8ea9d67129"><div class="ttname"><a href="group____3d.html#ga55e2f0d893662d0640118b8ea9d67129">cv::SacMethod</a></div><div class="ttdeci">SacMethod</div><div class="ttdoc">type of the robust estimation algorithm</div><div class="ttdef"><b>Definición</b> <a href="segment_8hpp_source.html#l00018">segment.hpp:19</a></div></div>
+<div class="ttc" id="agroup____3d_html_ga8bf7d401a22335aedd7ebadacdcb1664"><div class="ttname"><a href="group____3d.html#ga8bf7d401a22335aedd7ebadacdcb1664">cv::SacModelType</a></div><div class="ttdeci">SacModelType</div><div class="ttdef"><b>Definición</b> <a href="segment_8hpp_source.html#l00032">segment.hpp:33</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga02c1dbabceb00737ef16838630952adc"><div class="ttname"><a href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">cv::uint64</a></div><div class="ttdeci">uint64_t uint64</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00040">templmatch.cpp:40</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gaa75358e6ed91336d607ff7a9a5991251"><div class="ttname"><a href="group__imgproc__misc.html#gaa75358e6ed91336d607ff7a9a5991251">cv::labels</a></div><div class="ttdeci">OutputArray OutputArray labels</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l03362">imgproc.hpp:3362</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="asegment_8hpp_html"><div class="ttname"><a href="segment_8hpp.html">segment.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_a52c8a9fa86687e18a4a8ae268f10c32.html">geometry</a></li><li class="navelem"><a href="dir_02f85bb76821f8e71fba420137d549ef.html">src</a></li><li class="navelem"><a href="dir_156c4c17ccd76dbc459262cae97b86bd.html">ptcloud</a></li><li class="navelem"><a href="sac__segmentation_8hpp.html">sac_segmentation.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

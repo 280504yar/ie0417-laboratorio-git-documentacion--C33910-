@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['dataformat_0',['DataFormat',['../namespacecv.html#a7b0300c11aed48e6789bfe6b97ad4b18',1,'cv']]],
+  ['datalayout_1',['DataLayout',['../group__core__basic.html#ga294b6ad3bb4c238e5d9f71a034adb211',1,'cv']]],
+  ['datatype_2',['DataType',['../namespaceopencv__tensorflow.html#a408390a7a94fc606fa8d43fb0c5a3abc',1,'opencv_tensorflow']]],
+  ['decomptypes_3',['DecompTypes',['../group__core__array.html#gaaf9ea5dcc392d5ae04eacb9920b9674c',1,'cv']]],
+  ['defaultprintertype_4',['DefaultPrinterType',['../namespacetesting_1_1internal.html#a17fb8f0125fa92404a249ed38a43faa4',1,'testing::internal']]],
+  ['depthmask_5',['DepthMask',['../classcv_1_1___output_array.html#a9aa5a028921acff4607a7a5bb370fc39',1,'cv::_OutputArray']]],
+  ['detectortype_6',['DetectorType',['../classcv_1_1_fast_feature_detector.html#a4654f6fb0aa4b8e9123b223bfa0e2a08',1,'cv::FastFeatureDetector']]],
+  ['dftdims_7',['DftDims',['../namespacecv.html#a614434925887cfc57638f086b0e3e3f6',1,'cv']]],
+  ['dftflags_8',['DftFlags',['../group__core__array.html#gaf4dde112b483b38175621befedda1f1c',1,'cv']]],
+  ['dftmode_9',['DftMode',['../namespacecv.html#a4087f86fc4fcd49daf5cd18737bfdda5',1,'cv']]],
+  ['dictionarymode_10',['DictionaryMode',['../namespacecv_1_1aruco.html#a710091b33901f29002a7326e065ec540',1,'cv::aruco']]],
+  ['dimcase_11',['DimCase',['../classopencv__onnx_1_1_simple_sharded_dim_proto.html#a670a519691e914a0000a8616a53893ca',1,'opencv_onnx::SimpleShardedDimProto']]],
+  ['dimensiontype_12',['DimensionType',['../namespaceopencv__tflite.html#ab2716206f98ad7dd1c6534c746131e20',1,'opencv_tflite']]],
+  ['distance_13',['Distance',['../classcv_1_1_a_n_n_index.html#af48eb2f16afd8ebd8c01b40d75354a99',1,'cv::ANNIndex']]],
+  ['distancetransformlabeltypes_14',['DistanceTransformLabelTypes',['../group__imgproc__misc.html#ga3fe343d63844c40318ee627bd1c1c42f',1,'cv']]],
+  ['distancetransformmasks_15',['DistanceTransformMasks',['../group__imgproc__misc.html#gaaa68392323ccf7fad87570e41259b497',1,'cv']]],
+  ['distancetype_16',['DistanceType',['../group__ccm.html#ga16844d1f354b6c5f101c7011efdf2e72',1,'cv::ccm']]],
+  ['distancetypes_17',['DistanceTypes',['../group__geometry__shape.html#gaa2bfbebbc5c320526897996aafa1d8eb',1,'cv']]],
+  ['distype_18',['DisType',['../classcv_1_1_face_recognizer_s_f.html#a6501674e36c7283491db853ed6599b58',1,'cv::FaceRecognizerSF']]],
+  ['drawmatchesflags_19',['DrawMatchesFlags',['../group__features__draw.html#ga2c2ede79cd5141534ae70a3fd9f324c8',1,'cv']]]
+];

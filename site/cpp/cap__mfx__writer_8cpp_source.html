@@ -1,0 +1,498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_mfx_writer.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__mfx__writer_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">cap_mfx_writer.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="cap__mfx__writer_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="cap__mfx__writer_8hpp.html">cap_mfx_writer.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="base_8hpp.html">opencv2/core/base.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="cap__mfx__common_8hpp.html">cap_mfx_common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="imgproc_2include_2opencv2_2imgproc_2hal_2hal_8hpp.html">opencv2/imgproc/hal/hal.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="cap__interface_8hpp.html">cap_interface.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="cap__mfx__writer_8cpp.html#a52c40031f39c493f66442c249581cfdc">   14</a></span><span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a52c40031f39c493f66442c249581cfdc">estimateBitrate</a>(<span class="keywordtype">int</span> codecId, <span class="keywordtype">size_t</span> pixelNum, <span class="keywordtype">float</span> fps)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">float</span> bitrate = 0.f;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> mp = pixelNum / 1000000.f;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> (codecId == MFX_CODEC_MPEG2)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        bitrate = (mp * 43) * fps + 360;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (codecId == MFX_CODEC_AVC)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        bitrate = (mp * 140 + 19) * std::pow(fps, 0.60f);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (codecId == MFX_CODEC_HEVC)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        bitrate = (mp * 63 + 45) * std::pow(fps, 0.60f);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX encoder Bitrate estimation FAILED&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;MFX encoder Bitrate estimation (&quot;</span> &lt;&lt; mp &lt;&lt; <span class="stringliteral">&quot; MP x &quot;</span> &lt;&lt; fps &lt;&lt; <span class="stringliteral">&quot; fps): &quot;</span> &lt;&lt; bitrate &lt;&lt; endl);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> bitrate;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="cap__mfx__writer_8cpp.html#a99b448bb722db453e5bd901a89823013">   39</a></span><span class="keyword">static</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a99b448bb722db453e5bd901a89823013">getBitrateDivisor</a>()</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> res = <a class="code hl_function" href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">utils::getConfigurationParameterSizeT</a>(<span class="stringliteral">&quot;OPENCV_VIDEOIO_MFX_BITRATE_DIVISOR&quot;</span>, 300);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="cap__mfx__writer_8cpp.html#a7e48eb875f190bc09996f605ae3610a2">   45</a></span><span class="keyword">static</span> mfxU32 <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a7e48eb875f190bc09996f605ae3610a2">getWriterTimeoutMS</a>()</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> res = <a class="code hl_function" href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">utils::getConfigurationParameterSizeT</a>(<span class="stringliteral">&quot;OPENCV_VIDEOIO_MFX_WRITER_TIMEOUT&quot;</span>, 1);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__utils.html#ga257d01817e78477beb39f2ae3ef05f2a">saturate_cast&lt;mfxU32&gt;</a>(res * 1000); <span class="comment">// convert from seconds</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="cap__mfx__writer_8cpp.html#a973de38f49138b1fa98ac52c5c062a86">   51</a></span><span class="keyword">inline</span> mfxU32 <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a973de38f49138b1fa98ac52c5c062a86">codecIdByFourCC</a>(<span class="keywordtype">int</span> fourcc)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>{</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> CC_MPG2 = <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(<span class="charliteral">&#39;M&#39;</span>, <span class="charliteral">&#39;P&#39;</span>, <span class="charliteral">&#39;G&#39;</span>, <span class="charliteral">&#39;2&#39;</span>).vali32;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> CC_H264 = <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(<span class="charliteral">&#39;H&#39;</span>, <span class="charliteral">&#39;2&#39;</span>, <span class="charliteral">&#39;6&#39;</span>, <span class="charliteral">&#39;4&#39;</span>).vali32;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> CC_X264 = <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(<span class="charliteral">&#39;X&#39;</span>, <span class="charliteral">&#39;2&#39;</span>, <span class="charliteral">&#39;6&#39;</span>, <span class="charliteral">&#39;4&#39;</span>).vali32;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> CC_AVC = <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(<span class="charliteral">&#39;A&#39;</span>, <span class="charliteral">&#39;V&#39;</span>, <span class="charliteral">&#39;C&#39;</span>, <span class="charliteral">&#39; &#39;</span>).vali32;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> CC_H265 = <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(<span class="charliteral">&#39;H&#39;</span>, <span class="charliteral">&#39;2&#39;</span>, <span class="charliteral">&#39;6&#39;</span>, <span class="charliteral">&#39;5&#39;</span>).vali32;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> CC_HEVC = <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(<span class="charliteral">&#39;H&#39;</span>, <span class="charliteral">&#39;E&#39;</span>, <span class="charliteral">&#39;V&#39;</span>, <span class="charliteral">&#39;C&#39;</span>).vali32;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (fourcc == CC_X264 || fourcc == CC_H264 || fourcc == CC_AVC)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> MFX_CODEC_AVC;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fourcc == CC_H265 || fourcc == CC_HEVC)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> MFX_CODEC_HEVC;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fourcc == CC_MPG2)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> MFX_CODEC_MPEG2;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> (mfxU32)-1;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#a86f0431859114deb5c2b1bd29e05c14f">   70</a></span><a class="code hl_function" href="class_video_writer___intel_m_f_x.html#a86f0431859114deb5c2b1bd29e05c14f">VideoWriter_IntelMFX::VideoWriter_IntelMFX</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, <span class="keywordtype">int</span> _fourcc, <span class="keywordtype">double</span> fps, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> frameSize_, <span class="keywordtype">bool</span>)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    : session(0), plugin(0), deviceHandler(0), bs(0), encoder(0), pool(0), outSurface(NULL), frameSize(frameSize_), good(false)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>{</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    mfxStatus res = MFX_ERR_NONE;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">if</span> (frameSize.width % 2 || frameSize.height % 2)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        MSG(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Invalid frame size passed to encoder&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        return;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_function" href="ccl__bolelli__forest_8inc_8hpp.html#adf0f2a5b1766183828a3aea2ed9d3927">if</a> (fps &lt;= 0)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Invalid FPS passed to encoder&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// Init device and session</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    deviceHandler = <a class="code hl_function" href="cap__mfx__common_8cpp.html#adf5ba685111d72265a86c1b7da0459f1">createDeviceHandler</a>();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    session = <span class="keyword">new</span> <a class="code hl_class" href="class_m_f_x_video_session___w_r_a_p.html">MFXVideoSession_WRAP</a>();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">if</span> (!deviceHandler-&gt;init(*session))</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Can&#39;t initialize session&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">// Load appropriate plugin</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    mfxU32 codecId = <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a973de38f49138b1fa98ac52c5c062a86">codecIdByFourCC</a>(_fourcc);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">if</span> (codecId == (mfxU32)-1)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Unsupported FourCC: &quot;</span> &lt;&lt; <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(_fourcc) &lt;&lt; endl);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    plugin = <a class="code hl_function" href="class_plugin.html#aef9834b8b4e32f57af408f94704ec36c">Plugin::loadEncoderPlugin</a>(*session, codecId);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">if</span> (plugin &amp;&amp; !plugin-&gt;isGood())</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: LoadPlugin failed for codec: &quot;</span> &lt;&lt; codecId &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; <a class="code hl_function" href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC</a>(_fourcc) &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="comment">// Init encoder</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    encoder = <span class="keyword">new</span> MFXVideoENCODE(*session);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    mfxVideoParam <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    memset(&amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>, 0, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>));</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.CodecId = codecId;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.TargetUsage = MFX_TARGETUSAGE_BALANCED;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.TargetKbps = <a class="code hl_function" href="group__core__utils.html#ga257d01817e78477beb39f2ae3ef05f2a">saturate_cast&lt;mfxU16&gt;</a>(<a class="code hl_function" href="cap__mfx__writer_8cpp.html#a52c40031f39c493f66442c249581cfdc">estimateBitrate</a>(codecId, frameSize.area(), (<span class="keywordtype">float</span>)fps) * 300 / <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a99b448bb722db453e5bd901a89823013">getBitrateDivisor</a>()); <span class="comment">// TODO: set in options</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.RateControlMethod = MFX_RATECONTROL_VBR;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.FrameRateExtN = <a class="code hl_function" href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a>(fps * 1000);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.FrameRateExtD = 1000;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.FourCC = MFX_FOURCC_NV12;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.ChromaFormat = MFX_CHROMAFORMAT_YUV420;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.PicStruct = MFX_PICSTRUCT_PROGRESSIVE;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.CropX = 0;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.CropY = 0;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.CropW = (mfxU16)frameSize.width;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.CropH = (mfxU16)frameSize.height;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.Width = (mfxU16)<a class="code hl_function" href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">alignSize</a>(frameSize.width, 32);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo.Height = (mfxU16)<a class="code hl_function" href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">alignSize</a>(frameSize.height, 32);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.IOPattern = MFX_IOPATTERN_IN_SYSTEM_MEMORY;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    res = encoder-&gt;Query(&amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>, &amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;MFX Query: &quot;</span> &lt;&lt; res &lt;&lt; endl &lt;&lt; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx &lt;&lt; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">if</span> (res &lt; MFX_ERR_NONE)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Query failed: &quot;</span> &lt;&lt; res &lt;&lt; endl);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="comment">// Init surface pool</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    pool = <a class="code hl_function" href="class_surface_pool.html#a65af65990aa99deb9533e2a947bcafac">SurfacePool::create</a>(encoder, <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">if</span> (!pool)</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Failed to create surface pool&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="comment">// Init encoder</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    res = encoder-&gt;Init(&amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;MFX encoder Init: &quot;</span> &lt;&lt; res &lt;&lt; endl &lt;&lt; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.mfx.FrameInfo);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> (res &lt; MFX_ERR_NONE)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Failed to init encoder: &quot;</span> &lt;&lt; res &lt;&lt; endl);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">// Open output bitstream</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        mfxVideoParam par;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        memset(&amp;par, 0, <span class="keyword">sizeof</span>(par));</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        res = encoder-&gt;GetVideoParam(&amp;par);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;MFX GetVideoParam: &quot;</span> &lt;&lt; res &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;requested &quot;</span> &lt;&lt; par.mfx.BufferSizeInKB &lt;&lt; <span class="stringliteral">&quot; kB&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(res &gt;= MFX_ERR_NONE);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        bs = <span class="keyword">new</span> <a class="code hl_function" href="class_write_bitstream.html#a3f25fedf5816afc3948420b0608e392b">WriteBitstream</a>(filename.c_str(), par.mfx.BufferSizeInKB * 1024 * 2);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">if</span> (!bs-&gt;isOpened())</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Failed to open output file: &quot;</span> &lt;&lt; filename &lt;&lt; endl);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    good = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>}</div>
+</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="foldopen" id="foldopen00175" data-start="{" data-end="}">
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#aad3dd23cf0cf5dd915204b2b7928fd2b">  175</a></span><a class="code hl_function" href="class_video_writer___intel_m_f_x.html#aad3dd23cf0cf5dd915204b2b7928fd2b">VideoWriter_IntelMFX::~VideoWriter_IntelMFX</a>()</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>{</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="class_video_writer___intel_m_f_x.html#ab7ec7fa7bd191754b802e4542aedd5db">isOpened</a>())</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;====== Drain bitstream...&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> dummy;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">while</span> (<a class="code hl_function" href="class_video_writer___intel_m_f_x.html#ab9f9787ded808f2316579ae7c98cd950">write_one</a>(dummy)) {}</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;====== Drain Finished&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <a class="code hl_function" href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a>(bs);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <a class="code hl_function" href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a>(pool);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <a class="code hl_function" href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a>(encoder);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_function" href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a>(plugin);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_function" href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a>(session);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <a class="code hl_function" href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a>(deviceHandler);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>}</div>
+</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="foldopen" id="foldopen00192" data-start="{" data-end="}">
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#aaa89e4e217219b3bf159eacaab284128">  192</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="class_video_writer___intel_m_f_x.html#aaa89e4e217219b3bf159eacaab284128">VideoWriter_IntelMFX::getProperty</a>(<span class="keywordtype">int</span>)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: getProperty() is not implemented&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
+</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#a8cab10570d708348f534f0560efa8f08">  198</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_video_writer___intel_m_f_x.html#a8cab10570d708348f534f0560efa8f08">VideoWriter_IntelMFX::setProperty</a>(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>{</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: setProperty() is not implemented&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>}</div>
+</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="foldopen" id="foldopen00204" data-start="{" data-end="}">
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#ab7ec7fa7bd191754b802e4542aedd5db">  204</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_video_writer___intel_m_f_x.html#ab7ec7fa7bd191754b802e4542aedd5db">VideoWriter_IntelMFX::isOpened</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">return</span> good;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
+</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#a7c1a0bcdf24d83c98d111d00e5f30a3a">  209</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_video_writer___intel_m_f_x.html#a7c1a0bcdf24d83c98d111d00e5f30a3a">VideoWriter_IntelMFX::write</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a> input)</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>{</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_video_writer___intel_m_f_x.html#ab9f9787ded808f2316579ae7c98cd950">write_one</a>(input);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>}</div>
+</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="class_video_writer___intel_m_f_x.html#ab9f9787ded808f2316579ae7c98cd950">  214</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_video_writer___intel_m_f_x.html#ab9f9787ded808f2316579ae7c98cd950">VideoWriter_IntelMFX::write_one</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a> bgr)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>{</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    mfxStatus res;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    mfxFrameSurface1 *workSurface = 0;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    mfxSyncPoint sync;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">if</span> (!bgr.empty() &amp;&amp; (bgr.dims() != 2 || bgr.type() != <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a> || bgr.size() != frameSize))</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: invalid frame passed to encoder: &quot;</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            &lt;&lt; <span class="stringliteral">&quot;dims/depth/cn=&quot;</span> &lt;&lt; bgr.dims() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; bgr.depth() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; bgr.channels()</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            &lt;&lt; <span class="stringliteral">&quot;, size=&quot;</span> &lt;&lt; bgr.size() &lt;&lt; endl);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">if</span> (!bgr.empty())</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        workSurface = pool-&gt;getFreeSurface();</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <span class="keywordflow">if</span> (!workSurface)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="comment">// not enough surfaces</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Failed to get free surface&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src = bgr.getMat();</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <a class="code hl_function" href="group__imgproc__hal__functions.html#ga1d485a19d2d1f427cada0288c468b5d0">hal::cvtBGRtoTwoPlaneYUV</a>(src.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>, src.<a class="code hl_variable" href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">step</a>,</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                                 workSurface-&gt;Data.Y, workSurface-&gt;Data.UV, workSurface-&gt;Data.Pitch,</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                                 workSurface-&gt;Info.CropW, workSurface-&gt;Info.CropH,</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>                                 3, <span class="keyword">false</span>, 1);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    }</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>)</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        outSurface = 0;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;Calling with surface: &quot;</span> &lt;&lt; workSurface &lt;&lt; endl);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        res = encoder-&gt;EncodeFrameAsync(NULL, workSurface, &amp;bs-&gt;stream, &amp;sync);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">if</span> (res == MFX_ERR_NONE)</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            res = session-&gt;SyncOperation(sync, <a class="code hl_function" href="cap__mfx__writer_8cpp.html#a7e48eb875f190bc09996f605ae3610a2">getWriterTimeoutMS</a>()); <span class="comment">// TODO: provide interface to modify timeout</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            <span class="keywordflow">if</span> (res == MFX_ERR_NONE)</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                <span class="comment">// ready to write</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                <span class="keywordflow">if</span> (!bs-&gt;write())</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                    <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Failed to write bitstream&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                    <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;Write bitstream&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            {</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Sync error: &quot;</span> &lt;&lt; res &lt;&lt; endl);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            }</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (res == MFX_ERR_MORE_DATA)</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        {</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;ERR_MORE_DATA&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        }</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (res == MFX_WRN_DEVICE_BUSY)</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            <a class="code hl_define" href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a>(cout &lt;&lt; <span class="stringliteral">&quot;Waiting for device&quot;</span> &lt;&lt; endl);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            sleep_ms(1000);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            <a class="code hl_define" href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a>(cerr &lt;&lt; <span class="stringliteral">&quot;MFX: Bad status: &quot;</span> &lt;&lt; res &lt;&lt; endl);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    }</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>}</div>
+</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="foldopen" id="foldopen00291" data-start="{" data-end="}">
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="namespacecv.html#a620cd633c5e6b4ebe214d5cefeed44eb">  291</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;IVideoWriter&gt;</a> <a class="code hl_function" href="namespacecv.html#a620cd633c5e6b4ebe214d5cefeed44eb">cv::create_MFX_writer</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">int</span> _fourcc, <span class="keywordtype">double</span> fps,</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                                        <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>&amp; frameSize, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_video_writer_parameters.html">VideoWriterParameters</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>)</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>{</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="cap__mfx__writer_8cpp.html#a973de38f49138b1fa98ac52c5c062a86">codecIdByFourCC</a>(_fourcc) &gt; 0)</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    {</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> isColor = <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.get(<a class="code hl_enumvalue" href="group__videoio__flags__base.html#gga41c5cfa7859ae542b71b1d33bbd4d2b4aad8fd6a513706288dfcaa491269851d8">VIDEOWRITER_PROP_IS_COLOR</a>, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;VideoWriter_IntelMFX&gt;</a> a = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;VideoWriter_IntelMFX&gt;</a>(filename, _fourcc, fps, frameSize, isColor);</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keywordflow">if</span> (a-&gt;isOpened())</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            <span class="keywordflow">return</span> a;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">Ptr&lt;VideoWriter_IntelMFX&gt;</a>();</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>}</div>
+</div>
+<div class="ttc" id="abase_8hpp_html"><div class="ttname"><a href="base_8hpp.html">base.hpp</a></div></div>
+<div class="ttc" id="acap__interface_8hpp_html"><div class="ttname"><a href="cap__interface_8hpp.html">cap_interface.hpp</a></div></div>
+<div class="ttc" id="acap__mfx__common_8cpp_html_adf5ba685111d72265a86c1b7da0459f1"><div class="ttname"><a href="cap__mfx__common_8cpp.html#adf5ba685111d72265a86c1b7da0459f1">createDeviceHandler</a></div><div class="ttdeci">DeviceHandler * createDeviceHandler()</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8cpp_source.html#l00125">cap_mfx_common.cpp:125</a></div></div>
+<div class="ttc" id="acap__mfx__common_8hpp_html"><div class="ttname"><a href="cap__mfx__common_8hpp.html">cap_mfx_common.hpp</a></div></div>
+<div class="ttc" id="acap__mfx__common_8hpp_html_a0336f4e02658b146c41e46121fc00f79"><div class="ttname"><a href="cap__mfx__common_8hpp.html#a0336f4e02658b146c41e46121fc00f79">MSG</a></div><div class="ttdeci">#define MSG(i)</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8hpp_source.html#l00053">cap_mfx_common.hpp:53</a></div></div>
+<div class="ttc" id="acap__mfx__common_8hpp_html_af80319356bb41f574da39409fbcc4971"><div class="ttname"><a href="cap__mfx__common_8hpp.html#af80319356bb41f574da39409fbcc4971">cleanup</a></div><div class="ttdeci">void cleanup(T *&amp;ptr)</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8hpp_source.html#l00178">cap_mfx_common.hpp:178</a></div></div>
+<div class="ttc" id="acap__mfx__writer_8cpp_html_a52c40031f39c493f66442c249581cfdc"><div class="ttname"><a href="cap__mfx__writer_8cpp.html#a52c40031f39c493f66442c249581cfdc">estimateBitrate</a></div><div class="ttdeci">static float estimateBitrate(int codecId, size_t pixelNum, float fps)</div><div class="ttdef"><b>Definición</b> <a href="#l00014">cap_mfx_writer.cpp:14</a></div></div>
+<div class="ttc" id="acap__mfx__writer_8cpp_html_a7e48eb875f190bc09996f605ae3610a2"><div class="ttname"><a href="cap__mfx__writer_8cpp.html#a7e48eb875f190bc09996f605ae3610a2">getWriterTimeoutMS</a></div><div class="ttdeci">static mfxU32 getWriterTimeoutMS()</div><div class="ttdef"><b>Definición</b> <a href="#l00045">cap_mfx_writer.cpp:45</a></div></div>
+<div class="ttc" id="acap__mfx__writer_8cpp_html_a973de38f49138b1fa98ac52c5c062a86"><div class="ttname"><a href="cap__mfx__writer_8cpp.html#a973de38f49138b1fa98ac52c5c062a86">codecIdByFourCC</a></div><div class="ttdeci">mfxU32 codecIdByFourCC(int fourcc)</div><div class="ttdef"><b>Definición</b> <a href="#l00051">cap_mfx_writer.cpp:51</a></div></div>
+<div class="ttc" id="acap__mfx__writer_8cpp_html_a99b448bb722db453e5bd901a89823013"><div class="ttname"><a href="cap__mfx__writer_8cpp.html#a99b448bb722db453e5bd901a89823013">getBitrateDivisor</a></div><div class="ttdeci">static size_t getBitrateDivisor()</div><div class="ttdef"><b>Definición</b> <a href="#l00039">cap_mfx_writer.cpp:39</a></div></div>
+<div class="ttc" id="acap__mfx__writer_8hpp_html"><div class="ttname"><a href="cap__mfx__writer_8hpp.html">cap_mfx_writer.hpp</a></div></div>
+<div class="ttc" id="accl__bolelli__forest_8inc_8hpp_html_adf0f2a5b1766183828a3aea2ed9d3927"><div class="ttname"><a href="ccl__bolelli__forest_8inc_8hpp.html#adf0f2a5b1766183828a3aea2ed9d3927">if</a></div><div class="ttdeci">if(CONDITION_O)</div><div class="ttdef"><b>Definición</b> <a href="ccl__bolelli__forest_8inc_8hpp_source.html#l00012">ccl_bolelli_forest.inc.hpp:12</a></div></div>
+<div class="ttc" id="aclass_m_f_x_video_session___w_r_a_p_html"><div class="ttname"><a href="class_m_f_x_video_session___w_r_a_p.html">MFXVideoSession_WRAP</a></div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8hpp_source.html#l00195">cap_mfx_common.hpp:196</a></div></div>
+<div class="ttc" id="aclass_plugin_html_aef9834b8b4e32f57af408f94704ec36c"><div class="ttname"><a href="class_plugin.html#aef9834b8b4e32f57af408f94704ec36c">Plugin::loadEncoderPlugin</a></div><div class="ttdeci">static Plugin * loadEncoderPlugin(MFXVideoSession_WRAP &amp;session, mfxU32 codecId)</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8hpp_source.html#l00211">cap_mfx_common.hpp:211</a></div></div>
+<div class="ttc" id="aclass_surface_pool_html_a65af65990aa99deb9533e2a947bcafac"><div class="ttname"><a href="class_surface_pool.html#a65af65990aa99deb9533e2a947bcafac">SurfacePool::create</a></div><div class="ttdeci">static SurfacePool * create(T *instance, mfxVideoParam &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8hpp_source.html#l00302">cap_mfx_common.hpp:302</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_a7c1a0bcdf24d83c98d111d00e5f30a3a"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#a7c1a0bcdf24d83c98d111d00e5f30a3a">VideoWriter_IntelMFX::write</a></div><div class="ttdeci">bool write(cv::InputArray input) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00209">cap_mfx_writer.cpp:209</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_a86f0431859114deb5c2b1bd29e05c14f"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#a86f0431859114deb5c2b1bd29e05c14f">VideoWriter_IntelMFX::VideoWriter_IntelMFX</a></div><div class="ttdeci">VideoWriter_IntelMFX(const cv::String &amp;filename, int _fourcc, double fps, cv::Size frameSize, bool isColor)</div><div class="ttdef"><b>Definición</b> <a href="#l00070">cap_mfx_writer.cpp:70</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_a8cab10570d708348f534f0560efa8f08"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#a8cab10570d708348f534f0560efa8f08">VideoWriter_IntelMFX::setProperty</a></div><div class="ttdeci">bool setProperty(int, double) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00198">cap_mfx_writer.cpp:198</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_aaa89e4e217219b3bf159eacaab284128"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#aaa89e4e217219b3bf159eacaab284128">VideoWriter_IntelMFX::getProperty</a></div><div class="ttdeci">double getProperty(int) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00192">cap_mfx_writer.cpp:192</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_aad3dd23cf0cf5dd915204b2b7928fd2b"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#aad3dd23cf0cf5dd915204b2b7928fd2b">VideoWriter_IntelMFX::~VideoWriter_IntelMFX</a></div><div class="ttdeci">~VideoWriter_IntelMFX() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00175">cap_mfx_writer.cpp:175</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_ab7ec7fa7bd191754b802e4542aedd5db"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#ab7ec7fa7bd191754b802e4542aedd5db">VideoWriter_IntelMFX::isOpened</a></div><div class="ttdeci">bool isOpened() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00204">cap_mfx_writer.cpp:204</a></div></div>
+<div class="ttc" id="aclass_video_writer___intel_m_f_x_html_ab9f9787ded808f2316579ae7c98cd950"><div class="ttname"><a href="class_video_writer___intel_m_f_x.html#ab9f9787ded808f2316579ae7c98cd950">VideoWriter_IntelMFX::write_one</a></div><div class="ttdeci">bool write_one(cv::InputArray bgr)</div><div class="ttdef"><b>Definición</b> <a href="#l00214">cap_mfx_writer.cpp:214</a></div></div>
+<div class="ttc" id="aclass_write_bitstream_html_a3f25fedf5816afc3948420b0608e392b"><div class="ttname"><a href="class_write_bitstream.html#a3f25fedf5816afc3948420b0608e392b">WriteBitstream::WriteBitstream</a></div><div class="ttdeci">WriteBitstream(const char *filename, size_t maxSize)</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8cpp_source.html#l00236">cap_mfx_common.cpp:236</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a4d33bed1c850265370d2af0ff02e1564"><div class="ttname"><a href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">cv::Mat::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdoc">pointer to the data</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02493">mat.hpp:2493</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ab4b0843e64328eb2a026b5b9ede726fe"><div class="ttname"><a href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">cv::Mat::step</a></div><div class="ttdeci">MatStep step</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02514">mat.hpp:2514</a></div></div>
+<div class="ttc" id="aclasscv_1_1_video_writer_parameters_html"><div class="ttname"><a href="classcv_1_1_video_writer_parameters.html">cv::VideoWriterParameters</a></div><div class="ttdef"><b>Definición</b> <a href="cap__interface_8hpp_source.html#l00177">cap_interface.hpp:178</a></div></div>
+<div class="ttc" id="afilesystem_8cpp_html_ae8924623ca601364965e3d88fb7f40fa"><div class="ttname"><a href="filesystem_8cpp.html#ae8924623ca601364965e3d88fb7f40fa">DBG</a></div><div class="ttdeci">#define DBG(...)</div><div class="ttdef"><b>Definición</b> <a href="filesystem_8cpp_source.html#l00020">filesystem.cpp:20</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga88c4cd9de76f678f33928ef1e3f96047"><div class="ttname"><a href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a></div><div class="ttdeci">#define CV_8UC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00083">interface.h:83</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga085eca238176984a0b72df2818598d85"><div class="ttname"><a href="group__core__utils.html#ga085eca238176984a0b72df2818598d85">cvRound</a></div><div class="ttdeci">int cvRound(double value)</div><div class="ttdoc">Rounds floating-point number to the nearest integer.</div><div class="ttdef"><b>Definición</b> <a href="fast__math_8hpp_source.html#l00200">fast_math.hpp:200</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga257d01817e78477beb39f2ae3ef05f2a"><div class="ttname"><a href="group__core__utils.html#ga257d01817e78477beb39f2ae3ef05f2a">cv::saturate_cast</a></div><div class="ttdeci">_Tp saturate_cast(uchar v)</div><div class="ttdoc">Template function for accurate conversion from one primitive type to another.</div><div class="ttdef"><b>Definición</b> <a href="saturate_8hpp_source.html#l00081">saturate.hpp:81</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga6e547d8c01fd21783950d7db2fd6108f"><div class="ttname"><a href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">cv::alignSize</a></div><div class="ttdeci">size_t alignSize(size_t sz, int n)</div><div class="ttdoc">Aligns a buffer size to the specified number of bytes.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00565">utility.hpp:565</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="agroup__imgproc__hal__functions_html_ga1d485a19d2d1f427cada0288c468b5d0"><div class="ttname"><a href="group__imgproc__hal__functions.html#ga1d485a19d2d1f427cada0288c468b5d0">cv::hal::cvtBGRtoTwoPlaneYUV</a></div><div class="ttdeci">CV_EXPORTS void cvtBGRtoTwoPlaneYUV(const uchar *src_data, size_t src_step, uchar *y_data, uchar *uv_data, size_t dst_step, int width, int height, int scn, bool swapBlue, int uIdx)</div><div class="ttdoc">Separate Y and UV planes.</div><div class="ttdef"><b>Definición</b> <a href="color__yuv_8dispatch_8cpp_source.html#l00160">color_yuv.dispatch.cpp:160</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_gga41c5cfa7859ae542b71b1d33bbd4d2b4aad8fd6a513706288dfcaa491269851d8"><div class="ttname"><a href="group__videoio__flags__base.html#gga41c5cfa7859ae542b71b1d33bbd4d2b4aad8fd6a513706288dfcaa491269851d8">cv::VIDEOWRITER_PROP_IS_COLOR</a></div><div class="ttdeci">@ VIDEOWRITER_PROP_IS_COLOR</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00221">videoio.hpp:221</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">cv::CAP_PROP_UNKNOWN</a></div><div class="ttdeci">@ CAP_PROP_UNKNOWN</div><div class="ttdoc">Returned by VideoCapture::get if the requested property is unknown or unsupported.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00132">videoio.hpp:132</a></div></div>
+<div class="ttc" id="aimgproc_2include_2opencv2_2imgproc_2hal_2hal_8hpp_html"><div class="ttname"><a href="imgproc_2include_2opencv2_2imgproc_2hal_2hal_8hpp.html">hal.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1utils_html_a96a18231580c3d91fc0dddfade71ec93"><div class="ttname"><a href="namespacecv_1_1utils.html#a96a18231580c3d91fc0dddfade71ec93">cv::utils::getConfigurationParameterSizeT</a></div><div class="ttdeci">CV_EXPORTS size_t getConfigurationParameterSizeT(const char *name, size_t defaultValue=0)</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02206">system.cpp:2206</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a620cd633c5e6b4ebe214d5cefeed44eb"><div class="ttname"><a href="namespacecv.html#a620cd633c5e6b4ebe214d5cefeed44eb">cv::create_MFX_writer</a></div><div class="ttdeci">Ptr&lt; IVideoWriter &gt; create_MFX_writer(const std::string &amp;filename, int _fourcc, double fps, const Size &amp;frameSize, const VideoWriterParameters &amp;params)</div><div class="ttdef"><b>Definición</b> <a href="#l00291">cap_mfx_writer.cpp:291</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="astruct_four_c_c_html_aedd6bb57d087d79449d3ef4715fb750d"><div class="ttname"><a href="struct_four_c_c.html#aedd6bb57d087d79449d3ef4715fb750d">FourCC::FourCC</a></div><div class="ttdeci">FourCC(uint val)</div><div class="ttdef"><b>Definición</b> <a href="cap__mfx__common_8hpp_source.html#l00079">cap_mfx_common.hpp:79</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html_ac18c0d5defdf2b5653649393d563cce7"><div class="ttname"><a href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">cv::Ptr::Ptr</a></div><div class="ttdeci">Ptr() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00073">cvstd_wrapper.hpp:73</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__mfx__writer_8cpp.html">cap_mfx_writer.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/geometry/src/ptcloud/region_growing_3d.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('region__growing__3d_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">region_growing_3d.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="region__growing__3d_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2022, Wanli Zhong &lt;zhongwl2018@mail.sustech.edu.cn&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef OPENCV_REGION_ROWING_3D_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define OPENCV_REGION_ROWING_3D_HPP</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="segment_8hpp.html">opencv2/geometry/segment.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud__utils_8hpp.html">ptcloud_utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html">   15</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#aef13b0493f81a3169bd56002c2131530">RegionGrowing3DImpl</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d.html#a254fa094d1e12415521d363c4a7a873d">RegionGrowing3D</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">double</span> smoothness_thr;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">double</span> curvature_thr;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">int</span> max_neighbor_num;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">int</span> min_size;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">int</span> max_size;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> smooth_mode;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">int</span> region_num;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">bool</span> need_sort;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> curvatures;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> seeds;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#aef13b0493f81a3169bd56002c2131530">   50</a></span>    <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#aef13b0493f81a3169bd56002c2131530">RegionGrowing3DImpl</a>()</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            : smoothness_thr(0.5235987756 <span class="comment">/* 30*PI/180 */</span> ), curvature_thr(0.05),</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>              max_neighbor_num(INT_MAX), min_size(1), max_size(INT_MAX), smooth_mode(true),</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>              region_num(INT_MAX), need_sort(true)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a01882c1fc2289e4dac90119a988410b3">segment</a>(<a class="code hl_typedef" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> regions_idx, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__misc.html#gaa75358e6ed91336d607ff7a9a5991251">labels</a>, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> input_pts,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> normals, <a class="code hl_typedef" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> nn_idx) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="comment">//-------------------------- Getter and Setter -----------------------</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a1f3a4cddefa5440d46dc22750a03963d">   62</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a1f3a4cddefa5440d46dc22750a03963d">setMinSize</a>(<span class="keywordtype">int</span> min_size_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        min_size = min_size_ &lt;= 0 ? 1 : min_size_;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#aa298e10f9a7df03c8a3350a4beec6eff">   67</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#aa298e10f9a7df03c8a3350a4beec6eff">getMinSize</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> min_size;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#aea2b8e504dc58fd0b9cbebf75bd905e8">   72</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#aea2b8e504dc58fd0b9cbebf75bd905e8">setMaxSize</a>(<span class="keywordtype">int</span> max_size_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        max_size = max_size_ &lt;= 0 ? INT_MAX : max_size_;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a3bcf48798c426fb0b597a989b970d7f7">   77</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a3bcf48798c426fb0b597a989b970d7f7">getMaxSize</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> max_size;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a1b551b369db019607961f233d75578d4">   82</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a1b551b369db019607961f233d75578d4">setSmoothModeFlag</a>(<span class="keywordtype">bool</span> smooth_mode_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        smooth_mode = smooth_mode_;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a6ac6f275093bd6e45903554f0c1249dd">   87</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a6ac6f275093bd6e45903554f0c1249dd">getSmoothModeFlag</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> smooth_mode;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a1795b702e7b431ef4ab03e7797db4564">   92</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a1795b702e7b431ef4ab03e7797db4564">setSmoothnessThreshold</a>(<span class="keywordtype">double</span> smoothness_thr_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>(smoothness_thr_, 0.0,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="stringliteral">&quot;The smoothness threshold angle should be greater than or equal to 0.&quot;</span>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_define" href="check_8hpp.html#ac98e8b8e8db2358bda79304adc7eb8a9">CV_CheckLT</a>(smoothness_thr_, 1.5707963268 <span class="comment">/* 90*PI/180 */</span>,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                <span class="stringliteral">&quot;The smoothness threshold angle should be less than 90 degrees.&quot;</span>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        smoothness_thr = smoothness_thr_;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#ab4766ac4145081a9a65e93e1ab58049b">  101</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#ab4766ac4145081a9a65e93e1ab58049b">getSmoothnessThreshold</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> smoothness_thr;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a1b48b7674065dd6a755b29e4c53d4d86">  106</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a1b48b7674065dd6a755b29e4c53d4d86">setCurvatureThreshold</a>(<span class="keywordtype">double</span> curvature_thr_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <a class="code hl_define" href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a>(curvature_thr_, 0.0,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="stringliteral">&quot;The curvature threshold should be greater than or equal to 0.&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        curvature_thr = curvature_thr_;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a33b1de8bf8b042db3f379ccf2f6568d6">  113</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a33b1de8bf8b042db3f379ccf2f6568d6">getCurvatureThreshold</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> curvature_thr;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#af971f38eefa745b4956100633e3db8c3">  118</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#af971f38eefa745b4956100633e3db8c3">setMaxNumberOfNeighbors</a>(<span class="keywordtype">int</span> max_neighbor_num_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        max_neighbor_num = max_neighbor_num_ &lt;= 0 ? INT_MAX : max_neighbor_num_;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a6f0fe69f4d07366c1937f951b6fcd89e">  123</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a6f0fe69f4d07366c1937f951b6fcd89e">getMaxNumberOfNeighbors</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">return</span> max_neighbor_num;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a4900c70911b57607aa264fa10c9a6cb2">  128</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a4900c70911b57607aa264fa10c9a6cb2">setNumberOfRegions</a>(<span class="keywordtype">int</span> region_num_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        region_num = region_num_ &lt;= 0 ? INT_MAX : region_num_;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#ac77b7696408cca81954bd3e44f2a4727">  133</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#ac77b7696408cca81954bd3e44f2a4727">getNumberOfRegions</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">return</span> region_num;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a220f1f46180b72eea6710292eb6c5d07">  138</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a220f1f46180b72eea6710292eb6c5d07">setNeedSort</a>(<span class="keywordtype">bool</span> need_sort_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        need_sort = need_sort_;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#aff0ba952ba817ce18ae3dc0cab25ee55">  143</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#aff0ba952ba817ce18ae3dc0cab25ee55">getNeedSort</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> need_sort;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a6d0099f58ece591e320344f67ad88765">  148</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a6d0099f58ece591e320344f67ad88765">setSeeds</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> seeds_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        seeds = seeds_.getMat().reshape(1, 1);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#aa9af041a8b86c3e99c6a8ecd977cb491">  153</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#aa9af041a8b86c3e99c6a8ecd977cb491">getSeeds</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> seeds_)<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        seeds.copyTo(seeds_);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    }</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a89a3287a68ef988488bf127889a75b69">  158</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a89a3287a68ef988488bf127889a75b69">setCurvatures</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> curvatures_)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        curvatures = <a class="code hl_function" href="namespacecv.html#a99f26617dde62723f243ac724140971b">abs</a>(curvatures_.getMat().reshape(1, 1));</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
+</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="foldopen" id="foldopen00163" data-start="{" data-end="}">
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d_impl.html#a26b66ba20c02ad43c6476006562f6da0">  163</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_region_growing3_d_impl.html#a26b66ba20c02ad43c6476006562f6da0">getCurvatures</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> curvatures_)<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        curvatures.copyTo(curvatures_);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>};</div>
+</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classcv_1_1_region_growing3_d.html#a98dddd46ebc573194fa159064b72776d">  170</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;RegionGrowing3D&gt;</a> <a class="code hl_function" href="classcv_1_1_region_growing3_d.html#a98dddd46ebc573194fa159064b72776d">RegionGrowing3D::create</a>()</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>{</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;RegionGrowing3DImpl&gt;</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>}</div>
+</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>} <span class="comment">//end namespace cv</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#endif </span><span class="comment">//OPENCV_REGION_ROWING_3D_HPP</span></div>
+<div class="ttc" id="acheck_8hpp_html_ac98e8b8e8db2358bda79304adc7eb8a9"><div class="ttname"><a href="check_8hpp.html#ac98e8b8e8db2358bda79304adc7eb8a9">CV_CheckLT</a></div><div class="ttdeci">#define CV_CheckLT(v1, v2, msg)</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00123">check.hpp:123</a></div></div>
+<div class="ttc" id="acheck_8hpp_html_afb73e9363834035c36b766de56650a2e"><div class="ttname"><a href="check_8hpp.html#afb73e9363834035c36b766de56650a2e">CV_CheckGE</a></div><div class="ttdeci">#define CV_CheckGE(v1, v2, msg)</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00124">check.hpp:124</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_html_a254fa094d1e12415521d363c4a7a873d"><div class="ttname"><a href="classcv_1_1_region_growing3_d.html#a254fa094d1e12415521d363c4a7a873d">cv::RegionGrowing3D::RegionGrowing3D</a></div><div class="ttdeci">RegionGrowing3D()=default</div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_html_a98dddd46ebc573194fa159064b72776d"><div class="ttname"><a href="classcv_1_1_region_growing3_d.html#a98dddd46ebc573194fa159064b72776d">cv::RegionGrowing3D::create</a></div><div class="ttdeci">static Ptr&lt; RegionGrowing3D &gt; create()</div><div class="ttdef"><b>Definición</b> <a href="#l00170">region_growing_3d.hpp:170</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a01882c1fc2289e4dac90119a988410b3"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a01882c1fc2289e4dac90119a988410b3">cv::RegionGrowing3DImpl::segment</a></div><div class="ttdeci">int segment(OutputArrayOfArrays regions_idx, OutputArray labels, InputArray input_pts, InputArray normals, InputArrayOfArrays nn_idx) override</div><div class="ttdoc">Execute segmentation using the Region Growing algorithm.</div><div class="ttdef"><b>Definición</b> <a href="region__growing__3d_8cpp_source.html#l00020">region_growing_3d.cpp:20</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a1795b702e7b431ef4ab03e7797db4564"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a1795b702e7b431ef4ab03e7797db4564">cv::RegionGrowing3DImpl::setSmoothnessThreshold</a></div><div class="ttdeci">void setSmoothnessThreshold(double smoothness_thr_) override</div><div class="ttdoc">Set threshold value of the angle between normals, the input value is in radian.</div><div class="ttdef"><b>Definición</b> <a href="#l00092">region_growing_3d.hpp:92</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a1b48b7674065dd6a755b29e4c53d4d86"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a1b48b7674065dd6a755b29e4c53d4d86">cv::RegionGrowing3DImpl::setCurvatureThreshold</a></div><div class="ttdeci">void setCurvatureThreshold(double curvature_thr_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00106">region_growing_3d.hpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a1b551b369db019607961f233d75578d4"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a1b551b369db019607961f233d75578d4">cv::RegionGrowing3DImpl::setSmoothModeFlag</a></div><div class="ttdeci">void setSmoothModeFlag(bool smooth_mode_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00082">region_growing_3d.hpp:82</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a1f3a4cddefa5440d46dc22750a03963d"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a1f3a4cddefa5440d46dc22750a03963d">cv::RegionGrowing3DImpl::setMinSize</a></div><div class="ttdeci">void setMinSize(int min_size_) override</div><div class="ttdoc">Set the minimum size of region.</div><div class="ttdef"><b>Definición</b> <a href="#l00062">region_growing_3d.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a220f1f46180b72eea6710292eb6c5d07"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a220f1f46180b72eea6710292eb6c5d07">cv::RegionGrowing3DImpl::setNeedSort</a></div><div class="ttdeci">void setNeedSort(bool need_sort_) override</div><div class="ttdoc">Set whether the results need to be sorted in descending order by the number of points.</div><div class="ttdef"><b>Definición</b> <a href="#l00138">region_growing_3d.hpp:138</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a26b66ba20c02ad43c6476006562f6da0"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a26b66ba20c02ad43c6476006562f6da0">cv::RegionGrowing3DImpl::getCurvatures</a></div><div class="ttdeci">void getCurvatures(OutputArray curvatures_) const override</div><div class="ttdoc">Get the curvature of each point if you have set.</div><div class="ttdef"><b>Definición</b> <a href="#l00163">region_growing_3d.hpp:163</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a33b1de8bf8b042db3f379ccf2f6568d6"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a33b1de8bf8b042db3f379ccf2f6568d6">cv::RegionGrowing3DImpl::getCurvatureThreshold</a></div><div class="ttdeci">double getCurvatureThreshold() const override</div><div class="ttdoc">Get threshold value of curvature.</div><div class="ttdef"><b>Definición</b> <a href="#l00113">region_growing_3d.hpp:113</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a3bcf48798c426fb0b597a989b970d7f7"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a3bcf48798c426fb0b597a989b970d7f7">cv::RegionGrowing3DImpl::getMaxSize</a></div><div class="ttdeci">int getMaxSize() const override</div><div class="ttdoc">Get the maximum size of region.</div><div class="ttdef"><b>Definición</b> <a href="#l00077">region_growing_3d.hpp:77</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a4900c70911b57607aa264fa10c9a6cb2"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a4900c70911b57607aa264fa10c9a6cb2">cv::RegionGrowing3DImpl::setNumberOfRegions</a></div><div class="ttdeci">void setNumberOfRegions(int region_num_) override</div><div class="ttdoc">Set the maximum number of regions you want.</div><div class="ttdef"><b>Definición</b> <a href="#l00128">region_growing_3d.hpp:128</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a6ac6f275093bd6e45903554f0c1249dd"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a6ac6f275093bd6e45903554f0c1249dd">cv::RegionGrowing3DImpl::getSmoothModeFlag</a></div><div class="ttdeci">bool getSmoothModeFlag() const override</div><div class="ttdoc">Get whether to use the smoothness mode.</div><div class="ttdef"><b>Definición</b> <a href="#l00087">region_growing_3d.hpp:87</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a6d0099f58ece591e320344f67ad88765"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a6d0099f58ece591e320344f67ad88765">cv::RegionGrowing3DImpl::setSeeds</a></div><div class="ttdeci">void setSeeds(InputArray seeds_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00148">region_growing_3d.hpp:148</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a6f0fe69f4d07366c1937f951b6fcd89e"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a6f0fe69f4d07366c1937f951b6fcd89e">cv::RegionGrowing3DImpl::getMaxNumberOfNeighbors</a></div><div class="ttdeci">int getMaxNumberOfNeighbors() const override</div><div class="ttdoc">Get the maximum number of neighbors including itself.</div><div class="ttdef"><b>Definición</b> <a href="#l00123">region_growing_3d.hpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_a89a3287a68ef988488bf127889a75b69"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#a89a3287a68ef988488bf127889a75b69">cv::RegionGrowing3DImpl::setCurvatures</a></div><div class="ttdeci">void setCurvatures(InputArray curvatures_) override</div><div class="ttdoc">Set the curvature of each point, support vector&lt;float&gt; and Mat. If not, you can set it to noArray().</div><div class="ttdef"><b>Definición</b> <a href="#l00158">region_growing_3d.hpp:158</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_aa298e10f9a7df03c8a3350a4beec6eff"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#aa298e10f9a7df03c8a3350a4beec6eff">cv::RegionGrowing3DImpl::getMinSize</a></div><div class="ttdeci">int getMinSize() const override</div><div class="ttdoc">Get the minimum size of region.</div><div class="ttdef"><b>Definición</b> <a href="#l00067">region_growing_3d.hpp:67</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_aa9af041a8b86c3e99c6a8ecd977cb491"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#aa9af041a8b86c3e99c6a8ecd977cb491">cv::RegionGrowing3DImpl::getSeeds</a></div><div class="ttdeci">void getSeeds(OutputArray seeds_) const override</div><div class="ttdoc">Get the seed points.</div><div class="ttdef"><b>Definición</b> <a href="#l00153">region_growing_3d.hpp:153</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_ab4766ac4145081a9a65e93e1ab58049b"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#ab4766ac4145081a9a65e93e1ab58049b">cv::RegionGrowing3DImpl::getSmoothnessThreshold</a></div><div class="ttdeci">double getSmoothnessThreshold() const override</div><div class="ttdoc">Get threshold value of the angle between normals.</div><div class="ttdef"><b>Definición</b> <a href="#l00101">region_growing_3d.hpp:101</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_ac77b7696408cca81954bd3e44f2a4727"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#ac77b7696408cca81954bd3e44f2a4727">cv::RegionGrowing3DImpl::getNumberOfRegions</a></div><div class="ttdeci">int getNumberOfRegions() const override</div><div class="ttdoc">Get the maximum number of regions you want.</div><div class="ttdef"><b>Definición</b> <a href="#l00133">region_growing_3d.hpp:133</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_aea2b8e504dc58fd0b9cbebf75bd905e8"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#aea2b8e504dc58fd0b9cbebf75bd905e8">cv::RegionGrowing3DImpl::setMaxSize</a></div><div class="ttdeci">void setMaxSize(int max_size_) override</div><div class="ttdoc">Set the maximum size of region.</div><div class="ttdef"><b>Definición</b> <a href="#l00072">region_growing_3d.hpp:72</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_aef13b0493f81a3169bd56002c2131530"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#aef13b0493f81a3169bd56002c2131530">cv::RegionGrowing3DImpl::RegionGrowing3DImpl</a></div><div class="ttdeci">RegionGrowing3DImpl()</div><div class="ttdoc">No-argument constructor using default configuration.</div><div class="ttdef"><b>Definición</b> <a href="#l00050">region_growing_3d.hpp:50</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_af971f38eefa745b4956100633e3db8c3"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#af971f38eefa745b4956100633e3db8c3">cv::RegionGrowing3DImpl::setMaxNumberOfNeighbors</a></div><div class="ttdeci">void setMaxNumberOfNeighbors(int max_neighbor_num_) override</div><div class="ttdef"><b>Definición</b> <a href="#l00118">region_growing_3d.hpp:118</a></div></div>
+<div class="ttc" id="aclasscv_1_1_region_growing3_d_impl_html_aff0ba952ba817ce18ae3dc0cab25ee55"><div class="ttname"><a href="classcv_1_1_region_growing3_d_impl.html#aff0ba952ba817ce18ae3dc0cab25ee55">cv::RegionGrowing3DImpl::getNeedSort</a></div><div class="ttdeci">bool getNeedSort() const override</div><div class="ttdoc">Get whether the results need to be sorted you have set.</div><div class="ttdef"><b>Definición</b> <a href="#l00143">region_growing_3d.hpp:143</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga606feabe3b50ab6838f1ba89727aa07a"><div class="ttname"><a href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">cv::InputArrayOfArrays</a></div><div class="ttdeci">InputArray InputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00588">mat.hpp:588</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga889a09549b98223016170d9b613715de"><div class="ttname"><a href="group__core__basic.html#ga889a09549b98223016170d9b613715de">cv::OutputArrayOfArrays</a></div><div class="ttdeci">OutputArray OutputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00590">mat.hpp:590</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gaa75358e6ed91336d607ff7a9a5991251"><div class="ttname"><a href="group__imgproc__misc.html#gaa75358e6ed91336d607ff7a9a5991251">cv::labels</a></div><div class="ttdeci">OutputArray OutputArray labels</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l03362">imgproc.hpp:3362</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a99f26617dde62723f243ac724140971b"><div class="ttname"><a href="namespacecv.html#a99f26617dde62723f243ac724140971b">cv::abs</a></div><div class="ttdeci">uchar abs(uchar a)</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00066">cvstd.hpp:66</a></div></div>
+<div class="ttc" id="aptcloud__utils_8hpp_html"><div class="ttname"><a href="ptcloud__utils_8hpp.html">ptcloud_utils.hpp</a></div></div>
+<div class="ttc" id="asegment_8hpp_html"><div class="ttname"><a href="segment_8hpp.html">segment.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_a52c8a9fa86687e18a4a8ae268f10c32.html">geometry</a></li><li class="navelem"><a href="dir_02f85bb76821f8e71fba420137d549ef.html">src</a></li><li class="navelem"><a href="dir_156c4c17ccd76dbc459262cae97b86bd.html">ptcloud</a></li><li class="navelem"><a href="region__growing__3d_8hpp.html">region_growing_3d.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

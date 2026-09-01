@@ -1,0 +1,25 @@
+var ocl__perf_8hpp =
+[
+    [ "OCL_PERF_ENUM", "ocl__perf_8hpp.html#a7e377a90995e51a907a8ebf24479e49b", null ],
+    [ "OCL_PERF_STRATEGY", "ocl__perf_8hpp.html#ad85814d6d47a93f99b1ac43756ac681e", null ],
+    [ "OCL_PERF_TEST", "ocl__perf_8hpp.html#ae2b018320b4b1437b7b4b3aeed129ece", null ],
+    [ "OCL_PERF_TEST_P", "ocl__perf_8hpp.html#a9a23678448fcf9ca6382171112bf0e17", null ],
+    [ "OCL_SIZE_1", "ocl__perf_8hpp.html#a389dc3f0f068749d9edd1623852e38c0", null ],
+    [ "OCL_SIZE_2", "ocl__perf_8hpp.html#a07f07b4e926a081e62078121c20f5764", null ],
+    [ "OCL_SIZE_3", "ocl__perf_8hpp.html#afa9168a23adfedf09ac5cda5fd8d64da", null ],
+    [ "OCL_SIZE_4", "ocl__perf_8hpp.html#a008fff8e7424ec3b087609eafb4a57fd", null ],
+    [ "OCL_TEST_CYCLE", "ocl__perf_8hpp.html#a9119fd2a50316128bf15415747d693a8", null ],
+    [ "OCL_TEST_CYCLE_MULTIRUN", "ocl__perf_8hpp.html#aebe71184cbfd1eff1de23a0fb5dfd4f2", null ],
+    [ "OCL_TEST_CYCLE_N", "ocl__perf_8hpp.html#aa3325cecd2214eb3b4c18810f581b27a", null ],
+    [ "OCL_TEST_SIZES", "ocl__perf_8hpp.html#a8a3d4762610bbda04d4ba0fd66ebedd5", null ],
+    [ "OCL_TEST_TYPES", "ocl__perf_8hpp.html#afddb9ce56d7d75ab361cb509a7322603", null ],
+    [ "OCL_TEST_TYPES_134", "ocl__perf_8hpp.html#a50e86e72998bb26016ecae23b7b6fee9", null ],
+    [ "OCL_TEST_TYPES_14", "ocl__perf_8hpp.html#ab94d47b5b97fa3a125a299a05b460e0b", null ],
+    [ "PERF_SAMPLE_BEGIN", "ocl__perf_8hpp.html#adffe541841736d40ebaae54f21050400", null ],
+    [ "PERF_SAMPLE_END", "ocl__perf_8hpp.html#a2cdf3af23502c3becfa055d246d9b5a8", null ],
+    [ "SIMPLE_PERF_TEST", "ocl__perf_8hpp.html#a309eaa09ed9186f7a28edae64748caa4", null ],
+    [ "SIMPLE_PERF_TEST_P", "ocl__perf_8hpp.html#a4b61a014b33001c617956d1a3a80e9c2", null ],
+    [ "cvtest::ocl::perf::checkDeviceMaxMemoryAllocSize", "namespacecvtest_1_1ocl_1_1perf.html#ad1dd5c436dda6270cb5ae53fa180c61e", null ],
+    [ "cvtest::ocl::perf::randu", "namespacecvtest_1_1ocl_1_1perf.html#a714131b9d4149c54d50e671de7dfd2b1", null ],
+    [ "cvtest::ocl::perf::safeFinish", "namespacecvtest_1_1ocl_1_1perf.html#acaf39f46be430e910cae508f06703cd6", null ]
+];

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: OpenCV Hardware Acceleration Layer (HAL)</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('api_hal.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">OpenCV Hardware Acceleration Layer (HAL) </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__c_1_2_users_2_y_a_r_a_d_e_y_e_n_i_s_a_i_z_a_g_u_i_r_r_2opencv_2modules_2core_2doc_2hal"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+Detailed Description</h1>
+<p>OpenCV ships a single source tree that must run efficiently on wildly diverse hardware architectures, including x86, Arm, and RISC-V. Because each architecture utilizes wildly different SIMD widths and instruction sets (such as SSE2, AVX-512, NEON, SVE, and RVV), writing separate hand-optimized kernels for every algorithm is an unmaintainable approach.</p>
+<p>To solve this, the performance architecture relies on the <b>two pillars of OpenCV</b>:</p>
+<ul>
+<li><b>Universal Intrinsics:</b> A framework allowing developers to write vectorized code (a vector loop) just once using portable wrappers. The compiler then emits the highly optimized native intrinsics for the target architecture. (For an in-depth guide on writing vectorized code, visit the Universal Intrinsics Documentation).</li>
+<li><b>The Hardware Acceleration Layer (HAL):</b> A replaceable, stable C-interface that allows hardware vendors to bypass generic implementations entirely and inject their own highly tuned, silicon-specific libraries into OpenCV's core operations.</li>
+</ul>
+<p>This document focuses entirely on the second pillar: HAL.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+What is HAL?</h1>
+<p>The Hardware Acceleration Layer (HAL) acts as the thin, interceptable layer between OpenCV's high-level algorithms and the hardware metal. While Universal Intrinsics make generic code fast, hardware vendors often possess proprietary, hand-tuned libraries that utilize specific cache blocking strategies, custom ISAs, or hardware accelerators that outpace generic implementations.</p>
+<p>HAL allows these vendors to reach OpenCV's enormous user base without needing to fork the repository or maintain complex patch sets.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+Architecture &amp; The Call Chain</h1>
+<p>When an OpenCV application calls a standard algorithm, the execution follows a strict fallback chain to guarantee maximum performance and correctness:</p>
+<ol type="1">
+<li><b>The OpenCV Algorithm</b> (e.g., <span class="tt"><a class="el" href="group__imgproc__transform.html#ga92c459d3cdc84d6002263629033e017c" title="Resizes an image.">cv::resize</a></span>, <span class="tt"><a class="el" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14" title="Converts an image from one color space to another.">cv::cvtColor</a></span>, <span class="tt"><a class="el" href="group__core__array.html#gacb6e64071dffe36434e1e7ee79e7cb35" title="Performs generalized matrix multiplication.">cv::gemm</a></span>) is invoked.</li>
+<li><b>HAL Dispatcher:</b> OpenCV queries the <span class="tt">cv_hal_*</span> interface to check if a registered vendor backend has an optimized implementation for this specific operation and data type.</li>
+<li><b>Vendor Backend Execution:</b> If implemented, the vendor library (e.g., IPP, KleidiCV) executes the operation and returns the result.</li>
+<li><b>Graceful Fallback:</b> If the backend is absent, or returns a <span class="tt"><a class="el" href="filesystem_8cpp.html#aec2bcbab7ad208b42215cf4225e259e1">NOT_IMPLEMENTED</a></span> status, OpenCV transparently falls back to its own dispatched Universal Intrinsics. If no SIMD path exists, it falls back to portable C++ scalar code.</li>
+</ol>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Scope of Interceptable Operations</h1>
+<p>HAL exposes approximately 280 interceptable operations across the library. A vendor does not need to implement all of them; covering just the ~20 hotspots that dominate real computer vision workloads (color conversions, resizes, warps, filters, and GEMM) captures most of the runtime.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone"><span class="tt">cv_hal_*</span> Entry Points  </th><th class="markdownTableHeadNone">Examples  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">core  </td><td class="markdownTableBodyNone">~199  </td><td class="markdownTableBodyNone">add/sub/mul/div (all depths), gemm, SVD, LU, norm, split/merge, convertScale  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">imgproc  </td><td class="markdownTableBodyNone">~73  </td><td class="markdownTableBodyNone">resize, warpAffine/Perspective, remap, filter, sepFilter, morph, cvtColor, threshold, canny  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">geometry  </td><td class="markdownTableBodyNone">~4  </td><td class="markdownTableBodyNone">geometric transforms  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">features  </td><td class="markdownTableBodyNone">~4  </td><td class="markdownTableBodyNone">FAST corners, descriptor distance  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">video  </td><td class="markdownTableBodyNone">~3  </td><td class="markdownTableBodyNone">optical-flow primitives  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+Design Principles of the Replaceable Interface</h1>
+<p>The HAL interface is engineered to be as friction-less as possible for both OpenCV maintainers and hardware vendors:</p>
+<ul>
+<li><b>Plain C API:</b> Avoids complex C++ ABI headaches, making compiled vendor libraries easy to ship and link.</li>
+<li><b>Subset Implementation:</b> Vendors are encouraged to implement only the operations where their silicon has a distinct advantage. Partial coverage is a first-class feature.</li>
+<li><b>Stable Signatures:</b> HAL function signatures are immutable. Backends built for older versions will survive and function across future OpenCV releases.</li>
+<li><b>Low-Overhead Dispatch (New in OpenCV 5.0):</b> To reduce API bloat and eliminate calling overhead inside inner loops, modern OpenCV architecture uses a highly efficient function-pointer style dispatcher (<span class="tt">cv_hal_get_*_func()</span>) rather than rigid, type-specific C entry points. Through this new interface, rewritten geometric operations show performance gains ranging from 10% to over 300%.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+Plugging a Backend In</h1>
+<p>Vendor backends are integrated at build time via CMake. OpenCV provides built-in shortcut flags (like <span class="tt">WITH_IPP</span> or <span class="tt">WITH_KLEIDICV</span>) that automatically register known backends.</p>
+<p>Alternatively, custom HALs can be pointed to directly:</p>
+<div class="fragment"><div class="line">cmake -DOpenCV_HAL=&quot;myvendor_hal;ipp&quot;</div>
+</div><!-- fragment --><p><b>Runtime Coexistence:</b> Multiple HALs can coexist in a single build. At configure time, OpenCV registers every enabled HAL into an ordered list. At runtime, they are tried in registration order. This allows a user to combine a highly specialized custom HAL with a general-purpose HAL (like IPP) to achieve best-available acceleration automatically.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+Implementing a Custom HAL</h1>
+<p>If you are a hardware vendor or an advanced developer looking to build your own custom acceleration layer, OpenCV provides templates to get you started quickly.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+1. Start with the Templates</h2>
+<p>Do not start from scratch. Navigate to the OpenCV source tree and look at the provided samples:</p>
+<ul>
+<li><span class="tt">samples/hal/c_hal</span>: A barebones skeleton template demonstrating the required structure.</li>
+<li><span class="tt">samples/hal/slow_hal</span>: A fully working example that demonstrates how to properly wire up the CMake configuration and intercept calls.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+2. Implement the Interface</h2>
+<p>Write your optimized C code targeting the <span class="tt">cv_hal_&lt;op&gt;</span> signatures (or the new <span class="tt">cv_hal_get_&lt;op&gt;_func</span> signatures for OpenCV 5.0).</p>
+<ul>
+<li>If your library successfully computes the result, return <span class="tt">CV_HAL_OK</span> (or the equivalent success macro).</li>
+<li>If your library does not support the specific array size, data type, or operation, simply return <span class="tt"><a class="el" href="filesystem_8cpp.html#aec2bcbab7ad208b42215cf4225e259e1">NOT_IMPLEMENTED</a></span>. OpenCV will gracefully handle the failure and compute the result using its own generic SIMD code.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+3. CMake Configuration Requirements</h2>
+<p>When OpenCV searches for your custom HAL at build time, it runs <span class="tt">find_package(&lt;your_hal_name&gt;)</span>. Your CMake configuration must export the following variables so OpenCV can link against it:</p>
+<ul>
+<li><span class="tt">&lt;hal_name&gt;_FOUND</span></li>
+<li><span class="tt">&lt;hal_name&gt;_LIBRARIES</span></li>
+<li><span class="tt">&lt;hal_name&gt;_HEADERS</span></li>
+<li><span class="tt">&lt;hal_name&gt;_INCLUDE_DIRS</span></li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+4. Build OpenCV with Your HAL</h2>
+<p>Once your custom library is compiled and your CMake configuration is ready, build OpenCV by explicitly pointing it to your build directory:</p>
+<div class="fragment"><div class="line">cmake -DOpenCV_HAL=&quot;myvendor_hal&quot; -DOpenCV_HAL_DIR=&lt;path-to-your-build&gt; ..</div>
+</div><!-- fragment --><p>Verify the integration by checking the CMake configure summary for the <span class="tt">OpenCV_USED_HAL</span> status line.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+The HAL Ecosystem</h1>
+<p>OpenCV supports multiple production-ready vendor backends natively, featuring deeply integrated support for modern architectures. These can be enabled at build time using the following CMake shortcuts:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Backend  </th><th class="markdownTableHeadNone">Vendor  </th><th class="markdownTableHeadNone">Target  </th><th class="markdownTableHeadNone">Scope  </th><th class="markdownTableHeadNone">CMake Flag  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">IPP/IPPICV  </td><td class="markdownTableBodyNone">Intel  </td><td class="markdownTableBodyNone">x86/x86-64  </td><td class="markdownTableBodyNone">stats, transforms, warp  </td><td class="markdownTableBodyNone"><span class="tt">WITH_IPP</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">KleidiCV  </td><td class="markdownTableBodyNone">Arm  </td><td class="markdownTableBodyNone">AArch64 (NEON/SVE2/SME2)  </td><td class="markdownTableBodyNone">color, filter, resize, warp  </td><td class="markdownTableBodyNone"><span class="tt">WITH_KLEIDICV</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Carotene  </td><td class="markdownTableBodyNone">NVIDIA  </td><td class="markdownTableBodyNone">Arm NEON (v7/v8)  </td><td class="markdownTableBodyNone">80+ imgproc/arith ops  </td><td class="markdownTableBodyNone"><span class="tt">WITH_CAROTENE</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">FastCV  </td><td class="markdownTableBodyNone">Qualcomm  </td><td class="markdownTableBodyNone">Snapdragon (Android/Linux Arm)  </td><td class="markdownTableBodyNone">core + imgproc  </td><td class="markdownTableBodyNone"><span class="tt">WITH_FASTCV</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">RVV HAL  </td><td class="markdownTableBodyNone">OpenCV China, SpacemiT  </td><td class="markdownTableBodyNone">RISC-V RVV 1.0  </td><td class="markdownTableBodyNone">~119 core+imgproc ops  </td><td class="markdownTableBodyNone"><span class="tt">WITH_HAL_RVV</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NDSRVP  </td><td class="markdownTableBodyNone">Andes  </td><td class="markdownTableBodyNone">RISC-V P-extension (DSP)  </td><td class="markdownTableBodyNone">filter, morph, warp, remap  </td><td class="markdownTableBodyNone"><span class="tt">WITH_NDSRVP</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ARMPL  </td><td class="markdownTableBodyNone">Arm  </td><td class="markdownTableBodyNone">AArch64  </td><td class="markdownTableBodyNone">BLAS/LAPACK linear algebra  </td><td class="markdownTableBodyNone"><span class="tt">WITH_ARMPL</span>  </td></tr>
+</table>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

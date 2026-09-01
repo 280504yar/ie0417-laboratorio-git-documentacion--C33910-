@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/matmul.dispatch.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('matmul_8dispatch_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo matmul.dispatch.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="core_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="logger_8hpp_source.html">opencv2/core/utils/logger.hpp</a>&gt;</code><br />
+<code>#include &quot;opencl_kernels_core.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="opencl__clblas_8hpp_source.html">opencv2/core/opencl/runtime/opencl_clblas.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="opencl__core_8hpp_source.html">opencv2/core/opencl/runtime/opencl_core.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="intel__gpu__gemm_8inl_8hpp_source.html">intel_gpu_gemm.inl.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="matmul_8simd_8hpp_source.html">matmul.simd.hpp</a>&quot;</code><br />
+<code>#include &quot;matmul.simd_declarations.hpp&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en matmul.dispatch.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="matmul_8dispatch_8cpp__incl.svg" width="100%" height="588"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="matmul_8dispatch_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Espacios de nombres</h2></td></tr>
+<tr class="memitem:cv" id="r_cv"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html">cv</a></td></tr>
+<tr class="memdesc:namespacecv"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file is part of OpenCV project. <br /></td></tr>
+<tr class="memitem:cv_3A_3Ahal" id="r_cv_3A_3Ahal"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1hal.html">cv::hal</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+typedefs</h2></td></tr>
+<tr class="memitem:a5fd31100849f5c268af540d99ee6c00d" id="r_a5fd31100849f5c268af540d99ee6c00d"><td class="memItemLeft">typedef double(*)&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a5fd31100849f5c268af540d99ee6c00d">cv::DotProdFunc</a>(const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src1, const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src2, int len)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ga8894272aecb229343b39d377b908fd1f" id="r_ga8894272aecb229343b39d377b908fd1f"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__hal__functions.html#ga8894272aecb229343b39d377b908fd1f">cv::hal::gemm32f</a> (const float *src1, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src1_step, const float *src2, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src2_step, float alpha, const float *src3, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src3_step, float beta, float *dst, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int m_a, int n_a, int n_d, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:gaf08475eab6be49976709bae2841aca54" id="r_gaf08475eab6be49976709bae2841aca54"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__hal__functions.html#gaf08475eab6be49976709bae2841aca54">cv::hal::gemm64f</a> (const double *src1, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src1_step, const double *src2, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src2_step, double alpha, const double *src3, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src3_step, double beta, double *dst, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int m_a, int n_a, int n_d, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:ga5c127e4c3e06c6e6d9f4305a0f1eb4eb" id="r_ga5c127e4c3e06c6e6d9f4305a0f1eb4eb"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__hal__functions.html#ga5c127e4c3e06c6e6d9f4305a0f1eb4eb">cv::hal::gemm32fc</a> (const float *src1, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src1_step, const float *src2, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src2_step, float alpha, const float *src3, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src3_step, float beta, float *dst, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int m_a, int n_a, int n_d, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:ga3c942b8418afda53087e70d5944b59a7" id="r_ga3c942b8418afda53087e70d5944b59a7"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__hal__functions.html#ga3c942b8418afda53087e70d5944b59a7">cv::hal::gemm64fc</a> (const double *src1, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src1_step, const double *src2, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src2_step, double alpha, const double *src3, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src3_step, double beta, double *dst, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int m_a, int n_a, int n_d, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</td></tr>
+<tr class="memitem:gacb6e64071dffe36434e1e7ee79e7cb35" id="r_gacb6e64071dffe36434e1e7ee79e7cb35"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#gacb6e64071dffe36434e1e7ee79e7cb35">cv::gemm</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src1, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src2, double alpha, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src3, double beta, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> dst, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>=0)</td></tr>
+<tr class="memdesc:gacb6e64071dffe36434e1e7ee79e7cb35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs generalized matrix multiplication.  <br /></td></tr>
+<tr class="memitem:a5bf579e1181869a72d16afa539074ecc" id="r_a5bf579e1181869a72d16afa539074ecc"><td class="memItemLeft">static <a class="el" href="namespacecv.html#a1c80adcf4f214b62c88bbe279c723249">TransformFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a5bf579e1181869a72d16afa539074ecc">cv::getTransformFunc</a> (int depth)</td></tr>
+<tr class="memitem:a3752435907b14656c9751cf11efd353b" id="r_a3752435907b14656c9751cf11efd353b"><td class="memItemLeft">static <a class="el" href="namespacecv.html#a1c80adcf4f214b62c88bbe279c723249">TransformFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a3752435907b14656c9751cf11efd353b">cv::getDiagTransformFunc</a> (int depth)</td></tr>
+<tr class="memitem:ga393164aa54bb9169ce0a8cc44e08ff22" id="r_ga393164aa54bb9169ce0a8cc44e08ff22"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#ga393164aa54bb9169ce0a8cc44e08ff22">cv::transform</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> dst, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> m)</td></tr>
+<tr class="memdesc:ga393164aa54bb9169ce0a8cc44e08ff22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the matrix transformation of every array element.  <br /></td></tr>
+<tr class="memitem:aecaa2160ad7c0faad7edb5e78a41ee3a" id="r_aecaa2160ad7c0faad7edb5e78a41ee3a"><td class="memItemLeft">static <a class="el" href="namespacecv.html#a1c80adcf4f214b62c88bbe279c723249">TransformFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aecaa2160ad7c0faad7edb5e78a41ee3a">cv::getPerspectiveTransform</a> (int depth)</td></tr>
+<tr class="memitem:gad327659ac03e5fd6894b90025e6900a7" id="r_gad327659ac03e5fd6894b90025e6900a7"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#gad327659ac03e5fd6894b90025e6900a7">cv::perspectiveTransform</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> dst, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> m)</td></tr>
+<tr class="memdesc:gad327659ac03e5fd6894b90025e6900a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the perspective matrix transformation of vectors.  <br /></td></tr>
+<tr class="memitem:a38e3d1d2ac29baf801898c113f977927" id="r_a38e3d1d2ac29baf801898c113f977927"><td class="memItemLeft">static <a class="el" href="namespacecv.html#aad3a6faa940dc9c750c2e07bfaa6476d">ScaleAddFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a38e3d1d2ac29baf801898c113f977927">cv::getScaleAddFunc</a> (int depth)</td></tr>
+<tr class="memitem:ga9e0845db4135f55dcf20227402f00d98" id="r_ga9e0845db4135f55dcf20227402f00d98"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#ga9e0845db4135f55dcf20227402f00d98">cv::scaleAdd</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src1, double alpha, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src2, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> dst)</td></tr>
+<tr class="memdesc:ga9e0845db4135f55dcf20227402f00d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of a scaled array and another array.  <br /></td></tr>
+<tr class="memitem:gae6ffa9354633f984246945d52823165d" id="r_gae6ffa9354633f984246945d52823165d"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#gae6ffa9354633f984246945d52823165d">cv::calcCovarMatrix</a> (const <a class="el" href="interface_mat.html">Mat</a> *samples, int nsamples, <a class="el" href="interface_mat.html">Mat</a> &amp;covar, <a class="el" href="interface_mat.html">Mat</a> &amp;mean, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, int ctype=<a class="el" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>)</td></tr>
+<tr class="memdesc:gae6ffa9354633f984246945d52823165d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the covariance matrix of a set of vectors.  <br /></td></tr>
+<tr class="memitem:ga017122d912af19d7d0d2cccc2d63819f" id="r_ga017122d912af19d7d0d2cccc2d63819f"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#ga017122d912af19d7d0d2cccc2d63819f">cv::calcCovarMatrix</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> samples, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> covar, <a class="el" href="group__core__basic.html#gaf77c9a14ef956c50c1efd4547f444e63">InputOutputArray</a> mean, int flags<a class="el" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>, int ctype=<a class="el" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>)</td></tr>
+<tr class="memitem:a607bf59451da55dafbf458fe5432c767" id="r_a607bf59451da55dafbf458fe5432c767"><td class="memItemLeft">static <a class="el" href="namespacecv.html#aa436f2fde74e184560cc75080da25893">MahalanobisImplFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a607bf59451da55dafbf458fe5432c767">cv::getMahalanobisImplFunc</a> (int depth)</td></tr>
+<tr class="memitem:ga4493aee129179459cbfc6064f051aa7d" id="r_ga4493aee129179459cbfc6064f051aa7d"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> double&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#ga4493aee129179459cbfc6064f051aa7d">cv::Mahalanobis</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> v1, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> v2, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> icovar)</td></tr>
+<tr class="memdesc:ga4493aee129179459cbfc6064f051aa7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the Mahalanobis distance between two vectors.  <br /></td></tr>
+<tr class="memitem:a2e95d7e1577be47bd2f5f81ded41c9cf" id="r_a2e95d7e1577be47bd2f5f81ded41c9cf"><td class="memItemLeft">static <a class="el" href="namespacecv.html#a908d6b2cc2aa4e3d0f5bc083e1d58c7c">MulTransposedFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a2e95d7e1577be47bd2f5f81ded41c9cf">cv::getMulTransposedFunc</a> (int stype, int dtype, bool ata)</td></tr>
+<tr class="memitem:gadc4e49f8f7a155044e3be1b9e3b270ab" id="r_gadc4e49f8f7a155044e3be1b9e3b270ab"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__core__array.html#gadc4e49f8f7a155044e3be1b9e3b270ab">cv::mulTransposed</a> (<a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> src, <a class="el" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> dst, bool aTa, <a class="el" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> delta=<a class="el" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), double scale=1, int dtype=-1)</td></tr>
+<tr class="memdesc:gadc4e49f8f7a155044e3be1b9e3b270ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the product of a matrix and its transposition.  <br /></td></tr>
+<tr class="memitem:a6ecf5093024d41f9a7471539e7370a2b" id="r_a6ecf5093024d41f9a7471539e7370a2b"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6ecf5093024d41f9a7471539e7370a2b">cv::dotProd_8u</a> (const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src1, const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src2, int len)</td></tr>
+<tr class="memitem:acfbee9b726130857f003b9aadcd51263" id="r_acfbee9b726130857f003b9aadcd51263"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#acfbee9b726130857f003b9aadcd51263">cv::dotProd_8s</a> (const <a class="el" href="group__core__hal__interface.html#ga77589065442acad93fbb61473c86a21c">schar</a> *src1, const <a class="el" href="group__core__hal__interface.html#ga77589065442acad93fbb61473c86a21c">schar</a> *src2, int len)</td></tr>
+<tr class="memitem:a98d1f1b63fa6e556c26f3353f5161f1d" id="r_a98d1f1b63fa6e556c26f3353f5161f1d"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a98d1f1b63fa6e556c26f3353f5161f1d">cv::dotProd_16u</a> (const <a class="el" href="group__core__hal__interface.html#gad2eb2ef84c45fa8d16ed89fba4dba16e">ushort</a> *src1, const <a class="el" href="group__core__hal__interface.html#gad2eb2ef84c45fa8d16ed89fba4dba16e">ushort</a> *src2, int len)</td></tr>
+<tr class="memitem:a78e185202a84084f83c03ff2c9020510" id="r_a78e185202a84084f83c03ff2c9020510"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a78e185202a84084f83c03ff2c9020510">cv::dotProd_16s</a> (const short *src1, const short *src2, int len)</td></tr>
+<tr class="memitem:a7dde0d43c6066a15a99a6e6533dd930b" id="r_a7dde0d43c6066a15a99a6e6533dd930b"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a7dde0d43c6066a15a99a6e6533dd930b">cv::dotProd_32s</a> (const int *src1, const int *src2, int len)</td></tr>
+<tr class="memitem:a93a6fdc653686c1532a8dd1806d5919d" id="r_a93a6fdc653686c1532a8dd1806d5919d"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a93a6fdc653686c1532a8dd1806d5919d">cv::dotProd_32f</a> (const float *src1, const float *src2, int len)</td></tr>
+<tr class="memitem:a17d1efb784f6c301bda74e1f57f497fd" id="r_a17d1efb784f6c301bda74e1f57f497fd"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a17d1efb784f6c301bda74e1f57f497fd">cv::dotProd_64f</a> (const double *src1, const double *src2, int len)</td></tr>
+<tr class="memitem:ab02062dd7f817ac9e73a1cf024bf63bd" id="r_ab02062dd7f817ac9e73a1cf024bf63bd"><td class="memItemLeft">static <a class="el" href="namespacecv.html#a5fd31100849f5c268af540d99ee6c00d">DotProdFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ab02062dd7f817ac9e73a1cf024bf63bd">cv::getDotProdFunc</a> (int depth)</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="matmul_8dispatch_8cpp.html">matmul.dispatch.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

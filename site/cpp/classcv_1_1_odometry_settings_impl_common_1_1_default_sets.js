@@ -1,0 +1,25 @@
+var classcv_1_1_odometry_settings_impl_common_1_1_default_sets =
+[
+    [ "cx", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a3ba0b610b02b48f30c68bab24e851a0d", null ],
+    [ "cy", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a61ea10d5d8da24d81afb4c551f5e6266", null ],
+    [ "defaultAngleThreshold", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a6d438a393143eae2dd4a8d10a5cee266", null ],
+    [ "defaultCameraMatrix", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#ad7f6fa8a2102af9e78d21d8058cea969", null ],
+    [ "defaultIterCounts", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a90144a4e13a02248d00ca43ef64ee88e", null ],
+    [ "defaultMaxDepth", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a0793ff642247b05c8af2abec99dc3a62", null ],
+    [ "defaultMaxDepthDiff", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a14e8034e4c2c39a8dbce51a42ba25747", null ],
+    [ "defaultMaxPointsPart", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a36dd54b7ef75b8b40e9e3581c137a587", null ],
+    [ "defaultMaxRotation", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a766ccc1dad045707e69cee98250255ea", null ],
+    [ "defaultMaxTranslation", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a180a6ee778d2d8b06c5faed94b3fe64d", null ],
+    [ "defaultMinDepth", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#ac8e37b63e23f3c37dc79ba0daa31a63e", null ],
+    [ "defaultMinGradientMagnitude", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a7f1bc2b5fff30ae07d987f3a3aa920b3", null ],
+    [ "defaultMinGradientMagnitudes", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a606f7fd05262ba433c6233d7c91e04a0", null ],
+    [ "defaultNormalDiffThreshold", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#af792cde3a80dfb169d0d3c835e3be798", null ],
+    [ "defaultNormalMethod", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a80e02b3a7b8e47c92e8b68597b333035", null ],
+    [ "defaultNormalWinSize", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#ab99690bdf98ece6644026143bc10176e", null ],
+    [ "defaultSobelScale", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a7f312c71e8a0dfa6e6c92fc017bf1d02", null ],
+    [ "defaultSobelSize", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a4477b3b0d26e457d241b3e0d685b7034", null ],
+    [ "fx", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a42c2b7844a0d110d71c8f35309dfa935", null ],
+    [ "fy", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a3d3a7752a6186d56e1e02a35ee712cf3", null ],
+    [ "height", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#ac59bfd66c31193b06fce105943e7ae7f", null ],
+    [ "width", "classcv_1_1_odometry_settings_impl_common_1_1_default_sets.html#a14011c24d7c72ed16a6f0b06f37406fe", null ]
+];

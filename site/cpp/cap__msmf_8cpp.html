@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_msmf.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__msmf_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo cap_msmf.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="videoio_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &lt;windows.h&gt;</code><br />
+<code>#include &lt;guiddef.h&gt;</code><br />
+<code>#include &lt;initguid.h&gt;</code><br />
+<code>#include &lt;mfidl.h&gt;</code><br />
+<code>#include &lt;mfapi.h&gt;</code><br />
+<code>#include &lt;mfplay.h&gt;</code><br />
+<code>#include &lt;mfobjects.h&gt;</code><br />
+<code>#include &lt;tchar.h&gt;</code><br />
+<code>#include &lt;strsafe.h&gt;</code><br />
+<code>#include &lt;codecvt&gt;</code><br />
+<code>#include &lt;mfreadwrite.h&gt;</code><br />
+<code>#include &lt;new&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;deque&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdarg.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;mferror.h&gt;</code><br />
+<code>#include &lt;comdef.h&gt;</code><br />
+<code>#include &lt;shlwapi.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en cap_msmf.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="cap__msmf_8cpp__incl.svg" width="100%" height="544"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="cap__msmf_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:CvCapture_5FMSMF" id="r_CvCapture_5FMSMF"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_cv_capture___m_s_m_f.html">CvCapture_MSMF</a></td></tr>
+<tr class="memitem:CvVideoWriter_5FMSMF" id="r_CvVideoWriter_5FMSMF"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_cv_video_writer___m_s_m_f.html">CvVideoWriter_MSMF</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a7ec0069d0f87af74cd01bfef21559cbd" id="r_a7ec0069d0f87af74cd01bfef21559cbd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7ec0069d0f87af74cd01bfef21559cbd">CV_CAP_MODE_BGR</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('B','G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','3')</td></tr>
+<tr class="memitem:a9bdf0d7ad639a02976a4a557e48852ad" id="r_a9bdf0d7ad639a02976a4a557e48852ad"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9bdf0d7ad639a02976a4a557e48852ad">CV_CAP_MODE_RGB</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','G','B','3')</td></tr>
+<tr class="memitem:ae2a92aa24c7f672e0db272923cd1e576" id="r_ae2a92aa24c7f672e0db272923cd1e576"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae2a92aa24c7f672e0db272923cd1e576">CV_CAP_MODE_GRAY</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','<a class="el" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>','Y')</td></tr>
+<tr class="memitem:ab36883435f3203e2bf343e95e72b3af3" id="r_ab36883435f3203e2bf343e95e72b3af3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab36883435f3203e2bf343e95e72b3af3">CV_CAP_MODE_YUYV</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('Y', 'U', 'Y', 'V')</td></tr>
+<tr class="memitem:aecea0ec4a983492470783cf46d5f995a" id="r_aecea0ec4a983492470783cf46d5f995a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aecea0ec4a983492470783cf46d5f995a">_ComPtr</a>&#160;&#160;&#160;ComPtr</td></tr>
+<tr class="memitem:a97568a180365f9a64ec7f852d177d2e6" id="r_a97568a180365f9a64ec7f852d177d2e6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a97568a180365f9a64ec7f852d177d2e6">PRNT</a>(FMT)</td></tr>
+</table>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentación de «define»</h2>
+<a id="aecea0ec4a983492470783cf46d5f995a" name="aecea0ec4a983492470783cf46d5f995a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecea0ec4a983492470783cf46d5f995a">&#9670;&#160;</a></span>_ComPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _ComPtr&#160;&#160;&#160;ComPtr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__msmf_8cpp_source.html#l00160">160</a> del archivo <a class="el" href="cap__msmf_8cpp_source.html">cap_msmf.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__msmf_8cpp_source.html#l01448">CvCapture_MSMF::checkAudioProperties()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l01586">CvCapture_MSMF::configureAudioFrame()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l00997">CvCapture_MSMF::configureHW()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l00971">CvCapture_MSMF::getDefaultSourceConfig()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l01672">CvCapture_MSMF::grabAudioFrame()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l00932">CvCapture_MSMF::initStream()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l01271">CvCapture_MSMF::open()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l01209">CvCapture_MSMF::open()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l02602">CvVideoWriter_MSMF::open()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l02125">CvCapture_MSMF::readComplexProperty()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l01886">CvCapture_MSMF::retrieveVideoFrame()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l02720">CvVideoWriter_MSMF::write()</a> y <a class="el" href="cap__msmf_8cpp_source.html#l02300">CvCapture_MSMF::writeComplexProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a7ec0069d0f87af74cd01bfef21559cbd" name="a7ec0069d0f87af74cd01bfef21559cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec0069d0f87af74cd01bfef21559cbd">&#9670;&#160;</a></span>CV_CAP_MODE_BGR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_CAP_MODE_BGR&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('B','G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','3')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__msmf_8cpp_source.html#l00086">86</a> del archivo <a class="el" href="cap__msmf_8cpp_source.html">cap_msmf.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__msmf_8cpp_source.html#l01138">CvCapture_MSMF::configureVideoOutput()</a>, <a class="el" href="cap__msmf_8cpp_source.html#l00858">CvCapture_MSMF::CvCapture_MSMF()</a> y <a class="el" href="cap__msmf_8cpp_source.html#l01886">CvCapture_MSMF::retrieveVideoFrame()</a>.</p>
+
+</div>
+</div>
+<a id="ae2a92aa24c7f672e0db272923cd1e576" name="ae2a92aa24c7f672e0db272923cd1e576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2a92aa24c7f672e0db272923cd1e576">&#9670;&#160;</a></span>CV_CAP_MODE_GRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_CAP_MODE_GRAY&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','<a class="el" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>','Y')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__msmf_8cpp_source.html#l00088">88</a> del archivo <a class="el" href="cap__msmf_8cpp_source.html">cap_msmf.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__msmf_8cpp_source.html#l01138">CvCapture_MSMF::configureVideoOutput()</a> y <a class="el" href="cap__msmf_8cpp_source.html#l01886">CvCapture_MSMF::retrieveVideoFrame()</a>.</p>
+
+</div>
+</div>
+<a id="a9bdf0d7ad639a02976a4a557e48852ad" name="a9bdf0d7ad639a02976a4a557e48852ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bdf0d7ad639a02976a4a557e48852ad">&#9670;&#160;</a></span>CV_CAP_MODE_RGB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_CAP_MODE_RGB&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','G','B','3')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__msmf_8cpp_source.html#l00087">87</a> del archivo <a class="el" href="cap__msmf_8cpp_source.html">cap_msmf.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__msmf_8cpp_source.html#l01138">CvCapture_MSMF::configureVideoOutput()</a> y <a class="el" href="cap__msmf_8cpp_source.html#l01886">CvCapture_MSMF::retrieveVideoFrame()</a>.</p>
+
+</div>
+</div>
+<a id="ab36883435f3203e2bf343e95e72b3af3" name="ab36883435f3203e2bf343e95e72b3af3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36883435f3203e2bf343e95e72b3af3">&#9670;&#160;</a></span>CV_CAP_MODE_YUYV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_CAP_MODE_YUYV&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('Y', 'U', 'Y', 'V')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__msmf_8cpp_source.html#l00089">89</a> del archivo <a class="el" href="cap__msmf_8cpp_source.html">cap_msmf.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__msmf_8cpp_source.html#l01138">CvCapture_MSMF::configureVideoOutput()</a> y <a class="el" href="cap__msmf_8cpp_source.html#l01886">CvCapture_MSMF::retrieveVideoFrame()</a>.</p>
+
+</div>
+</div>
+<a id="a97568a180365f9a64ec7f852d177d2e6" name="a97568a180365f9a64ec7f852d177d2e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97568a180365f9a64ec7f852d177d2e6">&#9670;&#160;</a></span>PRNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PRNT</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>FMT</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (fmt == FMT) out &lt;&lt; #FMT;</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__msmf_8cpp.html">cap_msmf.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('seam__finders_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">seam_finders.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="seam__finders_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                          License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifndef OPENCV_STITCHING_SEAM_FINDERS_HPP</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define OPENCV_STITCHING_SEAM_FINDERS_HPP</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;opencv2/opencv_modules.hpp&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="};">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_seam_finder.html">   58</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_class" href="classcv_1_1detail_1_1_seam_finder.html">SeamFinder</a></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>{</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_seam_finder.html#a3b53a9b772dc0e48a469af53863ecbb9">   61</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a>  <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1detail_1_1_seam_finder.html#a3b53a9b772dc0e48a469af53863ecbb9">~SeamFinder</a>() {}</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6da9dd52fcf64f3609ac84cebbef9fc1c9b">   62</a></span>    <span class="keyword">enum</span> { <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6daea728238e9c14a3c576141bf31b41d77">NO</a>, <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6da55b2503305e94168c0b36c4531f288d7">VORONOI_SEAM</a>, <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6da9dd52fcf64f3609ac84cebbef9fc1c9b">DP_SEAM</a> };</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_seam_finder.html#a489e8f33bb4594b1dcaa1c40877eab75">   69</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_seam_finder.html#a489e8f33bb4594b1dcaa1c40877eab75">find</a>(<span class="keyword">const</span> std::vector&lt;UMat&gt; &amp;src, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                      <a class="code hl_define" href="group__core__utils.html#ga3ebcb7da2dea1ae77f77f643f54dcf09">CV_IN_OUT</a> std::vector&lt;UMat&gt; &amp;masks) = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">static</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;SeamFinder&gt;</a> <a class="code hl_function" href="classcv_1_1detail_1_1_seam_finder.html#ad444ed078d1ffffc6689ddffc80a352e">createDefault</a>(<span class="keywordtype">int</span> type);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="};">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_no_seam_finder.html">   76</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_class" href="classcv_1_1detail_1_1_no_seam_finder.html">NoSeamFinder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_seam_finder.html">SeamFinder</a></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>{</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_no_seam_finder.html#ab61b6cde8b72613d2d5e8252cb91af03">   79</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_no_seam_finder.html#ab61b6cde8b72613d2d5e8252cb91af03">find</a>(<span class="keyword">const</span> std::vector&lt;UMat&gt;&amp;, <span class="keyword">const</span> std::vector&lt;Point&gt;&amp;, <a class="code hl_define" href="group__core__utils.html#ga3ebcb7da2dea1ae77f77f643f54dcf09">CV_IN_OUT</a> std::vector&lt;UMat&gt;&amp;) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> {}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>};</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="};">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_pairwise_seam_finder.html">   84</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_class" href="classcv_1_1detail_1_1_pairwise_seam_finder.html">PairwiseSeamFinder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_seam_finder.html">SeamFinder</a></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>{</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#ac35ae12227a56c4fe3da16cdfbe7294b">find</a>(<span class="keyword">const</span> std::vector&lt;UMat&gt; &amp;src, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                      <a class="code hl_define" href="group__core__utils.html#ga3ebcb7da2dea1ae77f77f643f54dcf09">CV_IN_OUT</a> std::vector&lt;UMat&gt; &amp;masks) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> <a class="code hl_namespace" href="namespacerun.html">run</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a8e2d33396c0a012c7a256db8337435c6">   98</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a8e2d33396c0a012c7a256db8337435c6">findInPair</a>(<span class="keywordtype">size_t</span> first, <span class="keywordtype">size_t</span> second, <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> roi) = 0;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a681e67ac1e0b06c5b4d7ef15fc5eb0b0">  100</a></span>    std::vector&lt;UMat&gt; <a class="code hl_variable" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a681e67ac1e0b06c5b4d7ef15fc5eb0b0">images_</a>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a5abe230ead5af1b35d94cb3f2b867787">  101</a></span>    std::vector&lt;Size&gt; <a class="code hl_variable" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a5abe230ead5af1b35d94cb3f2b867787">sizes_</a>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a73b7891ed68d55b25011fbcdb6d5f4da">  102</a></span>    std::vector&lt;Point&gt; <a class="code hl_variable" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a73b7891ed68d55b25011fbcdb6d5f4da">corners_</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a3db4bcfb73c963e7eeb92ecffdda5db6">  103</a></span>    std::vector&lt;UMat&gt; <a class="code hl_variable" href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a3db4bcfb73c963e7eeb92ecffdda5db6">masks_</a>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="};">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_voronoi_seam_finder.html">  108</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_class" href="classcv_1_1detail_1_1_voronoi_seam_finder.html">VoronoiSeamFinder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_pairwise_seam_finder.html">PairwiseSeamFinder</a></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_voronoi_seam_finder.html#a0a02e2b3a5e5f0738a5977f78cae9c64">  111</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_voronoi_seam_finder.html#a0a02e2b3a5e5f0738a5977f78cae9c64">find</a>(<span class="keyword">const</span> std::vector&lt;UMat&gt; &amp;src, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                      <a class="code hl_define" href="group__core__utils.html#ga3ebcb7da2dea1ae77f77f643f54dcf09">CV_IN_OUT</a> std::vector&lt;UMat&gt; &amp;masks) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_voronoi_seam_finder.html#a0a02e2b3a5e5f0738a5977f78cae9c64">find</a>(<span class="keyword">const</span> std::vector&lt;Size&gt; &amp;size, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                      std::vector&lt;UMat&gt; &amp;masks);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">void</span> findInPair(<span class="keywordtype">size_t</span> first, <span class="keywordtype">size_t</span> second, <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> roi) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>};</div>
+</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="};">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_dp_seam_finder.html">  120</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1detail_1_1_dp_seam_finder.html#a1ab92a71baf2444abf8129e3bddc7151">DpSeamFinder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_seam_finder.html">SeamFinder</a></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>{</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3aa9485acd73bb7982e3b2d853d6b12947">  123</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3">CostFunction</a> { <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3aa9485acd73bb7982e3b2d853d6b12947">COLOR</a>, <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3a306cd9d1479580c01f8d2ffa5328917b">COLOR_GRAD</a> };</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_class" href="classcv_1_1detail_1_1_dp_seam_finder.html">DpSeamFinder</a>(CostFunction costFunc = COLOR);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_class" href="classcv_1_1detail_1_1_dp_seam_finder.html">DpSeamFinder</a>(<a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> costFunc );</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_dp_seam_finder.html#adc483aee372fbff08d564e991e6dd232">  128</a></span>    <a class="code hl_enumeration" href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3">CostFunction</a> <a class="code hl_function" href="classcv_1_1detail_1_1_dp_seam_finder.html#adc483aee372fbff08d564e991e6dd232">costFunction</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> costFunc_; }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_dp_seam_finder.html#a03aed0908c6b514c37ed3f00c0b057dd">  129</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_dp_seam_finder.html#a03aed0908c6b514c37ed3f00c0b057dd">setCostFunction</a>(<a class="code hl_enumeration" href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3">CostFunction</a> val) { costFunc_ = val; }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> setCostFunction(<a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> val);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> find(<span class="keyword">const</span> std::vector&lt;UMat&gt; &amp;src, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                      std::vector&lt;UMat&gt; &amp;masks) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keyword">enum</span> ComponentState</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        FIRST = 1, SECOND = 2, INTERS = 4,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        INTERS_FIRST = INTERS | FIRST,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        INTERS_SECOND = INTERS | SECOND</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    };</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">class </span>ImagePairLess</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        ImagePairLess(<span class="keyword">const</span> std::vector&lt;Mat&gt; &amp;images, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>)</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            : src_(&amp;images[0]), corners_(&amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>[0]) {}</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordtype">bool</span> operator() (<span class="keyword">const</span> std::pair&lt;size_t, size_t&gt; &amp;l, <span class="keyword">const</span> std::pair&lt;size_t, size_t&gt; &amp;r)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            Point c1 = corners_[l.first] + Point(src_[l.first].cols / 2, src_[l.first].rows / 2);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            Point c2 = corners_[l.second] + Point(src_[l.second].cols / 2, src_[l.second].rows / 2);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <span class="keywordtype">int</span> d1 = (c1 - c2).dot(c1 - c2);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            c1 = corners_[r.first] + Point(src_[r.first].cols / 2, src_[r.first].rows / 2);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            c2 = corners_[r.second] + Point(src_[r.second].cols / 2, src_[r.second].rows / 2);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordtype">int</span> d2 = (c1 - c2).dot(c1 - c2);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keywordflow">return</span> d1 &lt; d2;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keyword">const</span> Mat *src_;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> *corners_;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    };</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">class </span>ClosePoints</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        ClosePoints(<span class="keywordtype">int</span> minDist) : minDist_(minDist) {}</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">bool</span> operator() (<span class="keyword">const</span> Point &amp;p1, <span class="keyword">const</span> Point &amp;p2)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordtype">int</span> dist2 = (p1.x-p2.x) * (p1.x-p2.x) + (p1.y-p2.y) * (p1.y-p2.y);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <span class="keywordflow">return</span> dist2 &lt; minDist_ * minDist_;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordtype">int</span> minDist_;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    };</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">void</span> process(</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <span class="keyword">const</span> Mat &amp;image1, <span class="keyword">const</span> Mat &amp;image2, Point tl1, Point tl2,  Mat &amp;mask1, Mat &amp;mask2);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordtype">void</span> findComponents();</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">void</span> findEdges();</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">void</span> resolveConflicts(</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keyword">const</span> Mat &amp;image1, <span class="keyword">const</span> Mat &amp;image2, Point tl1, Point tl2, Mat &amp;mask1, Mat &amp;mask2);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordtype">void</span> computeGradients(<span class="keyword">const</span> Mat &amp;image1, <span class="keyword">const</span> Mat &amp;image2);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">bool</span> hasOnlyOneNeighbor(<span class="keywordtype">int</span> comp);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">bool</span> closeToContour(<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keyword">const</span> Mat_&lt;uchar&gt; &amp;contourMask);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordtype">bool</span> getSeamTips(<span class="keywordtype">int</span> comp1, <span class="keywordtype">int</span> comp2, Point &amp;p1, Point &amp;p2);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordtype">void</span> computeCosts(</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <span class="keyword">const</span> Mat &amp;image1, <span class="keyword">const</span> Mat &amp;image2, Point tl1, Point tl2,</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keywordtype">int</span> comp, Mat_&lt;float&gt; &amp;costV, Mat_&lt;float&gt; &amp;costH);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordtype">bool</span> estimateSeam(</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keyword">const</span> Mat &amp;image1, <span class="keyword">const</span> Mat &amp;image2, Point tl1, Point tl2, <span class="keywordtype">int</span> comp,</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            Point p1, Point p2, std::vector&lt;Point&gt; &amp;seam, <span class="keywordtype">bool</span> &amp;isHorizontal);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordtype">void</span> updateLabelsUsingSeam(</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            <span class="keywordtype">int</span> comp1, <span class="keywordtype">int</span> comp2, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;seam, <span class="keywordtype">bool</span> isHorizontalSeam);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    CostFunction costFunc_;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="comment">// processing images pair data</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <a class="code hl_typedef" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> unionTl_, unionBr_;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> unionSize_;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    Mat_&lt;uchar&gt; mask1_, mask2_;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    Mat_&lt;uchar&gt; contour1mask_, contour2mask_;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    Mat_&lt;float&gt; gradx1_, grady1_;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    Mat_&lt;float&gt; gradx2_, grady2_;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="comment">// components data</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordtype">int</span> ncomps_;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    Mat_&lt;int&gt; labels_;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    std::vector&lt;ComponentState&gt; states_;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    std::vector&lt;Point&gt; tls_, brs_;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    std::vector&lt;std::vector&lt;Point&gt; &gt; contours_;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    std::set&lt;std::pair&lt;int, int&gt; &gt; edges_;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>};</div>
+</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span></div>
+<div class="foldopen" id="foldopen00232" data-start="{" data-end="};">
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html">  232</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html">GraphCutSeamFinderBase</a></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>{</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cbafe0d275582723d93a0c576584ea90091">  235</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cb">CostType</a> { <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cbafe0d275582723d93a0c576584ea90091">COST_COLOR</a>, <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cba4e0af02eed7c3f02976244dc832e0e81">COST_COLOR_GRAD</a> };</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>};</div>
+</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span></div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="};">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1_graph_cut_seam_finder.html">  240</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a35191986128771a43662f02a25b0174a">GraphCutSeamFinder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html">GraphCutSeamFinderBase</a>, <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_seam_finder.html">SeamFinder</a></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>{</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <a class="code hl_function" href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a35191986128771a43662f02a25b0174a">GraphCutSeamFinder</a>(<span class="keywordtype">int</span> cost_type = <a class="code hl_enumvalue" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cba4e0af02eed7c3f02976244dc832e0e81">COST_COLOR_GRAD</a>, <span class="keywordtype">float</span> terminal_cost = 10000.f,</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>                       <span class="keywordtype">float</span> bad_region_penalty = 1000.f);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a35191986128771a43662f02a25b0174a">GraphCutSeamFinder</a>(<a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> cost_type,<span class="keywordtype">float</span> terminal_cost = 10000.f,</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordtype">float</span> bad_region_penalty = 1000.f);</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_function" href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a35191986128771a43662f02a25b0174a">~GraphCutSeamFinder</a>();</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a55aad32e4a04cb9261c31b1c785b1a25">find</a>(<span class="keyword">const</span> std::vector&lt;UMat&gt; &amp;src, <span class="keyword">const</span> std::vector&lt;Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>                      <a class="code hl_define" href="group__core__utils.html#ga3ebcb7da2dea1ae77f77f643f54dcf09">CV_IN_OUT</a> std::vector&lt;UMat&gt; &amp;masks) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="comment">// To avoid GCGraph dependency</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keyword">class </span>Impl;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;PairwiseSeamFinder&gt;</a> impl_;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>};</div>
+</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="preprocessor">#ifdef HAVE_OPENCV_CUDALEGACY</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> GraphCutSeamFinderGpu : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html">GraphCutSeamFinderBase</a>, <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1detail_1_1_pairwise_seam_finder.html">PairwiseSeamFinder</a></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>{</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    GraphCutSeamFinderGpu(<span class="keywordtype">int</span> cost_type = COST_COLOR_GRAD, <span class="keywordtype">float</span> terminal_cost = 10000.f,</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                          <span class="keywordtype">float</span> bad_region_penalty = 1000.f)</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                          : cost_type_(cost_type), terminal_cost_(terminal_cost),</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                            bad_region_penalty_(bad_region_penalty) {}</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordtype">void</span> find(<span class="keyword">const</span> std::vector&lt;cv::UMat&gt; &amp;src, <span class="keyword">const</span> std::vector&lt;cv::Point&gt; &amp;<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>,</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>              std::vector&lt;cv::UMat&gt; &amp;masks) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordtype">void</span> findInPair(<span class="keywordtype">size_t</span> first, <span class="keywordtype">size_t</span> second, <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> roi) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordtype">void</span> setGraphWeightsColor(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;img1, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;<a class="code hl_variable" href="group__features__draw.html#ga90c11ede268971f34650f8d2b1defcc8">img2</a>, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;mask1, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;mask2,</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                              <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;terminals, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;leftT, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;rightT, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;top, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;bottom);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordtype">void</span> setGraphWeightsColorGrad(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;img1, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;<a class="code hl_variable" href="group__features__draw.html#ga90c11ede268971f34650f8d2b1defcc8">img2</a>, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;dx1, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;dx2,</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                                  <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;dy1, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;dy2, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;mask1, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;mask2,</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                                  <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;terminals, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;leftT, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;rightT, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;top, <a class="code hl_class" href="classcv_1_1_mat.html">cv::Mat</a> &amp;bottom);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    std::vector&lt;Mat&gt; dx_, dy_;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keywordtype">int</span> cost_type_;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="keywordtype">float</span> terminal_cost_;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordtype">float</span> bad_region_penalty_;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>};</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>} <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_STITCHING_SEAM_FINDERS_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html">cv::detail::DpSeamFinder</a></div><div class="ttdef"><b>Definición</b> <a href="#l00120">seam_finders.hpp:121</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html_a03aed0908c6b514c37ed3f00c0b057dd"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html#a03aed0908c6b514c37ed3f00c0b057dd">cv::detail::DpSeamFinder::setCostFunction</a></div><div class="ttdeci">void setCostFunction(CostFunction val)</div><div class="ttdef"><b>Definición</b> <a href="#l00129">seam_finders.hpp:129</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html_a1ab92a71baf2444abf8129e3bddc7151"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html#a1ab92a71baf2444abf8129e3bddc7151">cv::detail::DpSeamFinder::DpSeamFinder</a></div><div class="ttdeci">DpSeamFinder(CostFunction costFunc=COLOR)</div><div class="ttdef"><b>Definición</b> <a href="seam__finders_8cpp_source.html#l00178">seam_finders.cpp:178</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html_a6ce104a17b48a0503ccdcf4787ba2ef3"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3">cv::detail::DpSeamFinder::CostFunction</a></div><div class="ttdeci">CostFunction</div><div class="ttdef"><b>Definición</b> <a href="#l00123">seam_finders.hpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html_a6ce104a17b48a0503ccdcf4787ba2ef3a306cd9d1479580c01f8d2ffa5328917b"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3a306cd9d1479580c01f8d2ffa5328917b">cv::detail::DpSeamFinder::COLOR_GRAD</a></div><div class="ttdeci">@ COLOR_GRAD</div><div class="ttdef"><b>Definición</b> <a href="#l00123">seam_finders.hpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html_a6ce104a17b48a0503ccdcf4787ba2ef3aa9485acd73bb7982e3b2d853d6b12947"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html#a6ce104a17b48a0503ccdcf4787ba2ef3aa9485acd73bb7982e3b2d853d6b12947">cv::detail::DpSeamFinder::COLOR</a></div><div class="ttdeci">@ COLOR</div><div class="ttdef"><b>Definición</b> <a href="#l00123">seam_finders.hpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_dp_seam_finder_html_adc483aee372fbff08d564e991e6dd232"><div class="ttname"><a href="classcv_1_1detail_1_1_dp_seam_finder.html#adc483aee372fbff08d564e991e6dd232">cv::detail::DpSeamFinder::costFunction</a></div><div class="ttdeci">CostFunction costFunction() const</div><div class="ttdef"><b>Definición</b> <a href="#l00128">seam_finders.hpp:128</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_graph_cut_seam_finder_base_html"><div class="ttname"><a href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html">cv::detail::GraphCutSeamFinderBase</a></div><div class="ttdoc">Base class for all minimum graph-cut-based seam estimators.</div><div class="ttdef"><b>Definición</b> <a href="#l00232">seam_finders.hpp:233</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_graph_cut_seam_finder_base_html_a42953bdb4c8a234670d37c5b5f4386cb"><div class="ttname"><a href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cb">cv::detail::GraphCutSeamFinderBase::CostType</a></div><div class="ttdeci">CostType</div><div class="ttdef"><b>Definición</b> <a href="#l00235">seam_finders.hpp:235</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_graph_cut_seam_finder_base_html_a42953bdb4c8a234670d37c5b5f4386cba4e0af02eed7c3f02976244dc832e0e81"><div class="ttname"><a href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cba4e0af02eed7c3f02976244dc832e0e81">cv::detail::GraphCutSeamFinderBase::COST_COLOR_GRAD</a></div><div class="ttdeci">@ COST_COLOR_GRAD</div><div class="ttdef"><b>Definición</b> <a href="#l00235">seam_finders.hpp:235</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_graph_cut_seam_finder_base_html_a42953bdb4c8a234670d37c5b5f4386cbafe0d275582723d93a0c576584ea90091"><div class="ttname"><a href="classcv_1_1detail_1_1_graph_cut_seam_finder_base.html#a42953bdb4c8a234670d37c5b5f4386cbafe0d275582723d93a0c576584ea90091">cv::detail::GraphCutSeamFinderBase::COST_COLOR</a></div><div class="ttdeci">@ COST_COLOR</div><div class="ttdef"><b>Definición</b> <a href="#l00235">seam_finders.hpp:235</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_graph_cut_seam_finder_html_a35191986128771a43662f02a25b0174a"><div class="ttname"><a href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a35191986128771a43662f02a25b0174a">cv::detail::GraphCutSeamFinder::GraphCutSeamFinder</a></div><div class="ttdeci">GraphCutSeamFinder(int cost_type=COST_COLOR_GRAD, float terminal_cost=10000.f, float bad_region_penalty=1000.f)</div><div class="ttdef"><b>Definición</b> <a href="seam__finders_8cpp_source.html#l01377">seam_finders.cpp:1377</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_graph_cut_seam_finder_html_a55aad32e4a04cb9261c31b1c785b1a25"><div class="ttname"><a href="classcv_1_1detail_1_1_graph_cut_seam_finder.html#a55aad32e4a04cb9261c31b1c785b1a25">cv::detail::GraphCutSeamFinder::find</a></div><div class="ttdeci">CV_WRAP void find(const std::vector&lt; UMat &gt; &amp;src, const std::vector&lt; Point &gt; &amp;corners, CV_IN_OUT std::vector&lt; UMat &gt; &amp;masks) CV_OVERRIDE</div><div class="ttdoc">Estimates seams.</div><div class="ttdef"><b>Definición</b> <a href="seam__finders_8cpp_source.html#l01383">seam_finders.cpp:1383</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_no_seam_finder_html"><div class="ttname"><a href="classcv_1_1detail_1_1_no_seam_finder.html">cv::detail::NoSeamFinder</a></div><div class="ttdoc">Stub seam estimator which does nothing.</div><div class="ttdef"><b>Definición</b> <a href="#l00076">seam_finders.hpp:77</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_no_seam_finder_html_ab61b6cde8b72613d2d5e8252cb91af03"><div class="ttname"><a href="classcv_1_1detail_1_1_no_seam_finder.html#ab61b6cde8b72613d2d5e8252cb91af03">cv::detail::NoSeamFinder::find</a></div><div class="ttdeci">CV_WRAP void find(const std::vector&lt; UMat &gt; &amp;, const std::vector&lt; Point &gt; &amp;, CV_IN_OUT std::vector&lt; UMat &gt; &amp;) CV_OVERRIDE</div><div class="ttdoc">Estimates seams.</div><div class="ttdef"><b>Definición</b> <a href="#l00079">seam_finders.hpp:79</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html">cv::detail::PairwiseSeamFinder</a></div><div class="ttdoc">Base class for all pairwise seam estimators.</div><div class="ttdef"><b>Definición</b> <a href="#l00084">seam_finders.hpp:85</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html_a3db4bcfb73c963e7eeb92ecffdda5db6"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a3db4bcfb73c963e7eeb92ecffdda5db6">cv::detail::PairwiseSeamFinder::masks_</a></div><div class="ttdeci">std::vector&lt; UMat &gt; masks_</div><div class="ttdef"><b>Definición</b> <a href="#l00103">seam_finders.hpp:103</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html_a5abe230ead5af1b35d94cb3f2b867787"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a5abe230ead5af1b35d94cb3f2b867787">cv::detail::PairwiseSeamFinder::sizes_</a></div><div class="ttdeci">std::vector&lt; Size &gt; sizes_</div><div class="ttdef"><b>Definición</b> <a href="#l00101">seam_finders.hpp:101</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html_a681e67ac1e0b06c5b4d7ef15fc5eb0b0"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a681e67ac1e0b06c5b4d7ef15fc5eb0b0">cv::detail::PairwiseSeamFinder::images_</a></div><div class="ttdeci">std::vector&lt; UMat &gt; images_</div><div class="ttdef"><b>Definición</b> <a href="#l00100">seam_finders.hpp:100</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html_a73b7891ed68d55b25011fbcdb6d5f4da"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a73b7891ed68d55b25011fbcdb6d5f4da">cv::detail::PairwiseSeamFinder::corners_</a></div><div class="ttdeci">std::vector&lt; Point &gt; corners_</div><div class="ttdef"><b>Definición</b> <a href="#l00102">seam_finders.hpp:102</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html_a8e2d33396c0a012c7a256db8337435c6"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html#a8e2d33396c0a012c7a256db8337435c6">cv::detail::PairwiseSeamFinder::findInPair</a></div><div class="ttdeci">virtual void findInPair(size_t first, size_t second, Rect roi)=0</div><div class="ttdoc">Resolves masks intersection of two specified images in the given ROI.</div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_pairwise_seam_finder_html_ac35ae12227a56c4fe3da16cdfbe7294b"><div class="ttname"><a href="classcv_1_1detail_1_1_pairwise_seam_finder.html#ac35ae12227a56c4fe3da16cdfbe7294b">cv::detail::PairwiseSeamFinder::find</a></div><div class="ttdeci">virtual CV_WRAP void find(const std::vector&lt; UMat &gt; &amp;src, const std::vector&lt; Point &gt; &amp;corners, CV_IN_OUT std::vector&lt; UMat &gt; &amp;masks) CV_OVERRIDE</div><div class="ttdoc">Estimates seams.</div><div class="ttdef"><b>Definición</b> <a href="seam__finders_8cpp_source.html#l00062">seam_finders.cpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html">cv::detail::SeamFinder</a></div><div class="ttdoc">Base class for a seam estimator.</div><div class="ttdef"><b>Definición</b> <a href="#l00058">seam_finders.hpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html_a0c16c3ba5b30a37be1959152b9523f6da55b2503305e94168c0b36c4531f288d7"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6da55b2503305e94168c0b36c4531f288d7">cv::detail::SeamFinder::VORONOI_SEAM</a></div><div class="ttdeci">@ VORONOI_SEAM</div><div class="ttdef"><b>Definición</b> <a href="#l00062">seam_finders.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html_a0c16c3ba5b30a37be1959152b9523f6da9dd52fcf64f3609ac84cebbef9fc1c9b"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6da9dd52fcf64f3609ac84cebbef9fc1c9b">cv::detail::SeamFinder::DP_SEAM</a></div><div class="ttdeci">@ DP_SEAM</div><div class="ttdef"><b>Definición</b> <a href="#l00062">seam_finders.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html_a0c16c3ba5b30a37be1959152b9523f6daea728238e9c14a3c576141bf31b41d77"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html#a0c16c3ba5b30a37be1959152b9523f6daea728238e9c14a3c576141bf31b41d77">cv::detail::SeamFinder::NO</a></div><div class="ttdeci">@ NO</div><div class="ttdef"><b>Definición</b> <a href="#l00062">seam_finders.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html_a3b53a9b772dc0e48a469af53863ecbb9"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html#a3b53a9b772dc0e48a469af53863ecbb9">cv::detail::SeamFinder::~SeamFinder</a></div><div class="ttdeci">virtual CV_WRAP ~SeamFinder()</div><div class="ttdef"><b>Definición</b> <a href="#l00061">seam_finders.hpp:61</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html_a489e8f33bb4594b1dcaa1c40877eab75"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html#a489e8f33bb4594b1dcaa1c40877eab75">cv::detail::SeamFinder::find</a></div><div class="ttdeci">virtual CV_WRAP void find(const std::vector&lt; UMat &gt; &amp;src, const std::vector&lt; Point &gt; &amp;corners, CV_IN_OUT std::vector&lt; UMat &gt; &amp;masks)=0</div><div class="ttdoc">Estimates seams.</div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_seam_finder_html_ad444ed078d1ffffc6689ddffc80a352e"><div class="ttname"><a href="classcv_1_1detail_1_1_seam_finder.html#ad444ed078d1ffffc6689ddffc80a352e">cv::detail::SeamFinder::createDefault</a></div><div class="ttdeci">static CV_WRAP Ptr&lt; SeamFinder &gt; createDefault(int type)</div><div class="ttdef"><b>Definición</b> <a href="seam__finders_8cpp_source.html#l00050">seam_finders.cpp:50</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_voronoi_seam_finder_html"><div class="ttname"><a href="classcv_1_1detail_1_1_voronoi_seam_finder.html">cv::detail::VoronoiSeamFinder</a></div><div class="ttdoc">Voronoi diagram-based seam estimator.</div><div class="ttdef"><b>Definición</b> <a href="#l00108">seam_finders.hpp:109</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1_voronoi_seam_finder_html_a0a02e2b3a5e5f0738a5977f78cae9c64"><div class="ttname"><a href="classcv_1_1detail_1_1_voronoi_seam_finder.html#a0a02e2b3a5e5f0738a5977f78cae9c64">cv::detail::VoronoiSeamFinder::find</a></div><div class="ttdeci">virtual CV_WRAP void find(const std::vector&lt; UMat &gt; &amp;src, const std::vector&lt; Point &gt; &amp;corners, CV_IN_OUT std::vector&lt; UMat &gt; &amp;masks) CV_OVERRIDE</div><div class="ttdoc">Estimates seams.</div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1e83eafb2d26b3c93f09e8338bcab192"><div class="ttname"><a href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">cv::Point</a></div><div class="ttdeci">Point2i Point</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00209">types.hpp:209</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga1bf9f0e121b54272da02379cfccd0a2b"><div class="ttname"><a href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a></div><div class="ttdeci">#define CV_EXPORTS</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00446">cvdef.h:446</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga3ebcb7da2dea1ae77f77f643f54dcf09"><div class="ttname"><a href="group__core__utils.html#ga3ebcb7da2dea1ae77f77f643f54dcf09">CV_IN_OUT</a></div><div class="ttdeci">#define CV_IN_OUT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00488">cvdef.h:488</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga67ea671a3582ce612ac3c281e067f480"><div class="ttname"><a href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a></div><div class="ttdeci">#define CV_EXPORTS_W</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00483">cvdef.h:483</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gae435babf3ce7cca990524b23adf6b4a3"><div class="ttname"><a href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a></div><div class="ttdeci">#define CV_WRAP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00493">cvdef.h:493</a></div></div>
+<div class="ttc" id="agroup__features__draw_html_ga90c11ede268971f34650f8d2b1defcc8"><div class="ttname"><a href="group__features__draw.html#ga90c11ede268971f34650f8d2b1defcc8">cv::img2</a></div><div class="ttdeci">const std::vector&lt; KeyPoint &gt; InputArray img2</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l01501">features.hpp:1501</a></div></div>
+<div class="ttc" id="agroup__features__main_html_gad876e2c53af18078dda096b260b7507b"><div class="ttname"><a href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">cv::corners</a></div><div class="ttdeci">CV_EXPORTS OutputArray corners</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00218">features.hpp:218</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html"><div class="ttname"><a href="namespacecv_1_1detail.html">cv::detail</a></div><div class="ttdef"><b>Definición</b> <a href="dualquaternion_8inl_8hpp_source.html#l00317">dualquaternion.inl.hpp:317</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacerun_html"><div class="ttname"><a href="namespacerun.html">run</a></div><div class="ttdef"><b>Definición</b> <a href="run_8py_source.html#l00001">run.py:1</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_61350599ec69e0dc4f4468047e146f77.html">stitching</a></li><li class="navelem"><a href="dir_409710c970ffd93d564b79d1dc318dc4.html">include</a></li><li class="navelem"><a href="dir_07f59ba62b041170eae22b21b86b5db1.html">opencv2</a></li><li class="navelem"><a href="dir_4036ac89f3496024bc4067ed27487d5f.html">stitching</a></li><li class="navelem"><a href="dir_ae4a20f8a4ee72631b2b08737aa13d16.html">detail</a></li><li class="navelem"><a href="seam__finders_8hpp.html">seam_finders.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

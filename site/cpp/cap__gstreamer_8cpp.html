@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_gstreamer.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__gstreamer_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo cap_gstreamer.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Use GStreamer to read/write video.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="videoio_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="logger_8hpp_source.html">opencv2/core/utils/logger.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="filesystem_8hpp_source.html">opencv2/core/utils/filesystem.hpp</a>&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;deque&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;gst/gst.h&gt;</code><br />
+<code>#include &lt;gst/gstbuffer.h&gt;</code><br />
+<code>#include &lt;gst/video/video.h&gt;</code><br />
+<code>#include &lt;gst/audio/audio.h&gt;</code><br />
+<code>#include &lt;gst/app/gstappsink.h&gt;</code><br />
+<code>#include &lt;gst/app/gstappsrc.h&gt;</code><br />
+<code>#include &lt;gst/riff/riff-media.h&gt;</code><br />
+<code>#include &lt;gst/pbutils/missing-plugins.h&gt;</code><br />
+<code>#include &lt;gst/pbutils/encoding-profile.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en cap_gstreamer.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="cap__gstreamer_8cpp__incl.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="cap__gstreamer_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:cv_3A_3Agst_5Finitializer" id="r_cv_3A_3Agst_5Finitializer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1gst__initializer.html">cv::gst_initializer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classcv_1_1gst__initializer.html" title="The gst_initializer class Initializes gstreamer once in the whole process.">gst_initializer</a> class Initializes gstreamer once in the whole process.  <a href="classcv_1_1gst__initializer.html#details">Más...</a><br /></td></tr>
+<tr class="memitem:cv_3A_3ACV_5FFINAL" id="r_cv_3A_3ACV_5FFINAL"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_c_v___f_i_n_a_l.html">cv::CV_FINAL</a></td></tr>
+<tr class="memitem:cv_3A_3ACvVideoWriter_5FGStreamer" id="r_cv_3A_3ACvVideoWriter_5FGStreamer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_cv_video_writer___g_streamer.html">cv::CvVideoWriter_GStreamer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classcv_1_1_cv_video_writer___g_streamer.html" title="The CvVideoWriter_GStreamer class Use GStreamer to write video.">CvVideoWriter_GStreamer</a> class Use GStreamer to write video.  <a href="classcv_1_1_cv_video_writer___g_streamer.html#details">Más...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Espacios de nombres</h2></td></tr>
+<tr class="memitem:cv" id="r_cv"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html">cv</a></td></tr>
+<tr class="memdesc:namespacecv"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file is part of OpenCV project. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a865bd4b7038a5d5ac8ca70802919f4a3" id="r_a865bd4b7038a5d5ac8ca70802919f4a3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a865bd4b7038a5d5ac8ca70802919f4a3">VERSION_NUM</a>(major,  minor,  micro)</td></tr>
+<tr class="memitem:a7ff2cfb1b77ae14fa8bc5b13bd2a434f" id="r_a7ff2cfb1b77ae14fa8bc5b13bd2a434f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7ff2cfb1b77ae14fa8bc5b13bd2a434f">FULL_GST_VERSION</a>&#160;&#160;&#160;<a class="el" href="#a865bd4b7038a5d5ac8ca70802919f4a3">VERSION_NUM</a>(GST_VERSION_MAJOR, GST_VERSION_MINOR, GST_VERSION_MICRO)</td></tr>
+<tr class="memitem:af48fe6f4cb717ed3d600f32c237f5409" id="r_af48fe6f4cb717ed3d600f32c237f5409"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af48fe6f4cb717ed3d600f32c237f5409">CV_WARN</a>(...)</td></tr>
+<tr class="memitem:a52007648929482cd0789855a54c39cca" id="r_a52007648929482cd0789855a54c39cca"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a52007648929482cd0789855a54c39cca">COLOR_ELEM</a>&#160;&#160;&#160;&quot;videoconvert&quot;</td></tr>
+<tr class="memitem:a2959331faee2d830fdc818b71d877b0c" id="r_a2959331faee2d830fdc818b71d877b0c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2959331faee2d830fdc818b71d877b0c">COLOR_ELEM_NAME</a>&#160;&#160;&#160;<a class="el" href="#a52007648929482cd0789855a54c39cca">COLOR_ELEM</a></td></tr>
+<tr class="memitem:a73afba0af5ba6ddf6da55d07b98c75b0" id="r_a73afba0af5ba6ddf6da55d07b98c75b0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a73afba0af5ba6ddf6da55d07b98c75b0">CV_GST_FORMAT</a>(format)</td></tr>
+<tr class="memitem:a5eaf9b850945290f3260a2e9daa59e74" id="r_a5eaf9b850945290f3260a2e9daa59e74"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5eaf9b850945290f3260a2e9daa59e74">GSTREAMER_INTERRUPT_OPEN_DEFAULT_TIMEOUT_NS</a>&#160;&#160;&#160;(30 * GST_SECOND)</td></tr>
+<tr class="memitem:a1df6c5844ed1f84e22e5cf1bfa749207" id="r_a1df6c5844ed1f84e22e5cf1bfa749207"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1df6c5844ed1f84e22e5cf1bfa749207">GSTREAMER_INTERRUPT_READ_DEFAULT_TIMEOUT_NS</a>&#160;&#160;&#160;(30 * GST_SECOND)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a715ecdaff7ae04c9b846ad15867d29b9" id="r_a715ecdaff7ae04c9b846ad15867d29b9"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a715ecdaff7ae04c9b846ad15867d29b9">cv::toFraction</a> (double decimal, <a class="el" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> int &amp;numerator, <a class="el" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> int &amp;denominator)</td></tr>
+<tr class="memitem:a18d68519ac4946c6ecba90e1775364f9" id="r_a18d68519ac4946c6ecba90e1775364f9"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a18d68519ac4946c6ecba90e1775364f9">cv::handleMessage</a> (GstElement *pipeline)</td></tr>
+<tr class="memdesc:a18d68519ac4946c6ecba90e1775364f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">handleMessage Handles gstreamer bus messages. Mainly for debugging purposes and ensuring clean shutdown on error  <br /></td></tr>
+<tr class="memitem:a5fa63b33281c62359af893962718f7c5" id="r_a5fa63b33281c62359af893962718f7c5"><td class="memItemLeft">static std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a5fa63b33281c62359af893962718f7c5">cv::get_gst_propname</a> (int propId)</td></tr>
+<tr class="memitem:a9d6bf549d91ffbb8ab7942822ca55f9f" id="r_a9d6bf549d91ffbb8ab7942822ca55f9f"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a9d6bf549d91ffbb8ab7942822ca55f9f">cv::is_gst_element_exists</a> (const std::string &amp;name)</td></tr>
+<tr class="memitem:a8f1c07121428febd58596814379a6c85" id="r_a8f1c07121428febd58596814379a6c85"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a8f1c07121428febd58596814379a6c85">cv::find_hw_element</a> (const GValue *item, gpointer va_type)</td></tr>
+<tr class="memitem:ab8e41bfbd4200aef6f0c76ea679f1eec" id="r_ab8e41bfbd4200aef6f0c76ea679f1eec"><td class="memItemLeft"><a class="el" href="structcv_1_1_ptr.html">Ptr</a>&lt; <a class="el" href="classcv_1_1_i_video_capture.html">IVideoCapture</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ab8e41bfbd4200aef6f0c76ea679f1eec">cv::createGStreamerCapture_file</a> (const <a class="el" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;filename, const <a class="el" href="classcv_1_1_video_capture_parameters.html">cv::VideoCaptureParameters</a> &amp;params)</td></tr>
+<tr class="memitem:a5a6cfbcb0764d203eb9cd4fd0fdc5d17" id="r_a5a6cfbcb0764d203eb9cd4fd0fdc5d17"><td class="memItemLeft"><a class="el" href="structcv_1_1_ptr.html">Ptr</a>&lt; <a class="el" href="classcv_1_1_i_video_capture.html">IVideoCapture</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a5a6cfbcb0764d203eb9cd4fd0fdc5d17">cv::createGStreamerCapture_cam</a> (int index, const <a class="el" href="classcv_1_1_video_capture_parameters.html">cv::VideoCaptureParameters</a> &amp;params)</td></tr>
+<tr class="memitem:aa323e30b5f97e8152d8afd2ea8ba260b" id="r_aa323e30b5f97e8152d8afd2ea8ba260b"><td class="memItemLeft"><a class="el" href="structcv_1_1_ptr.html">Ptr</a>&lt; <a class="el" href="classcv_1_1_i_video_writer.html">IVideoWriter</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aa323e30b5f97e8152d8afd2ea8ba260b">cv::create_GStreamer_writer</a> (const std::string &amp;filename, int fourcc, double fps, const <a class="el" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a> &amp;frameSize, const <a class="el" href="classcv_1_1_video_writer_parameters.html">VideoWriterParameters</a> &amp;params)</td></tr>
+<tr class="memitem:a55d12a269e547e7fd0780970e30c6bca" id="r_a55d12a269e547e7fd0780970e30c6bca"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a55d12a269e547e7fd0780970e30c6bca">cv::toFraction</a> (const double decimal, int &amp;numerator_i, int &amp;denominator_i)</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Use GStreamer to read/write video. </p>
+<dl class="section author"><dt>Autor</dt><dd>Nils Hasler <a href="mai'+'lto:+'has'+'le'+'r@m'+'pi'+'-in'+'f.'+'mpg'+'.d'+'e'">hasle<span class="obfuscator">.nosp@m.</span>r@mp<span class="obfuscator">.nosp@m.</span>i-inf<span class="obfuscator">.nosp@m.</span>.mpg<span class="obfuscator">.nosp@m.</span>.de</a> Max-Planck-Institut Informatik </dd>
+<dd>
+Dirk Van Haerenborgh <a href="mai'+'lto:+'vhd'+'ir'+'k@g'+'ma'+'il.'+'co'+'m'">vhdir<span class="obfuscator">.nosp@m.</span>k@gm<span class="obfuscator">.nosp@m.</span>ail.c<span class="obfuscator">.nosp@m.</span>om</a> </dd></dl>
+
+<p class="definition">Definición en el archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentación de «define»</h2>
+<a id="a52007648929482cd0789855a54c39cca" name="a52007648929482cd0789855a54c39cca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52007648929482cd0789855a54c39cca">&#9670;&#160;</a></span>COLOR_ELEM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COLOR_ELEM&#160;&#160;&#160;&quot;videoconvert&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00079">79</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2959331faee2d830fdc818b71d877b0c" name="a2959331faee2d830fdc818b71d877b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2959331faee2d830fdc818b71d877b0c">&#9670;&#160;</a></span>COLOR_ELEM_NAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COLOR_ELEM_NAME&#160;&#160;&#160;<a class="el" href="#a52007648929482cd0789855a54c39cca">COLOR_ELEM</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00080">80</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a73afba0af5ba6ddf6da55d07b98c75b0" name="a73afba0af5ba6ddf6da55d07b98c75b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73afba0af5ba6ddf6da55d07b98c75b0">&#9670;&#160;</a></span>CV_GST_FORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_GST_FORMAT</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>format</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">(format)</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00082">82</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af48fe6f4cb717ed3d600f32c237f5409" name="af48fe6f4cb717ed3d600f32c237f5409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af48fe6f4cb717ed3d600f32c237f5409">&#9670;&#160;</a></span>CV_WARN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_WARN</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><a class="code hl_define" href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a>(NULL, <span class="stringliteral">&quot;OpenCV | GStreamer warning: &quot;</span> &lt;&lt; __VA_ARGS__)</div>
+<div class="ttc" id="agroup__core__logging_html_ga9a7297e347ba19830270825e5cbb6d0b"><div class="ttname"><a href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a></div><div class="ttdeci">#define CV_LOG_WARNING(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00169">logger.hpp:169</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00077">77</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7ff2cfb1b77ae14fa8bc5b13bd2a434f" name="a7ff2cfb1b77ae14fa8bc5b13bd2a434f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff2cfb1b77ae14fa8bc5b13bd2a434f">&#9670;&#160;</a></span>FULL_GST_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FULL_GST_VERSION&#160;&#160;&#160;<a class="el" href="#a865bd4b7038a5d5ac8ca70802919f4a3">VERSION_NUM</a>(GST_VERSION_MAJOR, GST_VERSION_MINOR, GST_VERSION_MICRO)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00072">72</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5eaf9b850945290f3260a2e9daa59e74" name="a5eaf9b850945290f3260a2e9daa59e74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eaf9b850945290f3260a2e9daa59e74">&#9670;&#160;</a></span>GSTREAMER_INTERRUPT_OPEN_DEFAULT_TIMEOUT_NS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GSTREAMER_INTERRUPT_OPEN_DEFAULT_TIMEOUT_NS&#160;&#160;&#160;(30 * GST_SECOND)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00083">83</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1df6c5844ed1f84e22e5cf1bfa749207" name="a1df6c5844ed1f84e22e5cf1bfa749207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1df6c5844ed1f84e22e5cf1bfa749207">&#9670;&#160;</a></span>GSTREAMER_INTERRUPT_READ_DEFAULT_TIMEOUT_NS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GSTREAMER_INTERRUPT_READ_DEFAULT_TIMEOUT_NS&#160;&#160;&#160;(30 * GST_SECOND)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00084">84</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a865bd4b7038a5d5ac8ca70802919f4a3" name="a865bd4b7038a5d5ac8ca70802919f4a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a865bd4b7038a5d5ac8ca70802919f4a3">&#9670;&#160;</a></span>VERSION_NUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VERSION_NUM</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>major</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>minor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>micro</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">(major * 1000000 + minor * 1000 + micro)</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__gstreamer_8cpp_source.html#l00071">71</a> del archivo <a class="el" href="cap__gstreamer_8cpp_source.html">cap_gstreamer.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__gstreamer_8cpp.html">cap_gstreamer.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

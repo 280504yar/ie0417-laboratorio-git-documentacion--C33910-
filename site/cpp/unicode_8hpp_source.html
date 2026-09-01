@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/tokenizer/unicode.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('unicode_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">unicode.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="unicode_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  Adapted from the llama.cpp Unicode functionality:</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//      https://github.com/ggml-org/llama.cpp/blob/master/src/unicode.cpp</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//  This file is part of the OpenCV DNN module for tokenization.</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>/*M///////////////////////////////////////////////////////////////////////////////////////</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>// MIT License</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>//</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>// Copyright (c) 2023‑2024 The ggml authors</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>//</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>// Permission is hereby granted, free of charge, to any person obtaining a copy</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>// of this software and associated documentation files (the &quot;Software&quot;), to deal</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>// in the Software without restriction, including without limitation the rights</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>// copies of the Software, and to permit persons to whom the Software is</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>// furnished to do so, subject to the following conditions:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>//</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>// The above copyright notice and this permission notice shall be included in</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>// all copies or substantial portions of the Software.</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>//</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>// THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>// SOFTWARE.</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>//</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>#ifndef __OPENCV_DNN_TOKENIZER_UNICODE_HPP__</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>#define __OPENCV_DNN_TOKENIZER_UNICODE_HPP__</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>#include &lt;cstdint&gt;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>#include &lt;string&gt;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>#include &lt;vector&gt;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>namespace cv { namespace dnn {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html">   48</a></span>struct unicode_cpt_flags {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    enum {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa46590385dfbfb49068b7f3c72ea81de4">   50</a></span>        UNDEFINED       = 0x0001,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa482bb42b6d4de000e6123448898284c8">   51</a></span>        NUMBER          = 0x0002,  // regex: \p{N}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa57b0b2e6e2e2564342926adc5936d77e">   52</a></span>        LETTER          = 0x0004,  // regex: \p{L}</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56faa0a94b143ba28b9562242e4aa70e3659">   53</a></span>        SEPARATOR       = 0x0008,  // regex: \p{Z}</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa573089cf619c37fa5b4cae3c8ec81afc">   54</a></span>        ACCENT_MARK     = 0x0010,  // regex: \p{M}</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa2b62f72ddb100e46a9990d32f0351770">   55</a></span>        PUNCTUATION     = 0x0020,  // regex: \p{P}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa67f459085b265a2b3a43e6e9b28e8716">   56</a></span>        SYMBOL          = 0x0040,  // regex: \p{S}</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa2f8225b35cd71377130056e2349fc4b4">   57</a></span>        CONTROL         = 0x0080,  // regex: \p{C}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a45944209a83d13d8b9a42f9ff0a3c56fa0eff9cb3b009b9ea9f8b0517e3409b4c">   58</a></span>        MASK_CATEGORIES = 0x00FF,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    };</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    // codepoint type</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#ac7b2eb0b19727c1d0675c52d16a73c8c">   62</a></span>    uint16_t is_undefined   : 1;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a6af44ba85ce00fa47dd77c5bc07c971d">   63</a></span>    uint16_t is_number      : 1;  // regex: \p{N}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#af67ed405314867a0d4a80ac5680f477a">   64</a></span>    uint16_t is_letter      : 1;  // regex: \p{L}</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a07d085d0aef8c0f554500efcb93021c3">   65</a></span>    uint16_t is_separator   : 1;  // regex: \p{Z}</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#affc87bcd991eb7165cd73a9b388f3eb5">   66</a></span>    uint16_t is_accent_mark : 1;  // regex: \p{M}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#ab79259df768031f6bf07ce948c0aeed4">   67</a></span>    uint16_t is_punctuation : 1;  // regex: \p{P}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#afd148baad78a1abc867a85fd7f95fa34">   68</a></span>    uint16_t is_symbol      : 1;  // regex: \p{S}</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a0f89b835901e9c5c510cf6f1c18a520a">   69</a></span>    uint16_t is_control     : 1;  // regex: \p{C}</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    // helper flags</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a33ca4721640a43a2bfc77242bad2fb14">   71</a></span>    uint16_t is_whitespace  : 1;  // regex: \s</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a17dd8b626e41cbd69566eb758a95a2d6">   72</a></span>    uint16_t is_lowercase   : 1;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a0760a04bf224fc9ce7e51cfb151f7443">   73</a></span>    uint16_t is_uppercase   : 1;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a26d6c1e0840a951d442817c8cc8ce14c">   74</a></span>    uint16_t is_nfd         : 1;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    // decode from uint16</div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#ae6094e653d9ee73caf13e21329a58c2e">   77</a></span>    inline unicode_cpt_flags(const uint16_t flags = 0) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        *reinterpret_cast&lt;uint16_t*&gt;(this) = flags;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
+</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a270b1a1c3d8bb4992602b720bd978fd7">   81</a></span>    inline uint16_t as_uint() const {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        return *reinterpret_cast&lt;const uint16_t*&gt;(this);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1unicode__cpt__flags.html#a52b269eb262880d9d99c2542f35bdbf9">   85</a></span>    inline uint16_t category_flag() const {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        return this-&gt;as_uint() &amp; MASK_CATEGORIES;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>};</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>std::string unicode_cpt_to_utf8  (uint32_t cpt);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>uint32_t    unicode_cpt_from_utf8(const std::string &amp; utf8, size_t &amp; offset);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>std::vector&lt;uint32_t&gt; unicode_cpts_from_utf8(const std::string &amp; utf8);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>unicode_cpt_flags unicode_cpt_flags_from_cpt (uint32_t cpt);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>std::string unicode_byte_to_utf8(uint8_t byte);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>uint8_t     unicode_utf8_to_byte(const std::string &amp; utf8);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>uint32_t unicode_tolower(uint32_t cpt);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>std::vector&lt;std::string&gt; unicode_regex_split(const std::string &amp; text, const std::vector&lt;std::string&gt; &amp; regex_exprs);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}}</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>#endif</div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_b13ec2e4a2f1666747947725e11fa035.html">tokenizer</a></li><li class="navelem"><a href="unicode_8hpp.html">unicode.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

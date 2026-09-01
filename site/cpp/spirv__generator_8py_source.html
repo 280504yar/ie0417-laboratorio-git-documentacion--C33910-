@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/vkcom/shader/spirv_generator.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('spirv__generator_8py_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">spirv_generator.py</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="spirv__generator_8py.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html">    1</a></span><span class="comment"># Iterate all GLSL shaders (with suffix &#39;.comp&#39;) in current directory.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">#</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"># Use glslangValidator to compile them to SPIR-V shaders and write them</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"># into .cpp files as unsigned int array.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">#</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"># Also generate a header file &#39;spv_shader.hpp&#39; to extern declare these shaders.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> re</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> os</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> sys</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#acf0c7b9961e88b298c5e273f2f242d83">   12</a></span>dir = <span class="stringliteral">&quot;./&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a2d0a534d8f163ba8a3002924960ebf2d">   13</a></span>license_decl = \</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="stringliteral">&#39;// This file is part of OpenCV project.\n&#39;</span>\</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="stringliteral">&#39;// It is subject to the license terms in the LICENSE file found in the top-level directory\n&#39;</span>\</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="stringliteral">&#39;// of this distribution and at http://opencv.org/license.html.\n\n&#39;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#ab61f6e8b91b4d0b3c0046757ca0b2ea3">   18</a></span>precomp = <span class="stringliteral">&#39;#include \&quot;../../precomp.hpp\&quot;\n&#39;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#afb143794e03a619539d628e62b886c55">   19</a></span>ns_head = <span class="stringliteral">&#39;\nnamespace cv { namespace dnn { namespace vkcom {\n\n&#39;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a8c92b9a66da0cdd031ef05d260f59d81">   20</a></span>ns_tail = <span class="stringliteral">&#39;\n}}} // namespace cv::dnn::vkcom\n&#39;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a650951f46bd2d64abec3999157153751">   22</a></span>headfile = open(<span class="stringliteral">&#39;spv_shader.hpp&#39;</span>, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>headfile.write(license_decl)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>headfile.write(<span class="stringliteral">&#39;#ifndef OPENCV_DNN_SPV_SHADER_HPP\n&#39;</span>)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>headfile.write(<span class="stringliteral">&#39;#define OPENCV_DNN_SPV_SHADER_HPP\n\n&#39;</span>)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>headfile.write(ns_head)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a6aa949fe58c428f64f2577ae1e1dc1e0">   28</a></span>cppfile = open(<span class="stringliteral">&#39;spv_shader.cpp&#39;</span>, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>cppfile.write(license_decl)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>cppfile.write(precomp)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>cppfile.write(<span class="stringliteral">&#39;#include \&quot;spv_shader.hpp\&quot;\n&#39;</span>)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>cppfile.write(ns_head)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a7d5ccedb9de041ba935b6e2526b03a52">   34</a></span>cmd_remove = <span class="stringliteral">&#39;&#39;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a2b521e76af03110535160fe517e53c34">   35</a></span>null_out = <span class="stringliteral">&#39;&#39;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordflow">if</span> sys.platform.find(<span class="stringliteral">&#39;win32&#39;</span>) != -1:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    cmd_remove = <span class="stringliteral">&#39;del&#39;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    null_out = <span class="stringliteral">&#39; &gt;&gt;nul 2&gt;nul&#39;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordflow">elif</span> sys.platform.find(<span class="stringliteral">&#39;linux&#39;</span>) != -1:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    cmd_remove = <span class="stringliteral">&#39;rm&#39;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    null_out = <span class="stringliteral">&#39; &gt; /dev/null 2&gt;&amp;1&#39;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    cmd_remove = <span class="stringliteral">&#39;rm&#39;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#afa111f1404242a85b271e5462f6cd07b">   45</a></span>insertList = []</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#aa5fdedf3af6636938082dab60618de8a">   46</a></span>externList = []</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#ab1c07ad6669b91ced848e83e1cfb0136">   48</a></span>list = os.listdir(dir)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(0, len(list)):</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">if</span> (os.path.splitext(list[i])[-1] != <span class="stringliteral">&#39;.comp&#39;</span>):</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">continue</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a08fe2769d5892eaa46d0496cc4a9cd86">   52</a></span>    prefix = os.path.splitext(list[i])[0]</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#abd9cc6d849dc520491f66380ef6b4c4d">   53</a></span>    path = os.path.join(dir, list[i])</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a278d3c4ba9b4607704872399c72c681c">   56</a></span>    bin_file = prefix + <span class="stringliteral">&#39;.tmp&#39;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a211d3daf40c1a37d55231eb6b5429db2">   57</a></span>    cmd = <span class="stringliteral">&#39; glslangValidator -V &#39;</span> + path + <span class="stringliteral">&#39; -S comp -o &#39;</span> + bin_file</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    print(<span class="stringliteral">&#39;Run cmd = &#39;</span>, cmd)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> os.system(cmd) != 0:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">continue</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a73450d325035aa29ec6341e678780740">   62</a></span>    size = os.path.getsize(bin_file)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a9c5f8447cea0f8c0313ee567f4b24fba">   64</a></span>    spv_txt_file = prefix + <span class="stringliteral">&#39;.spv&#39;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    cmd = <span class="stringliteral">&#39;glslangValidator -V &#39;</span> + path + <span class="stringliteral">&#39; -S comp -o &#39;</span> + spv_txt_file  + <span class="stringliteral">&#39; -x&#39;</span> <span class="comment">#+ null_out</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    os.system(cmd)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a05b494f945c18ff54faa64802822612c">   68</a></span>    infile_name = spv_txt_file</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a636b96a2349feaeaecdf23471d654fb9">   69</a></span>    outfile_name = prefix + <span class="stringliteral">&#39;_spv.cpp&#39;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a4ca711c4fd8ce324a72abcb79c0f92b5">   70</a></span>    array_name = prefix + <span class="stringliteral">&#39;_spv&#39;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#ae6b1f64df0112e6ff2ec90c61fb7ae80">   71</a></span>    infile = open(infile_name, <span class="stringliteral">&#39;r&#39;</span>)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a1dc2e610d8284b63ed9243b16fb23081">   72</a></span>    outfile = open(outfile_name, <span class="stringliteral">&#39;w&#39;</span>)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    outfile.write(license_decl)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    outfile.write(precomp)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    outfile.write(ns_head)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="comment"># xxx.spv ==&gt; xxx_spv.cpp</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#aa72eb2cfd4dc5fff9eeeb1c5dd4c1634">   78</a></span>    fmt = <span class="stringliteral">&#39;extern const unsigned int %s[%d] = {\n&#39;</span> % (array_name, size/4)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    outfile.write(fmt)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">for</span> eachLine <span class="keywordflow">in</span> infile:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <a class="code hl_function" href="ccl__bolelli__forest_8inc_8hpp.html#adf0f2a5b1766183828a3aea2ed9d3927">if</a>(re.match(<span class="stringliteral">r&#39;^.*\/\/&#39;</span>, eachLine)):</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">continue</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="namespacespirv__generator.html#a9e64d5385c24c72357d6b210d4caad34">   83</a></span>        newline = <span class="stringliteral">&#39;    &#39;</span> + eachLine.replace(<span class="stringliteral">&#39;\t&#39;</span>,<span class="stringliteral">&#39;&#39;</span>)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        outfile.write(newline)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    infile.close()</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    outfile.write(<span class="stringliteral">&quot;};\n&quot;</span>)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    outfile.write(ns_tail)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="comment"># write a line into header file</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    fmt = <span class="stringliteral">&#39;extern const unsigned int %s[%d];\n&#39;</span> % (array_name, size/4)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    externList.append(fmt)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    fmt = <span class="stringliteral">&#39;    SPVMaps.insert(std::make_pair(&quot;%s&quot;, std::make_pair(%s, %d)));\n&#39;</span> % (array_name, array_name, size/4)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    insertList.append(fmt)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    os.system(cmd_remove + <span class="stringliteral">&#39; &#39;</span> + bin_file)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    os.system(cmd_remove + <span class="stringliteral">&#39; &#39;</span> + spv_txt_file)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keywordflow">for</span> fmt <span class="keywordflow">in</span> externList:</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    headfile.write(fmt)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"># write to head file</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>headfile.write(<span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>headfile.write(<span class="stringliteral">&#39;extern std::map&lt;std::string, std::pair&lt;const unsigned int *, size_t&gt; &gt; SPVMaps;\n\n&#39;</span>)</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>headfile.write(<span class="stringliteral">&#39;void initSPVMaps();\n&#39;</span>)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>headfile.write(ns_tail)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>headfile.write(<span class="stringliteral">&#39;\n#endif /* OPENCV_DNN_SPV_SHADER_HPP */\n&#39;</span>)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>headfile.close()</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"># write to cpp file</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>cppfile.write(<span class="stringliteral">&#39;std::map&lt;std::string, std::pair&lt;const unsigned int *, size_t&gt; &gt; SPVMaps;\n\n&#39;</span>)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>cppfile.write(<span class="stringliteral">&#39;void initSPVMaps()\n{\n&#39;</span>)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keywordflow">for</span> fmt <span class="keywordflow">in</span> insertList:</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    cppfile.write(fmt)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>cppfile.write(<span class="stringliteral">&#39;}\n&#39;</span>)</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>cppfile.write(ns_tail)</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>cppfile.close()</div>
+<div class="ttc" id="accl__bolelli__forest_8inc_8hpp_html_adf0f2a5b1766183828a3aea2ed9d3927"><div class="ttname"><a href="ccl__bolelli__forest_8inc_8hpp.html#adf0f2a5b1766183828a3aea2ed9d3927">if</a></div><div class="ttdeci">if(CONDITION_O)</div><div class="ttdef"><b>Definición</b> <a href="ccl__bolelli__forest_8inc_8hpp_source.html#l00012">ccl_bolelli_forest.inc.hpp:12</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_3189d8456ed9de76a844b61f6d58e08e.html">vkcom</a></li><li class="navelem"><a href="dir_835a3f052246cb8cb4b1490481320c81.html">shader</a></li><li class="navelem"><a href="spirv__generator_8py.html">spirv_generator.py</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

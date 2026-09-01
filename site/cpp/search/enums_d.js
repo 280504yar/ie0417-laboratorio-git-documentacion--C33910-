@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['ocl4dnnconvspatialkerneltype_5ft_0',['ocl4dnnConvSpatialKernelType_t',['../namespacecv_1_1dnn_1_1ocl4dnn.html#aa3c8e85cc797a1783b6766646d1641dc',1,'cv::dnn::ocl4dnn']]],
+  ['ocl4dnnconvspatialtype_5ft_1',['ocl4dnnConvSpatialType_t',['../namespacecv_1_1dnn_1_1ocl4dnn.html#a5019a9f36b5cf23565dfa722653ebae4',1,'cv::dnn::ocl4dnn']]],
+  ['ocl4dnnfusedactiv_5ft_2',['ocl4dnnFusedActiv_t',['../namespacecv_1_1dnn_1_1ocl4dnn.html#abf13fadb65fe217b35271d5b93f2890e',1,'cv::dnn::ocl4dnn']]],
+  ['ocl4dnnpoolingmethod_5ft_3',['ocl4dnnPoolingMethod_t',['../namespacecv_1_1dnn_1_1ocl4dnn.html#a5a94a58fb4b6c81ecfc787b9921d3b6c',1,'cv::dnn::ocl4dnn']]],
+  ['oclvectorstrategy_4',['OclVectorStrategy',['../group__core__opencl.html#gae601ac868b72015b583ccbbdd0dec587',1,'cv::ocl']]],
+  ['odometryalgotype_5',['OdometryAlgoType',['../group__ptcloud__rgbd.html#ga00cb8aaa0ed59dfe4ee956d769071a05',1,'cv']]],
+  ['odometryframepyramidtype_6',['OdometryFramePyramidType',['../group__ptcloud__rgbd.html#ga005ab414467b4d76486014adfb05e258',1,'cv']]],
+  ['odometrystate_7',['OdometryState',['../group__slam.html#ga7c06a2c5a7fe6109a3bcec25eb72b249',1,'cv::slam']]],
+  ['odometrytransformtype_8',['OdometryTransformType',['../namespacecv.html#a84a1e715dc5b84cb5fa4f96cf0d7f8f7',1,'cv']]],
+  ['odometrytype_9',['OdometryType',['../group__ptcloud__rgbd.html#ga04c2830b9af3b26e97499d6c99d3978b',1,'cv']]],
+  ['onnxdatatype_10',['OnnxDataType',['../namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74',1,'cv::dnn']]],
+  ['op_11',['Op',['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#ae336706b6e2fa7693728b75e79791d51',1,'cv::dnn::CV_FINAL']]],
+  ['opencl_5ffn_5fid_12',['OPENCL_FN_ID',['../opencl__core__impl_8hpp.html#adb4a9938f3ea80e2ecc7074e6f8d43f9',1,'opencl_core_impl.hpp']]],
+  ['opencl_5fgl_5ffn_5fid_13',['OPENCL_GL_FN_ID',['../opencl__gl__impl_8hpp.html#a568a9d7cf1dc9e7f02322c7f7c144a24',1,'opencl_gl_impl.hpp']]],
+  ['openclamdblas_5ffn_5fid_14',['OPENCLAMDBLAS_FN_ID',['../opencl__clblas__impl_8hpp.html#a7133dc803c905b0ee28fedccfd08ef8b',1,'opencl_clblas_impl.hpp']]],
+  ['openclamdfft_5ffn_5fid_15',['OPENCLAMDFFT_FN_ID',['../opencl__clfft__impl_8hpp.html#a67c26b4822b0b3efe148651bcb1478dc',1,'opencl_clfft_impl.hpp']]],
+  ['opencvfbmode_16',['OpenCVFBMode',['../namespacecv_1_1highgui__backend.html#a534ed68dbcb339e3a0e9f22070cffd17',1,'cv::highgui_backend']]],
+  ['operation_17',['OPERATION',['../classcv_1_1dnn_1_1_nary_eltwise_layer.html#ac7d75c4f03df8661d3a562f0fa5131a1',1,'cv::dnn::NaryEltwiseLayer']]],
+  ['operatorstatus_18',['OperatorStatus',['../namespaceopencv__onnx.html#ab64109aed97942a7678fbe6c7094a266',1,'opencv_onnx']]],
+  ['opmode_19',['OpMode',['../structcv_1_1dnn_1_1cuda4dnn_1_1_scale_shift_configuration.html#ac3a4835ee56886ddc924e0adf2f80599',1,'cv::dnn::cuda4dnn::ScaleShiftConfiguration']]],
+  ['origin_20',['Origin',['../classcv_1_1_c_v___f_i_n_a_l.html#a945f89756a056d569874a5edb54a7938',1,'cv::CV_FINAL']]],
+  ['outputchannelsmode_21',['OutputChannelsMode',['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#aa6d38ca46866704bc12c096313482744',1,'cv::dnn::CV_FINAL::OutputChannelsMode'],['../classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html#aa6d38ca46866704bc12c096313482744',1,'cv::dnn::CV_FINAL::OutputChannelsMode']]]
+];

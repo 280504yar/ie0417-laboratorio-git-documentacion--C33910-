@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/aruco/apriltag/unionfind.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('unionfind_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">unionfind.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="unionfind_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2013-2016, The Regents of The University of Michigan.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// This software was developed in the APRIL Robotics Lab under the</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// direction of Edwin Olson, ebolson@umich.edu. This software may be</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// available under alternative licensing terms; contact the address above.</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// The views and conclusions contained in the software and documentation are those</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// of the authors and should not be interpreted as representing official policies,</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// either expressed or implied, of the Regents of The University of Michigan.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef _OPENCV_UNIONFIND_HPP_</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define _OPENCV_UNIONFIND_HPP_</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1aruco.html">aruco</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html">   20</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#a7cf774b90acadd4586d049d5aeb40dd0">UnionFind</a> {</div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#a7cf774b90acadd4586d049d5aeb40dd0">   21</a></span>    <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#a7cf774b90acadd4586d049d5aeb40dd0">UnionFind</a>(uint32_t _maxid)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#afea90add91066c902ac755d4c3a33b4f">maxid</a> = _maxid;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>.resize(<a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#afea90add91066c902ac755d4c3a33b4f">maxid</a>+1);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt;= <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#afea90add91066c902ac755d4c3a33b4f">maxid</a>; i++) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[i].size = 1;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[i].parent = i;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#af346cef0d02a8362eff38e804175d1a2">   31</a></span>    <span class="keyword">inline</span> uint32_t <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#af346cef0d02a8362eff38e804175d1a2">get_representative</a>(uint32_t <span class="keywordtype">id</span>) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        uint32_t root = id;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="comment">// chase down the root</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">while</span> (<a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[root].parent != root) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            root = <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[root].parent;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="comment">// go back and collapse the tree.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="comment">// XXX: on some of our workloads that have very shallow trees</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="comment">// (e.g. image segmentation), we are actually faster not doing</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="comment">// this...</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">while</span> (<a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[<span class="keywordtype">id</span>].parent != root) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            uint32_t tmp = <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[id].parent;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[id].parent = root;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordtype">id</span> = tmp;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> root;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#a6a9699a6043513db3d553bbdd6a00036">   53</a></span>    <span class="keyword">inline</span> uint32_t <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#a6a9699a6043513db3d553bbdd6a00036">get_set_size</a>(uint32_t <span class="keywordtype">id</span>) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        uint32_t repid = <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#af346cef0d02a8362eff38e804175d1a2">get_representative</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[repid].size;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#a46d86459e7dc9ff7de4133d5c5279b98">   58</a></span>    <span class="keyword">inline</span> uint32_t <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#a46d86459e7dc9ff7de4133d5c5279b98">connect</a>(uint32_t aid, uint32_t bid) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        uint32_t aroot = <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#af346cef0d02a8362eff38e804175d1a2">get_representative</a>(aid);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        uint32_t broot = <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#af346cef0d02a8362eff38e804175d1a2">get_representative</a>(bid);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">if</span> (aroot == broot)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span> aroot;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="comment">// we don&#39;t perform &quot;union by rank&quot;, but we perform a similar</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="comment">// operation (but probably without the same asymptotic guarantee):</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="comment">// We join trees based on the number of *elements* (as opposed to</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="comment">// rank) contained within each tree. I.e., we use size as a proxy</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="comment">// for rank.  In my testing, it&#39;s often *faster* to use size than</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="comment">// rank, perhaps because the rank of the tree isn&#39;t that critical</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="comment">// if there are very few nodes in it.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        uint32_t asize = <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[aroot].size;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        uint32_t bsize = <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[broot].size;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="comment">// optimization idea: We could shortcut some or all of the tree</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="comment">// that is grafted onto the other tree. Pro: those nodes were just</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="comment">// read and so are probably in cache. Con: it might end up being</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="comment">// wasted effort -- the tree might be grafted onto another tree in</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="comment">// a moment!</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">if</span> (asize &gt; bsize) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[broot].parent = aroot;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[aroot].size += bsize;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">return</span> aroot;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[aroot].parent = broot;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>[broot].size += asize;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">return</span> broot;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="unionfind_8hpp.html#a8d52a8a038fb1dcc56f0304f681ed37c">   91</a></span><span class="preprocessor">    #define DO_UNIONFIND(dx, dy) if (im.data[y*s + dy*s + x + dx] == v) connect(y*w + x, y*w + dy*w + x + dx);</span></div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#a8ac91a84ea00388137a9939f1aebf18b">   92</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1aruco_1_1_union_find.html#a8ac91a84ea00388137a9939f1aebf18b">do_line</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;im, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> s, <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>+1 &lt; im.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(!im.<a class="code hl_function" href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">empty</a>());</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 1; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; w - 1; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            uint8_t v = im.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>*s + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>];</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordflow">if</span> (v == 127)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="comment">// (dx,dy) pairs for 8 connectivity:</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="comment">//          (REFERENCE) (1, 0)</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="comment">// (-1, 1)    (0, 1)    (1, 1)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="comment">//</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <a class="code hl_define" href="unionfind_8hpp.html#a8d52a8a038fb1dcc56f0304f681ed37c">DO_UNIONFIND</a>(1, 0);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_define" href="unionfind_8hpp.html#a8d52a8a038fb1dcc56f0304f681ed37c">DO_UNIONFIND</a>(0, 1);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">if</span> (v == 255) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <a class="code hl_define" href="unionfind_8hpp.html#a8d52a8a038fb1dcc56f0304f681ed37c">DO_UNIONFIND</a>(-1, 1);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <a class="code hl_define" href="unionfind_8hpp.html#a8d52a8a038fb1dcc56f0304f681ed37c">DO_UNIONFIND</a>(1, 1);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
+</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">    #undef DO_UNIONFIND</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="};">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html">  116</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html">ufrec</a> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="comment">// the parent of this node. If a node&#39;s parent is its own index,</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="comment">// then it is a root.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html#a0dae25128d84bba42d86cbbb34f67ab6">  119</a></span>        uint32_t <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html#a0dae25128d84bba42d86cbbb34f67ab6">parent</a>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="comment">// for the root of a connected component, the number of components</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="comment">// connected to it. For intermediate values, it&#39;s not meaningful.</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html#ae1dbb625e57ca2898d21d1d9c95179ee">  123</a></span>        uint32_t <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html#ae1dbb625e57ca2898d21d1d9c95179ee">size</a>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    };</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#afea90add91066c902ac755d4c3a33b4f">  126</a></span>    uint32_t <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#afea90add91066c902ac755d4c3a33b4f">maxid</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">  127</a></span>    std::vector&lt;ufrec&gt; <a class="code hl_variable" href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">data</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>};</div>
+</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}}</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a4d33bed1c850265370d2af0ff02e1564"><div class="ttname"><a href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">cv::Mat::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdoc">pointer to the data</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02493">mat.hpp:2493</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_abed816466c45234254d25bc59c31245e"><div class="ttname"><a href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">cv::Mat::rows</a></div><div class="ttdeci">int rows</div><div class="ttdoc">the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af855717faf149c9ec128896a7a6c7711"><div class="ttname"><a href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">cv::Mat::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">Returns true if the array has no elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01028">matrix.cpp:1028</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html"><div class="ttname"><a href="namespacecv_1_1aruco.html">cv::aruco</a></div><div class="ttdef"><b>Definición</b> <a href="aruco__board_8hpp_source.html#l00010">aruco_board.hpp:10</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_1_1ufrec_html"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html">cv::aruco::UnionFind::ufrec</a></div><div class="ttdef"><b>Definición</b> <a href="#l00116">unionfind.hpp:116</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_1_1ufrec_html_a0dae25128d84bba42d86cbbb34f67ab6"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html#a0dae25128d84bba42d86cbbb34f67ab6">cv::aruco::UnionFind::ufrec::parent</a></div><div class="ttdeci">uint32_t parent</div><div class="ttdef"><b>Definición</b> <a href="#l00119">unionfind.hpp:119</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_1_1ufrec_html_ae1dbb625e57ca2898d21d1d9c95179ee"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find_1_1ufrec.html#ae1dbb625e57ca2898d21d1d9c95179ee">cv::aruco::UnionFind::ufrec::size</a></div><div class="ttdeci">uint32_t size</div><div class="ttdef"><b>Definición</b> <a href="#l00123">unionfind.hpp:123</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_a46d86459e7dc9ff7de4133d5c5279b98"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#a46d86459e7dc9ff7de4133d5c5279b98">cv::aruco::UnionFind::connect</a></div><div class="ttdeci">uint32_t connect(uint32_t aid, uint32_t bid)</div><div class="ttdef"><b>Definición</b> <a href="#l00058">unionfind.hpp:58</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_a6a9699a6043513db3d553bbdd6a00036"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#a6a9699a6043513db3d553bbdd6a00036">cv::aruco::UnionFind::get_set_size</a></div><div class="ttdeci">uint32_t get_set_size(uint32_t id)</div><div class="ttdef"><b>Definición</b> <a href="#l00053">unionfind.hpp:53</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_a7cf774b90acadd4586d049d5aeb40dd0"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#a7cf774b90acadd4586d049d5aeb40dd0">cv::aruco::UnionFind::UnionFind</a></div><div class="ttdeci">UnionFind(uint32_t _maxid)</div><div class="ttdef"><b>Definición</b> <a href="#l00021">unionfind.hpp:21</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_a8ac91a84ea00388137a9939f1aebf18b"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#a8ac91a84ea00388137a9939f1aebf18b">cv::aruco::UnionFind::do_line</a></div><div class="ttdeci">void do_line(Mat &amp;im, int w, int s, int y)</div><div class="ttdef"><b>Definición</b> <a href="#l00092">unionfind.hpp:92</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_ad4cbb76e017c283ec26831354cc37022"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#ad4cbb76e017c283ec26831354cc37022">cv::aruco::UnionFind::data</a></div><div class="ttdeci">std::vector&lt; ufrec &gt; data</div><div class="ttdef"><b>Definición</b> <a href="#l00127">unionfind.hpp:127</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_af346cef0d02a8362eff38e804175d1a2"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#af346cef0d02a8362eff38e804175d1a2">cv::aruco::UnionFind::get_representative</a></div><div class="ttdeci">uint32_t get_representative(uint32_t id)</div><div class="ttdef"><b>Definición</b> <a href="#l00031">unionfind.hpp:31</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1_union_find_html_afea90add91066c902ac755d4c3a33b4f"><div class="ttname"><a href="structcv_1_1aruco_1_1_union_find.html#afea90add91066c902ac755d4c3a33b4f">cv::aruco::UnionFind::maxid</a></div><div class="ttdeci">uint32_t maxid</div><div class="ttdef"><b>Definición</b> <a href="#l00126">unionfind.hpp:126</a></div></div>
+<div class="ttc" id="aunionfind_8hpp_html_a8d52a8a038fb1dcc56f0304f681ed37c"><div class="ttname"><a href="unionfind_8hpp.html#a8d52a8a038fb1dcc56f0304f681ed37c">DO_UNIONFIND</a></div><div class="ttdeci">#define DO_UNIONFIND(dx, dy)</div><div class="ttdef"><b>Definición</b> <a href="#l00091">unionfind.hpp:91</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_e7b726b7d34261edef3afb35449b8fc1.html">aruco</a></li><li class="navelem"><a href="dir_bbf94555630977a25df97921491378bb.html">apriltag</a></li><li class="navelem"><a href="unionfind_8hpp.html">unionfind.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

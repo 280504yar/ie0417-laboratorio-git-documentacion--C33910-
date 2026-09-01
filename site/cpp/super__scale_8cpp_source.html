@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/barcode_decoder/common/super_scale.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('super__scale_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">super_scale.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="super__scale_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Tencent is pleased to support the open source community by making WeChat QRCode available.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// Copyright (C) 2020 THL A29 Limited, a Tencent company. All rights reserved.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Modified by darkliang wangberlinT</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="objdetect_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="super__scale_8hpp.html">super_scale.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="logger_8hpp.html">opencv2/core/utils/logger.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1barcode.html">barcode</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifdef HAVE_OPENCV_DNN</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keywordtype">float</span> MAX_SCALE = 4.0f;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_super_scale.html#a951dad7077392c8346e64ec45f4e098e">SuperScale::init</a>(<span class="keyword">const</span> std::string &amp;model_path)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">// Super Resolution is loaded from a single-file ONNX model (e.g. dnn/wechat_2021-01/sr.onnx).</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    srnet_ = <a class="code hl_function" href="group__dnn.html#ga02abced18387a1b89e3ed4d930130860">dnn::readNetFromONNX</a>(model_path);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    net_loaded_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_super_scale.html#acf4ac8d067798f6fdb482f38d65a765b">SuperScale::processImageScale</a>(<span class="keyword">const</span> Mat &amp;src, Mat &amp;<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">float</span> scale, <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;use_sr, <span class="keywordtype">int</span> sr_max_size)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a> = <a class="code hl_function" href="group__core__array.html#ga9af368f182ee76d0463d0d8d5330b764">min</a>(scale, MAX_SCALE);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">if</span> (scale &gt; .0 &amp;&amp; scale &lt; 1.0)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    {  <span class="comment">// down sample</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_function" href="group__imgproc__transform.html#ga92c459d3cdc84d6002263629033e017c">resize</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(), scale, scale, <a class="code hl_enumvalue" href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121acf959dca2480cc694ca016b81b442ceb">INTER_AREA</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (scale &gt; 1.5 &amp;&amp; scale &lt; 2.0)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_function" href="group__imgproc__transform.html#ga92c459d3cdc84d6002263629033e017c">resize</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(), scale, scale, <a class="code hl_enumvalue" href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121a55e404e7fa9684af79fe9827f36a5dc1">INTER_CUBIC</a>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (scale &gt;= 2.0)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#a38d82e61432caf77221daa817da6cd3e">width</a> = src.<a class="code hl_function" href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">cols</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#a60ac209806d4c2ba007b2e45f56c7b18">height</a> = src.<a class="code hl_function" href="interface_mat.html#a939b5265c8dbe049a59ea3a48d4434f0">rows</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">if</span> (use_sr &amp;&amp; (<span class="keywordtype">int</span>) <a class="code hl_function" href="group__core__array.html#ga186222c3919657890f88df5a1f64a7d7">sqrt</a>(width * height * 1.0) &lt; sr_max_size &amp;&amp; net_loaded_)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            superResolutionScale(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">if</span> (scale &gt; 2.0)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <a class="code hl_function" href="classcv_1_1barcode_1_1_super_scale.html#acf4ac8d067798f6fdb482f38d65a765b">processImageScale</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, scale / 2.0f, use_sr);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        { <a class="code hl_function" href="group__imgproc__transform.html#ga92c459d3cdc84d6002263629033e017c">resize</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(), scale, scale, <a class="code hl_enumvalue" href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121a55e404e7fa9684af79fe9827f36a5dc1">INTER_CUBIC</a>); }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keywordtype">int</span> SuperScale::superResolutionScale(<span class="keyword">const</span> Mat &amp;src, Mat &amp;<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    Mat blob;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_function" href="group__dnn.html#ga29f34df9376379a603acd8df581ac8d7">dnn::blobFromImage</a>(src, blob, 1.0 / 255, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(src.<a class="code hl_function" href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">cols</a>, src.<a class="code hl_function" href="interface_mat.html#a939b5265c8dbe049a59ea3a48d4434f0">rows</a>), {0.0f}, <span class="keyword">false</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    srnet_.setInput(blob);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">auto</span> prob = srnet_.forward();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = <a class="code hl_function" href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">Mat</a>(prob.size[2], prob.size[3], <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = 0; row &lt; prob.size[2]; row++)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> *prob_score = prob.ptr&lt;<span class="keywordtype">float</span>&gt;(0, 0, row);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keyword">auto</span> *dst_row = <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.ptr&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(row);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> col = 0; <a class="code hl_variable" href="namespacechart.html#ae7eab1cb19ae7b3d536dbbdbf4ad5c0d">col</a> &lt; prob.size[3]; <a class="code hl_variable" href="namespacechart.html#ae7eab1cb19ae7b3d536dbbdbf4ad5c0d">col</a>++)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            dst_row[<a class="code hl_variable" href="namespacechart.html#ae7eab1cb19ae7b3d536dbbdbf4ad5c0d">col</a>] = <a class="code hl_function" href="group__core__utils.html#ga2858f5fe522e46a2e17662669199f6ff">saturate_cast&lt;uchar&gt;</a>(prob_score[col] * 255.0f);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#else </span><span class="comment">// HAVE_OPENCV_DNN</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_super_scale.html#a951dad7077392c8346e64ec45f4e098e">   81</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_super_scale.html#a951dad7077392c8346e64ec45f4e098e">SuperScale::init</a>(<span class="keyword">const</span> std::string &amp;model_path)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>{</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(model_path);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_super_scale.html#acf4ac8d067798f6fdb482f38d65a765b">   87</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_super_scale.html#acf4ac8d067798f6fdb482f38d65a765b">SuperScale::processImageScale</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;src, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">float</span> scale, <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp; isEnabled, <span class="keywordtype">int</span> sr_max_size)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(sr_max_size);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">if</span> (isEnabled)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_define" href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a>(NULL, <span class="stringliteral">&quot;objdetect/barcode: SuperScaling disabled - OpenCV has been built without DNN support&quot;</span>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_function" href="group__imgproc__transform.html#ga92c459d3cdc84d6002263629033e017c">resize</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(), scale, scale, <a class="code hl_enumvalue" href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121a55e404e7fa9684af79fe9827f36a5dc1">INTER_CUBIC</a>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
+</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_OPENCV_DNN</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}  <span class="comment">// namespace barcode</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}  <span class="comment">// namespace cv</span></div>
+<div class="ttc" id="acap__ffmpeg__impl_8hpp_html_adea6825c69624f832940469560fee2d6"><div class="ttname"><a href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a></div><div class="ttdeci">#define CV_UNUSED(name)</div><div class="ttdef"><b>Definición</b> <a href="cap__ffmpeg__impl_8hpp_source.html#l00075">cap_ffmpeg_impl.hpp:75</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a666554613a268d1d7b51095501746652"><div class="ttname"><a href="classcv_1_1_mat.html#a666554613a268d1d7b51095501746652">cv::Mat::Mat</a></div><div class="ttdeci">Mat() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00714">matrix.cpp:714</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_super_scale_html_a951dad7077392c8346e64ec45f4e098e"><div class="ttname"><a href="classcv_1_1barcode_1_1_super_scale.html#a951dad7077392c8346e64ec45f4e098e">cv::barcode::SuperScale::init</a></div><div class="ttdeci">int init(const std::string &amp;model_path)</div><div class="ttdef"><b>Definición</b> <a href="#l00081">super_scale.cpp:81</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_super_scale_html_acf4ac8d067798f6fdb482f38d65a765b"><div class="ttname"><a href="classcv_1_1barcode_1_1_super_scale.html#acf4ac8d067798f6fdb482f38d65a765b">cv::barcode::SuperScale::processImageScale</a></div><div class="ttdeci">void processImageScale(const Mat &amp;src, Mat &amp;dst, float scale, const bool &amp;use_sr, int sr_max_size=160)</div><div class="ttdef"><b>Definición</b> <a href="#l00087">super_scale.cpp:87</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga186222c3919657890f88df5a1f64a7d7"><div class="ttname"><a href="group__core__array.html#ga186222c3919657890f88df5a1f64a7d7">cv::sqrt</a></div><div class="ttdeci">CV_EXPORTS_W void sqrt(InputArray src, OutputArray dst)</div><div class="ttdoc">Calculates a square root of array elements.</div><div class="ttdef"><b>Definición</b> <a href="mathfuncs_8cpp_source.html#l01111">mathfuncs.cpp:1111</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga9af368f182ee76d0463d0d8d5330b764"><div class="ttname"><a href="group__core__array.html#ga9af368f182ee76d0463d0d8d5330b764">cv::min</a></div><div class="ttdeci">CV_EXPORTS_W void min(InputArray src1, InputArray src2, OutputArray dst)</div><div class="ttdoc">Calculates per-element minimum of two arrays or an array and a scalar.</div><div class="ttdef"><b>Definición</b> <a href="arithm_8cpp_source.html#l00238">arithm.cpp:238</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga9a7297e347ba19830270825e5cbb6d0b"><div class="ttname"><a href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a></div><div class="ttdeci">#define CV_LOG_WARNING(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00169">logger.hpp:169</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga2858f5fe522e46a2e17662669199f6ff"><div class="ttname"><a href="group__core__utils.html#ga2858f5fe522e46a2e17662669199f6ff">cv::saturate_cast&lt; uchar &gt;</a></div><div class="ttdeci">uchar saturate_cast&lt; uchar &gt;(schar v)</div><div class="ttdef"><b>Definición</b> <a href="saturate_8hpp_source.html#l00101">saturate.hpp:101</a></div></div>
+<div class="ttc" id="agroup__dnn_html_ga02abced18387a1b89e3ed4d930130860"><div class="ttname"><a href="group__dnn.html#ga02abced18387a1b89e3ed4d930130860">cv::dnn::readNetFromONNX</a></div><div class="ttdeci">CV_EXPORTS_W Net readNetFromONNX(CV_WRAP_FILE_PATH const String &amp;onnxFile, int engine=ENGINE_AUTO)</div><div class="ttdoc">Reads a network model ONNX.</div></div>
+<div class="ttc" id="agroup__dnn_html_ga29f34df9376379a603acd8df581ac8d7"><div class="ttname"><a href="group__dnn.html#ga29f34df9376379a603acd8df581ac8d7">cv::dnn::blobFromImage</a></div><div class="ttdeci">CV_EXPORTS_W Mat blobFromImage(InputArray image, double scalefactor=1.0, const Size &amp;size=Size(), const Scalar &amp;mean=Scalar(), bool swapRB=false, bool crop=false, int ddepth=CV_32F)</div><div class="ttdoc">Creates 4-dimensional blob from image. Optionally resizes and crops image from center,...</div><div class="ttdef"><b>Definición</b> <a href="dnn__utils_8cpp_source.html#l00067">dnn_utils.cpp:67</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_ga92c459d3cdc84d6002263629033e017c"><div class="ttname"><a href="group__imgproc__transform.html#ga92c459d3cdc84d6002263629033e017c">cv::resize</a></div><div class="ttdeci">CV_EXPORTS_W void resize(InputArray src, OutputArray dst, Size dsize, double fx=0, double fy=0, int interpolation=INTER_LINEAR)</div><div class="ttdoc">Resizes an image.</div><div class="ttdef"><b>Definición</b> <a href="resize_8cpp_source.html#l04016">resize.cpp:4016</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_gga5bb5a1fea74ea38e1a5445ca803ff121a55e404e7fa9684af79fe9827f36a5dc1"><div class="ttname"><a href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121a55e404e7fa9684af79fe9827f36a5dc1">cv::INTER_CUBIC</a></div><div class="ttdeci">@ INTER_CUBIC</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00255">imgproc.hpp:255</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_gga5bb5a1fea74ea38e1a5445ca803ff121acf959dca2480cc694ca016b81b442ceb"><div class="ttname"><a href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121acf959dca2480cc694ca016b81b442ceb">cv::INTER_AREA</a></div><div class="ttdeci">@ INTER_AREA</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00259">imgproc.hpp:259</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a02a1bed6246a87b004010b9a54745c1b"><div class="ttname"><a href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">-[Mat cols]</a></div><div class="ttdeci">int cols()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00248">Mat.mm:248</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a939b5265c8dbe049a59ea3a48d4434f0"><div class="ttname"><a href="interface_mat.html#a939b5265c8dbe049a59ea3a48d4434f0">-[Mat rows]</a></div><div class="ttdeci">int rows()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00434">Mat.mm:434</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacechart_html_ae7eab1cb19ae7b3d536dbbdbf4ad5c0d"><div class="ttname"><a href="namespacechart.html#ae7eab1cb19ae7b3d536dbbdbf4ad5c0d">chart.col</a></div><div class="ttdeci">col</div><div class="ttdef"><b>Definición</b> <a href="chart_8py_source.html#l00252">chart.py:252</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html"><div class="ttname"><a href="namespacecv_1_1barcode.html">cv::barcode</a></div><div class="ttdef"><b>Definición</b> <a href="barcode_8hpp_source.html#l00013">barcode.hpp:13</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_a38d82e61432caf77221daa817da6cd3e"><div class="ttname"><a href="namespacegl.html#a38d82e61432caf77221daa817da6cd3e">gl::width</a></div><div class="ttdeci">GLint GLsizei width</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01075">gl_core_3_1.hpp:1075</a></div></div>
+<div class="ttc" id="anamespacegl_html_a60ac209806d4c2ba007b2e45f56c7b18"><div class="ttname"><a href="namespacegl.html#a60ac209806d4c2ba007b2e45f56c7b18">gl::height</a></div><div class="ttdeci">GLint GLsizei GLsizei height</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01075">gl_core_3_1.hpp:1075</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_afcd5f162cf9f070c38108726ea76b656"><div class="ttname"><a href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">quantize_face_detector.scale</a></div><div class="ttdeci">scale(x, name)</div><div class="ttdef"><b>Definición</b> <a href="quantize__face__detector_8py_source.html#l00041">quantize_face_detector.py:41</a></div></div>
+<div class="ttc" id="aobjdetect_2src_2precomp_8hpp_html"><div class="ttname"><a href="objdetect_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="asuper__scale_8hpp_html"><div class="ttname"><a href="super__scale_8hpp.html">super_scale.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_4daf0341874e9eb5cb8974052196445c.html">barcode_decoder</a></li><li class="navelem"><a href="dir_b956a88c1bb3b2821598d3b3077567f7.html">common</a></li><li class="navelem"><a href="super__scale_8cpp.html">super_scale.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

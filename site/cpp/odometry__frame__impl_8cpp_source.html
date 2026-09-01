@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/src/odometry_frame_impl.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('odometry__frame__impl_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">odometry_frame_impl.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="odometry__frame__impl_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="ocl_8hpp.html">opencv2/core/ocl.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud_2src_2utils_8hpp.html">utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#a6309099036757af66743aa9fd8376221">   14</a></span><a class="code hl_function" href="classcv_1_1_odometry_frame.html#a6309099036757af66743aa9fd8376221">OdometryFrame::OdometryFrame</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> depth, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> normals)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a> = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;OdometryFrame::Impl&gt;</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (!image.empty())</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        image.copyTo(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;image);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (!depth.empty())</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        depth.copyTo(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;depth);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>.empty())</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>.copyTo(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;mask);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">if</span> (!normals.empty())</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        normals.copyTo(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;normals);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#a78f267445410a6fbbfa67b08586c9e5d">   35</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#a78f267445410a6fbbfa67b08586c9e5d">OdometryFrame::getImage</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> image)<span class="keyword"> const </span>{ this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getImage(image); }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#aceaa1b8a0cdea1661f5f115e1769f95d">   36</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#aceaa1b8a0cdea1661f5f115e1769f95d">OdometryFrame::getGrayImage</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> image)<span class="keyword"> const </span>{ this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getGrayImage(image); }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#acb40d682b25048b282c390c8be4de19e">   37</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#acb40d682b25048b282c390c8be4de19e">OdometryFrame::getDepth</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> depth)<span class="keyword"> const </span>{ this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getDepth(depth); }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#ab8634119241b015f406751f4c0dcbdb8">   38</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#ab8634119241b015f406751f4c0dcbdb8">OdometryFrame::getProcessedDepth</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> depth)<span class="keyword"> const </span>{ this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getProcessedDepth(depth); }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#a0c529f801ca87a5c9ae2ac24969dd0b4">   39</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#a0c529f801ca87a5c9ae2ac24969dd0b4">OdometryFrame::getMask</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>)<span class="keyword"> const </span>{ this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getMask(<a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>); }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#a04ed16cd5234b5da991f0c3d18826564">   40</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#a04ed16cd5234b5da991f0c3d18826564">OdometryFrame::getNormals</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> normals)<span class="keyword"> const </span>{ this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getNormals(normals); }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#af91283e95bb16e5e740c8e95ac93645b">   42</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#af91283e95bb16e5e740c8e95ac93645b">OdometryFrame::getPyramidLevels</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getPyramidLevels(); }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame.html#a8cad09ee78684d1dd934dff746db23f2">   44</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame.html#a8cad09ee78684d1dd934dff746db23f2">OdometryFrame::getPyramidAt</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> img, <a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga005ab414467b4d76486014adfb05e258">OdometryFramePyramidType</a> pyrType, <span class="keywordtype">size_t</span> level)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">impl</a>-&gt;getPyramidAt(img, pyrType, level);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#a5fd15b883dddf445cf9d559ca1193d30">   49</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#a5fd15b883dddf445cf9d559ca1193d30">OdometryFrame::Impl::getImage</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _image)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    _image.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#a073e0839d05415271cd9d7e6433456ad">image</a>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#ac9675881ad2e1b2bb547a2cc0b4008f7">   54</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#ac9675881ad2e1b2bb547a2cc0b4008f7">OdometryFrame::Impl::getGrayImage</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _image)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    _image.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#ab215b18692b1da74a31165c7c2d669fa">imageGray</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#ab6983dc342e7de925d1eb597de080ab5">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#ab6983dc342e7de925d1eb597de080ab5">OdometryFrame::Impl::getDepth</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _depth)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    _depth.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#aa9292a254f30b9dd7abc5cb8dbdf59fa">depth</a>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#ab732b41ca97b450e4494873df56b0333">   64</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#ab732b41ca97b450e4494873df56b0333">OdometryFrame::Impl::getProcessedDepth</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _depth)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    _depth.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#a553595c9ef5a2cf7979c5b08da80852e">scaledDepth</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#a50f8e1f87eab8cc19d6e8ce99ad25091">   69</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#a50f8e1f87eab8cc19d6e8ce99ad25091">OdometryFrame::Impl::getMask</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _mask)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    _mask.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#a023c97ef55c6af57b51b41ad2a9cee3b">mask</a>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#a6f908a5ae018a0a92f5f8def1f2a36eb">   74</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#a6f908a5ae018a0a92f5f8def1f2a36eb">OdometryFrame::Impl::getNormals</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _normals)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    _normals.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#aab04b8f80e035803afa6bb243c4c985b">normals</a>);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#a01338faa9b520f23e37ae8367495e64b">   79</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#a01338faa9b520f23e37ae8367495e64b">OdometryFrame::Impl::getPyramidLevels</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="comment">// all pyramids should have the same size</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; p : this-&gt;<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#a2d521b3d98a2b9cbdb0c29c009488b32">pyramids</a>)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">if</span> (!p.empty())</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)(p.size());</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classcv_1_1_odometry_frame_1_1_impl.html#ada7e55dc090eeca542964a2659db50ba">   91</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_odometry_frame_1_1_impl.html#ada7e55dc090eeca542964a2659db50ba">OdometryFrame::Impl::getPyramidAt</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _img, <a class="code hl_enumeration" href="group__ptcloud__rgbd.html#ga005ab414467b4d76486014adfb05e258">OdometryFramePyramidType</a> pyrType, <span class="keywordtype">size_t</span> level)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(pyrType &lt; <a class="code hl_enumvalue" href="group__ptcloud__rgbd.html#gga005ab414467b4d76486014adfb05e258ad0c164c047f2d76ce73700db7909db78">OdometryFramePyramidType::N_PYRAMIDS</a>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">if</span> (level &lt; <a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#a2d521b3d98a2b9cbdb0c29c009488b32">pyramids</a>[pyrType].size())</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        _img.<a class="code hl_function" href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">assign</a>(<a class="code hl_variable" href="classcv_1_1_odometry_frame_1_1_impl.html#a2d521b3d98a2b9cbdb0c29c009488b32">pyramids</a>[pyrType][level]);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        _img.<a class="code hl_function" href="classcv_1_1___output_array.html#a4efa6037afcc3e6c51451db17b5e76cf">clear</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4efa6037afcc3e6c51451db17b5e76cf"><div class="ttname"><a href="classcv_1_1___output_array.html#a4efa6037afcc3e6c51451db17b5e76cf">cv::_OutputArray::clear</a></div><div class="ttdeci">void clear() const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l02150">matrix_wrap.cpp:2150</a></div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a6aeb30bb97609c10c16b76952fb1715c"><div class="ttname"><a href="classcv_1_1___output_array.html#a6aeb30bb97609c10c16b76952fb1715c">cv::_OutputArray::assign</a></div><div class="ttdeci">void assign(const UMat &amp;u) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l02295">matrix_wrap.cpp:2295</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a01338faa9b520f23e37ae8367495e64b"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a01338faa9b520f23e37ae8367495e64b">cv::OdometryFrame::Impl::getPyramidLevels</a></div><div class="ttdeci">virtual int getPyramidLevels() const</div><div class="ttdef"><b>Definición</b> <a href="#l00079">odometry_frame_impl.cpp:79</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a023c97ef55c6af57b51b41ad2a9cee3b"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a023c97ef55c6af57b51b41ad2a9cee3b">cv::OdometryFrame::Impl::mask</a></div><div class="ttdeci">UMat mask</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00312">utils.hpp:312</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a073e0839d05415271cd9d7e6433456ad"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a073e0839d05415271cd9d7e6433456ad">cv::OdometryFrame::Impl::image</a></div><div class="ttdeci">UMat image</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00309">utils.hpp:309</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a2d521b3d98a2b9cbdb0c29c009488b32"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a2d521b3d98a2b9cbdb0c29c009488b32">cv::OdometryFrame::Impl::pyramids</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; UMat &gt; &gt; pyramids</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00314">utils.hpp:314</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a50f8e1f87eab8cc19d6e8ce99ad25091"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a50f8e1f87eab8cc19d6e8ce99ad25091">cv::OdometryFrame::Impl::getMask</a></div><div class="ttdeci">virtual void getMask(OutputArray mask) const</div><div class="ttdef"><b>Definición</b> <a href="#l00069">odometry_frame_impl.cpp:69</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a553595c9ef5a2cf7979c5b08da80852e"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a553595c9ef5a2cf7979c5b08da80852e">cv::OdometryFrame::Impl::scaledDepth</a></div><div class="ttdeci">UMat scaledDepth</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00311">utils.hpp:311</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a5fd15b883dddf445cf9d559ca1193d30"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a5fd15b883dddf445cf9d559ca1193d30">cv::OdometryFrame::Impl::getImage</a></div><div class="ttdeci">virtual void getImage(OutputArray image) const</div><div class="ttdef"><b>Definición</b> <a href="#l00049">odometry_frame_impl.cpp:49</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_a6f908a5ae018a0a92f5f8def1f2a36eb"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#a6f908a5ae018a0a92f5f8def1f2a36eb">cv::OdometryFrame::Impl::getNormals</a></div><div class="ttdeci">virtual void getNormals(OutputArray normals) const</div><div class="ttdef"><b>Definición</b> <a href="#l00074">odometry_frame_impl.cpp:74</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_aa9292a254f30b9dd7abc5cb8dbdf59fa"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#aa9292a254f30b9dd7abc5cb8dbdf59fa">cv::OdometryFrame::Impl::depth</a></div><div class="ttdeci">UMat depth</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00310">utils.hpp:310</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_aab04b8f80e035803afa6bb243c4c985b"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#aab04b8f80e035803afa6bb243c4c985b">cv::OdometryFrame::Impl::normals</a></div><div class="ttdeci">UMat normals</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00313">utils.hpp:313</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_ab215b18692b1da74a31165c7c2d669fa"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#ab215b18692b1da74a31165c7c2d669fa">cv::OdometryFrame::Impl::imageGray</a></div><div class="ttdeci">UMat imageGray</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2src_2utils_8hpp_source.html#l00308">utils.hpp:308</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_ab6983dc342e7de925d1eb597de080ab5"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#ab6983dc342e7de925d1eb597de080ab5">cv::OdometryFrame::Impl::getDepth</a></div><div class="ttdeci">virtual void getDepth(OutputArray depth) const</div><div class="ttdef"><b>Definición</b> <a href="#l00059">odometry_frame_impl.cpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_ab732b41ca97b450e4494873df56b0333"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#ab732b41ca97b450e4494873df56b0333">cv::OdometryFrame::Impl::getProcessedDepth</a></div><div class="ttdeci">virtual void getProcessedDepth(OutputArray depth) const</div><div class="ttdef"><b>Definición</b> <a href="#l00064">odometry_frame_impl.cpp:64</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_ac9675881ad2e1b2bb547a2cc0b4008f7"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#ac9675881ad2e1b2bb547a2cc0b4008f7">cv::OdometryFrame::Impl::getGrayImage</a></div><div class="ttdeci">virtual void getGrayImage(OutputArray image) const</div><div class="ttdef"><b>Definición</b> <a href="#l00054">odometry_frame_impl.cpp:54</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_1_1_impl_html_ada7e55dc090eeca542964a2659db50ba"><div class="ttname"><a href="classcv_1_1_odometry_frame_1_1_impl.html#ada7e55dc090eeca542964a2659db50ba">cv::OdometryFrame::Impl::getPyramidAt</a></div><div class="ttdeci">virtual void getPyramidAt(OutputArray img, OdometryFramePyramidType pyrType, size_t level) const</div><div class="ttdef"><b>Definición</b> <a href="#l00091">odometry_frame_impl.cpp:91</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_a04ed16cd5234b5da991f0c3d18826564"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#a04ed16cd5234b5da991f0c3d18826564">cv::OdometryFrame::getNormals</a></div><div class="ttdeci">CV_WRAP void getNormals(OutputArray normals) const</div><div class="ttdoc">Get the normals image either generated for the ICP calculations or user-provided.</div><div class="ttdef"><b>Definición</b> <a href="#l00040">odometry_frame_impl.cpp:40</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_a0c529f801ca87a5c9ae2ac24969dd0b4"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#a0c529f801ca87a5c9ae2ac24969dd0b4">cv::OdometryFrame::getMask</a></div><div class="ttdeci">CV_WRAP void getMask(OutputArray mask) const</div><div class="ttdoc">Get the valid pixels mask generated for the ICP calculations intersected with the user-provided mask.</div><div class="ttdef"><b>Definición</b> <a href="#l00039">odometry_frame_impl.cpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_a11695f6b1fed61d16d5eea89dd6cb3aa"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#a11695f6b1fed61d16d5eea89dd6cb3aa">cv::OdometryFrame::impl</a></div><div class="ttdeci">Ptr&lt; Impl &gt; impl</div><div class="ttdef"><b>Definición</b> <a href="odometry__frame_8hpp_source.html#l00108">odometry_frame.hpp:108</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_a6309099036757af66743aa9fd8376221"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#a6309099036757af66743aa9fd8376221">cv::OdometryFrame::OdometryFrame</a></div><div class="ttdeci">CV_WRAP OdometryFrame(InputArray depth=noArray(), InputArray image=noArray(), InputArray mask=noArray(), InputArray normals=noArray())</div><div class="ttdoc">Construct a new OdometryFrame object. All non-empty images should have the same size.</div><div class="ttdef"><b>Definición</b> <a href="#l00014">odometry_frame_impl.cpp:14</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_a78f267445410a6fbbfa67b08586c9e5d"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#a78f267445410a6fbbfa67b08586c9e5d">cv::OdometryFrame::getImage</a></div><div class="ttdeci">CV_WRAP void getImage(OutputArray image) const</div><div class="ttdoc">Get the original user-provided BGR/Gray image.</div><div class="ttdef"><b>Definición</b> <a href="#l00035">odometry_frame_impl.cpp:35</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_a8cad09ee78684d1dd934dff746db23f2"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#a8cad09ee78684d1dd934dff746db23f2">cv::OdometryFrame::getPyramidAt</a></div><div class="ttdeci">CV_WRAP void getPyramidAt(OutputArray img, OdometryFramePyramidType pyrType, size_t level) const</div><div class="ttdoc">Get the image generated for the ICP calculations from one of the pyramids specified by pyrType....</div><div class="ttdef"><b>Definición</b> <a href="#l00044">odometry_frame_impl.cpp:44</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_ab8634119241b015f406751f4c0dcbdb8"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#ab8634119241b015f406751f4c0dcbdb8">cv::OdometryFrame::getProcessedDepth</a></div><div class="ttdeci">CV_WRAP void getProcessedDepth(OutputArray depth) const</div><div class="ttdoc">Get the depth image generated from the user-provided one after conversion, rescale or filtering for I...</div><div class="ttdef"><b>Definición</b> <a href="#l00038">odometry_frame_impl.cpp:38</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_acb40d682b25048b282c390c8be4de19e"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#acb40d682b25048b282c390c8be4de19e">cv::OdometryFrame::getDepth</a></div><div class="ttdeci">CV_WRAP void getDepth(OutputArray depth) const</div><div class="ttdoc">Get the original user-provided depth image.</div><div class="ttdef"><b>Definición</b> <a href="#l00037">odometry_frame_impl.cpp:37</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_aceaa1b8a0cdea1661f5f115e1769f95d"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#aceaa1b8a0cdea1661f5f115e1769f95d">cv::OdometryFrame::getGrayImage</a></div><div class="ttdeci">CV_WRAP void getGrayImage(OutputArray image) const</div><div class="ttdoc">Get the gray image generated from the user-provided BGR/Gray image.</div><div class="ttdef"><b>Definición</b> <a href="#l00036">odometry_frame_impl.cpp:36</a></div></div>
+<div class="ttc" id="aclasscv_1_1_odometry_frame_html_af91283e95bb16e5e740c8e95ac93645b"><div class="ttname"><a href="classcv_1_1_odometry_frame.html#af91283e95bb16e5e740c8e95ac93645b">cv::OdometryFrame::getPyramidLevels</a></div><div class="ttdeci">CV_WRAP int getPyramidLevels() const</div><div class="ttdoc">Get the amount of levels in pyramids (all of them if not empty should have the same number of levels)...</div><div class="ttdef"><b>Definición</b> <a href="#l00042">odometry_frame_impl.cpp:42</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__ptcloud__rgbd_html_ga005ab414467b4d76486014adfb05e258"><div class="ttname"><a href="group__ptcloud__rgbd.html#ga005ab414467b4d76486014adfb05e258">cv::OdometryFramePyramidType</a></div><div class="ttdeci">OdometryFramePyramidType</div><div class="ttdef"><b>Definición</b> <a href="odometry__frame_8hpp_source.html#l00018">odometry_frame.hpp:19</a></div></div>
+<div class="ttc" id="agroup__ptcloud__rgbd_html_gga005ab414467b4d76486014adfb05e258ad0c164c047f2d76ce73700db7909db78"><div class="ttname"><a href="group__ptcloud__rgbd.html#gga005ab414467b4d76486014adfb05e258ad0c164c047f2d76ce73700db7909db78">cv::N_PYRAMIDS</a></div><div class="ttdeci">@ N_PYRAMIDS</div><div class="ttdef"><b>Definición</b> <a href="odometry__frame_8hpp_source.html#l00029">odometry_frame.hpp:29</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aocl_8hpp_html"><div class="ttname"><a href="ocl_8hpp.html">ocl.hpp</a></div></div>
+<div class="ttc" id="aptcloud_2src_2precomp_8hpp_html"><div class="ttname"><a href="ptcloud_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="aptcloud_2src_2utils_8hpp_html"><div class="ttname"><a href="ptcloud_2src_2utils_8hpp.html">utils.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_e585da6166ee98e0160b5c7acdfa2558.html">src</a></li><li class="navelem"><a href="odometry__frame__impl_8cpp.html">odometry_frame_impl.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

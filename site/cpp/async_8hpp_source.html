@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/include/opencv2/core/async.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('async_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">async.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="async_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_CORE_ASYNC_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_CORE_ASYNC_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="mat_8hpp.html">opencv2/core/mat.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//#include &lt;future&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html">   29</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">~AsyncArray</a>() <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>() <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>&amp; o) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>&amp; <a class="code hl_function" href="classcv_1_1_async_array.html#ae1c25290fec28a7dc16ce96221d425a3">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>&amp; o) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_async_array.html#a801cbd8a4db7b4d2e01a8c7a37acdb0f">release</a>() <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_async_array.html#aca6c8dda8353ab799a815b15d55668d4">get</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_async_array.html#aca6c8dda8353ab799a815b15d55668d4">get</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a> timeoutNs) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">inline</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#adbde59b0f58877fde827b1ca6035112b">   61</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_async_array.html#adbde59b0f58877fde827b1ca6035112b">get</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">double</span> timeoutNs)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_async_array.html#adbde59b0f58877fde827b1ca6035112b">get</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, (<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a>)timeoutNs); }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">bool</span> wait_for(<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a> timeoutNs) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">inline</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#a04fb6af3ce06e19fe15819ff70526ee5">   66</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_async_array.html#a04fb6af3ce06e19fe15819ff70526ee5">wait_for</a>(<span class="keywordtype">double</span> timeoutNs)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_async_array.html#a04fb6af3ce06e19fe15819ff70526ee5">wait_for</a>((<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a>)timeoutNs); }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keywordtype">bool</span> valid() const <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#a1232b91cc8e7cf86e7784f14e4176ddc">   70</a></span>    inline <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>(<a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>&amp;&amp; o) { <a class="code hl_variable" href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">p</a> = o.p; o.p = NULL; }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#a21b3f1f3b041eefd6f990e86449331cf">   71</a></span>    <span class="keyword">inline</span> <a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>&amp; <a class="code hl_function" href="classcv_1_1_async_array.html#a21b3f1f3b041eefd6f990e86449331cf">operator=</a>(<a class="code hl_function" href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">AsyncArray</a>&amp;&amp; o) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a> { std::swap(<a class="code hl_variable" href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">p</a>, o.<a class="code hl_variable" href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">p</a>); <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Rep, <span class="keyword">typename</span> _Period&gt;</div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#aacbdd775a9a66b231a56b6ffb4c4de75">   74</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_async_array.html#aacbdd775a9a66b231a56b6ffb4c4de75">get</a>(<a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keyword">const</span> std::chrono::duration&lt;_Rep, _Period&gt;&amp; timeout)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_async_array.html#aca6c8dda8353ab799a815b15d55668d4">get</a>(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, (<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a>)(std::chrono::nanoseconds(timeout).count()));</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Rep, <span class="keyword">typename</span> _Period&gt;</div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#aa2de39b89c6f29b77a78d4499a933b61">   80</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_async_array.html#aa2de39b89c6f29b77a78d4499a933b61">wait_for</a>(<span class="keyword">const</span> std::chrono::duration&lt;_Rep, _Period&gt;&amp; timeout)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1_async_array.html#a528a789936be2fa2ca653eac775a9586">wait_for</a>((<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a>)(std::chrono::nanoseconds(timeout).count()));</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#if 0</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::future&lt;Mat&gt; getFutureMat() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::future&lt;UMat&gt; getFutureUMat() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">// PImpl</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#aee24c43b9029c5fba6fb8747c948c0da">   92</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1_async_array_1_1_impl.html">Impl</a>; <span class="keyword">friend</span> <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1_async_array_1_1_impl.html">Impl</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#ac882c22e506c1a899db0dda18489a011">   93</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="classcv_1_1_async_array.html#ac882c22e506c1a899db0dda18489a011">_getImpl</a>() const <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">p</a>; }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">   95</a></span>    <a class="code hl_struct" href="structcv_1_1_async_array_1_1_impl.html">Impl</a>* <a class="code hl_variable" href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">p</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>};</div>
+</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>} <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_CORE_ASYNC_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_a04fb6af3ce06e19fe15819ff70526ee5"><div class="ttname"><a href="classcv_1_1_async_array.html#a04fb6af3ce06e19fe15819ff70526ee5">cv::AsyncArray::wait_for</a></div><div class="ttdeci">CV_WRAP bool wait_for(double timeoutNs) const</div><div class="ttdef"><b>Definición</b> <a href="#l00066">async.hpp:66</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_a21b3f1f3b041eefd6f990e86449331cf"><div class="ttname"><a href="classcv_1_1_async_array.html#a21b3f1f3b041eefd6f990e86449331cf">cv::AsyncArray::operator=</a></div><div class="ttdeci">AsyncArray &amp; operator=(AsyncArray &amp;&amp;o) CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="#l00071">async.hpp:71</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_a3c627df1f79609c31cfb83c1044e9d25"><div class="ttname"><a href="classcv_1_1_async_array.html#a3c627df1f79609c31cfb83c1044e9d25">cv::AsyncArray::p</a></div><div class="ttdeci">Impl * p</div><div class="ttdef"><b>Definición</b> <a href="#l00095">async.hpp:95</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_a528a789936be2fa2ca653eac775a9586"><div class="ttname"><a href="classcv_1_1_async_array.html#a528a789936be2fa2ca653eac775a9586">cv::AsyncArray::wait_for</a></div><div class="ttdeci">bool wait_for(int64 timeoutNs) const</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00421">async.cpp:421</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_a801cbd8a4db7b4d2e01a8c7a37acdb0f"><div class="ttname"><a href="classcv_1_1_async_array.html#a801cbd8a4db7b4d2e01a8c7a37acdb0f">cv::AsyncArray::release</a></div><div class="ttdeci">CV_WRAP void release() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00400">async.cpp:400</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_aa2de39b89c6f29b77a78d4499a933b61"><div class="ttname"><a href="classcv_1_1_async_array.html#aa2de39b89c6f29b77a78d4499a933b61">cv::AsyncArray::wait_for</a></div><div class="ttdeci">bool wait_for(const std::chrono::duration&lt; _Rep, _Period &gt; &amp;timeout)</div><div class="ttdef"><b>Definición</b> <a href="#l00080">async.hpp:80</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_aacbdd775a9a66b231a56b6ffb4c4de75"><div class="ttname"><a href="classcv_1_1_async_array.html#aacbdd775a9a66b231a56b6ffb4c4de75">cv::AsyncArray::get</a></div><div class="ttdeci">bool get(OutputArray dst, const std::chrono::duration&lt; _Rep, _Period &gt; &amp;timeout)</div><div class="ttdef"><b>Definición</b> <a href="#l00074">async.hpp:74</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_ab70c3efa65213c3a099d7fec44c4c8cc"><div class="ttname"><a href="classcv_1_1_async_array.html#ab70c3efa65213c3a099d7fec44c4c8cc">cv::AsyncArray::AsyncArray</a></div><div class="ttdeci">CV_WRAP AsyncArray() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00373">async.cpp:373</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_ac882c22e506c1a899db0dda18489a011"><div class="ttname"><a href="classcv_1_1_async_array.html#ac882c22e506c1a899db0dda18489a011">cv::AsyncArray::_getImpl</a></div><div class="ttdeci">void * _getImpl() const CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="#l00093">async.hpp:93</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_aca6c8dda8353ab799a815b15d55668d4"><div class="ttname"><a href="classcv_1_1_async_array.html#aca6c8dda8353ab799a815b15d55668d4">cv::AsyncArray::get</a></div><div class="ttdeci">CV_WRAP void get(OutputArray dst) const</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00414">async.cpp:414</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_adbde59b0f58877fde827b1ca6035112b"><div class="ttname"><a href="classcv_1_1_async_array.html#adbde59b0f58877fde827b1ca6035112b">cv::AsyncArray::get</a></div><div class="ttdeci">CV_WRAP bool get(OutputArray dst, double timeoutNs) const</div><div class="ttdef"><b>Definición</b> <a href="#l00061">async.hpp:61</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html_ae1c25290fec28a7dc16ce96221d425a3"><div class="ttname"><a href="classcv_1_1_async_array.html#ae1c25290fec28a7dc16ce96221d425a3">cv::AsyncArray::operator=</a></div><div class="ttdeci">AsyncArray &amp; operator=(const AsyncArray &amp;o) CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00390">async.cpp:390</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gae51bd9c910ffb039b899cb8279d6900c"><div class="ttname"><a href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">cv::int64</a></div><div class="ttdeci">int64_t int64</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00039">templmatch.cpp:39</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga67ea671a3582ce612ac3c281e067f480"><div class="ttname"><a href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a></div><div class="ttdeci">#define CV_EXPORTS_W</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00483">cvdef.h:483</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga7b88772bee40b329b585a3a2157abd9b"><div class="ttname"><a href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a></div><div class="ttdeci">#define CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00838">cvdef.h:838</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gae435babf3ce7cca990524b23adf6b4a3"><div class="ttname"><a href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a></div><div class="ttdeci">#define CV_WRAP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00493">cvdef.h:493</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="amat_8hpp_html"><div class="ttname"><a href="mat_8hpp.html">mat.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_async_array_1_1_impl_html"><div class="ttname"><a href="structcv_1_1_async_array_1_1_impl.html">cv::AsyncArray::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00027">async.cpp:28</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_a1ce6c622e502fce8b9ea1b3bba41ffe.html">include</a></li><li class="navelem"><a href="dir_09383d60383568eadd55fb8da7ff392b.html">opencv2</a></li><li class="navelem"><a href="dir_74897800f5c261f7ce57f88938dadca6.html">core</a></li><li class="navelem"><a href="async_8hpp.html">async.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+var structwinrt__prop__type_3_01_a_b_i_1_1_windows_1_1_foundation_1_1_property_type___other_type_01_4 =
+[
+    [ "_Type", "structwinrt__prop__type_3_01_a_b_i_1_1_windows_1_1_foundation_1_1_property_type___other_type_01_4.html#aee019573c9966c260190fe640b9bde78", null ]
+];

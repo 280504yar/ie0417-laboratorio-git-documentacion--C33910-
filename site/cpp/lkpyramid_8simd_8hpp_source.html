@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/video/src/lkpyramid.simd.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('lkpyramid_8simd_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">lkpyramid.simd.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="lkpyramid_8simd_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, Advanced Micro Devices, Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="video_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="lkpyramid_8hpp.html">lkpyramid.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="intrin_8hpp.html">opencv2/core/hal/intrin.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// SIMD-optimized implementation</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1detail.html#ab596563194d6ed4bdd33e4a5f2d3df44">ScharrDerivInvoker_SIMD</a>(<span class="keyword">const</span> Mat&amp; src, Mat&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keyword">const</span> Range&amp; range);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>} <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#ifndef CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacecv_1_1detail.html#ab596563194d6ed4bdd33e4a5f2d3df44">   29</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1detail.html#ab596563194d6ed4bdd33e4a5f2d3df44">ScharrDerivInvoker_SIMD</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; src, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">Range</a>&amp; range)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">typedef</span> <span class="keywordtype">short</span> <a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">int</span> rows = src.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>, cols = src.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a>, cn = src.<a class="code hl_function" href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">channels</a>(), colsn = cols*cn;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>, delta = (int)<a class="code hl_function" href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">alignSize</a>((cols + 2)*cn, 16);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_class" href="classcv_1_1_auto_buffer.html">AutoBuffer&lt;deriv_type&gt;</a> _tempBuf(delta*2 + 64);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a> *trow0 = <a class="code hl_function" href="group__core__utils.html#ga11c3cdff9c5681e82b37a62e781e3648">alignPtr</a>(_tempBuf.<a class="code hl_function" href="classcv_1_1_auto_buffer.html#a3a8a675d7d048f83d52dc9efb190d055">data</a>() + cn, 16), *trow1 = <a class="code hl_function" href="group__core__utils.html#ga11c3cdff9c5681e82b37a62e781e3648">alignPtr</a>(trow0 + delta, 16);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#if (CV_SIMD)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> vlanes = VTraits&lt;v_int16&gt;::vlanes();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    v_int16 c3 = vx_setall_s16(3), c10 = vx_setall_s16(10);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">for</span>( <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> = range.<a class="code hl_variable" href="classcv_1_1_range.html#ad7ce51f1d8797236c97bec49d2b25522">start</a>; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> &lt; range.<a class="code hl_variable" href="classcv_1_1_range.html#aba16789fec81858a31c9685d399b62fc">end</a>; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>++ )</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* srow0 = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> &gt; 0 ? <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>-1 : rows &gt; 1 ? 1 : 0);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* srow1 = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* srow2 = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a> &lt; rows-1 ? <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>+1 : rows &gt; 1 ? rows-2 : 0);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>* drow = (<a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a> *)<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.ptr&lt;<a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>&gt;(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="comment">// do vertical convolution</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#if (CV_SIMD)</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">for</span>( ; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt;= colsn - vlanes; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> += vlanes )</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                v_int16 s0 = v_reinterpret_as_s16(vx_load_expand(srow0 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                v_int16 s1 = v_reinterpret_as_s16(vx_load_expand(srow1 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>));</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                v_int16 s2 = v_reinterpret_as_s16(vx_load_expand(srow2 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>));</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                v_int16 t1 = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(s2, s0);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                v_int16 t0 = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(v_mul_wrap(<a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(s0, s2), c3), v_mul_wrap(s1, c10));</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(trow0 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, t0);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(trow1 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, t1);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">for</span>( ; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; colsn; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++ )</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordtype">int</span> t0 = (srow0[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] + srow2[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>])*3 + srow1[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>]*10;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordtype">int</span> t1 = srow2[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] - srow0[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>];</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            trow0[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] = (<a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>)t0;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            trow1[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>] = (<a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>)t1;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="comment">// make border</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordtype">int</span> x0 = (cols &gt; 1 ? 1 : 0)*cn, x1 = (cols &gt; 1 ? cols-2 : 0)*cn;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">for</span>( <span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; cn; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++ )</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            trow0[-cn + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = trow0[x0 + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>]; trow0[colsn + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = trow0[x1 + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            trow1[-cn + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = trow1[x0 + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>]; trow1[colsn + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = trow1[x1 + <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="comment">// do horizontal convolution, interleave the results and store them to dst</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> = 0;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#if (CV_SIMD)</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">for</span>( ; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt;= colsn - vlanes; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> += vlanes )</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                v_int16 s0 = vx_load(trow0 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> - cn);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                v_int16 s1 = vx_load(trow0 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> + cn);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                v_int16 s2 = vx_load(trow1 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> - cn);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                v_int16 s3 = vx_load(trow1 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                v_int16 s4 = vx_load(trow1 + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> + cn);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                v_int16 t0 = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(s1, s0);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                v_int16 t1 = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(v_mul_wrap(<a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(s2, s4), c3), v_mul_wrap(s3, c10));</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <a class="code hl_function" href="group__core__hal__intrin.html#gaa809d0656c94b2bb24b9be06295f037e">v_store_interleave</a>((drow + <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>*2), t0, t1);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">for</span>( ; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &lt; colsn; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>++ )</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a> t0 = (<a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>)(trow0[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>+cn] - trow0[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>-cn]);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a> t1 = (<a class="code hl_typedef" href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">deriv_type</a>)((trow1[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>+cn] + trow1[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>-cn])*3 + trow1[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>]*10);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            drow[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>*2] = t0; drow[<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>*2+1] = t1;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>} <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#endif </span><span class="comment">// CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="ttc" id="aclasscv_1_1_auto_buffer_html"><div class="ttname"><a href="classcv_1_1_auto_buffer.html">cv::AutoBuffer</a></div><div class="ttdoc">Automatically Allocated Buffer Class.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00100">utility.hpp:102</a></div></div>
+<div class="ttc" id="aclasscv_1_1_auto_buffer_html_a3a8a675d7d048f83d52dc9efb190d055"><div class="ttname"><a href="classcv_1_1_auto_buffer.html#a3a8a675d7d048f83d52dc9efb190d055">cv::AutoBuffer::data</a></div><div class="ttdeci">_Tp * data()</div><div class="ttdoc">returns pointer to the real buffer, stack-allocated or heap-allocated</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00143">utility.hpp:143</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8b2912f6a6f5d55a3c9a7aae9134d862"><div class="ttname"><a href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">cv::Mat::ptr</a></div><div class="ttdeci">uchar * ptr(int i0=0)</div><div class="ttdoc">Returns a pointer to the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa11336b9ac538e0475d840657ce164be"><div class="ttname"><a href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">cv::Mat::channels</a></div><div class="ttdeci">int channels() const</div><div class="ttdoc">Returns the number of matrix channels.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa3e5a47585c9ef6a0842556739155e3e"><div class="ttname"><a href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cv::Mat::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_abed816466c45234254d25bc59c31245e"><div class="ttname"><a href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">cv::Mat::rows</a></div><div class="ttdeci">int rows</div><div class="ttdoc">the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html"><div class="ttname"><a href="classcv_1_1_range.html">cv::Range</a></div><div class="ttdoc">Template class specifying a continuous subsequence (slice) of a sequence.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00632">types.hpp:633</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aba16789fec81858a31c9685d399b62fc"><div class="ttname"><a href="classcv_1_1_range.html#aba16789fec81858a31c9685d399b62fc">cv::Range::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_ad7ce51f1d8797236c97bec49d2b25522"><div class="ttname"><a href="classcv_1_1_range.html#ad7ce51f1d8797236c97bec49d2b25522">cv::Range::start</a></div><div class="ttdeci">int start</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_a25097f49e52ccec77b2128b6ffadf135"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_END</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00024">cv_cpu_include_simd_declarations.hpp:24</a></div></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_aa4729b8f9a8694dc2e0953561fd6a6f2"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00023">cv_cpu_include_simd_declarations.hpp:23</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga275dfa9c8935f5e9a1031121cde460f4"><div class="ttname"><a href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">cv::v_store</a></div><div class="ttdeci">void v_store(_Tp *ptr, const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Store data to memory.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l02260">intrin_cpp.hpp:2260</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gaa809d0656c94b2bb24b9be06295f037e"><div class="ttname"><a href="group__core__hal__intrin.html#gaa809d0656c94b2bb24b9be06295f037e">cv::v_store_interleave</a></div><div class="ttdeci">void v_store_interleave(_Tp *ptr, const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b, hal::StoreMode=hal::STORE_UNALIGNED)</div><div class="ttdoc">Interleave and store (2 channels).</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l02185">intrin_cpp.hpp:2185</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gad23e56d9bbb3d122b20a86e51db73c68"><div class="ttname"><a href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">cv::v_sub</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_sub(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Subtract values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gadcf8617ab63379c5cbb04ea5f819ff20"><div class="ttname"><a href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">cv::v_add</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_add(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Add values.</div></div>
+<div class="ttc" id="agroup__core__utils_html_ga11c3cdff9c5681e82b37a62e781e3648"><div class="ttname"><a href="group__core__utils.html#ga11c3cdff9c5681e82b37a62e781e3648">cv::alignPtr</a></div><div class="ttdeci">_Tp * alignPtr(_Tp *ptr, int n=(int) sizeof(_Tp))</div><div class="ttdoc">Aligns a pointer to the specified number of bytes.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00552">utility.hpp:552</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga6e547d8c01fd21783950d7db2fd6108f"><div class="ttname"><a href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">cv::alignSize</a></div><div class="ttdeci">size_t alignSize(size_t sz, int n)</div><div class="ttdoc">Aligns a buffer size to the specified number of bytes.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00565">utility.hpp:565</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="aintrin_8hpp_html"><div class="ttname"><a href="intrin_8hpp.html">intrin.hpp</a></div></div>
+<div class="ttc" id="alkpyramid_8hpp_html"><div class="ttname"><a href="lkpyramid_8hpp.html">lkpyramid.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html"><div class="ttname"><a href="namespacecv_1_1detail.html">cv::detail</a></div><div class="ttdef"><b>Definición</b> <a href="dualquaternion_8inl_8hpp_source.html#l00317">dualquaternion.inl.hpp:317</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html_ab596563194d6ed4bdd33e4a5f2d3df44"><div class="ttname"><a href="namespacecv_1_1detail.html#ab596563194d6ed4bdd33e4a5f2d3df44">cv::detail::ScharrDerivInvoker_SIMD</a></div><div class="ttdeci">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN void ScharrDerivInvoker_SIMD(const Mat &amp;src, Mat &amp;dst, const Range &amp;range)</div><div class="ttdef"><b>Definición</b> <a href="#l00029">lkpyramid.simd.hpp:29</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html_ad390f1ba6290124e923c163f08facd3b"><div class="ttname"><a href="namespacecv_1_1detail.html#ad390f1ba6290124e923c163f08facd3b">cv::detail::deriv_type</a></div><div class="ttdeci">short deriv_type</div><div class="ttdef"><b>Definición</b> <a href="lkpyramid_8hpp_source.html#l00008">lkpyramid.hpp:8</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="avideo_2src_2precomp_8hpp_html"><div class="ttname"><a href="video_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_2508e962348bdf6937b92f313b633ed9.html">video</a></li><li class="navelem"><a href="dir_e10036e501edf27ab5629bafc103e45e.html">src</a></li><li class="navelem"><a href="lkpyramid_8simd_8hpp.html">lkpyramid.simd.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

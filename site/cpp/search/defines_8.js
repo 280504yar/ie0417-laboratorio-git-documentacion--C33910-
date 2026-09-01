@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['hal_5fbilinear_5f8x8_5fpatch_5fextraction_5fnext_5frow_0',['HAL_BILINEAR_8x8_PATCH_EXTRACTION_NEXT_ROW',['../dis__flow_8cpp.html#ab3cfe7fae8629463012fd78803ca1e6b',1,'dis_flow.cpp']]],
+  ['hal_5finit_5fbilinear_5f8x8_5fpatch_5fextraction_1',['HAL_INIT_BILINEAR_8x8_PATCH_EXTRACTION',['../dis__flow_8cpp.html#a4e02a6bda2d5dcd9515867209f41dc65',1,'dis_flow.cpp']]],
+  ['hal_5fprocess_5fbilinear_5f8x8_5fpatch_5fextraction_2',['HAL_PROCESS_BILINEAR_8x8_PATCH_EXTRACTION',['../dis__flow_8cpp.html#ab5b7f29b0f0e228118c4cbf446b6f602',1,'dis_flow.cpp']]],
+  ['handlexiresult_3',['HandleXiResult',['../cap__ximea_8cpp.html#a3bd7f3dd445bd7f5ad1e55b073654baa',1,'cap_ximea.cpp']]],
+  ['hatx_4',['HATX',['../eccms_8cpp.html#a0ed58d2d4b508a3b0f01b042a53f1d69',1,'eccms.cpp']]],
+  ['haty_5',['HATY',['../eccms_8cpp.html#ab2e404361ac51e9c877ea6debd08500b',1,'eccms.cpp']]],
+  ['hessian_5fparams_6',['HESSIAN_PARAMS',['../eccms_8cpp.html#aee2e5d215f963982194c60296e32a5a3',1,'eccms.cpp']]],
+  ['hg_5fbadname_7',['HG_BADNAME',['../highgui_2src_2precomp_8hpp.html#aa9113595153ec82eee4bfe389c20d9cf',1,'precomp.hpp']]],
+  ['hg_5fbadparam_8',['HG_BADPARAM',['../highgui_2src_2precomp_8hpp.html#a48b47b3bb431e6e0594125e1402abd96',1,'precomp.hpp']]],
+  ['hg_5finitfailed_9',['HG_INITFAILED',['../highgui_2src_2precomp_8hpp.html#ae7655b04e4f1c66cf173e5fbc29ce154',1,'precomp.hpp']]],
+  ['hg_5fnullptr_10',['HG_NULLPTR',['../highgui_2src_2precomp_8hpp.html#ac611670a4fa07413010bacf716eb53a9',1,'precomp.hpp']]],
+  ['hg_5fok_11',['HG_OK',['../highgui_2src_2precomp_8hpp.html#ac2ea8c0e5b6e7482a3cba8a5b799649c',1,'precomp.hpp']]],
+  ['hg_5fwcfailed_12',['HG_WCFAILED',['../highgui_2src_2precomp_8hpp.html#a23c7044cfb75f60b70fecffcfb4235ad',1,'precomp.hpp']]],
+  ['hop_13',['HOP',['../median__blur_8simd_8hpp.html#aee46e8097fbe9d66b89740ea6a9d7378',1,'median_blur.simd.hpp']]],
+  ['hw_5fdefault_5fpool_5fsize_14',['HW_DEFAULT_POOL_SIZE',['../cap__ffmpeg__hw_8hpp.html#ae6a3eca312038e2d012835739b1af73a',1,'cap_ffmpeg_hw.hpp']]],
+  ['hw_5fdefault_5fsw_5fformat_15',['HW_DEFAULT_SW_FORMAT',['../cap__ffmpeg__hw_8hpp.html#ac31b5693cabefe340036ec9e43ade58b',1,'cap_ffmpeg_hw.hpp']]]
+];

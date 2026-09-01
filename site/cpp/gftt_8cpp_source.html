@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/features/src/gftt.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('gftt_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">gftt.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="gftt_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                        Intel License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//   * The name of Intel Corporation may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &quot;<a class="code" href="features_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">class </span>GFTTDetector_Impl <a class="code hl_struct" href="classcv_1_1_c_v___f_i_n_a_l.html">CV_FINAL</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_g_f_t_t_detector.html">GFTTDetector</a></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#afcef2e3ae1b11f3722dae7d203f0e8b3">   50</a></span>    <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#afcef2e3ae1b11f3722dae7d203f0e8b3">GFTTDetector_Impl</a>( <span class="keywordtype">int</span> _nfeatures, <span class="keywordtype">double</span> _qualityLevel,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                      <span class="keywordtype">double</span> _minDistance, <span class="keywordtype">int</span> _blockSize, <span class="keywordtype">int</span> _gradientSize,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                      <span class="keywordtype">bool</span> _useHarrisDetector, <span class="keywordtype">double</span> _k )</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        : <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>(_nfeatures), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>(_qualityLevel), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>(_minDistance),</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>(_blockSize), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>(_gradientSize), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>(_useHarrisDetector), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a>(_k)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#aafeee9b54c7acd792da3bf6d06400c73">   58</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#aafeee9b54c7acd792da3bf6d06400c73">read</a>( <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_file_node.html">FileNode</a>&amp; fn) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      <span class="comment">// if node is empty, keep previous value</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;nfeatures&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        fn[<span class="stringliteral">&quot;nfeatures&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;qualityLevel&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        fn[<span class="stringliteral">&quot;qualityLevel&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;minDistance&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        fn[<span class="stringliteral">&quot;minDistance&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;blockSize&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        fn[<span class="stringliteral">&quot;blockSize&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;gradSize&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        fn[<span class="stringliteral">&quot;gradSize&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;useHarrisDetector&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        fn[<span class="stringliteral">&quot;useHarrisDetector&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      <span class="keywordflow">if</span> (!fn[<span class="stringliteral">&quot;k&quot;</span>].<a class="code hl_function" href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">empty</a>())</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        fn[<span class="stringliteral">&quot;k&quot;</span>] &gt;&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a07a312bbdecf06b8267024105fbe390c">   76</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a07a312bbdecf06b8267024105fbe390c">write</a>( <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a>&amp; <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <span class="keywordflow">if</span>(<a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>.isOpened())</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;name&quot;</span> &lt;&lt; <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#abda64f65e133acfc672b8705b1388211">getDefaultName</a>();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;nfeatures&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;qualityLevel&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;minDistance&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;blockSize&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;gradSize&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;useHarrisDetector&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a> &lt;&lt; <span class="stringliteral">&quot;k&quot;</span> &lt;&lt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a0c68b49532b95dd4e831509d29cad7c7">   91</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a0c68b49532b95dd4e831509d29cad7c7">setMaxFeatures</a>(<span class="keywordtype">int</span> maxFeatures) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a> = maxFeatures; }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a67b9b923f5785b47aaa8591de7bf6570">   92</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a67b9b923f5785b47aaa8591de7bf6570">getMaxFeatures</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>; }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ab142e4485c04b65b1a2ada22cf539529">   94</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#ab142e4485c04b65b1a2ada22cf539529">setQualityLevel</a>(<span class="keywordtype">double</span> qlevel) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a> = qlevel; }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ad4a6a5ca33f5d8170443c9918f64ad73">   95</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#ad4a6a5ca33f5d8170443c9918f64ad73">getQualityLevel</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>; }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#af515ec45112f510963679168a0484d8f">   97</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#af515ec45112f510963679168a0484d8f">setMinDistance</a>(<span class="keywordtype">double</span> minDistance_) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a> = minDistance_; }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ab1f79fe0b9e4a5d6a130b3236faa64f0">   98</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#ab1f79fe0b9e4a5d6a130b3236faa64f0">getMinDistance</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>; }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a55cd3ff0c3c605d9130ca1b217ecf85a">  100</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a55cd3ff0c3c605d9130ca1b217ecf85a">setBlockSize</a>(<span class="keywordtype">int</span> blockSize_) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a> = blockSize_; }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a7482e7fe94c8e6736897dd32c51d43d8">  101</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a7482e7fe94c8e6736897dd32c51d43d8">getBlockSize</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>; }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ab9db44e1c1de999411bef4be65c96742">  103</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#ab9db44e1c1de999411bef4be65c96742">setGradientSize</a>(<span class="keywordtype">int</span> gradientSize_) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a> = gradientSize_; }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#aa13a50c441b0ce2be6b4e8e306cfb78d">  104</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#aa13a50c441b0ce2be6b4e8e306cfb78d">getGradientSize</a>() <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>; }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#abe824ba84e20b77f1e69b8ac08ed5b08">  106</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#abe824ba84e20b77f1e69b8ac08ed5b08">setHarrisDetector</a>(<span class="keywordtype">bool</span> val) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a> = val; }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a53966d5d8199a824de0cc1dc844d0eb0">  107</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a53966d5d8199a824de0cc1dc844d0eb0">getHarrisDetector</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>; }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a31b532dcca0b9e60846ce1ba60960c1a">  109</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a31b532dcca0b9e60846ce1ba60960c1a">setK</a>(<span class="keywordtype">double</span> k_) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a> = k_; }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a14c283feb4507465e2928a26081781fe">  110</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a14c283feb4507465e2928a26081781fe">getK</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a>; }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a90ce821469d7e697f9957d146b6adb75">  112</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a90ce821469d7e697f9957d146b6adb75">detect</a>( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _image, std::vector&lt;KeyPoint&gt;&amp; keypoints, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _mask ) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">if</span>(_image.empty())</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            keypoints.clear();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        std::vector&lt;Point2f&gt; <a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        std::vector&lt;float&gt; <a class="code hl_variable" href="group__features__main.html#ga5e10bca8c6cd5fc6ff88d0554f1ca40b">cornersQuality</a>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">if</span> (_image.isUMat())</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_class" href="classcv_1_1_u_mat.html">UMat</a> ugrayImage;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">if</span>( _image.type() != <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a> )</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cvtColor</a>( _image, ugrayImage, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a353a4b8db9040165db4dacb5bcefb6ea">COLOR_BGR2GRAY</a> );</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                ugrayImage = _image.getUMat();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <a class="code hl_function" href="group__features__main.html#ga1d6bb77486c8f92d79c8793ad995d541">goodFeaturesToTrack</a>( ugrayImage, <a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>, _mask,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                                 <a class="code hl_variable" href="group__features__main.html#ga5e10bca8c6cd5fc6ff88d0554f1ca40b">cornersQuality</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a> );</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> image = _image.getMat(), grayImage = image;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="keywordflow">if</span>( image.type() != <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a> )</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cvtColor</a>( image, grayImage, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a353a4b8db9040165db4dacb5bcefb6ea">COLOR_BGR2GRAY</a> );</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <a class="code hl_function" href="group__features__main.html#ga1d6bb77486c8f92d79c8793ad995d541">goodFeaturesToTrack</a>( grayImage, <a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>, _mask,</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                                 <a class="code hl_variable" href="group__features__main.html#ga5e10bca8c6cd5fc6ff88d0554f1ca40b">cornersQuality</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>, <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a> );</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">size</a>() == <a class="code hl_variable" href="group__features__main.html#ga5e10bca8c6cd5fc6ff88d0554f1ca40b">cornersQuality</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">size</a>());</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        keypoints.resize(<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">size</a>());</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">size</a>(); i++)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            keypoints[i] = <a class="code hl_class" href="classcv_1_1_key_point.html">KeyPoint</a>(<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>[i], (<span class="keywordtype">float</span>)<a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>, -1, <a class="code hl_variable" href="group__features__main.html#ga5e10bca8c6cd5fc6ff88d0554f1ca40b">cornersQuality</a>[i]);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">  154</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">nfeatures</a>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">  155</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">qualityLevel</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">  156</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">minDistance</a>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">  157</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">blockSize</a>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">  158</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">gradSize</a>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">  159</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">useHarrisDetector</a>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">  160</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">k</a>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>};</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="foldopen" id="foldopen00164" data-start="{" data-end="}">
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classcv_1_1_g_f_t_t_detector.html#a6b681900349fe388509571c34bd48fe5">  164</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;GFTTDetector&gt;</a> <a class="code hl_function" href="classcv_1_1_g_f_t_t_detector.html#a06230b3c4b035016f43d44362610da83">GFTTDetector::create</a>( <span class="keywordtype">int</span> _nfeatures, <span class="keywordtype">double</span> _qualityLevel,</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                         <span class="keywordtype">double</span> _minDistance, <span class="keywordtype">int</span> _blockSize, <span class="keywordtype">int</span> _gradientSize,</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                         <span class="keywordtype">bool</span> _useHarrisDetector, <span class="keywordtype">double</span> _k )</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>{</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;GFTTDetector_Impl&gt;</a>(_nfeatures, _qualityLevel,</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                                      _minDistance, _blockSize, _gradientSize, _useHarrisDetector, _k);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
+</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classcv_1_1_g_f_t_t_detector.html#a06230b3c4b035016f43d44362610da83">  172</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;GFTTDetector&gt;</a> <a class="code hl_function" href="classcv_1_1_g_f_t_t_detector.html#a06230b3c4b035016f43d44362610da83">GFTTDetector::create</a>( <span class="keywordtype">int</span> _nfeatures, <span class="keywordtype">double</span> _qualityLevel,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                         <span class="keywordtype">double</span> _minDistance, <span class="keywordtype">int</span> _blockSize,</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                         <span class="keywordtype">bool</span> _useHarrisDetector, <span class="keywordtype">double</span> _k )</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>{</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;GFTTDetector_Impl&gt;</a>(_nfeatures, _qualityLevel,</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                                      _minDistance, _blockSize, 3, _useHarrisDetector, _k);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classcv_1_1_g_f_t_t_detector.html#a9016b69ac0a97ce195851d76cef24d79">  180</a></span><a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> <a class="code hl_function" href="classcv_1_1_g_f_t_t_detector.html#a9016b69ac0a97ce195851d76cef24d79">GFTTDetector::getDefaultName</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> (<a class="code hl_function" href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">Feature2D::getDefaultName</a>() + <span class="stringliteral">&quot;.GFTTDetector&quot;</span>);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>}</div>
+</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>}</div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a0d8ed64f7bbbda6d34e3289681ffdff0"><div class="ttname"><a href="classcv_1_1___input_array.html#a0d8ed64f7bbbda6d34e3289681ffdff0">cv::_InputArray::size</a></div><div class="ttdeci">Size size(int i=-1) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l00503">matrix_wrap.cpp:503</a></div></div>
+<div class="ttc" id="aclasscv_1_1_algorithm_html_aecd390e05cdd34fc6b6ebabd89ff53c9"><div class="ttname"><a href="classcv_1_1_algorithm.html#aecd390e05cdd34fc6b6ebabd89ff53c9">cv::Algorithm::empty</a></div><div class="ttdeci">virtual CV_WRAP bool empty() const</div><div class="ttdoc">Returns true if the Algorithm is empty (e.g. in the very beginning or after unsuccessful read.</div><div class="ttdef"><b>Definición</b> <a href="core_8hpp_source.html#l03196">core.hpp:3196</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html">cv::CV_FINAL</a></div><div class="ttdef"><b>Definición</b> <a href="conjugate__gradient_8cpp_source.html#l00071">conjugate_gradient.cpp:72</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a07a312bbdecf06b8267024105fbe390c"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a07a312bbdecf06b8267024105fbe390c">cv::CV_FINAL::write</a></div><div class="ttdeci">void write(FileStorage &amp;fs) const CV_OVERRIDE</div><div class="ttdoc">Stores algorithm parameters in a file storage.</div><div class="ttdef"><b>Definición</b> <a href="#l00076">gftt.cpp:76</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a09d2264a5aed99891e2c76b44cb71fe5"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a09d2264a5aed99891e2c76b44cb71fe5">cv::CV_FINAL::qualityLevel</a></div><div class="ttdeci">double qualityLevel</div><div class="ttdef"><b>Definición</b> <a href="#l00155">gftt.cpp:155</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a0c68b49532b95dd4e831509d29cad7c7"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a0c68b49532b95dd4e831509d29cad7c7">cv::CV_FINAL::setMaxFeatures</a></div><div class="ttdeci">void setMaxFeatures(int maxFeatures) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00091">gftt.cpp:91</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a14c283feb4507465e2928a26081781fe"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a14c283feb4507465e2928a26081781fe">cv::CV_FINAL::getK</a></div><div class="ttdeci">double getK() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00110">gftt.cpp:110</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a31b532dcca0b9e60846ce1ba60960c1a"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a31b532dcca0b9e60846ce1ba60960c1a">cv::CV_FINAL::setK</a></div><div class="ttdeci">void setK(double k_) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00109">gftt.cpp:109</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a53966d5d8199a824de0cc1dc844d0eb0"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a53966d5d8199a824de0cc1dc844d0eb0">cv::CV_FINAL::getHarrisDetector</a></div><div class="ttdeci">bool getHarrisDetector() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00107">gftt.cpp:107</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a55cd3ff0c3c605d9130ca1b217ecf85a"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a55cd3ff0c3c605d9130ca1b217ecf85a">cv::CV_FINAL::setBlockSize</a></div><div class="ttdeci">void setBlockSize(int blockSize_) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00100">gftt.cpp:100</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a67b9b923f5785b47aaa8591de7bf6570"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a67b9b923f5785b47aaa8591de7bf6570">cv::CV_FINAL::getMaxFeatures</a></div><div class="ttdeci">int getMaxFeatures() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00092">gftt.cpp:92</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a7482e7fe94c8e6736897dd32c51d43d8"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a7482e7fe94c8e6736897dd32c51d43d8">cv::CV_FINAL::getBlockSize</a></div><div class="ttdeci">int getBlockSize() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00101">gftt.cpp:101</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a8a4c1a799b0993958af8fbe84ebebbbf"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a8a4c1a799b0993958af8fbe84ebebbbf">cv::CV_FINAL::nfeatures</a></div><div class="ttdeci">int nfeatures</div><div class="ttdef"><b>Definición</b> <a href="#l00154">gftt.cpp:154</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a90ce821469d7e697f9957d146b6adb75"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a90ce821469d7e697f9957d146b6adb75">cv::CV_FINAL::detect</a></div><div class="ttdeci">void detect(InputArray _image, std::vector&lt; KeyPoint &gt; &amp;keypoints, InputArray _mask) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00112">gftt.cpp:112</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a9786679b4c673716aa41d4ec7e584285"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a9786679b4c673716aa41d4ec7e584285">cv::CV_FINAL::minDistance</a></div><div class="ttdeci">double minDistance</div><div class="ttdef"><b>Definición</b> <a href="#l00156">gftt.cpp:156</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a9cd49b865e6fce86a1540e199f42941c"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a9cd49b865e6fce86a1540e199f42941c">cv::CV_FINAL::useHarrisDetector</a></div><div class="ttdeci">bool useHarrisDetector</div><div class="ttdef"><b>Definición</b> <a href="#l00159">gftt.cpp:159</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a9ed74389c63df5df7a095c2d4af8fdcc"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a9ed74389c63df5df7a095c2d4af8fdcc">cv::CV_FINAL::k</a></div><div class="ttdeci">double k</div><div class="ttdef"><b>Definición</b> <a href="#l00160">gftt.cpp:160</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_aa13a50c441b0ce2be6b4e8e306cfb78d"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#aa13a50c441b0ce2be6b4e8e306cfb78d">cv::CV_FINAL::getGradientSize</a></div><div class="ttdeci">int getGradientSize() CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00104">gftt.cpp:104</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_aafeee9b54c7acd792da3bf6d06400c73"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#aafeee9b54c7acd792da3bf6d06400c73">cv::CV_FINAL::read</a></div><div class="ttdeci">void read(const FileNode &amp;fn) CV_OVERRIDE</div><div class="ttdoc">Reads algorithm parameters from a file storage.</div><div class="ttdef"><b>Definición</b> <a href="#l00058">gftt.cpp:58</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ab142e4485c04b65b1a2ada22cf539529"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ab142e4485c04b65b1a2ada22cf539529">cv::CV_FINAL::setQualityLevel</a></div><div class="ttdeci">void setQualityLevel(double qlevel) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00094">gftt.cpp:94</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ab1f79fe0b9e4a5d6a130b3236faa64f0"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ab1f79fe0b9e4a5d6a130b3236faa64f0">cv::CV_FINAL::getMinDistance</a></div><div class="ttdeci">double getMinDistance() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00098">gftt.cpp:98</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ab9db44e1c1de999411bef4be65c96742"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ab9db44e1c1de999411bef4be65c96742">cv::CV_FINAL::setGradientSize</a></div><div class="ttdeci">void setGradientSize(int gradientSize_) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00103">gftt.cpp:103</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_abcd44b6375c70bb35566c6f6576ee2d1"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#abcd44b6375c70bb35566c6f6576ee2d1">cv::CV_FINAL::gradSize</a></div><div class="ttdeci">int gradSize</div><div class="ttdef"><b>Definición</b> <a href="#l00158">gftt.cpp:158</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_abda64f65e133acfc672b8705b1388211"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#abda64f65e133acfc672b8705b1388211">cv::CV_FINAL::getDefaultName</a></div><div class="ttdeci">virtual String getDefaultName() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="bgfg__gaussmix2_8cpp_source.html#l00241">bgfg_gaussmix2.cpp:241</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_abe824ba84e20b77f1e69b8ac08ed5b08"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#abe824ba84e20b77f1e69b8ac08ed5b08">cv::CV_FINAL::setHarrisDetector</a></div><div class="ttdeci">void setHarrisDetector(bool val) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00106">gftt.cpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_abfb2c0d093aba2ee69fca84ac7d3a956"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#abfb2c0d093aba2ee69fca84ac7d3a956">cv::CV_FINAL::blockSize</a></div><div class="ttdeci">int blockSize</div><div class="ttdef"><b>Definición</b> <a href="#l00157">gftt.cpp:157</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ad4a6a5ca33f5d8170443c9918f64ad73"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ad4a6a5ca33f5d8170443c9918f64ad73">cv::CV_FINAL::getQualityLevel</a></div><div class="ttdeci">double getQualityLevel() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00095">gftt.cpp:95</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_af515ec45112f510963679168a0484d8f"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#af515ec45112f510963679168a0484d8f">cv::CV_FINAL::setMinDistance</a></div><div class="ttdeci">void setMinDistance(double minDistance_) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00097">gftt.cpp:97</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_afcef2e3ae1b11f3722dae7d203f0e8b3"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#afcef2e3ae1b11f3722dae7d203f0e8b3">cv::CV_FINAL::GFTTDetector_Impl</a></div><div class="ttdeci">GFTTDetector_Impl(int _nfeatures, double _qualityLevel, double _minDistance, int _blockSize, int _gradientSize, bool _useHarrisDetector, double _k)</div><div class="ttdef"><b>Definición</b> <a href="#l00050">gftt.cpp:50</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a342b15bfee06d992c2f67158cc6dc4d5"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">cv::Feature2D::getDefaultName</a></div><div class="ttdeci">virtual CV_WRAP String getDefaultName() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="feature2d_8cpp_source.html#l00219">feature2d.cpp:219</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html"><div class="ttname"><a href="classcv_1_1_file_node.html">cv::FileNode</a></div><div class="ttdoc">File Storage Node class.</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00447">persistence.hpp:448</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html"><div class="ttname"><a href="classcv_1_1_file_storage.html">cv::FileStorage</a></div><div class="ttdoc">XML/YAML/JSON file storage class that encapsulates all the information necessary for writing or readi...</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00260">persistence.hpp:261</a></div></div>
+<div class="ttc" id="aclasscv_1_1_g_f_t_t_detector_html"><div class="ttname"><a href="classcv_1_1_g_f_t_t_detector.html">cv::GFTTDetector</a></div><div class="ttdoc">Wrapping class for feature detection using the goodFeaturesToTrack function. :</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00649">features.hpp:650</a></div></div>
+<div class="ttc" id="aclasscv_1_1_g_f_t_t_detector_html_a06230b3c4b035016f43d44362610da83"><div class="ttname"><a href="classcv_1_1_g_f_t_t_detector.html#a06230b3c4b035016f43d44362610da83">cv::GFTTDetector::create</a></div><div class="ttdeci">static CV_WRAP Ptr&lt; GFTTDetector &gt; create(int maxCorners=1000, double qualityLevel=0.01, double minDistance=1, int blockSize=3, bool useHarrisDetector=false, double k=0.04)</div><div class="ttdef"><b>Definición</b> <a href="#l00172">gftt.cpp:172</a></div></div>
+<div class="ttc" id="aclasscv_1_1_g_f_t_t_detector_html_a9016b69ac0a97ce195851d76cef24d79"><div class="ttname"><a href="classcv_1_1_g_f_t_t_detector.html#a9016b69ac0a97ce195851d76cef24d79">cv::GFTTDetector::getDefaultName</a></div><div class="ttdeci">virtual CV_WRAP String getDefaultName() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00180">gftt.cpp:180</a></div></div>
+<div class="ttc" id="aclasscv_1_1_key_point_html"><div class="ttname"><a href="classcv_1_1_key_point.html">cv::KeyPoint</a></div><div class="ttdoc">Data structure for salient point detectors.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00754">types.hpp:755</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_u_mat_html"><div class="ttname"><a href="classcv_1_1_u_mat.html">cv::UMat</a></div><div class="ttdoc">Matrix class whose data may reside outside host memory..</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02813">mat.hpp:2814</a></div></div>
+<div class="ttc" id="afeatures_2src_2precomp_8hpp_html"><div class="ttname"><a href="features_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga1d6bb77486c8f92d79c8793ad995d541"><div class="ttname"><a href="group__features__main.html#ga1d6bb77486c8f92d79c8793ad995d541">cv::goodFeaturesToTrack</a></div><div class="ttdeci">CV_EXPORTS_W void goodFeaturesToTrack(InputArray image, OutputArray corners, int maxCorners, double qualityLevel, double minDistance, InputArray mask=noArray(), int blockSize=3, bool useHarrisDetector=false, double k=0.04)</div><div class="ttdoc">Determines strong corners on an image.</div><div class="ttdef"><b>Definición</b> <a href="featureselect_8cpp_source.html#l00277">featureselect.cpp:277</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga5e10bca8c6cd5fc6ff88d0554f1ca40b"><div class="ttname"><a href="group__features__main.html#ga5e10bca8c6cd5fc6ff88d0554f1ca40b">cv::cornersQuality</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray cornersQuality</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__features__main_html_gad876e2c53af18078dda096b260b7507b"><div class="ttname"><a href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">cv::corners</a></div><div class="ttdeci">CV_EXPORTS OutputArray corners</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00218">features.hpp:218</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gaf86c09fe702ed037c03c2bc603ceab14"><div class="ttname"><a href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a></div><div class="ttdeci">CV_EXPORTS_W void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0, AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Converts an image from one color space to another.</div><div class="ttdef"><b>Definición</b> <a href="imgproc_2src_2color_8cpp_source.html#l00192">color.cpp:192</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a353a4b8db9040165db4dacb5bcefb6ea"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a353a4b8db9040165db4dacb5bcefb6ea">cv::COLOR_BGR2GRAY</a></div><div class="ttdeci">@ COLOR_BGR2GRAY</div><div class="ttdoc">[8U/16U/32F] convert between RGB/BGR and grayscale, color conversions</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00547">imgproc.hpp:547</a></div></div>
+<div class="ttc" id="anamespacecv_1_1fs_html"><div class="ttname"><a href="namespacecv_1_1fs.html">cv::fs</a></div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l00019">persistence.cpp:20</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_42fc4c00be4dc0fac92759a97eddf1c7.html">features</a></li><li class="navelem"><a href="dir_a53baf90590c6cd83f3293daa50f4abb.html">src</a></li><li class="navelem"><a href="gftt_8cpp.html">gftt.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

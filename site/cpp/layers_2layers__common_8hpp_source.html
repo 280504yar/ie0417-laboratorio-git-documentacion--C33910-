@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/layers_common.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('layers_2layers__common_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">layers_common.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="layers_2layers__common_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2013, OpenCV Foundation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2017, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifndef __OPENCV_DNN_LAYERS_LAYERS_COMMON_HPP__</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define __OPENCV_DNN_LAYERS_LAYERS_COMMON_HPP__</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &lt;<a class="code" href="dnn_8hpp.html">opencv2/dnn.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &lt;<a class="code" href="shape__utils_8hpp.html">opencv2/dnn/shape_utils.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="layers_2layers__common_8hpp.html#a66bb28d5bbb5cd43d7700ca6abb18fb4">   48</a></span><span class="preprocessor">#define CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">// dispatched AVX/AVX2 optimizations</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="layers_2layers__common_8simd_8hpp.html">./layers_common.simd.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &quot;layers/layers_common.simd_declarations.hpp&quot;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#undef CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#ifdef HAVE_OPENCL</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#include &quot;<a class="code" href="ocl4dnn_8hpp.html">../ocl4dnn/include/ocl4dnn.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>{</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">namespace </span>dnn</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>{</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a1ad14d96f2872619def80628c91d306e">getConvolutionKernelParams</a>(<span class="keyword">const</span> LayerParams &amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>, std::vector&lt;size_t&gt;&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, std::vector&lt;size_t&gt;&amp; pads_begin,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                                std::vector&lt;size_t&gt;&amp; pads_end, std::vector&lt;size_t&gt;&amp; strides, std::vector&lt;size_t&gt;&amp; dilations,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                                <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a> &amp;padMode, std::vector&lt;size_t&gt;&amp; adjust_pads, <span class="keywordtype">bool</span>&amp; useWinograd);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a245e8636e4f485109395b0ea673c5de1">getPoolingKernelParams</a>(<span class="keyword">const</span> LayerParams &amp;<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>, std::vector&lt;size_t&gt;&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>, std::vector&lt;bool&gt;&amp; globalPooling,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                            std::vector&lt;size_t&gt;&amp; pads_begin, std::vector&lt;size_t&gt;&amp; pads_end, std::vector&lt;size_t&gt;&amp; strides, <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a> &amp;padMode);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a587b7ca36ed77daaa561d4fccde0a37a">getConvPoolOutParams</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; inp, <span class="keyword">const</span> std::vector&lt;size_t&gt;&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                          <span class="keyword">const</span> std::vector&lt;size_t&gt;&amp; stride, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;padMode,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                          <span class="keyword">const</span> std::vector&lt;size_t&gt;&amp; dilation, std::vector&lt;int&gt;&amp; out);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a712aed7e7be14e912e48908fedc58c15">getConvPoolPaddings</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; inp, <span class="keyword">const</span> std::vector&lt;size_t&gt;&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">kernel</a>,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                          <span class="keyword">const</span> std::vector&lt;size_t&gt;&amp; strides, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> &amp;padMode,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                          std::vector&lt;size_t&gt;&amp; pads_begin, std::vector&lt;size_t&gt;&amp; pads_end);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">// Used in quantized model. It will return the (Max_element - Min_element)/127.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keywordtype">double</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a7430e6e50ba7a23a525e7015d90e3ed5">getWeightScale</a>(<span class="keyword">const</span> <a class="code hl_class" href="interface_mat.html">Mat</a>&amp; weightsMat);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">// Several ONNX operations take list of integer&#39;s or float&#39;s,</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">// e.g. to specify list of axes (Squeeze, Unsqueeze, Transpose, Reduce*, ...),</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">// coordinates, repetitions etc. (Slice, Tile, ...), scale factors (Resize, ...).</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">// Here are helper functions to extract this data</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a27ee7e3f747f75bad4ebea5b1986eebb">tensorToIntVec</a>(<span class="keyword">const</span> <a class="code hl_class" href="interface_mat.html">Mat</a>&amp; tensor, std::vector&lt;int&gt;&amp; vec);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a77b7a4785c177ac779cafcdfd2f84064">tensorToFloatVec</a>(<span class="keyword">const</span> <a class="code hl_class" href="interface_mat.html">Mat</a>&amp; tensor, std::vector&lt;float&gt;&amp; vec);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#af7d90df6a6a04162e6463bc8c79c53ce">tensorToScalar</a>(<span class="keyword">const</span> <a class="code hl_class" href="interface_mat.html">Mat</a>&amp; tensor, <span class="keywordtype">int</span> type, <span class="keywordtype">void</span>* value);</div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#acbababe1ea151a88bfa0f093384a8524">   87</a></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; _Tp <a class="code hl_function" href="namespacecv_1_1dnn.html#af7d90df6a6a04162e6463bc8c79c53ce">tensorToScalar</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; tensor)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    _Tp value = _Tp(0);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_function" href="namespacecv_1_1dnn.html#af7d90df6a6a04162e6463bc8c79c53ce">tensorToScalar</a>(tensor, <a class="code hl_class" href="classcv_1_1_data_type.html">DataType&lt;_Tp&gt;::type</a>, &amp;value);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> value;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">// tensor to mat shape</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a> <a class="code hl_function" href="namespacecv_1_1dnn.html#a38bd00992d9a88dfbd86cf7b46e7a130">tensorToShape</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; shapeTensor);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="};">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74">   97</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74">OnnxDataType</a></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>{</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74af5f60e8c396da23cf7216267e6e82e3c">   99</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74af5f60e8c396da23cf7216267e6e82e3c">ONNX_UNDEFINED</a>  = 0,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a0289e6f9143e7e6f1a855633b05dadb2">  100</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a0289e6f9143e7e6f1a855633b05dadb2">ONNX_FLOAT</a>      = 1,   <span class="comment">// float</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a44bdd153215839909d82b9d7c381672e">  101</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a44bdd153215839909d82b9d7c381672e">ONNX_UINT8</a>      = 2,   <span class="comment">// uint8_t</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a8bda2b643189e4b7ba0a2603e9b56922">  102</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a8bda2b643189e4b7ba0a2603e9b56922">ONNX_INT8</a>       = 3,   <span class="comment">// int8_t</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74aa120801af9da86031303ca17e2152f83">  103</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74aa120801af9da86031303ca17e2152f83">ONNX_UINT16</a>     = 4,   <span class="comment">// uint16_t</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a2e38e8b271e515b48e182d8b815a517b">  104</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a2e38e8b271e515b48e182d8b815a517b">ONNX_INT16</a>      = 5,   <span class="comment">// int16_t</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a9d2dda500cad2bf8e94b1e4836597bd2">  105</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a9d2dda500cad2bf8e94b1e4836597bd2">ONNX_INT32</a>      = 6,   <span class="comment">// int32_t</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a37bfcb14c92bd8cfde2628870084c38e">  106</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a37bfcb14c92bd8cfde2628870084c38e">ONNX_INT64</a>      = 7,   <span class="comment">// int64_t</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a6b1dfd282f4d5e7b8e07989d21421fae">  107</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a6b1dfd282f4d5e7b8e07989d21421fae">ONNX_STRING</a>     = 8,   <span class="comment">// string</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a55c07843a14b55a61a45606af37e71d5">  108</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a55c07843a14b55a61a45606af37e71d5">ONNX_BOOL</a>       = 9,   <span class="comment">// bool</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74ac7b55651289e9eafb806c391624bc7df">  109</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74ac7b55651289e9eafb806c391624bc7df">ONNX_FLOAT16</a>    = 10,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a345cba210e22c830b30fb4363146b144">  110</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a345cba210e22c830b30fb4363146b144">ONNX_DOUBLE</a>     = 11,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1a2acaea24733f0173ac29fc1c279a7e">  111</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1a2acaea24733f0173ac29fc1c279a7e">ONNX_UINT32</a>     = 12,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a142b296e7d5313793a7c62b3ce25f7a3">  112</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a142b296e7d5313793a7c62b3ce25f7a3">ONNX_UINT64</a>     = 13,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1b7ed6e0fc6c69a130b4259bc85c1039">  113</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1b7ed6e0fc6c69a130b4259bc85c1039">ONNX_BFLOAT16</a>   = 14</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>};</div>
+</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a05aa667770406fd56c116552898709e1">  116</a></span><span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a05aa667770406fd56c116552898709e1">onnxDataTypeToCV</a>(<a class="code hl_enumeration" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74">OnnxDataType</a> dt)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>{</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">switch</span> (dt)</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a44bdd153215839909d82b9d7c381672e">ONNX_UINT8</a>:      <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a8bda2b643189e4b7ba0a2603e9b56922">ONNX_INT8</a>:       <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74aa120801af9da86031303ca17e2152f83">ONNX_UINT16</a>:     <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#gaf55ae5a94c48cae66b96979877576f12">CV_16U</a>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a2e38e8b271e515b48e182d8b815a517b">ONNX_INT16</a>:      <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga9d2ee1a8334733dea7482a47a88e0f87">CV_16S</a>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1a2acaea24733f0173ac29fc1c279a7e">ONNX_UINT32</a>:     <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#gaa79e0fdad5adb5036e5c549b84718694">CV_32U</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a9d2dda500cad2bf8e94b1e4836597bd2">ONNX_INT32</a>:      <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a142b296e7d5313793a7c62b3ce25f7a3">ONNX_UINT64</a>:     <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga345975890de9d8ee1bd99adc986c4a88">CV_64U</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a37bfcb14c92bd8cfde2628870084c38e">ONNX_INT64</a>:      <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a0289e6f9143e7e6f1a855633b05dadb2">ONNX_FLOAT</a>:      <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a345cba210e22c830b30fb4363146b144">ONNX_DOUBLE</a>:     <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74ac7b55651289e9eafb806c391624bc7df">ONNX_FLOAT16</a>:    <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1b7ed6e0fc6c69a130b4259bc85c1039">ONNX_BFLOAT16</a>:   <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a55c07843a14b55a61a45606af37e71d5">ONNX_BOOL</a>:       <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="comment">// Fallback to default ONNX FLOAT if value is unknown.</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">// inputs and outputs are both vector&lt;Mat&gt;&#39;s or both are vector&lt;UMat&gt;&#39;s.</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">// the function does the following:</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">//</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">// 1. resizes output vector to 1-element vector</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">// 2. outputs[0].fit(shape, inputs[0].type())</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">// 3. temp = inputs[0].reshape(shape);</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">// 4. temp.copyTo(outputs[0]) // detect in-place case and do nothing in this case</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">//</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">// the function helps to implement DL operations</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">// &#39;Reshape&#39;, &#39;Flatten&#39;, &#39;Squeeze&#39;, &#39;Unsqueeze&#39;, &#39;Identity&#39;.</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a4528c3ae10c52dd28130b6ca1a6af940">reshapeAndCopyFirst</a>(<a class="code hl_typedef" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> inputs,</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                         <a class="code hl_typedef" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> outputs,</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                         <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_mat_shape.html">MatShape</a>&amp; <a class="code hl_function" href="namespacecv_1_1dnn.html#ae28fb740009882180715b6dd94bca969">shape</a>);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>}</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasscv_1_1_data_type_html"><div class="ttname"><a href="classcv_1_1_data_type.html">cv::DataType</a></div><div class="ttdoc">Template &quot;trait&quot; class for OpenCV primitive data types.</div><div class="ttdef"><b>Definición</b> <a href="traits_8hpp_source.html#l00112">traits.hpp:113</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="adnn_8hpp_html"><div class="ttname"><a href="dnn_8hpp.html">dnn.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga606feabe3b50ab6838f1ba89727aa07a"><div class="ttname"><a href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">cv::InputArrayOfArrays</a></div><div class="ttdeci">InputArray InputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00588">mat.hpp:588</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga889a09549b98223016170d9b613715de"><div class="ttname"><a href="group__core__basic.html#ga889a09549b98223016170d9b613715de">cv::OutputArrayOfArrays</a></div><div class="ttdeci">OutputArray OutputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00590">mat.hpp:590</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga21111882276c49470604662f036151e6"><div class="ttname"><a href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a></div><div class="ttdeci">#define CV_Bool</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00063">interface.h:63</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3"><div class="ttname"><a href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a></div><div class="ttdeci">#define CV_8S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00055">interface.h:55</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga2b02a49f1f211e23c1fc11705a1f0ce7"><div class="ttname"><a href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a></div><div class="ttdeci">#define CV_16F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00061">interface.h:61</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga345975890de9d8ee1bd99adc986c4a88"><div class="ttname"><a href="group__core__hal__interface.html#ga345975890de9d8ee1bd99adc986c4a88">CV_64U</a></div><div class="ttdeci">#define CV_64U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00064">interface.h:64</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga9d2ee1a8334733dea7482a47a88e0f87"><div class="ttname"><a href="group__core__hal__interface.html#ga9d2ee1a8334733dea7482a47a88e0f87">CV_16S</a></div><div class="ttdeci">#define CV_16S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00057">interface.h:57</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa79e0fdad5adb5036e5c549b84718694"><div class="ttname"><a href="group__core__hal__interface.html#gaa79e0fdad5adb5036e5c549b84718694">CV_32U</a></div><div class="ttdeci">#define CV_32U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00066">interface.h:66</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabee4806a5f37b92d6c3dff4d97780a35"><div class="ttname"><a href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a></div><div class="ttdeci">#define CV_16BF</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00062">interface.h:62</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabfa4c421815900f05d712345a0e808a7"><div class="ttname"><a href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a></div><div class="ttdeci">#define CV_64S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00065">interface.h:65</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaf55ae5a94c48cae66b96979877576f12"><div class="ttname"><a href="group__core__hal__interface.html#gaf55ae5a94c48cae66b96979877576f12">CV_16U</a></div><div class="ttdeci">#define CV_16U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00056">interface.h:56</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gacf70dd7604c25059c5c22f3068158cae"><div class="ttname"><a href="group__imgproc__filter.html#gacf70dd7604c25059c5c22f3068158cae">cv::kernel</a></div><div class="ttdeci">OutputArray InputArray kernel</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="ainterface_mat_html"><div class="ttname"><a href="interface_mat.html">Mat</a></div><div class="ttdef"><b>Definición</b> <a href="_mat_8h_source.html#l00048">Mat.h:49</a></div></div>
+<div class="ttc" id="alayers_2layers__common_8simd_8hpp_html"><div class="ttname"><a href="layers_2layers__common_8simd_8hpp.html">layers_common.simd.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a05aa667770406fd56c116552898709e1"><div class="ttname"><a href="namespacecv_1_1dnn.html#a05aa667770406fd56c116552898709e1">cv::dnn::onnxDataTypeToCV</a></div><div class="ttdeci">int onnxDataTypeToCV(OnnxDataType dt)</div><div class="ttdef"><b>Definición</b> <a href="#l00116">layers_common.hpp:116</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a1ad14d96f2872619def80628c91d306e"><div class="ttname"><a href="namespacecv_1_1dnn.html#a1ad14d96f2872619def80628c91d306e">cv::dnn::getConvolutionKernelParams</a></div><div class="ttdeci">void getConvolutionKernelParams(const LayerParams &amp;params, std::vector&lt; size_t &gt; &amp;kernel, std::vector&lt; size_t &gt; &amp;pads_begin, std::vector&lt; size_t &gt; &amp;pads_end, std::vector&lt; size_t &gt; &amp;strides, std::vector&lt; size_t &gt; &amp;dilations, cv::String &amp;padMode, std::vector&lt; size_t &gt; &amp;adjust_pads, bool &amp;useWinograd)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00189">layers_common.cpp:189</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a245e8636e4f485109395b0ea673c5de1"><div class="ttname"><a href="namespacecv_1_1dnn.html#a245e8636e4f485109395b0ea673c5de1">cv::dnn::getPoolingKernelParams</a></div><div class="ttdeci">void getPoolingKernelParams(const LayerParams &amp;params, std::vector&lt; size_t &gt; &amp;kernel, std::vector&lt; bool &gt; &amp;globalPooling, std::vector&lt; size_t &gt; &amp;pads_begin, std::vector&lt; size_t &gt; &amp;pads_end, std::vector&lt; size_t &gt; &amp;strides, cv::String &amp;padMode)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00147">layers_common.cpp:147</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a27ee7e3f747f75bad4ebea5b1986eebb"><div class="ttname"><a href="namespacecv_1_1dnn.html#a27ee7e3f747f75bad4ebea5b1986eebb">cv::dnn::tensorToIntVec</a></div><div class="ttdeci">void tensorToIntVec(const Mat &amp;tensor, std::vector&lt; int &gt; &amp;vec)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00267">layers_common.cpp:267</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74">cv::dnn::OnnxDataType</a></div><div class="ttdeci">OnnxDataType</div><div class="ttdef"><b>Definición</b> <a href="#l00097">layers_common.hpp:98</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a0289e6f9143e7e6f1a855633b05dadb2"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a0289e6f9143e7e6f1a855633b05dadb2">cv::dnn::ONNX_FLOAT</a></div><div class="ttdeci">@ ONNX_FLOAT</div><div class="ttdef"><b>Definición</b> <a href="#l00100">layers_common.hpp:100</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a142b296e7d5313793a7c62b3ce25f7a3"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a142b296e7d5313793a7c62b3ce25f7a3">cv::dnn::ONNX_UINT64</a></div><div class="ttdeci">@ ONNX_UINT64</div><div class="ttdef"><b>Definición</b> <a href="#l00112">layers_common.hpp:112</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a1a2acaea24733f0173ac29fc1c279a7e"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1a2acaea24733f0173ac29fc1c279a7e">cv::dnn::ONNX_UINT32</a></div><div class="ttdeci">@ ONNX_UINT32</div><div class="ttdef"><b>Definición</b> <a href="#l00111">layers_common.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a1b7ed6e0fc6c69a130b4259bc85c1039"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a1b7ed6e0fc6c69a130b4259bc85c1039">cv::dnn::ONNX_BFLOAT16</a></div><div class="ttdeci">@ ONNX_BFLOAT16</div><div class="ttdef"><b>Definición</b> <a href="#l00113">layers_common.hpp:113</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a2e38e8b271e515b48e182d8b815a517b"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a2e38e8b271e515b48e182d8b815a517b">cv::dnn::ONNX_INT16</a></div><div class="ttdeci">@ ONNX_INT16</div><div class="ttdef"><b>Definición</b> <a href="#l00104">layers_common.hpp:104</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a345cba210e22c830b30fb4363146b144"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a345cba210e22c830b30fb4363146b144">cv::dnn::ONNX_DOUBLE</a></div><div class="ttdeci">@ ONNX_DOUBLE</div><div class="ttdef"><b>Definición</b> <a href="#l00110">layers_common.hpp:110</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a37bfcb14c92bd8cfde2628870084c38e"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a37bfcb14c92bd8cfde2628870084c38e">cv::dnn::ONNX_INT64</a></div><div class="ttdeci">@ ONNX_INT64</div><div class="ttdef"><b>Definición</b> <a href="#l00106">layers_common.hpp:106</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a44bdd153215839909d82b9d7c381672e"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a44bdd153215839909d82b9d7c381672e">cv::dnn::ONNX_UINT8</a></div><div class="ttdeci">@ ONNX_UINT8</div><div class="ttdef"><b>Definición</b> <a href="#l00101">layers_common.hpp:101</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a55c07843a14b55a61a45606af37e71d5"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a55c07843a14b55a61a45606af37e71d5">cv::dnn::ONNX_BOOL</a></div><div class="ttdeci">@ ONNX_BOOL</div><div class="ttdef"><b>Definición</b> <a href="#l00108">layers_common.hpp:108</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a6b1dfd282f4d5e7b8e07989d21421fae"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a6b1dfd282f4d5e7b8e07989d21421fae">cv::dnn::ONNX_STRING</a></div><div class="ttdeci">@ ONNX_STRING</div><div class="ttdef"><b>Definición</b> <a href="#l00107">layers_common.hpp:107</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a8bda2b643189e4b7ba0a2603e9b56922"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a8bda2b643189e4b7ba0a2603e9b56922">cv::dnn::ONNX_INT8</a></div><div class="ttdeci">@ ONNX_INT8</div><div class="ttdef"><b>Definición</b> <a href="#l00102">layers_common.hpp:102</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74a9d2dda500cad2bf8e94b1e4836597bd2"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74a9d2dda500cad2bf8e94b1e4836597bd2">cv::dnn::ONNX_INT32</a></div><div class="ttdeci">@ ONNX_INT32</div><div class="ttdef"><b>Definición</b> <a href="#l00105">layers_common.hpp:105</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74aa120801af9da86031303ca17e2152f83"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74aa120801af9da86031303ca17e2152f83">cv::dnn::ONNX_UINT16</a></div><div class="ttdeci">@ ONNX_UINT16</div><div class="ttdef"><b>Definición</b> <a href="#l00103">layers_common.hpp:103</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74ac7b55651289e9eafb806c391624bc7df"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74ac7b55651289e9eafb806c391624bc7df">cv::dnn::ONNX_FLOAT16</a></div><div class="ttdeci">@ ONNX_FLOAT16</div><div class="ttdef"><b>Definición</b> <a href="#l00109">layers_common.hpp:109</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a2e117f6074022fdf4b90ef5e0e758e74af5f60e8c396da23cf7216267e6e82e3c"><div class="ttname"><a href="namespacecv_1_1dnn.html#a2e117f6074022fdf4b90ef5e0e758e74af5f60e8c396da23cf7216267e6e82e3c">cv::dnn::ONNX_UNDEFINED</a></div><div class="ttdeci">@ ONNX_UNDEFINED</div><div class="ttdef"><b>Definición</b> <a href="#l00099">layers_common.hpp:99</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a38bd00992d9a88dfbd86cf7b46e7a130"><div class="ttname"><a href="namespacecv_1_1dnn.html#a38bd00992d9a88dfbd86cf7b46e7a130">cv::dnn::tensorToShape</a></div><div class="ttdeci">MatShape tensorToShape(const Mat &amp;shapeTensor)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00375">layers_common.cpp:375</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a4528c3ae10c52dd28130b6ca1a6af940"><div class="ttname"><a href="namespacecv_1_1dnn.html#a4528c3ae10c52dd28130b6ca1a6af940">cv::dnn::reshapeAndCopyFirst</a></div><div class="ttdeci">void reshapeAndCopyFirst(InputArrayOfArrays inputs, OutputArrayOfArrays outputs, const MatShape &amp;shape)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00314">layers_common.cpp:314</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a587b7ca36ed77daaa561d4fccde0a37a"><div class="ttname"><a href="namespacecv_1_1dnn.html#a587b7ca36ed77daaa561d4fccde0a37a">cv::dnn::getConvPoolOutParams</a></div><div class="ttdeci">void getConvPoolOutParams(const std::vector&lt; int &gt; &amp;inp, const std::vector&lt; size_t &gt; &amp;kernel, const std::vector&lt; size_t &gt; &amp;stride, const String &amp;padMode, const std::vector&lt; size_t &gt; &amp;dilation, std::vector&lt; int &gt; &amp;out)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00213">layers_common.cpp:213</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a712aed7e7be14e912e48908fedc58c15"><div class="ttname"><a href="namespacecv_1_1dnn.html#a712aed7e7be14e912e48908fedc58c15">cv::dnn::getConvPoolPaddings</a></div><div class="ttdeci">void getConvPoolPaddings(const std::vector&lt; int &gt; &amp;inp, const std::vector&lt; size_t &gt; &amp;kernel, const std::vector&lt; size_t &gt; &amp;strides, const String &amp;padMode, std::vector&lt; size_t &gt; &amp;pads_begin, std::vector&lt; size_t &gt; &amp;pads_end)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00233">layers_common.cpp:233</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a7430e6e50ba7a23a525e7015d90e3ed5"><div class="ttname"><a href="namespacecv_1_1dnn.html#a7430e6e50ba7a23a525e7015d90e3ed5">cv::dnn::getWeightScale</a></div><div class="ttdeci">double getWeightScale(const Mat &amp;weightsMat)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00256">layers_common.cpp:256</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a77b7a4785c177ac779cafcdfd2f84064"><div class="ttname"><a href="namespacecv_1_1dnn.html#a77b7a4785c177ac779cafcdfd2f84064">cv::dnn::tensorToFloatVec</a></div><div class="ttdeci">void tensorToFloatVec(const Mat &amp;tensor, std::vector&lt; float &gt; &amp;vec)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00290">layers_common.cpp:290</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ae28fb740009882180715b6dd94bca969"><div class="ttname"><a href="namespacecv_1_1dnn.html#ae28fb740009882180715b6dd94bca969">cv::dnn::shape</a></div><div class="ttdeci">MatShape shape(const int *dims, const int n)</div><div class="ttdef"><b>Definición</b> <a href="shape__utils_8hpp_source.html#l00119">shape_utils.hpp:119</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_af7d90df6a6a04162e6463bc8c79c53ce"><div class="ttname"><a href="namespacecv_1_1dnn.html#af7d90df6a6a04162e6463bc8c79c53ce">cv::dnn::tensorToScalar</a></div><div class="ttdeci">void tensorToScalar(const Mat &amp;tensor, int type, void *value)</div><div class="ttdef"><b>Definición</b> <a href="layers__common_8cpp_source.html#l00382">layers_common.cpp:382</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aocl4dnn_8hpp_html"><div class="ttname"><a href="ocl4dnn_8hpp.html">ocl4dnn.hpp</a></div></div>
+<div class="ttc" id="ashape__utils_8hpp_html"><div class="ttname"><a href="shape__utils_8hpp.html">shape_utils.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_mat_shape_html"><div class="ttname"><a href="structcv_1_1_mat_shape.html">cv::MatShape</a></div><div class="ttdoc">Represents shape of a matrix/tensor. Previously, MatShape was defined as an alias of std::vector&lt;int&gt;...</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00107">mat.hpp:108</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="layers_2layers__common_8hpp.html">layers_common.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

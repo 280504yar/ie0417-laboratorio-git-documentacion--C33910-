@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['tag_0',['TAG',['../cap__android__camera_8cpp.html#afc3d101f633a076cc1ca84b85b6224b2',1,'TAG:&#160;cap_android_camera.cpp'],['../cap__android__mediandk_8cpp.html#afc3d101f633a076cc1ca84b85b6224b2',1,'TAG:&#160;cap_android_mediandk.cpp']]],
+  ['target_5fos_5fvision_1',['TARGET_OS_VISION',['../cap__avfoundation_8mm.html#a68be629792c880841820015ea104ce6f',1,'cap_avfoundation.mm']]],
+  ['target_5frt_5fmac_5fcfm_2',['TARGET_RT_MAC_CFM',['../common_8h.html#af33b58a61162cf2635cbd04123b8acc5',1,'common.h']]],
+  ['tbb_5fsuppress_5fdeprecated_5fmessages_3',['TBB_SUPPRESS_DEPRECATED_MESSAGES',['../parallel__for_8tbb_8hpp.html#a7f41130cb850d9fcf11ba3a25c35ee6d',1,'parallel_for.tbb.hpp']]],
+  ['test_4',['TEST',['../ts__ext_8hpp.html#ad8b332753515c0ab8baada563c2547eb',1,'TEST:&#160;ts_ext.hpp'],['../ts__gtest_8h.html#ad8b332753515c0ab8baada563c2547eb',1,'TEST:&#160;ts_gtest.h']]],
+  ['test_5f_5',['TEST_',['../ts__ext_8hpp.html#a0ff7c406812e42a1c0998524ce2b7c4e',1,'ts_ext.hpp']]],
+  ['test_5fcycle_6',['TEST_CYCLE',['../ts__perf_8hpp.html#a0dc0c8bb73c31058078d83134b4a117f',1,'ts_perf.hpp']]],
+  ['test_5fcycle_5fmultirun_7',['TEST_CYCLE_MULTIRUN',['../ts__perf_8hpp.html#a59a99c039e4bf7b5bf01d1d7e301b5e0',1,'ts_perf.hpp']]],
+  ['test_5fcycle_5fn_8',['TEST_CYCLE_N',['../ts__perf_8hpp.html#ac23e50c884dc7b58a8f6c853d4474d61',1,'ts_perf.hpp']]],
+  ['test_5fdeclare_5finput_5fparameter_9',['TEST_DECLARE_INPUT_PARAMETER',['../ocl__test_8hpp.html#a6ffa96e858599b3b5e20f4c431cb9656',1,'ocl_test.hpp']]],
+  ['test_5fdeclare_5foutput_5fparameter_10',['TEST_DECLARE_OUTPUT_PARAMETER',['../ocl__test_8hpp.html#a106c045f45a0ec7f9d71f250f3631f76',1,'ocl_test.hpp']]],
+  ['test_5ff_11',['TEST_F',['../ts__ext_8hpp.html#a0ee66d464d1a06c20c1929cae09d8758',1,'TEST_F:&#160;ts_ext.hpp'],['../ts__gtest_8h.html#a0ee66d464d1a06c20c1929cae09d8758',1,'TEST_F:&#160;ts_gtest.h']]],
+  ['test_5fp_12',['TEST_P',['../ts__ext_8hpp.html#abd3bb216dafbffa36044a6030216ecda',1,'TEST_P:&#160;ts_ext.hpp'],['../ts__gtest_8h.html#abd3bb216dafbffa36044a6030216ecda',1,'TEST_P:&#160;ts_gtest.h']]],
+  ['test_5ftry_5ffile_5fwith_5fprefix_13',['TEST_TRY_FILE_WITH_PREFIX',['../ts_8cpp.html#ada2fcf555e9bac781e2a0e88af6ebd94',1,'ts.cpp']]],
+  ['thrust_5fdebug_14',['THRUST_DEBUG',['../reduce_8hpp.html#a307edaa487e6e39fcca95bd1250ec1f9',1,'reduce.hpp']]],
+  ['trace_5finference_15',['TRACE_INFERENCE',['../net__impl_8cpp.html#a450fce9ef6dd05829abada3eab8b8362',1,'net_impl.cpp']]],
+  ['tuning_5fsize_16',['TUNING_SIZE',['../ocl4dnn__conv__spatial_8cpp.html#a2bda162f341725298bf48d1309a22044',1,'ocl4dnn_conv_spatial.cpp']]],
+  ['types_17',['TYPES',['../cuda__test_8hpp.html#a0b531dd8376e3a9bf5af7275966604f6',1,'cuda_test.hpp']]],
+  ['typical_5fmat_5fsizes_18',['TYPICAL_MAT_SIZES',['../ts__perf_8hpp.html#ae0f3a4889c8ea669bb90f3708a891079',1,'ts_perf.hpp']]],
+  ['typical_5fmat_5ftypes_19',['TYPICAL_MAT_TYPES',['../ts__perf_8hpp.html#ab1cb0bf5cf859148e818fc86e3df239a',1,'ts_perf.hpp']]],
+  ['typical_5fmats_20',['TYPICAL_MATS',['../ts__perf_8hpp.html#a65d75f4ace1460cf0a9fb039cf36b6b3',1,'ts_perf.hpp']]],
+  ['typical_5fmats_5fc1_21',['TYPICAL_MATS_C1',['../ts__perf_8hpp.html#aa98df59178cd92dcc1f47f198e1ebafb',1,'ts_perf.hpp']]],
+  ['typical_5fmats_5fc4_22',['TYPICAL_MATS_C4',['../ts__perf_8hpp.html#abb4b64218882ae2bf2be85b0e86333cb',1,'ts_perf.hpp']]]
+];

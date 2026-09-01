@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda4dnn/primitives/reorg.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('reorg_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">reorg.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="reorg_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_REORG_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_REORG_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="op__cuda_8hpp.html">../../op_cuda.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8hpp.html">../csl/stream.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="kernels_2permute_8hpp.html">../kernels/permute.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html">   21</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a679d458dc65b2a2fd62d75960655d045">ReorgOp</a> final : <span class="keyword">public</span> CUDABackendNode {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a3f9d68a830547220c39c263d653565f7">   23</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a3f9d68a830547220c39c263d653565f7">wrapper_type</a> = GetCUDABackendWrapperType&lt;T&gt;;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a679d458dc65b2a2fd62d75960655d045">   25</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a679d458dc65b2a2fd62d75960655d045">ReorgOp</a>(<a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">csl::Stream</a> stream_, std::size_t stride_)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            : stream(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(stream_)), stride{ stride_ } { }</div>
+</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a6b43396750a5d03d2ed54a7889a53bb2">   28</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a6b43396750a5d03d2ed54a7889a53bb2">forward</a>(</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keyword">const</span> std::vector&lt;<a class="code hl_struct" href="structcv_1_1cv_1_1_ptr.html">cv::Ptr&lt;BackendWrapper&gt;</a>&gt;&amp; inputs,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keyword">const</span> std::vector&lt;<a class="code hl_struct" href="structcv_1_1cv_1_1_ptr.html">cv::Ptr&lt;BackendWrapper&gt;</a>&gt;&amp; outputs,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace.html">csl::Workspace</a>&amp; workspace)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(inputs.size() == 1 &amp;&amp; outputs.size() == 1);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keyword">auto</span> input_wrapper = inputs[0].dynamicCast&lt;<a class="code hl_typedef" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a3f9d68a830547220c39c263d653565f7">wrapper_type</a>&gt;();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keyword">auto</span> input = input_wrapper-&gt;getView();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keyword">auto</span> output_wrapper = outputs[0].dynamicCast&lt;<a class="code hl_typedef" href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a3f9d68a830547220c39c263d653565f7">wrapper_type</a>&gt;();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keyword">auto</span> output = output_wrapper-&gt;getSpan();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keyword">const</span> std::size_t permute_input_shape[] = {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>               input.get_axis_size(0),</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>               input.get_axis_size(1) * input.get_axis_size(2) / (stride * stride),</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>               stride,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>               input.get_axis_size(3),</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>               stride</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            };</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keyword">constexpr</span> std::size_t order[] = { 0, 2, 4, 1, 3 };</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keyword">const</span> std::size_t permute_output_shape[] = {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                permute_input_shape[order[0]],</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                permute_input_shape[order[1]],</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                permute_input_shape[order[2]],</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                permute_input_shape[order[3]],</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                permute_input_shape[order[4]]</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            };</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            input.unsqueeze();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            input.reshape(std::begin(permute_input_shape), std::end(permute_input_shape));</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            output.unsqueeze();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            output.reshape(std::begin(permute_output_shape), std::end(permute_output_shape));</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a371424e136b69e78e6baf6afa29ec5c9">kernels::permute</a>(stream, output, input, { std::begin(order), std::end(order) });</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">csl::Stream</a> stream;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        std::size_t stride;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    };</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}}} <span class="comment">/* namespace cv::dnn::cuda4dnn */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_REORG_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_reorg_op_html_a3f9d68a830547220c39c263d653565f7"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a3f9d68a830547220c39c263d653565f7">cv::dnn::cuda4dnn::ReorgOp::wrapper_type</a></div><div class="ttdeci">GetCUDABackendWrapperType&lt; T &gt; wrapper_type</div><div class="ttdef"><b>Definición</b> <a href="#l00023">reorg.hpp:23</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_reorg_op_html_a679d458dc65b2a2fd62d75960655d045"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a679d458dc65b2a2fd62d75960655d045">cv::dnn::cuda4dnn::ReorgOp::ReorgOp</a></div><div class="ttdeci">ReorgOp(csl::Stream stream_, std::size_t stride_)</div><div class="ttdef"><b>Definición</b> <a href="#l00025">reorg.hpp:25</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_reorg_op_html_a6b43396750a5d03d2ed54a7889a53bb2"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_reorg_op.html#a6b43396750a5d03d2ed54a7889a53bb2">cv::dnn::cuda4dnn::ReorgOp::forward</a></div><div class="ttdeci">void forward(const std::vector&lt; cv::Ptr&lt; BackendWrapper &gt; &gt; &amp;inputs, const std::vector&lt; cv::Ptr&lt; BackendWrapper &gt; &gt; &amp;outputs, csl::Workspace &amp;workspace) override</div><div class="ttdef"><b>Definición</b> <a href="#l00028">reorg.hpp:28</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">cv::dnn::cuda4dnn::csl::Stream</a></div><div class="ttdoc">sharable smart CUDA stream</div><div class="ttdef"><b>Definición</b> <a href="stream_8hpp_source.html#l00116">stream.hpp:116</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace.html">cv::dnn::cuda4dnn::csl::Workspace</a></div><div class="ttdoc">maintains a single block of reusable device memory</div><div class="ttdef"><b>Definición</b> <a href="workspace_8hpp_source.html#l00024">workspace.hpp:24</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="akernels_2permute_8hpp_html"><div class="ttname"><a href="kernels_2permute_8hpp.html">permute.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_a371424e136b69e78e6baf6afa29ec5c9"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a371424e136b69e78e6baf6afa29ec5c9">cv::dnn::cuda4dnn::kernels::permute</a></div><div class="ttdeci">void permute(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; input, std::vector&lt; std::size_t &gt; order)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="aop__cuda_8hpp_html"><div class="ttname"><a href="op__cuda_8hpp.html">op_cuda.hpp</a></div></div>
+<div class="ttc" id="astream_8hpp_html"><div class="ttname"><a href="stream_8hpp.html">stream.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1cv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1cv_1_1_ptr.html">cv::cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00068">templmatch.cpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_329f8aeda4c94140e35f70be21279668.html">cuda4dnn</a></li><li class="navelem"><a href="dir_d2ca54779c2590542eeb89ca6000009d.html">primitives</a></li><li class="navelem"><a href="reorg_8hpp.html">reorg.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

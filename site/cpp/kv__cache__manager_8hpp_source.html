@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/kv_cache_manager.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('kv__cache__manager_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">kv_cache_manager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="kv__cache__manager_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2020, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef __OPENCV_DNN_KV_CACHE_MANAGER_HPP__</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define __OPENCV_DNN_KV_CACHE_MANAGER_HPP__</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="dnn_2dnn_8hpp.html">opencv2/dnn/dnn.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="fast__gemm_8hpp.html">layers/cpu_kernels/fast_gemm.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// Upper bound for reserveKVCache(); keeps the page-count arithmetic in range.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#ab9339c060baa5df08954b841a552b2eca0b7be978aa5fc79f6250c6863d5bf802">   25</a></span><span class="keyword">enum</span> { <a class="code hl_enumvalue" href="namespacecv_1_1dnn.html#ab9339c060baa5df08954b841a552b2eca0b7be978aa5fc79f6250c6863d5bf802">KV_CACHE_MAX_RESERVED_TOKENS</a> = 1 &lt;&lt; 24 };</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html">   27</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#aec9e977acc018a3370da94fe45994da2">   30</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#aec9e977acc018a3370da94fe45994da2">~KVCache</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">   31</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>) : <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>),  <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a0bd19522ef8354a84b8df285b8c81572">headDim</a>(-1), <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a23905077e9e2f0f77a29abb24ae50f8f">offset</a>(0), <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) {}</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#aa01e913e13b9b783c3309d2177dc44a4">   32</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#aa01e913e13b9b783c3309d2177dc44a4">KVCache</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) : <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>(-1), <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a0bd19522ef8354a84b8df285b8c81572">headDim</a>(-1),<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a23905077e9e2f0f77a29abb24ae50f8f">offset</a>(0), <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) {}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#abe891d686d4f5576ff6a692c148d0b31">grow</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; newData);</div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a28c3a9bcb69456dd3ff2e6c00912b0a2">   34</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a28c3a9bcb69456dd3ff2e6c00912b0a2">clear</a>() {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">pages</a>.clear();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee">nTokens</a> = 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="comment">// Reserve the page pool for up to maxTokens (static cache); applied at prefill.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a025a55086e166db9baa2b12d23359f8e">   39</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a025a55086e166db9baa2b12d23359f8e">reserve</a>(<span class="keywordtype">int</span> maxTokens) { <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac635fe29c01aa632a597195cd5b95664">reservedTokens</a> = std::max(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac635fe29c01aa632a597195cd5b95664">reservedTokens</a>, maxTokens); }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a08cbb536e590ae07c88a7b97049f83d4">   40</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a08cbb536e590ae07c88a7b97049f83d4">getActivePageCount</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> &gt; 0 ? (<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee">nTokens</a> + <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> - 1) / <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> : 0; }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="comment">// Pages holding tokens. The paged kernels size the last page from the page count,</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="comment">// so reserved empty trailing pages must not be passed to them.</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a559db3e99c0742b6ed462a7480b0b90a">   43</a></span>        std::vector&lt;Mat&gt; <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a559db3e99c0742b6ed462a7480b0b90a">getActivePages</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="keywordtype">size_t</span> n = std::min((<span class="keywordtype">size_t</span>)<a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a08cbb536e590ae07c88a7b97049f83d4">getActivePageCount</a>(), <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">pages</a>.size());</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">return</span> std::vector&lt;Mat&gt;(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">pages</a>.begin(), <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">pages</a>.begin() + n);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a1fbe8f28118c6f471be35e6143ff148f">   47</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a1fbe8f28118c6f471be35e6143ff148f">getPageSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a>; }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#af4918355843df7c86d21e36d41aedaf0">   48</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#af4918355843df7c86d21e36d41aedaf0">getNumTokens</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee">nTokens</a>; }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a5308a276472f09c709f607ca14f2b701">growPrefill</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; newData, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="comment">// Append T (&gt;=1) tokens to a non-empty cache one column at a time.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a280422a42ee79467106fe40c4ad3aefd">appendTokens</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; newData, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a1236efed22606c5f7bfbadf136cccd20">   54</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a1236efed22606c5f7bfbadf136cccd20">growGenerate</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; newData) = 0;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">   55</a></span>        std::vector&lt;Mat&gt; <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">pages</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee">   57</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee">nTokens</a> = 0;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">   58</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> = -1;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">   59</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a0bd19522ef8354a84b8df285b8c81572">   60</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a0bd19522ef8354a84b8df285b8c81572">headDim</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#aa8f7221f340e3726d6e8ec04c05bec9c">   61</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#aa8f7221f340e3726d6e8ec04c05bec9c">batchSize</a> = -1;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a23905077e9e2f0f77a29abb24ae50f8f">   62</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a23905077e9e2f0f77a29abb24ae50f8f">offset</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#ac635fe29c01aa632a597195cd5b95664">   63</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ac635fe29c01aa632a597195cd5b95664">reservedTokens</a> = 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">   64</a></span>        <span class="keywordtype">bool</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">isKCache</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">   65</a></span>        <a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>};</div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="};">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_v_cache.html">   68</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1_v_cache.html#a3fc87a5471436ac24f69aa1ed244ad64">VCache</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_v_cache.html#a3fc87a5471436ac24f69aa1ed244ad64">   71</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_v_cache.html#a3fc87a5471436ac24f69aa1ed244ad64">VCache</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) : <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">isKCache</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> = <a class="code hl_function" href="namespacecv_1_1dnn.html#a36630de412f23549d64341511c8d3e2f">fastGemmKC</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
+</div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_v_cache.html#a26e9ed848db81b2528662d9f00aa34d7">   75</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_v_cache.html#a26e9ed848db81b2528662d9f00aa34d7">VCache</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>) : <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>, <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">isKCache</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> = <a class="code hl_function" href="namespacecv_1_1dnn.html#a36630de412f23549d64341511c8d3e2f">fastGemmKC</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_v_cache.html#a06f2f762115a78904f8b98fbb678e92a">growGenerate</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; newData) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="};">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_cache.html">   83</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1_k_cache.html#a7f9d0d507c6d52a143fa6d9424d7c0c0">KCache</a> : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>{</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_cache.html#a7f9d0d507c6d52a143fa6d9424d7c0c0">   86</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_k_cache.html#a7f9d0d507c6d52a143fa6d9424d7c0c0">KCache</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) : <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">isKCache</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> = <a class="code hl_function" href="namespacecv_1_1dnn.html#a130773e8f8b2fe12f55ce9c6abb6f522">fastGemmNR</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
+</div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1_k_cache.html#ab6a94c5896868d32231fe1c44e7f44a3">   90</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1_k_cache.html#ab6a94c5896868d32231fe1c44e7f44a3">KCache</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>) : <a class="code hl_function" href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">KVCache</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>, <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">nHeads</a>) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">isKCache</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">pageSize</a> = <a class="code hl_function" href="namespacecv_1_1dnn.html#a130773e8f8b2fe12f55ce9c6abb6f522">fastGemmNR</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">opt</a>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
+</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1_k_cache.html#ab4b77873eddaabb74b0eb67cbb9124c3">growGenerate</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; newData) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>};</div>
+</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="};">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html">   99</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1_k_v_cache_manager.html">KVCacheManager</a></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>{</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#ac9d987a4214907c6be35c9e17894167b">  101</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_net_1_1_impl.html">Net::Impl</a>* <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#ac9d987a4214907c6be35c9e17894167b">netimpl</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a3b8730d4f4efebcc70c109b2e8ea1bf7">  102</a></span>    std::map&lt;std::string, KCache&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a3b8730d4f4efebcc70c109b2e8ea1bf7">kData</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a101cd2bd2a2108efcabe6362bdbb03dc">  103</a></span>    std::map&lt;std::string, VCache&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a101cd2bd2a2108efcabe6362bdbb03dc">vData</a>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#af8cf262c16b61b8a4f3d29ddf97a1f5f">  104</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_fast_gemm_opt.html">FastGemmOpt</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#af8cf262c16b61b8a4f3d29ddf97a1f5f">opt</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#addf9d583f0c9a2dc05a8efb96e265d5b">  105</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#addf9d583f0c9a2dc05a8efb96e265d5b">isInitialized</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="comment">// present.* output arg idx -&gt; past_key_values.* input arg idx</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a8238e0717c36a6c8877f29b171d72647">  108</a></span>    std::vector&lt;std::pair&lt;int, int&gt;&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a8238e0717c36a6c8877f29b171d72647">presentToPastRoutes</a>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a36ef76f1586924a6586c91ffae1e81b1">  109</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a36ef76f1586924a6586c91ffae1e81b1">hasRoutes</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a341b3766889c053a560d5a2093d285b7">init</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a38aeab3befa526844dcf84a52bd3e135">buildRoutes</a>();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a281c6a9881d391414a1983857b134cef">applyRoutes</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#ad981b6f408b5b06a1b81205e37cb7fb5">initPastTensors</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="comment">// Pre-reserve every per-layer K/V cache for up to maxTokens total sequence length.</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a952aca519a6bb21913313a50d462bd3c">reserve</a>(<span class="keywordtype">int</span> maxTokens);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a04a748c92e60b8933057c3e986fa7e35">  117</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a04a748c92e60b8933057c3e986fa7e35">empty</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a3b8730d4f4efebcc70c109b2e8ea1bf7">kData</a>.empty() &amp;&amp; <a class="code hl_variable" href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a101cd2bd2a2108efcabe6362bdbb03dc">vData</a>.empty(); }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a8617811ed33eb686e65f46490283a6c3">setKVCacheManager</a>(<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Net::Impl&gt;</a> netimpl);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}}</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_cache_html_a7f9d0d507c6d52a143fa6d9424d7c0c0"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_cache.html#a7f9d0d507c6d52a143fa6d9424d7c0c0">cv::dnn::KCache::KCache</a></div><div class="ttdeci">KCache(FastGemmOpt opt)</div><div class="ttdef"><b>Definición</b> <a href="#l00086">kv_cache_manager.hpp:86</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_cache_html_ab4b77873eddaabb74b0eb67cbb9124c3"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_cache.html#ab4b77873eddaabb74b0eb67cbb9124c3">cv::dnn::KCache::growGenerate</a></div><div class="ttdeci">void growGenerate(const Mat &amp;newData) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00271">kv_cache_manager.cpp:271</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_cache_html_ab6a94c5896868d32231fe1c44e7f44a3"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_cache.html#ab6a94c5896868d32231fe1c44e7f44a3">cv::dnn::KCache::KCache</a></div><div class="ttdeci">KCache(FastGemmOpt opt, int nHeads)</div><div class="ttdef"><b>Definición</b> <a href="#l00090">kv_cache_manager.hpp:90</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a025a55086e166db9baa2b12d23359f8e"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a025a55086e166db9baa2b12d23359f8e">cv::dnn::KVCache::reserve</a></div><div class="ttdeci">void reserve(int maxTokens)</div><div class="ttdef"><b>Definición</b> <a href="#l00039">kv_cache_manager.hpp:39</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a08cbb536e590ae07c88a7b97049f83d4"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a08cbb536e590ae07c88a7b97049f83d4">cv::dnn::KVCache::getActivePageCount</a></div><div class="ttdeci">int getActivePageCount() const</div><div class="ttdef"><b>Definición</b> <a href="#l00040">kv_cache_manager.hpp:40</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a0bd19522ef8354a84b8df285b8c81572"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a0bd19522ef8354a84b8df285b8c81572">cv::dnn::KVCache::headDim</a></div><div class="ttdeci">int headDim</div><div class="ttdef"><b>Definición</b> <a href="#l00060">kv_cache_manager.hpp:60</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a0d0282251dc1a582d01ff197d923e896"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a0d0282251dc1a582d01ff197d923e896">cv::dnn::KVCache::KVCache</a></div><div class="ttdeci">KVCache(FastGemmOpt opt, int nHeads)</div><div class="ttdef"><b>Definición</b> <a href="#l00031">kv_cache_manager.hpp:31</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a1236efed22606c5f7bfbadf136cccd20"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a1236efed22606c5f7bfbadf136cccd20">cv::dnn::KVCache::growGenerate</a></div><div class="ttdeci">virtual void growGenerate(const Mat &amp;newData)=0</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a1fbe8f28118c6f471be35e6143ff148f"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a1fbe8f28118c6f471be35e6143ff148f">cv::dnn::KVCache::getPageSize</a></div><div class="ttdeci">int getPageSize() const</div><div class="ttdef"><b>Definición</b> <a href="#l00047">kv_cache_manager.hpp:47</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a23905077e9e2f0f77a29abb24ae50f8f"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a23905077e9e2f0f77a29abb24ae50f8f">cv::dnn::KVCache::offset</a></div><div class="ttdeci">int offset</div><div class="ttdef"><b>Definición</b> <a href="#l00062">kv_cache_manager.hpp:62</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a280422a42ee79467106fe40c4ad3aefd"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a280422a42ee79467106fe40c4ad3aefd">cv::dnn::KVCache::appendTokens</a></div><div class="ttdeci">void appendTokens(const Mat &amp;newData, int T)</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00196">kv_cache_manager.cpp:196</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a28c3a9bcb69456dd3ff2e6c00912b0a2"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a28c3a9bcb69456dd3ff2e6c00912b0a2">cv::dnn::KVCache::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definición</b> <a href="#l00034">kv_cache_manager.hpp:34</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a3117c0cc3726167c6b97bdca87d17edb"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a3117c0cc3726167c6b97bdca87d17edb">cv::dnn::KVCache::opt</a></div><div class="ttdeci">FastGemmOpt opt</div><div class="ttdef"><b>Definición</b> <a href="#l00065">kv_cache_manager.hpp:65</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a5308a276472f09c709f607ca14f2b701"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a5308a276472f09c709f607ca14f2b701">cv::dnn::KVCache::growPrefill</a></div><div class="ttdeci">void growPrefill(const Mat &amp;newData, int T)</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00210">kv_cache_manager.cpp:210</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a559db3e99c0742b6ed462a7480b0b90a"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a559db3e99c0742b6ed462a7480b0b90a">cv::dnn::KVCache::getActivePages</a></div><div class="ttdeci">std::vector&lt; Mat &gt; getActivePages() const</div><div class="ttdef"><b>Definición</b> <a href="#l00043">kv_cache_manager.hpp:43</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a602644a4d43b9dbc1c51a4e07683e535"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a602644a4d43b9dbc1c51a4e07683e535">cv::dnn::KVCache::pages</a></div><div class="ttdeci">std::vector&lt; Mat &gt; pages</div><div class="ttdef"><b>Definición</b> <a href="#l00055">kv_cache_manager.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a8e74d67fe855b5192128299119c88e5b"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a8e74d67fe855b5192128299119c88e5b">cv::dnn::KVCache::isKCache</a></div><div class="ttdeci">bool isKCache</div><div class="ttdef"><b>Definición</b> <a href="#l00064">kv_cache_manager.hpp:64</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_a96485bc256185220faf35e6793a89562"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#a96485bc256185220faf35e6793a89562">cv::dnn::KVCache::nHeads</a></div><div class="ttdeci">int nHeads</div><div class="ttdef"><b>Definición</b> <a href="#l00059">kv_cache_manager.hpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_aa01e913e13b9b783c3309d2177dc44a4"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#aa01e913e13b9b783c3309d2177dc44a4">cv::dnn::KVCache::KVCache</a></div><div class="ttdeci">KVCache(FastGemmOpt opt)</div><div class="ttdef"><b>Definición</b> <a href="#l00032">kv_cache_manager.hpp:32</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_aa8f7221f340e3726d6e8ec04c05bec9c"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#aa8f7221f340e3726d6e8ec04c05bec9c">cv::dnn::KVCache::batchSize</a></div><div class="ttdeci">int batchSize</div><div class="ttdef"><b>Definición</b> <a href="#l00061">kv_cache_manager.hpp:61</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_abe891d686d4f5576ff6a692c148d0b31"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#abe891d686d4f5576ff6a692c148d0b31">cv::dnn::KVCache::grow</a></div><div class="ttdeci">void grow(const Mat &amp;newData)</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00145">kv_cache_manager.cpp:145</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_ac635fe29c01aa632a597195cd5b95664"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#ac635fe29c01aa632a597195cd5b95664">cv::dnn::KVCache::reservedTokens</a></div><div class="ttdeci">int reservedTokens</div><div class="ttdef"><b>Definición</b> <a href="#l00063">kv_cache_manager.hpp:63</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_ac778327762043b3142aac77e698ecfee"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#ac778327762043b3142aac77e698ecfee">cv::dnn::KVCache::nTokens</a></div><div class="ttdeci">int nTokens</div><div class="ttdef"><b>Definición</b> <a href="#l00057">kv_cache_manager.hpp:57</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_ad2c3bd52d713a79abfaa2bf178c7d77e"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#ad2c3bd52d713a79abfaa2bf178c7d77e">cv::dnn::KVCache::pageSize</a></div><div class="ttdeci">int pageSize</div><div class="ttdef"><b>Definición</b> <a href="#l00058">kv_cache_manager.hpp:58</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_aec9e977acc018a3370da94fe45994da2"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#aec9e977acc018a3370da94fe45994da2">cv::dnn::KVCache::~KVCache</a></div><div class="ttdeci">virtual ~KVCache()=default</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_k_v_cache_html_af4918355843df7c86d21e36d41aedaf0"><div class="ttname"><a href="classcv_1_1dnn_1_1_k_v_cache.html#af4918355843df7c86d21e36d41aedaf0">cv::dnn::KVCache::getNumTokens</a></div><div class="ttdeci">int getNumTokens() const</div><div class="ttdef"><b>Definición</b> <a href="#l00048">kv_cache_manager.hpp:48</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_v_cache_html_a06f2f762115a78904f8b98fbb678e92a"><div class="ttname"><a href="classcv_1_1dnn_1_1_v_cache.html#a06f2f762115a78904f8b98fbb678e92a">cv::dnn::VCache::growGenerate</a></div><div class="ttdeci">void growGenerate(const Mat &amp;newData) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00298">kv_cache_manager.cpp:298</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_v_cache_html_a26e9ed848db81b2528662d9f00aa34d7"><div class="ttname"><a href="classcv_1_1dnn_1_1_v_cache.html#a26e9ed848db81b2528662d9f00aa34d7">cv::dnn::VCache::VCache</a></div><div class="ttdeci">VCache(FastGemmOpt opt, int nHeads)</div><div class="ttdef"><b>Definición</b> <a href="#l00075">kv_cache_manager.hpp:75</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_v_cache_html_a3fc87a5471436ac24f69aa1ed244ad64"><div class="ttname"><a href="classcv_1_1dnn_1_1_v_cache.html#a3fc87a5471436ac24f69aa1ed244ad64">cv::dnn::VCache::VCache</a></div><div class="ttdeci">VCache(FastGemmOpt opt)</div><div class="ttdef"><b>Definición</b> <a href="#l00071">kv_cache_manager.hpp:71</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="adnn_2dnn_8hpp_html"><div class="ttname"><a href="dnn_2dnn_8hpp.html">dnn.hpp</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="afast__gemm_8hpp_html"><div class="ttname"><a href="fast__gemm_8hpp.html">fast_gemm.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a130773e8f8b2fe12f55ce9c6abb6f522"><div class="ttname"><a href="namespacecv_1_1dnn.html#a130773e8f8b2fe12f55ce9c6abb6f522">cv::dnn::fastGemmNR</a></div><div class="ttdeci">int fastGemmNR(const FastGemmOpt &amp;opt)</div><div class="ttdef"><b>Definición</b> <a href="fast__gemm_8cpp_source.html#l00117">fast_gemm.cpp:117</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a36630de412f23549d64341511c8d3e2f"><div class="ttname"><a href="namespacecv_1_1dnn.html#a36630de412f23549d64341511c8d3e2f">cv::dnn::fastGemmKC</a></div><div class="ttdeci">int fastGemmKC(const FastGemmOpt &amp;opt)</div><div class="ttdef"><b>Definición</b> <a href="fast__gemm_8cpp_source.html#l00086">fast_gemm.cpp:86</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a8617811ed33eb686e65f46490283a6c3"><div class="ttname"><a href="namespacecv_1_1dnn.html#a8617811ed33eb686e65f46490283a6c3">cv::dnn::setKVCacheManager</a></div><div class="ttdeci">void setKVCacheManager(Ptr&lt; Net::Impl &gt; netimpl)</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00041">kv_cache_manager.cpp:41</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ab9339c060baa5df08954b841a552b2eca0b7be978aa5fc79f6250c6863d5bf802"><div class="ttname"><a href="namespacecv_1_1dnn.html#ab9339c060baa5df08954b841a552b2eca0b7be978aa5fc79f6250c6863d5bf802">cv::dnn::KV_CACHE_MAX_RESERVED_TOKENS</a></div><div class="ttdeci">@ KV_CACHE_MAX_RESERVED_TOKENS</div><div class="ttdef"><b>Definición</b> <a href="#l00025">kv_cache_manager.hpp:25</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_fast_gemm_opt_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_fast_gemm_opt.html">cv::dnn::FastGemmOpt</a></div><div class="ttdef"><b>Definición</b> <a href="fast__gemm_8hpp_source.html#l00020">fast_gemm.hpp:20</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html">cv::dnn::KVCacheManager</a></div><div class="ttdef"><b>Definición</b> <a href="#l00099">kv_cache_manager.hpp:100</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a04a748c92e60b8933057c3e986fa7e35"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a04a748c92e60b8933057c3e986fa7e35">cv::dnn::KVCacheManager::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdef"><b>Definición</b> <a href="#l00117">kv_cache_manager.hpp:117</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a101cd2bd2a2108efcabe6362bdbb03dc"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a101cd2bd2a2108efcabe6362bdbb03dc">cv::dnn::KVCacheManager::vData</a></div><div class="ttdeci">std::map&lt; std::string, VCache &gt; vData</div><div class="ttdef"><b>Definición</b> <a href="#l00103">kv_cache_manager.hpp:103</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a281c6a9881d391414a1983857b134cef"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a281c6a9881d391414a1983857b134cef">cv::dnn::KVCacheManager::applyRoutes</a></div><div class="ttdeci">void applyRoutes()</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00126">kv_cache_manager.cpp:126</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a341b3766889c053a560d5a2093d285b7"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a341b3766889c053a560d5a2093d285b7">cv::dnn::KVCacheManager::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00061">kv_cache_manager.cpp:61</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a36ef76f1586924a6586c91ffae1e81b1"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a36ef76f1586924a6586c91ffae1e81b1">cv::dnn::KVCacheManager::hasRoutes</a></div><div class="ttdeci">bool hasRoutes</div><div class="ttdef"><b>Definición</b> <a href="#l00109">kv_cache_manager.hpp:109</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a38aeab3befa526844dcf84a52bd3e135"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a38aeab3befa526844dcf84a52bd3e135">cv::dnn::KVCacheManager::buildRoutes</a></div><div class="ttdeci">void buildRoutes()</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00068">kv_cache_manager.cpp:68</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a3b8730d4f4efebcc70c109b2e8ea1bf7"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a3b8730d4f4efebcc70c109b2e8ea1bf7">cv::dnn::KVCacheManager::kData</a></div><div class="ttdeci">std::map&lt; std::string, KCache &gt; kData</div><div class="ttdef"><b>Definición</b> <a href="#l00102">kv_cache_manager.hpp:102</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a8238e0717c36a6c8877f29b171d72647"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a8238e0717c36a6c8877f29b171d72647">cv::dnn::KVCacheManager::presentToPastRoutes</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; int, int &gt; &gt; presentToPastRoutes</div><div class="ttdef"><b>Definición</b> <a href="#l00108">kv_cache_manager.hpp:108</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_a952aca519a6bb21913313a50d462bd3c"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#a952aca519a6bb21913313a50d462bd3c">cv::dnn::KVCacheManager::reserve</a></div><div class="ttdeci">void reserve(int maxTokens)</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00139">kv_cache_manager.cpp:139</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_ac9d987a4214907c6be35c9e17894167b"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#ac9d987a4214907c6be35c9e17894167b">cv::dnn::KVCacheManager::netimpl</a></div><div class="ttdeci">Net::Impl * netimpl</div><div class="ttdef"><b>Definición</b> <a href="#l00101">kv_cache_manager.hpp:101</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_ad981b6f408b5b06a1b81205e37cb7fb5"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#ad981b6f408b5b06a1b81205e37cb7fb5">cv::dnn::KVCacheManager::initPastTensors</a></div><div class="ttdeci">void initPastTensors()</div><div class="ttdef"><b>Definición</b> <a href="kv__cache__manager_8cpp_source.html#l00102">kv_cache_manager.cpp:102</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_addf9d583f0c9a2dc05a8efb96e265d5b"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#addf9d583f0c9a2dc05a8efb96e265d5b">cv::dnn::KVCacheManager::isInitialized</a></div><div class="ttdeci">bool isInitialized</div><div class="ttdef"><b>Definición</b> <a href="#l00105">kv_cache_manager.hpp:105</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_k_v_cache_manager_html_af8cf262c16b61b8a4f3d29ddf97a1f5f"><div class="ttname"><a href="structcv_1_1dnn_1_1_k_v_cache_manager.html#af8cf262c16b61b8a4f3d29ddf97a1f5f">cv::dnn::KVCacheManager::opt</a></div><div class="ttdeci">FastGemmOpt opt</div><div class="ttdef"><b>Definición</b> <a href="#l00104">kv_cache_manager.hpp:104</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html">cv::dnn::Net::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00088">net_impl.hpp:89</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="kv__cache__manager_8hpp.html">kv_cache_manager.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

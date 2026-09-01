@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>numpy.polynomial.chebyshev &#8212; NumPy - Documentación Sphinx</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=3f32dc30"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/translations.js?v=f85f4cfb"></script>
+    <link rel="index" title="Índice" href="../../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para numpy.polynomial.chebyshev</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">====================================================</span>
+<span class="sd">Chebyshev Series (:mod:`numpy.polynomial.chebyshev`)</span>
+<span class="sd">====================================================</span>
+
+<span class="sd">This module provides a number of objects (mostly functions) useful for</span>
+<span class="sd">dealing with Chebyshev series, including a `Chebyshev` class that</span>
+<span class="sd">encapsulates the usual arithmetic operations.  (General information</span>
+<span class="sd">on how this module represents and works with such polynomials is in the</span>
+<span class="sd">docstring for its "parent" sub-package, `numpy.polynomial`).</span>
+
+<span class="sd">Classes</span>
+<span class="sd">-------</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   Chebyshev</span>
+
+
+<span class="sd">Constants</span>
+<span class="sd">---------</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   chebdomain</span>
+<span class="sd">   chebzero</span>
+<span class="sd">   chebone</span>
+<span class="sd">   chebx</span>
+
+<span class="sd">Arithmetic</span>
+<span class="sd">----------</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   chebadd</span>
+<span class="sd">   chebsub</span>
+<span class="sd">   chebmulx</span>
+<span class="sd">   chebmul</span>
+<span class="sd">   chebdiv</span>
+<span class="sd">   chebpow</span>
+<span class="sd">   chebval</span>
+<span class="sd">   chebval2d</span>
+<span class="sd">   chebval3d</span>
+<span class="sd">   chebvalnd</span>
+<span class="sd">   chebgrid2d</span>
+<span class="sd">   chebgrid3d</span>
+
+<span class="sd">Calculus</span>
+<span class="sd">--------</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   chebder</span>
+<span class="sd">   chebint</span>
+
+<span class="sd">Misc Functions</span>
+<span class="sd">--------------</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   chebfromroots</span>
+<span class="sd">   chebroots</span>
+<span class="sd">   chebvander</span>
+<span class="sd">   chebvander2d</span>
+<span class="sd">   chebvander3d</span>
+<span class="sd">   chebgauss</span>
+<span class="sd">   chebweight</span>
+<span class="sd">   chebcompanion</span>
+<span class="sd">   chebfit</span>
+<span class="sd">   chebpts1</span>
+<span class="sd">   chebpts2</span>
+<span class="sd">   chebtrim</span>
+<span class="sd">   chebline</span>
+<span class="sd">   cheb2poly</span>
+<span class="sd">   poly2cheb</span>
+<span class="sd">   chebinterpolate</span>
+
+<span class="sd">See also</span>
+<span class="sd">--------</span>
+<span class="sd">`numpy.polynomial`</span>
+
+<span class="sd">Notes</span>
+<span class="sd">-----</span>
+<span class="sd">The implementations of multiplication, division, integration, and</span>
+<span class="sd">differentiation use the algebraic identities [1]_:</span>
+
+<span class="sd">.. math::</span>
+<span class="sd">    T_n(x) = \\frac{z^n + z^{-n}}{2} \\\\</span>
+<span class="sd">    z\\frac{dx}{dz} = \\frac{z - z^{-1}}{2}.</span>
+
+<span class="sd">where</span>
+
+<span class="sd">.. math:: x = \\frac{z + z^{-1}}{2}.</span>
+
+<span class="sd">These identities allow a Chebyshev series to be expressed as a finite,</span>
+<span class="sd">symmetric Laurent series.  In this module, this sort of Laurent series</span>
+<span class="sd">is referred to as a "z-series."</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1] A. T. Benjamin, et al., "Combinatorial Trigonometry with Chebyshev</span>
+<span class="sd">  Polynomials," *Journal of Statistical Planning and Inference 14*, 2008</span>
+<span class="sd">  (https://web.archive.org/web/20080221202153/https://www.math.hmc.edu/~benjamin/papers/CombTrig.pdf, pg. 4)</span>
+
+<span class="sd">"""</span>  <span class="c1"># noqa: E501</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">polyutils</span> <span class="k">as</span> <span class="n">pu</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._polybase</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABCPolyBase</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'chebzero'</span><span class="p">,</span> <span class="s1">'chebone'</span><span class="p">,</span> <span class="s1">'chebx'</span><span class="p">,</span> <span class="s1">'chebdomain'</span><span class="p">,</span> <span class="s1">'chebline'</span><span class="p">,</span> <span class="s1">'chebadd'</span><span class="p">,</span>
+    <span class="s1">'chebsub'</span><span class="p">,</span> <span class="s1">'chebmulx'</span><span class="p">,</span> <span class="s1">'chebmul'</span><span class="p">,</span> <span class="s1">'chebdiv'</span><span class="p">,</span> <span class="s1">'chebpow'</span><span class="p">,</span> <span class="s1">'chebval'</span><span class="p">,</span>
+    <span class="s1">'chebder'</span><span class="p">,</span> <span class="s1">'chebint'</span><span class="p">,</span> <span class="s1">'cheb2poly'</span><span class="p">,</span> <span class="s1">'poly2cheb'</span><span class="p">,</span> <span class="s1">'chebfromroots'</span><span class="p">,</span>
+    <span class="s1">'chebvander'</span><span class="p">,</span> <span class="s1">'chebfit'</span><span class="p">,</span> <span class="s1">'chebtrim'</span><span class="p">,</span> <span class="s1">'chebroots'</span><span class="p">,</span> <span class="s1">'chebpts1'</span><span class="p">,</span>
+    <span class="s1">'chebpts2'</span><span class="p">,</span> <span class="s1">'Chebyshev'</span><span class="p">,</span> <span class="s1">'chebval2d'</span><span class="p">,</span> <span class="s1">'chebval3d'</span><span class="p">,</span> <span class="s1">'chebvalnd'</span><span class="p">,</span> <span class="s1">'chebgrid2d'</span><span class="p">,</span>
+    <span class="s1">'chebgrid3d'</span><span class="p">,</span> <span class="s1">'chebvander2d'</span><span class="p">,</span> <span class="s1">'chebvander3d'</span><span class="p">,</span> <span class="s1">'chebcompanion'</span><span class="p">,</span>
+    <span class="s1">'chebgauss'</span><span class="p">,</span> <span class="s1">'chebweight'</span><span class="p">,</span> <span class="s1">'chebinterpolate'</span><span class="p">]</span>
+
+<span class="n">chebtrim</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">trimcoef</span>
+
+<span class="c1">#</span>
+<span class="c1"># A collection of functions for manipulating z-series. These are private</span>
+<span class="c1"># functions and do minimal error checking.</span>
+<span class="c1">#</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cseries_to_zseries</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Convert Chebyshev series to z-series.</span>
+
+<span class="sd">    Convert a Chebyshev series to the equivalent z-series. The result is</span>
+<span class="sd">    never an empty array. The dtype of the return is the same as that of</span>
+<span class="sd">    the input. No checks are run on the arguments as this routine is for</span>
+<span class="sd">    internal use.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : 1-D ndarray</span>
+<span class="sd">        Chebyshev coefficients, ordered from low to high</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    zs : 1-D ndarray</span>
+<span class="sd">        Odd length symmetric z-series, ordered from  low to high.</span>
+
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">zs</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">zs</span> <span class="o">+</span> <span class="n">zs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_zseries_to_cseries</span><span class="p">(</span><span class="n">zs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Convert z-series to a Chebyshev series.</span>
+
+<span class="sd">    Convert a z series to the equivalent Chebyshev series. The result is</span>
+<span class="sd">    never an empty array. The dtype of the return is the same as that of</span>
+<span class="sd">    the input. No checks are run on the arguments as this routine is for</span>
+<span class="sd">    internal use.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zs : 1-D ndarray</span>
+<span class="sd">        Odd length symmetric z-series, ordered from  low to high.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    c : 1-D ndarray</span>
+<span class="sd">        Chebyshev coefficients, ordered from  low to high.</span>
+
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">zs</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">zs</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_zseries_mul</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Multiply two z-series.</span>
+
+<span class="sd">    Multiply two z-series to produce a z-series.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z1, z2 : 1-D ndarray</span>
+<span class="sd">        The arrays must be 1-D but this is not checked.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    product : 1-D ndarray</span>
+<span class="sd">        The product z-series.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This is simply convolution. If symmetric/anti-symmetric z-series are</span>
+<span class="sd">    denoted by S/A then the following rules apply:</span>
+
+<span class="sd">    S*S, A*A -&gt; S</span>
+<span class="sd">    S*A, A*S -&gt; A</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_zseries_div</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Divide the first z-series by the second.</span>
+
+<span class="sd">    Divide `z1` by `z2` and return the quotient and remainder as z-series.</span>
+<span class="sd">    Warning: this implementation only applies when both z1 and z2 have the</span>
+<span class="sd">    same symmetry, which is sufficient for present purposes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z1, z2 : 1-D ndarray</span>
+<span class="sd">        The arrays must be 1-D and have the same symmetry, but this is not</span>
+<span class="sd">        checked.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    (quotient, remainder) : 1-D ndarrays</span>
+<span class="sd">        Quotient and remainder as z-series.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This is not the same as polynomial division on account of the desired form</span>
+<span class="sd">    of the remainder. If symmetric/anti-symmetric z-series are denoted by S/A</span>
+<span class="sd">    then the following rules apply:</span>
+
+<span class="sd">    S/S -&gt; S,S</span>
+<span class="sd">    A/A -&gt; S,A</span>
+
+<span class="sd">    The restriction to types of the same symmetry could be fixed but seems like</span>
+<span class="sd">    unneeded generality. There is no natural form for the remainder in the case</span>
+<span class="sd">    where there is no symmetry.</span>
+
+<span class="sd">    """</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">lc1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+    <span class="n">lc2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lc2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">z1</span> <span class="o">/=</span> <span class="n">z2</span>
+        <span class="k">return</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z1</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">lc1</span> <span class="o">&lt;</span> <span class="n">lc2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z1</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dlen</span> <span class="o">=</span> <span class="n">lc1</span> <span class="o">-</span> <span class="n">lc2</span>
+        <span class="n">scl</span> <span class="o">=</span> <span class="n">z2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">z2</span> <span class="o">/=</span> <span class="n">scl</span>
+        <span class="n">quo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">dlen</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">z1</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">dlen</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">quo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">quo</span><span class="p">[</span><span class="n">dlen</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">z2</span>
+            <span class="n">z1</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">lc2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">tmp</span>
+            <span class="n">z1</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="n">lc2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">tmp</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">quo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">z2</span>
+        <span class="n">z1</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">lc2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">tmp</span>
+        <span class="n">quo</span> <span class="o">/=</span> <span class="n">scl</span>
+        <span class="n">rem</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">lc2</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">quo</span><span class="p">,</span> <span class="n">rem</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_zseries_der</span><span class="p">(</span><span class="n">zs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Differentiate a z-series.</span>
+
+<span class="sd">    The derivative is with respect to x, not z. This is achieved using the</span>
+<span class="sd">    chain rule and the value of dx/dz given in the module notes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zs : z-series</span>
+<span class="sd">        The z-series to differentiate.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    derivative : z-series</span>
+<span class="sd">        The derivative</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The zseries for x (ns) has been multiplied by two in order to avoid</span>
+<span class="sd">    using floats that are incompatible with Decimal and likely other</span>
+<span class="sd">    specialized scalar types. This scaling has been compensated by</span>
+<span class="sd">    multiplying the value of zs by two also so that the two cancels in the</span>
+<span class="sd">    division.</span>
+
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">zs</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">zs</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">zs</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">_zseries_div</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_zseries_int</span><span class="p">(</span><span class="n">zs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Integrate a z-series.</span>
+
+<span class="sd">    The integral is with respect to x, not z. This is achieved by a change</span>
+<span class="sd">    of variable using dx/dz given in the module notes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zs : z-series</span>
+<span class="sd">        The z-series to integrate</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    integral : z-series</span>
+<span class="sd">        The indefinite integral</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The zseries for x (ns) has been multiplied by two in order to avoid</span>
+<span class="sd">    using floats that are incompatible with Decimal and likely other</span>
+<span class="sd">    specialized scalar types. This scaling has been compensated by</span>
+<span class="sd">    dividing the resulting zs by two.</span>
+
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">zs</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">zs</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">zs</span> <span class="o">=</span> <span class="n">_zseries_mul</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">zs</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">/=</span> <span class="n">div</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">zs</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/=</span> <span class="n">div</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+    <span class="n">zs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">zs</span>
+
+<span class="c1">#</span>
+<span class="c1"># Chebyshev series functions</span>
+<span class="c1">#</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">poly2cheb</span><span class="p">(</span><span class="n">pol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a polynomial to a Chebyshev series.</span>
+
+<span class="sd">    Convert an array representing the coefficients of a polynomial (relative</span>
+<span class="sd">    to the "standard" basis) ordered from lowest degree to highest, to an</span>
+<span class="sd">    array of the coefficients of the equivalent Chebyshev series, ordered</span>
+<span class="sd">    from lowest to highest degree.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pol : array_like</span>
+<span class="sd">        1-D array containing the polynomial coefficients</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    c : ndarray</span>
+<span class="sd">        1-D array containing the coefficients of the equivalent Chebyshev</span>
+<span class="sd">        series.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    cheb2poly</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The easy way to do conversions between polynomial basis sets</span>
+<span class="sd">    is to use the convert method of a class instance.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import polynomial as P</span>
+<span class="sd">    &gt;&gt;&gt; p = P.Polynomial(range(4))</span>
+<span class="sd">    &gt;&gt;&gt; p</span>
+<span class="sd">    Polynomial([0., 1., 2., 3.], domain=[-1.,  1.], window=[-1.,  1.], symbol='x')</span>
+<span class="sd">    &gt;&gt;&gt; c = p.convert(kind=P.Chebyshev)</span>
+<span class="sd">    &gt;&gt;&gt; c</span>
+<span class="sd">    Chebyshev([1.  , 3.25, 1.  , 0.75], domain=[-1.,  1.], window=[-1., ...</span>
+<span class="sd">    &gt;&gt;&gt; P.chebyshev.poly2cheb(range(4))</span>
+<span class="sd">    array([1.  , 3.25, 1.  , 0.75])</span>
+
+<span class="sd">    """</span>
+    <span class="p">[</span><span class="n">pol</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">pol</span><span class="p">])</span>
+    <span class="n">deg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pol</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">chebadd</span><span class="p">(</span><span class="n">chebmulx</span><span class="p">(</span><span class="n">res</span><span class="p">),</span> <span class="n">pol</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cheb2poly</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Chebyshev series to a polynomial.</span>
+
+<span class="sd">    Convert an array representing the coefficients of a Chebyshev series,</span>
+<span class="sd">    ordered from lowest degree to highest, to an array of the coefficients</span>
+<span class="sd">    of the equivalent polynomial (relative to the "standard" basis) ordered</span>
+<span class="sd">    from lowest to highest degree.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        1-D array containing the Chebyshev series coefficients, ordered</span>
+<span class="sd">        from lowest order term to highest.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pol : ndarray</span>
+<span class="sd">        1-D array containing the coefficients of the equivalent polynomial</span>
+<span class="sd">        (relative to the "standard" basis) ordered from lowest order term</span>
+<span class="sd">        to highest.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    poly2cheb</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The easy way to do conversions between polynomial basis sets</span>
+<span class="sd">    is to use the convert method of a class instance.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import polynomial as P</span>
+<span class="sd">    &gt;&gt;&gt; c = P.Chebyshev(range(4))</span>
+<span class="sd">    &gt;&gt;&gt; c</span>
+<span class="sd">    Chebyshev([0., 1., 2., 3.], domain=[-1.,  1.], window=[-1.,  1.], symbol='x')</span>
+<span class="sd">    &gt;&gt;&gt; p = c.convert(kind=P.Polynomial)</span>
+<span class="sd">    &gt;&gt;&gt; p</span>
+<span class="sd">    Polynomial([-2., -8.,  4., 12.], domain=[-1.,  1.], window=[-1.,  1.], ...</span>
+<span class="sd">    &gt;&gt;&gt; P.chebyshev.cheb2poly(range(4))</span>
+<span class="sd">    array([-2.,  -8.,   4.,  12.])</span>
+
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.polynomial</span><span class="w"> </span><span class="kn">import</span> <span class="n">polyadd</span><span class="p">,</span> <span class="n">polymulx</span><span class="p">,</span> <span class="n">polysub</span>
+
+    <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c</span><span class="p">])</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">c0</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># i is the current degree of c1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">c0</span>
+            <span class="n">c0</span> <span class="o">=</span> <span class="n">polysub</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">],</span> <span class="n">c1</span><span class="p">)</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="n">polyadd</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">polymulx</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">polyadd</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">polymulx</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># These are constant arrays are of integer type so as to be compatible</span>
+<span class="c1"># with the widest range of other types, such as Decimal.</span>
+<span class="c1">#</span>
+
+<span class="c1"># Chebyshev default domain.</span>
+<span class="n">chebdomain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+
+<span class="c1"># Chebyshev coefficients representing zero.</span>
+<span class="n">chebzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Chebyshev coefficients representing one.</span>
+<span class="n">chebone</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Chebyshev coefficients representing the identity x.</span>
+<span class="n">chebx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebline</span><span class="p">(</span><span class="n">off</span><span class="p">,</span> <span class="n">scl</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Chebyshev series whose graph is a straight line.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    off, scl : scalars</span>
+<span class="sd">        The specified line is given by ``off + scl*x``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    y : ndarray</span>
+<span class="sd">        This module's representation of the Chebyshev series for</span>
+<span class="sd">        ``off + scl*x``.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.polynomial.polynomial.polyline</span>
+<span class="sd">    numpy.polynomial.legendre.legline</span>
+<span class="sd">    numpy.polynomial.laguerre.lagline</span>
+<span class="sd">    numpy.polynomial.hermite.hermline</span>
+<span class="sd">    numpy.polynomial.hermite_e.hermeline</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy.polynomial.chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; C.chebline(3,2)</span>
+<span class="sd">    array([3, 2])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebval(-3, C.chebline(3,2)) # should be -3</span>
+<span class="sd">    -3.0</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">scl</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">off</span><span class="p">,</span> <span class="n">scl</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">off</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebfromroots</span><span class="p">(</span><span class="n">roots</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate a Chebyshev series with given roots.</span>
+
+<span class="sd">    The function returns the coefficients of the polynomial</span>
+
+<span class="sd">    .. math:: p(x) = (x - r_0) * (x - r_1) * ... * (x - r_n),</span>
+
+<span class="sd">    in Chebyshev form, where the :math:`r_n` are the roots specified in</span>
+<span class="sd">    `roots`.  If a zero has multiplicity n, then it must appear in `roots`</span>
+<span class="sd">    n times.  For instance, if 2 is a root of multiplicity three and 3 is a</span>
+<span class="sd">    root of multiplicity 2, then `roots` looks something like [2, 2, 2, 3, 3].</span>
+<span class="sd">    The roots can appear in any order.</span>
+
+<span class="sd">    If the returned coefficients are `c`, then</span>
+
+<span class="sd">    .. math:: p(x) = c_0 + c_1 * T_1(x) + ... +  c_n * T_n(x)</span>
+
+<span class="sd">    The coefficient of the last term is not generally 1 for monic</span>
+<span class="sd">    polynomials in Chebyshev form.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    roots : array_like</span>
+<span class="sd">        Sequence containing the roots.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        1-D array of coefficients.  If all roots are real then `out` is a</span>
+<span class="sd">        real array, if some of the roots are complex, then `out` is complex</span>
+<span class="sd">        even if all the coefficients in the result are real (see Examples</span>
+<span class="sd">        below).</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.polynomial.polynomial.polyfromroots</span>
+<span class="sd">    numpy.polynomial.legendre.legfromroots</span>
+<span class="sd">    numpy.polynomial.laguerre.lagfromroots</span>
+<span class="sd">    numpy.polynomial.hermite.hermfromroots</span>
+<span class="sd">    numpy.polynomial.hermite_e.hermefromroots</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy.polynomial.chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; C.chebfromroots((-1,0,1)) # x^3 - x relative to the standard basis</span>
+<span class="sd">    array([ 0.  , -0.25,  0.  ,  0.25])</span>
+<span class="sd">    &gt;&gt;&gt; j = complex(0,1)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebfromroots((-j,j)) # x^2 + 1 relative to the standard basis</span>
+<span class="sd">    array([1.5+0.j, 0. +0.j, 0.5+0.j])</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_fromroots</span><span class="p">(</span><span class="n">chebline</span><span class="p">,</span> <span class="n">chebmul</span><span class="p">,</span> <span class="n">roots</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebadd</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add one Chebyshev series to another.</span>
+
+<span class="sd">    Returns the sum of two Chebyshev series `c1` + `c2`.  The arguments</span>
+<span class="sd">    are sequences of coefficients ordered from lowest order term to</span>
+<span class="sd">    highest, i.e., [1,2,3] represents the series ``T_0 + 2*T_1 + 3*T_2``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c1, c2 : array_like</span>
+<span class="sd">        1-D arrays of Chebyshev series coefficients ordered from low to</span>
+<span class="sd">        high.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Array representing the Chebyshev series of their sum.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebsub, chebmulx, chebmul, chebdiv, chebpow</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Unlike multiplication, division, etc., the sum of two Chebyshev series</span>
+<span class="sd">    is a Chebyshev series (without having to "reproject" the result onto</span>
+<span class="sd">    the basis set) so addition, just like that of "standard" polynomials,</span>
+<span class="sd">    is simply "component-wise."</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; c1 = (1,2,3)</span>
+<span class="sd">    &gt;&gt;&gt; c2 = (3,2,1)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebadd(c1,c2)</span>
+<span class="sd">    array([4., 4., 4.])</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebsub</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Subtract one Chebyshev series from another.</span>
+
+<span class="sd">    Returns the difference of two Chebyshev series `c1` - `c2`.  The</span>
+<span class="sd">    sequences of coefficients are from lowest order term to highest, i.e.,</span>
+<span class="sd">    [1,2,3] represents the series ``T_0 + 2*T_1 + 3*T_2``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c1, c2 : array_like</span>
+<span class="sd">        1-D arrays of Chebyshev series coefficients ordered from low to</span>
+<span class="sd">        high.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Of Chebyshev series coefficients representing their difference.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebadd, chebmulx, chebmul, chebdiv, chebpow</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Unlike multiplication, division, etc., the difference of two Chebyshev</span>
+<span class="sd">    series is a Chebyshev series (without having to "reproject" the result</span>
+<span class="sd">    onto the basis set) so subtraction, just like that of "standard"</span>
+<span class="sd">    polynomials, is simply "component-wise."</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; c1 = (1,2,3)</span>
+<span class="sd">    &gt;&gt;&gt; c2 = (3,2,1)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebsub(c1,c2)</span>
+<span class="sd">    array([-2.,  0.,  2.])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebsub(c2,c1) # -C.chebsub(c1,c2)</span>
+<span class="sd">    array([ 2.,  0., -2.])</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_sub</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebmulx</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Multiply a Chebyshev series by x.</span>
+
+<span class="sd">    Multiply the polynomial `c` by x, where x is the independent</span>
+<span class="sd">    variable.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        1-D array of Chebyshev series coefficients ordered from low to</span>
+<span class="sd">        high.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Array representing the result of the multiplication.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebadd, chebsub, chebmul, chebdiv, chebpow</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; C.chebmulx([1,2,3])</span>
+<span class="sd">    array([1. , 2.5, 1. , 1.5])</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># c is a trimmed copy</span>
+    <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c</span><span class="p">])</span>
+    <span class="c1"># The zero series needs special treatment</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="n">prd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">prd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span>
+    <span class="n">prd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">prd</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="n">tmp</span>
+        <span class="n">prd</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">tmp</span>
+    <span class="k">return</span> <span class="n">prd</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebmul</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Multiply one Chebyshev series by another.</span>
+
+<span class="sd">    Returns the product of two Chebyshev series `c1` * `c2`.  The arguments</span>
+<span class="sd">    are sequences of coefficients, from lowest order "term" to highest,</span>
+<span class="sd">    e.g., [1,2,3] represents the series ``T_0 + 2*T_1 + 3*T_2``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c1, c2 : array_like</span>
+<span class="sd">        1-D arrays of Chebyshev series coefficients ordered from low to</span>
+<span class="sd">        high.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Of Chebyshev series coefficients representing their product.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebadd, chebsub, chebmulx, chebdiv, chebpow</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    In general, the (polynomial) product of two C-series results in terms</span>
+<span class="sd">    that are not in the Chebyshev polynomial basis set.  Thus, to express</span>
+<span class="sd">    the product as a C-series, it is typically necessary to "reproject"</span>
+<span class="sd">    the product onto said basis set, which typically produces</span>
+<span class="sd">    "unintuitive live" (but correct) results; see Examples section below.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; c1 = (1,2,3)</span>
+<span class="sd">    &gt;&gt;&gt; c2 = (3,2,1)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebmul(c1,c2) # multiplication requires "reprojection"</span>
+<span class="sd">    array([  6.5,  12. ,  12. ,   4. ,   1.5])</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># c1, c2 are trimmed copies</span>
+    <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">])</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">_cseries_to_zseries</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">_cseries_to_zseries</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+    <span class="n">prd</span> <span class="o">=</span> <span class="n">_zseries_mul</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">_zseries_to_cseries</span><span class="p">(</span><span class="n">prd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">trimseq</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebdiv</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Divide one Chebyshev series by another.</span>
+
+<span class="sd">    Returns the quotient-with-remainder of two Chebyshev series</span>
+<span class="sd">    `c1` / `c2`.  The arguments are sequences of coefficients from lowest</span>
+<span class="sd">    order "term" to highest, e.g., [1,2,3] represents the series</span>
+<span class="sd">    ``T_0 + 2*T_1 + 3*T_2``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c1, c2 : array_like</span>
+<span class="sd">        1-D arrays of Chebyshev series coefficients ordered from low to</span>
+<span class="sd">        high.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    [quo, rem] : ndarrays</span>
+<span class="sd">        Of Chebyshev series coefficients representing the quotient and</span>
+<span class="sd">        remainder.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebadd, chebsub, chebmulx, chebmul, chebpow</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    In general, the (polynomial) division of one C-series by another</span>
+<span class="sd">    results in quotient and remainder terms that are not in the Chebyshev</span>
+<span class="sd">    polynomial basis set.  Thus, to express these results as C-series, it</span>
+<span class="sd">    is typically necessary to "reproject" the results onto said basis</span>
+<span class="sd">    set, which typically produces "unintuitive" (but correct) results;</span>
+<span class="sd">    see Examples section below.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; c1 = (1,2,3)</span>
+<span class="sd">    &gt;&gt;&gt; c2 = (3,2,1)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebdiv(c1,c2) # quotient "intuitive," remainder not</span>
+<span class="sd">    (array([3.]), array([-8., -4.]))</span>
+<span class="sd">    &gt;&gt;&gt; c2 = (0,1,2,3)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebdiv(c2,c1) # neither "intuitive"</span>
+<span class="sd">    (array([0., 2.]), array([-2., -4.]))</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># c1, c2 are trimmed copies</span>
+    <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">c2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span>  <span class="c1"># FIXME: add message with details to exception</span>
+
+    <span class="c1"># note: this is more efficient than `pu._div(chebmul, c1, c2)`</span>
+    <span class="n">lc1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+    <span class="n">lc2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lc1</span> <span class="o">&lt;</span> <span class="n">lc2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c1</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c1</span>
+    <span class="k">elif</span> <span class="n">lc2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c1</span> <span class="o">/</span> <span class="n">c2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c1</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">z1</span> <span class="o">=</span> <span class="n">_cseries_to_zseries</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+        <span class="n">z2</span> <span class="o">=</span> <span class="n">_cseries_to_zseries</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+        <span class="n">quo</span><span class="p">,</span> <span class="n">rem</span> <span class="o">=</span> <span class="n">_zseries_div</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">)</span>
+        <span class="n">quo</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">trimseq</span><span class="p">(</span><span class="n">_zseries_to_cseries</span><span class="p">(</span><span class="n">quo</span><span class="p">))</span>
+        <span class="n">rem</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">trimseq</span><span class="p">(</span><span class="n">_zseries_to_cseries</span><span class="p">(</span><span class="n">rem</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">quo</span><span class="p">,</span> <span class="n">rem</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebpow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="n">maxpower</span><span class="o">=</span><span class="mi">16</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Raise a Chebyshev series to a power.</span>
+
+<span class="sd">    Returns the Chebyshev series `c` raised to the power `pow`. The</span>
+<span class="sd">    argument `c` is a sequence of coefficients ordered from low to high.</span>
+<span class="sd">    i.e., [1,2,3] is the series  ``T_0 + 2*T_1 + 3*T_2.``</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        1-D array of Chebyshev series coefficients ordered from low to</span>
+<span class="sd">        high.</span>
+<span class="sd">    pow : integer</span>
+<span class="sd">        Power to which the series will be raised</span>
+<span class="sd">    maxpower : integer, optional</span>
+<span class="sd">        Maximum power allowed. This is mainly to limit growth of the series</span>
+<span class="sd">        to unmanageable size. Default is 16</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    coef : ndarray</span>
+<span class="sd">        Chebyshev series of power.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebadd, chebsub, chebmulx, chebmul, chebdiv</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; C.chebpow([1, 2, 3, 4], 2)</span>
+<span class="sd">    array([15.5, 22. , 16. , ..., 12.5, 12. ,  8. ])</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># note: this is more efficient than `pu._pow(chebmul, c1, c2)`, as it</span>
+    <span class="c1"># avoids converting between z and c series repeatedly</span>
+
+    <span class="c1"># c is a trimmed copy</span>
+    <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c</span><span class="p">])</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">pow</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">power</span> <span class="o">!=</span> <span class="nb">pow</span> <span class="ow">or</span> <span class="n">power</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Power must be a non-negative integer."</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">maxpower</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power</span> <span class="o">&gt;</span> <span class="n">maxpower</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Power is too large"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">power</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">power</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># This can be made more efficient by using powers of two</span>
+        <span class="c1"># in the usual way.</span>
+        <span class="n">zs</span> <span class="o">=</span> <span class="n">_cseries_to_zseries</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">prd</span> <span class="o">=</span> <span class="n">zs</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">power</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">prd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">prd</span><span class="p">,</span> <span class="n">zs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_zseries_to_cseries</span><span class="p">(</span><span class="n">prd</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scl</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Differentiate a Chebyshev series.</span>
+
+<span class="sd">    Returns the Chebyshev series coefficients `c` differentiated `m` times</span>
+<span class="sd">    along `axis`.  At each iteration the result is multiplied by `scl` (the</span>
+<span class="sd">    scaling factor is for use in a linear change of variable). The argument</span>
+<span class="sd">    `c` is an array of coefficients from low to high degree along each</span>
+<span class="sd">    axis, e.g., [1,2,3] represents the series ``1*T_0 + 2*T_1 + 3*T_2``</span>
+<span class="sd">    while [[1,2],[1,2]] represents ``1*T_0(x)*T_0(y) + 1*T_1(x)*T_0(y) +</span>
+<span class="sd">    2*T_0(x)*T_1(y) + 2*T_1(x)*T_1(y)`` if axis=0 is ``x`` and axis=1 is</span>
+<span class="sd">    ``y``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of Chebyshev series coefficients. If c is multidimensional</span>
+<span class="sd">        the different axis correspond to different variables with the</span>
+<span class="sd">        degree in each axis given by the corresponding index.</span>
+<span class="sd">    m : int, optional</span>
+<span class="sd">        Number of derivatives taken, must be non-negative. (Default: 1)</span>
+<span class="sd">    scl : scalar, optional</span>
+<span class="sd">        Each differentiation is multiplied by `scl`.  The end result is</span>
+<span class="sd">        multiplication by ``scl**m``.  This is for use in a linear change of</span>
+<span class="sd">        variable. (Default: 1)</span>
+<span class="sd">    axis : int, optional</span>
+<span class="sd">        Axis over which the derivative is taken. (Default: 0).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    der : ndarray</span>
+<span class="sd">        Chebyshev series of the derivative.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebint</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    In general, the result of differentiating a C-series needs to be</span>
+<span class="sd">    "reprojected" onto the C-series basis set. Thus, typically, the</span>
+<span class="sd">    result of this function is "unintuitive," albeit correct; see Examples</span>
+<span class="sd">    section below.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; c = (1,2,3,4)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebder(c)</span>
+<span class="sd">    array([14., 12., 24.])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebder(c,3)</span>
+<span class="sd">    array([96.])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebder(c,scl=-1)</span>
+<span class="sd">    array([-14., -12., -24.])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebder(c,2,-1)</span>
+<span class="sd">    array([12.,  96.])</span>
+
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">char</span> <span class="ow">in</span> <span class="s1">'?bBhHiIlLqQpP'</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">_as_int</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">"the order of derivation"</span><span class="p">)</span>
+    <span class="n">iaxis</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">_as_int</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="s2">"the axis"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The order of derivation must be non-negative"</span><span class="p">)</span>
+    <span class="n">iaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">array_utils</span><span class="o">.</span><span class="n">normalize_axis_index</span><span class="p">(</span><span class="n">iaxis</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">iaxis</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cnt</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">c</span> <span class="o">*=</span> <span class="n">scl</span>
+            <span class="n">der</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,)</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">der</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">c</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">der</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">der</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">der</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iaxis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebint</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="p">[],</span> <span class="n">lbnd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scl</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Integrate a Chebyshev series.</span>
+
+<span class="sd">    Returns the Chebyshev series coefficients `c` integrated `m` times from</span>
+<span class="sd">    `lbnd` along `axis`. At each iteration the resulting series is</span>
+<span class="sd">    **multiplied** by `scl` and an integration constant, `k`, is added.</span>
+<span class="sd">    The scaling factor is for use in a linear change of variable.  ("Buyer</span>
+<span class="sd">    beware": note that, depending on what one is doing, one may want `scl`</span>
+<span class="sd">    to be the reciprocal of what one might expect; for more information,</span>
+<span class="sd">    see the Notes section below.)  The argument `c` is an array of</span>
+<span class="sd">    coefficients from low to high degree along each axis, e.g., [1,2,3]</span>
+<span class="sd">    represents the series ``T_0 + 2*T_1 + 3*T_2`` while [[1,2],[1,2]]</span>
+<span class="sd">    represents ``1*T_0(x)*T_0(y) + 1*T_1(x)*T_0(y) + 2*T_0(x)*T_1(y) +</span>
+<span class="sd">    2*T_1(x)*T_1(y)`` if axis=0 is ``x`` and axis=1 is ``y``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of Chebyshev series coefficients. If c is multidimensional</span>
+<span class="sd">        the different axis correspond to different variables with the</span>
+<span class="sd">        degree in each axis given by the corresponding index.</span>
+<span class="sd">    m : int, optional</span>
+<span class="sd">        Order of integration, must be positive. (Default: 1)</span>
+<span class="sd">    k : {[], list, scalar}, optional</span>
+<span class="sd">        Integration constant(s).  The value of the first integral at zero</span>
+<span class="sd">        is the first value in the list, the value of the second integral</span>
+<span class="sd">        at zero is the second value, etc.  If ``k == []`` (the default),</span>
+<span class="sd">        all constants are set to zero.  If ``m == 1``, a single scalar can</span>
+<span class="sd">        be given instead of a list.</span>
+<span class="sd">    lbnd : scalar, optional</span>
+<span class="sd">        The lower bound of the integral. (Default: 0)</span>
+<span class="sd">    scl : scalar, optional</span>
+<span class="sd">        Following each integration the result is *multiplied* by `scl`</span>
+<span class="sd">        before the integration constant is added. (Default: 1)</span>
+<span class="sd">    axis : int, optional</span>
+<span class="sd">        Axis over which the integral is taken. (Default: 0).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    S : ndarray</span>
+<span class="sd">        C-series coefficients of the integral.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``m &lt; 1``, ``len(k) &gt; m``, ``np.ndim(lbnd) != 0``, or</span>
+<span class="sd">        ``np.ndim(scl) != 0``.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebder</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Note that the result of each integration is *multiplied* by `scl`.</span>
+<span class="sd">    Why is this important to note?  Say one is making a linear change of</span>
+<span class="sd">    variable :math:`u = ax + b` in an integral relative to `x`.  Then</span>
+<span class="sd">    :math:`dx = du/a`, so one will need to set `scl` equal to</span>
+<span class="sd">    :math:`1/a`- perhaps not what one would have first thought.</span>
+
+<span class="sd">    Also note that, in general, the result of integrating a C-series needs</span>
+<span class="sd">    to be "reprojected" onto the C-series basis set.  Thus, typically,</span>
+<span class="sd">    the result of this function is "unintuitive," albeit correct; see</span>
+<span class="sd">    Examples section below.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.polynomial import chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; c = (1,2,3)</span>
+<span class="sd">    &gt;&gt;&gt; C.chebint(c)</span>
+<span class="sd">    array([ 0.5, -0.5,  0.5,  0.5])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebint(c,3)</span>
+<span class="sd">    array([ 0.03125   , -0.1875    ,  0.04166667, -0.05208333,  0.01041667, # may vary</span>
+<span class="sd">        0.00625   ])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebint(c, k=3)</span>
+<span class="sd">    array([ 3.5, -0.5,  0.5,  0.5])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebint(c,lbnd=-2)</span>
+<span class="sd">    array([ 8.5, -0.5,  0.5,  0.5])</span>
+<span class="sd">    &gt;&gt;&gt; C.chebint(c,scl=-2)</span>
+<span class="sd">    array([-1.,  1., -1., -1.])</span>
+
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">char</span> <span class="ow">in</span> <span class="s1">'?bBhHiIlLqQpP'</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">iterable</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">_as_int</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">"the order of integration"</span><span class="p">)</span>
+    <span class="n">iaxis</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">_as_int</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="s2">"the axis"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The order of integration must be non-negative"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">cnt</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Too many integration constants"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">lbnd</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"lbnd must be a scalar."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">scl</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"scl must be a scalar."</span><span class="p">)</span>
+    <span class="n">iaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">array_utils</span><span class="o">.</span><span class="n">normalize_axis_index</span><span class="p">(</span><span class="n">iaxis</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">iaxis</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cnt</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">*=</span> <span class="n">scl</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">tmp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">4</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">tmp</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">tmp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">chebval</span><span class="p">(</span><span class="n">lbnd</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">tmp</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iaxis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a Chebyshev series at points x.</span>
+
+<span class="sd">    If `c` is of length `n + 1`, this function returns the value:</span>
+
+<span class="sd">    .. math:: p(x) = c_0 * T_0(x) + c_1 * T_1(x) + ... + c_n * T_n(x)</span>
+
+<span class="sd">    The parameter `x` is converted to an array only if it is a tuple or a</span>
+<span class="sd">    list, otherwise it is treated as a scalar. In either case, either `x`</span>
+<span class="sd">    or its elements must support multiplication and addition both with</span>
+<span class="sd">    themselves and with the elements of `c`.</span>
+
+<span class="sd">    If `c` is a 1-D array, then ``p(x)`` will have the same shape as `x`.  If</span>
+<span class="sd">    `c` is multidimensional, then the shape of the result depends on the</span>
+<span class="sd">    value of `tensor`. If `tensor` is true the shape will be c.shape[1:] +</span>
+<span class="sd">    x.shape. If `tensor` is false the shape will be c.shape[1:]. Note that</span>
+<span class="sd">    scalars have shape (,).</span>
+
+<span class="sd">    Trailing zeros in the coefficients will be used in the evaluation, so</span>
+<span class="sd">    they should be avoided if efficiency is a concern.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : array_like, compatible object</span>
+<span class="sd">        If `x` is a list or tuple, it is converted to an ndarray, otherwise</span>
+<span class="sd">        it is left unchanged and treated as a scalar. In either case, `x`</span>
+<span class="sd">        or its elements must support addition and multiplication with</span>
+<span class="sd">        themselves and with the elements of `c`.</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of coefficients ordered so that the coefficients for terms of</span>
+<span class="sd">        degree n are contained in c[n]. If `c` is multidimensional the</span>
+<span class="sd">        remaining indices enumerate multiple polynomials. In the two</span>
+<span class="sd">        dimensional case the coefficients may be thought of as stored in</span>
+<span class="sd">        the columns of `c`.</span>
+<span class="sd">    tensor : boolean, optional</span>
+<span class="sd">        If True, the shape of the coefficient array is extended with ones</span>
+<span class="sd">        on the right, one for each dimension of `x`. Scalars have dimension 0</span>
+<span class="sd">        for this action. The result is that every column of coefficients in</span>
+<span class="sd">        `c` is evaluated for every element of `x`. If False, `x` is broadcast</span>
+<span class="sd">        over the columns of `c` for the evaluation.  This keyword is useful</span>
+<span class="sd">        when `c` is multidimensional. The default value is True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : ndarray, algebra_like</span>
+<span class="sd">        The shape of the return value is described above.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebval2d, chebgrid2d, chebval3d, chebgrid3d</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The evaluation uses Clenshaw recursion, aka synthetic division.</span>
+
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">char</span> <span class="ow">in</span> <span class="s1">'?bBhHiIlLqQpP'</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tensor</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">c0</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">c0</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+        <span class="n">c0</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">c0</span>
+            <span class="n">c0</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">c1</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">x2</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebval2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a 2-D Chebyshev series at points (x, y).</span>
+
+<span class="sd">    This function returns the values:</span>
+
+<span class="sd">    .. math:: p(x,y) = \\sum_{i,j} c_{i,j} * T_i(x) * T_j(y)</span>
+
+<span class="sd">    The parameters `x` and `y` are converted to arrays only if they are</span>
+<span class="sd">    tuples or a lists, otherwise they are treated as a scalars and they</span>
+<span class="sd">    must have the same shape after conversion. In either case, either `x`</span>
+<span class="sd">    and `y` or their elements must support multiplication and addition both</span>
+<span class="sd">    with themselves and with the elements of `c`.</span>
+
+<span class="sd">    If `c` is a 1-D array a one is implicitly appended to its shape to make</span>
+<span class="sd">    it 2-D. The shape of the result will be c.shape[2:] + x.shape.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y : array_like, compatible objects</span>
+<span class="sd">        The two dimensional series is evaluated at the points ``(x, y)``,</span>
+<span class="sd">        where `x` and `y` must have the same shape. If `x` or `y` is a list</span>
+<span class="sd">        or tuple, it is first converted to an ndarray, otherwise it is left</span>
+<span class="sd">        unchanged and if it isn't an ndarray it is treated as a scalar.</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of coefficients ordered so that the coefficient of the term</span>
+<span class="sd">        of multi-degree i,j is contained in ``c[i,j]``. If `c` has</span>
+<span class="sd">        dimension greater than 2 the remaining indices enumerate multiple</span>
+<span class="sd">        sets of coefficients.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : ndarray, compatible object</span>
+<span class="sd">        The values of the two dimensional Chebyshev series at points formed</span>
+<span class="sd">        from pairs of corresponding values from `x` and `y`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebval, chebgrid2d, chebval3d, chebgrid3d</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_valnd</span><span class="p">(</span><span class="n">chebval</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebgrid2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a 2-D Chebyshev series on the Cartesian product of x and y.</span>
+
+<span class="sd">    This function returns the values:</span>
+
+<span class="sd">    .. math:: p(a,b) = \\sum_{i,j} c_{i,j} * T_i(a) * T_j(b),</span>
+
+<span class="sd">    where the points `(a, b)` consist of all pairs formed by taking</span>
+<span class="sd">    `a` from `x` and `b` from `y`. The resulting points form a grid with</span>
+<span class="sd">    `x` in the first dimension and `y` in the second.</span>
+
+<span class="sd">    The parameters `x` and `y` are converted to arrays only if they are</span>
+<span class="sd">    tuples or a lists, otherwise they are treated as a scalars. In either</span>
+<span class="sd">    case, either `x` and `y` or their elements must support multiplication</span>
+<span class="sd">    and addition both with themselves and with the elements of `c`.</span>
+
+<span class="sd">    If `c` has fewer than two dimensions, ones are implicitly appended to</span>
+<span class="sd">    its shape to make it 2-D. The shape of the result will be c.shape[2:] +</span>
+<span class="sd">    x.shape + y.shape.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y : array_like, compatible objects</span>
+<span class="sd">        The two dimensional series is evaluated at the points in the</span>
+<span class="sd">        Cartesian product of `x` and `y`.  If `x` or `y` is a list or</span>
+<span class="sd">        tuple, it is first converted to an ndarray, otherwise it is left</span>
+<span class="sd">        unchanged and, if it isn't an ndarray, it is treated as a scalar.</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of coefficients ordered so that the coefficient of the term of</span>
+<span class="sd">        multi-degree i,j is contained in ``c[i,j]``. If `c` has dimension</span>
+<span class="sd">        greater than two the remaining indices enumerate multiple sets of</span>
+<span class="sd">        coefficients.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : ndarray, compatible object</span>
+<span class="sd">        The values of the two dimensional Chebyshev series at points in the</span>
+<span class="sd">        Cartesian product of `x` and `y`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebval, chebval2d, chebval3d, chebgrid3d</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_gridnd</span><span class="p">(</span><span class="n">chebval</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebval3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a 3-D Chebyshev series at points (x, y, z).</span>
+
+<span class="sd">    This function returns the values:</span>
+
+<span class="sd">    .. math:: p(x,y,z) = \\sum_{i,j,k} c_{i,j,k} * T_i(x) * T_j(y) * T_k(z)</span>
+
+<span class="sd">    The parameters `x`, `y`, and `z` are converted to arrays only if</span>
+<span class="sd">    they are tuples or a lists, otherwise they are treated as a scalars and</span>
+<span class="sd">    they must have the same shape after conversion. In either case, either</span>
+<span class="sd">    `x`, `y`, and `z` or their elements must support multiplication and</span>
+<span class="sd">    addition both with themselves and with the elements of `c`.</span>
+
+<span class="sd">    If `c` has fewer than 3 dimensions, ones are implicitly appended to its</span>
+<span class="sd">    shape to make it 3-D. The shape of the result will be c.shape[3:] +</span>
+<span class="sd">    x.shape.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y, z : array_like, compatible object</span>
+<span class="sd">        The three dimensional series is evaluated at the points</span>
+<span class="sd">        ``(x, y, z)``, where `x`, `y`, and `z` must have the same shape.  If</span>
+<span class="sd">        any of `x`, `y`, or `z` is a list or tuple, it is first converted</span>
+<span class="sd">        to an ndarray, otherwise it is left unchanged and if it isn't an</span>
+<span class="sd">        ndarray it is  treated as a scalar.</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of coefficients ordered so that the coefficient of the term of</span>
+<span class="sd">        multi-degree i,j,k is contained in ``c[i,j,k]``. If `c` has dimension</span>
+<span class="sd">        greater than 3 the remaining indices enumerate multiple sets of</span>
+<span class="sd">        coefficients.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : ndarray, compatible object</span>
+<span class="sd">        The values of the multidimensional polynomial on points formed with</span>
+<span class="sd">        triples of corresponding values from `x`, `y`, and `z`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebval, chebval2d, chebgrid2d, chebgrid3d</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_valnd</span><span class="p">(</span><span class="n">chebval</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebvalnd</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Evaluate an N-D Chebyshev series at points.</span>
+
+<span class="sd">    This function returns the values:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        p(pts, c) = \sum_{i_1, i_2, \dots, i_n}</span>
+<span class="sd">        c_{i_1, i_2, \dots, i_n} * T_{i_1}(x_1) * T_{i_2}(x_2) \dots T_{i_n}(x_n)</span>
+
+<span class="sd">    where :math:`x_1, x_2, \dots, x_n = pts`.</span>
+<span class="sd">    Note that `pts` may also be an `(n, m)` array.</span>
+
+<span class="sd">    The parameters in `pts` are converted to arrays only if they are</span>
+<span class="sd">    tuples or lists, otherwise they are treated as scalars and</span>
+<span class="sd">    they must have the same shape after conversion. In either case, either</span>
+<span class="sd">    the elements of `pts` or their elements must support multiplication and</span>
+<span class="sd">    addition both with themselves and with the elements of `c`.</span>
+
+<span class="sd">    If `c` has fewer than N dimensions, ones are implicitly appended to its</span>
+<span class="sd">    shape to make it N-D. The shape of the result will be c.shape[N:] +</span>
+<span class="sd">    pts[0].shape.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pts : tuple or list of array_like, compatible objects</span>
+<span class="sd">        The N-dimensional series is evaluated at the points</span>
+<span class="sd">        ``(x_1, x_2, ..., x_n)`` provided in the `pts` iterable, where</span>
+<span class="sd">        all elements must have the same shape. If any element is a list</span>
+<span class="sd">        or tuple, it is first converted to an ndarray, otherwise it is</span>
+<span class="sd">        left unchanged and if it isn't an ndarray it is treated as a scalar.</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of coefficients ordered so that the coefficient of the term of</span>
+<span class="sd">        multi-degree i,j,k,... is contained in ``c[i,j,k,...]``. If `c` has</span>
+<span class="sd">        dimension greater than N, the remaining indices enumerate multiple</span>
+<span class="sd">        sets of coefficients.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : ndarray, compatible object</span>
+<span class="sd">        The values of the multidimensional Chebyshev series on points formed</span>
+<span class="sd">        with N-tuples of corresponding values from `pts`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebval, chebval2d, chebval3d</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_valnd</span><span class="p">(</span><span class="n">chebval</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">*</span><span class="n">pts</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebgrid3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a 3-D Chebyshev series on the Cartesian product of x, y, and z.</span>
+
+<span class="sd">    This function returns the values:</span>
+
+<span class="sd">    .. math:: p(a,b,c) = \\sum_{i,j,k} c_{i,j,k} * T_i(a) * T_j(b) * T_k(c)</span>
+
+<span class="sd">    where the points ``(a, b, c)`` consist of all triples formed by taking</span>
+<span class="sd">    `a` from `x`, `b` from `y`, and `c` from `z`. The resulting points form</span>
+<span class="sd">    a grid with `x` in the first dimension, `y` in the second, and `z` in</span>
+<span class="sd">    the third.</span>
+
+<span class="sd">    The parameters `x`, `y`, and `z` are converted to arrays only if they</span>
+<span class="sd">    are tuples or a lists, otherwise they are treated as a scalars. In</span>
+<span class="sd">    either case, either `x`, `y`, and `z` or their elements must support</span>
+<span class="sd">    multiplication and addition both with themselves and with the elements</span>
+<span class="sd">    of `c`.</span>
+
+<span class="sd">    If `c` has fewer than three dimensions, ones are implicitly appended to</span>
+<span class="sd">    its shape to make it 3-D. The shape of the result will be c.shape[3:] +</span>
+<span class="sd">    x.shape + y.shape + z.shape.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y, z : array_like, compatible objects</span>
+<span class="sd">        The three dimensional series is evaluated at the points in the</span>
+<span class="sd">        Cartesian product of `x`, `y`, and `z`.  If `x`, `y`, or `z` is a</span>
+<span class="sd">        list or tuple, it is first converted to an ndarray, otherwise it is</span>
+<span class="sd">        left unchanged and, if it isn't an ndarray, it is treated as a</span>
+<span class="sd">        scalar.</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        Array of coefficients ordered so that the coefficients for terms of</span>
+<span class="sd">        degree i,j are contained in ``c[i,j]``. If `c` has dimension</span>
+<span class="sd">        greater than two the remaining indices enumerate multiple sets of</span>
+<span class="sd">        coefficients.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : ndarray, compatible object</span>
+<span class="sd">        The values of the two dimensional polynomial at points in the Cartesian</span>
+<span class="sd">        product of `x` and `y`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebval, chebval2d, chebgrid2d, chebval3d</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_gridnd</span><span class="p">(</span><span class="n">chebval</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebvander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">deg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Pseudo-Vandermonde matrix of given degree.</span>
+
+<span class="sd">    Returns the pseudo-Vandermonde matrix of degree `deg` and sample points</span>
+<span class="sd">    `x`. The pseudo-Vandermonde matrix is defined by</span>
+
+<span class="sd">    .. math:: V[..., i] = T_i(x),</span>
+
+<span class="sd">    where ``0 &lt;= i &lt;= deg``. The leading indices of `V` index the elements of</span>
+<span class="sd">    `x` and the last index is the degree of the Chebyshev polynomial.</span>
+
+<span class="sd">    If `c` is a 1-D array of coefficients of length ``n + 1`` and `V` is the</span>
+<span class="sd">    matrix ``V = chebvander(x, n)``, then ``np.dot(V, c)`` and</span>
+<span class="sd">    ``chebval(x, c)`` are the same up to roundoff.  This equivalence is</span>
+<span class="sd">    useful both for least squares fitting and for the evaluation of a large</span>
+<span class="sd">    number of Chebyshev series of the same degree and sample points.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : array_like</span>
+<span class="sd">        Array of points. The dtype is converted to float64 or complex128</span>
+<span class="sd">        depending on whether any of the elements are complex. If `x` is</span>
+<span class="sd">        scalar it is converted to a 1-D array.</span>
+<span class="sd">    deg : int</span>
+<span class="sd">        Degree of the resulting matrix.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    vander : ndarray</span>
+<span class="sd">        The pseudo Vandermonde matrix. The shape of the returned matrix is</span>
+<span class="sd">        ``x.shape + (deg + 1,)``, where The last index is the degree of the</span>
+<span class="sd">        corresponding Chebyshev polynomial.  The dtype will be the same as</span>
+<span class="sd">        the converted `x`.</span>
+
+<span class="sd">    """</span>
+    <span class="n">ideg</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">_as_int</span><span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="s2">"deg"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ideg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"deg must be non-negative"</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="p">(</span><span class="n">ideg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">dtyp</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtyp</span><span class="p">)</span>
+    <span class="c1"># Use forward recursion to generate the entries.</span>
+    <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">0</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">ideg</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+        <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ideg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebvander2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">deg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Pseudo-Vandermonde matrix of given degrees.</span>
+
+<span class="sd">    Returns the pseudo-Vandermonde matrix of degrees `deg` and sample</span>
+<span class="sd">    points ``(x, y)``. The pseudo-Vandermonde matrix is defined by</span>
+
+<span class="sd">    .. math:: V[..., (deg[1] + 1)*i + j] = T_i(x) * T_j(y),</span>
+
+<span class="sd">    where ``0 &lt;= i &lt;= deg[0]`` and ``0 &lt;= j &lt;= deg[1]``. The leading indices of</span>
+<span class="sd">    `V` index the points ``(x, y)`` and the last index encodes the degrees of</span>
+<span class="sd">    the Chebyshev polynomials.</span>
+
+<span class="sd">    If ``V = chebvander2d(x, y, [xdeg, ydeg])``, then the columns of `V`</span>
+<span class="sd">    correspond to the elements of a 2-D coefficient array `c` of shape</span>
+<span class="sd">    (xdeg + 1, ydeg + 1) in the order</span>
+
+<span class="sd">    .. math:: c_{00}, c_{01}, c_{02}, ... , c_{10}, c_{11}, c_{12}, ...</span>
+
+<span class="sd">    and ``np.dot(V, c.flat)`` and ``chebval2d(x, y, c)`` will be the same</span>
+<span class="sd">    up to roundoff. This equivalence is useful both for least squares</span>
+<span class="sd">    fitting and for the evaluation of a large number of 2-D Chebyshev</span>
+<span class="sd">    series of the same degrees and sample points.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y : array_like</span>
+<span class="sd">        Arrays of point coordinates, all of the same shape. The dtypes</span>
+<span class="sd">        will be converted to either float64 or complex128 depending on</span>
+<span class="sd">        whether any of the elements are complex. Scalars are converted to</span>
+<span class="sd">        1-D arrays.</span>
+<span class="sd">    deg : list of ints</span>
+<span class="sd">        List of maximum degrees of the form [x_deg, y_deg].</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    vander2d : ndarray</span>
+<span class="sd">        The shape of the returned matrix is ``x.shape + (order,)``, where</span>
+<span class="sd">        :math:`order = (deg[0]+1)*(deg[1]+1)`.  The dtype will be the same</span>
+<span class="sd">        as the converted `x` and `y`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebvander, chebvander3d, chebval2d, chebval3d</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_vander_nd_flat</span><span class="p">((</span><span class="n">chebvander</span><span class="p">,</span> <span class="n">chebvander</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">deg</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebvander3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">deg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Pseudo-Vandermonde matrix of given degrees.</span>
+
+<span class="sd">    Returns the pseudo-Vandermonde matrix of degrees `deg` and sample</span>
+<span class="sd">    points ``(x, y, z)``. If `l`, `m`, `n` are the given degrees in `x`, `y`, `z`,</span>
+<span class="sd">    then The pseudo-Vandermonde matrix is defined by</span>
+
+<span class="sd">    .. math:: V[..., (m+1)(n+1)i + (n+1)j + k] = T_i(x)*T_j(y)*T_k(z),</span>
+
+<span class="sd">    where ``0 &lt;= i &lt;= l``, ``0 &lt;= j &lt;= m``, and ``0 &lt;= j &lt;= n``.  The leading</span>
+<span class="sd">    indices of `V` index the points ``(x, y, z)`` and the last index encodes</span>
+<span class="sd">    the degrees of the Chebyshev polynomials.</span>
+
+<span class="sd">    If ``V = chebvander3d(x, y, z, [xdeg, ydeg, zdeg])``, then the columns</span>
+<span class="sd">    of `V` correspond to the elements of a 3-D coefficient array `c` of</span>
+<span class="sd">    shape (xdeg + 1, ydeg + 1, zdeg + 1) in the order</span>
+
+<span class="sd">    .. math:: c_{000}, c_{001}, c_{002},... , c_{010}, c_{011}, c_{012},...</span>
+
+<span class="sd">    and ``np.dot(V, c.flat)`` and ``chebval3d(x, y, z, c)`` will be the</span>
+<span class="sd">    same up to roundoff. This equivalence is useful both for least squares</span>
+<span class="sd">    fitting and for the evaluation of a large number of 3-D Chebyshev</span>
+<span class="sd">    series of the same degrees and sample points.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y, z : array_like</span>
+<span class="sd">        Arrays of point coordinates, all of the same shape. The dtypes will</span>
+<span class="sd">        be converted to either float64 or complex128 depending on whether</span>
+<span class="sd">        any of the elements are complex. Scalars are converted to 1-D</span>
+<span class="sd">        arrays.</span>
+<span class="sd">    deg : list of ints</span>
+<span class="sd">        List of maximum degrees of the form [x_deg, y_deg, z_deg].</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    vander3d : ndarray</span>
+<span class="sd">        The shape of the returned matrix is ``x.shape + (order,)``, where</span>
+<span class="sd">        :math:`order = (deg[0]+1)*(deg[1]+1)*(deg[2]+1)`.  The dtype will</span>
+<span class="sd">        be the same as the converted `x`, `y`, and `z`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebvander, chebvander3d, chebval2d, chebval3d</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_vander_nd_flat</span><span class="p">((</span><span class="n">chebvander</span><span class="p">,</span> <span class="n">chebvander</span><span class="p">,</span> <span class="n">chebvander</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">),</span> <span class="n">deg</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Least squares fit of Chebyshev series to data.</span>
+
+<span class="sd">    Return the coefficients of a Chebyshev series of degree `deg` that is the</span>
+<span class="sd">    least squares fit to the data values `y` given at points `x`. If `y` is</span>
+<span class="sd">    1-D the returned coefficients will also be 1-D. If `y` is 2-D multiple</span>
+<span class="sd">    fits are done, one for each column of `y`, and the resulting</span>
+<span class="sd">    coefficients are stored in the corresponding columns of a 2-D return.</span>
+<span class="sd">    The fitted polynomial(s) are in the form</span>
+
+<span class="sd">    .. math::  p(x) = c_0 + c_1 * T_1(x) + ... + c_n * T_n(x),</span>
+
+<span class="sd">    where `n` is `deg`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : array_like, shape (M,)</span>
+<span class="sd">        x-coordinates of the M sample points ``(x[i], y[i])``.</span>
+<span class="sd">    y : array_like, shape (M,) or (M, K)</span>
+<span class="sd">        y-coordinates of the sample points. Several data sets of sample</span>
+<span class="sd">        points sharing the same x-coordinates can be fitted at once by</span>
+<span class="sd">        passing in a 2D-array that contains one dataset per column.</span>
+<span class="sd">    deg : int or 1-D array_like</span>
+<span class="sd">        Degree(s) of the fitting polynomials. If `deg` is a single integer,</span>
+<span class="sd">        all terms up to and including the `deg`'th term are included in the</span>
+<span class="sd">        fit. For NumPy versions &gt;= 1.11.0 a list of integers specifying the</span>
+<span class="sd">        degrees of the terms to include may be used instead.</span>
+<span class="sd">    rcond : float, optional</span>
+<span class="sd">        Relative condition number of the fit. Singular values smaller than</span>
+<span class="sd">        this relative to the largest singular value will be ignored. The</span>
+<span class="sd">        default value is ``len(x)*eps``, where eps is the relative precision of</span>
+<span class="sd">        the float type, about 2e-16 in most cases.</span>
+<span class="sd">    full : bool, optional</span>
+<span class="sd">        Switch determining nature of return value. When it is False (the</span>
+<span class="sd">        default) just the coefficients are returned, when True diagnostic</span>
+<span class="sd">        information from the singular value decomposition is also returned.</span>
+<span class="sd">    w : array_like, shape (`M`,), optional</span>
+<span class="sd">        Weights. If not None, the weight ``w[i]`` applies to the unsquared</span>
+<span class="sd">        residual ``y[i] - y_hat[i]`` at ``x[i]``. Ideally the weights are</span>
+<span class="sd">        chosen so that the errors of the products ``w[i]*y[i]`` all have the</span>
+<span class="sd">        same variance.  When using inverse-variance weighting, use</span>
+<span class="sd">        ``w[i] = 1/sigma(y[i])``.  The default value is None.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    coef : ndarray, shape (M,) or (M, K)</span>
+<span class="sd">        Chebyshev coefficients ordered from low to high. If `y` was 2-D,</span>
+<span class="sd">        the coefficients for the data in column k  of `y` are in column</span>
+<span class="sd">        `k`.</span>
+
+<span class="sd">    [residuals, rank, singular_values, rcond] : list</span>
+<span class="sd">        These values are only returned if ``full == True``</span>
+
+<span class="sd">        - residuals -- sum of squared residuals of the least squares fit</span>
+<span class="sd">        - rank -- the numerical rank of the scaled Vandermonde matrix</span>
+<span class="sd">        - singular_values -- singular values of the scaled Vandermonde matrix</span>
+<span class="sd">        - rcond -- value of `rcond`.</span>
+
+<span class="sd">        For more details, see `numpy.linalg.lstsq`.</span>
+
+<span class="sd">    Warns</span>
+<span class="sd">    -----</span>
+<span class="sd">    RankWarning</span>
+<span class="sd">        The rank of the coefficient matrix in the least-squares fit is</span>
+<span class="sd">        deficient. The warning is only raised if ``full == False``.  The</span>
+<span class="sd">        warnings can be turned off by</span>
+
+<span class="sd">        &gt;&gt;&gt; import warnings</span>
+<span class="sd">        &gt;&gt;&gt; warnings.simplefilter('ignore', np.exceptions.RankWarning)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.polynomial.polynomial.polyfit</span>
+<span class="sd">    numpy.polynomial.legendre.legfit</span>
+<span class="sd">    numpy.polynomial.laguerre.lagfit</span>
+<span class="sd">    numpy.polynomial.hermite.hermfit</span>
+<span class="sd">    numpy.polynomial.hermite_e.hermefit</span>
+<span class="sd">    chebval : Evaluates a Chebyshev series.</span>
+<span class="sd">    chebvander : Vandermonde matrix of Chebyshev series.</span>
+<span class="sd">    chebweight : Chebyshev weight function.</span>
+<span class="sd">    numpy.linalg.lstsq : Computes a least-squares fit from the matrix.</span>
+<span class="sd">    scipy.interpolate.UnivariateSpline : Computes spline fits.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The solution is the coefficients of the Chebyshev series `p` that</span>
+<span class="sd">    minimizes the sum of the weighted squared errors</span>
+
+<span class="sd">    .. math:: E = \\sum_j w_j^2 * |y_j - p(x_j)|^2,</span>
+
+<span class="sd">    where :math:`w_j` are the weights. This problem is solved by setting up</span>
+<span class="sd">    as the (typically) overdetermined matrix equation</span>
+
+<span class="sd">    .. math:: V(x) * c = w * y,</span>
+
+<span class="sd">    where `V` is the weighted pseudo Vandermonde matrix of `x`, `c` are the</span>
+<span class="sd">    coefficients to be solved for, `w` are the weights, and `y` are the</span>
+<span class="sd">    observed values.  This equation is then solved using the singular value</span>
+<span class="sd">    decomposition of `V`.</span>
+
+<span class="sd">    If some of the singular values of `V` are so small that they are</span>
+<span class="sd">    neglected, then a `~exceptions.RankWarning` will be issued. This means that</span>
+<span class="sd">    the coefficient values may be poorly determined. Using a lower order fit</span>
+<span class="sd">    will usually get rid of the warning.  The `rcond` parameter can also be</span>
+<span class="sd">    set to a value smaller than its default, but the resulting fit may be</span>
+<span class="sd">    spurious and have large contributions from roundoff error.</span>
+
+<span class="sd">    Fits using Chebyshev series are usually better conditioned than fits</span>
+<span class="sd">    using power series, but much can depend on the distribution of the</span>
+<span class="sd">    sample points and the smoothness of the data. If the quality of the fit</span>
+<span class="sd">    is inadequate splines may be a good alternative.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Wikipedia, "Curve fitting",</span>
+<span class="sd">           https://en.wikipedia.org/wiki/Curve_fitting</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pu</span><span class="o">.</span><span class="n">_fit</span><span class="p">(</span><span class="n">chebvander</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">rcond</span><span class="p">,</span> <span class="n">full</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebcompanion</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return the scaled companion matrix of c.</span>
+
+<span class="sd">    The basis polynomials are scaled so that the companion matrix is</span>
+<span class="sd">    symmetric when `c` is a Chebyshev basis polynomial. This provides</span>
+<span class="sd">    better eigenvalue estimates than the unscaled case and for basis</span>
+<span class="sd">    polynomials the eigenvalues are guaranteed to be real if</span>
+<span class="sd">    `numpy.linalg.eigvalsh` is used to obtain them.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : array_like</span>
+<span class="sd">        1-D array of Chebyshev series coefficients ordered from low to high</span>
+<span class="sd">        degree.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mat : ndarray</span>
+<span class="sd">        Scaled companion matrix of dimensions (deg, deg).</span>
+<span class="sd">    """</span>
+    <span class="c1"># c is a trimmed copy</span>
+    <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Series must have maximum degree of at least 1.'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">scl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">::</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">bot</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="n">n</span><span class="p">::</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">top</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">top</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">bot</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span>
+    <span class="n">mat</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">c</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">scl</span> <span class="o">/</span> <span class="n">scl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">.5</span>
+    <span class="k">return</span> <span class="n">mat</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebroots</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Compute the roots of a Chebyshev series.</span>
+
+<span class="sd">    Return the roots (a.k.a. "zeros") of the polynomial</span>
+
+<span class="sd">    .. math:: p(x) = \\sum_i c[i] * T_i(x).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : 1-D array_like</span>
+<span class="sd">        1-D array of coefficients.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Array of the roots of the series. If all the roots are real,</span>
+<span class="sd">        then `out` is also real, otherwise it is complex.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.polynomial.polynomial.polyroots</span>
+<span class="sd">    numpy.polynomial.legendre.legroots</span>
+<span class="sd">    numpy.polynomial.laguerre.lagroots</span>
+<span class="sd">    numpy.polynomial.hermite.hermroots</span>
+<span class="sd">    numpy.polynomial.hermite_e.hermeroots</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The root estimates are obtained as the eigenvalues of the companion</span>
+<span class="sd">    matrix, Roots far from the origin of the complex plane may have large</span>
+<span class="sd">    errors due to the numerical instability of the series for such</span>
+<span class="sd">    values. Roots with multiplicity greater than 1 will also show larger</span>
+<span class="sd">    errors as the value of the series near such points is relatively</span>
+<span class="sd">    insensitive to errors in the roots. Isolated roots near the origin can</span>
+<span class="sd">    be improved by a few iterations of Newton's method.</span>
+
+<span class="sd">    The Chebyshev series basis polynomials aren't powers of `x` so the</span>
+<span class="sd">    results of this function may seem unintuitive.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy.polynomial.chebyshev as cheb</span>
+<span class="sd">    &gt;&gt;&gt; cheb.chebroots((-1, 1,-1, 1)) # T3 - T2 + T1 - T0 has real roots</span>
+<span class="sd">    array([ -5.00000000e-01,   2.60860684e-17,   1.00000000e+00]) # may vary</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># c is a trimmed copy</span>
+    <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">as_series</span><span class="p">([</span><span class="n">c</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+    <span class="c1"># rotated companion matrix reduces error</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">chebcompanion</span><span class="p">(</span><span class="n">c</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebinterpolate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">()):</span>
+<span class="w">    </span><span class="sd">"""Interpolate a function at the Chebyshev points of the first kind.</span>
+
+<span class="sd">    Returns the Chebyshev series that interpolates `func` at the Chebyshev</span>
+<span class="sd">    points of the first kind in the interval [-1, 1]. The interpolating</span>
+<span class="sd">    series tends to a minmax approximation to `func` with increasing `deg`</span>
+<span class="sd">    if the function is continuous in the interval.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function</span>
+<span class="sd">        The function to be approximated. It must be a function of a single</span>
+<span class="sd">        variable of the form ``f(x, a, b, c...)``, where ``a, b, c...`` are</span>
+<span class="sd">        extra arguments passed in the `args` parameter.</span>
+<span class="sd">    deg : int</span>
+<span class="sd">        Degree of the interpolating polynomial</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Extra arguments to be used in the function call. Default is no extra</span>
+<span class="sd">        arguments.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    coef : ndarray, shape (deg + 1,)</span>
+<span class="sd">        Chebyshev coefficients of the interpolating series ordered from low to</span>
+<span class="sd">        high.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy.polynomial.chebyshev as C</span>
+<span class="sd">    &gt;&gt;&gt; C.chebinterpolate(lambda x: np.tanh(x) + 0.5, 8)</span>
+<span class="sd">    array([  5.00000000e-01,   8.11675684e-01,  -9.86864911e-17,</span>
+<span class="sd">            -5.42457905e-02,  -2.71387850e-16,   4.51658839e-03,</span>
+<span class="sd">             2.46716228e-17,  -3.79694221e-04,  -3.26899002e-16])</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The Chebyshev polynomials used in the interpolation are orthogonal when</span>
+<span class="sd">    sampled at the Chebyshev points of the first kind. If it is desired to</span>
+<span class="sd">    constrain some of the coefficients they can simply be set to the desired</span>
+<span class="sd">    value after the interpolation, no new interpolation or fit is needed. This</span>
+<span class="sd">    is especially useful if it is known apriori that some of coefficients are</span>
+<span class="sd">    zero. For instance, if the function is even then the coefficients of the</span>
+<span class="sd">    terms of odd degree in the result can be set to zero.</span>
+
+<span class="sd">    """</span>
+    <span class="n">deg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">deg</span><span class="p">)</span>
+
+    <span class="c1"># check arguments.</span>
+    <span class="k">if</span> <span class="n">deg</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">deg</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">'iu'</span> <span class="ow">or</span> <span class="n">deg</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"deg must be an int"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">deg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"expected deg &gt;= 0"</span><span class="p">)</span>
+
+    <span class="n">order</span> <span class="o">=</span> <span class="n">deg</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">xcheb</span> <span class="o">=</span> <span class="n">chebpts1</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="n">yfunc</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">xcheb</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">chebvander</span><span class="p">(</span><span class="n">xcheb</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">yfunc</span><span class="p">)</span>
+    <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">order</span>
+    <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">order</span>
+
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebgauss</span><span class="p">(</span><span class="n">deg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Gauss-Chebyshev quadrature.</span>
+
+<span class="sd">    Computes the sample points and weights for Gauss-Chebyshev quadrature.</span>
+<span class="sd">    These sample points and weights will correctly integrate polynomials of</span>
+<span class="sd">    degree :math:`2*deg - 1` or less over the interval :math:`[-1, 1]` with</span>
+<span class="sd">    the weight function :math:`f(x) = 1/\\sqrt{1 - x^2}`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    deg : int</span>
+<span class="sd">        Number of sample points and weights. It must be &gt;= 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x : ndarray</span>
+<span class="sd">        1-D ndarray containing the sample points.</span>
+<span class="sd">    y : ndarray</span>
+<span class="sd">        1-D ndarray containing the weights.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The results have only been tested up to degree 100, higher degrees may</span>
+<span class="sd">    be problematic. For Gauss-Chebyshev there are closed form solutions for</span>
+<span class="sd">    the sample points and weights. If n = `deg`, then</span>
+
+<span class="sd">    .. math:: x_i = \\cos(\\pi (2 i - 1) / (2 n))</span>
+
+<span class="sd">    .. math:: w_i = \\pi / n</span>
+
+<span class="sd">    """</span>
+    <span class="n">ideg</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">_as_int</span><span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="s2">"deg"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ideg</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"deg must be a positive integer"</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ideg</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">ideg</span><span class="p">))</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ideg</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">ideg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebweight</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    The weight function of the Chebyshev polynomials.</span>
+
+<span class="sd">    The weight function is :math:`1/\\sqrt{1 - x^2}` and the interval of</span>
+<span class="sd">    integration is :math:`[-1, 1]`. The Chebyshev polynomials are</span>
+<span class="sd">    orthogonal, but not normalized, with respect to this weight function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : array_like</span>
+<span class="sd">       Values at which the weight function will be computed.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    w : ndarray</span>
+<span class="sd">       The weight function at `x`.</span>
+<span class="sd">    """</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">w</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebpts1</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Chebyshev points of the first kind.</span>
+
+<span class="sd">    The Chebyshev points of the first kind are the points ``cos(x)``,</span>
+<span class="sd">    where ``x = [pi*(k + .5)/npts for k in range(npts)]``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    npts : int</span>
+<span class="sd">        Number of sample points desired.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pts : ndarray</span>
+<span class="sd">        The Chebyshev points of the first kind.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    chebpts2</span>
+<span class="sd">    """</span>
+    <span class="n">_npts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_npts</span> <span class="o">!=</span> <span class="n">npts</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"npts must be integer"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_npts</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"npts must be &gt;= 1"</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">_npts</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">_npts</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_npts</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chebpts2</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Chebyshev points of the second kind.</span>
+
+<span class="sd">    The Chebyshev points of the second kind are the points ``cos(x)``,</span>
+<span class="sd">    where ``x = [pi*k/(npts - 1) for k in range(npts)]`` sorted in ascending</span>
+<span class="sd">    order.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    npts : int</span>
+<span class="sd">        Number of sample points desired.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pts : ndarray</span>
+<span class="sd">        The Chebyshev points of the second kind.</span>
+<span class="sd">    """</span>
+    <span class="n">_npts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_npts</span> <span class="o">!=</span> <span class="n">npts</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"npts must be integer"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_npts</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"npts must be &gt;= 2"</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_npts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># Chebyshev series class</span>
+<span class="c1">#</span>
+
+<div class="viewcode-block" id="Chebyshev">
+<a class="viewcode-back" href="../../../api/polynomial.html#numpy.polynomial.Chebyshev">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Chebyshev</span><span class="p">(</span><span class="n">ABCPolyBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""A Chebyshev series class.</span>
+
+<span class="sd">    The Chebyshev class provides the standard Python numerical methods</span>
+<span class="sd">    '+', '-', '*', '//', '%', 'divmod', '**', and '()' as well as the</span>
+<span class="sd">    attributes and methods listed below.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coef : array_like</span>
+<span class="sd">        Chebyshev coefficients in order of increasing degree, i.e.,</span>
+<span class="sd">        ``(1, 2, 3)`` gives ``1*T_0(x) + 2*T_1(x) + 3*T_2(x)``.</span>
+<span class="sd">    domain : (2,) array_like, optional</span>
+<span class="sd">        Domain to use. The interval ``[domain[0], domain[1]]`` is mapped</span>
+<span class="sd">        to the interval ``[window[0], window[1]]`` by shifting and scaling.</span>
+<span class="sd">        The default value is [-1., 1.].</span>
+<span class="sd">    window : (2,) array_like, optional</span>
+<span class="sd">        Window, see `domain` for its use. The default value is [-1., 1.].</span>
+<span class="sd">    symbol : str, optional</span>
+<span class="sd">        Symbol used to represent the independent variable in string</span>
+<span class="sd">        representations of the polynomial expression, e.g. for printing.</span>
+<span class="sd">        The symbol must be a valid Python identifier. Default value is 'x'.</span>
+
+<span class="sd">        .. versionadded:: 1.24</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># Virtual Functions</span>
+    <span class="n">_add</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebadd</span><span class="p">)</span>
+    <span class="n">_sub</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebsub</span><span class="p">)</span>
+    <span class="n">_mul</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebmul</span><span class="p">)</span>
+    <span class="n">_div</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebdiv</span><span class="p">)</span>
+    <span class="n">_pow</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebpow</span><span class="p">)</span>
+    <span class="n">_val</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebval</span><span class="p">)</span>
+    <span class="n">_int</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebint</span><span class="p">)</span>
+    <span class="n">_der</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebder</span><span class="p">)</span>
+    <span class="n">_fit</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebfit</span><span class="p">)</span>
+    <span class="n">_line</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebline</span><span class="p">)</span>
+    <span class="n">_roots</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebroots</span><span class="p">)</span>
+    <span class="n">_fromroots</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">chebfromroots</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Chebyshev.interpolate">
+<a class="viewcode-back" href="../../../api/polynomial.html#numpy.polynomial.Chebyshev.interpolate">[documentos]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interpolate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">()):</span>
+<span class="w">        </span><span class="sd">"""Interpolate a function at the Chebyshev points of the first kind.</span>
+
+<span class="sd">        Returns the series that interpolates `func` at the Chebyshev points of</span>
+<span class="sd">        the first kind scaled and shifted to the `domain`. The resulting series</span>
+<span class="sd">        tends to a minmax approximation of `func` when the function is</span>
+<span class="sd">        continuous in the domain.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        func : function</span>
+<span class="sd">            The function to be interpolated. It must be a function of a single</span>
+<span class="sd">            variable of the form ``f(x, a, b, c...)``, where ``a, b, c...`` are</span>
+<span class="sd">            extra arguments passed in the `args` parameter.</span>
+<span class="sd">        deg : int</span>
+<span class="sd">            Degree of the interpolating polynomial.</span>
+<span class="sd">        domain : {None, [beg, end]}, optional</span>
+<span class="sd">            Domain over which `func` is interpolated. The default is None, in</span>
+<span class="sd">            which case the domain is [-1, 1].</span>
+<span class="sd">        args : tuple, optional</span>
+<span class="sd">            Extra arguments to be used in the function call. Default is no</span>
+<span class="sd">            extra arguments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        polynomial : Chebyshev instance</span>
+<span class="sd">            Interpolating Chebyshev instance.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        See `numpy.polynomial.chebinterpolate` for more details.</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">domain</span>
+        <span class="n">xfunc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">mapdomain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">coef</span> <span class="o">=</span> <span class="n">chebinterpolate</span><span class="p">(</span><span class="n">xfunc</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Virtual properties</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">chebdomain</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">chebdomain</span><span class="p">)</span>
+    <span class="n">basis_name</span> <span class="o">=</span> <span class="s1">'T'</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">NumPy - Documentación Sphinx</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduccion.html">Introducción a NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">Referencia de API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Código de módulo</a><ul>
+  <li><a href="../polynomial.html">numpy.polynomial</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Yara.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

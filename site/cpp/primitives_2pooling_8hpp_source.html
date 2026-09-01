@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda4dnn/primitives/pooling.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('primitives_2pooling_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">pooling.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="primitives_2pooling_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_POOLING_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_POOLING_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="op__cuda_8hpp.html">../../op_cuda.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="cudnn_8hpp.html">../csl/cudnn.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="cuda4dnn_2csl_2tensor_8hpp.html">../csl/tensor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="tensor__ops_8hpp.html">../csl/tensor_ops.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html">   24</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html">PoolingConfiguration</a> {</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96">   25</a></span>        <span class="keyword">enum class</span> <a class="code hl_enumeration" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96">PoolingMode</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96a26a4b44a837bf97b972628509912b4a5">   26</a></span>            <a class="code hl_define" href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96ab3fd1ff1bba4e2318c460a0e90245eca">   27</a></span>            AVERAGE_INCLUDE_PADDING, <span class="comment">/* include padding while calculating average */</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96a49017f58793851b894bf740043036b4f">   28</a></span>            AVERAGE_EXCLUDE_PADDING <span class="comment">/* exclude padding while calculating average */</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        };</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a53eca54ebe5cfaa955136b77e3c64b0c">   31</a></span>        <a class="code hl_enumeration" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96">PoolingMode</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a53eca54ebe5cfaa955136b77e3c64b0c">poolMode</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="comment">/* the size of the following vectors must be equal to the window size */</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a0c2f8f09b24ca7403a21be81e6779bdb">   34</a></span>        std::vector&lt;std::size_t&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a0c2f8f09b24ca7403a21be81e6779bdb">window_size</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a7e849dc02ead2dfd8a57670514aebe1d">   35</a></span>        std::vector&lt;std::size_t&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a7e849dc02ead2dfd8a57670514aebe1d">strides</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcd">   37</a></span>        <span class="keyword">enum class</span> <a class="code hl_enumeration" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcd">PaddingMode</a> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdaa60a6a471c0681e5a49c4f5d00f6bc5a">   38</a></span>            MANUAL, <span class="comment">/* uses explicit padding values provided in `pads_begin` and `pads_end` */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdac9f1a6384b1c466d4612f513bd8e13ea">   39</a></span>            VALID, <span class="comment">/* no padding is added */</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdac706ffd80b0ad0a4ef605c581e95252b">   40</a></span>            SAME <span class="comment">/* TensorFlow logic is used for same padding */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        };</div>
+</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#aeea011a0d5f8472399e533a73ad7dbe6">   43</a></span>        <a class="code hl_enumeration" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcd">PaddingMode</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#aeea011a0d5f8472399e533a73ad7dbe6">padMode</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="comment">/* explicit paddings are used if and only if padMode is set to manual */</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a7c265983aefa25b5f5c100a85e330143">   46</a></span>        std::vector&lt;std::size_t&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a7c265983aefa25b5f5c100a85e330143">pads_begin</a>, <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#adaae7b1113d5ba634b682709df5787f9">pads_end</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="comment">/* the output shape is calculated using the following formula:</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * output_dim = func[(input_dim + padding_left + padding_right - kernel_dim)/stride] + 1</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         * rounding mode decides what is used as `func`</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="};">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382b">   53</a></span>        <span class="keyword">enum class</span> <a class="code hl_enumeration" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382b">RoundingMode</a> {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382ba5bdce8e6d9dc3efbbd31e90a8a181dff">   54</a></span>            CEIL, <span class="comment">/* uses ceil */</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382ba56c1e354d36beb85b0d881c5b2e24cbe">   55</a></span>            FLOOR</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        };</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14c89051da3b79a0a645318e785fd004">   58</a></span>        <a class="code hl_enumeration" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382b">RoundingMode</a> <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14c89051da3b79a0a645318e785fd004">roundMode</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment">/* full shape inclusive of channel and batch axis */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a30a0c58bb4dfc0a0454a1b4199d02ee4">   61</a></span>        std::vector&lt;std::size_t&gt; <a class="code hl_variable" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a30a0c58bb4dfc0a0454a1b4199d02ee4">input_shape</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    };</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="};">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html">   65</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#ade09bf9aac3e5d7bad5cad42ac075141">PoolingOp</a> final : <span class="keyword">public</span> CUDABackendNode {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#a75a960a2c3f104def7ecc56833b747ce">   67</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#a75a960a2c3f104def7ecc56833b747ce">wrapper_type</a> = GetCUDABackendWrapperType&lt;T&gt;;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#ade09bf9aac3e5d7bad5cad42ac075141">   69</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#ade09bf9aac3e5d7bad5cad42ac075141">PoolingOp</a>(<a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_handle.html">csl::cudnn::Handle</a> handle, <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html">PoolingConfiguration</a>&amp; config)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            : cudnnHandle(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(handle))</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; window_size = config.window_size;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keyword">const</span> <span class="keyword">auto</span> pooling_order = window_size.size();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(pooling_order &gt;= 1);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; strides = config.strides;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(pooling_order == strides.size());</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; input_shape = config.input_shape;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(input_shape.size() == pooling_order + 2);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">if</span> (pooling_order &gt; 3)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">Error::StsNotImplemented</a>, <span class="stringliteral">&quot;Only 1D/2D/3D pooling are supported.&quot;</span>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keyword">const</span> <span class="keyword">auto</span> rank = input_shape.size();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="comment">/* left and right are misleading as the padding is applicable for any number of dimensions</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">             * but we use those identifiers to avoid confusion with `pads_begin` and `pads_end`</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">             * `common_padding` contains the amount of padding that has to be added to both sides</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">             * `padding_left` and `padding_right` contains the amount of padding that needs to be added</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">             * to a particular side in addition to the common padding</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            std::vector&lt;std::size_t&gt; common_padding(rank, 0);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            std::vector&lt;std::size_t&gt; padding_left(rank, 0), padding_right(rank, 0);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">if</span> (config.padMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdaa60a6a471c0681e5a49c4f5d00f6bc5a">PoolingConfiguration::PaddingMode::MANUAL</a>)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                <span class="keyword">const</span> <span class="keyword">auto</span>&amp; pads_begin = config.pads_begin;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="keyword">const</span> <span class="keyword">auto</span>&amp; pads_end = config.pads_end;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(pooling_order == pads_begin.size());</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(pooling_order == pads_end.size());</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                <span class="comment">/* cuDNN rounds down by default; hence, if ceilMode is false, we do nothing</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">                 * otherwise, we add extra padding towards the end so that the convolution arithmetic yields</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">                 * the correct output size without having to deal with fancy fractional sizes</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keyword">auto</span> pads_end_modified = pads_end;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="keywordflow">if</span> (config.roundMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382ba5bdce8e6d9dc3efbbd31e90a8a181dff">PoolingConfiguration::RoundingMode::CEIL</a>)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; window_size.size(); i++) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                        <span class="keyword">auto</span> rem = (input_shape[i + 2] + pads_begin[i] + pads_end[i] - window_size[i]) % strides[i];</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                        <span class="keywordflow">if</span> (rem)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                            pads_end_modified[i] += strides[i] - rem;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                    }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; common_padding.size(); i++)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                    common_padding[i] = std::min(pads_begin[i - 2], pads_end_modified[i - 2]);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    padding_left[i] = pads_begin[i - 2] - common_padding[i];</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    padding_right[i] = pads_end_modified[i - 2] - common_padding[i];</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config.padMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdac9f1a6384b1c466d4612f513bd8e13ea">PoolingConfiguration::PaddingMode::VALID</a>)</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                <span class="comment">/* nothing to do as the paddings are already preset to zero */</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config.padMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdac706ffd80b0ad0a4ef605c581e95252b">PoolingConfiguration::PaddingMode::SAME</a>)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                <span class="comment">/* TensorFlow Logic:</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">                 * total_padding[i] = (o[i] - 1) * s[i] + effective_k[i] - i[i]</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">                 *</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">                 * if total padding is odd, the extra is added towards the end</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; rank; i++)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> j = i - 2; <span class="comment">/* filter index */</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> output_dim = (input_shape[i] - 1 + strides[j]) / strides[j];</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> required_total_padding =</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                        std::max&lt;std::int64_t&gt;(0, (output_dim - 1) * strides[j] + window_size[j] - input_shape[i]);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                    common_padding[i] = required_total_padding / 2;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                    padding_left[i] = 0;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                    padding_right[i] = required_total_padding % 2;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="comment">/* in some scenarios, the extra padding at the end may not change the output at all */</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; rank; i++) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keyword">const</span> <span class="keyword">auto</span> j = i - 2; <span class="comment">/* filter idx */</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                <span class="keyword">const</span> <span class="keyword">auto</span> total_padding = common_padding[i] * 2 + padding_left[i] + padding_right[i];</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                std::int64_t rem = (input_shape[i] + total_padding - window_size[j]) % strides[j];</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="comment">/* the output shape doesn&#39;t change if we decrease the total padding by at most `rem`</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">                 * provided that we decrease from the right</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                <span class="keywordflow">if</span> (rem &amp;&amp; padding_right[i] &gt; 0)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                    padding_right[i] = std::max&lt;std::int64_t&gt;(0, padding_right[i] - rem);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keyword">auto</span> is_not_zero = [](std::size_t i) { <span class="keywordflow">return</span> i != 0; };</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keywordflow">if</span> (std::any_of(std::begin(padding_left), std::end(padding_left), is_not_zero) ||</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                std::any_of(std::begin(padding_right), std::end(padding_right), is_not_zero))</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                <span class="comment">/* csl::Pooling does not fully support asymmetric padding; hence, we deal with asymmetric padding by</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">                 * copying the input to a bigger tensor and padding the ends manually</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">                 *</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">                 * But we first try to avoid the transformation using cuDNN&#39;s flexibility. cuDNN can accept a smaller or</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">                 * a bigger output shape. This effectively allows us to have arbitrary padding at the right.</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                <span class="keywordflow">if</span> (std::any_of(std::begin(padding_left), std::end(padding_left), is_not_zero))</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                    <span class="comment">/* there is padding on the left and we are forced to transform */</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    <span class="keyword">auto</span> transformed_input_shape = input_shape;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; rank; i++)</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                        transformed_input_shape[i] += padding_left[i] + padding_right[i];</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                    transformedInput.resize(std::begin(transformed_input_shape), std::end(transformed_input_shape));</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                    inputTransformer = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_transform.html">csl::TensorTransform&lt;T&gt;</a>(cudnnHandle, padding_left, padding_right);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keyword">typename</span> <a class="code hl_struct" href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling_1_1params__type.html">csl::Pooling&lt;T&gt;::params_type</a> <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <span class="keywordflow">if</span> (transformedInput.empty())</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                <span class="comment">/* no transform =&gt; use original input shape */</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.input_shape.assign(std::begin(input_shape), std::end(input_shape));</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                <span class="comment">/* the pooling operation will be seeing the transformed input */</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                <span class="keyword">auto</span> transformed_input_shape = transformedInput.shape_as_vector();</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.input_shape.assign(std::begin(transformed_input_shape), std::end(transformed_input_shape));</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            <span class="keyword">auto</span> output_shape = input_shape;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; rank; i++)</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                <span class="keyword">auto</span> total_padding = common_padding[i] * 2 + padding_left[i] + padding_right[i];</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                output_shape[i] = (<a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.input_shape[i] + total_padding - window_size[i - 2]) / strides[i - 2] + 1;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.output_shape.assign(std::begin(output_shape), std::end(output_shape));</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.window_size = window_size;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.padding.assign(std::begin(common_padding) + 2, std::end(common_padding));</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.stride = strides;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            <span class="keywordflow">if</span> (config.poolMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96a26a4b44a837bf97b972628509912b4a5">PoolingConfiguration::PoolingMode::MAX</a>)</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.type = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling.html">csl::Pooling&lt;T&gt;::PoolingType::MAX</a>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config.poolMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96ab3fd1ff1bba4e2318c460a0e90245eca">PoolingConfiguration::PoolingMode::AVERAGE_INCLUDE_PADDING</a>)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.type = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling.html">csl::Pooling&lt;T&gt;::PoolingType::AVERAGE_INCLUDE_PADDING</a>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config.poolMode == <a class="code hl_enumvalue" href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96a49017f58793851b894bf740043036b4f">PoolingConfiguration::PoolingMode::AVERAGE_EXCLUDE_PADDING</a>)</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>.type = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling.html">csl::Pooling&lt;T&gt;::PoolingType::AVERAGE_EXCLUDE_PADDING</a>;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            pooler = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling.html">csl::Pooling&lt;T&gt;</a>(cudnnHandle, <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        }</div>
+</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="foldopen" id="foldopen00226" data-start="{" data-end="}">
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#a413586c729b733d72ccf7846258dbc54">  226</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#a413586c729b733d72ccf7846258dbc54">forward</a>(</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <span class="keyword">const</span> std::vector&lt;cuda::GpuMatND&gt;&amp; inputs,</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keyword">const</span> std::vector&lt;cuda::GpuMatND&gt;&amp; outputs,</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace.html">csl::Workspace</a>&amp; workspace)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(inputs.size() == 1 &amp;&amp; outputs.size() == 1);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="keyword">auto</span> input = csl::viewOf&lt;T&gt;(inputs[0]);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="keywordflow">if</span> (!transformedInput.empty())</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                inputTransformer.transform(input, transformedInput);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>                input = <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_view.html">csl::TensorView&lt;T&gt;</a>(transformedInput);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="keyword">auto</span> output = csl::spanOf&lt;T&gt;(outputs[0]);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            pooler.pool(input, output);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        }</div>
+</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_handle.html">csl::cudnn::Handle</a> cudnnHandle;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling.html">csl::Pooling&lt;T&gt;</a> pooler;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor.html">csl::Tensor&lt;T&gt;</a> transformedInput;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_transform.html">csl::TensorTransform&lt;T&gt;</a> inputTransformer;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    };</div>
+</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>}}} <span class="comment">/* namespace cv::dnn::cuda4dnn */</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_POOLING_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_pooling_op_html_a413586c729b733d72ccf7846258dbc54"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#a413586c729b733d72ccf7846258dbc54">cv::dnn::cuda4dnn::PoolingOp::forward</a></div><div class="ttdeci">void forward(const std::vector&lt; cuda::GpuMatND &gt; &amp;inputs, const std::vector&lt; cuda::GpuMatND &gt; &amp;outputs, csl::Workspace &amp;workspace) override</div><div class="ttdef"><b>Definición</b> <a href="#l00226">pooling.hpp:226</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_pooling_op_html_a75a960a2c3f104def7ecc56833b747ce"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#a75a960a2c3f104def7ecc56833b747ce">cv::dnn::cuda4dnn::PoolingOp::wrapper_type</a></div><div class="ttdeci">GetCUDABackendWrapperType&lt; T &gt; wrapper_type</div><div class="ttdef"><b>Definición</b> <a href="#l00067">pooling.hpp:67</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_pooling_op_html_ade09bf9aac3e5d7bad5cad42ac075141"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_pooling_op.html#ade09bf9aac3e5d7bad5cad42ac075141">cv::dnn::cuda4dnn::PoolingOp::PoolingOp</a></div><div class="ttdeci">PoolingOp(csl::cudnn::Handle handle, const PoolingConfiguration &amp;config)</div><div class="ttdef"><b>Definición</b> <a href="#l00069">pooling.hpp:69</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling.html">cv::dnn::cuda4dnn::csl::Pooling</a></div><div class="ttdef"><b>Definición</b> <a href="tensor__ops_8hpp_source.html#l00384">tensor_ops.hpp:384</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor.html">cv::dnn::cuda4dnn::csl::Tensor</a></div><div class="ttdoc">multi-dimensional contiguous non-copyable GPU tensor</div><div class="ttdef"><b>Definición</b> <a href="cuda4dnn_2csl_2tensor_8hpp_source.html#l00069">tensor.hpp:69</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_transform_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_transform.html">cv::dnn::cuda4dnn::csl::TensorTransform</a></div><div class="ttdef"><b>Definición</b> <a href="tensor__ops_8hpp_source.html#l00469">tensor_ops.hpp:469</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_view_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_tensor_view.html">cv::dnn::cuda4dnn::csl::TensorView</a></div><div class="ttdoc">view of a tensor</div><div class="ttdef"><b>Definición</b> <a href="cuda4dnn_2csl_2tensor_8hpp_source.html#l00843">tensor.hpp:843</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace.html">cv::dnn::cuda4dnn::csl::Workspace</a></div><div class="ttdoc">maintains a single block of reusable device memory</div><div class="ttdef"><b>Definición</b> <a href="workspace_8hpp_source.html#l00024">workspace.hpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_handle_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_handle.html">cv::dnn::cuda4dnn::csl::cudnn::Handle</a></div><div class="ttdoc">sharable cuDNN smart handle</div><div class="ttdef"><b>Definición</b> <a href="cudnn_2cudnn_8hpp_source.html#l00130">cudnn.hpp:130</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="acuda4dnn_2csl_2tensor_8hpp_html"><div class="ttname"><a href="cuda4dnn_2csl_2tensor_8hpp.html">tensor.hpp</a></div></div>
+<div class="ttc" id="acudnn_8hpp_html"><div class="ttname"><a href="cudnn_8hpp.html">cudnn.hpp</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafa99ec4acc4ecb2dc3c2d05da15d0e3f"><div class="ttname"><a href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a></div><div class="ttdeci">#define MAX(a, b)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00539">cvdef.h:539</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">cv::Error::StsNotImplemented</a></div><div class="ttdeci">@ StsNotImplemented</div><div class="ttdoc">the requested function/feature is not implemented</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00063">exception.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="aop__cuda_8hpp_html"><div class="ttname"><a href="op__cuda_8hpp.html">op_cuda.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html">cv::dnn::cuda4dnn::PoolingConfiguration</a></div><div class="ttdef"><b>Definición</b> <a href="#l00024">pooling.hpp:24</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a0c2f8f09b24ca7403a21be81e6779bdb"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a0c2f8f09b24ca7403a21be81e6779bdb">cv::dnn::cuda4dnn::PoolingConfiguration::window_size</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; window_size</div><div class="ttdef"><b>Definición</b> <a href="#l00034">pooling.hpp:34</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a11cd2ba486586dce52cc6ef5b9796bcd"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcd">cv::dnn::cuda4dnn::PoolingConfiguration::PaddingMode</a></div><div class="ttdeci">PaddingMode</div><div class="ttdef"><b>Definición</b> <a href="#l00037">pooling.hpp:37</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a11cd2ba486586dce52cc6ef5b9796bcdaa60a6a471c0681e5a49c4f5d00f6bc5a"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdaa60a6a471c0681e5a49c4f5d00f6bc5a">cv::dnn::cuda4dnn::PoolingConfiguration::PaddingMode::MANUAL</a></div><div class="ttdeci">@ MANUAL</div><div class="ttdef"><b>Definición</b> <a href="#l00038">pooling.hpp:38</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a11cd2ba486586dce52cc6ef5b9796bcdac706ffd80b0ad0a4ef605c581e95252b"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdac706ffd80b0ad0a4ef605c581e95252b">cv::dnn::cuda4dnn::PoolingConfiguration::PaddingMode::SAME</a></div><div class="ttdeci">@ SAME</div><div class="ttdef"><b>Definición</b> <a href="#l00040">pooling.hpp:40</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a11cd2ba486586dce52cc6ef5b9796bcdac9f1a6384b1c466d4612f513bd8e13ea"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a11cd2ba486586dce52cc6ef5b9796bcdac9f1a6384b1c466d4612f513bd8e13ea">cv::dnn::cuda4dnn::PoolingConfiguration::PaddingMode::VALID</a></div><div class="ttdeci">@ VALID</div><div class="ttdef"><b>Definición</b> <a href="#l00039">pooling.hpp:39</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a14c89051da3b79a0a645318e785fd004"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14c89051da3b79a0a645318e785fd004">cv::dnn::cuda4dnn::PoolingConfiguration::roundMode</a></div><div class="ttdeci">RoundingMode roundMode</div><div class="ttdef"><b>Definición</b> <a href="#l00058">pooling.hpp:58</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a14d51c905641b3db9dc4670ff530382b"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382b">cv::dnn::cuda4dnn::PoolingConfiguration::RoundingMode</a></div><div class="ttdeci">RoundingMode</div><div class="ttdef"><b>Definición</b> <a href="#l00053">pooling.hpp:53</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a14d51c905641b3db9dc4670ff530382ba5bdce8e6d9dc3efbbd31e90a8a181dff"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a14d51c905641b3db9dc4670ff530382ba5bdce8e6d9dc3efbbd31e90a8a181dff">cv::dnn::cuda4dnn::PoolingConfiguration::RoundingMode::CEIL</a></div><div class="ttdeci">@ CEIL</div><div class="ttdef"><b>Definición</b> <a href="#l00054">pooling.hpp:54</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a308c1a79444286a228b366c89022fc96"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96">cv::dnn::cuda4dnn::PoolingConfiguration::PoolingMode</a></div><div class="ttdeci">PoolingMode</div><div class="ttdef"><b>Definición</b> <a href="#l00025">pooling.hpp:25</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a308c1a79444286a228b366c89022fc96a26a4b44a837bf97b972628509912b4a5"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96a26a4b44a837bf97b972628509912b4a5">cv::dnn::cuda4dnn::PoolingConfiguration::PoolingMode::MAX</a></div><div class="ttdeci">@ MAX</div><div class="ttdef"><b>Definición</b> <a href="#l00026">pooling.hpp:26</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a308c1a79444286a228b366c89022fc96a49017f58793851b894bf740043036b4f"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96a49017f58793851b894bf740043036b4f">cv::dnn::cuda4dnn::PoolingConfiguration::PoolingMode::AVERAGE_EXCLUDE_PADDING</a></div><div class="ttdeci">@ AVERAGE_EXCLUDE_PADDING</div><div class="ttdef"><b>Definición</b> <a href="#l00028">pooling.hpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a308c1a79444286a228b366c89022fc96ab3fd1ff1bba4e2318c460a0e90245eca"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a308c1a79444286a228b366c89022fc96ab3fd1ff1bba4e2318c460a0e90245eca">cv::dnn::cuda4dnn::PoolingConfiguration::PoolingMode::AVERAGE_INCLUDE_PADDING</a></div><div class="ttdeci">@ AVERAGE_INCLUDE_PADDING</div><div class="ttdef"><b>Definición</b> <a href="#l00027">pooling.hpp:27</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a30a0c58bb4dfc0a0454a1b4199d02ee4"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a30a0c58bb4dfc0a0454a1b4199d02ee4">cv::dnn::cuda4dnn::PoolingConfiguration::input_shape</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; input_shape</div><div class="ttdef"><b>Definición</b> <a href="#l00061">pooling.hpp:61</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a53eca54ebe5cfaa955136b77e3c64b0c"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a53eca54ebe5cfaa955136b77e3c64b0c">cv::dnn::cuda4dnn::PoolingConfiguration::poolMode</a></div><div class="ttdeci">PoolingMode poolMode</div><div class="ttdef"><b>Definición</b> <a href="#l00031">pooling.hpp:31</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a7c265983aefa25b5f5c100a85e330143"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a7c265983aefa25b5f5c100a85e330143">cv::dnn::cuda4dnn::PoolingConfiguration::pads_begin</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; pads_begin</div><div class="ttdef"><b>Definición</b> <a href="#l00046">pooling.hpp:46</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_a7e849dc02ead2dfd8a57670514aebe1d"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#a7e849dc02ead2dfd8a57670514aebe1d">cv::dnn::cuda4dnn::PoolingConfiguration::strides</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; strides</div><div class="ttdef"><b>Definición</b> <a href="#l00035">pooling.hpp:35</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_adaae7b1113d5ba634b682709df5787f9"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#adaae7b1113d5ba634b682709df5787f9">cv::dnn::cuda4dnn::PoolingConfiguration::pads_end</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; pads_end</div><div class="ttdef"><b>Definición</b> <a href="#l00046">pooling.hpp:46</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration_html_aeea011a0d5f8472399e533a73ad7dbe6"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1_pooling_configuration.html#aeea011a0d5f8472399e533a73ad7dbe6">cv::dnn::cuda4dnn::PoolingConfiguration::padMode</a></div><div class="ttdeci">PaddingMode padMode</div><div class="ttdef"><b>Definición</b> <a href="#l00043">pooling.hpp:43</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling_1_1params__type_html"><div class="ttname"><a href="structcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_pooling_1_1params__type.html">cv::dnn::cuda4dnn::csl::Pooling::params_type</a></div><div class="ttdef"><b>Definición</b> <a href="tensor__ops_8hpp_source.html#l00391">tensor_ops.hpp:391</a></div></div>
+<div class="ttc" id="atensor__ops_8hpp_html"><div class="ttname"><a href="tensor__ops_8hpp.html">tensor_ops.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_329f8aeda4c94140e35f70be21279668.html">cuda4dnn</a></li><li class="navelem"><a href="dir_d2ca54779c2590542eeb89ca6000009d.html">primitives</a></li><li class="navelem"><a href="primitives_2pooling_8hpp.html">pooling.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

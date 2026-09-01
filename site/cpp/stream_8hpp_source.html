@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda4dnn/csl/stream.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('stream_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">stream.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="stream_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA4DNN_CSL_STREAM_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA4DNN_CSL_STREAM_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="error_8hpp.html">error.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">opencv2/core/utils/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cuda_runtime_api.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">csl</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html">   36</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">   38</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>() noexcept : stream{ 0 } { }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a7acdeda2dc7deba5cda468f72d9917a3">   39</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a7acdeda2dc7deba5cda468f72d9917a3">UniqueStream</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#af7a5d4c9200974e7543ab4d268ea8901">   40</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#af7a5d4c9200974e7543ab4d268ea8901">UniqueStream</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            stream = other.stream;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            other.stream = 0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        }</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a56c9b6cac12a4d39711f0205ee82d993">   46</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a56c9b6cac12a4d39711f0205ee82d993">UniqueStream</a>(<span class="keywordtype">bool</span> create) : stream{ 0 } {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">if</span> (create) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="comment">/* we create non-blocking streams to avoid inrerruptions from users using the default stream */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaStreamCreateWithFlags(&amp;stream, cudaStreamNonBlocking));</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#abc6d2571b233a0a271a5e16b6403709a">   53</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#abc6d2571b233a0a271a5e16b6403709a">~UniqueStream</a>() {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                <span class="comment">/* cudaStreamDestroy does not throw if a valid stream is passed unless a previous</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">                 * asynchronous operation errored.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="keywordflow">if</span> (stream != 0)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaStreamDestroy(stream));</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            } <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_c_u_d_a_exception.html">CUDAException</a>&amp; ex) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                std::ostringstream os;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                os &lt;&lt; <span class="stringliteral">&quot;Asynchronous exception caught during CUDA stream destruction.\n&quot;</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                os &lt;&lt; ex.<a class="code hl_function" href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">what</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                os &lt;&lt; <span class="stringliteral">&quot;Exception will be ignored.\n&quot;</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <a class="code hl_define" href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a>(0, os.str().c_str());</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a3d0300b2ee08b4b0a1a0ee55dcf219bb">   69</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a3d0300b2ee08b4b0a1a0ee55dcf219bb">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a88385b6670f49edc4d1402da9c4a7851">   70</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a88385b6670f49edc4d1402da9c4a7851">operator=</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(other);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">if</span> (&amp;other != <span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">UniqueStream</a>(std::move(*<span class="keyword">this</span>)); <span class="comment">/* destroy current stream */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                stream = other.stream;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                other.stream = 0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#af72198d27e065baf9e9787b521f8e27b">   81</a></span>        cudaStream_t <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#af72198d27e065baf9e9787b521f8e27b">get</a>() const noexcept {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">return</span> stream;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span></div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a5e27cc5ccebd6d374d75fcdc66d1a476">   87</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a5e27cc5ccebd6d374d75fcdc66d1a476">synchronize</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(cudaStreamSynchronize(stream));</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a0e610d9bc985d945db4ddb0bc14e644d">   93</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a0e610d9bc985d945db4ddb0bc14e644d">busy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keyword">auto</span> status = cudaStreamQuery(stream);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">if</span> (status == cudaErrorNotReady)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <a class="code hl_define" href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a>(status);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        }</div>
+</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#aeea91bc10a93201669528c8fcbc3935d">  104</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(stream); }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        cudaStream_t stream;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    };</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="};">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">  116</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">  118</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>() { }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#afdb91a88bd939e739b93e7c2538bed9f">  119</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#afdb91a88bd939e739b93e7c2538bed9f">Stream</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#ac81f79d4a2a439ca3815da066c9f668e">  120</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#ac81f79d4a2a439ca3815da066c9f668e">Stream</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#adac8aa5db849319778f03564d747f035">  123</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#adac8aa5db849319778f03564d747f035">Stream</a>(<span class="keywordtype">bool</span> create) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">if</span> (create)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                stream = std::make_shared&lt;UniqueStream&gt;(create);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a24643bc69526348795e5a15253c1aa97">  128</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a24643bc69526348795e5a15253c1aa97">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#aee52bf8d323c9f2cb2bc69b5f9608edb">  129</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#aee52bf8d323c9f2cb2bc69b5f9608edb">operator=</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">Stream</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span></div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a1a7150c758914f923df9ad213ebf9929">  132</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a1a7150c758914f923df9ad213ebf9929">synchronize</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            stream-&gt;synchronize();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        }</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#afad0e75b35da0f95f8212ff49a021d76">  138</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#afad0e75b35da0f95f8212ff49a021d76">busy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordflow">return</span> stream-&gt;busy();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
+<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#af414fabb335b5a0bb73f80a43b16bb33">  144</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordflow">if</span> (!stream)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">return</span> stream-&gt;operator bool();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a8c1d98df4ccaa98b78a6bc6916943ec3">  150</a></span>        cudaStream_t <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a8c1d98df4ccaa98b78a6bc6916943ec3">get</a>() const noexcept {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(stream);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="keywordflow">return</span> stream-&gt;get();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        }</div>
+</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        std::shared_ptr&lt;UniqueStream&gt; stream;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    };</div>
+</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}}}} <span class="comment">/* namespace cv::dnn::cuda4dnn::csl */</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA4DNN_CSL_STREAM_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1_exception_html_ac0f5570ab924b550575c2457a4b799ef"><div class="ttname"><a href="classcv_1_1_exception.html#ac0f5570ab924b550575c2457a4b799ef">cv::Exception::what</a></div><div class="ttdeci">virtual const char * what() const CV_NOEXCEPT CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l00337">system.cpp:337</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_c_u_d_a_exception_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_c_u_d_a_exception.html">cv::dnn::cuda4dnn::csl::CUDAException</a></div><div class="ttdoc">exception class for errors thrown by the CUDA APIs</div><div class="ttdef"><b>Definición</b> <a href="error_8hpp_source.html#l00017">error.hpp:17</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_a1a7150c758914f923df9ad213ebf9929"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a1a7150c758914f923df9ad213ebf9929">cv::dnn::cuda4dnn::csl::Stream::synchronize</a></div><div class="ttdeci">void synchronize() const</div><div class="ttdef"><b>Definición</b> <a href="#l00132">stream.hpp:132</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_a24643bc69526348795e5a15253c1aa97"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a24643bc69526348795e5a15253c1aa97">cv::dnn::cuda4dnn::csl::Stream::operator=</a></div><div class="ttdeci">Stream &amp; operator=(const Stream &amp;)=default</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_a3f76b7513f35e5745695c498f91188f2"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a3f76b7513f35e5745695c498f91188f2">cv::dnn::cuda4dnn::csl::Stream::Stream</a></div><div class="ttdeci">Stream()</div><div class="ttdef"><b>Definición</b> <a href="#l00118">stream.hpp:118</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_a8c1d98df4ccaa98b78a6bc6916943ec3"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#a8c1d98df4ccaa98b78a6bc6916943ec3">cv::dnn::cuda4dnn::csl::Stream::get</a></div><div class="ttdeci">cudaStream_t get() const noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00150">stream.hpp:150</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_ac81f79d4a2a439ca3815da066c9f668e"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#ac81f79d4a2a439ca3815da066c9f668e">cv::dnn::cuda4dnn::csl::Stream::Stream</a></div><div class="ttdeci">Stream(Stream &amp;&amp;)=default</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_adac8aa5db849319778f03564d747f035"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#adac8aa5db849319778f03564d747f035">cv::dnn::cuda4dnn::csl::Stream::Stream</a></div><div class="ttdeci">Stream(bool create)</div><div class="ttdef"><b>Definición</b> <a href="#l00123">stream.hpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_aee52bf8d323c9f2cb2bc69b5f9608edb"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#aee52bf8d323c9f2cb2bc69b5f9608edb">cv::dnn::cuda4dnn::csl::Stream::operator=</a></div><div class="ttdeci">Stream &amp; operator=(Stream &amp;&amp;)=default</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_afad0e75b35da0f95f8212ff49a021d76"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#afad0e75b35da0f95f8212ff49a021d76">cv::dnn::cuda4dnn::csl::Stream::busy</a></div><div class="ttdeci">bool busy() const</div><div class="ttdef"><b>Definición</b> <a href="#l00138">stream.hpp:138</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html_afdb91a88bd939e739b93e7c2538bed9f"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html#afdb91a88bd939e739b93e7c2538bed9f">cv::dnn::cuda4dnn::csl::Stream::Stream</a></div><div class="ttdeci">Stream(const Stream &amp;)=default</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a0e610d9bc985d945db4ddb0bc14e644d"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a0e610d9bc985d945db4ddb0bc14e644d">cv::dnn::cuda4dnn::csl::UniqueStream::busy</a></div><div class="ttdeci">bool busy() const</div><div class="ttdef"><b>Definición</b> <a href="#l00093">stream.hpp:93</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a3d0300b2ee08b4b0a1a0ee55dcf219bb"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a3d0300b2ee08b4b0a1a0ee55dcf219bb">cv::dnn::cuda4dnn::csl::UniqueStream::operator=</a></div><div class="ttdeci">UniqueStream &amp; operator=(const UniqueStream &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a56c9b6cac12a4d39711f0205ee82d993"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a56c9b6cac12a4d39711f0205ee82d993">cv::dnn::cuda4dnn::csl::UniqueStream::UniqueStream</a></div><div class="ttdeci">UniqueStream(bool create)</div><div class="ttdef"><b>Definición</b> <a href="#l00046">stream.hpp:46</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a5e27cc5ccebd6d374d75fcdc66d1a476"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a5e27cc5ccebd6d374d75fcdc66d1a476">cv::dnn::cuda4dnn::csl::UniqueStream::synchronize</a></div><div class="ttdeci">void synchronize() const</div><div class="ttdef"><b>Definición</b> <a href="#l00087">stream.hpp:87</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a7acdeda2dc7deba5cda468f72d9917a3"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a7acdeda2dc7deba5cda468f72d9917a3">cv::dnn::cuda4dnn::csl::UniqueStream::UniqueStream</a></div><div class="ttdeci">UniqueStream(UniqueStream &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a88385b6670f49edc4d1402da9c4a7851"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a88385b6670f49edc4d1402da9c4a7851">cv::dnn::cuda4dnn::csl::UniqueStream::operator=</a></div><div class="ttdeci">UniqueStream &amp; operator=(UniqueStream &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00070">stream.hpp:70</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_a9b37ebcc940c1c307f0d11934264d1e7"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#a9b37ebcc940c1c307f0d11934264d1e7">cv::dnn::cuda4dnn::csl::UniqueStream::UniqueStream</a></div><div class="ttdeci">UniqueStream() noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00038">stream.hpp:38</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_abc6d2571b233a0a271a5e16b6403709a"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#abc6d2571b233a0a271a5e16b6403709a">cv::dnn::cuda4dnn::csl::UniqueStream::~UniqueStream</a></div><div class="ttdeci">~UniqueStream()</div><div class="ttdef"><b>Definición</b> <a href="#l00053">stream.hpp:53</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_af72198d27e065baf9e9787b521f8e27b"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#af72198d27e065baf9e9787b521f8e27b">cv::dnn::cuda4dnn::csl::UniqueStream::get</a></div><div class="ttdeci">cudaStream_t get() const noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00081">stream.hpp:81</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream_html_af7a5d4c9200974e7543ab4d268ea8901"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_unique_stream.html#af7a5d4c9200974e7543ab4d268ea8901">cv::dnn::cuda4dnn::csl::UniqueStream::UniqueStream</a></div><div class="ttdeci">UniqueStream(UniqueStream &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00040">stream.hpp:40</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_a78eb7f9d6378d214ab43da4f1fcd28ae"><div class="ttname"><a href="error_8hpp.html#a78eb7f9d6378d214ab43da4f1fcd28ae">CUDA4DNN_CHECK_CUDA</a></div><div class="ttdeci">#define CUDA4DNN_CHECK_CUDA(call)</div><div class="ttdef"><b>Definición</b> <a href="error_8hpp_source.html#l00012">error.hpp:12</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga9a7297e347ba19830270825e5cbb6d0b"><div class="ttname"><a href="group__core__logging.html#ga9a7297e347ba19830270825e5cbb6d0b">CV_LOG_WARNING</a></div><div class="ttdeci">#define CV_LOG_WARNING(tag,...)</div><div class="ttdef"><b>Definición</b> <a href="logger_8hpp_source.html#l00169">logger.hpp:169</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">cv::dnn::cuda4dnn::csl</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_329f8aeda4c94140e35f70be21279668.html">cuda4dnn</a></li><li class="navelem"><a href="dir_c1ab3ca0f95442b07db671d87c7a5644.html">csl</a></li><li class="navelem"><a href="stream_8hpp.html">stream.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_winrt_bridge.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__winrt__bridge_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">cap_winrt_bridge.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="cap__winrt__bridge_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// videoio to XAML bridge for OpenCV</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Copyright (c) Microsoft Open Technologies, Inc.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// All rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// (3 - clause BSD License)</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification, are permitted provided that</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// the following conditions are met:</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// following disclaimer.</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// following disclaimer in the documentation and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// promote products derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// PARTICULAR PURPOSE ARE DISCLAIMED.IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES(INCLUDING, BUT NOT LIMITED TO,</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT(INCLUDING</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="cap__winrt_8hpp.html">opencv2\videoio\cap_winrt.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="cap__winrt__capture_8hpp.html">cap_winrt_capture.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="cap__winrt__bridge_8hpp.html">cap_winrt_bridge.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="cap__winrt__video_8hpp.html">cap_winrt_video.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">using namespace </span>Windows::Foundation;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">using namespace </span>Windows::Media::Capture;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">using namespace </span>Windows::Media::MediaProperties;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">using namespace </span>Windows::Devices::Enumeration;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">using namespace </span>Windows::UI::Xaml::Media::Imaging;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">using namespace </span>Microsoft::WRL;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">using namespace </span>Platform;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">using namespace </span>::Concurrency;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">using namespace </span>::<a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/***************************** VideoioBridge class ******************************/</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">// non-blocking</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#ad799a616ca17fdba3fe6ae7fe914d0aa">   48</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#ad799a616ca17fdba3fe6ae7fe914d0aa">VideoioBridge::requestForUIthreadAsync</a>(<span class="keywordtype">int</span> action)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    reporter.report(action);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#aa2a4c1dfb3c942a68652b8191eb49cc9">   53</a></span>VideoioBridge&amp; <a class="code hl_function" href="class_videoio_bridge.html#aa2a4c1dfb3c942a68652b8191eb49cc9">VideoioBridge::getInstance</a>()</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">static</span> VideoioBridge instance;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a3c51142bdeb606fa6036dba925884d55">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#a3c51142bdeb606fa6036dba925884d55">VideoioBridge::swapInputBuffers</a>()</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="comment">// TODO: already locked, check validity</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="comment">// lock_guard&lt;mutex&gt; lock(inputBufferMutex);</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    swap(<a class="code hl_variable" href="class_videoio_bridge.html#a2fb64f344c40956432b1d73eb8738aa5">backInputPtr</a>, <a class="code hl_variable" href="class_videoio_bridge.html#aaedc4b67ddddcb3303f17b10d110172e">frontInputPtr</a>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="comment">//if (currentFrame != frameCounter)</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">//{</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">//    currentFrame = frameCounter;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">//    swap(backInputPtr, frontInputPtr);</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">//}</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a55095810122dd7a3d2f6fac4b03e8a7a">   71</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#a55095810122dd7a3d2f6fac4b03e8a7a">VideoioBridge::swapOutputBuffers</a>()</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>{</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    lock_guard&lt;mutex&gt; lock(<a class="code hl_variable" href="class_videoio_bridge.html#a6eeccc84f6c3d7fa700f0d48702170de">outputBufferMutex</a>);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    swap(<a class="code hl_variable" href="class_videoio_bridge.html#a77b8f56ac284db3d1d39678e6ac9e4cd">frontOutputBuffer</a>, <a class="code hl_variable" href="class_videoio_bridge.html#a486fdbdf4c4312d7ae957e538be3bf89">backOutputBuffer</a>);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a36cfb4e13a44dffe18f33d2ba7782367">   77</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#a36cfb4e13a44dffe18f33d2ba7782367">VideoioBridge::allocateOutputBuffers</a>()</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_variable" href="class_videoio_bridge.html#a77b8f56ac284db3d1d39678e6ac9e4cd">frontOutputBuffer</a> = ref <span class="keyword">new</span> WriteableBitmap(width, height);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_variable" href="class_videoio_bridge.html#a486fdbdf4c4312d7ae957e538be3bf89">backOutputBuffer</a> = ref <span class="keyword">new</span> WriteableBitmap(width, height);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">// performed on UI thread</span></div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a9c9fcf4eae660a3abbf3f16a58381a90">   84</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#a9c9fcf4eae660a3abbf3f16a58381a90">VideoioBridge::allocateBuffers</a>(<span class="keywordtype">int</span> width_, <span class="keywordtype">int</span> height_)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>{</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// allocate input Mats (bgra8 = CV_8UC4, RGB24 = CV_8UC3)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    frontInputMat.create(height_, width_, <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    backInputMat.create(height_, width_, <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_variable" href="class_videoio_bridge.html#aaedc4b67ddddcb3303f17b10d110172e">frontInputPtr</a> = frontInputMat.ptr(0);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_variable" href="class_videoio_bridge.html#a2fb64f344c40956432b1d73eb8738aa5">backInputPtr</a> = backInputMat.ptr(0);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_function" href="class_videoio_bridge.html#a36cfb4e13a44dffe18f33d2ba7782367">allocateOutputBuffers</a>();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">// performed on UI thread</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a9171ff0056b90f152c23978481ebca4f">   97</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_videoio_bridge.html#a9171ff0056b90f152c23978481ebca4f">VideoioBridge::openCamera</a>()</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>{</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">// buffers must alloc&#39;d on UI thread</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_function" href="class_videoio_bridge.html#a9c9fcf4eae660a3abbf3f16a58381a90">allocateBuffers</a>(width, height);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="comment">// nb. video capture device init must be done on UI thread;</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="class_video.html#a44cba2804f1c61134b2e16ac9c3731ad">Video::getInstance</a>().isStarted())</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_function" href="class_video.html#a44cba2804f1c61134b2e16ac9c3731ad">Video::getInstance</a>().<a class="code hl_function" href="class_video.html#a994621fa50f253e08a23dd8536c02965">initGrabber</a>(deviceIndex, width, height);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>}</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">// nb on UI thread</span></div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#ae2f63b2f80fe715e41e29c4a98d736c7">  113</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#ae2f63b2f80fe715e41e29c4a98d736c7">VideoioBridge::updateFrameContainer</a>()</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>{</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="comment">// copy output Mat to WBM</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_function" href="class_video.html#a44cba2804f1c61134b2e16ac9c3731ad">Video::getInstance</a>().<a class="code hl_function" href="class_video.html#a0e535edccddf0210611cdecc87b0def1">CopyOutput</a>();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="comment">// set XAML image element with image WBM</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <a class="code hl_variable" href="class_videoio_bridge.html#a208ead4017e1ad2e391bccb1a8392e2d">cvImage</a>-&gt;Source = <a class="code hl_variable" href="class_videoio_bridge.html#a486fdbdf4c4312d7ae957e538be3bf89">backOutputBuffer</a>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a5eeaa325ef83e1aa43c7c0becfc551f7">  122</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#a5eeaa325ef83e1aa43c7c0becfc551f7">VideoioBridge::imshow</a>()</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>{</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_function" href="class_videoio_bridge.html#a55095810122dd7a3d2f6fac4b03e8a7a">swapOutputBuffers</a>();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_function" href="class_videoio_bridge.html#ad799a616ca17fdba3fe6ae7fe914d0aa">requestForUIthreadAsync</a>(<a class="code hl_enumvalue" href="group__videoio__winrt.html#gga846675492cd20ae236e61b7ffc9f2a54a8905331d148c6456bb412654b366886a">cv::UPDATE_IMAGE_ELEMENT</a>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a222fce3d683d7e663a68a658dedcc347">  128</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_videoio_bridge.html#a222fce3d683d7e663a68a658dedcc347">VideoioBridge::getDeviceIndex</a>()</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>{</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">return</span> deviceIndex;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#abdca737693ffd5d01020de05283cdb71">  133</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#abdca737693ffd5d01020de05283cdb71">VideoioBridge::setDeviceIndex</a>(<span class="keywordtype">int</span> index)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>{</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    deviceIndex = index;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a1a5f4064ae1e6f6ab39be3e490c36419">  138</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_videoio_bridge.html#a1a5f4064ae1e6f6ab39be3e490c36419">VideoioBridge::getWidth</a>()</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>{</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">return</span> width;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#ac4507726093b19f1fe9195142b8cb83b">  143</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_videoio_bridge.html#ac4507726093b19f1fe9195142b8cb83b">VideoioBridge::getHeight</a>()</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>{</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">return</span> height;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
+</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#a6ccb744c5f6a7fad9663c6ebc3ab4d26">  148</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#a6ccb744c5f6a7fad9663c6ebc3ab4d26">VideoioBridge::setWidth</a>(<span class="keywordtype">int</span> _width)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>{</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    width = _width;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_videoio_bridge.html#ace8af15829cd9bea68cb280cb0e7e032">  153</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_videoio_bridge.html#ace8af15829cd9bea68cb280cb0e7e032">VideoioBridge::setHeight</a>(<span class="keywordtype">int</span> _height)</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    height = _height;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>}</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">// end</span></div>
+<div class="ttc" id="acap__winrt_8hpp_html"><div class="ttname"><a href="cap__winrt_8hpp.html">cap_winrt.hpp</a></div></div>
+<div class="ttc" id="acap__winrt__bridge_8hpp_html"><div class="ttname"><a href="cap__winrt__bridge_8hpp.html">cap_winrt_bridge.hpp</a></div></div>
+<div class="ttc" id="acap__winrt__capture_8hpp_html"><div class="ttname"><a href="cap__winrt__capture_8hpp.html">cap_winrt_capture.hpp</a></div></div>
+<div class="ttc" id="acap__winrt__video_8hpp_html"><div class="ttname"><a href="cap__winrt__video_8hpp.html">cap_winrt_video.hpp</a></div></div>
+<div class="ttc" id="aclass_video_html_a0e535edccddf0210611cdecc87b0def1"><div class="ttname"><a href="class_video.html#a0e535edccddf0210611cdecc87b0def1">Video::CopyOutput</a></div><div class="ttdeci">void CopyOutput()</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__video_8cpp_source.html#l00234">cap_winrt_video.cpp:234</a></div></div>
+<div class="ttc" id="aclass_video_html_a44cba2804f1c61134b2e16ac9c3731ad"><div class="ttname"><a href="class_video.html#a44cba2804f1c61134b2e16ac9c3731ad">Video::getInstance</a></div><div class="ttdeci">static Video &amp; getInstance()</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__video_8cpp_source.html#l00065">cap_winrt_video.cpp:65</a></div></div>
+<div class="ttc" id="aclass_video_html_a994621fa50f253e08a23dd8536c02965"><div class="ttname"><a href="class_video.html#a994621fa50f253e08a23dd8536c02965">Video::initGrabber</a></div><div class="ttdeci">bool initGrabber(int device, int w, int h)</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__video_8cpp_source.html#l00082">cap_winrt_video.cpp:82</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a1a5f4064ae1e6f6ab39be3e490c36419"><div class="ttname"><a href="class_videoio_bridge.html#a1a5f4064ae1e6f6ab39be3e490c36419">VideoioBridge::getWidth</a></div><div class="ttdeci">int getWidth()</div><div class="ttdef"><b>Definición</b> <a href="#l00138">cap_winrt_bridge.cpp:138</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a208ead4017e1ad2e391bccb1a8392e2d"><div class="ttname"><a href="class_videoio_bridge.html#a208ead4017e1ad2e391bccb1a8392e2d">VideoioBridge::cvImage</a></div><div class="ttdeci">Windows::UI::Xaml::Controls::Image cvImage</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__bridge_8hpp_source.html#l00084">cap_winrt_bridge.hpp:84</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a222fce3d683d7e663a68a658dedcc347"><div class="ttname"><a href="class_videoio_bridge.html#a222fce3d683d7e663a68a658dedcc347">VideoioBridge::getDeviceIndex</a></div><div class="ttdeci">int getDeviceIndex()</div><div class="ttdef"><b>Definición</b> <a href="#l00128">cap_winrt_bridge.cpp:128</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a2fb64f344c40956432b1d73eb8738aa5"><div class="ttname"><a href="class_videoio_bridge.html#a2fb64f344c40956432b1d73eb8738aa5">VideoioBridge::backInputPtr</a></div><div class="ttdeci">unsigned char * backInputPtr</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__bridge_8hpp_source.html#l00077">cap_winrt_bridge.hpp:77</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a36cfb4e13a44dffe18f33d2ba7782367"><div class="ttname"><a href="class_videoio_bridge.html#a36cfb4e13a44dffe18f33d2ba7782367">VideoioBridge::allocateOutputBuffers</a></div><div class="ttdeci">void allocateOutputBuffers()</div><div class="ttdef"><b>Definición</b> <a href="#l00077">cap_winrt_bridge.cpp:77</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a3c51142bdeb606fa6036dba925884d55"><div class="ttname"><a href="class_videoio_bridge.html#a3c51142bdeb606fa6036dba925884d55">VideoioBridge::swapInputBuffers</a></div><div class="ttdeci">void swapInputBuffers()</div><div class="ttdef"><b>Definición</b> <a href="#l00059">cap_winrt_bridge.cpp:59</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a486fdbdf4c4312d7ae957e538be3bf89"><div class="ttname"><a href="class_videoio_bridge.html#a486fdbdf4c4312d7ae957e538be3bf89">VideoioBridge::backOutputBuffer</a></div><div class="ttdeci">Windows::UI::Xaml::Media::Imaging::WriteableBitmap backOutputBuffer</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__bridge_8hpp_source.html#l00083">cap_winrt_bridge.hpp:83</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a55095810122dd7a3d2f6fac4b03e8a7a"><div class="ttname"><a href="class_videoio_bridge.html#a55095810122dd7a3d2f6fac4b03e8a7a">VideoioBridge::swapOutputBuffers</a></div><div class="ttdeci">void swapOutputBuffers()</div><div class="ttdef"><b>Definición</b> <a href="#l00071">cap_winrt_bridge.cpp:71</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a5eeaa325ef83e1aa43c7c0becfc551f7"><div class="ttname"><a href="class_videoio_bridge.html#a5eeaa325ef83e1aa43c7c0becfc551f7">VideoioBridge::imshow</a></div><div class="ttdeci">void imshow()</div><div class="ttdef"><b>Definición</b> <a href="#l00122">cap_winrt_bridge.cpp:122</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a6ccb744c5f6a7fad9663c6ebc3ab4d26"><div class="ttname"><a href="class_videoio_bridge.html#a6ccb744c5f6a7fad9663c6ebc3ab4d26">VideoioBridge::setWidth</a></div><div class="ttdeci">void setWidth(int width)</div><div class="ttdef"><b>Definición</b> <a href="#l00148">cap_winrt_bridge.cpp:148</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a6eeccc84f6c3d7fa700f0d48702170de"><div class="ttname"><a href="class_videoio_bridge.html#a6eeccc84f6c3d7fa700f0d48702170de">VideoioBridge::outputBufferMutex</a></div><div class="ttdeci">std::mutex outputBufferMutex</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__bridge_8hpp_source.html#l00081">cap_winrt_bridge.hpp:81</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a77b8f56ac284db3d1d39678e6ac9e4cd"><div class="ttname"><a href="class_videoio_bridge.html#a77b8f56ac284db3d1d39678e6ac9e4cd">VideoioBridge::frontOutputBuffer</a></div><div class="ttdeci">Windows::UI::Xaml::Media::Imaging::WriteableBitmap frontOutputBuffer</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__bridge_8hpp_source.html#l00082">cap_winrt_bridge.hpp:82</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a9171ff0056b90f152c23978481ebca4f"><div class="ttname"><a href="class_videoio_bridge.html#a9171ff0056b90f152c23978481ebca4f">VideoioBridge::openCamera</a></div><div class="ttdeci">bool openCamera()</div><div class="ttdef"><b>Definición</b> <a href="#l00097">cap_winrt_bridge.cpp:97</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_a9c9fcf4eae660a3abbf3f16a58381a90"><div class="ttname"><a href="class_videoio_bridge.html#a9c9fcf4eae660a3abbf3f16a58381a90">VideoioBridge::allocateBuffers</a></div><div class="ttdeci">void allocateBuffers(int width, int height)</div><div class="ttdef"><b>Definición</b> <a href="#l00084">cap_winrt_bridge.cpp:84</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_aa2a4c1dfb3c942a68652b8191eb49cc9"><div class="ttname"><a href="class_videoio_bridge.html#aa2a4c1dfb3c942a68652b8191eb49cc9">VideoioBridge::getInstance</a></div><div class="ttdeci">static VideoioBridge &amp; getInstance()</div><div class="ttdef"><b>Definición</b> <a href="#l00053">cap_winrt_bridge.cpp:53</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_aaedc4b67ddddcb3303f17b10d110172e"><div class="ttname"><a href="class_videoio_bridge.html#aaedc4b67ddddcb3303f17b10d110172e">VideoioBridge::frontInputPtr</a></div><div class="ttdeci">unsigned char * frontInputPtr</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt__bridge_8hpp_source.html#l00076">cap_winrt_bridge.hpp:76</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_abdca737693ffd5d01020de05283cdb71"><div class="ttname"><a href="class_videoio_bridge.html#abdca737693ffd5d01020de05283cdb71">VideoioBridge::setDeviceIndex</a></div><div class="ttdeci">void setDeviceIndex(int index)</div><div class="ttdef"><b>Definición</b> <a href="#l00133">cap_winrt_bridge.cpp:133</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_ac4507726093b19f1fe9195142b8cb83b"><div class="ttname"><a href="class_videoio_bridge.html#ac4507726093b19f1fe9195142b8cb83b">VideoioBridge::getHeight</a></div><div class="ttdeci">int getHeight()</div><div class="ttdef"><b>Definición</b> <a href="#l00143">cap_winrt_bridge.cpp:143</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_ace8af15829cd9bea68cb280cb0e7e032"><div class="ttname"><a href="class_videoio_bridge.html#ace8af15829cd9bea68cb280cb0e7e032">VideoioBridge::setHeight</a></div><div class="ttdeci">void setHeight(int height)</div><div class="ttdef"><b>Definición</b> <a href="#l00153">cap_winrt_bridge.cpp:153</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_ad799a616ca17fdba3fe6ae7fe914d0aa"><div class="ttname"><a href="class_videoio_bridge.html#ad799a616ca17fdba3fe6ae7fe914d0aa">VideoioBridge::requestForUIthreadAsync</a></div><div class="ttdeci">void requestForUIthreadAsync(int action)</div><div class="ttdef"><b>Definición</b> <a href="#l00048">cap_winrt_bridge.cpp:48</a></div></div>
+<div class="ttc" id="aclass_videoio_bridge_html_ae2f63b2f80fe715e41e29c4a98d736c7"><div class="ttname"><a href="class_videoio_bridge.html#ae2f63b2f80fe715e41e29c4a98d736c7">VideoioBridge::updateFrameContainer</a></div><div class="ttdeci">void updateFrameContainer()</div><div class="ttdef"><b>Definición</b> <a href="#l00113">cap_winrt_bridge.cpp:113</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga88c4cd9de76f678f33928ef1e3f96047"><div class="ttname"><a href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a></div><div class="ttdeci">#define CV_8UC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00083">interface.h:83</a></div></div>
+<div class="ttc" id="agroup__videoio__winrt_html_gga846675492cd20ae236e61b7ffc9f2a54a8905331d148c6456bb412654b366886a"><div class="ttname"><a href="group__videoio__winrt.html#gga846675492cd20ae236e61b7ffc9f2a54a8905331d148c6456bb412654b366886a">cv::UPDATE_IMAGE_ELEMENT</a></div><div class="ttdeci">@ UPDATE_IMAGE_ELEMENT</div><div class="ttdef"><b>Definición</b> <a href="cap__winrt_8hpp_source.html#l00042">cap_winrt.hpp:42</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__winrt__bridge_8cpp.html">cap_winrt_bridge.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

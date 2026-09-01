@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/misc/face_detector_accuracy.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('face__detector__accuracy_8py_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">face_detector_accuracy.py</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="face__detector__accuracy_8py.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html">    1</a></span><span class="comment"># This script is used to estimate an accuracy of different face detection models.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"># COCO evaluation tool is used to compute an accuracy metrics (Average Precision).</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"># Script works with different face detection datasets.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> os</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> json</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">from</span> fnmatch <span class="keyword">import</span> fnmatch</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> math <span class="keyword">import</span> pi</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> argparse</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> os</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> sys</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">from</span> pycocotools.coco <span class="keyword">import</span> COCO</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">from</span> pycocotools.cocoeval <span class="keyword">import</span> COCOeval</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#ad4caf6303fae57181249350b46b982c9">   15</a></span>parser = argparse.ArgumentParser(</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        description=<span class="stringliteral">&#39;Evaluate OpenCV face detection algorithms &#39;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                    <span class="stringliteral">&#39;using COCO evaluation tool, http://cocodataset.org/#detections-eval&#39;</span>)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a76c5ffdee6a0bb52eda23a36a7f6f281">   18</a></span>parser.add_argument(<span class="stringliteral">&#39;--proto&#39;</span>, help=<span class="stringliteral">&#39;Path to .pbtxt of TensorFlow graph&#39;</span>)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>parser.add_argument(<span class="stringliteral">&#39;--model&#39;</span>, help=<span class="stringliteral">&#39;Path to .onnx of ONNX model or .pb from TensorFlow&#39;</span>)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>parser.add_argument(<span class="stringliteral">&#39;--cascade&#39;</span>, help=<span class="stringliteral">&#39;Optional path to trained Haar cascade as &#39;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                                      <span class="stringliteral">&#39;an additional model for evaluation&#39;</span>)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>parser.add_argument(<span class="stringliteral">&#39;--ann&#39;</span>, help=<span class="stringliteral">&#39;Path to text file with ground truth annotations&#39;</span>)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>parser.add_argument(<span class="stringliteral">&#39;--pics&#39;</span>, help=<span class="stringliteral">&#39;Path to images root directory&#39;</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a99e99ca9311956b909c6353a1444c0b7">   24</a></span>parser.add_argument(<span class="stringliteral">&#39;--fddb&#39;</span>, help=<span class="stringliteral">&#39;Evaluate FDDB dataset, http://vis-www.cs.umass.edu/fddb/&#39;</span>, action=<span class="stringliteral">&#39;store_true&#39;</span>)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>parser.add_argument(<span class="stringliteral">&#39;--wider&#39;</span>, help=<span class="stringliteral">&#39;Evaluate WIDER FACE dataset, http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/&#39;</span>, action=<span class="stringliteral">&#39;store_true&#39;</span>)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a5a627d5c0d8f5cd3c4318e05db592129">   26</a></span>args = parser.parse_args()</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#aab04391e0784dbce440247f1e91ac8fe">   28</a></span>dataset = {}</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>dataset[<span class="stringliteral">&#39;images&#39;</span>] = []</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>dataset[<span class="stringliteral">&#39;categories&#39;</span>] = [{ <span class="stringliteral">&#39;id&#39;</span>: 0, <span class="stringliteral">&#39;name&#39;</span>: <span class="stringliteral">&#39;face&#39;</span> }]</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>dataset[<span class="stringliteral">&#39;annotations&#39;</span>] = []</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="" data-end="">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a91950d9259e25a9b81c4da054163b845">   33</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a91950d9259e25a9b81c4da054163b845">ellipse2Rect</a>(params):</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    rad_x = params[0]</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    rad_y = params[1]</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    angle = params[2] * 180.0 / pi</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    center_x = params[3]</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    center_y = params[4]</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    pts = <a class="code hl_function" href="group__imgproc__draw.html#ga08534a5142ba8a4ff18fefadb6c8e36e">cv.ellipse2Poly</a>((int(center_x), int(center_y)), (int(rad_x), int(rad_y)),</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                          int(angle), 0, 360, 10)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    rect = <a class="code hl_function" href="group__geometry__shape.html#ga5dac345dfeea578bf979daf1fe9ec0a7">cv.boundingRect</a>(pts)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    left = rect[0]</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    top = rect[1]</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    right = rect[0] + rect[2]</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    bottom = rect[1] + rect[3]</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> left, top, right, bottom</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+</div>
+<div class="foldopen" id="foldopen00048" data-start="" data-end="">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a1296c82c4a00af8a150374db2a17abe1">   48</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a1296c82c4a00af8a150374db2a17abe1">addImage</a>(imagePath):</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    assert(<span class="stringliteral">&#39;images&#39;</span> <span class="keywordflow">in</span>  dataset)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    imageId = len(dataset[<span class="stringliteral">&#39;images&#39;</span>])</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    dataset[<span class="stringliteral">&#39;images&#39;</span>].append({</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="stringliteral">&#39;id&#39;</span>: int(imageId),</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="stringliteral">&#39;file_name&#39;</span>: imagePath</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    })</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> imageId</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+</div>
+<div class="foldopen" id="foldopen00057" data-start="" data-end="">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#ab6db77be7b38002772c1371eb2c4c5cf">   57</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#ab6db77be7b38002772c1371eb2c4c5cf">addBBox</a>(imageId, left, top, width, height):</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    assert(<span class="stringliteral">&#39;annotations&#39;</span> <span class="keywordflow">in</span>  dataset)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    dataset[<span class="stringliteral">&#39;annotations&#39;</span>].append({</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="stringliteral">&#39;id&#39;</span>: len(dataset[<span class="stringliteral">&#39;annotations&#39;</span>]),</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="stringliteral">&#39;image_id&#39;</span>: int(imageId),</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="stringliteral">&#39;category_id&#39;</span>: 0,  <span class="comment"># Face</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="stringliteral">&#39;bbox&#39;</span>: [int(left), int(top), int(width), int(height)],</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="stringliteral">&#39;iscrowd&#39;</span>: 0,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="stringliteral">&#39;area&#39;</span>: float(width * height)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    })</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+</div>
+<div class="foldopen" id="foldopen00068" data-start="" data-end="">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#ae7df1be8c8b7f2b29641d777a84b7793">   68</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#ae7df1be8c8b7f2b29641d777a84b7793">addDetection</a>(detections, imageId, left, top, width, height, score):</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    detections.append({</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <span class="stringliteral">&#39;image_id&#39;</span>: int(imageId),</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <span class="stringliteral">&#39;category_id&#39;</span>: 0,  <span class="comment"># Face</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      <span class="stringliteral">&#39;bbox&#39;</span>: [int(left), int(top), int(width), int(height)],</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      <span class="stringliteral">&#39;score&#39;</span>: float(score)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    })</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+</div>
+<div class="foldopen" id="foldopen00077" data-start="" data-end="">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a0dcb9e043149d39a31aaa4154cedbff3">   77</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a0dcb9e043149d39a31aaa4154cedbff3">fddb_dataset</a>(annotations, images):</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">for</span> d <span class="keywordflow">in</span> os.listdir(annotations):</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">if</span> fnmatch(d, <span class="stringliteral">&#39;FDDB-fold-*-ellipseList.txt&#39;</span>):</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keyword">with</span> open(os.path.join(annotations, d), <span class="stringliteral">&#39;rt&#39;</span>) <span class="keyword">as</span> f:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                lines = [line.rstrip(<span class="stringliteral">&#39;\n&#39;</span>) <span class="keywordflow">for</span> line <span class="keywordflow">in</span> f]</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                lineId = 0</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordflow">while</span> lineId &lt; len(lines):</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    <span class="comment"># Image</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    imgPath = lines[lineId]</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    lineId += 1</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                    imageId = <a class="code hl_function" href="namespaceface__detector__accuracy.html#a1296c82c4a00af8a150374db2a17abe1">addImage</a>(os.path.join(images, imgPath) + <span class="stringliteral">&#39;.jpg&#39;</span>)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    img = <a class="code hl_function" href="group__imgcodecs.html#gacbaa02cffc4ec2422dfa2e24412a99e2">cv.imread</a>(os.path.join(images, imgPath) + <span class="stringliteral">&#39;.jpg&#39;</span>)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    <span class="comment"># Faces</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    numFaces = int(lines[lineId])</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    lineId += 1</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(numFaces):</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                        params = [float(v) <span class="keywordflow">for</span> v <span class="keywordflow">in</span> lines[lineId].split()]</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                        lineId += 1</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                        left, top, right, bottom = <a class="code hl_function" href="namespaceface__detector__accuracy.html#a91950d9259e25a9b81c4da054163b845">ellipse2Rect</a>(params)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                        <a class="code hl_function" href="namespaceface__detector__accuracy.html#ab6db77be7b38002772c1371eb2c4c5cf">addBBox</a>(imageId, left, top, width=right - left + 1,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                                height=bottom - top + 1)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+</div>
+<div class="foldopen" id="foldopen00102" data-start="" data-end="">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a92f549c6509a45dca285366311cf1364">  102</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a92f549c6509a45dca285366311cf1364">wider_dataset</a>(annotations, images):</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">with</span> open(annotations, <span class="stringliteral">&#39;rt&#39;</span>) <span class="keyword">as</span> f:</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        lines = [line.rstrip(<span class="stringliteral">&#39;\n&#39;</span>) <span class="keywordflow">for</span> line <span class="keywordflow">in</span> f]</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        lineId = 0</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">while</span> lineId &lt; len(lines):</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="comment"># Image</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            imgPath = lines[lineId]</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            lineId += 1</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            imageId = <a class="code hl_function" href="namespaceface__detector__accuracy.html#a1296c82c4a00af8a150374db2a17abe1">addImage</a>(os.path.join(images, imgPath))</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="comment"># Faces</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            numFaces = int(lines[lineId])</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            lineId += 1</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(numFaces):</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                params = [int(v) <span class="keywordflow">for</span> v <span class="keywordflow">in</span> lines[lineId].split()]</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                lineId += 1</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                left, top, width, height = params[0], params[1], params[2], params[3]</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <a class="code hl_function" href="namespaceface__detector__accuracy.html#ab6db77be7b38002772c1371eb2c4c5cf">addBBox</a>(imageId, left, top, width, height)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+</div>
+<div class="foldopen" id="foldopen00121" data-start="" data-end="">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#acada42a90eec3ff55491f0333001ff55">  121</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#acada42a90eec3ff55491f0333001ff55">evaluate</a>():</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    cocoGt = COCO(<span class="stringliteral">&#39;annotations.json&#39;</span>)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    cocoDt = cocoGt.loadRes(<span class="stringliteral">&#39;detections.json&#39;</span>)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    cocoEval = COCOeval(cocoGt, cocoDt, <span class="stringliteral">&#39;bbox&#39;</span>)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    cocoEval.evaluate()</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    cocoEval.accumulate()</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    cocoEval.summarize()</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>assert(args.fddb <span class="keywordflow">or</span> args.wider)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keywordflow">if</span> args.fddb:</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <a class="code hl_function" href="namespaceface__detector__accuracy.html#a0dcb9e043149d39a31aaa4154cedbff3">fddb_dataset</a>(args.ann, args.pics)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keywordflow">elif</span> args.wider:</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_function" href="namespaceface__detector__accuracy.html#a92f549c6509a45dca285366311cf1364">wider_dataset</a>(args.ann, args.pics)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">with</span> open(<span class="stringliteral">&#39;annotations.json&#39;</span>, <span class="stringliteral">&#39;wt&#39;</span>) <span class="keyword">as</span> f:</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    json.dump(dataset, f)</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a29a11f4afb76fbf76e0cb1b27ff4c36d">  141</a></span>detections = []</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keywordflow">if</span> args.proto <span class="keywordflow">and</span> args.model <span class="keywordflow">and</span> args.model.endswith(<span class="stringliteral">&#39;.pb&#39;</span>):</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a53134ee8a81cebfe83c3dd67966aec3b">  143</a></span>    net = <a class="code hl_function" href="group__dnn.html#gac56d415c3788b6590bb52263de2a7e72">cv.dnn.readNet</a>(args.proto, args.model)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="foldopen" id="foldopen00145" data-start="" data-end="">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a80c85a4d0f9290766d2e91db9aa2d788">  145</a></span>    <span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a80c85a4d0f9290766d2e91db9aa2d788">detect</a>(img, imageId):</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        imgWidth = img.shape[1]</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        imgHeight = img.shape[0]</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        net.setInput(<a class="code hl_function" href="group__dnn.html#ga29f34df9376379a603acd8df581ac8d7">cv.dnn.blobFromImage</a>(img, 1.0, (300, 300), (104., 177., 123.), <span class="keyword">False</span>, <span class="keyword">False</span>))</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        out = net.forward()</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(out.shape[2]):</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            confidence = out[0, 0, i, 2]</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            left = int(out[0, 0, i, 3] * img.shape[1])</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            top = int(out[0, 0, i, 4] * img.shape[0])</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            right = int(out[0, 0, i, 5] * img.shape[1])</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            bottom = int(out[0, 0, i, 6] * img.shape[0])</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            x = max(0, min(left, img.shape[1] - 1))</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            y = max(0, min(top, img.shape[0] - 1))</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            w = max(0, min(right - x + 1, img.shape[1] - x))</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            h = max(0, min(bottom - y + 1, img.shape[0] - y))</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <a class="code hl_function" href="namespaceface__detector__accuracy.html#ae7df1be8c8b7f2b29641d777a84b7793">addDetection</a>(detections, imageId, x, y, w, h, score=confidence)</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="keywordflow">elif</span> args.model <span class="keywordflow">and</span> args.model.endswith(<span class="stringliteral">&#39;.onnx&#39;</span>):</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    net = <a class="code hl_function" href="classcv_1_1_face_detector_y_n.html#a06b37c64e36f55e69cedad74c470d843">cv.FaceDetectorYN.create</a>(args.model, <span class="stringliteral">&quot;&quot;</span>, (320, 320), 0.3, 0.45, 5000)</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a80c85a4d0f9290766d2e91db9aa2d788">detect</a>(img, imageId):</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        net.setInputSize((img.shape[1], img.shape[0]))</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        faces = net.detect(img)</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">if</span> faces[1] <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            <span class="keywordflow">for</span> idx, face <span class="keywordflow">in</span> enumerate(faces[1]):</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                left, top, width, height = face[0], face[1], face[2], face[3]</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                <a class="code hl_function" href="namespaceface__detector__accuracy.html#ae7df1be8c8b7f2b29641d777a84b7793">addDetection</a>(detections, imageId, left, top, width, height, score=face[-1])</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keywordflow">elif</span> args.cascade:</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#a4cfd21663cd47f6e330dc751abd89eb0">  178</a></span>    cascade = cv.CascadeClassifier(args.cascade)</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#a80c85a4d0f9290766d2e91db9aa2d788">detect</a>(img, imageId):</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        srcImgGray = <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv.cvtColor</a>(img, cv.COLOR_BGR2GRAY)</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        faces = cascade.detectMultiScale(srcImgGray)</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">for</span> rect <span class="keywordflow">in</span> faces:</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            left, top, width, height = rect[0], rect[1], rect[2], rect[3]</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <a class="code hl_function" href="namespaceface__detector__accuracy.html#ae7df1be8c8b7f2b29641d777a84b7793">addDetection</a>(detections, imageId, left, top, width, height, score=1.0)</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(dataset[<span class="stringliteral">&#39;images&#39;</span>])):</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    sys.stdout.write(<span class="stringliteral">&#39;\r%d / %d&#39;</span> % (i + 1, len(dataset[<span class="stringliteral">&#39;images&#39;</span>])))</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    sys.stdout.flush()</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#ac4fec268369640f3a419c87cc28ddd86">  192</a></span>    img = <a class="code hl_function" href="group__imgcodecs.html#gacbaa02cffc4ec2422dfa2e24412a99e2">cv.imread</a>(dataset[<span class="stringliteral">&#39;images&#39;</span>][i][<span class="stringliteral">&#39;file_name&#39;</span>])</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#adc157512c515aa3421727028f62392dd">  193</a></span>    imageId = int(dataset[<span class="stringliteral">&#39;images&#39;</span>][i][<span class="stringliteral">&#39;id&#39;</span>])</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <a class="code hl_function" href="namespaceface__detector__accuracy.html#a80c85a4d0f9290766d2e91db9aa2d788">detect</a>(img, imageId)</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="keyword">with</span> open(<span class="stringliteral">&#39;detections.json&#39;</span>, <span class="stringliteral">&#39;wt&#39;</span>) <span class="keyword">as</span> f:</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    json.dump(detections, f)</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><a class="code hl_function" href="namespaceface__detector__accuracy.html#acada42a90eec3ff55491f0333001ff55">evaluate</a>()</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="foldopen" id="foldopen00203" data-start="" data-end="">
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="namespaceface__detector__accuracy.html#ae66b573d4dd3639a5d1dff75cd2a38bb">  203</a></span><span class="keyword">def </span><a class="code hl_function" href="namespaceface__detector__accuracy.html#ae66b573d4dd3639a5d1dff75cd2a38bb">rm</a>(f):</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">if</span> os.path.exists(f):</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        os.remove(f)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><a class="code hl_function" href="namespaceface__detector__accuracy.html#ae66b573d4dd3639a5d1dff75cd2a38bb">rm</a>(<span class="stringliteral">&#39;annotations.json&#39;</span>)</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><a class="code hl_function" href="namespaceface__detector__accuracy.html#ae66b573d4dd3639a5d1dff75cd2a38bb">rm</a>(<span class="stringliteral">&#39;detections.json&#39;</span>)</div>
+<div class="ttc" id="aclasscv_1_1_face_detector_y_n_html_a06b37c64e36f55e69cedad74c470d843"><div class="ttname"><a href="classcv_1_1_face_detector_y_n.html#a06b37c64e36f55e69cedad74c470d843">cv::FaceDetectorYN::create</a></div><div class="ttdeci">static CV_WRAP Ptr&lt; FaceDetectorYN &gt; create(CV_WRAP_FILE_PATH const String &amp;model, CV_WRAP_FILE_PATH const String &amp;config, const Size &amp;input_size, float score_threshold=0.9f, float nms_threshold=0.3f, int top_k=5000, int backend_id=0, int target_id=0)</div><div class="ttdoc">Creates an instance of face detector class with given parameters.</div></div>
+<div class="ttc" id="agroup__dnn_html_ga29f34df9376379a603acd8df581ac8d7"><div class="ttname"><a href="group__dnn.html#ga29f34df9376379a603acd8df581ac8d7">cv::dnn::blobFromImage</a></div><div class="ttdeci">CV_EXPORTS_W Mat blobFromImage(InputArray image, double scalefactor=1.0, const Size &amp;size=Size(), const Scalar &amp;mean=Scalar(), bool swapRB=false, bool crop=false, int ddepth=CV_32F)</div><div class="ttdoc">Creates 4-dimensional blob from image. Optionally resizes and crops image from center,...</div><div class="ttdef"><b>Definición</b> <a href="dnn__utils_8cpp_source.html#l00067">dnn_utils.cpp:67</a></div></div>
+<div class="ttc" id="agroup__dnn_html_gac56d415c3788b6590bb52263de2a7e72"><div class="ttname"><a href="group__dnn.html#gac56d415c3788b6590bb52263de2a7e72">cv::dnn::readNet</a></div><div class="ttdeci">CV_EXPORTS_W Net readNet(CV_WRAP_FILE_PATH const String &amp;model, CV_WRAP_FILE_PATH const String &amp;config=&quot;&quot;, const String &amp;framework=&quot;&quot;, int engine=ENGINE_AUTO)</div><div class="ttdoc">Read deep learning network represented in one of the supported formats.</div></div>
+<div class="ttc" id="agroup__geometry__shape_html_ga5dac345dfeea578bf979daf1fe9ec0a7"><div class="ttname"><a href="group__geometry__shape.html#ga5dac345dfeea578bf979daf1fe9ec0a7">cv::boundingRect</a></div><div class="ttdeci">CV_EXPORTS_W Rect boundingRect(InputArray array)</div><div class="ttdoc">Calculates the up-right bounding rectangle of a point set or non-zero pixels of gray-scale image.</div><div class="ttdef"><b>Definición</b> <a href="geometry_8cpp_source.html#l00707">geometry.cpp:707</a></div></div>
+<div class="ttc" id="agroup__imgcodecs_html_gacbaa02cffc4ec2422dfa2e24412a99e2"><div class="ttname"><a href="group__imgcodecs.html#gacbaa02cffc4ec2422dfa2e24412a99e2">cv::imread</a></div><div class="ttdeci">CV_EXPORTS_W Mat imread(const String &amp;filename, int flags=IMREAD_COLOR_BGR)</div><div class="ttdoc">Loads an image from a file.</div><div class="ttdef"><b>Definición</b> <a href="loadsave_8cpp_source.html#l00754">loadsave.cpp:754</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gaf86c09fe702ed037c03c2bc603ceab14"><div class="ttname"><a href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a></div><div class="ttdeci">CV_EXPORTS_W void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0, AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Converts an image from one color space to another.</div><div class="ttdef"><b>Definición</b> <a href="imgproc_2src_2color_8cpp_source.html#l00192">color.cpp:192</a></div></div>
+<div class="ttc" id="agroup__imgproc__draw_html_ga08534a5142ba8a4ff18fefadb6c8e36e"><div class="ttname"><a href="group__imgproc__draw.html#ga08534a5142ba8a4ff18fefadb6c8e36e">cv::ellipse2Poly</a></div><div class="ttdeci">CV_EXPORTS_W void ellipse2Poly(Point center, Size axes, int angle, int arcStart, int arcEnd, int delta, CV_OUT std::vector&lt; Point &gt; &amp;pts)</div><div class="ttdoc">Approximates an elliptic arc with a polyline.</div><div class="ttdef"><b>Definición</b> <a href="drawing_8cpp_source.html#l00922">drawing.cpp:922</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_a0dcb9e043149d39a31aaa4154cedbff3"><div class="ttname"><a href="namespaceface__detector__accuracy.html#a0dcb9e043149d39a31aaa4154cedbff3">face_detector_accuracy.fddb_dataset</a></div><div class="ttdeci">fddb_dataset(annotations, images)</div><div class="ttdef"><b>Definición</b> <a href="#l00077">face_detector_accuracy.py:77</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_a1296c82c4a00af8a150374db2a17abe1"><div class="ttname"><a href="namespaceface__detector__accuracy.html#a1296c82c4a00af8a150374db2a17abe1">face_detector_accuracy.addImage</a></div><div class="ttdeci">addImage(imagePath)</div><div class="ttdef"><b>Definición</b> <a href="#l00048">face_detector_accuracy.py:48</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_a80c85a4d0f9290766d2e91db9aa2d788"><div class="ttname"><a href="namespaceface__detector__accuracy.html#a80c85a4d0f9290766d2e91db9aa2d788">face_detector_accuracy.detect</a></div><div class="ttdeci">detect(img, imageId)</div><div class="ttdef"><b>Definición</b> <a href="#l00145">face_detector_accuracy.py:145</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_a91950d9259e25a9b81c4da054163b845"><div class="ttname"><a href="namespaceface__detector__accuracy.html#a91950d9259e25a9b81c4da054163b845">face_detector_accuracy.ellipse2Rect</a></div><div class="ttdeci">ellipse2Rect(params)</div><div class="ttdef"><b>Definición</b> <a href="#l00033">face_detector_accuracy.py:33</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_a92f549c6509a45dca285366311cf1364"><div class="ttname"><a href="namespaceface__detector__accuracy.html#a92f549c6509a45dca285366311cf1364">face_detector_accuracy.wider_dataset</a></div><div class="ttdeci">wider_dataset(annotations, images)</div><div class="ttdef"><b>Definición</b> <a href="#l00102">face_detector_accuracy.py:102</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_ab6db77be7b38002772c1371eb2c4c5cf"><div class="ttname"><a href="namespaceface__detector__accuracy.html#ab6db77be7b38002772c1371eb2c4c5cf">face_detector_accuracy.addBBox</a></div><div class="ttdeci">addBBox(imageId, left, top, width, height)</div><div class="ttdef"><b>Definición</b> <a href="#l00057">face_detector_accuracy.py:57</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_acada42a90eec3ff55491f0333001ff55"><div class="ttname"><a href="namespaceface__detector__accuracy.html#acada42a90eec3ff55491f0333001ff55">face_detector_accuracy.evaluate</a></div><div class="ttdeci">evaluate()</div><div class="ttdef"><b>Definición</b> <a href="#l00121">face_detector_accuracy.py:121</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_ae66b573d4dd3639a5d1dff75cd2a38bb"><div class="ttname"><a href="namespaceface__detector__accuracy.html#ae66b573d4dd3639a5d1dff75cd2a38bb">face_detector_accuracy.rm</a></div><div class="ttdeci">rm(f)</div><div class="ttdef"><b>Definición</b> <a href="#l00203">face_detector_accuracy.py:203</a></div></div>
+<div class="ttc" id="anamespaceface__detector__accuracy_html_ae7df1be8c8b7f2b29641d777a84b7793"><div class="ttname"><a href="namespaceface__detector__accuracy.html#ae7df1be8c8b7f2b29641d777a84b7793">face_detector_accuracy.addDetection</a></div><div class="ttdeci">addDetection(detections, imageId, left, top, width, height, score)</div><div class="ttdef"><b>Definición</b> <a href="#l00068">face_detector_accuracy.py:68</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_9f76ba29537c1364d4d47b424ffb77fd.html">misc</a></li><li class="navelem"><a href="face__detector__accuracy_8py.html">face_detector_accuracy.py</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

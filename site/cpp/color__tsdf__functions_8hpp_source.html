@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/src/color_tsdf_functions.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('color__tsdf__functions_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">color_tsdf_functions.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="color__tsdf__functions_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Partially rewritten from https://github.com/Nerei/kinfu_remake</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// Copyright(c) 2012, Anatoly Baksheev. All rights reserved.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef OPENCV_3D_COLORED_TSDF_FUNCTIONS_HPP</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define OPENCV_3D_COLORED_TSDF_FUNCTIONS_HPP</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;unordered_set&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud_2src_2utils_8hpp.html">utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="tsdf__functions_8hpp.html">tsdf_functions.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="color__tsdf__functions_8hpp.html#a64cead3aa40a936342d6bf18ffaff592">   16</a></span><span class="preprocessor">#define USE_INTERPOLATION_IN_GETNORMAL 1</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#abfa3b3c81e6f410690afde3d0f55d2fc">integrateColorTsdfVolumeUnit</a>(<span class="keyword">const</span> VolumeSettings &amp;settings, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#gaaccfdd6e633076501c97b6ba4e792f53">Matx44f</a> &amp;cameraPose,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                                  <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _depth, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _rgb, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _pixNorms, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _volume);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#abfa3b3c81e6f410690afde3d0f55d2fc">integrateColorTsdfVolumeUnit</a>(<span class="keyword">const</span> VolumeSettings &amp;settings, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#gaaccfdd6e633076501c97b6ba4e792f53">Matx44f</a> &amp;volumePose, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#gaaccfdd6e633076501c97b6ba4e792f53">Matx44f</a> &amp;cameraPose,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                                  <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _depth, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _rgb, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _pixNorms, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _volume);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#af7a50fcc787d5e22b416a3c062349194">raycastColorTsdfVolumeUnit</a>(<span class="keyword">const</span> VolumeSettings &amp;settings, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#gaaccfdd6e633076501c97b6ba4e792f53">Matx44f</a> &amp;cameraPose,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                                <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> intr,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                                <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _volume, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _points, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _normals, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _colors);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#af5090bc7ebdd7c6620a30e1604ea5717">fetchNormalsFromColorTsdfVolumeUnit</a>(<span class="keyword">const</span> VolumeSettings &amp;settings, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _volume,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                                         <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _points, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _normals);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#abdd3002fef26461d077405cf5196cbcf">fetchPointsNormalsFromColorTsdfVolumeUnit</a>(<span class="keyword">const</span> VolumeSettings &amp;settings, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _volume,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                                               <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _points, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _normals);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#ade1a5ccf8988bb1280097961a0dd8cba">fetchPointsNormalsColorsFromColorTsdfVolumeUnit</a>(<span class="keyword">const</span> VolumeSettings &amp;settings, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _volume,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                                                     <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _points, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _normals, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _colors);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="agroup__core__basic_html_gaaccfdd6e633076501c97b6ba4e792f53"><div class="ttname"><a href="group__core__basic.html#gaaccfdd6e633076501c97b6ba4e792f53">cv::Matx44f</a></div><div class="ttdeci">Matx&lt; float, 4, 4 &gt; Matx44f</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00264">matx.hpp:264</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_abdd3002fef26461d077405cf5196cbcf"><div class="ttname"><a href="namespacecv.html#abdd3002fef26461d077405cf5196cbcf">cv::fetchPointsNormalsFromColorTsdfVolumeUnit</a></div><div class="ttdeci">void fetchPointsNormalsFromColorTsdfVolumeUnit(const VolumeSettings &amp;settings, InputArray _volume, OutputArray _points, OutputArray _normals)</div><div class="ttdef"><b>Definición</b> <a href="color__tsdf__functions_8cpp_source.html#l01125">color_tsdf_functions.cpp:1125</a></div></div>
+<div class="ttc" id="anamespacecv_html_abfa3b3c81e6f410690afde3d0f55d2fc"><div class="ttname"><a href="namespacecv.html#abfa3b3c81e6f410690afde3d0f55d2fc">cv::integrateColorTsdfVolumeUnit</a></div><div class="ttdeci">void integrateColorTsdfVolumeUnit(const VolumeSettings &amp;settings, const Matx44f &amp;cameraPose, InputArray _depth, InputArray _rgb, InputArray _pixNorms, InputArray _volume)</div><div class="ttdef"><b>Definición</b> <a href="color__tsdf__functions_8cpp_source.html#l00015">color_tsdf_functions.cpp:15</a></div></div>
+<div class="ttc" id="anamespacecv_html_ade1a5ccf8988bb1280097961a0dd8cba"><div class="ttname"><a href="namespacecv.html#ade1a5ccf8988bb1280097961a0dd8cba">cv::fetchPointsNormalsColorsFromColorTsdfVolumeUnit</a></div><div class="ttdeci">void fetchPointsNormalsColorsFromColorTsdfVolumeUnit(const VolumeSettings &amp;settings, InputArray _volume, OutputArray _points, OutputArray _normals, OutputArray _colors)</div><div class="ttdef"><b>Definición</b> <a href="color__tsdf__functions_8cpp_source.html#l01131">color_tsdf_functions.cpp:1131</a></div></div>
+<div class="ttc" id="anamespacecv_html_af5090bc7ebdd7c6620a30e1604ea5717"><div class="ttname"><a href="namespacecv.html#af5090bc7ebdd7c6620a30e1604ea5717">cv::fetchNormalsFromColorTsdfVolumeUnit</a></div><div class="ttdeci">void fetchNormalsFromColorTsdfVolumeUnit(const VolumeSettings &amp;settings, InputArray _volume, InputArray _points, OutputArray _normals)</div><div class="ttdef"><b>Definición</b> <a href="color__tsdf__functions_8cpp_source.html#l01009">color_tsdf_functions.cpp:1009</a></div></div>
+<div class="ttc" id="anamespacecv_html_af7a50fcc787d5e22b416a3c062349194"><div class="ttname"><a href="namespacecv.html#af7a50fcc787d5e22b416a3c062349194">cv::raycastColorTsdfVolumeUnit</a></div><div class="ttdeci">void raycastColorTsdfVolumeUnit(const VolumeSettings &amp;settings, const Matx44f &amp;cameraPose, int height, int width, InputArray intr, InputArray _volume, OutputArray _points, OutputArray _normals, OutputArray _colors)</div><div class="ttdef"><b>Definición</b> <a href="color__tsdf__functions_8cpp_source.html#l00692">color_tsdf_functions.cpp:692</a></div></div>
+<div class="ttc" id="aptcloud_2src_2utils_8hpp_html"><div class="ttname"><a href="ptcloud_2src_2utils_8hpp.html">utils.hpp</a></div></div>
+<div class="ttc" id="atsdf__functions_8hpp_html"><div class="ttname"><a href="tsdf__functions_8hpp.html">tsdf_functions.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_e585da6166ee98e0160b5c7acdfa2558.html">src</a></li><li class="navelem"><a href="color__tsdf__functions_8hpp.html">color_tsdf_functions.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+var structcv_1_1dnn_1_1_model_fusion_attention =
+[
+    [ "ModelFusionAttention", "structcv_1_1dnn_1_1_model_fusion_attention.html#a8d849f94d26c2bb22971c410880f4519", null ],
+    [ "collectShapeChain", "structcv_1_1dnn_1_1_model_fusion_attention.html#aa03e52c55fd2410ae38635eeb5cce924", null ],
+    [ "extractConstInt", "structcv_1_1dnn_1_1_model_fusion_attention.html#a6fff2c1e19eb8f699520ceb34a8160bd", null ],
+    [ "findMatchingConsumer", "structcv_1_1dnn_1_1_model_fusion_attention.html#a6a054e3298fbeabc2ba1bdf888638819", null ],
+    [ "followProjChain", "structcv_1_1dnn_1_1_model_fusion_attention.html#add644e5abfa11bb3e4bca142db4056a6", null ],
+    [ "fuse", "structcv_1_1dnn_1_1_model_fusion_attention.html#a3baba82b23576f188f2738667a46caf3", null ],
+    [ "fuseGraph", "structcv_1_1dnn_1_1_model_fusion_attention.html#a1642bfbf834abec662e7c3bf3c7c4e4c", null ],
+    [ "getProjWeight", "structcv_1_1dnn_1_1_model_fusion_attention.html#a8a7e40214d84a007de51198ad7e13afc", null ],
+    [ "isMaskAdd", "structcv_1_1dnn_1_1_model_fusion_attention.html#a69d57c3d961649f6e49a63f27fb2b6bd", null ],
+    [ "isMatMul", "structcv_1_1dnn_1_1_model_fusion_attention.html#ad76232b8db7a3e27d6f5d51fab01a080", null ],
+    [ "isProjCandidate", "structcv_1_1dnn_1_1_model_fusion_attention.html#a0a35e09eecc48339503c651ac7368d2b", null ],
+    [ "isReshape", "structcv_1_1dnn_1_1_model_fusion_attention.html#a622cc811455641984ce734829d2c7055", null ],
+    [ "isRuntimeQKScaleChain", "structcv_1_1dnn_1_1_model_fusion_attention.html#a4a9143f27821fe05686dc33a6b6b1fba", null ],
+    [ "isScalarBinOp", "structcv_1_1dnn_1_1_model_fusion_attention.html#a62dc1289f9e1670ae57683f663540052", null ],
+    [ "isScalarDiv", "structcv_1_1dnn_1_1_model_fusion_attention.html#a3c7dac90bce42ae0a0639e98b34f5051", null ],
+    [ "isScalarMul", "structcv_1_1dnn_1_1_model_fusion_attention.html#ab2e9caf4ebd81feaa04619a57a40ee30", null ],
+    [ "isSoftmax", "structcv_1_1dnn_1_1_model_fusion_attention.html#ac5f159be250874d3f1887590f55c5cc3", null ],
+    [ "isTranspose", "structcv_1_1dnn_1_1_model_fusion_attention.html#a0625b909ba1a943caf20e3e24bbd3118", null ],
+    [ "removalIsSelfContained", "structcv_1_1dnn_1_1_model_fusion_attention.html#ac14ae1fca008ad0d9f58a3fe36f95eed", null ],
+    [ "singleConsumer", "structcv_1_1dnn_1_1_model_fusion_attention.html#ade5a917d3a25caa6f75055838d20a749", null ],
+    [ "traceClipBranch", "structcv_1_1dnn_1_1_model_fusion_attention.html#a5e44764b36debb852ee2725fb187c35e", null ],
+    [ "tryFuseClipAttention", "structcv_1_1dnn_1_1_model_fusion_attention.html#a25abdbefb091ffa056271742e0319c29", null ],
+    [ "tryFuseCombinedQKV", "structcv_1_1dnn_1_1_model_fusion_attention.html#a87ba2101741e04cdcb1a6da5838f5502", null ],
+    [ "netimpl", "structcv_1_1dnn_1_1_model_fusion_attention.html#a48bac0c8cb8d1ac46be0110af0772269", null ]
+];

@@ -1,0 +1,4 @@
+var unionopencv__onnx_1_1_sharding_spec_proto_default_type_internal_1_1_0funion_0e_8____unnamed0____ =
+[
+    [ "_instance", "unionopencv__onnx_1_1_sharding_spec_proto_default_type_internal_1_1_0funion_0e_8____unnamed0____.html#af28b4db2b750a51620f31f88d9b0dd20", null ]
+];

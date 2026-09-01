@@ -1,0 +1,25 @@
+var classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker =
+[
+    [ "dtype", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a94ac95b0d8b9e121e0b52f2b9ff54485", null ],
+    [ "dtype", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a94ac95b0d8b9e121e0b52f2b9ff54485", null ],
+    [ "WT", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a88128e765654d827402dd93872aa25b1", null ],
+    [ "ReduceInvoker", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#afeaf0a3c2806486c0143a8f136555dc6", null ],
+    [ "ReduceInvoker", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#afeaf0a3c2806486c0143a8f136555dc6", null ],
+    [ "operator()", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a7f547263cb58997e79f304307595d612", null ],
+    [ "operator()", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a7f547263cb58997e79f304307595d612", null ],
+    [ "run", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#ac00812effba3b3345a29cd1a1be3d7cb", null ],
+    [ "run", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#ac00812effba3b3345a29cd1a1be3d7cb", null ],
+    [ "cost_per_thread", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a8630eca03daa30cba054d1a1b8c89086", null ],
+    [ "dst", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a28ef237295afe83a44651b08058d553e", null ],
+    [ "last_reduced_dim", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a4adf44c559eb39a11914f4c69b8783e9", null ],
+    [ "last_reduced_step", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a026bda3163914fa95f2859c35514e5b1", null ],
+    [ "last_unreduced_dim", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#abae0c30e96edd7447b96d5536ab5bd6d", null ],
+    [ "last_unreduced_step", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a72da251cd12aea39f614d13fde094866", null ],
+    [ "loop_size", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a4c535b67bad03145e76b45c6eaf1cf29", null ],
+    [ "n_reduce", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a9b21ad7fdf1da7b5c246b02fa25b6bf2", null ],
+    [ "projected_steps", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a0a1da281add44c60c13170f7dcda8c30", null ],
+    [ "reduced_axes", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#ad7a8b72f88d822db9fb6c0a3cd3cc8c8", null ],
+    [ "src", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a6055dee65170c2107a01b9b29138918a", null ],
+    [ "total", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a98390883a422ae445304be0372345814", null ],
+    [ "unprojected_steps", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_reduce_invoker.html#a710e52569d9958e4c179664d0b3f1124", null ]
+];

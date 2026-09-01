@@ -1,0 +1,25 @@
+var classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l =
+[
+    [ "finalize", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a33d579880cbb23993bb15d7384d9500f", null ],
+    [ "finalize", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#ada5a452bac3389404dbc2dd4d8ad8f3e", null ],
+    [ "finalize", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#aa0f6ae5a5dec699b9e7613d499f092f0", null ],
+    [ "finalize", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a313232e144d2c94d72a3dc003b712ebe", null ],
+    [ "forward", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#acae1db48589afb571fb42549cbe57252", null ],
+    [ "forward", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#ac4688b263bf4e13e9399407b57bbdc96", null ],
+    [ "forward_fallback", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a23c5b995fb95b6c16da1b23e40cb5071", null ],
+    [ "getFLOPS", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#aea55939b891922446eb9af843d16f7f4", null ],
+    [ "getMemoryShapes", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a0b229dd279934a9d4093edce7b20ba6d", null ],
+    [ "getScaleShift", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#aadc1d81d157eea8f95883baaf634c620", null ],
+    [ "initCUDA", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#ab59e3e7afb3739c1695cc863b61f8011", null ],
+    [ "initNgraph", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#adf25ece33a5ee23e146555e879757ad6", null ],
+    [ "initVkCom", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a456f4c2e3447bc7bda239f86db302852", null ],
+    [ "inputNameToIndex", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a8e6e21f3837c1a638af12e28a02b58ec", null ],
+    [ "NotImplementedImpl", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a5daa65629d96a50e85d81448e2ce7936", null ],
+    [ "outputNameToIndex", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a88b1e4024fbb7c2af9b788db76766e44", null ],
+    [ "run", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a83c94fe44e19f966ded5db856ab28388", null ],
+    [ "setActivation", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a765fdb56e54cf63bebb6428938d4f2ea", null ],
+    [ "supportBackend", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#ac923d5e9e49101a9ddf30f2cafed9164", null ],
+    [ "tryFuse", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#abd016dae0f2b69e60c6eb667895bbd5d", null ],
+    [ "unsetAttached", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a58ded6e2fe489d4123185e18829b6dcc", null ],
+    [ "updateMemoryShapes", "classcv_1_1dnn_1_1detail_1_1_c_v___f_i_n_a_l.html#a1691bda0350e972fb5ddba853cfb4d63", null ]
+];

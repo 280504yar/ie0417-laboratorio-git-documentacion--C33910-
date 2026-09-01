@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/misc/quantize_face_detector.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('quantize__face__detector_8py_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">quantize_face_detector.py</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="quantize__face__detector_8py.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html">    1</a></span><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">import</span> sys</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> argparse</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">assert</span> cv.__version__ &lt; <span class="stringliteral">&quot;5.0&quot;</span>, <span class="stringliteral">&quot;Caffe importer is deprecated and removed from OpenCV 5.0&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> struct</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordflow">if</span> sys.version_info &gt; (3,):</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a7de173dce550b6d32fd846ee76635f35">   11</a></span>    long = int</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">from</span> tensorflow.python.tools <span class="keyword">import</span> optimize_for_inference_lib</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">from</span> tensorflow.tools.graph_transforms <span class="keyword">import</span> TransformGraph</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacetensorflow_1_1core_1_1framework_1_1node__def__pb2.html">tensorflow.core.framework.node_def_pb2</a> <span class="keyword">import</span> NodeDef</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">from</span> google.protobuf <span class="keyword">import</span> text_format</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a550204f57ad7e562e9b52421b33f8e75">   18</a></span>parser = argparse.ArgumentParser(description=<span class="stringliteral">&quot;Use this script to create TensorFlow graph &quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                                             <span class="stringliteral">&quot;with weights from OpenCV&#39;s face detection network. &quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                                             <span class="stringliteral">&quot;Only backbone part of SSD model is converted this way. &quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                                             <span class="stringliteral">&quot;Look for .pbtxt configuration file at &quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                                             <span class="stringliteral">&quot;https://github.com/opencv/opencv_extra/tree/5.x/testdata/dnn/opencv_face_detector.pbtxt&quot;</span>)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a654436faec88ece1db4a2ebc6366e9f4">   23</a></span>parser.add_argument(<span class="stringliteral">&#39;--model&#39;</span>, help=<span class="stringliteral">&#39;Path to .caffemodel weights&#39;</span>, required=<span class="keyword">True</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>parser.add_argument(<span class="stringliteral">&#39;--proto&#39;</span>, help=<span class="stringliteral">&#39;Path to .prototxt Caffe model definition&#39;</span>, required=<span class="keyword">True</span>)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>parser.add_argument(<span class="stringliteral">&#39;--pb&#39;</span>, help=<span class="stringliteral">&#39;Path to output .pb TensorFlow model&#39;</span>, required=<span class="keyword">True</span>)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>parser.add_argument(<span class="stringliteral">&#39;--pbtxt&#39;</span>, help=<span class="stringliteral">&#39;Path to output .pbxt TensorFlow graph&#39;</span>, required=<span class="keyword">True</span>)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#af8ca91879f64da90f88de429d6f1a8f6">   27</a></span>parser.add_argument(<span class="stringliteral">&#39;--quantize&#39;</span>, help=<span class="stringliteral">&#39;Quantize weights to uint8&#39;</span>, action=<span class="stringliteral">&#39;store_true&#39;</span>)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>parser.add_argument(<span class="stringliteral">&#39;--fp16&#39;</span>, help=<span class="stringliteral">&#39;Convert weights to half precision floats&#39;</span>, action=<span class="stringliteral">&#39;store_true&#39;</span>)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a0dbecbbb24d4563efa06160537b4ba57">   29</a></span>args = parser.parse_args()</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>assert(<span class="keywordflow">not</span> args.quantize <span class="keywordflow">or</span> <span class="keywordflow">not</span> args.fp16)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a19fade9927118598e579d4c4af026d60">   33</a></span>dtype = tf.float16 <span class="keywordflow">if</span> args.fp16 <span class="keywordflow">else</span> tf.float32</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a203fa676e2a6c7a2937773e86d815681">   36</a></span>cvNet = <a class="code hl_function" href="group__dnn.html#gac56d415c3788b6590bb52263de2a7e72">cv.dnn.readNet</a>(args.proto, args.model)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="" data-end="">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">   38</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">dnnLayer</a>(name):</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">return</span> cvNet.getLayer(<a class="code hl_variable" href="namespacequantize__face__detector.html#a7de173dce550b6d32fd846ee76635f35">long</a>(cvNet.getLayerId(name)))</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+</div>
+<div class="foldopen" id="foldopen00041" data-start="" data-end="">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">   41</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(x, name):</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">with</span> tf.variable_scope(name):</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        layer = <a class="code hl_function" href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">dnnLayer</a>(name)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        w = tf.Variable(layer.blobs[0].flatten(), dtype=dtype, name=<span class="stringliteral">&#39;mul&#39;</span>)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">if</span> len(layer.blobs) &gt; 1:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            b = tf.Variable(layer.blobs[1].flatten(), dtype=dtype, name=<span class="stringliteral">&#39;add&#39;</span>)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">return</span> tf.nn.bias_add(tf.multiply(x, w), b)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">return</span> tf.multiply(x, w, name)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+</div>
+<div class="foldopen" id="foldopen00051" data-start="" data-end="">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">   51</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(x, name, stride=1, pad=&#39;SAME&#39;, dilation=1, activ=None):</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">with</span> tf.variable_scope(name):</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        layer = <a class="code hl_function" href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">dnnLayer</a>(name)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        w = tf.Variable(layer.blobs[0].transpose(2, 3, 1, 0), dtype=dtype, name=<span class="stringliteral">&#39;weights&#39;</span>)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">if</span> dilation == 1:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            conv = tf.nn.conv2d(x, filter=w, strides=(1, stride, stride, 1), padding=pad)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            assert(stride == 1)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            conv = tf.nn.atrous_conv2d(x, w, rate=dilation, padding=pad)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">if</span> len(layer.blobs) &gt; 1:</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            b = tf.Variable(layer.blobs[1].flatten(), dtype=dtype, name=<span class="stringliteral">&#39;bias&#39;</span>)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            conv = tf.nn.bias_add(conv, b)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> activ(conv) <span class="keywordflow">if</span> activ <span class="keywordflow">else</span> conv</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+</div>
+<div class="foldopen" id="foldopen00066" data-start="" data-end="">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">   66</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(x, name):</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">with</span> tf.variable_scope(name):</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="comment"># Unfortunately, TensorFlow&#39;s batch normalization layer doesn&#39;t work with fp16 input.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="comment"># Here we do a cast to fp32 but remove it in the frozen graph.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">if</span> x.dtype != tf.float32:</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            x = tf.cast(x, tf.float32)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        layer = <a class="code hl_function" href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">dnnLayer</a>(name)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        assert(len(layer.blobs) &gt;= 3)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        mean = layer.blobs[0].flatten()</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        std = layer.blobs[1].flatten()</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        scale = layer.blobs[2].flatten()</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        eps = 1e-5</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        hasBias = len(layer.blobs) &gt; 3</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        hasWeights = scale.shape != (1,)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> hasWeights <span class="keywordflow">and</span> <span class="keywordflow">not</span> hasBias:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            mean /= scale[0]</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            std /= scale[0]</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        mean = tf.Variable(mean, dtype=tf.float32, name=<span class="stringliteral">&#39;mean&#39;</span>)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        std = tf.Variable(std, dtype=tf.float32, name=<span class="stringliteral">&#39;std&#39;</span>)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        gamma = tf.Variable(scale <span class="keywordflow">if</span> hasWeights <span class="keywordflow">else</span> np.ones(mean.shape), dtype=tf.float32, name=<span class="stringliteral">&#39;gamma&#39;</span>)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        beta = tf.Variable(layer.blobs[3].flatten() <span class="keywordflow">if</span> hasBias <span class="keywordflow">else</span> np.zeros(mean.shape), dtype=tf.float32, name=<span class="stringliteral">&#39;beta&#39;</span>)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        bn = tf.nn.fused_batch_norm(x, gamma, beta, mean, std, eps,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                                    is_training=<span class="keyword">False</span>)[0]</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">if</span> bn.dtype != dtype:</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            bn = tf.cast(bn, dtype)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">return</span> bn</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+</div>
+<div class="foldopen" id="foldopen00098" data-start="" data-end="">
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a0fa99f6c09ccc543e3e62723c118abbf">   98</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacequantize__face__detector.html#a0fa99f6c09ccc543e3e62723c118abbf">l2norm</a>(x, name):</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keyword">with</span> tf.variable_scope(name):</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        layer = <a class="code hl_function" href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">dnnLayer</a>(name)</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        w = tf.Variable(layer.blobs[0].flatten(), dtype=dtype, name=<span class="stringliteral">&#39;mul&#39;</span>)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">return</span> tf.nn.l2_normalize(x, 3, epsilon=1e-10) * w</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a996e8fe1e1ffaac0227543a65eed008c">  105</a></span>inp = tf.placeholder(dtype, [1, 300, 300, 3], <span class="stringliteral">&#39;data&#39;</span>)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a254fffca0759a4f486b70bf36f15c412">  106</a></span>data_bn = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(inp, <span class="stringliteral">&#39;data_bn&#39;</span>)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a87145b753bdcd41259c76f5979d0b1d7">  107</a></span>data_scale = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(data_bn, <span class="stringliteral">&#39;data_scale&#39;</span>)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"># Instead of tf.pad we use tf.space_to_batch_nd layers which override convolution&#39;s padding strategy to explicit numbers</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"># data_scale = tf.pad(data_scale, [[0, 0], [3, 3], [3, 3], [0, 0]])</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>data_scale = tf.space_to_batch_nd(data_scale, [1, 1], [[3, 3], [3, 3]], name=<span class="stringliteral">&#39;Pad&#39;</span>)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a1497269eaaa6d9e52d66bda37b4e8b27">  112</a></span>conv1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(data_scale, stride=2, pad=<span class="stringliteral">&#39;VALID&#39;</span>, name=<span class="stringliteral">&#39;conv1_h&#39;</span>)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a9b52e7605ad81fa24a1e0ee84f34bcf4">  114</a></span>conv1_bn_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(conv1_h, <span class="stringliteral">&#39;conv1_bn_h&#39;</span>)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a28ae236f8afa67ff86c77034f1e126fc">  115</a></span>conv1_scale_h = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(conv1_bn_h, <span class="stringliteral">&#39;conv1_scale_h&#39;</span>)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a11ace5dfe5a421550ebe0690ce254cba">  116</a></span>conv1_relu = tf.nn.relu(conv1_scale_h)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a1f4aa9d12659183cdd7249626b3f5571">  117</a></span>conv1_pool = tf.layers.max_pooling2d(conv1_relu, pool_size=(3, 3), strides=(2, 2),</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                                     padding=<span class="stringliteral">&#39;SAME&#39;</span>, name=<span class="stringliteral">&#39;conv1_pool&#39;</span>)</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a5df0f3bea467e95716e745a9666e2b23">  120</a></span>layer_64_1_conv1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv1_pool, <span class="stringliteral">&#39;layer_64_1_conv1_h&#39;</span>)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a375189296e2b2df2f157ec916d357e57">  121</a></span>layer_64_1_bn2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_64_1_conv1_h, <span class="stringliteral">&#39;layer_64_1_bn2_h&#39;</span>)</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a9d3016c8af2f47dd4a9f411b18a812be">  122</a></span>layer_64_1_scale2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_64_1_bn2_h, <span class="stringliteral">&#39;layer_64_1_scale2_h&#39;</span>)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a233da4c9834e5a5f8c765dcde5aa67f7">  123</a></span>layer_64_1_relu2 = tf.nn.relu(layer_64_1_scale2_h)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a630e0add854c1b320bfa74bfed86904b">  124</a></span>layer_64_1_conv2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_64_1_relu2, <span class="stringliteral">&#39;layer_64_1_conv2_h&#39;</span>)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a5ca1084f9721f205108abdaea70ceff1">  125</a></span>layer_64_1_sum = layer_64_1_conv2_h + conv1_pool</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a023a72750bd9819d63e437c2bf4abefd">  127</a></span>layer_128_1_bn1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_64_1_sum, <span class="stringliteral">&#39;layer_128_1_bn1_h&#39;</span>)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aa1d36154d1abf0b112d2ebc342e9f6c1">  128</a></span>layer_128_1_scale1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_128_1_bn1_h, <span class="stringliteral">&#39;layer_128_1_scale1_h&#39;</span>)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a2d0de3736e450ff9957c6a4eb416d339">  129</a></span>layer_128_1_relu1 = tf.nn.relu(layer_128_1_scale1_h)</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ae8529a1ebf3947dd9a416eae590667f4">  130</a></span>layer_128_1_conv1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_128_1_relu1, stride=2, name=<span class="stringliteral">&#39;layer_128_1_conv1_h&#39;</span>)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#af15ded74cae7eb1147fa43f2ea60bcf9">  131</a></span>layer_128_1_bn2 = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_128_1_conv1_h, <span class="stringliteral">&#39;layer_128_1_bn2&#39;</span>)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a206415ce3bbfada0f4c711b7e24f2888">  132</a></span>layer_128_1_scale2 = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_128_1_bn2, <span class="stringliteral">&#39;layer_128_1_scale2&#39;</span>)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a8027b0871571e72663448f9113c2899e">  133</a></span>layer_128_1_relu2 = tf.nn.relu(layer_128_1_scale2)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a2cd34e90f353a34070305c323ac065d3">  134</a></span>layer_128_1_conv2 = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_128_1_relu2, <span class="stringliteral">&#39;layer_128_1_conv2&#39;</span>)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a2efa47e9b5eedc74177ff37caca1879e">  135</a></span>layer_128_1_conv_expand_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_128_1_relu1, stride=2, name=<span class="stringliteral">&#39;layer_128_1_conv_expand_h&#39;</span>)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#abf3b51c4a4654b50fff4907430a27e99">  136</a></span>layer_128_1_sum = layer_128_1_conv2 + layer_128_1_conv_expand_h</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a32eafd6683063c6548228620a1e2d927">  138</a></span>layer_256_1_bn1 = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_128_1_sum, <span class="stringliteral">&#39;layer_256_1_bn1&#39;</span>)</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#afa1616948e627893c5b41275d4617b6b">  139</a></span>layer_256_1_scale1 = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_256_1_bn1, <span class="stringliteral">&#39;layer_256_1_scale1&#39;</span>)</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a8002bb4de2ccff36294ec7bf80d04735">  140</a></span>layer_256_1_relu1 = tf.nn.relu(layer_256_1_scale1)</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment"># layer_256_1_conv1 = tf.pad(layer_256_1_relu1, [[0, 0], [1, 1], [1, 1], [0, 0]])</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ad29aa0a17f16ed3e26167b3a4e435b7f">  143</a></span>layer_256_1_conv1 = tf.space_to_batch_nd(layer_256_1_relu1, [1, 1], [[1, 1], [1, 1]], name=<span class="stringliteral">&#39;Pad_1&#39;</span>)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>layer_256_1_conv1 = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_256_1_conv1, stride=2, pad=<span class="stringliteral">&#39;VALID&#39;</span>, name=<span class="stringliteral">&#39;layer_256_1_conv1&#39;</span>)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a60d99fb35b57795e50aa54a4a5551daa">  146</a></span>layer_256_1_bn2 = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_256_1_conv1, <span class="stringliteral">&#39;layer_256_1_bn2&#39;</span>)</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aa8282ea00d590a3fbb7f3e22a0899103">  147</a></span>layer_256_1_scale2 = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_256_1_bn2, <span class="stringliteral">&#39;layer_256_1_scale2&#39;</span>)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ad13e00e64d5f956d2f15195e0c4e9e11">  148</a></span>layer_256_1_relu2 = tf.nn.relu(layer_256_1_scale2)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aa41f3f99ae596bf118735c4718c32e0f">  149</a></span>layer_256_1_conv2 = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_256_1_relu2, <span class="stringliteral">&#39;layer_256_1_conv2&#39;</span>)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ae77da691d89bd6ae441e1d66b9e2544d">  150</a></span>layer_256_1_conv_expand = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_256_1_relu1, stride=2, name=<span class="stringliteral">&#39;layer_256_1_conv_expand&#39;</span>)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a8d233054ee859894f5e3e4e9bff0d80d">  151</a></span>layer_256_1_sum = layer_256_1_conv2 + layer_256_1_conv_expand</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aaea328c0ded23d40ab3bfc1b5b36c332">  153</a></span>layer_512_1_bn1 = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_256_1_sum, <span class="stringliteral">&#39;layer_512_1_bn1&#39;</span>)</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a96cd498716a3f642ed74e4f9e29173c9">  154</a></span>layer_512_1_scale1 = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_512_1_bn1, <span class="stringliteral">&#39;layer_512_1_scale1&#39;</span>)</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a74afef942d9314898658e0997e0699ed">  155</a></span>layer_512_1_relu1 = tf.nn.relu(layer_512_1_scale1)</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a2ec56145f903b450a57a189c21b4375f">  156</a></span>layer_512_1_conv1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_512_1_relu1, <span class="stringliteral">&#39;layer_512_1_conv1_h&#39;</span>)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a7138ab64760bca6a308bb33c3e8f3a3f">  157</a></span>layer_512_1_bn2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_512_1_conv1_h, <span class="stringliteral">&#39;layer_512_1_bn2_h&#39;</span>)</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a0c2b4a1a9bba020e81339b01a15f8bea">  158</a></span>layer_512_1_scale2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(layer_512_1_bn2_h, <span class="stringliteral">&#39;layer_512_1_scale2_h&#39;</span>)</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#acaa75d57dc4e278abdab05204c9ad3a5">  159</a></span>layer_512_1_relu2 = tf.nn.relu(layer_512_1_scale2_h)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ae929d538e4e7c568b7349b9888271686">  160</a></span>layer_512_1_conv2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_512_1_relu2, dilation=2, name=<span class="stringliteral">&#39;layer_512_1_conv2_h&#39;</span>)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#afd470d4bf665bdfba465a2b9b4cffa23">  161</a></span>layer_512_1_conv_expand_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(layer_512_1_relu1, <span class="stringliteral">&#39;layer_512_1_conv_expand_h&#39;</span>)</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a72116416c320f3154134127bb54c8f12">  162</a></span>layer_512_1_sum = layer_512_1_conv2_h + layer_512_1_conv_expand_h</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a47a6e9f5ceec0cd5c0310aac7b3c1a17">  164</a></span>last_bn_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">batch_norm</a>(layer_512_1_sum, <span class="stringliteral">&#39;last_bn_h&#39;</span>)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a70c5e9877877302614b0ad1372c918a2">  165</a></span>last_scale_h = <a class="code hl_function" href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">scale</a>(last_bn_h, <span class="stringliteral">&#39;last_scale_h&#39;</span>)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aa63f6945ac3e3663758e4c8d392e5248">  166</a></span>fc7 = tf.nn.relu(last_scale_h, name=<span class="stringliteral">&#39;last_relu&#39;</span>)</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a95383160bb6b97d4cb64c0c17d01e870">  168</a></span>conv6_1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(fc7, <span class="stringliteral">&#39;conv6_1_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a9473c5175e393fa8c7d6e37d01439af1">  169</a></span>conv6_2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv6_1_h, stride=2, name=<span class="stringliteral">&#39;conv6_2_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a0e76d98e7fa8688b42a5a75023f0075b">  170</a></span>conv7_1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv6_2_h, <span class="stringliteral">&#39;conv7_1_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment"># conv7_2_h = tf.pad(conv7_1_h, [[0, 0], [1, 1], [1, 1], [0, 0]])</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a199a778653a5dd75307048f9b52df8be">  173</a></span>conv7_2_h = tf.space_to_batch_nd(conv7_1_h, [1, 1], [[1, 1], [1, 1]], name=<span class="stringliteral">&#39;Pad_2&#39;</span>)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>conv7_2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv7_2_h, stride=2, pad=<span class="stringliteral">&#39;VALID&#39;</span>, name=<span class="stringliteral">&#39;conv7_2_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a386ffbc4a0ef99cc13a4a8a7cfc63ec0">  176</a></span>conv8_1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv7_2_h, pad=<span class="stringliteral">&#39;SAME&#39;</span>, name=<span class="stringliteral">&#39;conv8_1_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a68370a66511cc1e50a94acba377024c5">  177</a></span>conv8_2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv8_1_h, pad=<span class="stringliteral">&#39;VALID&#39;</span>, name=<span class="stringliteral">&#39;conv8_2_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a3c38b266144104f7bbf1ab66b2aabb84">  178</a></span>conv9_1_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv8_2_h, <span class="stringliteral">&#39;conv9_1_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aaffbf3fa79ff99214d8c95f98b962032">  179</a></span>conv9_2_h = <a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(conv9_1_h, pad=<span class="stringliteral">&#39;VALID&#39;</span>, name=<span class="stringliteral">&#39;conv9_2_h&#39;</span>, activ=tf.nn.relu)</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ac5826c53883c82f44ef52906cd4700e3">  181</a></span>conv4_3_norm = <a class="code hl_function" href="namespacequantize__face__detector.html#a0fa99f6c09ccc543e3e62723c118abbf">l2norm</a>(layer_256_1_relu1, <span class="stringliteral">&#39;conv4_3_norm&#39;</span>)</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aebc212a6467c4d899973f092a0755960">  184</a></span>locations = []</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a422fbfacf006b8cacb58bfa65153a6e7">  185</a></span>confidences = []</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a46c4d1d4614b74e93d73143297defad0">  186</a></span>flattenLayersNames = []  <span class="comment"># Collect all reshape layers names that should be replaced to flattens.</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="keywordflow">for</span> top, suffix <span class="keywordflow">in</span> zip([locations, confidences], [<span class="stringliteral">&#39;_mbox_loc&#39;</span>, <span class="stringliteral">&#39;_mbox_conf&#39;</span>]):</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">for</span> bottom, name <span class="keywordflow">in</span> zip([conv4_3_norm, fc7, conv6_2_h, conv7_2_h, conv8_2_h, conv9_2_h],</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                            [<span class="stringliteral">&#39;conv4_3_norm&#39;</span>, <span class="stringliteral">&#39;fc7&#39;</span>, <span class="stringliteral">&#39;conv6_2&#39;</span>, <span class="stringliteral">&#39;conv7_2&#39;</span>, <span class="stringliteral">&#39;conv8_2&#39;</span>, <span class="stringliteral">&#39;conv9_2&#39;</span>]):</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        name += suffix</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a54fd03b807a58e5c94569acbc7119629">  191</a></span>        flat = tf.layers.flatten(<a class="code hl_function" href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">conv</a>(bottom, name))</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        flattenLayersNames.append(flat.name[:flat.name.find(<span class="stringliteral">&#39;:&#39;</span>)])</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        top.append(flat)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a693f1bdf744b2fe212b328369bcc4931">  195</a></span>mbox_loc = tf.concat(locations, axis=-1, name=<span class="stringliteral">&#39;mbox_loc&#39;</span>)</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#acca9856b013bd5de85aa7dfbb57a2f7e">  196</a></span>mbox_conf = tf.concat(confidences, axis=-1, name=<span class="stringliteral">&#39;mbox_conf&#39;</span>)</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a99c594cdba4e9825219a07e835967a5f">  198</a></span>total = int(np.prod(mbox_conf.shape[1:]))</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ab6c5bd4c96096c82f8932e04dc3d4459">  199</a></span>mbox_conf_reshape = tf.reshape(mbox_conf, [-1, 2], name=<span class="stringliteral">&#39;mbox_conf_reshape&#39;</span>)</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a3f3b0e79022fc4100bff350c335364a8">  200</a></span>mbox_conf_softmax = tf.nn.softmax(mbox_conf_reshape, name=<span class="stringliteral">&#39;mbox_conf_softmax&#39;</span>)</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a86528889021776de29f875918fe0d6ae">  201</a></span>mbox_conf_flatten = tf.reshape(mbox_conf_softmax, [-1, total], name=<span class="stringliteral">&#39;mbox_conf_flatten&#39;</span>)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>flattenLayersNames.append(<span class="stringliteral">&#39;mbox_conf_flatten&#39;</span>)</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    sess.run(tf.global_variables_initializer())</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#af23ba8ccdc21007ceb842c22698aee07">  208</a></span>    out_nodes = [<span class="stringliteral">&#39;mbox_loc&#39;</span>, <span class="stringliteral">&#39;mbox_conf_flatten&#39;</span>]</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a15546aa1c33fac2b27487b196010a4c7">  209</a></span>    inp_nodes = [inp.name[:inp.name.find(<span class="stringliteral">&#39;:&#39;</span>)]]</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    np.random.seed(2701)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a6965c81de33c8322fbe781d026bd865c">  212</a></span>    inputData = np.random.standard_normal([1, 3, 300, 300]).astype(np.float32)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    cvNet.setInput(inputData)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    cvNet.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#af099c2e8c1a5c4324a4cbbaa93d13e68">  216</a></span>    outDNN = cvNet.forward(out_nodes)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#af897bd956a95512ceea4ea09bfd50e7d">  218</a></span>    outTF = sess.run([mbox_loc, mbox_conf_flatten], feed_dict={inp: inputData.transpose(0, 2, 3, 1)})</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    print(<span class="stringliteral">&#39;Max diff @ locations:  %e&#39;</span> % np.max(np.abs(outDNN[0] - outTF[0])))</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    print(<span class="stringliteral">&#39;Max diff @ confidence: %e&#39;</span> % np.max(np.abs(outDNN[1] - outTF[1])))</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="comment"># Save a graph</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#af43ec89112564b4d0394f29a395b4da7">  223</a></span>    graph_def = sess.graph.as_graph_def()</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="comment"># Freeze graph. Replaces variables to constants.</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    graph_def = tf.graph_util.convert_variables_to_constants(sess, graph_def, out_nodes)</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="comment"># Optimize graph. Removes training-only ops, unused nodes.</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    graph_def = optimize_for_inference_lib.optimize_for_inference(graph_def, inp_nodes, out_nodes, dtype.as_datatype_enum)</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="comment"># Fuse constant operations.</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ac160086172a745352b5026415008058a">  230</a></span>    transforms = [<span class="stringliteral">&quot;fold_constants(ignore_errors=True)&quot;</span>]</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">if</span> args.quantize:</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        transforms += [<span class="stringliteral">&quot;quantize_weights(minimum_size=0)&quot;</span>]</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    transforms += [<span class="stringliteral">&quot;sort_by_execution_order&quot;</span>]</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    graph_def = TransformGraph(graph_def, inp_nodes, out_nodes, transforms)</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="comment"># By default, float16 weights are stored in repeated tensor&#39;s field called</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="comment"># `half_val`. It has type int32 with leading zeros for unused bytes.</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="comment"># This type is encoded by Variant that means only 7 bits are used for value</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="comment"># representation but the last one is indicated the end of encoding. This way</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="comment"># float16 might takes 1 or 2 or 3 bytes depends on value. To improve compression,</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="comment"># we replace all `half_val` values to `tensor_content` using only 2 bytes for everyone.</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keywordflow">for</span> node <span class="keywordflow">in</span> graph_def.node:</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;value&#39;</span> <span class="keywordflow">in</span> node.attr:</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a2d277f67d35d359faf107620050db20f">  244</a></span>            halfs = node.attr[<span class="stringliteral">&quot;value&quot;</span>].tensor.half_val</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> node.attr[<span class="stringliteral">&quot;value&quot;</span>].tensor.tensor_content <span class="keywordflow">and</span> halfs:</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aef7d3475a00fc9abfd2522638505779f">  246</a></span>                node.attr[<span class="stringliteral">&quot;value&quot;</span>].tensor.tensor_content = struct.pack(<span class="stringliteral">&#39;H&#39;</span> * len(halfs), *halfs)</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                node.attr[<span class="stringliteral">&quot;value&quot;</span>].tensor.ClearField(<span class="stringliteral">&#39;half_val&#39;</span>)</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="comment"># Serialize</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keyword">with</span> tf.gfile.FastGFile(args.pb, <span class="stringliteral">&#39;wb&#39;</span>) <span class="keyword">as</span> f:</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            f.write(graph_def.SerializeToString())</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span></div>
+<div class="foldopen" id="foldopen00257" data-start="" data-end="">
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a263f67a9892eaea24dd0d4acb785cf74">  257</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacequantize__face__detector.html#a263f67a9892eaea24dd0d4acb785cf74">tensorMsg</a>(values):</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    msg = <span class="stringliteral">&#39;tensor { dtype: DT_FLOAT tensor_shape { dim { size: %d } }&#39;</span> % len(values)</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">for</span> value <span class="keywordflow">in</span> values:</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        msg += <span class="stringliteral">&#39;float_val: %f &#39;</span> % value</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">return</span> msg + <span class="stringliteral">&#39;}&#39;</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment"># Remove Const nodes and unused attributes.</span></div>
+</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="keywordflow">for</span> i <span class="keywordflow">in</span> reversed(range(len(graph_def.node))):</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">if</span> graph_def.node[i].op <span class="keywordflow">in</span> [<span class="stringliteral">&#39;Const&#39;</span>, <span class="stringliteral">&#39;Dequantize&#39;</span>]:</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        del graph_def.node[i]</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordflow">for</span> attr <span class="keywordflow">in</span> [<span class="stringliteral">&#39;T&#39;</span>, <span class="stringliteral">&#39;data_format&#39;</span>, <span class="stringliteral">&#39;Tshape&#39;</span>, <span class="stringliteral">&#39;N&#39;</span>, <span class="stringliteral">&#39;Tidx&#39;</span>, <span class="stringliteral">&#39;Tdim&#39;</span>,</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                 <span class="stringliteral">&#39;use_cudnn_on_gpu&#39;</span>, <span class="stringliteral">&#39;Index&#39;</span>, <span class="stringliteral">&#39;Tperm&#39;</span>, <span class="stringliteral">&#39;is_training&#39;</span>,</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                 <span class="stringliteral">&#39;Tpaddings&#39;</span>, <span class="stringliteral">&#39;Tblock_shape&#39;</span>, <span class="stringliteral">&#39;Tcrops&#39;</span>]:</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">if</span> attr <span class="keywordflow">in</span> graph_def.node[i].attr:</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            del graph_def.node[i].attr[attr]</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment"># Append prior box generators</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#aa7d1a88ccffeb7520a700db63d86e52b">  274</a></span>min_sizes = [30, 60, 111, 162, 213, 264]</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#afa35a1fb443dff647e1a4acbadb3761a">  275</a></span>max_sizes = [60, 111, 162, 213, 264, 315]</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a71885edbf7cc602fb6be9f0f71f8533c">  276</a></span>steps = [8, 16, 32, 64, 100, 300]</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a0eabfcb57e3bb1d5e1e7033451544436">  277</a></span>aspect_ratios = [[2], [2, 3], [2, 3], [2, 3], [2], [2]]</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ad7f0245ca0560d83e9b95e10cff5524b">  278</a></span>layers = [conv4_3_norm, fc7, conv6_2_h, conv7_2_h, conv8_2_h, conv9_2_h]</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(6):</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#adf62a3ee08c542b196f35b3dc470b98d">  280</a></span>    priorBox = NodeDef()</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a72cc1c8ccfaa278d45e609f52a88b303">  281</a></span>    priorBox.name = <span class="stringliteral">&#39;PriorBox_%d&#39;</span> % i</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a632fc847ae5e0bdb19adec0ff2894091">  282</a></span>    priorBox.op = <span class="stringliteral">&#39;PriorBox&#39;</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    priorBox.input.append(layers[i].name[:layers[i].name.find(<span class="stringliteral">&#39;:&#39;</span>)])</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    priorBox.input.append(inp_nodes[0])  <span class="comment"># data</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    text_format.Merge(<span class="stringliteral">&#39;i: %d&#39;</span> % min_sizes[i], priorBox.attr[<span class="stringliteral">&quot;min_size&quot;</span>])</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    text_format.Merge(<span class="stringliteral">&#39;i: %d&#39;</span> % max_sizes[i], priorBox.attr[<span class="stringliteral">&quot;max_size&quot;</span>])</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    text_format.Merge(<span class="stringliteral">&#39;b: true&#39;</span>, priorBox.attr[<span class="stringliteral">&quot;flip&quot;</span>])</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    text_format.Merge(<span class="stringliteral">&#39;b: false&#39;</span>, priorBox.attr[<span class="stringliteral">&quot;clip&quot;</span>])</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    text_format.Merge(<a class="code hl_function" href="namespacequantize__face__detector.html#a263f67a9892eaea24dd0d4acb785cf74">tensorMsg</a>(aspect_ratios[i]), priorBox.attr[<span class="stringliteral">&quot;aspect_ratio&quot;</span>])</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    text_format.Merge(<a class="code hl_function" href="namespacequantize__face__detector.html#a263f67a9892eaea24dd0d4acb785cf74">tensorMsg</a>([0.1, 0.1, 0.2, 0.2]), priorBox.attr[<span class="stringliteral">&quot;variance&quot;</span>])</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    text_format.Merge(<span class="stringliteral">&#39;f: %f&#39;</span> % steps[i], priorBox.attr[<span class="stringliteral">&quot;step&quot;</span>])</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    text_format.Merge(<span class="stringliteral">&#39;f: 0.5&#39;</span>, priorBox.attr[<span class="stringliteral">&quot;offset&quot;</span>])</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    graph_def.node.extend([priorBox])</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment"># Concatenate prior boxes</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ada0aa9070ef1ebab1e6477c33a8e5474">  297</a></span>concat = NodeDef()</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>concat.name = <span class="stringliteral">&#39;mbox_priorbox&#39;</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>concat.op = <span class="stringliteral">&#39;ConcatV2&#39;</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(6):</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    concat.input.append(<span class="stringliteral">&#39;PriorBox_%d&#39;</span> % i)</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>concat.input.append(<span class="stringliteral">&#39;mbox_loc/axis&#39;</span>)</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>graph_def.node.extend([concat])</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment"># DetectionOutput layer</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a90e0f8eb9021a6eba29d87b3f5fd92cf">  306</a></span>detectionOut = NodeDef()</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>detectionOut.name = <span class="stringliteral">&#39;detection_out&#39;</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>detectionOut.op = <span class="stringliteral">&#39;DetectionOutput&#39;</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>detectionOut.input.append(<span class="stringliteral">&#39;mbox_loc&#39;</span>)</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>detectionOut.input.append(<span class="stringliteral">&#39;mbox_conf_flatten&#39;</span>)</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>detectionOut.input.append(<span class="stringliteral">&#39;mbox_priorbox&#39;</span>)</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>text_format.Merge(<span class="stringliteral">&#39;i: 2&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;num_classes&#39;</span>])</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>text_format.Merge(<span class="stringliteral">&#39;b: true&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;share_location&#39;</span>])</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>text_format.Merge(<span class="stringliteral">&#39;i: 0&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;background_label_id&#39;</span>])</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>text_format.Merge(<span class="stringliteral">&#39;f: 0.45&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;nms_threshold&#39;</span>])</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>text_format.Merge(<span class="stringliteral">&#39;i: 400&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;top_k&#39;</span>])</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>text_format.Merge(<span class="stringliteral">&#39;s: &quot;CENTER_SIZE&quot;&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;code_type&#39;</span>])</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>text_format.Merge(<span class="stringliteral">&#39;i: 200&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;keep_top_k&#39;</span>])</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>text_format.Merge(<span class="stringliteral">&#39;f: 0.01&#39;</span>, detectionOut.attr[<span class="stringliteral">&#39;confidence_threshold&#39;</span>])</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>graph_def.node.extend([detectionOut])</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment"># Replace L2Normalization subgraph onto a single node.</span></div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="keywordflow">for</span> i <span class="keywordflow">in</span> reversed(range(len(graph_def.node))):</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">if</span> graph_def.node[i].name <span class="keywordflow">in</span> [<span class="stringliteral">&#39;conv4_3_norm/l2_normalize/Square&#39;</span>,</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                                  <span class="stringliteral">&#39;conv4_3_norm/l2_normalize/Sum&#39;</span>,</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                                  <span class="stringliteral">&#39;conv4_3_norm/l2_normalize/Maximum&#39;</span>,</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                                  <span class="stringliteral">&#39;conv4_3_norm/l2_normalize/Rsqrt&#39;</span>]:</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        del graph_def.node[i]</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="keywordflow">for</span> node <span class="keywordflow">in</span> graph_def.node:</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">if</span> node.name == <span class="stringliteral">&#39;conv4_3_norm/l2_normalize&#39;</span>:</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        node.op = <span class="stringliteral">&#39;L2Normalize&#39;</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        node.input.pop()</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        node.input.pop()</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        node.input.append(layer_256_1_relu1.name)</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        node.input.append(<span class="stringliteral">&#39;conv4_3_norm/l2_normalize/Sum/reduction_indices&#39;</span>)</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keywordflow">break</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ae611eb92b29530a22fa22f29c88dbeff">  341</a></span>softmaxShape = NodeDef()</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>softmaxShape.name = <span class="stringliteral">&#39;reshape_before_softmax&#39;</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>softmaxShape.op = <span class="stringliteral">&#39;Const&#39;</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>text_format.Merge(</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="stringliteral">&#39;tensor {&#39;</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="stringliteral">&#39;  dtype: DT_INT32&#39;</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="stringliteral">&#39;  tensor_shape { dim { size: 3 } }&#39;</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="stringliteral">&#39;  int_val: 0&#39;</span></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="stringliteral">&#39;  int_val: -1&#39;</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="stringliteral">&#39;  int_val: 2&#39;</span></div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="stringliteral">&#39;}&#39;</span>, softmaxShape.attr[<span class="stringliteral">&quot;value&quot;</span>])</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>graph_def.node.extend([softmaxShape])</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span> </div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="keywordflow">for</span> node <span class="keywordflow">in</span> graph_def.node:</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keywordflow">if</span> node.name == <span class="stringliteral">&#39;mbox_conf_reshape&#39;</span>:</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        node.input[1] = softmaxShape.name</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="keywordflow">elif</span> node.name == <span class="stringliteral">&#39;mbox_conf_softmax&#39;</span>:</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        text_format.Merge(<span class="stringliteral">&#39;i: 2&#39;</span>, node.attr[<span class="stringliteral">&#39;axis&#39;</span>])</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">elif</span> node.name <span class="keywordflow">in</span> flattenLayersNames:</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        node.op = <span class="stringliteral">&#39;Flatten&#39;</span></div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#a9fac91b81e07ea485f482b250ad3288a">  361</a></span>        inpName = node.input[0]</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        node.input.pop()</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        node.input.pop()</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        node.input.append(inpName)</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno"><a class="line" href="namespacequantize__face__detector.html#ac585e81fdadfb47fde47f5057e622d06">  366</a></span>tf.train.write_graph(graph_def, <span class="stringliteral">&quot;&quot;</span>, args.pbtxt, as_text=<span class="keyword">True</span>)</div>
+<div class="ttc" id="agroup__dnn_html_gac56d415c3788b6590bb52263de2a7e72"><div class="ttname"><a href="group__dnn.html#gac56d415c3788b6590bb52263de2a7e72">cv::dnn::readNet</a></div><div class="ttdeci">CV_EXPORTS_W Net readNet(CV_WRAP_FILE_PATH const String &amp;model, CV_WRAP_FILE_PATH const String &amp;config=&quot;&quot;, const String &amp;framework=&quot;&quot;, int engine=ENGINE_AUTO)</div><div class="ttdoc">Read deep learning network represented in one of the supported formats.</div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_a0fa99f6c09ccc543e3e62723c118abbf"><div class="ttname"><a href="namespacequantize__face__detector.html#a0fa99f6c09ccc543e3e62723c118abbf">quantize_face_detector.l2norm</a></div><div class="ttdeci">l2norm(x, name)</div><div class="ttdef"><b>Definición</b> <a href="#l00098">quantize_face_detector.py:98</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_a21d39cfa2f862940855b8a8059f13f90"><div class="ttname"><a href="namespacequantize__face__detector.html#a21d39cfa2f862940855b8a8059f13f90">quantize_face_detector.conv</a></div><div class="ttdeci">conv(x, name, stride=1, pad=&#39;SAME&#39;, dilation=1, activ=None)</div><div class="ttdef"><b>Definición</b> <a href="#l00051">quantize_face_detector.py:51</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_a263f67a9892eaea24dd0d4acb785cf74"><div class="ttname"><a href="namespacequantize__face__detector.html#a263f67a9892eaea24dd0d4acb785cf74">quantize_face_detector.tensorMsg</a></div><div class="ttdeci">tensorMsg(values)</div><div class="ttdoc">Write a text graph representation.</div><div class="ttdef"><b>Definición</b> <a href="#l00257">quantize_face_detector.py:257</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_a7a0521fad6ad7ca55fb764bf8dd774bd"><div class="ttname"><a href="namespacequantize__face__detector.html#a7a0521fad6ad7ca55fb764bf8dd774bd">quantize_face_detector.batch_norm</a></div><div class="ttdeci">batch_norm(x, name)</div><div class="ttdef"><b>Definición</b> <a href="#l00066">quantize_face_detector.py:66</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_a7de173dce550b6d32fd846ee76635f35"><div class="ttname"><a href="namespacequantize__face__detector.html#a7de173dce550b6d32fd846ee76635f35">quantize_face_detector.long</a></div><div class="ttdeci">long</div><div class="ttdef"><b>Definición</b> <a href="#l00011">quantize_face_detector.py:11</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_afcd5f162cf9f070c38108726ea76b656"><div class="ttname"><a href="namespacequantize__face__detector.html#afcd5f162cf9f070c38108726ea76b656">quantize_face_detector.scale</a></div><div class="ttdeci">scale(x, name)</div><div class="ttdef"><b>Definición</b> <a href="#l00041">quantize_face_detector.py:41</a></div></div>
+<div class="ttc" id="anamespacequantize__face__detector_html_afd6ed5ac9989f250956b6f2548c89cc2"><div class="ttname"><a href="namespacequantize__face__detector.html#afd6ed5ac9989f250956b6f2548c89cc2">quantize_face_detector.dnnLayer</a></div><div class="ttdeci">dnnLayer(name)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">quantize_face_detector.py:38</a></div></div>
+<div class="ttc" id="anamespacetensorflow_1_1core_1_1framework_1_1node__def__pb2_html"><div class="ttname"><a href="namespacetensorflow_1_1core_1_1framework_1_1node__def__pb2.html">tensorflow::core::framework::node_def_pb2</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_9f76ba29537c1364d4d47b424ffb77fd.html">misc</a></li><li class="navelem"><a href="quantize__face__detector_8py.html">quantize_face_detector.py</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

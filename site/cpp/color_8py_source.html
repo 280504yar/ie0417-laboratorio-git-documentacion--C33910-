@@ -1,0 +1,578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ts/misc/color.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('color_8py_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">color.py</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="color_8py.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespacecolor.html">    1</a></span><span class="comment">#!/usr/bin/env python</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="stringliteral">&quot;&quot;&quot; Utility package used by other test result formatting scripts.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> math, os, sys</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="namespacecolor.html#a90d74f672b51736c4cbd76b1266c5d99">    6</a></span>webcolors = {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="stringliteral">&quot;indianred&quot;</span>: <span class="stringliteral">&quot;#cd5c5c&quot;</span>,</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="stringliteral">&quot;lightcoral&quot;</span>: <span class="stringliteral">&quot;#f08080&quot;</span>,</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="stringliteral">&quot;salmon&quot;</span>: <span class="stringliteral">&quot;#fa8072&quot;</span>,</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="stringliteral">&quot;darksalmon&quot;</span>: <span class="stringliteral">&quot;#e9967a&quot;</span>,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="stringliteral">&quot;lightsalmon&quot;</span>: <span class="stringliteral">&quot;#ffa07a&quot;</span>,</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="stringliteral">&quot;red&quot;</span>: <span class="stringliteral">&quot;#ff0000&quot;</span>,</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="stringliteral">&quot;crimson&quot;</span>: <span class="stringliteral">&quot;#dc143c&quot;</span>,</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="stringliteral">&quot;firebrick&quot;</span>: <span class="stringliteral">&quot;#b22222&quot;</span>,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="stringliteral">&quot;darkred&quot;</span>: <span class="stringliteral">&quot;#8b0000&quot;</span>,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="stringliteral">&quot;pink&quot;</span>: <span class="stringliteral">&quot;#ffc0cb&quot;</span>,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="stringliteral">&quot;lightpink&quot;</span>: <span class="stringliteral">&quot;#ffb6c1&quot;</span>,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="stringliteral">&quot;hotpink&quot;</span>: <span class="stringliteral">&quot;#ff69b4&quot;</span>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="stringliteral">&quot;deeppink&quot;</span>: <span class="stringliteral">&quot;#ff1493&quot;</span>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="stringliteral">&quot;mediumvioletred&quot;</span>: <span class="stringliteral">&quot;#c71585&quot;</span>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral">&quot;palevioletred&quot;</span>: <span class="stringliteral">&quot;#db7093&quot;</span>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="stringliteral">&quot;lightsalmon&quot;</span>: <span class="stringliteral">&quot;#ffa07a&quot;</span>,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="stringliteral">&quot;coral&quot;</span>: <span class="stringliteral">&quot;#ff7f50&quot;</span>,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="stringliteral">&quot;tomato&quot;</span>: <span class="stringliteral">&quot;#ff6347&quot;</span>,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="stringliteral">&quot;orangered&quot;</span>: <span class="stringliteral">&quot;#ff4500&quot;</span>,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="stringliteral">&quot;darkorange&quot;</span>: <span class="stringliteral">&quot;#ff8c00&quot;</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="stringliteral">&quot;orange&quot;</span>: <span class="stringliteral">&quot;#ffa500&quot;</span>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="stringliteral">&quot;gold&quot;</span>: <span class="stringliteral">&quot;#ffd700&quot;</span>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="stringliteral">&quot;yellow&quot;</span>: <span class="stringliteral">&quot;#ffff00&quot;</span>,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="stringliteral">&quot;lightyellow&quot;</span>: <span class="stringliteral">&quot;#ffffe0&quot;</span>,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="stringliteral">&quot;lemonchiffon&quot;</span>: <span class="stringliteral">&quot;#fffacd&quot;</span>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="stringliteral">&quot;lightgoldenrodyellow&quot;</span>: <span class="stringliteral">&quot;#fafad2&quot;</span>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="stringliteral">&quot;papayawhip&quot;</span>: <span class="stringliteral">&quot;#ffefd5&quot;</span>,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="stringliteral">&quot;moccasin&quot;</span>: <span class="stringliteral">&quot;#ffe4b5&quot;</span>,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="stringliteral">&quot;peachpuff&quot;</span>: <span class="stringliteral">&quot;#ffdab9&quot;</span>,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="stringliteral">&quot;palegoldenrod&quot;</span>: <span class="stringliteral">&quot;#eee8aa&quot;</span>,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="stringliteral">&quot;khaki&quot;</span>: <span class="stringliteral">&quot;#f0e68c&quot;</span>,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="stringliteral">&quot;darkkhaki&quot;</span>: <span class="stringliteral">&quot;#bdb76b&quot;</span>,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="stringliteral">&quot;lavender&quot;</span>: <span class="stringliteral">&quot;#e6e6fa&quot;</span>,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="stringliteral">&quot;thistle&quot;</span>: <span class="stringliteral">&quot;#d8bfd8&quot;</span>,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="stringliteral">&quot;plum&quot;</span>: <span class="stringliteral">&quot;#dda0dd&quot;</span>,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="stringliteral">&quot;violet&quot;</span>: <span class="stringliteral">&quot;#ee82ee&quot;</span>,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="stringliteral">&quot;orchid&quot;</span>: <span class="stringliteral">&quot;#da70d6&quot;</span>,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="stringliteral">&quot;fuchsia&quot;</span>: <span class="stringliteral">&quot;#ff00ff&quot;</span>,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="stringliteral">&quot;magenta&quot;</span>: <span class="stringliteral">&quot;#ff00ff&quot;</span>,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="stringliteral">&quot;mediumorchid&quot;</span>: <span class="stringliteral">&quot;#ba55d3&quot;</span>,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="stringliteral">&quot;mediumpurple&quot;</span>: <span class="stringliteral">&quot;#9370db&quot;</span>,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="stringliteral">&quot;blueviolet&quot;</span>: <span class="stringliteral">&quot;#8a2be2&quot;</span>,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="stringliteral">&quot;darkviolet&quot;</span>: <span class="stringliteral">&quot;#9400d3&quot;</span>,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="stringliteral">&quot;darkorchid&quot;</span>: <span class="stringliteral">&quot;#9932cc&quot;</span>,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="stringliteral">&quot;darkmagenta&quot;</span>: <span class="stringliteral">&quot;#8b008b&quot;</span>,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="stringliteral">&quot;purple&quot;</span>: <span class="stringliteral">&quot;#800080&quot;</span>,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="stringliteral">&quot;indigo&quot;</span>: <span class="stringliteral">&quot;#4b0082&quot;</span>,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="stringliteral">&quot;darkslateblue&quot;</span>: <span class="stringliteral">&quot;#483d8b&quot;</span>,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="stringliteral">&quot;slateblue&quot;</span>: <span class="stringliteral">&quot;#6a5acd&quot;</span>,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="stringliteral">&quot;mediumslateblue&quot;</span>: <span class="stringliteral">&quot;#7b68ee&quot;</span>,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="stringliteral">&quot;greenyellow&quot;</span>: <span class="stringliteral">&quot;#adff2f&quot;</span>,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="stringliteral">&quot;chartreuse&quot;</span>: <span class="stringliteral">&quot;#7fff00&quot;</span>,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="stringliteral">&quot;lawngreen&quot;</span>: <span class="stringliteral">&quot;#7cfc00&quot;</span>,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="stringliteral">&quot;lime&quot;</span>: <span class="stringliteral">&quot;#00ff00&quot;</span>,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="stringliteral">&quot;limegreen&quot;</span>: <span class="stringliteral">&quot;#32cd32&quot;</span>,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="stringliteral">&quot;palegreen&quot;</span>: <span class="stringliteral">&quot;#98fb98&quot;</span>,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="stringliteral">&quot;lightgreen&quot;</span>: <span class="stringliteral">&quot;#90ee90&quot;</span>,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="stringliteral">&quot;mediumspringgreen&quot;</span>: <span class="stringliteral">&quot;#00fa9a&quot;</span>,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="stringliteral">&quot;springgreen&quot;</span>: <span class="stringliteral">&quot;#00ff7f&quot;</span>,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="stringliteral">&quot;mediumseagreen&quot;</span>: <span class="stringliteral">&quot;#3cb371&quot;</span>,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="stringliteral">&quot;seagreen&quot;</span>: <span class="stringliteral">&quot;#2e8b57&quot;</span>,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="stringliteral">&quot;forestgreen&quot;</span>: <span class="stringliteral">&quot;#228b22&quot;</span>,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="stringliteral">&quot;green&quot;</span>: <span class="stringliteral">&quot;#008000&quot;</span>,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="stringliteral">&quot;darkgreen&quot;</span>: <span class="stringliteral">&quot;#006400&quot;</span>,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="stringliteral">&quot;yellowgreen&quot;</span>: <span class="stringliteral">&quot;#9acd32&quot;</span>,</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="stringliteral">&quot;olivedrab&quot;</span>: <span class="stringliteral">&quot;#6b8e23&quot;</span>,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="stringliteral">&quot;olive&quot;</span>: <span class="stringliteral">&quot;#808000&quot;</span>,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="stringliteral">&quot;darkolivegreen&quot;</span>: <span class="stringliteral">&quot;#556b2f&quot;</span>,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="stringliteral">&quot;mediumaquamarine&quot;</span>: <span class="stringliteral">&quot;#66cdaa&quot;</span>,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="stringliteral">&quot;darkseagreen&quot;</span>: <span class="stringliteral">&quot;#8fbc8f&quot;</span>,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="stringliteral">&quot;lightseagreen&quot;</span>: <span class="stringliteral">&quot;#20b2aa&quot;</span>,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="stringliteral">&quot;darkcyan&quot;</span>: <span class="stringliteral">&quot;#008b8b&quot;</span>,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="stringliteral">&quot;teal&quot;</span>: <span class="stringliteral">&quot;#008080&quot;</span>,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="stringliteral">&quot;aqua&quot;</span>: <span class="stringliteral">&quot;#00ffff&quot;</span>,</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="stringliteral">&quot;cyan&quot;</span>: <span class="stringliteral">&quot;#00ffff&quot;</span>,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="stringliteral">&quot;lightcyan&quot;</span>: <span class="stringliteral">&quot;#e0ffff&quot;</span>,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="stringliteral">&quot;paleturquoise&quot;</span>: <span class="stringliteral">&quot;#afeeee&quot;</span>,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="stringliteral">&quot;aquamarine&quot;</span>: <span class="stringliteral">&quot;#7fffd4&quot;</span>,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="stringliteral">&quot;turquoise&quot;</span>: <span class="stringliteral">&quot;#40e0d0&quot;</span>,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="stringliteral">&quot;mediumturquoise&quot;</span>: <span class="stringliteral">&quot;#48d1cc&quot;</span>,</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="stringliteral">&quot;darkturquoise&quot;</span>: <span class="stringliteral">&quot;#00ced1&quot;</span>,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="stringliteral">&quot;cadetblue&quot;</span>: <span class="stringliteral">&quot;#5f9ea0&quot;</span>,</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="stringliteral">&quot;steelblue&quot;</span>: <span class="stringliteral">&quot;#4682b4&quot;</span>,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="stringliteral">&quot;lightsteelblue&quot;</span>: <span class="stringliteral">&quot;#b0c4de&quot;</span>,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="stringliteral">&quot;powderblue&quot;</span>: <span class="stringliteral">&quot;#b0e0e6&quot;</span>,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="stringliteral">&quot;lightblue&quot;</span>: <span class="stringliteral">&quot;#add8e6&quot;</span>,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="stringliteral">&quot;skyblue&quot;</span>: <span class="stringliteral">&quot;#87ceeb&quot;</span>,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="stringliteral">&quot;lightskyblue&quot;</span>: <span class="stringliteral">&quot;#87cefa&quot;</span>,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="stringliteral">&quot;deepskyblue&quot;</span>: <span class="stringliteral">&quot;#00bfff&quot;</span>,</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="stringliteral">&quot;dodgerblue&quot;</span>: <span class="stringliteral">&quot;#1e90ff&quot;</span>,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="stringliteral">&quot;cornflowerblue&quot;</span>: <span class="stringliteral">&quot;#6495ed&quot;</span>,</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="stringliteral">&quot;royalblue&quot;</span>: <span class="stringliteral">&quot;#4169e1&quot;</span>,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="stringliteral">&quot;blue&quot;</span>: <span class="stringliteral">&quot;#0000ff&quot;</span>,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="stringliteral">&quot;mediumblue&quot;</span>: <span class="stringliteral">&quot;#0000cd&quot;</span>,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="stringliteral">&quot;darkblue&quot;</span>: <span class="stringliteral">&quot;#00008b&quot;</span>,</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="stringliteral">&quot;navy&quot;</span>: <span class="stringliteral">&quot;#000080&quot;</span>,</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="stringliteral">&quot;midnightblue&quot;</span>: <span class="stringliteral">&quot;#191970&quot;</span>,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="stringliteral">&quot;cornsilk&quot;</span>: <span class="stringliteral">&quot;#fff8dc&quot;</span>,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="stringliteral">&quot;blanchedalmond&quot;</span>: <span class="stringliteral">&quot;#ffebcd&quot;</span>,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="stringliteral">&quot;bisque&quot;</span>: <span class="stringliteral">&quot;#ffe4c4&quot;</span>,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="stringliteral">&quot;navajowhite&quot;</span>: <span class="stringliteral">&quot;#ffdead&quot;</span>,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="stringliteral">&quot;wheat&quot;</span>: <span class="stringliteral">&quot;#f5deb3&quot;</span>,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="stringliteral">&quot;burlywood&quot;</span>: <span class="stringliteral">&quot;#deb887&quot;</span>,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="stringliteral">&quot;tan&quot;</span>: <span class="stringliteral">&quot;#d2b48c&quot;</span>,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="stringliteral">&quot;rosybrown&quot;</span>: <span class="stringliteral">&quot;#bc8f8f&quot;</span>,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="stringliteral">&quot;sandybrown&quot;</span>: <span class="stringliteral">&quot;#f4a460&quot;</span>,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="stringliteral">&quot;goldenrod&quot;</span>: <span class="stringliteral">&quot;#daa520&quot;</span>,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="stringliteral">&quot;darkgoldenrod&quot;</span>: <span class="stringliteral">&quot;#b8860b&quot;</span>,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="stringliteral">&quot;peru&quot;</span>: <span class="stringliteral">&quot;#cd853f&quot;</span>,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="stringliteral">&quot;chocolate&quot;</span>: <span class="stringliteral">&quot;#d2691e&quot;</span>,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="stringliteral">&quot;saddlebrown&quot;</span>: <span class="stringliteral">&quot;#8b4513&quot;</span>,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="stringliteral">&quot;sienna&quot;</span>: <span class="stringliteral">&quot;#a0522d&quot;</span>,</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="stringliteral">&quot;brown&quot;</span>: <span class="stringliteral">&quot;#a52a2a&quot;</span>,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="stringliteral">&quot;maroon&quot;</span>: <span class="stringliteral">&quot;#800000&quot;</span>,</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="stringliteral">&quot;white&quot;</span>: <span class="stringliteral">&quot;#ffffff&quot;</span>,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="stringliteral">&quot;snow&quot;</span>: <span class="stringliteral">&quot;#fffafa&quot;</span>,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="stringliteral">&quot;honeydew&quot;</span>: <span class="stringliteral">&quot;#f0fff0&quot;</span>,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="stringliteral">&quot;mintcream&quot;</span>: <span class="stringliteral">&quot;#f5fffa&quot;</span>,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="stringliteral">&quot;azure&quot;</span>: <span class="stringliteral">&quot;#f0ffff&quot;</span>,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="stringliteral">&quot;aliceblue&quot;</span>: <span class="stringliteral">&quot;#f0f8ff&quot;</span>,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="stringliteral">&quot;ghostwhite&quot;</span>: <span class="stringliteral">&quot;#f8f8ff&quot;</span>,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="stringliteral">&quot;whitesmoke&quot;</span>: <span class="stringliteral">&quot;#f5f5f5&quot;</span>,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="stringliteral">&quot;seashell&quot;</span>: <span class="stringliteral">&quot;#fff5ee&quot;</span>,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="stringliteral">&quot;beige&quot;</span>: <span class="stringliteral">&quot;#f5f5dc&quot;</span>,</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="stringliteral">&quot;oldlace&quot;</span>: <span class="stringliteral">&quot;#fdf5e6&quot;</span>,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="stringliteral">&quot;floralwhite&quot;</span>: <span class="stringliteral">&quot;#fffaf0&quot;</span>,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="stringliteral">&quot;ivory&quot;</span>: <span class="stringliteral">&quot;#fffff0&quot;</span>,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="stringliteral">&quot;antiquewhite&quot;</span>: <span class="stringliteral">&quot;#faebd7&quot;</span>,</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="stringliteral">&quot;linen&quot;</span>: <span class="stringliteral">&quot;#faf0e6&quot;</span>,</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="stringliteral">&quot;lavenderblush&quot;</span>: <span class="stringliteral">&quot;#fff0f5&quot;</span>,</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="stringliteral">&quot;mistyrose&quot;</span>: <span class="stringliteral">&quot;#ffe4e1&quot;</span>,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="stringliteral">&quot;gainsboro&quot;</span>: <span class="stringliteral">&quot;#dcdcdc&quot;</span>,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="stringliteral">&quot;lightgrey&quot;</span>: <span class="stringliteral">&quot;#d3d3d3&quot;</span>,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="stringliteral">&quot;silver&quot;</span>: <span class="stringliteral">&quot;#c0c0c0&quot;</span>,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="stringliteral">&quot;darkgray&quot;</span>: <span class="stringliteral">&quot;#a9a9a9&quot;</span>,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="stringliteral">&quot;gray&quot;</span>: <span class="stringliteral">&quot;#808080&quot;</span>,</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="stringliteral">&quot;dimgray&quot;</span>: <span class="stringliteral">&quot;#696969&quot;</span>,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="stringliteral">&quot;lightslategray&quot;</span>: <span class="stringliteral">&quot;#778899&quot;</span>,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="stringliteral">&quot;slategray&quot;</span>: <span class="stringliteral">&quot;#708090&quot;</span>,</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="stringliteral">&quot;darkslategray&quot;</span>: <span class="stringliteral">&quot;#2f4f4f&quot;</span>,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="stringliteral">&quot;black&quot;</span>: <span class="stringliteral">&quot;#000000&quot;</span>,</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keywordflow">if</span> os.name == <span class="stringliteral">&quot;nt&quot;</span>:</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="namespacecolor.html#a97230ccc654584aaa116e8fe34155ef6">  151</a></span>    consoleColors = [</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="stringliteral">&quot;#000000&quot;</span>,  <span class="comment">#{   0,   0,   0 },//0 - black</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="stringliteral">&quot;#000080&quot;</span>,  <span class="comment">#{   0,   0, 128 },//1 - navy</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="stringliteral">&quot;#008000&quot;</span>,  <span class="comment">#{   0, 128,   0 },//2 - green</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="stringliteral">&quot;#008080&quot;</span>,  <span class="comment">#{   0, 128, 128 },//3 - teal</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="stringliteral">&quot;#800000&quot;</span>,  <span class="comment">#{ 128,   0,   0 },//4 - maroon</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="stringliteral">&quot;#800080&quot;</span>,  <span class="comment">#{ 128,   0, 128 },//5 - purple</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="stringliteral">&quot;#808000&quot;</span>,  <span class="comment">#{ 128, 128,   0 },//6 - olive</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="stringliteral">&quot;#C0C0C0&quot;</span>,  <span class="comment">#{ 192, 192, 192 },//7 - silver</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="stringliteral">&quot;#808080&quot;</span>,  <span class="comment">#{ 128, 128, 128 },//8 - gray</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="stringliteral">&quot;#0000FF&quot;</span>,  <span class="comment">#{   0,   0, 255 },//9 - blue</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="stringliteral">&quot;#00FF00&quot;</span>,  <span class="comment">#{   0, 255,   0 },//a - lime</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="stringliteral">&quot;#00FFFF&quot;</span>,  <span class="comment">#{   0, 255, 255 },//b - cyan</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="stringliteral">&quot;#FF0000&quot;</span>,  <span class="comment">#{ 255,   0,   0 },//c - red</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="stringliteral">&quot;#FF00FF&quot;</span>,  <span class="comment">#{ 255,   0, 255 },//d - magenta</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="stringliteral">&quot;#FFFF00&quot;</span>,  <span class="comment">#{ 255, 255,   0 },//e - yellow</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="stringliteral">&quot;#FFFFFF&quot;</span>,  <span class="comment">#{ 255, 255, 255 } //f - white</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    ]</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    consoleColors = [</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="stringliteral">&quot;#2e3436&quot;</span>,</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="stringliteral">&quot;#cc0000&quot;</span>,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="stringliteral">&quot;#4e9a06&quot;</span>,</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="stringliteral">&quot;#c4a000&quot;</span>,</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="stringliteral">&quot;#3465a4&quot;</span>,</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="stringliteral">&quot;#75507b&quot;</span>,</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="stringliteral">&quot;#06989a&quot;</span>,</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="stringliteral">&quot;#d3d7cf&quot;</span>,</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="stringliteral">&quot;#ffffff&quot;</span>,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="stringliteral">&quot;#555753&quot;</span>,</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="stringliteral">&quot;#ef2929&quot;</span>,</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="stringliteral">&quot;#8ae234&quot;</span>,</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="stringliteral">&quot;#fce94f&quot;</span>,</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="stringliteral">&quot;#729fcf&quot;</span>,</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="stringliteral">&quot;#ad7fa8&quot;</span>,</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="stringliteral">&quot;#34e2e2&quot;</span>,</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="stringliteral">&quot;#eeeeec&quot;</span>,</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    ]</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="foldopen" id="foldopen00191" data-start="" data-end="">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">  191</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">RGB2LAB</a>(r,g,b):</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">if</span> max(r,g,b):</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        r /= 255.</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        g /= 255.</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        b /= 255.</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    X = (0.412453 * r + 0.357580 * g + 0.180423 * b) / 0.950456</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    Y = (0.212671 * r + 0.715160 * g + 0.072169 * b)</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    Z = (0.019334 * r + 0.119193 * g + 0.950227 * b) / 1.088754</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="comment">#[X * 0.950456]   [0.412453 0.357580 0.180423]   [R]</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="comment">#[Y           ] = [0.212671 0.715160 0.072169] * [G]</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="comment">#[Z * 1.088754]   [0.019334 0.119193 0.950227]   [B]</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    T = 0.008856 <span class="comment">#threshold</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keywordflow">if</span> X &gt; T:</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        fX = math.pow(X, 1./3.)</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        fX = 7.787 * X + 16./116.</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="comment"># Compute L</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordflow">if</span> Y &gt; T:</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        Y3 = math.pow(Y, 1./3.)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        fY = Y3</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        L  = 116. * Y3 - 16.0</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        fY = 7.787 * Y + 16./116.</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        L  = 903.3 * Y</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">if</span> Z &gt; T:</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        fZ = math.pow(Z, 1./3.)</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        fZ = 7.787 * Z + 16./116.</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="comment"># Compute a and b</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    a = 500. * (fX - fY)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    b = 200. * (fY - fZ)</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">return</span> (L,a,b)</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+</div>
+<div class="foldopen" id="foldopen00232" data-start="" data-end="">
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="namespacecolor.html#a2fffae3244ca50f39414ff1280c4d545">  232</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacecolor.html#a2fffae3244ca50f39414ff1280c4d545">colorDistance</a>(r1,g1,b1 = None, r2 = None, g2 = None,b2 = None):</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordflow">if</span> type(r1) == tuple <span class="keywordflow">and</span> type(g1) == tuple <span class="keywordflow">and</span> b1 <span class="keywordflow">is</span> <span class="keywordtype">None</span> <span class="keywordflow">and</span> r2 <span class="keywordflow">is</span> <span class="keywordtype">None</span> <span class="keywordflow">and</span> g2 <span class="keywordflow">is</span> <span class="keywordtype">None</span> <span class="keywordflow">and</span> b2 <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        (l1,a1,b1) = <a class="code hl_function" href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">RGB2LAB</a>(*r1)</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        (l2,a2,b2) = <a class="code hl_function" href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">RGB2LAB</a>(*g1)</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        (l1,a1,b1) = <a class="code hl_function" href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">RGB2LAB</a>(r1,g1,b1)</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        (l2,a2,b2) = <a class="code hl_function" href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">RGB2LAB</a>(r2,g2,b2)</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="comment">#CIE94</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    dl = l1-l2</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    C1 = math.sqrt(a1*a1 + b1*b1)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    C2 = math.sqrt(a2*a2 + b2*b2)</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    dC = C1 - C2</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    da = a1-a2</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    db = b1-b2</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    dH = math.sqrt(max(0, da*da + db*db - dC*dC))</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    Kl = 1</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    K1 = 0.045</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    K2 = 0.015</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    s1 = dl/Kl</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    s2 = dC/(1. + K1 * C1)</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    s3 = dH/(1. + K2 * C1)</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keywordflow">return</span> math.sqrt(s1*s1 + s2*s2 + s3*s3)</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+</div>
+<div class="foldopen" id="foldopen00256" data-start="" data-end="">
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="namespacecolor.html#af46c6605ca97e88ccd73a79e3fffa4bc">  256</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacecolor.html#af46c6605ca97e88ccd73a79e3fffa4bc">parseHexColor</a>(col):</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordflow">if</span> len(col) != 4 <span class="keywordflow">and</span> len(col) != 7 <span class="keywordflow">and</span> <span class="keywordflow">not</span> col.startswith(<span class="stringliteral">&quot;#&quot;</span>):</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">return</span> (0,0,0)</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">if</span> len(col) == 4:</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        r = col[1]*2</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        g = col[2]*2</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        b = col[3]*2</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        r = col[1:3]</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        g = col[3:5]</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        b = col[5:7]</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordflow">return</span> (int(r,16), int(g,16), int(b,16))</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+</div>
+<div class="foldopen" id="foldopen00269" data-start="" data-end="">
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="namespacecolor.html#a5a386478a1a83be4a181b2d94d2874cd">  269</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacecolor.html#a5a386478a1a83be4a181b2d94d2874cd">getColor</a>(col):</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordflow">if</span> isinstance(col, str):</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keywordflow">if</span> col.lower() <span class="keywordflow">in</span> webcolors:</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecolor.html#af46c6605ca97e88ccd73a79e3fffa4bc">parseHexColor</a>(webcolors[col.lower()])</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecolor.html#af46c6605ca97e88ccd73a79e3fffa4bc">parseHexColor</a>(col)</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordflow">return</span> col</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+</div>
+<div class="foldopen" id="foldopen00278" data-start="" data-end="">
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="namespacecolor.html#ad57f9817cce81eeec24c0c1abf72293d">  278</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacecolor.html#ad57f9817cce81eeec24c0c1abf72293d">getNearestConsoleColor</a>(col):</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    color = <a class="code hl_function" href="namespacecolor.html#a5a386478a1a83be4a181b2d94d2874cd">getColor</a>(col)</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    minidx = 0</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    mindist = <a class="code hl_function" href="namespacecolor.html#a2fffae3244ca50f39414ff1280c4d545">colorDistance</a>(color, <a class="code hl_function" href="namespacecolor.html#a5a386478a1a83be4a181b2d94d2874cd">getColor</a>(consoleColors[0]))</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(consoleColors)):</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        dist = <a class="code hl_function" href="namespacecolor.html#a2fffae3244ca50f39414ff1280c4d545">colorDistance</a>(color, <a class="code hl_function" href="namespacecolor.html#a5a386478a1a83be4a181b2d94d2874cd">getColor</a>(consoleColors[i]))</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">if</span> dist &lt; mindist:</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            mindist = dist</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            minidx = i</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">return</span> minidx</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="keywordflow">if</span> os.name == <span class="stringliteral">&#39;nt&#39;</span>:</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keyword">import</span> msvcrt</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keyword">from</span> ctypes <span class="keyword">import</span> windll, Structure, c_short, c_ushort, byref</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="namespacecolor.html#aeab91e77d856778facfe87bbc92534e4">  292</a></span>    SHORT = c_short</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="namespacecolor.html#af77794379369684ca34261d973ffac99">  293</a></span>    WORD = c_ushort</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="foldopen" id="foldopen00295" data-start="" data-end="">
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="classcolor_1_1_c_o_o_r_d.html">  295</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classcolor_1_1_c_o_o_r_d.html">COORD</a>(Structure):</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="classcolor_1_1_c_o_o_r_d.html#a2705102279945b64324c81bd12c80f3c">  296</a></span>        _fields_ = [</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>            (<span class="stringliteral">&quot;X&quot;</span>, SHORT),</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            (<span class="stringliteral">&quot;Y&quot;</span>, SHORT)]</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
+</div>
+<div class="foldopen" id="foldopen00300" data-start="" data-end="">
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="classcolor_1_1_s_m_a_l_l___r_e_c_t.html">  300</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classcolor_1_1_s_m_a_l_l___r_e_c_t.html">SMALL_RECT</a>(Structure):</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classcolor_1_1_s_m_a_l_l___r_e_c_t.html#a4af546d4dad723fd5cd319f673328cca">  301</a></span>        _fields_ = [</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>            (<span class="stringliteral">&quot;Left&quot;</span>, SHORT),</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            (<span class="stringliteral">&quot;Top&quot;</span>, SHORT),</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            (<span class="stringliteral">&quot;Right&quot;</span>, SHORT),</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            (<span class="stringliteral">&quot;Bottom&quot;</span>, SHORT)]</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+</div>
+<div class="foldopen" id="foldopen00307" data-start="" data-end="">
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno"><a class="line" href="classcolor_1_1_c_o_n_s_o_l_e___s_c_r_e_e_n___b_u_f_f_e_r___i_n_f_o.html">  307</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classcolor_1_1_c_o_n_s_o_l_e___s_c_r_e_e_n___b_u_f_f_e_r___i_n_f_o.html">CONSOLE_SCREEN_BUFFER_INFO</a>(Structure):</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classcolor_1_1_c_o_n_s_o_l_e___s_c_r_e_e_n___b_u_f_f_e_r___i_n_f_o.html#a0e4cea7f1f1dac93ec37dd389f6d74a5">  308</a></span>        _fields_ = [</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            (<span class="stringliteral">&quot;dwSize&quot;</span>, COORD),</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            (<span class="stringliteral">&quot;dwCursorPosition&quot;</span>, COORD),</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>            (<span class="stringliteral">&quot;wAttributes&quot;</span>, WORD),</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            (<span class="stringliteral">&quot;srWindow&quot;</span>, SMALL_RECT),</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            (<span class="stringliteral">&quot;dwMaximumWindowSize&quot;</span>, COORD)]</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+</div>
+<div class="foldopen" id="foldopen00315" data-start="" data-end="">
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html">  315</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classcolor_1_1win_console_colorizer.html">winConsoleColorizer</a>(object):</div>
+<div class="foldopen" id="foldopen00316" data-start="" data-end="">
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#a309182578140c120277453456838ee1f">  316</a></span>        <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#a309182578140c120277453456838ee1f">__init__</a>(self, stream):</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#a80db12eff4aa31f7c49630572994e989">  317</a></span>            self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a80db12eff4aa31f7c49630572994e989">handle</a> = msvcrt.get_osfhandle(stream.fileno())</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#a7533d9093a96bef757e771e6b1367ca8">  318</a></span>            self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a7533d9093a96bef757e771e6b1367ca8">default_attrs</a> = 7<span class="comment">#self.get_text_attr()</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#a758c3de8c2e4117ec0f216bbbe6fa635">  319</a></span>            self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a758c3de8c2e4117ec0f216bbbe6fa635">stream</a> = stream</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+</div>
+<div class="foldopen" id="foldopen00321" data-start="" data-end="">
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#acca2dfc572682f5ba23b1676a55841fa">  321</a></span>        <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#acca2dfc572682f5ba23b1676a55841fa">get_text_attr</a>(self):</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>            csbi = <a class="code hl_class" href="classcolor_1_1_c_o_n_s_o_l_e___s_c_r_e_e_n___b_u_f_f_e_r___i_n_f_o.html">CONSOLE_SCREEN_BUFFER_INFO</a>()</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            windll.kernel32.GetConsoleScreenBufferInfo(self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a80db12eff4aa31f7c49630572994e989">handle</a>, byref(csbi))</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>            <span class="keywordflow">return</span> csbi.wAttributes</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+</div>
+<div class="foldopen" id="foldopen00326" data-start="" data-end="">
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#a4ca5a33216b692875a22dfb948d482a1">  326</a></span>        <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#a4ca5a33216b692875a22dfb948d482a1">set_text_attr</a>(self, color):</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            windll.kernel32.SetConsoleTextAttribute(self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a80db12eff4aa31f7c49630572994e989">handle</a>, color)</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+</div>
+<div class="foldopen" id="foldopen00329" data-start="" data-end="">
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno"><a class="line" href="classcolor_1_1win_console_colorizer.html#aba30d96c0333238822bca9f5f9217448">  329</a></span>        <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#aba30d96c0333238822bca9f5f9217448">write</a>(self, *text, **attrs):</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> text:</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                <span class="keywordflow">return</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            color = attrs.get(<span class="stringliteral">&quot;color&quot;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            <span class="keywordflow">if</span> color:</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                col = <a class="code hl_function" href="namespacecolor.html#ad57f9817cce81eeec24c0c1abf72293d">getNearestConsoleColor</a>(color)</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a758c3de8c2e4117ec0f216bbbe6fa635">stream</a>.flush()</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                self.<a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#a4ca5a33216b692875a22dfb948d482a1">set_text_attr</a>(col)</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>            self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a758c3de8c2e4117ec0f216bbbe6fa635">stream</a>.<a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#aba30d96c0333238822bca9f5f9217448">write</a>(<span class="stringliteral">&quot; &quot;</span>.join([str(t) <span class="keywordflow">for</span> t <span class="keywordflow">in</span> text]))</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            <span class="keywordflow">if</span> color:</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a758c3de8c2e4117ec0f216bbbe6fa635">stream</a>.flush()</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                self.<a class="code hl_function" href="classcolor_1_1win_console_colorizer.html#a4ca5a33216b692875a22dfb948d482a1">set_text_attr</a>(self.<a class="code hl_variable" href="classcolor_1_1win_console_colorizer.html#a7533d9093a96bef757e771e6b1367ca8">default_attrs</a>)</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+</div>
+</div>
+<div class="foldopen" id="foldopen00342" data-start="" data-end="">
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classcolor_1_1dummy_colorizer.html">  342</a></span><span class="keyword">class </span><a class="code hl_class" href="classcolor_1_1dummy_colorizer.html">dummyColorizer</a>(object):</div>
+<div class="foldopen" id="foldopen00343" data-start="" data-end="">
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno"><a class="line" href="classcolor_1_1dummy_colorizer.html#afdc6ea74f95a86041d523cfd16b23359">  343</a></span>    <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1dummy_colorizer.html#afdc6ea74f95a86041d523cfd16b23359">__init__</a>(self, stream):</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno"><a class="line" href="classcolor_1_1dummy_colorizer.html#ae6f67378b56a25adcd9ddcf58fee5dbb">  344</a></span>        self.<a class="code hl_variable" href="classcolor_1_1dummy_colorizer.html#ae6f67378b56a25adcd9ddcf58fee5dbb">stream</a> = stream</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+</div>
+<div class="foldopen" id="foldopen00346" data-start="" data-end="">
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno"><a class="line" href="classcolor_1_1dummy_colorizer.html#ae486c7a2bfb15eacb53c15309eb8f193">  346</a></span>    <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1dummy_colorizer.html#ae486c7a2bfb15eacb53c15309eb8f193">write</a>(self, *text, **attrs):</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keywordflow">if</span> text:</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            self.<a class="code hl_variable" href="classcolor_1_1dummy_colorizer.html#ae6f67378b56a25adcd9ddcf58fee5dbb">stream</a>.<a class="code hl_function" href="classcolor_1_1dummy_colorizer.html#ae486c7a2bfb15eacb53c15309eb8f193">write</a>(<span class="stringliteral">&quot; &quot;</span>.join([str(t) <span class="keywordflow">for</span> t <span class="keywordflow">in</span> text]))</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
+</div>
+</div>
+<div class="foldopen" id="foldopen00350" data-start="" data-end="">
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html">  350</a></span><span class="keyword">class </span><a class="code hl_class" href="classcolor_1_1ascii_seq_colorizer.html">asciiSeqColorizer</a>(object):</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#a33d49f52abea82419fcb7689048b60bd">  351</a></span>    RESET_SEQ = <span class="stringliteral">&quot;\033[0m&quot;</span></div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="comment">#BOLD_SEQ = &quot;\033[1m&quot;</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#a793f385f5b5e1629bdb7bb7d1578a3fc">  353</a></span>    ITALIC_SEQ = <span class="stringliteral">&quot;\033[3m&quot;</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#ad4917318847a353fc7e2178856edd6c6">  354</a></span>    UNDERLINE_SEQ = <span class="stringliteral">&quot;\033[4m&quot;</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#aa04e7a9ff715a466c7ab861e31bab116">  355</a></span>    STRIKEOUT_SEQ = <span class="stringliteral">&quot;\033[9m&quot;</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#a89536fc26e4bc7f2fb366b0f8bf10056">  356</a></span>    COLOR_SEQ0 = <span class="stringliteral">&quot;\033[00;%dm&quot;</span> <span class="comment">#dark</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#a8197e90bd0ad0e6db24ea097236dcd40">  357</a></span>    COLOR_SEQ1 = <span class="stringliteral">&quot;\033[01;%dm&quot;</span> <span class="comment">#bold and light</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
+<div class="foldopen" id="foldopen00359" data-start="" data-end="">
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#aab569c6ed7cdad86d3ac4219d96d0295">  359</a></span>    <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#aab569c6ed7cdad86d3ac4219d96d0295">__init__</a>(self, stream):</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#ac0a664d24abd78a1c5f32428322aef7f">  360</a></span>        self.<a class="code hl_variable" href="classcolor_1_1ascii_seq_colorizer.html#ac0a664d24abd78a1c5f32428322aef7f">stream</a> = stream</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+</div>
+<div class="foldopen" id="foldopen00362" data-start="" data-end="">
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#a0681d23446095770fc5dd125af2c8473">  362</a></span>    <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#a0681d23446095770fc5dd125af2c8473">get_seq</a>(self, code):</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        <span class="keywordflow">if</span> code &gt; 8:</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            <span class="keywordflow">return</span> self.__class__.COLOR_SEQ1 % (30 + code - 9)</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            <span class="keywordflow">return</span> self.__class__.COLOR_SEQ0 % (30 + code)</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
+</div>
+<div class="foldopen" id="foldopen00368" data-start="" data-end="">
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno"><a class="line" href="classcolor_1_1ascii_seq_colorizer.html#a548cc3bf8b8eb086ecf7880f2c9e4e43">  368</a></span>    <span class="keyword">def </span><a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#a548cc3bf8b8eb086ecf7880f2c9e4e43">write</a>(self, *text, **attrs):</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> text:</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>            <span class="keywordflow">return</span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        color = attrs.get(<span class="stringliteral">&quot;color&quot;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="keywordflow">if</span> color:</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            col = <a class="code hl_function" href="namespacecolor.html#ad57f9817cce81eeec24c0c1abf72293d">getNearestConsoleColor</a>(color)</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>            self.<a class="code hl_variable" href="classcolor_1_1ascii_seq_colorizer.html#ac0a664d24abd78a1c5f32428322aef7f">stream</a>.<a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#a548cc3bf8b8eb086ecf7880f2c9e4e43">write</a>(self.<a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#a0681d23446095770fc5dd125af2c8473">get_seq</a>(col))</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        self.<a class="code hl_variable" href="classcolor_1_1ascii_seq_colorizer.html#ac0a664d24abd78a1c5f32428322aef7f">stream</a>.<a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#a548cc3bf8b8eb086ecf7880f2c9e4e43">write</a>(<span class="stringliteral">&quot; &quot;</span>.join([str(t) <span class="keywordflow">for</span> t <span class="keywordflow">in</span> text]))</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <span class="keywordflow">if</span> color:</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>            self.<a class="code hl_variable" href="classcolor_1_1ascii_seq_colorizer.html#ac0a664d24abd78a1c5f32428322aef7f">stream</a>.<a class="code hl_function" href="classcolor_1_1ascii_seq_colorizer.html#a548cc3bf8b8eb086ecf7880f2c9e4e43">write</a>(self.__class__.RESET_SEQ)</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+</div>
+</div>
+<div class="foldopen" id="foldopen00380" data-start="" data-end="">
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno"><a class="line" href="namespacecolor.html#ab25b9197d535a78f269dc6c8ce4528d1">  380</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacecolor.html#ab25b9197d535a78f269dc6c8ce4528d1">getColorizer</a>(stream):</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keywordflow">if</span> stream.isatty():</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="keywordflow">if</span> os.name == <span class="stringliteral">&quot;nt&quot;</span>:</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classcolor_1_1win_console_colorizer.html">winConsoleColorizer</a>(stream)</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classcolor_1_1ascii_seq_colorizer.html">asciiSeqColorizer</a>(stream)</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classcolor_1_1dummy_colorizer.html">dummyColorizer</a>(stream)</div>
+</div>
+<div class="ttc" id="aclasscolor_1_1_c_o_n_s_o_l_e___s_c_r_e_e_n___b_u_f_f_e_r___i_n_f_o_html"><div class="ttname"><a href="classcolor_1_1_c_o_n_s_o_l_e___s_c_r_e_e_n___b_u_f_f_e_r___i_n_f_o.html">color.CONSOLE_SCREEN_BUFFER_INFO</a></div><div class="ttdef"><b>Definición</b> <a href="#l00307">color.py:307</a></div></div>
+<div class="ttc" id="aclasscolor_1_1_c_o_o_r_d_html"><div class="ttname"><a href="classcolor_1_1_c_o_o_r_d.html">color.COORD</a></div><div class="ttdef"><b>Definición</b> <a href="#l00295">color.py:295</a></div></div>
+<div class="ttc" id="aclasscolor_1_1_s_m_a_l_l___r_e_c_t_html"><div class="ttname"><a href="classcolor_1_1_s_m_a_l_l___r_e_c_t.html">color.SMALL_RECT</a></div><div class="ttdef"><b>Definición</b> <a href="#l00300">color.py:300</a></div></div>
+<div class="ttc" id="aclasscolor_1_1ascii_seq_colorizer_html"><div class="ttname"><a href="classcolor_1_1ascii_seq_colorizer.html">color.asciiSeqColorizer</a></div><div class="ttdef"><b>Definición</b> <a href="#l00350">color.py:350</a></div></div>
+<div class="ttc" id="aclasscolor_1_1ascii_seq_colorizer_html_a0681d23446095770fc5dd125af2c8473"><div class="ttname"><a href="classcolor_1_1ascii_seq_colorizer.html#a0681d23446095770fc5dd125af2c8473">color.asciiSeqColorizer.get_seq</a></div><div class="ttdeci">get_seq(self, code)</div><div class="ttdef"><b>Definición</b> <a href="#l00362">color.py:362</a></div></div>
+<div class="ttc" id="aclasscolor_1_1ascii_seq_colorizer_html_a548cc3bf8b8eb086ecf7880f2c9e4e43"><div class="ttname"><a href="classcolor_1_1ascii_seq_colorizer.html#a548cc3bf8b8eb086ecf7880f2c9e4e43">color.asciiSeqColorizer.write</a></div><div class="ttdeci">write(self, *text, **attrs)</div><div class="ttdef"><b>Definición</b> <a href="#l00368">color.py:368</a></div></div>
+<div class="ttc" id="aclasscolor_1_1ascii_seq_colorizer_html_aab569c6ed7cdad86d3ac4219d96d0295"><div class="ttname"><a href="classcolor_1_1ascii_seq_colorizer.html#aab569c6ed7cdad86d3ac4219d96d0295">color.asciiSeqColorizer.__init__</a></div><div class="ttdeci">__init__(self, stream)</div><div class="ttdef"><b>Definición</b> <a href="#l00359">color.py:359</a></div></div>
+<div class="ttc" id="aclasscolor_1_1ascii_seq_colorizer_html_ac0a664d24abd78a1c5f32428322aef7f"><div class="ttname"><a href="classcolor_1_1ascii_seq_colorizer.html#ac0a664d24abd78a1c5f32428322aef7f">color.asciiSeqColorizer.stream</a></div><div class="ttdeci">stream</div><div class="ttdef"><b>Definición</b> <a href="#l00360">color.py:360</a></div></div>
+<div class="ttc" id="aclasscolor_1_1dummy_colorizer_html"><div class="ttname"><a href="classcolor_1_1dummy_colorizer.html">color.dummyColorizer</a></div><div class="ttdef"><b>Definición</b> <a href="#l00342">color.py:342</a></div></div>
+<div class="ttc" id="aclasscolor_1_1dummy_colorizer_html_ae486c7a2bfb15eacb53c15309eb8f193"><div class="ttname"><a href="classcolor_1_1dummy_colorizer.html#ae486c7a2bfb15eacb53c15309eb8f193">color.dummyColorizer.write</a></div><div class="ttdeci">write(self, *text, **attrs)</div><div class="ttdef"><b>Definición</b> <a href="#l00346">color.py:346</a></div></div>
+<div class="ttc" id="aclasscolor_1_1dummy_colorizer_html_ae6f67378b56a25adcd9ddcf58fee5dbb"><div class="ttname"><a href="classcolor_1_1dummy_colorizer.html#ae6f67378b56a25adcd9ddcf58fee5dbb">color.dummyColorizer.stream</a></div><div class="ttdeci">stream</div><div class="ttdef"><b>Definición</b> <a href="#l00344">color.py:344</a></div></div>
+<div class="ttc" id="aclasscolor_1_1dummy_colorizer_html_afdc6ea74f95a86041d523cfd16b23359"><div class="ttname"><a href="classcolor_1_1dummy_colorizer.html#afdc6ea74f95a86041d523cfd16b23359">color.dummyColorizer.__init__</a></div><div class="ttdeci">__init__(self, stream)</div><div class="ttdef"><b>Definición</b> <a href="#l00343">color.py:343</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html">color.winConsoleColorizer</a></div><div class="ttdef"><b>Definición</b> <a href="#l00315">color.py:315</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_a309182578140c120277453456838ee1f"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#a309182578140c120277453456838ee1f">color.winConsoleColorizer.__init__</a></div><div class="ttdeci">__init__(self, stream)</div><div class="ttdef"><b>Definición</b> <a href="#l00316">color.py:316</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_a4ca5a33216b692875a22dfb948d482a1"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#a4ca5a33216b692875a22dfb948d482a1">color.winConsoleColorizer.set_text_attr</a></div><div class="ttdeci">set_text_attr(self, color)</div><div class="ttdef"><b>Definición</b> <a href="#l00326">color.py:326</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_a7533d9093a96bef757e771e6b1367ca8"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#a7533d9093a96bef757e771e6b1367ca8">color.winConsoleColorizer.default_attrs</a></div><div class="ttdeci">int default_attrs</div><div class="ttdef"><b>Definición</b> <a href="#l00318">color.py:318</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_a758c3de8c2e4117ec0f216bbbe6fa635"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#a758c3de8c2e4117ec0f216bbbe6fa635">color.winConsoleColorizer.stream</a></div><div class="ttdeci">stream</div><div class="ttdef"><b>Definición</b> <a href="#l00319">color.py:319</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_a80db12eff4aa31f7c49630572994e989"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#a80db12eff4aa31f7c49630572994e989">color.winConsoleColorizer.handle</a></div><div class="ttdeci">handle</div><div class="ttdef"><b>Definición</b> <a href="#l00317">color.py:317</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_aba30d96c0333238822bca9f5f9217448"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#aba30d96c0333238822bca9f5f9217448">color.winConsoleColorizer.write</a></div><div class="ttdeci">write(self, *text, **attrs)</div><div class="ttdef"><b>Definición</b> <a href="#l00329">color.py:329</a></div></div>
+<div class="ttc" id="aclasscolor_1_1win_console_colorizer_html_acca2dfc572682f5ba23b1676a55841fa"><div class="ttname"><a href="classcolor_1_1win_console_colorizer.html#acca2dfc572682f5ba23b1676a55841fa">color.winConsoleColorizer.get_text_attr</a></div><div class="ttdeci">get_text_attr(self)</div><div class="ttdef"><b>Definición</b> <a href="#l00321">color.py:321</a></div></div>
+<div class="ttc" id="anamespacecolor_html_a2fffae3244ca50f39414ff1280c4d545"><div class="ttname"><a href="namespacecolor.html#a2fffae3244ca50f39414ff1280c4d545">color.colorDistance</a></div><div class="ttdeci">colorDistance(r1, g1, b1=None, r2=None, g2=None, b2=None)</div><div class="ttdef"><b>Definición</b> <a href="#l00232">color.py:232</a></div></div>
+<div class="ttc" id="anamespacecolor_html_a5a386478a1a83be4a181b2d94d2874cd"><div class="ttname"><a href="namespacecolor.html#a5a386478a1a83be4a181b2d94d2874cd">color.getColor</a></div><div class="ttdeci">getColor(col)</div><div class="ttdef"><b>Definición</b> <a href="#l00269">color.py:269</a></div></div>
+<div class="ttc" id="anamespacecolor_html_ab25b9197d535a78f269dc6c8ce4528d1"><div class="ttname"><a href="namespacecolor.html#ab25b9197d535a78f269dc6c8ce4528d1">color.getColorizer</a></div><div class="ttdeci">getColorizer(stream)</div><div class="ttdef"><b>Definición</b> <a href="#l00380">color.py:380</a></div></div>
+<div class="ttc" id="anamespacecolor_html_ad2ed5d571eca0a92979070249908ff06"><div class="ttname"><a href="namespacecolor.html#ad2ed5d571eca0a92979070249908ff06">color.RGB2LAB</a></div><div class="ttdeci">RGB2LAB(r, g, b)</div><div class="ttdef"><b>Definición</b> <a href="#l00191">color.py:191</a></div></div>
+<div class="ttc" id="anamespacecolor_html_ad57f9817cce81eeec24c0c1abf72293d"><div class="ttname"><a href="namespacecolor.html#ad57f9817cce81eeec24c0c1abf72293d">color.getNearestConsoleColor</a></div><div class="ttdeci">getNearestConsoleColor(col)</div><div class="ttdef"><b>Definición</b> <a href="#l00278">color.py:278</a></div></div>
+<div class="ttc" id="anamespacecolor_html_af46c6605ca97e88ccd73a79e3fffa4bc"><div class="ttname"><a href="namespacecolor.html#af46c6605ca97e88ccd73a79e3fffa4bc">color.parseHexColor</a></div><div class="ttdeci">parseHexColor(col)</div><div class="ttdef"><b>Definición</b> <a href="#l00256">color.py:256</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_b01e93c1c06ae16e40397e41d4929e13.html">ts</a></li><li class="navelem"><a href="dir_277250546df05ce9251d46c44ec18aa8.html">misc</a></li><li class="navelem"><a href="color_8py.html">color.py</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

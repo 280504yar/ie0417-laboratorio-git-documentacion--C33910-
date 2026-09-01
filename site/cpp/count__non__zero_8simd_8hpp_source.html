@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/count_non_zero.simd.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('count__non__zero_8simd_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">count_non_zero.simd.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="count__non__zero_8simd_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">    9</a></span><span class="keyword">typedef</span> int (*<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)(<span class="keyword">const</span> <span class="keywordtype">void</span>*, int);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a> getCountNonZeroTab(<span class="keywordtype">int</span> depth);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifndef CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacecv.html#a3d02dc3ba0d5e01af205bf90fc3e2997">   18</a></span><span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv.html#a3d02dc3ba0d5e01af205bf90fc3e2997">countNonZero_</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* src, <span class="keywordtype">int</span> len )</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">int</span> nz = 0;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">for</span>( <span class="keywordtype">int</span> i = 0; i &lt; len; i++ )</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        nz += src[i] != 0;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">return</span> nz;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
+</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#undef SIMD_ONLY</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define SIMD_ONLY(expr) expr</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a7c8480f9c54e83367b243e419c30fadd">   30</a></span><span class="preprocessor">#define SIMD_ONLY(expr)</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// AVX-512 exposes wide per-lane mask registers, so counting zero lanes with</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// v_signmask()+popcount is cheaper than the batched add-based reduction.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// Narrower SIMD (AVX2, NEON, LASX, ...) keeps the legacy batched kernel to</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// avoid regressions on smaller vector widths.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#undef CV_COUNTNONZERO_AVX512</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#if defined(CV_CPU_COMPILE_AVX512_SKX) || defined(CV_CPU_COMPILE_AVX512_ICL)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#define CV_COUNTNONZERO_AVX512 1</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a4599f42354acea3e7978761410a91135">   41</a></span><span class="preprocessor">#define CV_COUNTNONZERO_AVX512 0</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#if CV_COUNTNONZERO_AVX512</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> cnz_popcount32(<span class="keywordtype">unsigned</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#if defined(__GNUC__) || defined(__clang__)</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> __builtin_popcount(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">int</span> c = 0;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">for</span> (; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &amp;= <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> - 1)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        ++c;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> c;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> cnz_popcount64(<a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#if defined(__GNUC__) || defined(__clang__)</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)__builtin_popcountll((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span>)<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">int</span> c = 0;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">for</span> (; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>; <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> &amp;= <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a> - 1)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        ++c;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> c;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> cnz_lane_pop(<span class="keywordtype">int</span> m) { <span class="keywordflow">return</span> cnz_popcount32((<span class="keywordtype">unsigned</span>)m); }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> cnz_lane_pop(<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a> m) { <span class="keywordflow">return</span> cnz_popcount64((<a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a>)m); }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif </span><span class="comment">// CV_COUNTNONZERO_AVX512</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">// SIMD body of the countNonZero kernels. The AVX-512 variant counts zero lanes</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">// via signmask+popcount; every other target keeps the legacy batched add kernel.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#undef CNZ_SIMD_BODY</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#if CV_COUNTNONZERO_AVX512</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#define CNZ_SIMD_BODY(suffix, ssuffix, rsuffix, VT, ST, cmp_op, add_op, update_sum) \</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">    const int vlanes = VTraits&lt;VT&gt;::vlanes(); \</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">    VT v_zero = vx_setzero_##suffix(); \</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">    int nzeros = 0; \</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">    for (; i &lt;= len - vlanes*2; i += vlanes*2) \</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">    { \</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">        nzeros += cnz_lane_pop(v_signmask(v_reinterpret_as_##rsuffix(cmp_op(vx_load(src + i), v_zero)))); \</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">        nzeros += cnz_lane_pop(v_signmask(v_reinterpret_as_##rsuffix(cmp_op(vx_load(src + i + vlanes), v_zero)))); \</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">    for (; i &lt;= len - vlanes; i += vlanes) \</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">    { \</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">        nzeros += cnz_lane_pop(v_signmask(v_reinterpret_as_##rsuffix(cmp_op(vx_load(src + i), v_zero)))); \</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">    nz += i - nzeros; \</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">    v_cleanup();</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#else</span></div>
+<div class="foldopen" id="foldopen00093" data-start="" data-end="">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#add592e22ccdb3e036f975af9788ffca8">   93</a></span><span class="preprocessor">#define CNZ_SIMD_BODY(suffix, ssuffix, rsuffix, VT, ST, cmp_op, add_op, update_sum) \</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">    const int vlanes = VTraits&lt;VT&gt;::vlanes(); \</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">    VT v_zero = vx_setzero_##suffix(); \</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">    VT v_1 = vx_setall_##suffix(1); \</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">    VT v_8 = vx_setall_##suffix(8); \</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">    ST v_sum0 = vx_setzero_##ssuffix(); \</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">    ST v_sum1 = v_sum0; \</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">    for (i = 0; i &lt;= len - vlanes*8; i += vlanes*8) \</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">    { \</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">        VT x0 = vx_load(src + i); \</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">        VT x1 = vx_load(src + i + vlanes); \</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">        VT x2 = vx_load(src + i + vlanes*2); \</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">        VT x3 = vx_load(src + i + vlanes*3); \</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">        VT x4 = vx_load(src + i + vlanes*4); \</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">        VT x5 = vx_load(src + i + vlanes*5); \</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">        VT x6 = vx_load(src + i + vlanes*6); \</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">        VT x7 = vx_load(src + i + vlanes*7); \</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">        x0 = cmp_op(x0, v_zero); \</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">        x1 = cmp_op(x1, v_zero); \</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">        x2 = cmp_op(x2, v_zero); \</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">        x3 = cmp_op(x3, v_zero); \</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">        x4 = cmp_op(x4, v_zero); \</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">        x5 = cmp_op(x5, v_zero); \</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">        x6 = cmp_op(x6, v_zero); \</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">        x7 = cmp_op(x7, v_zero); \</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">        x0 = add_op(x0, x1); \</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">        x2 = add_op(x2, x3); \</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">        x4 = add_op(x4, x5); \</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">        x6 = add_op(x6, x7); \</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">        x0 = add_op(x0, x2); \</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">        x4 = add_op(x4, x6); \</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">        x0 = add_op(add_op(x0, x4), v_8); \</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">        update_sum(v_sum0, v_sum1, x0); \</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">    for (; i &lt;= len - vlanes; i += vlanes) \</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">    { \</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">        VT x0 = vx_load(src + i); \</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">        x0 = add_op(cmp_op(x0, v_zero), v_1); \</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">        update_sum(v_sum0, v_sum1, x0); \</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">    nz += (int)v_reduce_sum(v_add(v_sum0, v_sum1)); \</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">    v_cleanup();</span></div>
+</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">#undef DEFINE_NONZERO_FUNC</span></div>
+<div class="foldopen" id="foldopen00138" data-start="" data-end="">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">  138</a></span><span class="preprocessor">#define DEFINE_NONZERO_FUNC(funcname, suffix, ssuffix, rsuffix, T, VT, ST, cmp_op, add_op, update_sum, scalar_cmp_op) \</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">static int funcname( const void* src_ptr, int len ) \</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">{ \</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="preprocessor">    const T* src = static_cast&lt;const T*&gt;(src_ptr); \</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">    int i = 0, nz = 0; \</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">    SIMD_ONLY( CNZ_SIMD_BODY(suffix, ssuffix, rsuffix, VT, ST, cmp_op, add_op, update_sum) ) \</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="preprocessor">    for( ; i &lt; len; i++ ) \</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">    { \</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">        nz += scalar_cmp_op(src[i]); \</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">    return nz; \</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">}</span></div>
+</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#undef CHECK_NZ_INT</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a67b3b056fec15323c333afdb041e99dd">  152</a></span><span class="preprocessor">#define CHECK_NZ_INT(x) ((x) != 0)</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#undef CHECK_NZ_FP</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#ad15017f3cc6b6bca5ba76a24411bae15">  154</a></span><span class="preprocessor">#define CHECK_NZ_FP(x) ((x)*2 != 0)</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">// 16-bit float: mask the sign bit so -0.0 (0x8000) reads as zero.</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#undef CHECK_NZ_FP16</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#acb5515a04a6a0b77f4485361d37889f1">  157</a></span><span class="preprocessor">#define CHECK_NZ_FP16(x) (((x) &amp; 0x7fff) != 0)</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#undef VEC_CMP_EQ_Z_FP16</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a6f8ab8659c39b7206d95a54ddba5fec6">  159</a></span><span class="preprocessor">#define VEC_CMP_EQ_Z_FP16(x, z) v_eq(v_add_wrap(x, x), z)</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="preprocessor">#undef VEC_CMP_EQ_Z_FP</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#acfa6adc56e50edc1c8d14e5e7afd5b44">  161</a></span><span class="preprocessor">#define VEC_CMP_EQ_Z_FP(x, z) v_eq(v_add(x, x), z)</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">#undef UPDATE_SUM_U8</span></div>
+<div class="foldopen" id="foldopen00164" data-start="" data-end="">
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#abce16f1855e436597c0090b9f9c713c5">  164</a></span><span class="preprocessor">#define UPDATE_SUM_U8(v_sum0, v_sum1, x0) \</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">    v_uint16 w0 = v_expand_low(x0); \</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="preprocessor">    v_uint16 w1 = v_expand_high(x0); \</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="preprocessor">    v_sum0 = v_add(v_sum0, v_expand_low(w0)); \</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="preprocessor">    v_sum1 = v_add(v_sum1, v_expand_high(w0)); \</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">    v_sum0 = v_add(v_sum0, v_expand_low(w1)); \</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">    v_sum1 = v_add(v_sum1, v_expand_high(w1))</span></div>
+</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">#undef UPDATE_SUM_U16</span></div>
+<div class="foldopen" id="foldopen00173" data-start="" data-end="">
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a511eb66118dea11b68abe23beda12259">  173</a></span><span class="preprocessor">#define UPDATE_SUM_U16(v_sum0, v_sum1, x0) \</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="preprocessor">    v_sum0 = v_add(v_sum0, v_expand_low(x0)); \</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="preprocessor">    v_sum1 = v_add(v_sum1, v_expand_high(x0))</span></div>
+</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#undef UPDATE_SUM_S32</span></div>
+<div class="foldopen" id="foldopen00178" data-start="" data-end="">
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#ac5fecadf963fc7a522f4bf557ca07374">  178</a></span><span class="preprocessor">#define UPDATE_SUM_S32(v_sum0, v_sum1, x0) \</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">    v_sum0 = v_add(v_sum0, x0)</span></div>
+</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">DEFINE_NONZERO_FUNC</a>(countNonZero8u, u8, u32, s8, <a class="code hl_typedef" href="group__core__hal__interface.html#ga27c902d5ca78afa82d5ed75554d5cedc">uchar</a>, v_uint8, v_uint32, v_eq, v_add_wrap, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#abce16f1855e436597c0090b9f9c713c5">UPDATE_SUM_U8</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a67b3b056fec15323c333afdb041e99dd">CHECK_NZ_INT</a>)</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">DEFINE_NONZERO_FUNC</a>(countNonZero16u, u16, u32, s16, <a class="code hl_typedef" href="group__core__hal__interface.html#ga9e58a7bf060b7a5fbf6a401d3020adca">ushort</a>, v_uint16, v_uint32, v_eq, v_add_wrap, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a511eb66118dea11b68abe23beda12259">UPDATE_SUM_U16</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a67b3b056fec15323c333afdb041e99dd">CHECK_NZ_INT</a>)</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">DEFINE_NONZERO_FUNC</a>(countNonZero32s, s32, s32, s32, <span class="keywordtype">int</span>, v_int32, v_int32, v_eq, <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#ac5fecadf963fc7a522f4bf557ca07374">UPDATE_SUM_S32</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a67b3b056fec15323c333afdb041e99dd">CHECK_NZ_INT</a>)</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">DEFINE_NONZERO_FUNC</a>(countNonZero32f, u32, u32, s32, <a class="code hl_typedef" href="group__core__hal__interface.html#ga4f5fce8c1ef282264f9214809524d836">uint</a>, v_uint32, v_uint32, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#acfa6adc56e50edc1c8d14e5e7afd5b44">VEC_CMP_EQ_Z_FP</a>, <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#ac5fecadf963fc7a522f4bf557ca07374">UPDATE_SUM_S32</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#ad15017f3cc6b6bca5ba76a24411bae15">CHECK_NZ_FP</a>)</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">DEFINE_NONZERO_FUNC</a>(countNonZero16f, u16, u32, s16, <a class="code hl_typedef" href="group__core__hal__interface.html#ga9e58a7bf060b7a5fbf6a401d3020adca">ushort</a>, v_uint16, v_uint32, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a6f8ab8659c39b7206d95a54ddba5fec6">VEC_CMP_EQ_Z_FP16</a>, v_add_wrap, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a511eb66118dea11b68abe23beda12259">UPDATE_SUM_U16</a>, <a class="code hl_define" href="count__non__zero_8simd_8hpp.html#acb5515a04a6a0b77f4485361d37889f1">CHECK_NZ_FP16</a>)</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#undef DEFINE_NONZERO_FUNC_NOSIMD</span></div>
+<div class="foldopen" id="foldopen00188" data-start="" data-end="">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="count__non__zero_8simd_8hpp.html#a0ae6e04bebb6ba913650dc1e24742e98">  188</a></span><span class="preprocessor">#define DEFINE_NONZERO_FUNC_NOSIMD(funcname, T) \</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">static int funcname(const void* src, int len) \</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="preprocessor">{ \</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="preprocessor">    return countNonZero_(static_cast&lt;const T*&gt;(src), len); \</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="preprocessor">}</span></div>
+</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a0ae6e04bebb6ba913650dc1e24742e98">DEFINE_NONZERO_FUNC_NOSIMD</a>(countNonZero64s, <a class="code hl_typedef" href="group__core__hal__interface.html#ga7cde0074dfd288f2d70c0e035dacb28a">int64</a>)</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="preprocessor">#if CV_COUNTNONZERO_AVX512 &amp;&amp; (CV_SIMD_64F || CV_SIMD_SCALABLE_64F)</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">// 64-bit floats: FP compare against zero treats -0.0 as zero, matching the</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">// scalar `src[i] != 0` path.</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keyword">static</span> <span class="keywordtype">int</span> countNonZero64f( <span class="keyword">const</span> <span class="keywordtype">void</span>* src_ptr, <span class="keywordtype">int</span> len )</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>{</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">const</span> <span class="keywordtype">double</span>* src = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">double</span>*<span class="keyword">&gt;</span>(src_ptr);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordtype">int</span> i = 0, nz = 0;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> vlanes = VTraits&lt;v_float64&gt;::vlanes();</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    v_float64 v_zero = vx_setzero_f64();</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordtype">int</span> nzeros = 0;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">for</span> (; i &lt;= len - vlanes*2; i += vlanes*2)</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        nzeros += cnz_lane_pop(<a class="code hl_function" href="group__core__hal__intrin.html#ga191a888185e95f221c8203884e8d66ec">v_signmask</a>(v_eq(vx_load(src + i), v_zero)));</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        nzeros += cnz_lane_pop(<a class="code hl_function" href="group__core__hal__intrin.html#ga191a888185e95f221c8203884e8d66ec">v_signmask</a>(v_eq(vx_load(src + i + vlanes), v_zero)));</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">for</span> (; i &lt;= len - vlanes; i += vlanes)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        nzeros += cnz_lane_pop(<a class="code hl_function" href="group__core__hal__intrin.html#ga191a888185e95f221c8203884e8d66ec">v_signmask</a>(v_eq(vx_load(src + i), v_zero)));</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    nz += i - nzeros;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <a class="code hl_function" href="group__core__hal__intrin.html#gaa24f949c3930df676514d3f06f114cb7">v_cleanup</a>();</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">for</span> (; i &lt; len; i++)</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        nz += src[i] != 0;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">return</span> nz;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>}</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><a class="code hl_define" href="count__non__zero_8simd_8hpp.html#a0ae6e04bebb6ba913650dc1e24742e98">DEFINE_NONZERO_FUNC_NOSIMD</a>(countNonZero64f, <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a> getCountNonZeroTab(<span class="keywordtype">int</span> depth)</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>{</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keyword">static</span> <a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a> countNonZeroTab[<a class="code hl_define" href="group__core__hal__interface.html#gacba5122a909469622bb5398aac729910">CV_DEPTH_MAX</a>] =</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero8u),</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero8u),</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero16u),</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero16u),</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero32s),</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero32f),</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero64f),</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero16f),</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero16f), <span class="comment">// for bf16 it&#39;s the same code as for f16</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero8u),</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero64s),</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero64s),</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        (<a class="code hl_typedef" href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">CountNonZeroFunc</a>)<a class="code hl_define" href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a>(countNonZero32s),</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        0</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    };</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordflow">return</span> countNonZeroTab[<a class="code hl_variable" href="namespacegl.html#a957806c1ecff586e5987e364d2381aa5">depth</a>];</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>} <span class="comment">// namespace</span></div>
+<div class="ttc" id="acalib_2src_2precomp_8hpp_html_afe35748ca9e8830cde75219fd43e5cd8"><div class="ttname"><a href="calib_2src_2precomp_8hpp.html#afe35748ca9e8830cde75219fd43e5cd8">GET_OPTIMIZED</a></div><div class="ttdeci">#define GET_OPTIMIZED(func)</div><div class="ttdef"><b>Definición</b> <a href="calib_2src_2precomp_8hpp_source.html#l00056">precomp.hpp:56</a></div></div>
+<div class="ttc" id="acore_2src_2precomp_8hpp_html"><div class="ttname"><a href="core_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_a0ae6e04bebb6ba913650dc1e24742e98"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#a0ae6e04bebb6ba913650dc1e24742e98">DEFINE_NONZERO_FUNC_NOSIMD</a></div><div class="ttdeci">#define DEFINE_NONZERO_FUNC_NOSIMD(funcname, T)</div><div class="ttdef"><b>Definición</b> <a href="#l00188">count_non_zero.simd.hpp:188</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_a46df0f4565451e9d7b4f78c557e66a2e"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#a46df0f4565451e9d7b4f78c557e66a2e">DEFINE_NONZERO_FUNC</a></div><div class="ttdeci">#define DEFINE_NONZERO_FUNC(funcname, suffix, ssuffix, rsuffix, T, VT, ST, cmp_op, add_op, update_sum, scalar_cmp_op)</div><div class="ttdef"><b>Definición</b> <a href="#l00138">count_non_zero.simd.hpp:138</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_a511eb66118dea11b68abe23beda12259"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#a511eb66118dea11b68abe23beda12259">UPDATE_SUM_U16</a></div><div class="ttdeci">#define UPDATE_SUM_U16(v_sum0, v_sum1, x0)</div><div class="ttdef"><b>Definición</b> <a href="#l00173">count_non_zero.simd.hpp:173</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_a67b3b056fec15323c333afdb041e99dd"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#a67b3b056fec15323c333afdb041e99dd">CHECK_NZ_INT</a></div><div class="ttdeci">#define CHECK_NZ_INT(x)</div><div class="ttdef"><b>Definición</b> <a href="#l00152">count_non_zero.simd.hpp:152</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_a6f8ab8659c39b7206d95a54ddba5fec6"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#a6f8ab8659c39b7206d95a54ddba5fec6">VEC_CMP_EQ_Z_FP16</a></div><div class="ttdeci">#define VEC_CMP_EQ_Z_FP16(x, z)</div><div class="ttdef"><b>Definición</b> <a href="#l00159">count_non_zero.simd.hpp:159</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_abce16f1855e436597c0090b9f9c713c5"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#abce16f1855e436597c0090b9f9c713c5">UPDATE_SUM_U8</a></div><div class="ttdeci">#define UPDATE_SUM_U8(v_sum0, v_sum1, x0)</div><div class="ttdef"><b>Definición</b> <a href="#l00164">count_non_zero.simd.hpp:164</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_ac5fecadf963fc7a522f4bf557ca07374"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#ac5fecadf963fc7a522f4bf557ca07374">UPDATE_SUM_S32</a></div><div class="ttdeci">#define UPDATE_SUM_S32(v_sum0, v_sum1, x0)</div><div class="ttdef"><b>Definición</b> <a href="#l00178">count_non_zero.simd.hpp:178</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_acb5515a04a6a0b77f4485361d37889f1"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#acb5515a04a6a0b77f4485361d37889f1">CHECK_NZ_FP16</a></div><div class="ttdeci">#define CHECK_NZ_FP16(x)</div><div class="ttdef"><b>Definición</b> <a href="#l00157">count_non_zero.simd.hpp:157</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_acfa6adc56e50edc1c8d14e5e7afd5b44"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#acfa6adc56e50edc1c8d14e5e7afd5b44">VEC_CMP_EQ_Z_FP</a></div><div class="ttdeci">#define VEC_CMP_EQ_Z_FP(x, z)</div><div class="ttdef"><b>Definición</b> <a href="#l00161">count_non_zero.simd.hpp:161</a></div></div>
+<div class="ttc" id="acount__non__zero_8simd_8hpp_html_ad15017f3cc6b6bca5ba76a24411bae15"><div class="ttname"><a href="count__non__zero_8simd_8hpp.html#ad15017f3cc6b6bca5ba76a24411bae15">CHECK_NZ_FP</a></div><div class="ttdeci">#define CHECK_NZ_FP(x)</div><div class="ttdef"><b>Definición</b> <a href="#l00154">count_non_zero.simd.hpp:154</a></div></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_a25097f49e52ccec77b2128b6ffadf135"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_END</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00024">cv_cpu_include_simd_declarations.hpp:24</a></div></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_aa4729b8f9a8694dc2e0953561fd6a6f2"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#aa4729b8f9a8694dc2e0953561fd6a6f2">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00023">cv_cpu_include_simd_declarations.hpp:23</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga02c1dbabceb00737ef16838630952adc"><div class="ttname"><a href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">cv::uint64</a></div><div class="ttdeci">uint64_t uint64</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00040">templmatch.cpp:40</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga27c902d5ca78afa82d5ed75554d5cedc"><div class="ttname"><a href="group__core__hal__interface.html#ga27c902d5ca78afa82d5ed75554d5cedc">uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00035">interface.h:35</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4f5fce8c1ef282264f9214809524d836"><div class="ttname"><a href="group__core__hal__interface.html#ga4f5fce8c1ef282264f9214809524d836">uint</a></div><div class="ttdeci">uint32_t uint</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00037">interface.h:37</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga7cde0074dfd288f2d70c0e035dacb28a"><div class="ttname"><a href="group__core__hal__interface.html#ga7cde0074dfd288f2d70c0e035dacb28a">int64</a></div><div class="ttdeci">int64_t int64</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00038">interface.h:38</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga9e58a7bf060b7a5fbf6a401d3020adca"><div class="ttname"><a href="group__core__hal__interface.html#ga9e58a7bf060b7a5fbf6a401d3020adca">ushort</a></div><div class="ttdeci">uint16_t ushort</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00036">interface.h:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gacba5122a909469622bb5398aac729910"><div class="ttname"><a href="group__core__hal__interface.html#gacba5122a909469622bb5398aac729910">CV_DEPTH_MAX</a></div><div class="ttdeci">#define CV_DEPTH_MAX</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00052">interface.h:52</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gae51bd9c910ffb039b899cb8279d6900c"><div class="ttname"><a href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">cv::int64</a></div><div class="ttdeci">int64_t int64</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00039">templmatch.cpp:39</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga191a888185e95f221c8203884e8d66ec"><div class="ttname"><a href="group__core__hal__intrin.html#ga191a888185e95f221c8203884e8d66ec">cv::v_signmask</a></div><div class="ttdeci">int v_signmask(const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Get negative values mask.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01462">intrin_cpp.hpp:1462</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gaa24f949c3930df676514d3f06f114cb7"><div class="ttname"><a href="group__core__hal__intrin.html#gaa24f949c3930df676514d3f06f114cb7">cv::v_cleanup</a></div><div class="ttdeci">void v_cleanup()</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l03381">intrin_cpp.hpp:3381</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gadcf8617ab63379c5cbb04ea5f819ff20"><div class="ttname"><a href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">cv::v_add</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_add(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Add values.</div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a3d02dc3ba0d5e01af205bf90fc3e2997"><div class="ttname"><a href="namespacecv.html#a3d02dc3ba0d5e01af205bf90fc3e2997">cv::countNonZero_</a></div><div class="ttdeci">static int countNonZero_(const T *src, int len)</div><div class="ttdef"><b>Definición</b> <a href="#l00018">count_non_zero.simd.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_html_ab17b7bde890b99242e587d251b0205f2"><div class="ttname"><a href="namespacecv.html#ab17b7bde890b99242e587d251b0205f2">cv::CountNonZeroFunc</a></div><div class="ttdeci">int(*) CountNonZeroFunc(const void *, int)</div><div class="ttdef"><b>Definición</b> <a href="#l00009">count_non_zero.simd.hpp:9</a></div></div>
+<div class="ttc" id="anamespacegl_html_a957806c1ecff586e5987e364d2381aa5"><div class="ttname"><a href="namespacegl.html#a957806c1ecff586e5987e364d2381aa5">gl::depth</a></div><div class="ttdeci">GLint GLint GLint GLint GLsizei GLsizei GLsizei depth</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01138">gl_core_3_1.hpp:1138</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="count__non__zero_8simd_8hpp.html">count_non_zero.simd.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

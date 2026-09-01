@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/cuda_host_mem.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cuda__host__mem_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">cuda_host_mem.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="cuda__host__mem_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                          License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Copyright (C) 2013, OpenCV Foundation, all rights reserved.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">//</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv_1_1cuda.html">cv::cuda</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#ifdef HAVE_CUDA</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">namespace </span>{</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">class </span>HostMemAllocator : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_mat_allocator.html">MatAllocator</a></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">explicit</span> HostMemAllocator(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>) : flags_(<a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_variable" href="group__core__basic.html#gaefafc9f27fc6af8375fbf13e72878990">UMatData</a>* allocate(<span class="keywordtype">int</span> dims, <span class="keyword">const</span> <span class="keywordtype">int</span>* sizes, <span class="keywordtype">int</span> type,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                       <span class="keywordtype">void</span>* data0, <span class="keywordtype">size_t</span>* step,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                       <a class="code hl_enumeration" href="group__core__basic.html#ga6226c29c7b0e7bda7aff72e96ba8e1df">AccessFlag</a> <span class="comment">/*flags*/</span>, <a class="code hl_enumeration" href="group__core__basic.html#ga5681439dda418431eb0a672697135ed2">UMatUsageFlags</a> <span class="comment">/*usageFlags*/</span>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = <a class="code hl_define" href="group__core__utils.html#gafede26477297ba5774c779f6b74f451b">CV_ELEM_SIZE</a>(type);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = dims-1; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &gt;= 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>--)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordflow">if</span> (step)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="keywordflow">if</span> (data0 &amp;&amp; step[i] != <a class="code hl_define" href="group__core__utils.html#ga2037b9e258f1d2091a58003922968a85">CV_AUTOSTEP</a>)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> &lt;= step[i]);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                    <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = step[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                    step[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>] = <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> *= sizes[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_variable" href="group__core__basic.html#gaefafc9f27fc6af8375fbf13e72878990">UMatData</a>* u = <span class="keyword">new</span> <a class="code hl_function" href="structcv_1_1_u_mat_data.html#acf6afbd0fafee36cafe5c10ff82cc45d">UMatData</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#ab3bf7b4c0a3f1206def1008d9f9150ba">size</a> = <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">if</span> (data0)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#a20e87bb7088a637bdd9e1bc6ed649419">data</a> = u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#aee30a2d2615e8e4d7fcfb2c893ac9839">origdata</a> = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group__core__hal__interface.html#ga27c902d5ca78afa82d5ed75554d5cedc">uchar</a>*<span class="keyword">&gt;</span>(data0);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#abd20502f4de49d5bf2fe2147d3f49d83">flags</a> |= <a class="code hl_enumvalue" href="structcv_1_1_u_mat_data.html#a4aaeab7d089a219c65db6b6b62bd4d12a418bf779152a73ed41c8657baf911d82">UMatData::USER_ALLOCATED</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordtype">void</span>* <a class="code hl_variable" href="namespacegl.html#a7c271ffcf103e05d3fed5cfcefcdda9a">ptr</a> = 0;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            cudaSafeCall( cudaHostAlloc(&amp;ptr, <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>, flags_) );</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#a20e87bb7088a637bdd9e1bc6ed649419">data</a> = u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#aee30a2d2615e8e4d7fcfb2c893ac9839">origdata</a> = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group__core__hal__interface.html#ga27c902d5ca78afa82d5ed75554d5cedc">uchar</a>*<span class="keyword">&gt;</span>(<a class="code hl_variable" href="namespacegl.html#a7c271ffcf103e05d3fed5cfcefcdda9a">ptr</a>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">return</span> u;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">bool</span> allocate(<a class="code hl_variable" href="group__core__basic.html#gaefafc9f27fc6af8375fbf13e72878990">UMatData</a>* u, <a class="code hl_enumeration" href="group__core__basic.html#ga6226c29c7b0e7bda7aff72e96ba8e1df">AccessFlag</a> <span class="comment">/*accessFlags*/</span>, <a class="code hl_enumeration" href="group__core__basic.html#ga5681439dda418431eb0a672697135ed2">UMatUsageFlags</a> <span class="comment">/*usageFlags*/</span>) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> (u != NULL);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span> deallocate(<a class="code hl_variable" href="group__core__basic.html#gaefafc9f27fc6af8375fbf13e72878990">UMatData</a>* u) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">if</span> (!u)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#afb9eb71d0e7cb31fa6b636bb2e62e5dc">urefcount</a> &gt;= 0);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#a21d534e3d518241614744ecf92119a84">refcount</a> &gt;= 0);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">if</span> (u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#a21d534e3d518241614744ecf92119a84">refcount</a> == 0)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> ( !(u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#abd20502f4de49d5bf2fe2147d3f49d83">flags</a> &amp; <a class="code hl_enumvalue" href="structcv_1_1_u_mat_data.html#a4aaeab7d089a219c65db6b6b62bd4d12a418bf779152a73ed41c8657baf911d82">UMatData::USER_ALLOCATED</a>) )</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                cudaFreeHost(u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#aee30a2d2615e8e4d7fcfb2c893ac9839">origdata</a>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                u-&gt;<a class="code hl_variable" href="structcv_1_1_u_mat_data.html#aee30a2d2615e8e4d7fcfb2c893ac9839">origdata</a> = 0;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keyword">delete</span> u;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags_;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>};</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>} <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classcv_1_1cuda_1_1_host_mem.html#a9a9d828fba170bf3cd0eb3aea955a55f">  136</a></span><a class="code hl_class" href="classcv_1_1_mat_allocator.html">MatAllocator</a>* <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a9a9d828fba170bf3cd0eb3aea955a55f">cv::cuda::HostMem::getAllocator</a>(<a class="code hl_enumeration" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16">AllocType</a> <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a>)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>{</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="preprocessor">#ifndef HAVE_CUDA</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a>);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">static</span> std::map&lt;unsigned int, Ptr&lt;MatAllocator&gt; &gt; allocators;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flag = cudaHostAllocDefault;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">switch</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a>)</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16a968d788513648797c888aa13e056d6a4">PAGE_LOCKED</a>:    flag = cudaHostAllocDefault; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6">SHARED</a>:         flag = cudaHostAllocMapped;  <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16aef6b60397f05650d972d2cf55e3523eb">WRITE_COMBINED</a>: flag = cudaHostAllocWriteCombined; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">default</span>:             <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaabaf8225a48e1263fa91ff31ae38742e1">cv::Error::StsBadFlag</a>, <span class="stringliteral">&quot;Invalid alloc type&quot;</span>);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;MatAllocator&gt;</a>&amp; a = allocators[flag];</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordflow">if</span> (a.empty())</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        a = <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;HostMemAllocator&gt;</a>(flag);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">return</span> a.get();</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">#ifdef HAVE_CUDA</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keyword">namespace</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>{</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordtype">size_t</span> alignUpStep(<span class="keywordtype">size_t</span> what, <span class="keywordtype">size_t</span> alignment)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordtype">size_t</span> alignMask = alignment - 1;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordtype">size_t</span> inverseAlignMask = ~alignMask;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">size_t</span> res = (what + alignMask) &amp; inverseAlignMask;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="foldopen" id="foldopen00178" data-start="{" data-end="}">
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classcv_1_1cuda_1_1_host_mem.html#a62eea66ac1a181eeeb10a2335f3bd4bd">  178</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a62eea66ac1a181eeeb10a2335f3bd4bd">cv::cuda::HostMem::create</a>(<span class="keywordtype">int</span> rows_, <span class="keywordtype">int</span> cols_, <span class="keywordtype">int</span> type_)</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>{</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#ifndef HAVE_CUDA</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(rows_);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(cols_);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(type_);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>();</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a> == <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6">SHARED</a>)</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <a class="code hl_class" href="classcv_1_1cuda_1_1_device_info.html">DeviceInfo</a> devInfo;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( devInfo.<a class="code hl_function" href="classcv_1_1cuda_1_1_device_info.html#a8345db2ebf373ccdd0704ec9554a5ce5">canMapHostMemory</a>() );</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    type_ &amp;= <a class="code hl_enumvalue" href="classcv_1_1_mat.html#ad1e296013f13a504380aba2860df61f6a03b3e6a1defa1189b67c9f3d70b7c448">Mat::TYPE_MASK</a>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a> == rows_ &amp;&amp; <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a> == cols_ &amp;&amp; <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#ae0763e338696b9d6e6ae9a0c4a2f567a">type</a>() == type_ &amp;&amp; <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">data</a>)</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">data</a>)</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a924b94dc7a70dd17d8c38e0de48ab827">release</a>();</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_define" href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a>( rows_ &gt;= 0 &amp;&amp; cols_ &gt;= 0 );</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">if</span> (rows_ &gt; 0 &amp;&amp; cols_ &gt; 0)</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#af81a4ce11a420f2905f7666d5545c674">flags</a> = <a class="code hl_enumvalue" href="classcv_1_1_mat.html#af5176b37a1e8a94a47de3de8147d3fa3a2082a2faa4b65dedcc5b84433c97f817">Mat::MAGIC_VAL</a> + type_;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a> = rows_;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a> = cols_;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a> = <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a3df7c8b1dee62597a7b3041090fecb3b">elemSize</a>() * <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordtype">int</span> sz[] = { <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a>, <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a> };</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordtype">size_t</span> steps[] = { <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a>, (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)<a class="code hl_define" href="group__core__utils.html#gafede26477297ba5774c779f6b74f451b">CV_ELEM_SIZE</a>(type_) };</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#af81a4ce11a420f2905f7666d5545c674">flags</a> = <a class="code hl_function" href="namespacecv.html#a3b620a6fc0109bdb18c36bdba0e2073c">updateContinuityFlag</a>(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#af81a4ce11a420f2905f7666d5545c674">flags</a>, 2, sz, steps);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a> == <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6">SHARED</a>)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <a class="code hl_class" href="classcv_1_1cuda_1_1_device_info.html">DeviceInfo</a> devInfo;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a> = alignUpStep(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a>, devInfo.<a class="code hl_function" href="classcv_1_1cuda_1_1_device_info.html#ac173dbbddf57044299d14fb2db2738a3">textureAlignment</a>());</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a> _nettosize = (<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a>)<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a>*<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordtype">size_t</span> nettosize = (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)_nettosize;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        <span class="keywordflow">if</span> (_nettosize != (<a class="code hl_typedef" href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">int64</a>)nettosize)</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa27734f018d2dd51cbaa7e3723cfbf43b">cv::Error::StsNoMem</a>, <span class="stringliteral">&quot;Too big buffer is allocated&quot;</span>);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordtype">size_t</span> datasize = <a class="code hl_function" href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">alignSize</a>(nettosize, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(*<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a>));</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordtype">void</span>* ptr = 0;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordflow">switch</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a>)</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16a968d788513648797c888aa13e056d6a4">PAGE_LOCKED</a>:    cudaSafeCall( cudaHostAlloc(&amp;ptr, datasize, cudaHostAllocDefault) ); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6">SHARED</a>:         cudaSafeCall( cudaHostAlloc(&amp;ptr, datasize, cudaHostAllocMapped) );  <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16aef6b60397f05650d972d2cf55e3523eb">WRITE_COMBINED</a>: cudaSafeCall( cudaHostAlloc(&amp;ptr, datasize, cudaHostAllocWriteCombined) ); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">default</span>:             <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaabaf8225a48e1263fa91ff31ae38742e1">cv::Error::StsBadFlag</a>, <span class="stringliteral">&quot;Invalid alloc type&quot;</span>);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a5e62aeda0a11c82ed104ad2c0475e1fb">datastart</a> = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">data</a> =  (<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>*)ptr;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a895b08a1958e4d6a73bd5410a7b86c3b">dataend</a> = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">data</a> + nettosize;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a> = (<span class="keywordtype">int</span>*)<a class="code hl_function" href="group__core__utils.html#gaae3167219cad54c1d14cbcaba2509166">cv::fastMalloc</a>(<span class="keyword">sizeof</span>(*<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a>));</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        *<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a> = 1;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>}</div>
+</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="foldopen" id="foldopen00245" data-start="{" data-end="}">
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classcv_1_1cuda_1_1_host_mem.html#a31e3165f8fc1a4863d7a67a973f5bd68">  245</a></span><a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a031e4973be1d4875e65797632022368b">HostMem</a> <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a31e3165f8fc1a4863d7a67a973f5bd68">cv::cuda::HostMem::reshape</a>(<span class="keywordtype">int</span> new_cn, <span class="keywordtype">int</span> new_rows)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a031e4973be1d4875e65797632022368b">HostMem</a> hdr = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordtype">int</span> cn = <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a6043b838aef3c658441f60a6ccf6f1f9">channels</a>();</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">if</span> (new_cn == 0)</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        new_cn = cn;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordtype">int</span> total_width = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a> * cn;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordflow">if</span> ((new_cn &gt; total_width || total_width % new_cn != 0) &amp;&amp; new_rows == 0)</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        new_rows = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a> * total_width / new_cn;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">if</span> (new_rows != 0 &amp;&amp; new_rows != <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a>)</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordtype">int</span> total_size = total_width * <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#aa5a1df3c92af0f6196154d31a6e25bd7">isContinuous</a>())</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa1670338df3460d0f954d03d0b4fa086c">cv::Error::BadStep</a>, <span class="stringliteral">&quot;The matrix is not continuous, thus its number of rows can not be changed&quot;</span>);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keywordflow">if</span> ((<span class="keywordtype">unsigned</span>)new_rows &gt; (<span class="keywordtype">unsigned</span>)total_size)</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaae81e61d2aacc2b4355293af68aededd0">cv::Error::StsOutOfRange</a>, <span class="stringliteral">&quot;Bad new number of rows&quot;</span>);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        total_width = total_size / new_rows;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">if</span> (total_width * new_rows != total_size)</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">cv::Error::StsBadArg</a>, <span class="stringliteral">&quot;The total number of matrix elements is not divisible by the new number of rows&quot;</span>);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        hdr.<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a> = new_rows;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        hdr.<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a> = total_width * <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a8627eb140e3df3eff6ae1afb09502a50">elemSize1</a>();</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordtype">int</span> new_width = total_width / new_cn;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keywordflow">if</span> (new_width * new_cn != total_width)</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa4f9030381646764be3834aae87e35c96">cv::Error::BadNumChannels</a>, <span class="stringliteral">&quot;The total width is not divisible by the new number of channels&quot;</span>);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    hdr.<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a> = new_width;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    hdr.<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#af81a4ce11a420f2905f7666d5545c674">flags</a> = (hdr.<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#af81a4ce11a420f2905f7666d5545c674">flags</a> &amp; <a class="code hl_define" href="group__core__utils.html#ga9674cdb1652c965abdd63f4a8b35cd29">~CV_MAT_CN_MASK</a>) | ((new_cn - 1) &lt;&lt; <a class="code hl_define" href="group__core__hal__interface.html#gab20a4b46fe25d403e4f1dd67a5168d82">CV_CN_SHIFT</a>);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">return</span> hdr;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>}</div>
+</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="foldopen" id="foldopen00288" data-start="{" data-end="}">
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classcv_1_1cuda_1_1_host_mem.html#a924b94dc7a70dd17d8c38e0de48ab827">  288</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a924b94dc7a70dd17d8c38e0de48ab827">cv::cuda::HostMem::release</a>()</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>{</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="preprocessor">#ifdef HAVE_CUDA</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a> &amp;&amp; CV_XADD(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a>, -1) == 1)</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        cudaFreeHost(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a5e62aeda0a11c82ed104ad2c0475e1fb">datastart</a>);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <a class="code hl_function" href="group__core__utils.html#ga4b0d54a6957761ba64880fa51c4b8a6b">fastFree</a>(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a>);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    }</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a895b08a1958e4d6a73bd5410a7b86c3b">dataend</a> = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">data</a> = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a5e62aeda0a11c82ed104ad2c0475e1fb">datastart</a> = 0;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a> = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a> = <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a> = 0;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">refcount</a> = 0;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>}</div>
+</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="foldopen" id="foldopen00303" data-start="{" data-end="}">
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno"><a class="line" href="classcv_1_1cuda_1_1_host_mem.html#a6444e4aa55f0c4cd6fcba072763106ff">  303</a></span><a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#a6444e4aa55f0c4cd6fcba072763106ff">cv::cuda::HostMem::createGpuMatHeader</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="preprocessor">#ifndef HAVE_CUDA</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>();</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">alloc_type</a> == <a class="code hl_enumvalue" href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6">SHARED</a> );</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="keywordtype">void</span> *pdev;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    cudaSafeCall( cudaHostGetDevicePointer(&amp;pdev, <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">data</a>, 0) );</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a69c5e2fd756efdd43ece785f221851db">GpuMat</a>(<a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">rows</a>, <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cols</a>, <a class="code hl_function" href="classcv_1_1cuda_1_1_host_mem.html#ae0763e338696b9d6e6ae9a0c4a2f567a">type</a>(), pdev, <a class="code hl_variable" href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">step</a>);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
+</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="group__cudacore__struct.html#ga6d25da8194cc95035994ae98e9eebc02">  317</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__cudacore__struct.html#ga6d25da8194cc95035994ae98e9eebc02">cv::cuda::registerPageLocked</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; m)</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>{</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="preprocessor">#ifndef HAVE_CUDA</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(m);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>();</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( m.isContinuous() );</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    cudaSafeCall( cudaHostRegister(m.data, m.step * m.rows, cudaHostRegisterPortable) );</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}</div>
+</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="group__cudacore__struct.html#ga68dd974fb5e19f6306122a4b49c6a428">  328</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__cudacore__struct.html#ga68dd974fb5e19f6306122a4b49c6a428">cv::cuda::unregisterPageLocked</a>(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; m)</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>{</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="preprocessor">#ifndef HAVE_CUDA</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <a class="code hl_define" href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(m);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    cudaSafeCall( cudaHostUnregister(m.data) );</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}</div>
+</div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a8d1a237453cad869d11df90f8279651a"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void void *CL_RUNTIME_EXPORT const cl_device_id const char const cl_program const char void void *CL_RUNTIME_EXPORT size_t</div><div class="ttdef"><b>Definición</b> <a href="autogenerated_2opencl__core_8hpp_source.html#l00286">opencl_core.hpp:286</a></div></div>
+<div class="ttc" id="acap__ffmpeg__impl_8hpp_html_adea6825c69624f832940469560fee2d6"><div class="ttname"><a href="cap__ffmpeg__impl_8hpp.html#adea6825c69624f832940469560fee2d6">CV_UNUSED</a></div><div class="ttdeci">#define CV_UNUSED(name)</div><div class="ttdef"><b>Definición</b> <a href="cap__ffmpeg__impl_8hpp_source.html#l00075">cap_ffmpeg_impl.hpp:75</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_allocator_html"><div class="ttname"><a href="classcv_1_1_mat_allocator.html">cv::MatAllocator</a></div><div class="ttdoc">Custom array allocator.</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00640">mat.hpp:641</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ad1e296013f13a504380aba2860df61f6a03b3e6a1defa1189b67c9f3d70b7c448"><div class="ttname"><a href="classcv_1_1_mat.html#ad1e296013f13a504380aba2860df61f6a03b3e6a1defa1189b67c9f3d70b7c448">cv::Mat::TYPE_MASK</a></div><div class="ttdeci">@ TYPE_MASK</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02478">mat.hpp:2478</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af5176b37a1e8a94a47de3de8147d3fa3a2082a2faa4b65dedcc5b84433c97f817"><div class="ttname"><a href="classcv_1_1_mat.html#af5176b37a1e8a94a47de3de8147d3fa3a2082a2faa4b65dedcc5b84433c97f817">cv::Mat::MAGIC_VAL</a></div><div class="ttdeci">@ MAGIC_VAL</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02477">mat.hpp:2477</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_device_info_html"><div class="ttname"><a href="classcv_1_1cuda_1_1_device_info.html">cv::cuda::DeviceInfo</a></div><div class="ttdoc">Class providing functionality for querying the specified GPU properties.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l01128">cuda.hpp:1129</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_device_info_html_a8345db2ebf373ccdd0704ec9554a5ce5"><div class="ttname"><a href="classcv_1_1cuda_1_1_device_info.html#a8345db2ebf373ccdd0704ec9554a5ce5">cv::cuda::DeviceInfo::canMapHostMemory</a></div><div class="ttdeci">CV_WRAP bool canMapHostMemory() const</div><div class="ttdoc">device can map host memory with cudaHostAlloc/cudaHostGetDevicePointer</div><div class="ttdef"><b>Definición</b> <a href="cuda__info_8cpp_source.html#l00507">cuda_info.cpp:507</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_device_info_html_ac173dbbddf57044299d14fb2db2738a3"><div class="ttname"><a href="classcv_1_1cuda_1_1_device_info.html#ac173dbbddf57044299d14fb2db2738a3">cv::cuda::DeviceInfo::textureAlignment</a></div><div class="ttdeci">CV_WRAP size_t textureAlignment() const</div><div class="ttdoc">alignment requirement for textures</div><div class="ttdef"><b>Definición</b> <a href="cuda__info_8cpp_source.html#l00460">cuda_info.cpp:460</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html">cv::cuda::GpuMat</a></div><div class="ttdoc">Base storage class for GPU memory with reference counting.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00105">cuda.hpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html_a69c5e2fd756efdd43ece785f221851db"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html#a69c5e2fd756efdd43ece785f221851db">cv::cuda::GpuMat::GpuMat</a></div><div class="ttdeci">CV_WRAP GpuMat(GpuMat::Allocator *allocator=GpuMat::defaultAllocator())</div><div class="ttdoc">default constructor</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a031e4973be1d4875e65797632022368b"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a031e4973be1d4875e65797632022368b">cv::cuda::HostMem::HostMem</a></div><div class="ttdeci">CV_WRAP HostMem(HostMem::AllocType alloc_type=HostMem::AllocType::PAGE_LOCKED)</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a22e267551b43057c9371aa927cc34ee9"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a22e267551b43057c9371aa927cc34ee9">cv::cuda::HostMem::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00872">cuda.hpp:872</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a31e3165f8fc1a4863d7a67a973f5bd68"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a31e3165f8fc1a4863d7a67a973f5bd68">cv::cuda::HostMem::reshape</a></div><div class="ttdeci">CV_WRAP HostMem reshape(int cn, int rows=0) const</div><div class="ttdef"><b>Definición</b> <a href="#l00245">cuda_host_mem.cpp:245</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a3df7c8b1dee62597a7b3041090fecb3b"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a3df7c8b1dee62597a7b3041090fecb3b">cv::cuda::HostMem::elemSize</a></div><div class="ttdeci">CV_WRAP size_t elemSize() const</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a454a7773e1423302f35819ea7720303f"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a454a7773e1423302f35819ea7720303f">cv::cuda::HostMem::rows</a></div><div class="ttdeci">int rows</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00869">cuda.hpp:869</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a5e62aeda0a11c82ed104ad2c0475e1fb"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a5e62aeda0a11c82ed104ad2c0475e1fb">cv::cuda::HostMem::datastart</a></div><div class="ttdeci">uchar * datastart</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00875">cuda.hpp:875</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a6043b838aef3c658441f60a6ccf6f1f9"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a6043b838aef3c658441f60a6ccf6f1f9">cv::cuda::HostMem::channels</a></div><div class="ttdeci">CV_WRAP int channels() const</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a62eea66ac1a181eeeb10a2335f3bd4bd"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a62eea66ac1a181eeeb10a2335f3bd4bd">cv::cuda::HostMem::create</a></div><div class="ttdeci">CV_WRAP void create(int rows, int cols, int type)</div><div class="ttdoc">allocates new matrix data unless the matrix already has specified size and type.</div><div class="ttdef"><b>Definición</b> <a href="#l00178">cuda_host_mem.cpp:178</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a637b04a3a6e107d9bdb16eba7ca238eb"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a637b04a3a6e107d9bdb16eba7ca238eb">cv::cuda::HostMem::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00869">cuda.hpp:869</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a6444e4aa55f0c4cd6fcba072763106ff"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a6444e4aa55f0c4cd6fcba072763106ff">cv::cuda::HostMem::createGpuMatHeader</a></div><div class="ttdeci">GpuMat createGpuMatHeader() const</div><div class="ttdoc">Maps CPU memory to GPU address space and creates the cuda::GpuMat header without reference counting f...</div><div class="ttdef"><b>Definición</b> <a href="#l00303">cuda_host_mem.cpp:303</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a7aa81f7274591f2daff52157343e9834"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a7aa81f7274591f2daff52157343e9834">cv::cuda::HostMem::step</a></div><div class="ttdeci">CV_PROP size_t step</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00870">cuda.hpp:870</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a8627eb140e3df3eff6ae1afb09502a50"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a8627eb140e3df3eff6ae1afb09502a50">cv::cuda::HostMem::elemSize1</a></div><div class="ttdeci">CV_WRAP size_t elemSize1() const</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a895b08a1958e4d6a73bd5410a7b86c3b"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a895b08a1958e4d6a73bd5410a7b86c3b">cv::cuda::HostMem::dataend</a></div><div class="ttdeci">const uchar * dataend</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00876">cuda.hpp:876</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a924b94dc7a70dd17d8c38e0de48ab827"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a924b94dc7a70dd17d8c38e0de48ab827">cv::cuda::HostMem::release</a></div><div class="ttdeci">void release()</div><div class="ttdoc">decrements reference counter and released memory if needed.</div><div class="ttdef"><b>Definición</b> <a href="#l00288">cuda_host_mem.cpp:288</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_a9a9d828fba170bf3cd0eb3aea955a55f"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#a9a9d828fba170bf3cd0eb3aea955a55f">cv::cuda::HostMem::getAllocator</a></div><div class="ttdeci">static MatAllocator * getAllocator(HostMem::AllocType alloc_type=HostMem::AllocType::PAGE_LOCKED)</div><div class="ttdef"><b>Definición</b> <a href="#l00136">cuda_host_mem.cpp:136</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_aa0d69b2aa95680a6b2af6dc4dda44e16"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16">cv::cuda::HostMem::AllocType</a></div><div class="ttdeci">AllocType</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00809">cuda.hpp:809</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_aa0d69b2aa95680a6b2af6dc4dda44e16a968d788513648797c888aa13e056d6a4"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16a968d788513648797c888aa13e056d6a4">cv::cuda::HostMem::PAGE_LOCKED</a></div><div class="ttdeci">@ PAGE_LOCKED</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00809">cuda.hpp:809</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16ac5eb57263e17573194ea66ab06b1bdb6">cv::cuda::HostMem::SHARED</a></div><div class="ttdeci">@ SHARED</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00809">cuda.hpp:809</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_aa0d69b2aa95680a6b2af6dc4dda44e16aef6b60397f05650d972d2cf55e3523eb"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#aa0d69b2aa95680a6b2af6dc4dda44e16aef6b60397f05650d972d2cf55e3523eb">cv::cuda::HostMem::WRITE_COMBINED</a></div><div class="ttdeci">@ WRITE_COMBINED</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00809">cuda.hpp:809</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_aa5a1df3c92af0f6196154d31a6e25bd7"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#aa5a1df3c92af0f6196154d31a6e25bd7">cv::cuda::HostMem::isContinuous</a></div><div class="ttdeci">CV_WRAP bool isContinuous() const</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_adafb6e996e9e7a0d6c4696b6a186600e"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#adafb6e996e9e7a0d6c4696b6a186600e">cv::cuda::HostMem::alloc_type</a></div><div class="ttdeci">AllocType alloc_type</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00878">cuda.hpp:878</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_ae0763e338696b9d6e6ae9a0c4a2f567a"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#ae0763e338696b9d6e6ae9a0c4a2f567a">cv::cuda::HostMem::type</a></div><div class="ttdeci">CV_WRAP int type() const</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_ae3e7ec959e9a6a3142d55f1896be1b6e"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#ae3e7ec959e9a6a3142d55f1896be1b6e">cv::cuda::HostMem::refcount</a></div><div class="ttdeci">int * refcount</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00873">cuda.hpp:873</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_host_mem_html_af81a4ce11a420f2905f7666d5545c674"><div class="ttname"><a href="classcv_1_1cuda_1_1_host_mem.html#af81a4ce11a420f2905f7666d5545c674">cv::cuda::HostMem::flags</a></div><div class="ttdeci">int flags</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00868">cuda.hpp:868</a></div></div>
+<div class="ttc" id="acore_2src_2precomp_8hpp_html"><div class="ttname"><a href="core_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="acuda__stubs_8hpp_html_a5321f59f42253d937a925ec3a61bc2c8"><div class="ttname"><a href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a></div><div class="ttdeci">CV_NORETURN void throw_no_cuda()</div><div class="ttdef"><b>Definición</b> <a href="cuda__stubs_8hpp_source.html#l00016">cuda_stubs.hpp:16</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga5681439dda418431eb0a672697135ed2"><div class="ttname"><a href="group__core__basic.html#ga5681439dda418431eb0a672697135ed2">cv::UMatUsageFlags</a></div><div class="ttdeci">UMatUsageFlags</div><div class="ttdoc">Usage flags for allocator.</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00624">mat.hpp:625</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga6226c29c7b0e7bda7aff72e96ba8e1df"><div class="ttname"><a href="group__core__basic.html#ga6226c29c7b0e7bda7aff72e96ba8e1df">cv::AccessFlag</a></div><div class="ttdeci">AccessFlag</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00066">mat.hpp:66</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaefafc9f27fc6af8375fbf13e72878990"><div class="ttname"><a href="group__core__basic.html#gaefafc9f27fc6af8375fbf13e72878990">cv::UMatData</a></div><div class="ttdeci">struct CV_EXPORTS UMatData</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00636">mat.hpp:636</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga27c902d5ca78afa82d5ed75554d5cedc"><div class="ttname"><a href="group__core__hal__interface.html#ga27c902d5ca78afa82d5ed75554d5cedc">uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00035">interface.h:35</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gab20a4b46fe25d403e4f1dd67a5168d82"><div class="ttname"><a href="group__core__hal__interface.html#gab20a4b46fe25d403e4f1dd67a5168d82">CV_CN_SHIFT</a></div><div class="ttdeci">#define CV_CN_SHIFT</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00051">interface.h:51</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gae51bd9c910ffb039b899cb8279d6900c"><div class="ttname"><a href="group__core__hal__interface.html#gae51bd9c910ffb039b899cb8279d6900c">cv::int64</a></div><div class="ttdeci">int64_t int64</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00039">templmatch.cpp:39</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga2037b9e258f1d2091a58003922968a85"><div class="ttname"><a href="group__core__utils.html#ga2037b9e258f1d2091a58003922968a85">CV_AUTOSTEP</a></div><div class="ttdeci">#define CV_AUTOSTEP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00532">cvdef.h:532</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4b0d54a6957761ba64880fa51c4b8a6b"><div class="ttname"><a href="group__core__utils.html#ga4b0d54a6957761ba64880fa51c4b8a6b">cv::fastFree</a></div><div class="ttdeci">CV_EXPORTS void fastFree(void *ptr)</div><div class="ttdoc">Deallocates a memory buffer.</div><div class="ttdef"><b>Definición</b> <a href="alloc_8cpp_source.html#l00172">alloc.cpp:172</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga6e547d8c01fd21783950d7db2fd6108f"><div class="ttname"><a href="group__core__utils.html#ga6e547d8c01fd21783950d7db2fd6108f">cv::alignSize</a></div><div class="ttdeci">size_t alignSize(size_t sz, int n)</div><div class="ttdoc">Aligns a buffer size to the specified number of bytes.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00565">utility.hpp:565</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga9674cdb1652c965abdd63f4a8b35cd29"><div class="ttname"><a href="group__core__utils.html#ga9674cdb1652c965abdd63f4a8b35cd29">CV_MAT_CN_MASK</a></div><div class="ttdeci">#define CV_MAT_CN_MASK</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00506">cvdef.h:506</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaae3167219cad54c1d14cbcaba2509166"><div class="ttname"><a href="group__core__utils.html#gaae3167219cad54c1d14cbcaba2509166">cv::cv::fastMalloc</a></div><div class="ttdeci">CV_EXPORTS void * fastMalloc(size_t bufSize)</div><div class="ttdoc">Allocates an aligned memory buffer.</div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafbcb487cba05bd288dbe18c433de4f6f"><div class="ttname"><a href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a></div><div class="ttdeci">#define CV_DbgAssert(expr)</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00232">exception.hpp:232</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafede26477297ba5774c779f6b74f451b"><div class="ttname"><a href="group__core__utils.html#gafede26477297ba5774c779f6b74f451b">CV_ELEM_SIZE</a></div><div class="ttdeci">#define CV_ELEM_SIZE(type)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00530">cvdef.h:530</a></div></div>
+<div class="ttc" id="agroup__cudacore__struct_html_ga68dd974fb5e19f6306122a4b49c6a428"><div class="ttname"><a href="group__cudacore__struct.html#ga68dd974fb5e19f6306122a4b49c6a428">cv::cuda::unregisterPageLocked</a></div><div class="ttdeci">CV_EXPORTS_W void unregisterPageLocked(Mat &amp;m)</div><div class="ttdoc">Unmaps the memory of matrix and makes it pageable again.</div><div class="ttdef"><b>Definición</b> <a href="#l00328">cuda_host_mem.cpp:328</a></div></div>
+<div class="ttc" id="agroup__cudacore__struct_html_ga6d25da8194cc95035994ae98e9eebc02"><div class="ttname"><a href="group__cudacore__struct.html#ga6d25da8194cc95035994ae98e9eebc02">cv::cuda::registerPageLocked</a></div><div class="ttdeci">CV_EXPORTS_W void registerPageLocked(Mat &amp;m)</div><div class="ttdoc">Page-locks the memory of matrix and maps it for the device(s).</div><div class="ttdef"><b>Definición</b> <a href="#l00317">cuda_host_mem.cpp:317</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a537e9e30547f68fff6358cc410095bb9"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a537e9e30547f68fff6358cc410095bb9">flags</a></div><div class="ttdeci">int int int flags</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa1670338df3460d0f954d03d0b4fa086c"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa1670338df3460d0f954d03d0b4fa086c">cv::Error::BadStep</a></div><div class="ttdeci">@ BadStep</div><div class="ttdoc">image step is wrong, this may happen for a non-continuous matrix.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00032">exception.hpp:32</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa27734f018d2dd51cbaa7e3723cfbf43b"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa27734f018d2dd51cbaa7e3723cfbf43b">cv::Error::StsNoMem</a></div><div class="ttdeci">@ StsNoMem</div><div class="ttdoc">insufficient memory</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00023">exception.hpp:23</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa4f9030381646764be3834aae87e35c96"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa4f9030381646764be3834aae87e35c96">cv::Error::BadNumChannels</a></div><div class="ttdeci">@ BadNumChannels</div><div class="ttdoc">bad number of channels, for example, some functions accept only single channel matrices.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00034">exception.hpp:34</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaabaf8225a48e1263fa91ff31ae38742e1"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaabaf8225a48e1263fa91ff31ae38742e1">cv::Error::StsBadFlag</a></div><div class="ttdeci">@ StsBadFlag</div><div class="ttdoc">flag is wrong or not supported</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00056">exception.hpp:56</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaae81e61d2aacc2b4355293af68aededd0"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaae81e61d2aacc2b4355293af68aededd0">cv::Error::StsOutOfRange</a></div><div class="ttdeci">@ StsOutOfRange</div><div class="ttdoc">some of parameters are out of range</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00061">exception.hpp:61</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">cv::Error::StsBadArg</a></div><div class="ttdeci">@ StsBadArg</div><div class="ttdoc">function arg/param is bad</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00024">exception.hpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_1_1cuda_html"><div class="ttname"><a href="namespacecv_1_1cuda.html">cv::cuda</a></div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00065">cuda.hpp:65</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ad0ae34c58960d6781fd8ceb895524722"><div class="ttname"><a href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">cv::dnn::total</a></div><div class="ttdeci">size_t total(const MatShape &amp;shape, int start=-1, int end=-1)</div><div class="ttdef"><b>Definición</b> <a href="shape__utils_8hpp_source.html#l00155">shape_utils.hpp:155</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a3b620a6fc0109bdb18c36bdba0e2073c"><div class="ttname"><a href="namespacecv.html#a3b620a6fc0109bdb18c36bdba0e2073c">cv::updateContinuityFlag</a></div><div class="ttdeci">int updateContinuityFlag(int flags, int dims, const int *size, const size_t *step)</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00658">matrix.cpp:658</a></div></div>
+<div class="ttc" id="anamespacegl_html_a7c271ffcf103e05d3fed5cfcefcdda9a"><div class="ttname"><a href="namespacegl.html#a7c271ffcf103e05d3fed5cfcefcdda9a">gl::ptr</a></div><div class="ttdeci">GLenum GLsizei const GLvoid * ptr</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01362">gl_core_3_1.hpp:1362</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a3f4c9888bcfa4a6e9150cbcfb39fc480"><div class="ttname"><a href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">parser_cl.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00052">parser_cl.py:52</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_a20e87bb7088a637bdd9e1bc6ed649419"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#a20e87bb7088a637bdd9e1bc6ed649419">cv::UMatData::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00741">mat.hpp:741</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_a21d534e3d518241614744ecf92119a84"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#a21d534e3d518241614744ecf92119a84">cv::UMatData::refcount</a></div><div class="ttdeci">int refcount</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00740">mat.hpp:740</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_a4aaeab7d089a219c65db6b6b62bd4d12a418bf779152a73ed41c8657baf911d82"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#a4aaeab7d089a219c65db6b6b62bd4d12a418bf779152a73ed41c8657baf911d82">cv::UMatData::USER_ALLOCATED</a></div><div class="ttdeci">@ USER_ALLOCATED</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00717">mat.hpp:717</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_ab3bf7b4c0a3f1206def1008d9f9150ba"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#ab3bf7b4c0a3f1206def1008d9f9150ba">cv::UMatData::size</a></div><div class="ttdeci">size_t size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00743">mat.hpp:743</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_abd20502f4de49d5bf2fe2147d3f49d83"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#abd20502f4de49d5bf2fe2147d3f49d83">cv::UMatData::flags</a></div><div class="ttdeci">UMatData::MemoryFlag flags</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00745">mat.hpp:745</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_acf6afbd0fafee36cafe5c10ff82cc45d"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#acf6afbd0fafee36cafe5c10ff82cc45d">cv::UMatData::UMatData</a></div><div class="ttdeci">UMatData(const MatAllocator *allocator)</div><div class="ttdef"><b>Definición</b> <a href="umatrix_8cpp_source.html#l00059">umatrix.cpp:59</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_aee30a2d2615e8e4d7fcfb2c893ac9839"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#aee30a2d2615e8e4d7fcfb2c893ac9839">cv::UMatData::origdata</a></div><div class="ttdeci">uchar * origdata</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00742">mat.hpp:742</a></div></div>
+<div class="ttc" id="astructcv_1_1_u_mat_data_html_afb9eb71d0e7cb31fa6b636bb2e62e5dc"><div class="ttname"><a href="structcv_1_1_u_mat_data.html#afb9eb71d0e7cb31fa6b636bb2e62e5dc">cv::UMatData::urefcount</a></div><div class="ttdeci">int urefcount</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00739">mat.hpp:739</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="cuda__host__mem_8cpp.html">cuda_host_mem.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

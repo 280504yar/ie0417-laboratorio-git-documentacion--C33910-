@@ -1,0 +1,2370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__ffmpeg__impl_8hpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo cap_ffmpeg_impl.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;<a class="el" href="configuration_8private_8hpp_source.html">opencv2/core/utils/configuration.private.hpp</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="cap__ffmpeg__legacy__api_8hpp_source.html">cap_ffmpeg_legacy_api.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="logger_8hpp_source.html">opencv2/core/utils/logger.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cap__interface_8hpp_source.html">cap_interface.hpp</a>&quot;</code><br />
+<code>#include &lt;pthread.h&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="ffmpeg__codecs_8hpp_source.html">ffmpeg_codecs.hpp</a>&quot;</code><br />
+<code>#include &lt;libavutil/mathematics.h&gt;</code><br />
+<code>#include &lt;libavutil/opt.h&gt;</code><br />
+<code>#include &lt;libavcodec/avcodec.h&gt;</code><br />
+<code>#include &lt;libswscale/swscale.h&gt;</code><br />
+<code>#include &lt;libavutil/pixdesc.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en cap_ffmpeg_impl.hpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="cap__ffmpeg__impl_8hpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="cap__ffmpeg__impl_8hpp__dep__incl.svg" width="259" height="176"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="cap__ffmpeg__impl_8hpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:Image_5FFFMPEG" id="r_Image_5FFFMPEG"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_image___f_f_m_p_e_g.html">Image_FFMPEG</a></td></tr>
+<tr class="memitem:AVInterruptCallbackMetadata" id="r_AVInterruptCallbackMetadata"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_a_v_interrupt_callback_metadata.html">AVInterruptCallbackMetadata</a></td></tr>
+<tr class="memitem:CvCapture_5FFFMPEG" id="r_CvCapture_5FFFMPEG"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a></td></tr>
+<tr class="memitem:ImplMutex" id="r_ImplMutex"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_impl_mutex.html">ImplMutex</a></td></tr>
+<tr class="memitem:ImplMutex_3A_3AImpl" id="r_ImplMutex_3A_3AImpl"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_impl_mutex_1_1_impl.html">ImplMutex::Impl</a></td></tr>
+<tr class="memitem:AutoLock" id="r_AutoLock"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_auto_lock.html">AutoLock</a></td></tr>
+<tr class="memitem:InternalFFMpegRegister" id="r_InternalFFMpegRegister"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_internal_f_f_mpeg_register.html">InternalFFMpegRegister</a></td></tr>
+<tr class="memitem:CvVideoWriter_5FFFMPEG" id="r_CvVideoWriter_5FFFMPEG"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a841002061bcfa66fcc2f20b7ba51a045" id="r_a841002061bcfa66fcc2f20b7ba51a045"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a841002061bcfa66fcc2f20b7ba51a045">CV_FOURCC</a>(c1,  c2,  c3,  c4)</td></tr>
+<tr class="memitem:a0b17f7c3a178b14dda5968908aa65e53" id="r_a0b17f7c3a178b14dda5968908aa65e53"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0b17f7c3a178b14dda5968908aa65e53">CALC_FFMPEG_VERSION</a>(a,  b,  c)</td></tr>
+<tr class="memitem:adea6825c69624f832940469560fee2d6" id="r_adea6825c69624f832940469560fee2d6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#adea6825c69624f832940469560fee2d6">CV_UNUSED</a>(name)</td></tr>
+<tr class="memitem:aeecfd600322fd9f280725b55f0be0969" id="r_aeecfd600322fd9f280725b55f0be0969"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aeecfd600322fd9f280725b55f0be0969">CV_FFMPEG_REGISTER</a></td></tr>
+<tr class="memitem:ad7f999c81c9addf166581ac21b768e64" id="r_ad7f999c81c9addf166581ac21b768e64"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad7f999c81c9addf166581ac21b768e64">CV_FFMPEG_LOCKMGR</a></td></tr>
+<tr class="memitem:a74f5dcee0e52509e716d6872e062794b" id="r_a74f5dcee0e52509e716d6872e062794b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a74f5dcee0e52509e716d6872e062794b">CV_FFMPEG_FMT_CONST</a></td></tr>
+<tr class="memitem:ab9adc2c7d840c38d594e2e6a45477952" id="r_ab9adc2c7d840c38d594e2e6a45477952"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab9adc2c7d840c38d594e2e6a45477952">CV_FFMPEG_CODEC_FIELD</a>&#160;&#160;&#160;codec</td></tr>
+<tr class="memitem:a9d93713a490b9521e125e13062989801" id="r_a9d93713a490b9521e125e13062989801"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9d93713a490b9521e125e13062989801">CV_FFMPEG_PTS_FIELD</a>&#160;&#160;&#160;pkt_pts</td></tr>
+<tr class="memitem:a62b4f06f6b759cc3b9b29c32f665a70a" id="r_a62b4f06f6b759cc3b9b29c32f665a70a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a62b4f06f6b759cc3b9b29c32f665a70a">USE_AV_HW_CODECS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a6ed4d7f0fd72e44d2b02b2150b44e3ac" id="r_a6ed4d7f0fd72e44d2b02b2150b44e3ac"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6ed4d7f0fd72e44d2b02b2150b44e3ac">CV_WARN</a>(message)</td></tr>
+<tr class="memitem:aefa76bbdf822699c2ab95a6943ef94d3" id="r_aefa76bbdf822699c2ab95a6943ef94d3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aefa76bbdf822699c2ab95a6943ef94d3">AV_NOPTS_VALUE_</a>&#160;&#160;&#160;((int64_t)AV_NOPTS_VALUE)</td></tr>
+<tr class="memitem:ab4faa0afdf35076914824200331defff" id="r_ab4faa0afdf35076914824200331defff"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab4faa0afdf35076914824200331defff">AVERROR_EOF</a>&#160;&#160;&#160;(-<a class="el" href="ffmpeg__codecs_8hpp.html#a19c68e2b5efcbab914d79db1e4fee734">MKTAG</a>( '<a class="el" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>','O','<a class="el" href="group__calib.html#gac4cdb95154776973ef9e69df8aebaa77">F</a>',' '))</td></tr>
+<tr class="memitem:a4e2d654010c615a9432752706842ae58" id="r_a4e2d654010c615a9432752706842ae58"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a>&#160;&#160;&#160;CodecID</td></tr>
+<tr class="memitem:a688db8170476605a40b004c4fd25a130" id="r_a688db8170476605a40b004c4fd25a130"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a688db8170476605a40b004c4fd25a130">CV_CODEC</a>(name)</td></tr>
+<tr class="memitem:a7b9d25898166cbfe61aaffcd24da4622" id="r_a7b9d25898166cbfe61aaffcd24da4622"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7b9d25898166cbfe61aaffcd24da4622">PKT_FLAG_KEY</a>&#160;&#160;&#160;AV_PKT_FLAG_KEY</td></tr>
+<tr class="memitem:ad547e2c1db48a885ae2875582cb24fc9" id="r_ad547e2c1db48a885ae2875582cb24fc9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad547e2c1db48a885ae2875582cb24fc9">USE_AV_FRAME_GET_BUFFER</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:add80189702cf0f5ea82718576fb43201" id="r_add80189702cf0f5ea82718576fb43201"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#add80189702cf0f5ea82718576fb43201">AV_NUM_DATA_POINTERS</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:a205306d014a84055c1c738e5eabe70e6" id="r_a205306d014a84055c1c738e5eabe70e6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a205306d014a84055c1c738e5eabe70e6">USE_AV_INTERRUPT_CALLBACK</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a41fcf41958a010949c8eae0370be6ed1" id="r_a41fcf41958a010949c8eae0370be6ed1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a41fcf41958a010949c8eae0370be6ed1">USE_AV_SEND_FRAME_API</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a4be9051a09b7cc8ee6e7b9496ee1de44" id="r_a4be9051a09b7cc8ee6e7b9496ee1de44"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4be9051a09b7cc8ee6e7b9496ee1de44">LIBAVFORMAT_INTERRUPT_OPEN_DEFAULT_TIMEOUT_MS</a>&#160;&#160;&#160;30000</td></tr>
+<tr class="memitem:a39e39fffdead4a27a8ae74956c6c35d7" id="r_a39e39fffdead4a27a8ae74956c6c35d7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a39e39fffdead4a27a8ae74956c6c35d7">LIBAVFORMAT_INTERRUPT_READ_DEFAULT_TIMEOUT_MS</a>&#160;&#160;&#160;30000</td></tr>
+<tr class="memitem:ab83ca408a574b40c76f681b616096fc8" id="r_ab83ca408a574b40c76f681b616096fc8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab83ca408a574b40c76f681b616096fc8">AVSEEK_FLAG_FRAME</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a998c3af80d050fd3d4f6a209fd5a87bc" id="r_a998c3af80d050fd3d4f6a209fd5a87bc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a998c3af80d050fd3d4f6a209fd5a87bc">AVSEEK_FLAG_ANY</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:acc73a791c7f9b4111d055553854e6ace" id="r_acc73a791c7f9b4111d055553854e6ace"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#acc73a791c7f9b4111d055553854e6ace">CV_PRINTABLE_CHAR</a>(ch)</td></tr>
+<tr class="memitem:a745f68230bcb7674f7e13211f9f4b5cd" id="r_a745f68230bcb7674f7e13211f9f4b5cd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a745f68230bcb7674f7e13211f9f4b5cd">CV_TAG_TO_PRINTABLE_CHAR4</a>(tag)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a7778b1d209ceb3e4bf34e40150d3b882" id="r_a7778b1d209ceb3e4bf34e40150d3b882"><td class="memItemLeft">static AVRational&#160;</td><td class="memItemRight"><a class="el" href="#a7778b1d209ceb3e4bf34e40150d3b882">av_make_q</a> (int num, int den)</td></tr>
+<tr class="memitem:acab55fbbbae3e2cc95c7af8d87d9f045" id="r_acab55fbbbae3e2cc95c7af8d87d9f045"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#acab55fbbbae3e2cc95c7af8d87d9f045">get_monotonic_time</a> (timespec *time)</td></tr>
+<tr class="memitem:a56ae17e355e649b029d6970474642581" id="r_a56ae17e355e649b029d6970474642581"><td class="memItemLeft">static timespec&#160;</td><td class="memItemRight"><a class="el" href="#a56ae17e355e649b029d6970474642581">get_monotonic_time_diff</a> (timespec start, timespec end)</td></tr>
+<tr class="memitem:a83369ac0baa80420de968568c0ccdb6e" id="r_a83369ac0baa80420de968568c0ccdb6e"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="#a83369ac0baa80420de968568c0ccdb6e">get_monotonic_time_diff_ms</a> (timespec time1, timespec time2)</td></tr>
+<tr class="memitem:a3f55241a54c7f69dcda4b851f9ddc759" id="r_a3f55241a54c7f69dcda4b851f9ddc759"><td class="memItemLeft">static const char *&#160;</td><td class="memItemRight"><a class="el" href="#a3f55241a54c7f69dcda4b851f9ddc759">_opencv_avcodec_get_name</a> (<a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a> id)</td></tr>
+<tr class="memitem:a723aa9517341d146d2a6a0b089e61dfc" id="r_a723aa9517341d146d2a6a0b089e61dfc"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a723aa9517341d146d2a6a0b089e61dfc">_opencv_ffmpeg_interrupt_callback</a> (<a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *ptr)</td></tr>
+<tr class="memitem:ad31dfbee025e1c01cf7b47142c1f5faf" id="r_ad31dfbee025e1c01cf7b47142c1f5faf"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad31dfbee025e1c01cf7b47142c1f5faf">_opencv_ffmpeg_av_packet_unref</a> (AVPacket *pkt)</td></tr>
+<tr class="memitem:a26741dd5efe63e26e7ff038c9b931bda" id="r_a26741dd5efe63e26e7ff038c9b931bda"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#a26741dd5efe63e26e7ff038c9b931bda">_opencv_ffmpeg_av_image_fill_arrays</a> (<a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *frame, uint8_t *ptr, enum AVPixelFormat pix_fmt, int width, int height)</td></tr>
+<tr class="memitem:a2e0a88691e86b7077d67cfec9b4ac739" id="r_a2e0a88691e86b7077d67cfec9b4ac739"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a2e0a88691e86b7077d67cfec9b4ac739">_opencv_ffmpeg_av_image_get_buffer_size</a> (enum AVPixelFormat pix_fmt, int width, int height)</td></tr>
+<tr class="memitem:ae9439b23f22ff5644639ab46ac346d60" id="r_ae9439b23f22ff5644639ab46ac346d60"><td class="memItemLeft">static AVRational&#160;</td><td class="memItemRight"><a class="el" href="#ae9439b23f22ff5644639ab46ac346d60">_opencv_ffmpeg_get_sample_aspect_ratio</a> (AVStream *stream)</td></tr>
+<tr class="memitem:a8b5f714f1ecc8a0ad721ac5a05aa78b9" id="r_a8b5f714f1ecc8a0ad721ac5a05aa78b9"><td class="memItemLeft">static <a class="el" href="core__bindings_8cpp.html#ad453f9f71ce1f9153fb748d6bb25e454">std::string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8b5f714f1ecc8a0ad721ac5a05aa78b9">_opencv_ffmpeg_get_error_string</a> (int error_code)</td></tr>
+<tr class="memitem:a096cc40b0fe697197348d0a83b48e4b6" id="r_a096cc40b0fe697197348d0a83b48e4b6"><td class="memItemLeft">static int64_t&#160;</td><td class="memItemRight"><a class="el" href="#a096cc40b0fe697197348d0a83b48e4b6">to_avtb</a> (int64_t ts, AVRational tb)</td></tr>
+<tr class="memitem:a10e90f20918c3aa9114b1424b5bb120f" id="r_a10e90f20918c3aa9114b1424b5bb120f"><td class="memItemLeft">static int64_t&#160;</td><td class="memItemRight"><a class="el" href="#a10e90f20918c3aa9114b1424b5bb120f">from_avtb</a> (int64_t ts_avtb, AVRational tb)</td></tr>
+<tr class="memitem:ada1fdcf3d8011fa13c00e4273eb54c5a" id="r_ada1fdcf3d8011fa13c00e4273eb54c5a"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#ada1fdcf3d8011fa13c00e4273eb54c5a">LockCallBack</a> (<a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> **mutex, AVLockOp op)</td></tr>
+<tr class="memitem:aa67ed895fae93995267ad5027edf56e6" id="r_aa67ed895fae93995267ad5027edf56e6"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa67ed895fae93995267ad5027edf56e6">ffmpeg_log_callback</a> (<a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *ptr, int level, const char *fmt, va_list vargs)</td></tr>
+<tr class="memitem:abd7c628b0336f3e0dba0a929866f827f" id="r_abd7c628b0336f3e0dba0a929866f827f"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#abd7c628b0336f3e0dba0a929866f827f">fill_codec_context</a> (AVCodecContext *enc, AVDictionary *dict)</td></tr>
+<tr class="memitem:aee82daf259c05383fe588da10660b4d0" id="r_aee82daf259c05383fe588da10660b4d0"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#aee82daf259c05383fe588da10660b4d0">isThreadSafe</a> ()</td></tr>
+<tr class="memitem:a053743e660fcb09177e461e49f7d7c28" id="r_a053743e660fcb09177e461e49f7d7c28"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a053743e660fcb09177e461e49f7d7c28">h26xContainer</a> (const char *formatLongName)</td></tr>
+<tr class="memitem:adf0b460e0ea53a429bbf0e37176fe26e" id="r_adf0b460e0ea53a429bbf0e37176fe26e"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="#adf0b460e0ea53a429bbf0e37176fe26e">getCodecTag</a> (const AVCodecID codec_id)</td></tr>
+<tr class="memitem:ab8e1a96a811013a0d8a25f275870c069" id="r_ab8e1a96a811013a0d8a25f275870c069"><td class="memItemLeft">static double&#160;</td><td class="memItemRight"><a class="el" href="#ab8e1a96a811013a0d8a25f275870c069">getCodecIdFourcc</a> (const AVCodecID codec_id)</td></tr>
+<tr class="memitem:a8680d7a9963f93abc2051f160e69cb43" id="r_a8680d7a9963f93abc2051f160e69cb43"><td class="memItemLeft">static const char *&#160;</td><td class="memItemRight"><a class="el" href="#a8680d7a9963f93abc2051f160e69cb43">icvFFMPEGErrStr</a> (int err)</td></tr>
+<tr class="memitem:abbe7b892ce7355fb96a04506799b8957" id="r_abbe7b892ce7355fb96a04506799b8957"><td class="memItemLeft">enum <a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a>&#160;</td><td class="memItemRight"><a class="el" href="#abbe7b892ce7355fb96a04506799b8957">codec_get_bmp_id</a> (unsigned int tag)</td></tr>
+<tr class="memitem:a836972be5543c3d6c76594d402d69053" id="r_a836972be5543c3d6c76594d402d69053"><td class="memItemLeft">static AVFrame *&#160;</td><td class="memItemRight"><a class="el" href="#a836972be5543c3d6c76594d402d69053">icv_alloc_picture_FFMPEG</a> (int pix_fmt, int width, int height, bool alloc)</td></tr>
+<tr class="memitem:af800ed75823d09130416a3a9b6453e37" id="r_af800ed75823d09130416a3a9b6453e37"><td class="memItemLeft">static AVCodecContext *&#160;</td><td class="memItemRight"><a class="el" href="#af800ed75823d09130416a3a9b6453e37">icv_configure_video_stream_FFMPEG</a> (AVFormatContext *oc, AVStream *st, const AVCodec *codec, int w, int h, int bitrate, double fps, AVPixelFormat pixel_format, int fourcc, AVCodecID codec_id)</td></tr>
+<tr class="memitem:a2ad03b0526afd067b610551688b34efc" id="r_a2ad03b0526afd067b610551688b34efc"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a2ad03b0526afd067b610551688b34efc">icv_av_encapsulate_video_FFMPEG</a> (AVFormatContext *oc, AVStream *video_st, AVCodecContext *c, uint8_t *data, int sz, const int frame_idx, const int pts_index, const int b_frame_dts_delay, const bool key_frame)</td></tr>
+<tr class="memitem:a5961e48d1fbe8d10d5df2af8a5e62c4d" id="r_a5961e48d1fbe8d10d5df2af8a5e62c4d"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a5961e48d1fbe8d10d5df2af8a5e62c4d">icv_av_write_frame_FFMPEG</a> (AVFormatContext *oc, AVStream *video_st, AVCodecContext *c, uint8_t *, uint32_t, AVFrame *picture, int frame_idx)</td></tr>
+<tr class="memitem:ac5ce1808ab377c950dcfea64be134040" id="r_ac5ce1808ab377c950dcfea64be134040"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ac5ce1808ab377c950dcfea64be134040">cv_ff_codec_tag_match</a> (const <a class="el" href="struct_a_v_codec_tag.html">AVCodecTag</a> *tags, <a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a> id, unsigned int tag)</td></tr>
+<tr class="memitem:ab884b2c5c5caca6458fba8c8be8cf80c" id="r_ab884b2c5c5caca6458fba8c8be8cf80c"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ab884b2c5c5caca6458fba8c8be8cf80c">cv_ff_codec_tag_list_match</a> (const <a class="el" href="struct_a_v_codec_tag.html">AVCodecTag</a> *const *tags, <a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a> id, unsigned int tag)</td></tr>
+<tr class="memitem:a6f481f5353689017ca1a8b7475398c41" id="r_a6f481f5353689017ca1a8b7475398c41"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6f481f5353689017ca1a8b7475398c41">cv_ff_codec_tag_dump</a> (const <a class="el" href="struct_a_v_codec_tag.html">AVCodecTag</a> *const *tags)</td></tr>
+<tr class="memitem:a7a3e3cc42255dfb55a37f77228acc29c" id="r_a7a3e3cc42255dfb55a37f77228acc29c"><td class="memItemLeft">static <a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a7a3e3cc42255dfb55a37f77228acc29c">cvCreateFileCaptureWithParams_FFMPEG</a> (const char *filename, const <a class="el" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a> &amp;params)</td></tr>
+<tr class="memitem:a02afa6cb22812f1caabef7a83552df5e" id="r_a02afa6cb22812f1caabef7a83552df5e"><td class="memItemLeft">static <a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a02afa6cb22812f1caabef7a83552df5e">cvCreateFileCaptureWithParams_FFMPEG</a> (int index, const <a class="el" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a> &amp;params)</td></tr>
+<tr class="memitem:a46c6d886357b14f54c7584e0dbe0aab8" id="r_a46c6d886357b14f54c7584e0dbe0aab8"><td class="memItemLeft">static <a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a46c6d886357b14f54c7584e0dbe0aab8">cvCreateStreamCaptureWithParams_FFMPEG</a> (const <a class="el" href="structcv_1_1_ptr.html">Ptr</a>&lt; <a class="el" href="classcv_1_1_i_stream_reader.html">IStreamReader</a> &gt; &amp;stream, const <a class="el" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a> &amp;params)</td></tr>
+<tr class="memitem:a729a2f2a188d44f46b7ffa2a03c88a11" id="r_a729a2f2a188d44f46b7ffa2a03c88a11"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#a729a2f2a188d44f46b7ffa2a03c88a11">cvReleaseCapture_FFMPEG</a> (<a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> **capture)</td></tr>
+<tr class="memitem:a47e651e301cd32f95913800548b8e2b0" id="r_a47e651e301cd32f95913800548b8e2b0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a47e651e301cd32f95913800548b8e2b0">cvSetCaptureProperty_FFMPEG</a> (<a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *capture, int prop_id, double value)</td></tr>
+<tr class="memitem:aca932defc2dd1995c788c08279c079b8" id="r_aca932defc2dd1995c788c08279c079b8"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aca932defc2dd1995c788c08279c079b8">cvGetCaptureProperty_FFMPEG</a> (<a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *capture, int prop_id)</td></tr>
+<tr class="memitem:a9145814c28a11b046f4b9505971febb0" id="r_a9145814c28a11b046f4b9505971febb0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9145814c28a11b046f4b9505971febb0">cvGrabFrame_FFMPEG</a> (<a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *capture)</td></tr>
+<tr class="memitem:a0fec4b203cf818cb257e2393fa7dcc6b" id="r_a0fec4b203cf818cb257e2393fa7dcc6b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0fec4b203cf818cb257e2393fa7dcc6b">cvRetrieveFrame_FFMPEG</a> (<a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *capture, unsigned char **data, int *step, int *width, int *height, int *cn)</td></tr>
+<tr class="memitem:a01223cd270faa8ee72a98731aa3d744d" id="r_a01223cd270faa8ee72a98731aa3d744d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a01223cd270faa8ee72a98731aa3d744d">cvRetrieveFrame2_FFMPEG</a> (<a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *capture, unsigned char **data, int *step, int *width, int *height, int *cn, int *depth)</td></tr>
+<tr class="memitem:a06993b1aff1e6bf7abb555c9314219c1" id="r_a06993b1aff1e6bf7abb555c9314219c1"><td class="memItemLeft">static <a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a06993b1aff1e6bf7abb555c9314219c1">cvCreateVideoWriterWithParams_FFMPEG</a> (const char *filename, int fourcc, double fps, int width, int height, const <a class="el" href="classcv_1_1_video_writer_parameters.html">VideoWriterParameters</a> &amp;params)</td></tr>
+<tr class="memitem:a4ff800be048fa2fcb1510edf81ae0508" id="r_a4ff800be048fa2fcb1510edf81ae0508"><td class="memItemLeft"><a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a4ff800be048fa2fcb1510edf81ae0508">cvCreateVideoWriter_FFMPEG</a> (const char *filename, int fourcc, double fps, int width, int height, int isColor)</td></tr>
+<tr class="memitem:ae35df9e8204ac39208670908fea8f0cf" id="r_ae35df9e8204ac39208670908fea8f0cf"><td class="memItemLeft"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae35df9e8204ac39208670908fea8f0cf">cvReleaseVideoWriter_FFMPEG</a> (<a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> **writer)</td></tr>
+<tr class="memitem:a6fcc7190c561e3d7af59f5dc0dd57842" id="r_a6fcc7190c561e3d7af59f5dc0dd57842"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6fcc7190c561e3d7af59f5dc0dd57842">cvWriteFrame_FFMPEG</a> (<a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> *writer, const unsigned char *data, int step, int width, int height, int cn, int origin)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1831c7389c423828dc1526a1774f7a02" id="r_a1831c7389c423828dc1526a1774f7a02"><td class="memItemLeft">static <a class="el" href="class_impl_mutex.html">ImplMutex</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1831c7389c423828dc1526a1774f7a02">_mutex</a></td></tr>
+<tr class="memitem:a49368c5a2c228bf4c2e781a15b11fc81" id="r_a49368c5a2c228bf4c2e781a15b11fc81"><td class="memItemLeft">static const int&#160;</td><td class="memItemRight"><a class="el" href="#a49368c5a2c228bf4c2e781a15b11fc81">OPENCV_NO_FRAMES_WRITTEN_CODE</a> = 1000</td></tr>
+</table>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentación de «define»</h2>
+<a id="aefa76bbdf822699c2ab95a6943ef94d3" name="aefa76bbdf822699c2ab95a6943ef94d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefa76bbdf822699c2ab95a6943ef94d3">&#9670;&#160;</a></span>AV_NOPTS_VALUE_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AV_NOPTS_VALUE_&#160;&#160;&#160;((int64_t)AV_NOPTS_VALUE)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00216">216</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02260">CvCapture_FFMPEG::dts_to_sec()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02101">CvCapture_FFMPEG::getProperty()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00629">CvCapture_FFMPEG::init()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02304">CvCapture_FFMPEG::seek()</a>.</p>
+
+</div>
+</div>
+<a id="add80189702cf0f5ea82718576fb43201" name="add80189702cf0f5ea82718576fb43201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add80189702cf0f5ea82718576fb43201">&#9670;&#160;</a></span>AV_NUM_DATA_POINTERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AV_NUM_DATA_POINTERS&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00241">241</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01841">CvCapture_FFMPEG::retrieveFrame()</a>.</p>
+
+</div>
+</div>
+<a id="ab4faa0afdf35076914824200331defff" name="ab4faa0afdf35076914824200331defff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4faa0afdf35076914824200331defff">&#9670;&#160;</a></span>AVERROR_EOF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AVERROR_EOF&#160;&#160;&#160;(-<a class="el" href="ffmpeg__codecs_8hpp.html#a19c68e2b5efcbab914d79db1e4fee734">MKTAG</a>( '<a class="el" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>','O','<a class="el" href="group__calib.html#gac4cdb95154776973ef9e69df8aebaa77">F</a>',' '))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00220">220</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02468">icvFFMPEGErrStr()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a998c3af80d050fd3d4f6a209fd5a87bc" name="a998c3af80d050fd3d4f6a209fd5a87bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a998c3af80d050fd3d4f6a209fd5a87bc">&#9670;&#160;</a></span>AVSEEK_FLAG_ANY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AVSEEK_FLAG_ANY&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00780">780</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab83ca408a574b40c76f681b616096fc8" name="ab83ca408a574b40c76f681b616096fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab83ca408a574b40c76f681b616096fc8">&#9670;&#160;</a></span>AVSEEK_FLAG_FRAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AVSEEK_FLAG_FRAME&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00777">777</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b17f7c3a178b14dda5968908aa65e53" name="a0b17f7c3a178b14dda5968908aa65e53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b17f7c3a178b14dda5968908aa65e53">&#9670;&#160;</a></span>CALC_FFMPEG_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CALC_FFMPEG_VERSION</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">( a&lt;&lt;16 | b&lt;&lt;8 | c )</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00061">61</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01541">CvCapture_FFMPEG::processRawPacket()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01841">CvCapture_FFMPEG::retrieveFrame()</a>.</p>
+
+</div>
+</div>
+<a id="a688db8170476605a40b004c4fd25a130" name="a688db8170476605a40b004c4fd25a130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a688db8170476605a40b004c4fd25a130">&#9670;&#160;</a></span>CV_CODEC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_CODEC</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">name</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00228">228</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02577">icv_configure_video_stream_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01541">CvCapture_FFMPEG::processRawPacket()</a>.</p>
+
+</div>
+</div>
+<a id="a4e2d654010c615a9432752706842ae58" name="a4e2d654010c615a9432752706842ae58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e2d654010c615a9432752706842ae58">&#9670;&#160;</a></span>CV_CODEC_ID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_CODEC_ID&#160;&#160;&#160;CodecID</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00227">227</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00397">_opencv_avcodec_get_name()</a>, <a class="el" href="#abbe7b892ce7355fb96a04506799b8957">codec_get_bmp_id()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03123">cv_ff_codec_tag_list_match()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03112">cv_ff_codec_tag_match()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02577">icv_configure_video_stream_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01541">CvCapture_FFMPEG::processRawPacket()</a>.</p>
+
+</div>
+</div>
+<a id="ab9adc2c7d840c38d594e2e6a45477952" name="ab9adc2c7d840c38d594e2e6a45477952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9adc2c7d840c38d594e2e6a45477952">&#9670;&#160;</a></span>CV_FFMPEG_CODEC_FIELD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_FFMPEG_CODEC_FIELD&#160;&#160;&#160;codec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00139">139</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a74f5dcee0e52509e716d6872e062794b" name="a74f5dcee0e52509e716d6872e062794b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f5dcee0e52509e716d6872e062794b">&#9670;&#160;</a></span>CV_FFMPEG_FMT_CONST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_FFMPEG_FMT_CONST</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00124">124</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="ad7f999c81c9addf166581ac21b768e64" name="ad7f999c81c9addf166581ac21b768e64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7f999c81c9addf166581ac21b768e64">&#9670;&#160;</a></span>CV_FFMPEG_LOCKMGR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_FFMPEG_LOCKMGR</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00110">110</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9d93713a490b9521e125e13062989801" name="a9d93713a490b9521e125e13062989801"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d93713a490b9521e125e13062989801">&#9670;&#160;</a></span>CV_FFMPEG_PTS_FIELD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_FFMPEG_PTS_FIELD&#160;&#160;&#160;pkt_pts</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00145">145</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeecfd600322fd9f280725b55f0be0969" name="aeecfd600322fd9f280725b55f0be0969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeecfd600322fd9f280725b55f0be0969">&#9670;&#160;</a></span>CV_FFMPEG_REGISTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_FFMPEG_REGISTER</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00105">105</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a841002061bcfa66fcc2f20b7ba51a045" name="a841002061bcfa66fcc2f20b7ba51a045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a841002061bcfa66fcc2f20b7ba51a045">&#9670;&#160;</a></span>CV_FOURCC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_FOURCC</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>c1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>c2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>c3</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>c4</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">(((c1) &amp; 255) + (((c2) &amp; 255) &lt;&lt; 8) + (((c3) &amp; 255) &lt;&lt; 16) + (((c4) &amp; 255) &lt;&lt; 24))</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00058">58</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cvdef_8h_source.html#l01069">CV_FOURCC()</a>, <a class="el" href="cap__avfoundation_8mm_source.html#l01170">CvVideoWriter_AVFoundation::CvVideoWriter_AVFoundation()</a>, <a class="el" href="cap__avfoundation__mac_8mm_source.html#l01094">CvVideoWriter_AVFoundation::CvVideoWriter_AVFoundation()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02092">getCodecIdFourcc()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="acc73a791c7f9b4111d055553854e6ace" name="acc73a791c7f9b4111d055553854e6ace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc73a791c7f9b4111d055553854e6ace">&#9670;&#160;</a></span>CV_PRINTABLE_CHAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_PRINTABLE_CHAR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>ch</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">((ch) &lt; 32 ? <span class="charliteral">&#39;?&#39;</span> : (ch))</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03109">3109</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a745f68230bcb7674f7e13211f9f4b5cd" name="a745f68230bcb7674f7e13211f9f4b5cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745f68230bcb7674f7e13211f9f4b5cd">&#9670;&#160;</a></span>CV_TAG_TO_PRINTABLE_CHAR4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_TAG_TO_PRINTABLE_CHAR4</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>tag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#acc73a791c7f9b4111d055553854e6ace">CV_PRINTABLE_CHAR</a>((tag) &amp; 255), <a class="code hl_define" href="#acc73a791c7f9b4111d055553854e6ace">CV_PRINTABLE_CHAR</a>(((tag) &gt;&gt; 8) &amp; 255), <a class="code hl_define" href="#acc73a791c7f9b4111d055553854e6ace">CV_PRINTABLE_CHAR</a>(((tag) &gt;&gt; 16) &amp; 255), <a class="code hl_define" href="#acc73a791c7f9b4111d055553854e6ace">CV_PRINTABLE_CHAR</a>(((tag) &gt;&gt; 24) &amp; 255)</div>
+<div class="ttc" id="acap__ffmpeg__impl_8hpp_html_acc73a791c7f9b4111d055553854e6ace"><div class="ttname"><a href="#acc73a791c7f9b4111d055553854e6ace">CV_PRINTABLE_CHAR</a></div><div class="ttdeci">#define CV_PRINTABLE_CHAR(ch)</div><div class="ttdef"><b>Definición</b> <a href="cap__ffmpeg__impl_8hpp_source.html#l03109">cap_ffmpeg_impl.hpp:3109</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03110">3110</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03135">cv_ff_codec_tag_dump()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="adea6825c69624f832940469560fee2d6" name="adea6825c69624f832940469560fee2d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adea6825c69624f832940469560fee2d6">&#9670;&#160;</a></span>CV_UNUSED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_UNUSED</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">(<a class="code hl_function" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>)name</div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a1dabed62d2d603302ed85878c743e251"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void(CL_CALLBACK *)(cl_program</div></div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00075">75</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02015">cv::dnn::AcoshFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02097">cv::dnn::AsinhFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02181">cv::dnn::AtanhFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l00801">cv::dnn::BaseDefaultFunctor&lt; T &gt;::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01694">cv::dnn::BNLLFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02735">cv::dnn::CeluFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l03267">cv::dnn::ChannelsPReLUFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02236">cv::dnn::CosFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02290">cv::dnn::CoshFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01518">cv::dnn::ELUFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02345">cv::dnn::ErfFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l03191">cv::dnn::ExpFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01069">cv::dnn::GeluApproximationFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l00926">cv::dnn::GeluFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02406">cv::dnn::HardSwishFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01869">cv::dnn::LogFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01339">cv::dnn::MishFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02959">cv::dnn::PowerFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l03410">cv::dnn::PReLUFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l00671">cv::dnn::ReLU6Functor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l00501">cv::dnn::ReLUFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02849">cv::dnn::SeluFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02487">cv::dnn::SinFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02541">cv::dnn::SinhFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02596">cv::dnn::SoftplusFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01225">cv::dnn::SwishFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l02678">cv::dnn::TanFunctor::apply()</a>, <a class="el" href="layers_2elementwise__layers_8cpp_source.html#l01128">cv::dnn::TanHFunctor::apply()</a>, <a class="el" href="arithm_8cpp_source.html#l00446">cv::arithm_op_ocl()</a>, <a class="el" href="demosaicing_8cpp_source.html#l00129">cv::SIMDBayerInterpolator_8u::bayer2Gray()</a>, <a class="el" href="demosaicing_8cpp_source.html#l00284">cv::SIMDBayerInterpolator_8u::bayer2RGB()</a>, <a class="el" href="demosaicing_8cpp_source.html#l00557">cv::SIMDBayerInterpolator_8u::bayer2RGB_EA()</a>, <a class="el" href="demosaicing_8cpp_source.html#l00420">cv::SIMDBayerInterpolator_8u::bayer2RGBA()</a>, <a class="el" href="stitching_2src_2matchers_8cpp_source.html#l00368">cv::detail::BestOf2NearestMatcher::BestOf2NearestMatcher()</a>, <a class="el" href="opengl_8cpp_source.html#l00745">cv::ogl::Buffer::bind()</a>, <a class="el" href="opengl_8cpp_source.html#l00521">cv::ogl::Buffer::Buffer()</a>, <a class="el" href="opengl_8cpp_source.html#l00488">cv::ogl::Buffer::Buffer()</a>, <a class="el" href="opengl_8cpp_source.html#l00505">cv::ogl::Buffer::Buffer()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00740">cv::cuda::BufferPool::BufferPool()</a>, <a class="el" href="warpers__cuda_8cpp_source.html#l00251">cv::detail::CylindricalWarperGpu::buildMaps()</a>, <a class="el" href="warpers__cuda_8cpp_source.html#l00155">cv::detail::PlaneWarperGpu::buildMaps()</a>, <a class="el" href="warpers__cuda_8cpp_source.html#l00208">cv::detail::SphericalWarperGpu::buildMaps()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00227">cv::cuda::TargetArchs::builtWith()</a>, <a class="el" href="check_8cpp_source.html#l00175">cv::detail::check_failed_false()</a>, <a class="el" href="check_8cpp_source.html#l00167">cv::detail::check_failed_true()</a>, <a class="el" href="videoio__registry_8cpp_source.html#l00389">cv::videoio_registry::checkDeprecatedBackend()</a>, <a class="el" href="opengl_8cpp_source.html#l02147">cv::ogl::clearColor()</a>, <a class="el" href="opengl_8cpp_source.html#l02159">cv::ogl::clearDepth()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00162">cv::cuda::GpuMatND::clone()</a>, <a class="el" href="opengl_8cpp_source.html#l00732">cv::ogl::Buffer::clone()</a>, <a class="el" href="arithm_8cpp_source.html#l01110">cv::compare()</a>, <a class="el" href="odometry_8cpp_source.html#l00090">cv::OdometryICP::compute()</a>, <a class="el" href="odometry_8cpp_source.html#l00145">cv::OdometryRGB::compute()</a>, <a class="el" href="odometry_8cpp_source.html#l00212">cv::OdometryRGBD::compute()</a>, <a class="el" href="orb_8cpp_source.html#l00826">cv::computeKeyPoints()</a>, <a class="el" href="directx_8cpp_source.html#l01465">cv::directx::convertFromD3D10Texture2D()</a>, <a class="el" href="directx_8cpp_source.html#l01374">cv::directx::convertFromD3D11Texture2D()</a>, <a class="el" href="directx_8cpp_source.html#l01596">cv::directx::convertFromDirect3DSurface9()</a>, <a class="el" href="opengl_8cpp_source.html#l02465">cv::ogl::convertFromGLTexture2D()</a>, <a class="el" href="va__intel_8cpp_source.html#l00671">cv::va_intel::convertFromVASurface()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00545">cv::cuda::GpuMat::convertTo()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00537">cv::cuda::GpuMat::convertTo()</a>, <a class="el" href="directx_8cpp_source.html#l01401">cv::directx::convertToD3D10Texture2D()</a>, <a class="el" href="directx_8cpp_source.html#l01347">cv::directx::convertToD3D11Texture2D()</a>, <a class="el" href="directx_8cpp_source.html#l01526">cv::directx::convertToDirect3DSurface9()</a>, <a class="el" href="opengl_8cpp_source.html#l02409">cv::ogl::convertToGLTexture2D()</a>, <a class="el" href="va__intel_8cpp_source.html#l00522">cv::va_intel::convertToVASurface()</a>, <a class="el" href="opengl_8cpp_source.html#l00648">cv::ogl::Buffer::copyFrom()</a>, <a class="el" href="opengl_8cpp_source.html#l00603">cv::ogl::Buffer::copyFrom()</a>, <a class="el" href="opengl_8cpp_source.html#l01117">cv::ogl::Texture2D::copyFrom()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00501">cv::cuda::GpuMat::copyTo()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00514">cv::cuda::GpuMat::copyTo()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00507">cv::cuda::GpuMat::copyTo()</a>, <a class="el" href="opengl_8cpp_source.html#l00673">cv::ogl::Buffer::copyTo()</a>, <a class="el" href="opengl_8cpp_source.html#l00713">cv::ogl::Buffer::copyTo()</a>, <a class="el" href="opengl_8cpp_source.html#l01184">cv::ogl::Texture2D::copyTo()</a>, <a class="el" href="feature2d__aliked_8cpp_source.html#l00176">cv::ALIKED::create()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00428">cv::cuda::GpuMat::create()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00145">cv::cuda::GpuMatND::create()</a>, <a class="el" href="cuda__host__mem_8cpp_source.html#l00178">cv::cuda::HostMem::create()</a>, <a class="el" href="face__detect_8cpp_source.html#l00307">cv::FaceDetectorYN::create()</a>, <a class="el" href="face__recognize_8cpp_source.html#l00205">cv::FaceRecognizerSF::create()</a>, <a class="el" href="matchers__lightglue_8cpp_source.html#l00289">cv::LightGlueMatcher::create()</a>, <a class="el" href="opengl_8cpp_source.html#l00553">cv::ogl::Buffer::create()</a>, <a class="el" href="opengl_8cpp_source.html#l01885">cv::ogl::Program::create()</a>, <a class="el" href="opengl_8cpp_source.html#l01709">cv::ogl::Shader::create()</a>, <a class="el" href="opengl_8cpp_source.html#l01075">cv::ogl::Texture2D::create()</a>, <a class="el" href="opengl_8cpp_source.html#l01558">cv::ogl::VertexArray::create()</a>, <a class="el" href="tracker__nano_8cpp_source.html#l00364">cv::TrackerNano::create()</a>, <a class="el" href="tracker__vit_8cpp_source.html#l00232">cv::TrackerVit::create()</a>, <a class="el" href="blenders_8cpp_source.html#l00840">cv::detail::createLaplacePyrGpu()</a>, <a class="el" href="backend__plugin_8cpp_source.html#l00791">cv::createPluginBackendFactory()</a>, <a class="el" href="dnn_2src_2plugin__wrapper_8impl_8hpp_source.html#l00282">cv::dnn_backend::createPluginDNNBackendFactory()</a>, <a class="el" href="plugin__parallel__wrapper_8impl_8hpp_source.html#l00280">cv::parallel::createPluginParallelBackendFactory()</a>, <a class="el" href="highgui_2src_2plugin__wrapper_8impl_8hpp_source.html#l00284">cv::highgui_backend::createPluginUIBackendFactory()</a>, <a class="el" href="barcode_8cpp_source.html#l00292">cv::barcode::BarcodeImpl::decode()</a>, <a class="el" href="barcode_8cpp_source.html#l00324">cv::barcode::BarcodeImpl::decodeMulti()</a>, <a class="el" href="viz3d_8cpp_source.html#l00643">cv::viz3d::destroyObject()</a>, <a class="el" href="barcode_8cpp_source.html#l00304">cv::barcode::BarcodeImpl::detectAndDecode()</a>, <a class="el" href="barcode_8cpp_source.html#l00331">cv::barcode::BarcodeImpl::detectAndDecodeMulti()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00098">cv::cuda::deviceSupports()</a>, <a class="el" href="opengl_8cpp_source.html#l02200">cv::ogl::disable()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00488">cv::cuda::GpuMat::download()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00494">cv::cuda::GpuMat::download()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00181">cv::cuda::GpuMatND::download()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00187">cv::cuda::GpuMatND::download()</a>, <a class="el" href="opengl_8cpp_source.html#l02170">cv::ogl::drawArrays()</a>, <a class="el" href="opengl_8cpp_source.html#l02180">cv::ogl::drawElements()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00867">cv::cuda::Event::elapsedTime()</a>, <a class="el" href="opengl_8cpp_source.html#l02190">cv::ogl::enable()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00528">cv::cuda::Stream::enqueueHostCallback()</a>, <a class="el" href="rho_8cpp_source.html#l00124">cv::RHO_HEST::ensureCapacity()</a>, <a class="el" href="system_8cpp_source.html#l02175">cv::envRead()</a>, <a class="el" href="usac_8hpp_source.html#l00145">cv::usac::NonMinimalSolver::estimate()</a>, <a class="el" href="usac_8hpp_source.html#l00389">cv::usac::Estimator::estimateModelNonMinimalSample()</a>, <a class="el" href="lkpyramid_8cpp_source.html#l01278">cv::estimateRigidTransform()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00823">cv::cuda::Event::Event()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00945">ffmpeg_log_callback()</a>, <a class="el" href="ts_8hpp_source.html#l00773">cvtest::fillGradient()</a>, <a class="el" href="layer_8cpp_source.html#l00166">cv::dnn::Layer::finalize()</a>, <a class="el" href="blobdetector_8cpp_source.html#l00232">cv::SimpleBlobDetectorImpl::findBlobs()</a>, <a class="el" href="calibinit_8cpp_source.html#l02191">cv::findCirclesGrid()</a>, <a class="el" href="datafile_8cpp_source.html#l00427">cv::utils::findDataFile()</a>, <a class="el" href="datafile_8cpp_source.html#l00190">cv::utils::findDataFile()</a>, <a class="el" href="samples_8cpp_source.html#l00051">cv::samples::findFile()</a>, <a class="el" href="image__decoder__layer_8cpp_source.html#l00070">cv::dnn::CV_FINAL&lt; BaseLayer &gt;::forward()</a>, <a class="el" href="net__impl2_8cpp_source.html#l01473">cv::dnn::Net::Impl::forwardGraph()</a>, <a class="el" href="fp__control__utils_8hpp_source.html#l00047">cv::details::FPDenormalsIgnoreHintScopeNOOP::FPDenormalsIgnoreHintScopeNOOP()</a>, <a class="el" href="fp__control__utils_8hpp_source.html#l00048">cv::details::FPDenormalsIgnoreHintScopeNOOP::FPDenormalsIgnoreHintScopeNOOP()</a>, <a class="el" href="smooth_8dispatch_8cpp_source.html#l00525">cv::GaussianBlur()</a>, <a class="el" href="cuda__host__mem_8cpp_source.html#l00136">cv::cuda::HostMem::getAllocator()</a>, <a class="el" href="opengl_8cpp_source.html#l01932">cv::ogl::Program::getAttributeLocation()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00751">cv::cuda::BufferPool::getBuffer()</a>, <a class="el" href="matrix_8cpp_source.html#l00546">cv::MatAllocator::getBufferPoolController()</a>, <a class="el" href="backend__plugin_8cpp_source.html#l00803">cv::getCapturePluginVersion()</a>, <a class="el" href="int8layers_2batch__norm__layer_8cpp_source.html#l00298">cv::dnn::CV_FINAL&lt; BaseLayer &gt;::getFLOPS()</a>, <a class="el" href="smooth_8dispatch_8cpp_source.html#l00259">cv::getGaussianKernel()</a>, <a class="el" href="matrix__wrap_8cpp_source.html#l00426">cv::_InputArray::getGpuMatNDVector()</a>, <a class="el" href="matrix__wrap_8cpp_source.html#l00413">cv::_InputArray::getGpuMatVector()</a>, <a class="el" href="op__inf__engine_8cpp_source.html#l00314">cv::dnn::getInferenceEngineBackendType()</a>, <a class="el" href="op__inf__engine_8cpp_source.html#l00365">cv::dnn::getInferenceEngineCPUType()</a>, <a class="el" href="einsum__layer_8cpp_source.html#l00467">cv::dnn::CV_FINAL&lt; BaseLayer &gt;::getMemoryShapes()</a>, <a class="el" href="datafile_8cpp_source.html#l00110">cv::utils::getModuleLocation()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02995">CvVideoWriter_FFMPEG::getProperty()</a>, <a class="el" href="thresh_8cpp_source.html#l01143">cv::getThreshVal_Otsu_8u()</a>, <a class="el" href="directx_8cpp_source.html#l00182">cv::directx::getTypeFromD3DFORMAT()</a>, <a class="el" href="directx_8cpp_source.html#l00064">cv::directx::getTypeFromDXGI_FORMAT()</a>, <a class="el" href="opengl_8cpp_source.html#l01942">cv::ogl::Program::getUniformLocation()</a>, <a class="el" href="backend__plugin_8cpp_source.html#l00823">cv::getWriterPluginVersion()</a>, <a class="el" href="glob_8cpp_source.html#l00284">cv::glob()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00134">cv::cuda::GpuData::GpuData()</a>, <a class="el" href="ts__gtest_8cpp_source.html#l03900">testing::internal::HandleSehExceptionsInMethodIfSupported()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00248">cv::cuda::TargetArchs::hasBin()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00281">cv::cuda::TargetArchs::hasEqualOrGreaterBin()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00270">cv::cuda::TargetArchs::hasEqualOrGreaterPtx()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00259">cv::cuda::TargetArchs::hasEqualOrLessPtx()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00237">cv::cuda::TargetArchs::hasPtx()</a>, <a class="el" href="cap__ffmpeg__hw_8hpp_source.html#l00818">hw_copy_frame_to_umat()</a>, <a class="el" href="cap__ffmpeg__hw_8hpp_source.html#l00870">hw_copy_umat_to_frame()</a>, <a class="el" href="cap__ffmpeg__hw_8hpp_source.html#l00535">hw_create_device()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">icv_av_write_frame_FFMPEG()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00273">cv::cuda::Stream::Impl::Impl()</a>, <a class="el" href="window_8cpp_source.html#l01057">cv::imshow()</a>, <a class="el" href="super__scale_8cpp_source.html#l00081">cv::barcode::SuperScale::init()</a>, <a class="el" href="layer_8cpp_source.html#l00060">cv::dnn::Layer::initCUDA()</a>, <a class="el" href="directx_8cpp_source.html#l00555">cv::directx::ocl::initializeContextFromD3D10Device()</a>, <a class="el" href="directx_8cpp_source.html#l00359">cv::directx::ocl::initializeContextFromD3D11Device()</a>, <a class="el" href="directx_8cpp_source.html#l00781">cv::directx::ocl::initializeContextFromDirect3DDevice9()</a>, <a class="el" href="directx_8cpp_source.html#l00667">cv::directx::ocl::initializeContextFromDirect3DDevice9Ex()</a>, <a class="el" href="va__intel_8cpp_source.html#l00080">cv::va_intel::ocl::initializeContextFromVA()</a>, <a class="el" href="init_8cpp_source.html#l00088">cv::dnn::initializeLayerFactory()</a>, <a class="el" href="glob_8cpp_source.html#l00178">cv::utils::fs::isDirectory()</a>, <a class="el" href="usac_8hpp_source.html#l00333">cv::usac::Degeneracy::isModelValid()</a>, <a class="el" href="usac_8hpp_source.html#l00325">cv::usac::Degeneracy::isSampleGood()</a>, <a class="el" href="cap__mfx__common_8hpp_source.html#l00222">Plugin::loadDecoderPlugin()</a>, <a class="el" href="cap__mfx__common_8hpp_source.html#l00211">Plugin::loadEncoderPlugin()</a>, <a class="el" href="load__point__cloud_8cpp_source.html#l00125">cv::loadMesh()</a>, <a class="el" href="load__point__cloud_8cpp_source.html#l00052">cv::loadPointCloud()</a>, <a class="el" href="opengl_8cpp_source.html#l00811">cv::ogl::Buffer::mapDevice()</a>, <a class="el" href="opengl_8cpp_source.html#l02528">cv::ogl::mapGLBuffer()</a>, <a class="el" href="opengl_8cpp_source.html#l00766">cv::ogl::Buffer::mapHost()</a>, <a class="el" href="blenders_8cpp_source.html#l00216">cv::detail::MultiBandBlender::MultiBandBlender()</a>, <a class="el" href="connectedcomponents_8cpp_source.html#l00068">cv::connectedcomponents::NoOp::operator()()</a>, <a class="el" href="int8layers_2pooling__layer_8cpp_source.html#l00442">cv::dnn::CV_FINAL&lt; BaseLayer &gt;::PoolingInvoker::operator()()</a>, <a class="el" href="odometry__functions_8cpp_source.html#l01037">cv::GetAbInvoker::operator()()</a>, <a class="el" href="multiview__calibration_8cpp_source.html#l00263">cv::multiview::pairwiseRegistration()</a>, <a class="el" href="parallel_8cpp_source.html#l00503">cv::parallel_for_()</a>, <a class="el" href="container__avi_8private_8hpp_source.html#l00108">cv::AVIReadContainer::parseMovi()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00909">cv::cuda::printCudaDeviceInfo()</a>, <a class="el" href="cuda__info_8cpp_source.html#l01002">cv::cuda::printShortCudaDeviceInfo()</a>, <a class="el" href="super__scale_8cpp_source.html#l00087">cv::barcode::SuperScale::processImageScale()</a>, <a class="el" href="opengl_8cpp_source.html#l01875">cv::ogl::Program::Program()</a>, <a class="el" href="cv2__convert_8cpp_source.html#l00589">pyopencv_to()</a>, <a class="el" href="cv2__convert_8cpp_source.html#l00395">pyopencv_to()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00842">cv::cuda::DeviceInfo::queryMemory()</a>, <a class="el" href="core_8hpp_source.html#l03192">cv::Algorithm::read()</a>, <a class="el" href="net__openvino_8cpp_source.html#l00841">cv::dnn::Net::readFromModelOptimizer()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00833">cv::cuda::Event::record()</a>, <a class="el" href="usac_8hpp_source.html#l00342">cv::usac::Degeneracy::recoverIfDegenerate()</a>, <a class="el" href="cuda__host__mem_8cpp_source.html#l00317">cv::cuda::registerPageLocked()</a>, <a class="el" href="opengl_8cpp_source.html#l02075">cv::ogl::render()</a>, <a class="el" href="opengl_8cpp_source.html#l02056">cv::ogl::render()</a>, <a class="el" href="opengl_8cpp_source.html#l01984">cv::ogl::render()</a>, <a class="el" href="system_8cpp_source.html#l02801">cv::details::restoreFPDenormalsState()</a>, <a class="el" href="blenders_8cpp_source.html#l00881">cv::detail::restoreImageFromLaplacePyrGpu()</a>, <a class="el" href="backend__plugin__legacy_8impl_8hpp_source.html#l00072">cv::impl::legacy::PluginCapture::retrieve_callback()</a>, <a class="el" href="cap__winrt__capture_8cpp_source.html#l00155">cv::VideoCapture_WinRT::retrieveFrame()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02059">CvCapture_FFMPEG::retrieveHWFrame()</a>, <a class="el" href="system_8cpp_source.html#l02781">cv::details::saveFPDenormalsState()</a>, <a class="el" href="load__point__cloud_8cpp_source.html#l00254">cv::saveMesh()</a>, <a class="el" href="load__point__cloud_8cpp_source.html#l00086">cv::savePointCloud()</a>, <a class="el" href="opengl_8cpp_source.html#l01344">cv::ogl::Arrays::setAutoRelease()</a>, <a class="el" href="opengl_8cpp_source.html#l00593">cv::ogl::Buffer::setAutoRelease()</a>, <a class="el" href="opengl_8cpp_source.html#l01904">cv::ogl::Program::setAutoRelease()</a>, <a class="el" href="opengl_8cpp_source.html#l01729">cv::ogl::Shader::setAutoRelease()</a>, <a class="el" href="opengl_8cpp_source.html#l01107">cv::ogl::Texture2D::setAutoRelease()</a>, <a class="el" href="opengl_8cpp_source.html#l01577">cv::ogl::VertexArray::setAutoRelease()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00709">cv::cuda::setBufferPoolConfig()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00699">cv::cuda::setBufferPoolUsage()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00417">cv::cuda::GpuMat::setDefaultAllocator()</a>, <a class="el" href="cuda__info_8cpp_source.html#l00067">cv::cuda::setDevice()</a>, <a class="el" href="system_8cpp_source.html#l02312">cv::instr::setFlags()</a>, <a class="el" href="system_8cpp_source.html#l02758">cv::details::setFPDenormalsIgnoreHint()</a>, <a class="el" href="opengl_8cpp_source.html#l00121">cv::cuda::setGlDevice()</a>, <a class="el" href="viz3d_8cpp_source.html#l00209">cv::viz3d::setGridVisible()</a>, <a class="el" href="op__inf__engine_8cpp_source.html#l00330">cv::dnn::setInferenceEngineBackendType()</a>, <a class="el" href="system_8cpp_source.html#l02651">cv::ipp::setIppStatus()</a>, <a class="el" href="bufferpool_8impl_8hpp_source.html#l00022">cv::DummyBufferPoolController::setMaxReservedSize()</a>, <a class="el" href="parallel_8cpp_source.html#l00712">cv::setNumThreads()</a>, <a class="el" href="viz3d_8cpp_source.html#l00607">cv::viz3d::setObjectPosition()</a>, <a class="el" href="viz3d_8cpp_source.html#l00625">cv::viz3d::setObjectRotation()</a>, <a class="el" href="viz3d_8cpp_source.html#l00193">cv::viz3d::setPerspective()</a>, <a class="el" href="viz3d_8cpp_source.html#l00239">cv::viz3d::setSky()</a>, <a class="el" href="viz3d_8cpp_source.html#l00223">cv::viz3d::setSun()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00529">cv::cuda::GpuMat::setTo()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00522">cv::cuda::GpuMat::setTo()</a>, <a class="el" href="opengl_8cpp_source.html#l01962">cv::ogl::Program::setUniformMat4x4()</a>, <a class="el" href="opengl_8cpp_source.html#l01952">cv::ogl::Program::setUniformVec3()</a>, <a class="el" href="system_8cpp_source.html#l02286">cv::instr::setUseInstrumentation()</a>, <a class="el" href="system_8cpp_source.html#l02708">cv::ipp::setUseIPP()</a>, <a class="el" href="system_8cpp_source.html#l02733">cv::ipp::setUseIPP_NotExact()</a>, <a class="el" href="opengl_8cpp_source.html#l01699">cv::ogl::Shader::Shader()</a>, <a class="el" href="viz3d_8cpp_source.html#l00253">cv::viz3d::showBox()</a>, <a class="el" href="viz3d_8cpp_source.html#l00415">cv::viz3d::showCameraTrajectory()</a>, <a class="el" href="viz3d_8cpp_source.html#l00592">cv::viz3d::showLines()</a>, <a class="el" href="viz3d_8cpp_source.html#l00516">cv::viz3d::showMesh()</a>, <a class="el" href="viz3d_8cpp_source.html#l00500">cv::viz3d::showMesh()</a>, <a class="el" href="viz3d_8cpp_source.html#l00273">cv::viz3d::showPlane()</a>, <a class="el" href="viz3d_8cpp_source.html#l00531">cv::viz3d::showPoints()</a>, <a class="el" href="viz3d_8cpp_source.html#l00546">cv::viz3d::showRGBD()</a>, <a class="el" href="viz3d_8cpp_source.html#l00293">cv::viz3d::showSphere()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00452">cv::cuda::Stream::Stream()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00462">cv::cuda::Stream::Stream()</a>, <a class="el" href="system_8cpp_source.html#l01138">cv::tempfile()</a>, <a class="el" href="opengl_8cpp_source.html#l01005">cv::ogl::Texture2D::Texture2D()</a>, <a class="el" href="opengl_8cpp_source.html#l00972">cv::ogl::Texture2D::Texture2D()</a>, <a class="el" href="opengl_8cpp_source.html#l00989">cv::ogl::Texture2D::Texture2D()</a>, <a class="el" href="_mat_8cpp_source.html#l00013">throwJavaException()</a>, <a class="el" href="cv2__convert_8hpp_source.html#l00196">PyOpenCV_Converter&lt; T, typename std::enable_if&lt; std::is_same&lt; long long, T &gt;::value &amp;&amp;!std::is_same&lt; long long, int64 &gt;::value &gt;::type &gt;::to()</a>, <a class="el" href="cv2__convert_8hpp_source.html#l00170">PyOpenCV_Converter&lt; T, typename std::enable_if&lt; std::is_same&lt; uint64_t, T &gt;::value &amp;&amp;!std::is_same&lt; uint64_t, size_t &gt;::value &gt;::type &gt;::to()</a>, <a class="el" href="cv2__convert_8hpp_source.html#l00144">PyOpenCV_Converter&lt; T, typename std::enable_if&lt; std::is_same&lt; unsigned int, T &gt;::value &amp;&amp;!std::is_same&lt; unsigned int, size_t &gt;::value &gt;::type &gt;::to()</a>, <a class="el" href="opengl_8cpp_source.html#l00755">cv::ogl::Buffer::unbind()</a>, <a class="el" href="opengl_8cpp_source.html#l00826">cv::ogl::Buffer::unmapDevice()</a>, <a class="el" href="opengl_8cpp_source.html#l02580">cv::ogl::unmapGLBuffer()</a>, <a class="el" href="cuda__host__mem_8cpp_source.html#l00328">cv::cuda::unregisterPageLocked()</a>, <a class="el" href="termination_8cpp_source.html#l00086">cv::usac::SPRTTerminationImpl::update()</a>, <a class="el" href="termination_8cpp_source.html#l00031">cv::usac::StandardTerminationCriteriaImpl::update()</a>, <a class="el" href="ts_8cpp_source.html#l00616">cvtest::TS::update_context()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00475">cv::cuda::GpuMat::upload()</a>, <a class="el" href="cuda__gpu__mat_8cpp_source.html#l00481">cv::cuda::GpuMat::upload()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00168">cv::cuda::GpuMatND::upload()</a>, <a class="el" href="cuda__gpu__mat__nd_8cpp_source.html#l00174">cv::cuda::GpuMatND::upload()</a>, <a class="el" href="opengl_8cpp_source.html#l01548">cv::ogl::VertexArray::VertexArray()</a>, <a class="el" href="cap_8cpp_source.html#l00630">cv::VideoCapture::waitAny()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00496">cv::cuda::Stream::waitEvent()</a>, <a class="el" href="warpers__cuda_8cpp_source.html#l00274">cv::detail::CylindricalWarperGpu::warp()</a>, <a class="el" href="warpers__cuda_8cpp_source.html#l00187">cv::detail::PlaneWarperGpu::warp()</a>, <a class="el" href="warpers__cuda_8cpp_source.html#l00230">cv::detail::SphericalWarperGpu::warp()</a>, <a class="el" href="imgwarp_8sse4__1_8cpp_source.html#l00204">cv::opt_SSE4_1::CV_FINAL::WarpPerspectiveLine_SSE4_Impl()</a>, <a class="el" href="cuda__stream_8cpp_source.html#l00589">cv::cuda::wrapStream()</a>, <a class="el" href="core_8hpp_source.html#l03179">cv::Algorithm::write()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02960">CvVideoWriter_FFMPEG::writeHWFrame()</a> y <a class="el" href="umatrix_8cpp_source.html#l00072">cv::UMatData::~UMatData()</a>.</p>
+
+</div>
+</div>
+<a id="a6ed4d7f0fd72e44d2b02b2150b44e3ac" name="a6ed4d7f0fd72e44d2b02b2150b44e3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ed4d7f0fd72e44d2b02b2150b44e3ac">&#9670;&#160;</a></span>CV_WARN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CV_WARN</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">fprintf(stderr, <span class="stringliteral">&quot;warning: %s (%s:%d)\n&quot;</span>, message, __FILE__, __LINE__)</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00188">188</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__gstreamer_8cpp_source.html#l02241">cv::CvVideoWriter_GStreamer::close_()</a>, <a class="el" href="cap__images_8cpp_source.html#l00138">cv::CvCapture_Images::getProperty()</a>, <a class="el" href="cap__gstreamer_8cpp_source.html#l02816">cv::handleMessage()</a>, <a class="el" href="cap__gstreamer_8cpp_source.html#l02367">cv::CvVideoWriter_GStreamer::open()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01541">CvCapture_FFMPEG::processRawPacket()</a>, <a class="el" href="cap__images_8cpp_source.html#l00165">cv::CvCapture_Images::setProperty()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01523">CvCapture_FFMPEG::setRaw()</a>, <a class="el" href="cap__gstreamer_8cpp_source.html#l02692">cv::CvVideoWriter_GStreamer::write()</a> y <a class="el" href="cap__gstreamer_8cpp_source.html#l02193">cv::CvVideoWriter_GStreamer::~CvVideoWriter_GStreamer()</a>.</p>
+
+</div>
+</div>
+<a id="a4be9051a09b7cc8ee6e7b9496ee1de44" name="a4be9051a09b7cc8ee6e7b9496ee1de44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be9051a09b7cc8ee6e7b9496ee1de44">&#9670;&#160;</a></span>LIBAVFORMAT_INTERRUPT_OPEN_DEFAULT_TIMEOUT_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIBAVFORMAT_INTERRUPT_OPEN_DEFAULT_TIMEOUT_MS&#160;&#160;&#160;30000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00261">261</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00629">CvCapture_FFMPEG::init()</a>.</p>
+
+</div>
+</div>
+<a id="a39e39fffdead4a27a8ae74956c6c35d7" name="a39e39fffdead4a27a8ae74956c6c35d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e39fffdead4a27a8ae74956c6c35d7">&#9670;&#160;</a></span>LIBAVFORMAT_INTERRUPT_READ_DEFAULT_TIMEOUT_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIBAVFORMAT_INTERRUPT_READ_DEFAULT_TIMEOUT_MS&#160;&#160;&#160;30000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00262">262</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00629">CvCapture_FFMPEG::init()</a>.</p>
+
+</div>
+</div>
+<a id="a7b9d25898166cbfe61aaffcd24da4622" name="a7b9d25898166cbfe61aaffcd24da4622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b9d25898166cbfe61aaffcd24da4622">&#9670;&#160;</a></span>PKT_FLAG_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PKT_FLAG_KEY&#160;&#160;&#160;AV_PKT_FLAG_KEY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00232">232</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02703">icv_av_encapsulate_video_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">icv_av_write_frame_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="ad547e2c1db48a885ae2875582cb24fc9" name="ad547e2c1db48a885ae2875582cb24fc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad547e2c1db48a885ae2875582cb24fc9">&#9670;&#160;</a></span>USE_AV_FRAME_GET_BUFFER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_AV_FRAME_GET_BUFFER&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00239">239</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a62b4f06f6b759cc3b9b29c32f665a70a" name="a62b4f06f6b759cc3b9b29c32f665a70a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b4f06f6b759cc3b9b29c32f665a70a">&#9670;&#160;</a></span>USE_AV_HW_CODECS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_AV_HW_CODECS&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00177">177</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a205306d014a84055c1c738e5eabe70e6" name="a205306d014a84055c1c738e5eabe70e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a205306d014a84055c1c738e5eabe70e6">&#9670;&#160;</a></span>USE_AV_INTERRUPT_CALLBACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_AV_INTERRUPT_CALLBACK&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00247">247</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a41fcf41958a010949c8eae0370be6ed1" name="a41fcf41958a010949c8eae0370be6ed1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41fcf41958a010949c8eae0370be6ed1">&#9670;&#160;</a></span>USE_AV_SEND_FRAME_API</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_AV_SEND_FRAME_API&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00256">256</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentación de funciones</h2>
+<a id="a3f55241a54c7f69dcda4b851f9ddc759" name="a3f55241a54c7f69dcda4b851f9ddc759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f55241a54c7f69dcda4b851f9ddc759">&#9670;&#160;</a></span>_opencv_avcodec_get_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * _opencv_avcodec_get_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00397">397</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00397">_opencv_avcodec_get_name()</a>, <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00143">AV_CODEC_ID_NONE</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00227">CV_CODEC_ID</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00397">_opencv_avcodec_get_name()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02092">getCodecIdFourcc()</a>.</p>
+
+</div>
+</div>
+<a id="a26741dd5efe63e26e7ff038c9b931bda" name="a26741dd5efe63e26e7ff038c9b931bda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26741dd5efe63e26e7ff038c9b931bda">&#9670;&#160;</a></span>_opencv_ffmpeg_av_image_fill_arrays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> _opencv_ffmpeg_av_image_fill_arrays </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *</td>          <td class="paramname"><span class="paramname"><em>frame</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum AVPixelFormat</td>          <td class="paramname"><span class="paramname"><em>pix_fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00473">473</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00473">_opencv_ffmpeg_av_image_fill_arrays()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00473">_opencv_ffmpeg_av_image_fill_arrays()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02542">icv_alloc_picture_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01841">CvCapture_FFMPEG::retrieveFrame()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02807">CvVideoWriter_FFMPEG::writeFrame()</a>.</p>
+
+</div>
+</div>
+<a id="a2e0a88691e86b7077d67cfec9b4ac739" name="a2e0a88691e86b7077d67cfec9b4ac739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e0a88691e86b7077d67cfec9b4ac739">&#9670;&#160;</a></span>_opencv_ffmpeg_av_image_get_buffer_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int _opencv_ffmpeg_av_image_get_buffer_size </td>
+          <td>(</td>
+          <td class="paramtype">enum AVPixelFormat</td>          <td class="paramname"><span class="paramname"><em>pix_fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00484">484</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00484">_opencv_ffmpeg_av_image_get_buffer_size()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00484">_opencv_ffmpeg_av_image_get_buffer_size()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02542">icv_alloc_picture_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01841">CvCapture_FFMPEG::retrieveFrame()</a>.</p>
+
+</div>
+</div>
+<a id="ad31dfbee025e1c01cf7b47142c1f5faf" name="ad31dfbee025e1c01cf7b47142c1f5faf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad31dfbee025e1c01cf7b47142c1f5faf">&#9670;&#160;</a></span>_opencv_ffmpeg_av_packet_unref()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> _opencv_ffmpeg_av_packet_unref </td>
+          <td>(</td>
+          <td class="paramtype">AVPacket *</td>          <td class="paramname"><span class="paramname"><em>pkt</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00462">462</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00462">_opencv_ffmpeg_av_packet_unref()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00462">_opencv_ffmpeg_av_packet_unref()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00686">CvCapture_FFMPEG::close()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">icv_av_write_frame_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01541">CvCapture_FFMPEG::processRawPacket()</a>.</p>
+
+</div>
+</div>
+<a id="a8b5f714f1ecc8a0ad721ac5a05aa78b9" name="a8b5f714f1ecc8a0ad721ac5a05aa78b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b5f714f1ecc8a0ad721ac5a05aa78b9">&#9670;&#160;</a></span>_opencv_ffmpeg_get_error_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="core__bindings_8cpp.html#ad453f9f71ce1f9153fb748d6bb25e454">std::string</a> _opencv_ffmpeg_get_error_string </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>error_code</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00517">517</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00517">_opencv_ffmpeg_get_error_string()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00517">_opencv_ffmpeg_get_error_string()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="ae9439b23f22ff5644639ab46ac346d60" name="ae9439b23f22ff5644639ab46ac346d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9439b23f22ff5644639ab46ac346d60">&#9670;&#160;</a></span>_opencv_ffmpeg_get_sample_aspect_ratio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AVRational _opencv_ffmpeg_get_sample_aspect_ratio </td>
+          <td>(</td>
+          <td class="paramtype">AVStream *</td>          <td class="paramname"><span class="paramname"><em>stream</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00494">494</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00494">_opencv_ffmpeg_get_sample_aspect_ratio()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00494">_opencv_ffmpeg_get_sample_aspect_ratio()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02101">CvCapture_FFMPEG::getProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a723aa9517341d146d2a6a0b089e61dfc" name="a723aa9517341d146d2a6a0b089e61dfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a723aa9517341d146d2a6a0b089e61dfc">&#9670;&#160;</a></span>_opencv_ffmpeg_interrupt_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int _opencv_ffmpeg_interrupt_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00431">431</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00431">_opencv_ffmpeg_interrupt_callback()</a>, <a class="el" href="logger_8hpp_source.html#l00169">CV_LOG_WARNING</a>, <a class="el" href="system_8cpp_source.html#l01115">cv::format()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00334">get_monotonic_time()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00368">get_monotonic_time_diff_ms()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00392">AVInterruptCallbackMetadata::timeout</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00391">AVInterruptCallbackMetadata::timeout_after_ms</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00390">AVInterruptCallbackMetadata::value</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00431">_opencv_ffmpeg_interrupt_callback()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a7778b1d209ceb3e4bf34e40150d3b882" name="a7778b1d209ceb3e4bf34e40150d3b882"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7778b1d209ceb3e4bf34e40150d3b882">&#9670;&#160;</a></span>av_make_q()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AVRational av_make_q </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>num</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>den</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00150">150</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00150">av_make_q()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00150">av_make_q()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00532">from_avtb()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02577">icv_configure_video_stream_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00527">to_avtb()</a>.</p>
+
+</div>
+</div>
+<a id="abbe7b892ce7355fb96a04506799b8957" name="abbe7b892ce7355fb96a04506799b8957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbe7b892ce7355fb96a04506799b8957">&#9670;&#160;</a></span>codec_get_bmp_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a> codec_get_bmp_id </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>tag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Hace referencia a <a class="el" href="#abbe7b892ce7355fb96a04506799b8957">codec_get_bmp_id()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00227">CV_CODEC_ID</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="#abbe7b892ce7355fb96a04506799b8957">codec_get_bmp_id()</a>.</p>
+
+</div>
+</div>
+<a id="a6f481f5353689017ca1a8b7475398c41" name="a6f481f5353689017ca1a8b7475398c41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f481f5353689017ca1a8b7475398c41">&#9670;&#160;</a></span>cv_ff_codec_tag_dump()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> cv_ff_codec_tag_dump </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_a_v_codec_tag.html">AVCodecTag</a> *const *</td>          <td class="paramname"><span class="paramname"><em>tags</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03135">3135</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00143">AV_CODEC_ID_NONE</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03135">cv_ff_codec_tag_dump()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03110">CV_TAG_TO_PRINTABLE_CHAR4</a>, <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00077">AVCodecTag::id</a> y <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00078">AVCodecTag::tag</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03135">cv_ff_codec_tag_dump()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="ab884b2c5c5caca6458fba8c8be8cf80c" name="ab884b2c5c5caca6458fba8c8be8cf80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab884b2c5c5caca6458fba8c8be8cf80c">&#9670;&#160;</a></span>cv_ff_codec_tag_list_match()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cv_ff_codec_tag_list_match </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_a_v_codec_tag.html">AVCodecTag</a> *const *</td>          <td class="paramname"><span class="paramname"><em>tags</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03123">3123</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00227">CV_CODEC_ID</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03123">cv_ff_codec_tag_list_match()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03112">cv_ff_codec_tag_match()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03123">cv_ff_codec_tag_list_match()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="ac5ce1808ab377c950dcfea64be134040" name="ac5ce1808ab377c950dcfea64be134040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ce1808ab377c950dcfea64be134040">&#9670;&#160;</a></span>cv_ff_codec_tag_match()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cv_ff_codec_tag_match </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_a_v_codec_tag.html">AVCodecTag</a> *</td>          <td class="paramname"><span class="paramname"><em>tags</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a4e2d654010c615a9432752706842ae58">CV_CODEC_ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03112">3112</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00143">AV_CODEC_ID_NONE</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00227">CV_CODEC_ID</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03112">cv_ff_codec_tag_match()</a>, <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00077">AVCodecTag::id</a> y <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00078">AVCodecTag::tag</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03123">cv_ff_codec_tag_list_match()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03112">cv_ff_codec_tag_match()</a>.</p>
+
+</div>
+</div>
+<a id="a7a3e3cc42255dfb55a37f77228acc29c" name="a7a3e3cc42255dfb55a37f77228acc29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a3e3cc42255dfb55a37f77228acc29c">&#9670;&#160;</a></span>cvCreateFileCaptureWithParams_FFMPEG() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> * cvCreateFileCaptureWithParams_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>params</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03663">3663</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00686">CvCapture_FFMPEG::close()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03663">cvCreateFileCaptureWithParams_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00629">CvCapture_FFMPEG::init()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a> y <a class="el" href="imgproc_8hpp_source.html#l01451">cv::params</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03663">cvCreateFileCaptureWithParams_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03678">cvCreateFileCaptureWithParams_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a02afa6cb22812f1caabef7a83552df5e" name="a02afa6cb22812f1caabef7a83552df5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02afa6cb22812f1caabef7a83552df5e">&#9670;&#160;</a></span>cvCreateFileCaptureWithParams_FFMPEG() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> * cvCreateFileCaptureWithParams_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>params</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03678">3678</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00686">CvCapture_FFMPEG::close()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03663">cvCreateFileCaptureWithParams_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00629">CvCapture_FFMPEG::init()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a> y <a class="el" href="imgproc_8hpp_source.html#l01451">cv::params</a>.</p>
+
+</div>
+</div>
+<a id="a46c6d886357b14f54c7584e0dbe0aab8" name="a46c6d886357b14f54c7584e0dbe0aab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c6d886357b14f54c7584e0dbe0aab8">&#9670;&#160;</a></span>cvCreateStreamCaptureWithParams_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> * cvCreateStreamCaptureWithParams_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcv_1_1_ptr.html">Ptr</a>&lt; <a class="el" href="classcv_1_1_i_stream_reader.html">IStreamReader</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcv_1_1_video_capture_parameters.html">VideoCaptureParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>params</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03693">3693</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00686">CvCapture_FFMPEG::close()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03693">cvCreateStreamCaptureWithParams_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00629">CvCapture_FFMPEG::init()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a> y <a class="el" href="imgproc_8hpp_source.html#l01451">cv::params</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03693">cvCreateStreamCaptureWithParams_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a4ff800be048fa2fcb1510edf81ae0508" name="a4ff800be048fa2fcb1510edf81ae0508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ff800be048fa2fcb1510edf81ae0508">&#9670;&#160;</a></span>cvCreateVideoWriter_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> * cvCreateVideoWriter_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fourcc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>fps</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>isColor</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03757">3757</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03757">cvCreateVideoWriter_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03743">cvCreateVideoWriterWithParams_FFMPEG()</a>, <a class="el" href="imgproc_8hpp_source.html#l01451">cv::params</a> y <a class="el" href="videoio_8hpp_source.html#l00221">cv::VIDEOWRITER_PROP_IS_COLOR</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03757">cvCreateVideoWriter_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a06993b1aff1e6bf7abb555c9314219c1" name="a06993b1aff1e6bf7abb555c9314219c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06993b1aff1e6bf7abb555c9314219c1">&#9670;&#160;</a></span>cvCreateVideoWriterWithParams_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> * cvCreateVideoWriterWithParams_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fourcc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>fps</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcv_1_1_video_writer_parameters.html">VideoWriterParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>params</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03743">3743</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03037">CvVideoWriter_FFMPEG::close()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03743">cvCreateVideoWriterWithParams_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02509">CvVideoWriter_FFMPEG::init()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a> y <a class="el" href="imgproc_8hpp_source.html#l01451">cv::params</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03757">cvCreateVideoWriter_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03743">cvCreateVideoWriterWithParams_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="aca932defc2dd1995c788c08279c079b8" name="aca932defc2dd1995c788c08279c079b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca932defc2dd1995c788c08279c079b8">&#9670;&#160;</a></span>cvGetCaptureProperty_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double cvGetCaptureProperty_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *</td>          <td class="paramname"><span class="paramname"><em>capture</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>prop_id</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03722">3722</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03722">cvGetCaptureProperty_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02101">CvCapture_FFMPEG::getProperty()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03722">cvGetCaptureProperty_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a9145814c28a11b046f4b9505971febb0" name="a9145814c28a11b046f4b9505971febb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9145814c28a11b046f4b9505971febb0">&#9670;&#160;</a></span>cvGrabFrame_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cvGrabFrame_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *</td>          <td class="paramname"><span class="paramname"><em>capture</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03727">3727</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03727">cvGrabFrame_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03727">cvGrabFrame_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a729a2f2a188d44f46b7ffa2a03c88a11" name="a729a2f2a188d44f46b7ffa2a03c88a11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a729a2f2a188d44f46b7ffa2a03c88a11">&#9670;&#160;</a></span>cvReleaseCapture_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> cvReleaseCapture_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> **</td>          <td class="paramname"><span class="paramname"><em>capture</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03707">3707</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03707">cvReleaseCapture_FFMPEG()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03707">cvReleaseCapture_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="ae35df9e8204ac39208670908fea8f0cf" name="ae35df9e8204ac39208670908fea8f0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae35df9e8204ac39208670908fea8f0cf">&#9670;&#160;</a></span>cvReleaseVideoWriter_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> cvReleaseVideoWriter_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> **</td>          <td class="paramname"><span class="paramname"><em>writer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03765">3765</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03765">cvReleaseVideoWriter_FFMPEG()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03765">cvReleaseVideoWriter_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a01223cd270faa8ee72a98731aa3d744d" name="a01223cd270faa8ee72a98731aa3d744d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01223cd270faa8ee72a98731aa3d744d">&#9670;&#160;</a></span>cvRetrieveFrame2_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cvRetrieveFrame2_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *</td>          <td class="paramname"><span class="paramname"><em>capture</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char **</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>step</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cn</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>depth</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03738">3738</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03738">cvRetrieveFrame2_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01841">CvCapture_FFMPEG::retrieveFrame()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03738">cvRetrieveFrame2_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03732">cvRetrieveFrame_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a0fec4b203cf818cb257e2393fa7dcc6b" name="a0fec4b203cf818cb257e2393fa7dcc6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fec4b203cf818cb257e2393fa7dcc6b">&#9670;&#160;</a></span>cvRetrieveFrame_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cvRetrieveFrame_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *</td>          <td class="paramname"><span class="paramname"><em>capture</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char **</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>step</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cn</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03732">3732</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">CV_8U</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03738">cvRetrieveFrame2_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03732">cvRetrieveFrame_FFMPEG()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03732">cvRetrieveFrame_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a47e651e301cd32f95913800548b8e2b0" name="a47e651e301cd32f95913800548b8e2b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47e651e301cd32f95913800548b8e2b0">&#9670;&#160;</a></span>cvSetCaptureProperty_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cvSetCaptureProperty_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_capture___f_f_m_p_e_g.html">CvCapture_FFMPEG</a> *</td>          <td class="paramname"><span class="paramname"><em>capture</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>prop_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03717">3717</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03717">cvSetCaptureProperty_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02386">CvCapture_FFMPEG::setProperty()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03717">cvSetCaptureProperty_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="a6fcc7190c561e3d7af59f5dc0dd57842" name="a6fcc7190c561e3d7af59f5dc0dd57842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fcc7190c561e3d7af59f5dc0dd57842">&#9670;&#160;</a></span>cvWriteFrame_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cvWriteFrame_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_cv_video_writer___f_f_m_p_e_g.html">CvVideoWriter_FFMPEG</a> *</td>          <td class="paramname"><span class="paramname"><em>writer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>step</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cn</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>origin</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03776">3776</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03776">cvWriteFrame_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02807">CvVideoWriter_FFMPEG::writeFrame()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03776">cvWriteFrame_FFMPEG()</a>.</p>
+
+</div>
+</div>
+<a id="aa67ed895fae93995267ad5027edf56e6" name="aa67ed895fae93995267ad5027edf56e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67ed895fae93995267ad5027edf56e6">&#9670;&#160;</a></span>ffmpeg_log_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> ffmpeg_log_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">va_list</td>          <td class="paramname"><span class="paramname"><em>vargs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00945">945</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00075">CV_UNUSED</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00945">ffmpeg_log_callback()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00945">ffmpeg_log_callback()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00970">InternalFFMpegRegister::initLogger_()</a>.</p>
+
+</div>
+</div>
+<a id="abd7c628b0336f3e0dba0a929866f827f" name="abd7c628b0336f3e0dba0a929866f827f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd7c628b0336f3e0dba0a929866f827f">&#9670;&#160;</a></span>fill_codec_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> fill_codec_context </td>
+          <td>(</td>
+          <td class="paramtype">AVCodecContext *</td>          <td class="paramname"><span class="paramname"><em>enc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVDictionary *</td>          <td class="paramname"><span class="paramname"><em>dict</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01024">1024</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01024">fill_codec_context()</a> y <a class="el" href="parallel_8cpp_source.html#l01025">cv::getNumberOfCPUs()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01024">fill_codec_context()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a10e90f20918c3aa9114b1424b5bb120f" name="a10e90f20918c3aa9114b1424b5bb120f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10e90f20918c3aa9114b1424b5bb120f">&#9670;&#160;</a></span>from_avtb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t from_avtb </td>
+          <td>(</td>
+          <td class="paramtype">int64_t</td>          <td class="paramname"><span class="paramname"><em>ts_avtb</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVRational</td>          <td class="paramname"><span class="paramname"><em>tb</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00532">532</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00150">av_make_q()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00532">from_avtb()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00532">from_avtb()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02304">CvCapture_FFMPEG::seek()</a>.</p>
+
+</div>
+</div>
+<a id="acab55fbbbae3e2cc95c7af8d87d9f045" name="acab55fbbbae3e2cc95c7af8d87d9f045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acab55fbbbae3e2cc95c7af8d87d9f045">&#9670;&#160;</a></span>get_monotonic_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> get_monotonic_time </td>
+          <td>(</td>
+          <td class="paramtype">timespec *</td>          <td class="paramname"><span class="paramname"><em>time</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00334">334</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00334">get_monotonic_time()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00431">_opencv_ffmpeg_interrupt_callback()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00334">get_monotonic_time()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a56ae17e355e649b029d6970474642581" name="a56ae17e355e649b029d6970474642581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ae17e355e649b029d6970474642581">&#9670;&#160;</a></span>get_monotonic_time_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">timespec get_monotonic_time_diff </td>
+          <td>(</td>
+          <td class="paramtype">timespec</td>          <td class="paramname"><span class="paramname"><em>start</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">timespec</td>          <td class="paramname"><span class="paramname"><em>end</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00351">351</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00351">get_monotonic_time_diff()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00351">get_monotonic_time_diff()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00368">get_monotonic_time_diff_ms()</a>.</p>
+
+</div>
+</div>
+<a id="a83369ac0baa80420de968568c0ccdb6e" name="a83369ac0baa80420de968568c0ccdb6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83369ac0baa80420de968568c0ccdb6e">&#9670;&#160;</a></span>get_monotonic_time_diff_ms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double get_monotonic_time_diff_ms </td>
+          <td>(</td>
+          <td class="paramtype">timespec</td>          <td class="paramname"><span class="paramname"><em>time1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">timespec</td>          <td class="paramname"><span class="paramname"><em>time2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00368">368</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00351">get_monotonic_time_diff()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00368">get_monotonic_time_diff_ms()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00431">_opencv_ffmpeg_interrupt_callback()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00368">get_monotonic_time_diff_ms()</a>.</p>
+
+</div>
+</div>
+<a id="ab8e1a96a811013a0d8a25f275870c069" name="ab8e1a96a811013a0d8a25f275870c069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e1a96a811013a0d8a25f275870c069">&#9670;&#160;</a></span>getCodecIdFourcc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getCodecIdFourcc </td>
+          <td>(</td>
+          <td class="paramtype">const AVCodecID</td>          <td class="paramname"><span class="paramname"><em>codec_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02092">2092</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00397">_opencv_avcodec_get_name()</a>, <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00143">AV_CODEC_ID_NONE</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00058">CV_FOURCC</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02092">getCodecIdFourcc()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02075">getCodecTag()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02092">getCodecIdFourcc()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02101">CvCapture_FFMPEG::getProperty()</a>.</p>
+
+</div>
+</div>
+<a id="adf0b460e0ea53a429bbf0e37176fe26e" name="adf0b460e0ea53a429bbf0e37176fe26e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf0b460e0ea53a429bbf0e37176fe26e">&#9670;&#160;</a></span>getCodecTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getCodecTag </td>
+          <td>(</td>
+          <td class="paramtype">const AVCodecID</td>          <td class="paramname"><span class="paramname"><em>codec_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02075">2075</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00146">codec_bmp_tags</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02075">getCodecTag()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02092">getCodecIdFourcc()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02075">getCodecTag()</a>.</p>
+
+</div>
+</div>
+<a id="a053743e660fcb09177e461e49f7d7c28" name="a053743e660fcb09177e461e49f7d7c28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a053743e660fcb09177e461e49f7d7c28">&#9670;&#160;</a></span>h26xContainer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool h26xContainer </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>formatLongName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01537">1537</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01537">h26xContainer()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01537">h26xContainer()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01541">CvCapture_FFMPEG::processRawPacket()</a>.</p>
+
+</div>
+</div>
+<a id="a836972be5543c3d6c76594d402d69053" name="a836972be5543c3d6c76594d402d69053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a836972be5543c3d6c76594d402d69053">&#9670;&#160;</a></span>icv_alloc_picture_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AVFrame * icv_alloc_picture_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>pix_fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>the following function is a modified version of code found in ffmpeg-0.4.9-pre1/output_example.c </p>
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02542">2542</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00473">_opencv_ffmpeg_av_image_fill_arrays()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00484">_opencv_ffmpeg_av_image_get_buffer_size()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02542">icv_alloc_picture_FFMPEG()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02542">icv_alloc_picture_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a2ad03b0526afd067b610551688b34efc" name="a2ad03b0526afd067b610551688b34efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad03b0526afd067b610551688b34efc">&#9670;&#160;</a></span>icv_av_encapsulate_video_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int icv_av_encapsulate_video_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">AVFormatContext *</td>          <td class="paramname"><span class="paramname"><em>oc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVStream *</td>          <td class="paramname"><span class="paramname"><em>video_st</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVCodecContext *</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sz</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>frame_idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>pts_index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>b_frame_dts_delay</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>key_frame</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02703">2703</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02703">icv_av_encapsulate_video_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00232">PKT_FLAG_KEY</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02703">icv_av_encapsulate_video_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02807">CvVideoWriter_FFMPEG::writeFrame()</a>.</p>
+
+</div>
+</div>
+<a id="a5961e48d1fbe8d10d5df2af8a5e62c4d" name="a5961e48d1fbe8d10d5df2af8a5e62c4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5961e48d1fbe8d10d5df2af8a5e62c4d">&#9670;&#160;</a></span>icv_av_write_frame_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int icv_av_write_frame_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">AVFormatContext *</td>          <td class="paramname"><span class="paramname"><em>oc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVStream *</td>          <td class="paramname"><span class="paramname"><em>video_st</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVCodecContext *</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVFrame *</td>          <td class="paramname"><span class="paramname"><em>picture</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>frame_idx</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">2728</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00462">_opencv_ffmpeg_av_packet_unref()</a>, <a class="el" href="logger_8hpp_source.html#l00168">CV_LOG_ERROR</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00075">CV_UNUSED</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">icv_av_write_frame_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02701">OPENCV_NO_FRAMES_WRITTEN_CODE</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00232">PKT_FLAG_KEY</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03037">CvVideoWriter_FFMPEG::close()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">icv_av_write_frame_FFMPEG()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02807">CvVideoWriter_FFMPEG::writeFrame()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02960">CvVideoWriter_FFMPEG::writeHWFrame()</a>.</p>
+
+</div>
+</div>
+<a id="af800ed75823d09130416a3a9b6453e37" name="af800ed75823d09130416a3a9b6453e37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af800ed75823d09130416a3a9b6453e37">&#9670;&#160;</a></span>icv_configure_video_stream_FFMPEG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AVCodecContext * icv_configure_video_stream_FFMPEG </td>
+          <td>(</td>
+          <td class="paramtype">AVFormatContext *</td>          <td class="paramname"><span class="paramname"><em>oc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVStream *</td>          <td class="paramname"><span class="paramname"><em>st</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const AVCodec *</td>          <td class="paramname"><span class="paramname"><em>codec</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bitrate</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>fps</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVPixelFormat</td>          <td class="paramname"><span class="paramname"><em>pixel_format</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fourcc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVCodecID</td>          <td class="paramname"><span class="paramname"><em>codec_id</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02577">2577</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="ffmpeg__codecs_8hpp_source.html#l00082">AV_CODEC_ID_H264</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00150">av_make_q()</a>, <a class="el" href="exception_8hpp_source.html#l00198">CV_Assert</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00228">CV_CODEC</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00227">CV_CODEC_ID</a>, <a class="el" href="system_8cpp_source.html#l01332">cv::error()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02577">icv_configure_video_stream_FFMPEG()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02577">icv_configure_video_stream_FFMPEG()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a8680d7a9963f93abc2051f160e69cb43" name="a8680d7a9963f93abc2051f160e69cb43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8680d7a9963f93abc2051f160e69cb43">&#9670;&#160;</a></span>icvFFMPEGErrStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * icvFFMPEGErrStr </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02468">2468</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00220">AVERROR_EOF</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02468">icvFFMPEGErrStr()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02468">icvFFMPEGErrStr()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="aee82daf259c05383fe588da10660b4d0" name="aee82daf259c05383fe588da10660b4d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee82daf259c05383fe588da10660b4d0">&#9670;&#160;</a></span>isThreadSafe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isThreadSafe </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01058">1058</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="logger_8hpp_source.html#l00169">CV_LOG_WARNING</a>, <a class="el" href="system_8cpp_source.html#l02201">cv::utils::getConfigurationParameterBool()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01058">isThreadSafe()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01058">isThreadSafe()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="ada1fdcf3d8011fa13c00e4273eb54c5a" name="ada1fdcf3d8011fa13c00e4273eb54c5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada1fdcf3d8011fa13c00e4273eb54c5a">&#9670;&#160;</a></span>LockCallBack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LockCallBack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> **</td>          <td class="paramname"><span class="paramname"><em>mutex</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVLockOp</td>          <td class="paramname"><span class="paramname"><em>op</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00913">913</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00789">ImplMutex::ImplMutex()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00892">ImplMutex::lock()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00913">LockCallBack()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00893">ImplMutex::unlock()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00995">InternalFFMpegRegister::InternalFFMpegRegister()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00913">LockCallBack()</a>.</p>
+
+</div>
+</div>
+<a id="a096cc40b0fe697197348d0a83b48e4b6" name="a096cc40b0fe697197348d0a83b48e4b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a096cc40b0fe697197348d0a83b48e4b6">&#9670;&#160;</a></span>to_avtb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t to_avtb </td>
+          <td>(</td>
+          <td class="paramtype">int64_t</td>          <td class="paramname"><span class="paramname"><em>ts</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AVRational</td>          <td class="paramname"><span class="paramname"><em>tb</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00527">527</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00150">av_make_q()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00527">to_avtb()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01635">CvCapture_FFMPEG::grabFrame()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00527">to_avtb()</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentación de variables</h2>
+<a id="a1831c7389c423828dc1526a1774f7a02" name="a1831c7389c423828dc1526a1774f7a02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1831c7389c423828dc1526a1774f7a02">&#9670;&#160;</a></span>_mutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_impl_mutex.html">ImplMutex</a> _mutex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00910">910</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l00963">InternalFFMpegRegister::init()</a>, <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l01066">CvCapture_FFMPEG::open()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03150">CvVideoWriter_FFMPEG::open()</a>.</p>
+
+</div>
+</div>
+<a id="a49368c5a2c228bf4c2e781a15b11fc81" name="a49368c5a2c228bf4c2e781a15b11fc81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49368c5a2c228bf4c2e781a15b11fc81">&#9670;&#160;</a></span>OPENCV_NO_FRAMES_WRITTEN_CODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int OPENCV_NO_FRAMES_WRITTEN_CODE = 1000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02701">2701</a> del archivo <a class="el" href="cap__ffmpeg__impl_8hpp_source.html">cap_ffmpeg_impl.hpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l03037">CvVideoWriter_FFMPEG::close()</a> y <a class="el" href="cap__ffmpeg__impl_8hpp_source.html#l02728">icv_av_write_frame_FFMPEG()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__ffmpeg__impl_8hpp.html">cap_ffmpeg_impl.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

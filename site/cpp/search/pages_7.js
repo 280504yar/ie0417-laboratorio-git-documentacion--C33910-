@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['c_20example_0',['Objective-C Example',['../interface_mat.html#autotoc_md44',1,'']]],
+  ['call_20chain_1',['Architecture &amp;amp; The Call Chain',['../api_hal.html#autotoc_md5',1,'']]],
+  ['camera_20models_2',['Camera models',['../group__stitching.html#autotoc_md73',1,'']]],
+  ['cameras_3',['Use 3rd party drivers or cameras',['../videoio_overview.html#autotoc_md85',1,'']]],
+  ['chain_4',['Architecture &amp;amp; The Call Chain',['../api_hal.html#autotoc_md5',1,'']]],
+  ['cie_20l_20a_20b_5',['RGB &amp;lt;-&amp;gt; CIE L*a*b*',['../imgproc_color_conversions.html#autotoc_md67',1,'']]],
+  ['cie_20l_20u_20v_6',['RGB &amp;lt;-&amp;gt; CIE L*u*v*',['../imgproc_color_conversions.html#autotoc_md68',1,'']]],
+  ['cie_20xyz_20rec_20709_20with_20d65_20white_20point_7',['RGB &amp;lt;-&amp;gt; CIE XYZ.Rec 709 with D65 white point',['../imgproc_color_conversions.html#autotoc_md62',1,'']]],
+  ['cmake_20configuration_20requirements_8',['3. CMake Configuration Requirements',['../api_hal.html#autotoc_md12',1,'']]],
+  ['color_20conversions_9',['Color conversions',['../imgproc_color_conversions.html',1,'']]],
+  ['combinations_10',['Depth combinations',['../group__imgproc__filter.html#autotoc_md70',1,'']]],
+  ['comparison_20operations_11',['Arithmetic, bitwise and comparison operations',['../group__core__hal__intrin.html#autotoc_md27',1,'']]],
+  ['compilation_20for_20different_20nvidia_20platforms_12',['Compilation for Different NVIDIA* Platforms',['../cuda_intro.html#autotoc_md1',1,'']]],
+  ['computation_13',['Perspective-n-Point (PnP) pose computation',['../calib3d_solve_pn_p.html',1,'']]],
+  ['computation_20methods_14',['Pose computation methods',['../calib3d_solve_pn_p.html#autotoc_md55',1,'']]],
+  ['computation_20overview_15',['Pose computation overview',['../calib3d_solve_pn_p.html#autotoc_md54',1,'']]],
+  ['concepts_16',['API Concepts',['../intro.html#autotoc_md15',1,'']]],
+  ['configuration_20requirements_17',['3. CMake Configuration Requirements',['../api_hal.html#autotoc_md12',1,'']]],
+  ['conversions_18',['Conversions',['../group__core__hal__intrin.html#autotoc_md30',1,'']]],
+  ['conversions_19',['Color conversions',['../imgproc_color_conversions.html',1,'']]],
+  ['cuda_20module_20introduction_20',['CUDA Module Introduction',['../cuda_intro.html',1,'']]],
+  ['custom_20hal_21',['Implementing a Custom HAL',['../api_hal.html#autotoc_md9',1,'']]],
+  ['cv_20namespace_22',['cv Namespace',['../intro.html#autotoc_md16',1,'']]]
+];

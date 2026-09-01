@@ -1,0 +1,7 @@
+var structcv_1_1_v_resize_linear_3_01uchar_00_01int_00_01short_00_01_fixed_pt_cast_3_01int_00_01uchafe3d3c6ffa65940fe16ecc34500b6c77 =
+[
+    [ "alpha_type", "structcv_1_1_v_resize_linear_3_01uchar_00_01int_00_01short_00_01_fixed_pt_cast_3_01int_00_01uchafe3d3c6ffa65940fe16ecc34500b6c77.html#af03e3efed1398d85b22bfdd98d9f9195", null ],
+    [ "buf_type", "structcv_1_1_v_resize_linear_3_01uchar_00_01int_00_01short_00_01_fixed_pt_cast_3_01int_00_01uchafe3d3c6ffa65940fe16ecc34500b6c77.html#a77150211955dc35dcc1495420a7c06ce", null ],
+    [ "value_type", "structcv_1_1_v_resize_linear_3_01uchar_00_01int_00_01short_00_01_fixed_pt_cast_3_01int_00_01uchafe3d3c6ffa65940fe16ecc34500b6c77.html#a99c75c96f68572614334dc7c54e37ce8", null ],
+    [ "operator()", "structcv_1_1_v_resize_linear_3_01uchar_00_01int_00_01short_00_01_fixed_pt_cast_3_01int_00_01uchafe3d3c6ffa65940fe16ecc34500b6c77.html#aa19f2fc29794f36defa58724c957b768", null ]
+];

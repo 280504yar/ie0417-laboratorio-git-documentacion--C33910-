@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['opconstructor_0',['OpConstructor',['../classcv_1_1dnn_1_1_layer_factory.html#ad1e0a6390d7b387583f39984fd442d25',1,'cv::dnn::LayerFactory']]],
+  ['opencv_5fapi_5fheader_1',['OpenCV_API_Header',['../group__core__lowlevel__api.html#gae453db1e4e2f8d317533f51227909d63',1,'llapi.h']]],
+  ['opencv_5fcore_5fparallel_5fplugin_5fapi_2',['OpenCV_Core_Parallel_Plugin_API',['../plugin__parallel__api_8hpp.html#ab3eb1cf6c005fd8a16eb6683419a63f0',1,'plugin_parallel_api.hpp']]],
+  ['opencv_5fcore_5fparallel_5fplugin_5fapi_5fv0_3',['OpenCV_Core_Parallel_Plugin_API_v0',['../plugin__parallel__api_8hpp.html#a850b3316c9721fb6082c603b5a97c8d6',1,'plugin_parallel_api.hpp']]],
+  ['opencv_5fdnn_5fplugin_5fapi_4',['OpenCV_DNN_Plugin_API',['../dnn_2src_2plugin__api_8hpp.html#a2b1c2b7a93f3168b92f29df9eddac12d',1,'plugin_api.hpp']]],
+  ['opencv_5fdnn_5fplugin_5fapi_5fv0_5',['OpenCV_DNN_Plugin_API_v0',['../dnn_2src_2plugin__api_8hpp.html#a5262c06c6818c5ce88661e995618106d',1,'plugin_api.hpp']]],
+  ['opencv_5fui_5fplugin_5fapi_6',['OpenCV_UI_Plugin_API',['../highgui_2src_2plugin__api_8hpp.html#a41337b3d26c619b02922e2934f4b7909',1,'plugin_api.hpp']]],
+  ['opencv_5fui_5fplugin_5fapi_5fv0_7',['OpenCV_UI_Plugin_API_v0',['../highgui_2src_2plugin__api_8hpp.html#a68a796bc6fbfc8864924047610fe6e44',1,'plugin_api.hpp']]],
+  ['opencv_5fvideoio_5fcapture_5fplugin_5fapi_8',['OpenCV_VideoIO_Capture_Plugin_API',['../plugin__capture__api_8hpp.html#a045ddb0662b4ec3b9f9e9ab1c1642310',1,'plugin_capture_api.hpp']]],
+  ['opencv_5fvideoio_5fcapture_5fplugin_5fapi_5fv1_5f0_9',['OpenCV_VideoIO_Capture_Plugin_API_v1_0',['../plugin__capture__api_8hpp.html#a80c31b81660ef42e5fe4a3cb23ef08d3',1,'plugin_capture_api.hpp']]],
+  ['opencv_5fvideoio_5fcapture_5fplugin_5fapi_5fv1_5f1_10',['OpenCV_VideoIO_Capture_Plugin_API_v1_1',['../plugin__capture__api_8hpp.html#a12b9f2962f141d0817033b5e776e2027',1,'plugin_capture_api.hpp']]],
+  ['opencv_5fvideoio_5fcapture_5fplugin_5fapi_5fv1_5f2_11',['OpenCV_VideoIO_Capture_Plugin_API_v1_2',['../plugin__capture__api_8hpp.html#a5111814ccb96c9babcad6ebdf0908647',1,'plugin_capture_api.hpp']]],
+  ['opencv_5fvideoio_5fplugin_5fapi_5fpreview_12',['OpenCV_VideoIO_Plugin_API_preview',['../videoio_2src_2plugin__api_8hpp.html#a058f981bc2e4e531cd5cfcf605614f8a',1,'plugin_api.hpp']]],
+  ['opencv_5fvideoio_5fplugin_5fapi_5fpreview_5fv0_13',['OpenCV_VideoIO_Plugin_API_preview_v0',['../videoio_2src_2plugin__api_8hpp.html#a898ed2900c9fa4e8a6ab09c3dab04768',1,'plugin_api.hpp']]],
+  ['opencv_5fvideoio_5fplugin_5fapi_5fpreview_5fv1_14',['OpenCV_VideoIO_Plugin_API_preview_v1',['../videoio_2src_2plugin__api_8hpp.html#ac0b88e7df689872cccc193a9878f46e7',1,'plugin_api.hpp']]],
+  ['opencv_5fvideoio_5fwriter_5fplugin_5fapi_15',['OpenCV_VideoIO_Writer_Plugin_API',['../plugin__writer__api_8hpp.html#aec8c0e43cd75557a000690778b0ba7c2',1,'plugin_writer_api.hpp']]],
+  ['opencv_5fvideoio_5fwriter_5fplugin_5fapi_5fv1_5f0_16',['OpenCV_VideoIO_Writer_Plugin_API_v1_0',['../plugin__writer__api_8hpp.html#ae299ae08f4989d4ec48cf0ec0e48924b',1,'plugin_writer_api.hpp']]],
+  ['opencv_5fvideoio_5fwriter_5fplugin_5fapi_5fv1_5f1_17',['OpenCV_VideoIO_Writer_Plugin_API_v1_1',['../plugin__writer__api_8hpp.html#a2b37aad4da34a89cff4e1837a298a2b7',1,'plugin_writer_api.hpp']]],
+  ['opengldrawcallback_18',['OpenGlDrawCallback',['../group__highgui.html#ga9399e738c28de6ddca6862e905bb98ef',1,'cv']]],
+  ['openglfreecallback_19',['OpenGlFreeCallback',['../group__highgui.html#ga48d3f2545940cba593773c90ec2ab650',1,'cv']]],
+  ['opfactory_5fimpl_20',['OpFactory_Impl',['../namespacecv_1_1dnn.html#acc015605b3bac3ba7098bf48a68bd7dd',1,'cv::dnn']]],
+  ['optional_21',['Optional',['../classopencv__onnx_1_1_type_proto.html#a41e5b063805c7e3bbe7968fc28ceb9ac',1,'opencv_onnx::TypeProto']]],
+  ['outputarray_22',['OutputArray',['../group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0',1,'cv::OutputArray'],['../namespacecvtest.html#aad17fda1d0f0d1ee069aebb1df2913c0',1,'cvtest::OutputArray']]],
+  ['outputarrayofarrays_23',['OutputArrayOfArrays',['../group__core__basic.html#ga889a09549b98223016170d9b613715de',1,'cv']]]
+];

@@ -1,0 +1,6 @@
+var structopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal =
+[
+    [ "[union].__unnamed0__", "unionopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal_1_1_0funion_0e_8____unnamed0____.html", "unionopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal_1_1_0funion_0e_8____unnamed0____" ],
+    [ "NodeDef_AttrEntry_DoNotUseDefaultTypeInternal", "structopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal.html#a8b7618b96b4d03486f25f4471c755510", null ],
+    [ "~NodeDef_AttrEntry_DoNotUseDefaultTypeInternal", "structopencv__tensorflow_1_1_node_def___attr_entry___do_not_use_default_type_internal.html#a3044a7bcf147dbe2f8bb93962eef14e3", null ]
+];

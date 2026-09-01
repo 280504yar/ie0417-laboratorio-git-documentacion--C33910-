@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_android_mediandk.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__android__mediandk_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo cap_android_mediandk.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="videoio_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;android/log.h&gt;</code><br />
+<code>#include &lt;android/native_window.h&gt;</code><br />
+<code>#include &quot;media/NdkMediaCodec.h&quot;</code><br />
+<code>#include &quot;media/NdkMediaMuxer.h&quot;</code><br />
+<code>#include &quot;media/NdkMediaExtractor.h&quot;</code><br />
+<code>#include &quot;media/NdkMediaFormat.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en cap_android_mediandk.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="cap__android__mediandk_8cpp__incl.svg" width="100%" height="544"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="cap__android__mediandk_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:AndroidMediaNdkCapture" id="r_AndroidMediaNdkCapture"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_android_media_ndk_capture.html">AndroidMediaNdkCapture</a></td></tr>
+<tr class="memitem:CV_5FFINAL" id="r_CV_5FFINAL"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_c_v___f_i_n_a_l.html">CV_FINAL</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:aeac6e5795cef1c6971bde245d54de5d5" id="r_aeac6e5795cef1c6971bde245d54de5d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aeac6e5795cef1c6971bde245d54de5d5">INPUT_TIMEOUT_MS</a>&#160;&#160;&#160;2000</td></tr>
+<tr class="memitem:a5f35c856b12bf7cc89e296c9973cd5c6" id="r_a5f35c856b12bf7cc89e296c9973cd5c6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5f35c856b12bf7cc89e296c9973cd5c6">COLOR_FormatUnknown</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:aeb3f6594e01ba608635ae36791890642" id="r_aeb3f6594e01ba608635ae36791890642"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aeb3f6594e01ba608635ae36791890642">COLOR_FormatYUV420Planar</a>&#160;&#160;&#160;19</td></tr>
+<tr class="memitem:a554446d6f44f5a6fce12933d864eada1" id="r_a554446d6f44f5a6fce12933d864eada1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a554446d6f44f5a6fce12933d864eada1">COLOR_FormatYUV420SemiPlanar</a>&#160;&#160;&#160;21</td></tr>
+<tr class="memitem:a7254cccf31784f3bd9503b086a97cac4" id="r_a7254cccf31784f3bd9503b086a97cac4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7254cccf31784f3bd9503b086a97cac4">COLOR_FormatSurface</a>&#160;&#160;&#160;0x7f000789</td></tr>
+<tr class="memitem:aebf04178b14c49c5661056b1813dc76a" id="r_aebf04178b14c49c5661056b1813dc76a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aebf04178b14c49c5661056b1813dc76a">FOURCC_BGR</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('B','G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','3')</td></tr>
+<tr class="memitem:a1849da3886777e7519ccecf3707e46ee" id="r_a1849da3886777e7519ccecf3707e46ee"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1849da3886777e7519ccecf3707e46ee">FOURCC_RGB</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','G','B','3')</td></tr>
+<tr class="memitem:ae3a05252bbfbe1a76e729f85cc576f7f" id="r_ae3a05252bbfbe1a76e729f85cc576f7f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae3a05252bbfbe1a76e729f85cc576f7f">FOURCC_BGRA</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('B','G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','4')</td></tr>
+<tr class="memitem:a15c5b6d7678eb24a4af42f5a2988b9fc" id="r_a15c5b6d7678eb24a4af42f5a2988b9fc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a15c5b6d7678eb24a4af42f5a2988b9fc">FOURCC_RGBA</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','G','B','4')</td></tr>
+<tr class="memitem:a9727a4edb30fd64a880cbd2d6fb9c15e" id="r_a9727a4edb30fd64a880cbd2d6fb9c15e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9727a4edb30fd64a880cbd2d6fb9c15e">FOURCC_GRAY</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','<a class="el" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>','Y')</td></tr>
+<tr class="memitem:a859d44a8a56d552bc6c3f1da0c474e82" id="r_a859d44a8a56d552bc6c3f1da0c474e82"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a859d44a8a56d552bc6c3f1da0c474e82">FOURCC_NV12</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>','V','1','2')</td></tr>
+<tr class="memitem:a619a6658111ff459af242d056a2e426d" id="r_a619a6658111ff459af242d056a2e426d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a619a6658111ff459af242d056a2e426d">FOURCC_YV12</a>&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('Y','V','1','2')</td></tr>
+<tr class="memitem:a766d24807d6cdb027a3db3ca21368981" id="r_a766d24807d6cdb027a3db3ca21368981"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a766d24807d6cdb027a3db3ca21368981">FOURCC_UNKNOWN</a>&#160;&#160;&#160;0xFFFFFFFF</td></tr>
+<tr class="memitem:afc3d101f633a076cc1ca84b85b6224b2" id="r_afc3d101f633a076cc1ca84b85b6224b2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#afc3d101f633a076cc1ca84b85b6224b2">TAG</a>&#160;&#160;&#160;&quot;NativeCodec&quot;</td></tr>
+<tr class="memitem:ab78bd305488c62caf8515ee765b1ed49" id="r_ab78bd305488c62caf8515ee765b1ed49"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab78bd305488c62caf8515ee765b1ed49">LOGV</a>(...)</td></tr>
+<tr class="memitem:ae02538a80ad5fc009caec73487d11a8d" id="r_ae02538a80ad5fc009caec73487d11a8d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(...)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ade93628da20a3ff7f1713b4ffa185ca4" id="r_ade93628da20a3ff7f1713b4ffa185ca4"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#ade93628da20a3ff7f1713b4ffa185ca4">deleter_AMediaExtractor</a> (AMediaExtractor *extractor)</td></tr>
+<tr class="memitem:a85a1d23ac50a932044ac4c97740922bc" id="r_a85a1d23ac50a932044ac4c97740922bc"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#a85a1d23ac50a932044ac4c97740922bc">deleter_AMediaCodec</a> (AMediaCodec *codec)</td></tr>
+<tr class="memitem:a648d96e5d0ee0dddbd1644d2cd75b7d1" id="r_a648d96e5d0ee0dddbd1644d2cd75b7d1"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="#a648d96e5d0ee0dddbd1644d2cd75b7d1">deleter_AMediaFormat</a> (AMediaFormat *format)</td></tr>
+</table>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentación de «define»</h2>
+<a id="a7254cccf31784f3bd9503b086a97cac4" name="a7254cccf31784f3bd9503b086a97cac4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7254cccf31784f3bd9503b086a97cac4">&#9670;&#160;</a></span>COLOR_FormatSurface</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COLOR_FormatSurface&#160;&#160;&#160;0x7f000789</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00027">27</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00623">CV_FINAL::open()</a>.</p>
+
+</div>
+</div>
+<a id="a5f35c856b12bf7cc89e296c9973cd5c6" name="a5f35c856b12bf7cc89e296c9973cd5c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f35c856b12bf7cc89e296c9973cd5c6">&#9670;&#160;</a></span>COLOR_FormatUnknown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COLOR_FormatUnknown&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00024">24</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00062">AndroidMediaNdkCapture::AndroidMediaNdkCapture()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="aeb3f6594e01ba608635ae36791890642" name="aeb3f6594e01ba608635ae36791890642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb3f6594e01ba608635ae36791890642">&#9670;&#160;</a></span>COLOR_FormatYUV420Planar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COLOR_FormatYUV420Planar&#160;&#160;&#160;19</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00025">25</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a554446d6f44f5a6fce12933d864eada1" name="a554446d6f44f5a6fce12933d864eada1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554446d6f44f5a6fce12933d864eada1">&#9670;&#160;</a></span>COLOR_FormatYUV420SemiPlanar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COLOR_FormatYUV420SemiPlanar&#160;&#160;&#160;21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00026">26</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00623">CV_FINAL::open()</a>, <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="aebf04178b14c49c5661056b1813dc76a" name="aebf04178b14c49c5661056b1813dc76a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf04178b14c49c5661056b1813dc76a">&#9670;&#160;</a></span>FOURCC_BGR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_BGR&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('B','G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','3')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00029">29</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00062">AndroidMediaNdkCapture::AndroidMediaNdkCapture()</a>, <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="ae3a05252bbfbe1a76e729f85cc576f7f" name="ae3a05252bbfbe1a76e729f85cc576f7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3a05252bbfbe1a76e729f85cc576f7f">&#9670;&#160;</a></span>FOURCC_BGRA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_BGRA&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('B','G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','4')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00031">31</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a9727a4edb30fd64a880cbd2d6fb9c15e" name="a9727a4edb30fd64a880cbd2d6fb9c15e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9727a4edb30fd64a880cbd2d6fb9c15e">&#9670;&#160;</a></span>FOURCC_GRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_GRAY&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('G','<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','<a class="el" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>','Y')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00033">33</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a859d44a8a56d552bc6c3f1da0c474e82" name="a859d44a8a56d552bc6c3f1da0c474e82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a859d44a8a56d552bc6c3f1da0c474e82">&#9670;&#160;</a></span>FOURCC_NV12</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_NV12&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="median__blur_8simd_8hpp.html#a0240ac851181b84ac374872dc5434ee4">N</a>','V','1','2')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00034">34</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a1849da3886777e7519ccecf3707e46ee" name="a1849da3886777e7519ccecf3707e46ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1849da3886777e7519ccecf3707e46ee">&#9670;&#160;</a></span>FOURCC_RGB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_RGB&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','G','B','3')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00030">30</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a15c5b6d7678eb24a4af42f5a2988b9fc" name="a15c5b6d7678eb24a4af42f5a2988b9fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c5b6d7678eb24a4af42f5a2988b9fc">&#9670;&#160;</a></span>FOURCC_RGBA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_RGBA&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('<a class="el" href="group__calib.html#ga4f54fd94c93832386eee74ac994176bb">R</a>','G','B','4')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00032">32</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a766d24807d6cdb027a3db3ca21368981" name="a766d24807d6cdb027a3db3ca21368981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766d24807d6cdb027a3db3ca21368981">&#9670;&#160;</a></span>FOURCC_UNKNOWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_UNKNOWN&#160;&#160;&#160;0xFFFFFFFF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00036">36</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="a619a6658111ff459af242d056a2e426d" name="a619a6658111ff459af242d056a2e426d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a619a6658111ff459af242d056a2e426d">&#9670;&#160;</a></span>FOURCC_YV12</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOURCC_YV12&#160;&#160;&#160;<a class="el" href="group__core__utils.html#gae50212337d3b05af7acb23d9efa611c3">CV_FOURCC_MACRO</a>('Y','V','1','2')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00035">35</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00242">AndroidMediaNdkCapture::setProperty()</a>.</p>
+
+</div>
+</div>
+<a id="aeac6e5795cef1c6971bde245d54de5d5" name="aeac6e5795cef1c6971bde245d54de5d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeac6e5795cef1c6971bde245d54de5d5">&#9670;&#160;</a></span>INPUT_TIMEOUT_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INPUT_TIMEOUT_MS&#160;&#160;&#160;2000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00022">22</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00090">AndroidMediaNdkCapture::decodeFrame()</a>.</p>
+
+</div>
+</div>
+<a id="ae02538a80ad5fc009caec73487d11a8d" name="ae02538a80ad5fc009caec73487d11a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae02538a80ad5fc009caec73487d11a8d">&#9670;&#160;</a></span>LOGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOGE</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">__android_log_print(ANDROID_LOG_ERROR, <a class="code hl_define" href="cap__android__camera_8cpp.html#afc3d101f633a076cc1ca84b85b6224b2">TAG</a>, __VA_ARGS__)</div>
+<div class="ttc" id="acap__android__camera_8cpp_html_afc3d101f633a076cc1ca84b85b6224b2"><div class="ttname"><a href="cap__android__camera_8cpp.html#afc3d101f633a076cc1ca84b85b6224b2">TAG</a></div><div class="ttdeci">#define TAG</div><div class="ttdef"><b>Definición</b> <a href="cap__android__camera_8cpp_source.html#l00022">cap_android_camera.cpp:22</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00042">42</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00280">AndroidMediaNdkCapture::initCapture()</a>, <a class="el" href="cap__android__mediandk_8cpp_source.html#l00623">CV_FINAL::open()</a>, <a class="el" href="cap__android__mediandk_8cpp_source.html#l00164">AndroidMediaNdkCapture::retrieveFrame()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00546">CV_FINAL::write()</a>.</p>
+
+</div>
+</div>
+<a id="ab78bd305488c62caf8515ee765b1ed49" name="ab78bd305488c62caf8515ee765b1ed49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab78bd305488c62caf8515ee765b1ed49">&#9670;&#160;</a></span>LOGV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOGV</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">__android_log_print(ANDROID_LOG_VERBOSE, <a class="code hl_define" href="cap__android__camera_8cpp.html#afc3d101f633a076cc1ca84b85b6224b2">TAG</a>, __VA_ARGS__)</div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00041">41</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00090">AndroidMediaNdkCapture::decodeFrame()</a>, <a class="el" href="cap__android__mediandk_8cpp_source.html#l00280">AndroidMediaNdkCapture::initCapture()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00623">CV_FINAL::open()</a>.</p>
+
+</div>
+</div>
+<a id="afc3d101f633a076cc1ca84b85b6224b2" name="afc3d101f633a076cc1ca84b85b6224b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc3d101f633a076cc1ca84b85b6224b2">&#9670;&#160;</a></span>TAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAG&#160;&#160;&#160;&quot;NativeCodec&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00040">40</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentación de funciones</h2>
+<a id="a85a1d23ac50a932044ac4c97740922bc" name="a85a1d23ac50a932044ac4c97740922bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a1d23ac50a932044ac4c97740922bc">&#9670;&#160;</a></span>deleter_AMediaCodec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> deleter_AMediaCodec </td>
+          <td>(</td>
+          <td class="paramtype">AMediaCodec *</td>          <td class="paramname"><span class="paramname"><em>codec</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00049">49</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__android__mediandk_8cpp_source.html#l00049">deleter_AMediaCodec()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00049">deleter_AMediaCodec()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00280">AndroidMediaNdkCapture::initCapture()</a>.</p>
+
+</div>
+</div>
+<a id="ade93628da20a3ff7f1713b4ffa185ca4" name="ade93628da20a3ff7f1713b4ffa185ca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade93628da20a3ff7f1713b4ffa185ca4">&#9670;&#160;</a></span>deleter_AMediaExtractor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> deleter_AMediaExtractor </td>
+          <td>(</td>
+          <td class="paramtype">AMediaExtractor *</td>          <td class="paramname"><span class="paramname"><em>extractor</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00045">45</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__android__mediandk_8cpp_source.html#l00045">deleter_AMediaExtractor()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00045">deleter_AMediaExtractor()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00280">AndroidMediaNdkCapture::initCapture()</a>.</p>
+
+</div>
+</div>
+<a id="a648d96e5d0ee0dddbd1644d2cd75b7d1" name="a648d96e5d0ee0dddbd1644d2cd75b7d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a648d96e5d0ee0dddbd1644d2cd75b7d1">&#9670;&#160;</a></span>deleter_AMediaFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> deleter_AMediaFormat </td>
+          <td>(</td>
+          <td class="paramtype">AMediaFormat *</td>          <td class="paramname"><span class="paramname"><em>format</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="cap__android__mediandk_8cpp_source.html#l00054">54</a> del archivo <a class="el" href="cap__android__mediandk_8cpp_source.html">cap_android_mediandk.cpp</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="cap__android__mediandk_8cpp_source.html#l00054">deleter_AMediaFormat()</a> y <a class="el" href="system_8cpp_source.html#l01115">cv::format()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="cap__android__mediandk_8cpp_source.html#l00090">AndroidMediaNdkCapture::decodeFrame()</a>, <a class="el" href="cap__android__mediandk_8cpp_source.html#l00054">deleter_AMediaFormat()</a> y <a class="el" href="cap__android__mediandk_8cpp_source.html#l00280">AndroidMediaNdkCapture::initCapture()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__android__mediandk_8cpp.html">cap_android_mediandk.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

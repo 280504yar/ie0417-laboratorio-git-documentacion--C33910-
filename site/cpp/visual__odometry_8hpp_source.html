@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/include/opencv2/ptcloud/slam/visual_odometry.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('visual__odometry_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">visual_odometry.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="visual__odometry_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef OPENCV_SLAM_VISUAL_ODOMETRY_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define OPENCV_SLAM_VISUAL_ODOMETRY_HPP</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="features_8hpp.html">opencv2/features.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp.html">opencv2/ptcloud/slam/types.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="map_8hpp.html">opencv2/ptcloud/slam/map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="odometry__params_8hpp.html">opencv2/ptcloud/slam/odometry_params.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1slam.html">slam</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html">   34</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a9f0ef3521b0df000fc8a9f70c08a0c6d">VisualOdometry</a></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a0f432a624a348946bf9f3773ee09088d">   37</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a0f432a624a348946bf9f3773ee09088d">~VisualOdometry</a>();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">static</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;VisualOdometry&gt;</a> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#aea0d56ca4350a5ba9805189979d0c33c">create</a>(</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Feature2D&gt;</a>&amp; detector,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;DescriptorMatcher&gt;</a>&amp; matcher,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#gaa599e73b974acb7eba1f2cc38f0df113">cameraMatrix</a>,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__calib.html#ga9762c6adc95626d6a94ac8388e27ade2">distCoeffs</a> = <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(),</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1slam_1_1_odometry_params.html">OdometryParams</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a> = <a class="code hl_struct" href="structcv_1_1slam_1_1_odometry_params.html">OdometryParams</a>());</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a8ab44c3cb9f795f0040f1970789c4197">   47</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a8ab44c3cb9f795f0040f1970789c4197">processFrame</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image) = 0;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#aaaee5343bcecdcf66cad0e43e3bf211d">   50</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#aaaee5343bcecdcf66cad0e43e3bf211d">reset</a>() = 0;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a1a5b3b4a8d74d64826c2a142e6878561">   52</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <a class="code hl_enumeration" href="group__slam.html#ga7c06a2c5a7fe6109a3bcec25eb72b249">OdometryState</a> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a1a5b3b4a8d74d64826c2a142e6878561">getState</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a2cb970d85c97b5823437890e9beac8d3">   53</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <a class="code hl_typedef" href="group__core__basic.html#ga366070cdc95233a6b6db521dfd99e713">Matx44d</a> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a2cb970d85c97b5823437890e9beac8d3">getLastPose</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a44300dfd600de7c26e789f55f1098195">   56</a></span>    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1slam_1_1_map.html">Map</a>&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a44300dfd600de7c26e789f55f1098195">getMap</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a9c895766ccfce54fda866df185de6d55">   60</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a9c895766ccfce54fda866df185de6d55">getNumKeyframes</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a7424bff7f49a3b98c57557ca8198778e">   64</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a7424bff7f49a3b98c57557ca8198778e">getNumMapPoints</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a6ac2e238bd9775b40591b9dc89d00aba">   66</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keyword">const</span> std::vector&lt;Matx44d&gt;&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a6ac2e238bd9775b40591b9dc89d00aba">getTrajectory</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a801710e4f4103d99e4d5bee4c3fe3ae0">   68</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1slam_1_1_odometry_params.html">OdometryParams</a>&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a801710e4f4103d99e4d5bee4c3fe3ae0">getParams</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a4f0fc4466cd3fe17cabc24ece8eef7ea">   69</a></span>    <a class="code hl_define" href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a4f0fc4466cd3fe17cabc24ece8eef7ea">setParams</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1slam_1_1_odometry_params.html">OdometryParams</a>&amp; <a class="code hl_variable" href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">params</a>) = 0;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_visual_odometry.html#a9f0ef3521b0df000fc8a9f70c08a0c6d">   72</a></span>    <a class="code hl_function" href="classcv_1_1slam_1_1_visual_odometry.html#a9f0ef3521b0df000fc8a9f70c08a0c6d">VisualOdometry</a>();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}} <span class="comment">// namespace cv::slam</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_SLAM_VISUAL_ODOMETRY_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html">cv::slam::Map</a></div><div class="ttdoc">Owns all persistent SLAM state (KeyFrames and MapPoints). Pointers from addKeyframe / addMapPoint are...</div><div class="ttdef"><b>Definición</b> <a href="map_8hpp_source.html#l00023">map.hpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a0f432a624a348946bf9f3773ee09088d"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a0f432a624a348946bf9f3773ee09088d">cv::slam::VisualOdometry::~VisualOdometry</a></div><div class="ttdeci">virtual ~VisualOdometry()</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a1a5b3b4a8d74d64826c2a142e6878561"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a1a5b3b4a8d74d64826c2a142e6878561">cv::slam::VisualOdometry::getState</a></div><div class="ttdeci">virtual CV_WRAP OdometryState getState() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a2cb970d85c97b5823437890e9beac8d3"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a2cb970d85c97b5823437890e9beac8d3">cv::slam::VisualOdometry::getLastPose</a></div><div class="ttdeci">virtual CV_WRAP Matx44d getLastPose() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a44300dfd600de7c26e789f55f1098195"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a44300dfd600de7c26e789f55f1098195">cv::slam::VisualOdometry::getMap</a></div><div class="ttdeci">virtual const Map &amp; getMap() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a4f0fc4466cd3fe17cabc24ece8eef7ea"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a4f0fc4466cd3fe17cabc24ece8eef7ea">cv::slam::VisualOdometry::setParams</a></div><div class="ttdeci">virtual CV_WRAP void setParams(const OdometryParams &amp;params)=0</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a6ac2e238bd9775b40591b9dc89d00aba"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a6ac2e238bd9775b40591b9dc89d00aba">cv::slam::VisualOdometry::getTrajectory</a></div><div class="ttdeci">virtual CV_WRAP const std::vector&lt; Matx44d &gt; &amp; getTrajectory() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a7424bff7f49a3b98c57557ca8198778e"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a7424bff7f49a3b98c57557ca8198778e">cv::slam::VisualOdometry::getNumMapPoints</a></div><div class="ttdeci">virtual CV_WRAP int getNumMapPoints() const =0</div><div class="ttdoc">Number of map points in the map. Convenience for callers (e.g. Python) that can&#39;t use getMap directly...</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a801710e4f4103d99e4d5bee4c3fe3ae0"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a801710e4f4103d99e4d5bee4c3fe3ae0">cv::slam::VisualOdometry::getParams</a></div><div class="ttdeci">virtual CV_WRAP const OdometryParams &amp; getParams() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a8ab44c3cb9f795f0040f1970789c4197"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a8ab44c3cb9f795f0040f1970789c4197">cv::slam::VisualOdometry::processFrame</a></div><div class="ttdeci">virtual CV_WRAP bool processFrame(InputArray image)=0</div><div class="ttdoc">Feed one image. Returns true if a pose was emitted.</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a9c895766ccfce54fda866df185de6d55"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a9c895766ccfce54fda866df185de6d55">cv::slam::VisualOdometry::getNumKeyframes</a></div><div class="ttdeci">virtual CV_WRAP int getNumKeyframes() const =0</div><div class="ttdoc">Number of keyframes in the map. Convenience for callers (e.g. Python) that can&#39;t use getMap directly.</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_a9f0ef3521b0df000fc8a9f70c08a0c6d"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#a9f0ef3521b0df000fc8a9f70c08a0c6d">cv::slam::VisualOdometry::VisualOdometry</a></div><div class="ttdeci">VisualOdometry()</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_aaaee5343bcecdcf66cad0e43e3bf211d"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#aaaee5343bcecdcf66cad0e43e3bf211d">cv::slam::VisualOdometry::reset</a></div><div class="ttdeci">virtual CV_WRAP void reset()=0</div><div class="ttdoc">Reset to NOT_INITIALIZED, clearing map and trajectory.</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_visual_odometry_html_aea0d56ca4350a5ba9805189979d0c33c"><div class="ttname"><a href="classcv_1_1slam_1_1_visual_odometry.html#aea0d56ca4350a5ba9805189979d0c33c">cv::slam::VisualOdometry::create</a></div><div class="ttdeci">static CV_WRAP Ptr&lt; VisualOdometry &gt; create(const Ptr&lt; Feature2D &gt; &amp;detector, const Ptr&lt; DescriptorMatcher &gt; &amp;matcher, InputArray cameraMatrix, InputArray distCoeffs=noArray(), const OdometryParams &amp;params=OdometryParams())</div><div class="ttdef"><b>Definición</b> <a href="visual__odometry_8cpp_source.html#l00018">visual_odometry.cpp:18</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="afeatures_8hpp_html"><div class="ttname"><a href="features_8hpp.html">features.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_ga9762c6adc95626d6a94ac8388e27ade2"><div class="ttname"><a href="group__calib.html#ga9762c6adc95626d6a94ac8388e27ade2">cv::distCoeffs</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray InputOutputArray distCoeffs</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00692">calib.hpp:692</a></div></div>
+<div class="ttc" id="agroup__calib_html_gaa599e73b974acb7eba1f2cc38f0df113"><div class="ttname"><a href="group__calib.html#gaa599e73b974acb7eba1f2cc38f0df113">cv::cameraMatrix</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray cameraMatrix</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00692">calib.hpp:692</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga366070cdc95233a6b6db521dfd99e713"><div class="ttname"><a href="group__core__basic.html#ga366070cdc95233a6b6db521dfd99e713">cv::Matx44d</a></div><div class="ttdeci">Matx&lt; double, 4, 4 &gt; Matx44d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00265">matx.hpp:265</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gad9287b23bba2fed753b36ef561ae7346"><div class="ttname"><a href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">cv::noArray</a></div><div class="ttdeci">CV_EXPORTS InputOutputArray noArray()</div><div class="ttdoc">Returns an empty InputArray or OutputArray.</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l02476">matrix_wrap.cpp:2476</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga67ea671a3582ce612ac3c281e067f480"><div class="ttname"><a href="group__core__utils.html#ga67ea671a3582ce612ac3c281e067f480">CV_EXPORTS_W</a></div><div class="ttdeci">#define CV_EXPORTS_W</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00483">cvdef.h:483</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gae435babf3ce7cca990524b23adf6b4a3"><div class="ttname"><a href="group__core__utils.html#gae435babf3ce7cca990524b23adf6b4a3">CV_WRAP</a></div><div class="ttdeci">#define CV_WRAP</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00493">cvdef.h:493</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_gaee57ed8d85a48ee8b8afc8639f6c25d3"><div class="ttname"><a href="group__imgproc__filter.html#gaee57ed8d85a48ee8b8afc8639f6c25d3">cv::params</a></div><div class="ttdeci">OutputArray InputArray const Filter2DParams &amp; params</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01451">imgproc.hpp:1451</a></div></div>
+<div class="ttc" id="agroup__slam_html_ga7c06a2c5a7fe6109a3bcec25eb72b249"><div class="ttname"><a href="group__slam.html#ga7c06a2c5a7fe6109a3bcec25eb72b249">cv::slam::OdometryState</a></div><div class="ttdeci">OdometryState</div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_source.html#l00023">types.hpp:24</a></div></div>
+<div class="ttc" id="amap_8hpp_html"><div class="ttname"><a href="map_8hpp.html">map.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1slam_html"><div class="ttname"><a href="namespacecv_1_1slam.html">cv::slam</a></div><div class="ttdef"><b>Definición</b> <a href="map_8hpp_source.html#l00016">map.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aodometry__params_8hpp_html"><div class="ttname"><a href="odometry__params_8hpp.html">odometry_params.hpp</a></div></div>
+<div class="ttc" id="aptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_html"><div class="ttname"><a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp.html">types.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_odometry_params_html"><div class="ttname"><a href="structcv_1_1slam_1_1_odometry_params.html">cv::slam::OdometryParams</a></div><div class="ttdoc">Tunable parameters for visual odometry: initialization, tracking, keyframe selection,...</div><div class="ttdef"><b>Definición</b> <a href="odometry__params_8hpp_source.html#l00019">odometry_params.hpp:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_a9037f4ed1ec75d0caf55d2711bc72b6.html">include</a></li><li class="navelem"><a href="dir_1de3aac8aad9fd9856fd56fd06b84f4c.html">opencv2</a></li><li class="navelem"><a href="dir_dd715dc039d82cfb809eded872f873c9.html">ptcloud</a></li><li class="navelem"><a href="dir_146e752ce612cadeb05178fd909adcf8.html">slam</a></li><li class="navelem"><a href="visual__odometry_8hpp.html">visual_odometry.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/aruco/apriltag/zmaxheap.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('zmaxheap_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">zmaxheap.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="zmaxheap_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2013-2016, The Regents of The University of Michigan.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// This software was developed in the APRIL Robotics Lab under the</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// direction of Edwin Olson, ebolson@umich.edu. This software may be</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// available under alternative licensing terms; contact the address above.</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// The views and conclusions contained in the software and documentation are those</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// of the authors and should not be interpreted as representing official policies,</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// either expressed or implied, of the Regents of The University of Michigan.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef _OPENCV_ZMAXHEAP_HPP_</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define _OPENCV_ZMAXHEAP_HPP_</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1aruco.html">aruco</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">   19</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1aruco_1_1zmaxheap.html">zmaxheap</a> <a class="code hl_typedef" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">zmaxheap_t</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespacecv_1_1aruco.html#ab5d63d59c65a5d40aac5d935ef8ec4b8">   21</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1aruco_1_1zmaxheap__iterator.html">zmaxheap_iterator</a> <a class="code hl_typedef" href="namespacecv_1_1aruco.html#ab5d63d59c65a5d40aac5d935ef8ec4b8">zmaxheap_iterator_t</a>;</div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1zmaxheap__iterator.html">   22</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1aruco_1_1zmaxheap__iterator.html">zmaxheap_iterator</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1zmaxheap__iterator.html#acdb211fa648c617d39efbdeb1863a20c">   23</a></span>    <a class="code hl_typedef" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">zmaxheap_t</a> *<a class="code hl_variable" href="structcv_1_1aruco_1_1zmaxheap__iterator.html#acdb211fa648c617d39efbdeb1863a20c">heap</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structcv_1_1aruco_1_1zmaxheap__iterator.html#a4758ea9204ae1cea178ea68024ac19aa">   24</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1aruco_1_1zmaxheap__iterator.html#a4758ea9204ae1cea178ea68024ac19aa">in</a>, <a class="code hl_variable" href="structcv_1_1aruco_1_1zmaxheap__iterator.html#a23efa4bbe7d05e868421f829dcffb539">out</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><a class="code hl_typedef" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">zmaxheap_t</a> *<a class="code hl_function" href="namespacecv_1_1aruco.html#abbff5edb0753da63186b1c9f7b7537f0">zmaxheap_create</a>(<span class="keywordtype">size_t</span> el_sz);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1aruco.html#a1741775b7fe891f5922ae65d2bb25a4e">zmaxheap_destroy</a>(<a class="code hl_typedef" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">zmaxheap_t</a> *heap);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1aruco.html#a2e80c460ea656ccfd790fc721c2ec820">zmaxheap_add</a>(<a class="code hl_typedef" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">zmaxheap_t</a> *heap, <span class="keywordtype">void</span> *p, <span class="keywordtype">float</span> v);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// returns 0 if the heap is empty, so you can do</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// while (zmaxheap_remove_max(...)) { }</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1aruco.html#a9158905edbffe8b330fc42362d9f38ca">zmaxheap_remove_max</a>(<a class="code hl_typedef" href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">zmaxheap_t</a> *heap, <span class="keywordtype">void</span> *p, <span class="keywordtype">float</span> *v);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html"><div class="ttname"><a href="namespacecv_1_1aruco.html">cv::aruco</a></div><div class="ttdef"><b>Definición</b> <a href="aruco__board_8hpp_source.html#l00010">aruco_board.hpp:10</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html_a11f08d3c8226fdd3d8c9ce1f07c962e0"><div class="ttname"><a href="namespacecv_1_1aruco.html#a11f08d3c8226fdd3d8c9ce1f07c962e0">cv::aruco::zmaxheap_t</a></div><div class="ttdeci">struct zmaxheap zmaxheap_t</div><div class="ttdef"><b>Definición</b> <a href="#l00019">zmaxheap.hpp:19</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html_a1741775b7fe891f5922ae65d2bb25a4e"><div class="ttname"><a href="namespacecv_1_1aruco.html#a1741775b7fe891f5922ae65d2bb25a4e">cv::aruco::zmaxheap_destroy</a></div><div class="ttdeci">void zmaxheap_destroy(zmaxheap_t *heap)</div><div class="ttdef"><b>Definición</b> <a href="zmaxheap_8cpp_source.html#l00083">zmaxheap.cpp:83</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html_a2e80c460ea656ccfd790fc721c2ec820"><div class="ttname"><a href="namespacecv_1_1aruco.html#a2e80c460ea656ccfd790fc721c2ec820">cv::aruco::zmaxheap_add</a></div><div class="ttdeci">void zmaxheap_add(zmaxheap_t *heap, void *p, float v)</div><div class="ttdef"><b>Definición</b> <a href="zmaxheap_8cpp_source.html#l00111">zmaxheap.cpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html_a9158905edbffe8b330fc42362d9f38ca"><div class="ttname"><a href="namespacecv_1_1aruco.html#a9158905edbffe8b330fc42362d9f38ca">cv::aruco::zmaxheap_remove_max</a></div><div class="ttdeci">int zmaxheap_remove_max(zmaxheap_t *heap, void *p, float *v)</div><div class="ttdef"><b>Definición</b> <a href="zmaxheap_8cpp_source.html#l00201">zmaxheap.cpp:201</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html_ab5d63d59c65a5d40aac5d935ef8ec4b8"><div class="ttname"><a href="namespacecv_1_1aruco.html#ab5d63d59c65a5d40aac5d935ef8ec4b8">cv::aruco::zmaxheap_iterator_t</a></div><div class="ttdeci">struct zmaxheap_iterator zmaxheap_iterator_t</div><div class="ttdef"><b>Definición</b> <a href="#l00021">zmaxheap.hpp:21</a></div></div>
+<div class="ttc" id="anamespacecv_1_1aruco_html_abbff5edb0753da63186b1c9f7b7537f0"><div class="ttname"><a href="namespacecv_1_1aruco.html#abbff5edb0753da63186b1c9f7b7537f0">cv::aruco::zmaxheap_create</a></div><div class="ttdeci">zmaxheap_t * zmaxheap_create(size_t el_sz)</div><div class="ttdef"><b>Definición</b> <a href="zmaxheap_8cpp_source.html#l00070">zmaxheap.cpp:70</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1zmaxheap__iterator_html"><div class="ttname"><a href="structcv_1_1aruco_1_1zmaxheap__iterator.html">cv::aruco::zmaxheap_iterator</a></div><div class="ttdef"><b>Definición</b> <a href="#l00022">zmaxheap.hpp:22</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1zmaxheap__iterator_html_a23efa4bbe7d05e868421f829dcffb539"><div class="ttname"><a href="structcv_1_1aruco_1_1zmaxheap__iterator.html#a23efa4bbe7d05e868421f829dcffb539">cv::aruco::zmaxheap_iterator::out</a></div><div class="ttdeci">int out</div><div class="ttdef"><b>Definición</b> <a href="#l00024">zmaxheap.hpp:24</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1zmaxheap__iterator_html_a4758ea9204ae1cea178ea68024ac19aa"><div class="ttname"><a href="structcv_1_1aruco_1_1zmaxheap__iterator.html#a4758ea9204ae1cea178ea68024ac19aa">cv::aruco::zmaxheap_iterator::in</a></div><div class="ttdeci">int in</div><div class="ttdef"><b>Definición</b> <a href="#l00024">zmaxheap.hpp:24</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1zmaxheap__iterator_html_acdb211fa648c617d39efbdeb1863a20c"><div class="ttname"><a href="structcv_1_1aruco_1_1zmaxheap__iterator.html#acdb211fa648c617d39efbdeb1863a20c">cv::aruco::zmaxheap_iterator::heap</a></div><div class="ttdeci">zmaxheap_t * heap</div><div class="ttdef"><b>Definición</b> <a href="#l00023">zmaxheap.hpp:23</a></div></div>
+<div class="ttc" id="astructcv_1_1aruco_1_1zmaxheap_html"><div class="ttname"><a href="structcv_1_1aruco_1_1zmaxheap.html">cv::aruco::zmaxheap</a></div><div class="ttdef"><b>Definición</b> <a href="zmaxheap_8cpp_source.html#l00032">zmaxheap.cpp:33</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_e7b726b7d34261edef3afb35449b8fc1.html">aruco</a></li><li class="navelem"><a href="dir_bbf94555630977a25df97921491378bb.html">apriltag</a></li><li class="navelem"><a href="zmaxheap_8hpp.html">zmaxheap.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+var classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected =
+[
+    [ "FullyConnected", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a4f92b540a4afb5a99487941426da09f5", null ],
+    [ "FullyConnected", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a4f92b540a4afb5a99487941426da09f5", null ],
+    [ "operator()", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a274907cfa72071ee4cbfa5f2106108cb", null ],
+    [ "operator()", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a274907cfa72071ee4cbfa5f2106108cb", null ],
+    [ "run", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a877d589d44ac27df88c518fa09df8412", null ],
+    [ "run", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#abd0a29b637737d84e4f90077f3cf404b", null ],
+    [ "activ", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#afc9b3246837f518c95fd9058c099beb1", null ],
+    [ "activ", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a2cefd936cd8c6903edc0a79885b4da99", null ],
+    [ "activationLUT", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a9d939f7bcdf467b83c290c6493ef6ccb", null ],
+    [ "biasMat", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#ab7d3ce38be2f2aac6df76291507e6236", null ],
+    [ "dstMat", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a49480355f5648c6450962544ebdf9b7b", null ],
+    [ "nstripes", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a32d7aa6362d581629f482f84631768bc", null ],
+    [ "outputMultiplier", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a080c5510c49f63924187c2c92ca55d43", null ],
+    [ "outZp", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a94421b332efa388088395ddf821f9782", null ],
+    [ "srcMat", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a9b018562083b926fa8e0f824a03a8f61", null ],
+    [ "useAVX", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#ac222cdd233f8e2290fb954f1c5a7fba8", null ],
+    [ "useAVX2", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a5e85875746965306caabc7122178d836", null ],
+    [ "useAVX512", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a909426a295b9ab548c3be61803eacaa8", null ],
+    [ "useLASX", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#af4446082552e19ec1798d64d8769c6f3", null ],
+    [ "useRVV", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a36ebf6aae8ee710d44ba5425eb217739", null ],
+    [ "useSVE", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a81efa6703d1a62809d5a4b1ea174ad80", null ],
+    [ "weights", "classcv_1_1dnn_1_1_c_v___f_i_n_a_l_1_1_fully_connected.html#a3ddee7e66a3eb92102b595fbded84964", null ]
+];

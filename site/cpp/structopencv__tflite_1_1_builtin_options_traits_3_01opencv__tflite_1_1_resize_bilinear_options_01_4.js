@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_resize_bilinear_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_resize_bilinear_options_01_4.html#ac7fc993aa547f5db631d4098e6830572", null ]
+];

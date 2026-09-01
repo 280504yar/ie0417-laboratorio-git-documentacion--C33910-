@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/elementwise_layers.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('layers_2elementwise__layers_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo elementwise_layers.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="dnn_2src_2precomp_8hpp_source.html">../precomp.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="layers_2layers__common_8hpp_source.html">layers_common.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="op__cuda_8hpp_source.html">../op_cuda.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="op__inf__engine_8hpp_source.html">../op_inf_engine.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ie__ngraph_8hpp_source.html">../ie_ngraph.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="op__vkcom_8hpp_source.html">../op_vkcom.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="op__webnn_8hpp_source.html">../op_webnn.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="op__cann_8hpp_source.html">../op_cann.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="shape__utils_8hpp_source.html">opencv2/dnn/shape_utils.hpp</a>&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;cfenv&gt;</code><br />
+<code>#include &lt;<a class="el" href="logger_8hpp_source.html">opencv2/core/utils/logger.hpp</a>&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en elementwise_layers.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="layers_2elementwise__layers_8cpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="layers_2elementwise__layers_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20Func_20_3E" id="r_cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20Func_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_element_wise_int_dispatch.html">cv::dnn::ElementWiseIntDispatch&lt; Func &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AIntAbsOp" id="r_cv_3A_3Adnn_3A_3AIntAbsOp"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_int_abs_op.html">cv::dnn::IntAbsOp</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AIntSignOp" id="r_cv_3A_3Adnn_3A_3AIntSignOp"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_int_sign_op.html">cv::dnn::IntSignOp</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AElementWiseLayer_3C_20Func_20_3E" id="r_cv_3A_3Adnn_3A_3AElementWiseLayer_3C_20Func_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1dnn_1_1_element_wise_layer.html">cv::dnn::ElementWiseLayer&lt; Func &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AElementWiseLayer_3C_20Func_20_3E_3A_3APBody" id="r_cv_3A_3Adnn_3A_3AElementWiseLayer_3C_20Func_20_3E_3A_3APBody"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1dnn_1_1_element_wise_layer_1_1_p_body.html">cv::dnn::ElementWiseLayer&lt; Func &gt;::PBody</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ABaseFunctor" id="r_cv_3A_3Adnn_3A_3ABaseFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_base_functor.html">cv::dnn::BaseFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AReLUFunctor" id="r_cv_3A_3Adnn_3A_3AReLUFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_re_l_u_functor.html">cv::dnn::ReLUFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AReLU6Functor" id="r_cv_3A_3Adnn_3A_3AReLU6Functor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_re_l_u6_functor.html">cv::dnn::ReLU6Functor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ABaseDefaultFunctor_3C_20T_20_3E" id="r_cv_3A_3Adnn_3A_3ABaseDefaultFunctor_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_base_default_functor.html">cv::dnn::BaseDefaultFunctor&lt; T &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AGeluFunctor" id="r_cv_3A_3Adnn_3A_3AGeluFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_gelu_functor.html">cv::dnn::GeluFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AGeluApproximationFunctor" id="r_cv_3A_3Adnn_3A_3AGeluApproximationFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_gelu_approximation_functor.html">cv::dnn::GeluApproximationFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ATanHFunctor" id="r_cv_3A_3Adnn_3A_3ATanHFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_tan_h_functor.html">cv::dnn::TanHFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASwishFunctor" id="r_cv_3A_3Adnn_3A_3ASwishFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_swish_functor.html">cv::dnn::SwishFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AMishFunctor" id="r_cv_3A_3Adnn_3A_3AMishFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_mish_functor.html">cv::dnn::MishFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASigmoidFunctor" id="r_cv_3A_3Adnn_3A_3ASigmoidFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_sigmoid_functor.html">cv::dnn::SigmoidFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AELUFunctor" id="r_cv_3A_3Adnn_3A_3AELUFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_e_l_u_functor.html">cv::dnn::ELUFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAbsValFunctor" id="r_cv_3A_3Adnn_3A_3AAbsValFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_abs_val_functor.html">cv::dnn::AbsValFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20AbsValFunctor_20_3E" id="r_cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20AbsValFunctor_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_element_wise_int_dispatch_3_01_abs_val_functor_01_4.html">cv::dnn::ElementWiseIntDispatch&lt; AbsValFunctor &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ABNLLFunctor" id="r_cv_3A_3Adnn_3A_3ABNLLFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_b_n_l_l_functor.html">cv::dnn::BNLLFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ACeilFunctor" id="r_cv_3A_3Adnn_3A_3ACeilFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_ceil_functor.html">cv::dnn::CeilFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AFloorFunctor" id="r_cv_3A_3Adnn_3A_3AFloorFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_floor_functor.html">cv::dnn::FloorFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ALogFunctor" id="r_cv_3A_3Adnn_3A_3ALogFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_log_functor.html">cv::dnn::LogFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ARoundFunctor" id="r_cv_3A_3Adnn_3A_3ARoundFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_round_functor.html">cv::dnn::RoundFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASqrtFunctor" id="r_cv_3A_3Adnn_3A_3ASqrtFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_sqrt_functor.html">cv::dnn::SqrtFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAcosFunctor" id="r_cv_3A_3Adnn_3A_3AAcosFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_acos_functor.html">cv::dnn::AcosFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAcoshFunctor" id="r_cv_3A_3Adnn_3A_3AAcoshFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_acosh_functor.html">cv::dnn::AcoshFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAsinFunctor" id="r_cv_3A_3Adnn_3A_3AAsinFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_asin_functor.html">cv::dnn::AsinFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAsinhFunctor" id="r_cv_3A_3Adnn_3A_3AAsinhFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_asinh_functor.html">cv::dnn::AsinhFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAtanFunctor" id="r_cv_3A_3Adnn_3A_3AAtanFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_atan_functor.html">cv::dnn::AtanFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AAtanhFunctor" id="r_cv_3A_3Adnn_3A_3AAtanhFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_atanh_functor.html">cv::dnn::AtanhFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ACosFunctor" id="r_cv_3A_3Adnn_3A_3ACosFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_cos_functor.html">cv::dnn::CosFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ACoshFunctor" id="r_cv_3A_3Adnn_3A_3ACoshFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_cosh_functor.html">cv::dnn::CoshFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AErfFunctor" id="r_cv_3A_3Adnn_3A_3AErfFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_erf_functor.html">cv::dnn::ErfFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AHardSwishFunctor" id="r_cv_3A_3Adnn_3A_3AHardSwishFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_hard_swish_functor.html">cv::dnn::HardSwishFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASinFunctor" id="r_cv_3A_3Adnn_3A_3ASinFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_sin_functor.html">cv::dnn::SinFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASinhFunctor" id="r_cv_3A_3Adnn_3A_3ASinhFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_sinh_functor.html">cv::dnn::SinhFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASoftplusFunctor" id="r_cv_3A_3Adnn_3A_3ASoftplusFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_softplus_functor.html">cv::dnn::SoftplusFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASoftsignFunctor" id="r_cv_3A_3Adnn_3A_3ASoftsignFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_softsign_functor.html">cv::dnn::SoftsignFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ATanFunctor" id="r_cv_3A_3Adnn_3A_3ATanFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_tan_functor.html">cv::dnn::TanFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ACeluFunctor" id="r_cv_3A_3Adnn_3A_3ACeluFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_celu_functor.html">cv::dnn::CeluFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AHardSigmoidFunctor" id="r_cv_3A_3Adnn_3A_3AHardSigmoidFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_hard_sigmoid_functor.html">cv::dnn::HardSigmoidFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASeluFunctor" id="r_cv_3A_3Adnn_3A_3ASeluFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_selu_functor.html">cv::dnn::SeluFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AThresholdedReluFunctor" id="r_cv_3A_3Adnn_3A_3AThresholdedReluFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_thresholded_relu_functor.html">cv::dnn::ThresholdedReluFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3APowerFunctor" id="r_cv_3A_3Adnn_3A_3APowerFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_power_functor.html">cv::dnn::PowerFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20PowerFunctor_20_3E" id="r_cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20PowerFunctor_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_element_wise_int_dispatch_3_01_power_functor_01_4.html">cv::dnn::ElementWiseIntDispatch&lt; PowerFunctor &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AExpFunctor" id="r_cv_3A_3Adnn_3A_3AExpFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_exp_functor.html">cv::dnn::ExpFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AChannelsPReLUFunctor" id="r_cv_3A_3Adnn_3A_3AChannelsPReLUFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_channels_p_re_l_u_functor.html">cv::dnn::ChannelsPReLUFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3APReLUFunctor" id="r_cv_3A_3Adnn_3A_3APReLUFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_p_re_l_u_functor.html">cv::dnn::PReLUFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ASignFunctor" id="r_cv_3A_3Adnn_3A_3ASignFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_sign_functor.html">cv::dnn::SignFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20SignFunctor_20_3E" id="r_cv_3A_3Adnn_3A_3AElementWiseIntDispatch_3C_20SignFunctor_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_element_wise_int_dispatch_3_01_sign_functor_01_4.html">cv::dnn::ElementWiseIntDispatch&lt; SignFunctor &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AShrinkFunctor" id="r_cv_3A_3Adnn_3A_3AShrinkFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_shrink_functor.html">cv::dnn::ShrinkFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AReciprocalFunctor" id="r_cv_3A_3Adnn_3A_3AReciprocalFunctor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1dnn_1_1_reciprocal_functor.html">cv::dnn::ReciprocalFunctor</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3ACV_5FFINAL_3C_20BaseLayer_20_3E" id="r_cv_3A_3Adnn_3A_3ACV_5FFINAL_3C_20BaseLayer_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1dnn_1_1_c_v___f_i_n_a_l.html">cv::dnn::CV_FINAL&lt; BaseLayer &gt;</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Espacios de nombres</h2></td></tr>
+<tr class="memitem:cv" id="r_cv"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html">cv</a></td></tr>
+<tr class="memdesc:namespacecv"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file is part of OpenCV project. <br /></td></tr>
+<tr class="memitem:cv_3A_3Adnn" id="r_cv_3A_3Adnn"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html">cv::dnn</a></td></tr>
+<tr class="memitem:cv_3A_3Adnn_3A_3AGeluApproximationConstants" id="r_cv_3A_3Adnn_3A_3AGeluApproximationConstants"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn_1_1_gelu_approximation_constants.html">cv::dnn::GeluApproximationConstants</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a75ee3fb3d1dd8d5ab8412b4087efda72" id="r_a75ee3fb3d1dd8d5ab8412b4087efda72"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a75ee3fb3d1dd8d5ab8412b4087efda72">cv::dnn::isIntegerDepth</a> (int depth)</td></tr>
+<tr class="memitem:a2d3ade96727bbe678c3cb084da25e707" id="r_a2d3ade96727bbe678c3cb084da25e707"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a2d3ade96727bbe678c3cb084da25e707">cv::dnn::isUnsignedDepth</a> (int depth)</td></tr>
+<tr class="memitem:a9402c210b0a0b5b4809d34a807e77634" id="r_a9402c210b0a0b5b4809d34a807e77634"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt; </td></tr>
+<tr class="memitem:a9402c210b0a0b5b4809d34a807e77634 template"><td class="memItemLeft">static <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a9402c210b0a0b5b4809d34a807e77634">cv::dnn::intAbs</a> (<a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, std::true_type)</td></tr>
+<tr class="memitem:a6acb7c21d619c05f9ac19a5d7155a4b2" id="r_a6acb7c21d619c05f9ac19a5d7155a4b2"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt; </td></tr>
+<tr class="memitem:a6acb7c21d619c05f9ac19a5d7155a4b2 template"><td class="memItemLeft">static <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a6acb7c21d619c05f9ac19a5d7155a4b2">cv::dnn::intAbs</a> (<a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, std::false_type)</td></tr>
+<tr class="memitem:aad8fae1eceab1c31f56b1bb4c085aaa3" id="r_aad8fae1eceab1c31f56b1bb4c085aaa3"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt; </td></tr>
+<tr class="memitem:aad8fae1eceab1c31f56b1bb4c085aaa3 template"><td class="memItemLeft">static <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#aad8fae1eceab1c31f56b1bb4c085aaa3">cv::dnn::intSign</a> (<a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, std::true_type)</td></tr>
+<tr class="memitem:a907f4640b32d242cb8c5affdb5740a38" id="r_a907f4640b32d242cb8c5affdb5740a38"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&gt; </td></tr>
+<tr class="memitem:a907f4640b32d242cb8c5affdb5740a38 template"><td class="memItemLeft">static <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a907f4640b32d242cb8c5affdb5740a38">cv::dnn::intSign</a> (<a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, std::false_type)</td></tr>
+<tr class="memitem:a4ea7ed71de0ce1fab889d5adbb9a6790" id="r_a4ea7ed71de0ce1fab889d5adbb9a6790"><td class="memTemplParams" colspan="2">template&lt;typename Body&gt; </td></tr>
+<tr class="memitem:a4ea7ed71de0ce1fab889d5adbb9a6790 template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a4ea7ed71de0ce1fab889d5adbb9a6790">cv::dnn::blockedParallelFor</a> (<a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> total, Body &amp;&amp;body)</td></tr>
+<tr class="memitem:a0b606732312546b6b7bffe18196723ff" id="r_a0b606732312546b6b7bffe18196723ff"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, typename Op&gt; </td></tr>
+<tr class="memitem:a0b606732312546b6b7bffe18196723ff template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a0b606732312546b6b7bffe18196723ff">cv::dnn::intUnaryKernel</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst)</td></tr>
+<tr class="memitem:af5c30b4335b2f88664ed7d5837febc89" id="r_af5c30b4335b2f88664ed7d5837febc89"><td class="memTemplParams" colspan="2">template&lt;typename Op&gt; </td></tr>
+<tr class="memitem:af5c30b4335b2f88664ed7d5837febc89 template"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#af5c30b4335b2f88664ed7d5837febc89">cv::dnn::intUnaryDispatch</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, <a class="el" href="interface_mat.html">Mat</a> &amp;dst)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aeb75f0a71574e516e7ee09a4523f7eda" id="r_aeb75f0a71574e516e7ee09a4523f7eda"><td class="memItemLeft">static constexpr float&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn_1_1_gelu_approximation_constants.html#aeb75f0a71574e516e7ee09a4523f7eda">cv::dnn::GeluApproximationConstants::sqrt_2_pi</a> = 0.7978845834732056f</td></tr>
+<tr class="memitem:a94606378af93fdea72136ac76b248aa2" id="r_a94606378af93fdea72136ac76b248aa2"><td class="memItemLeft">static constexpr float&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn_1_1_gelu_approximation_constants.html#a94606378af93fdea72136ac76b248aa2">cv::dnn::GeluApproximationConstants::coef_sqrt_2_pi</a> = 0.044714998453855515f * <a class="el" href="namespacecv_1_1dnn_1_1_gelu_approximation_constants.html#aeb75f0a71574e516e7ee09a4523f7eda">sqrt_2_pi</a></td></tr>
+<tr class="memitem:ace5ef707453e68b42dffaad9d6ecdf44" id="r_ace5ef707453e68b42dffaad9d6ecdf44"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ace5ef707453e68b42dffaad9d6ecdf44 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#ace5ef707453e68b42dffaad9d6ecdf44">cv::dnn::BaseDefaultFunctor&lt; GeluApproximationFunctor &gt;::ocl_kernel_name</a> = &quot;GeluApproximationForward&quot;</td></tr>
+<tr class="memitem:acf4786ebe1c2e654b488d9a0382d8239" id="r_acf4786ebe1c2e654b488d9a0382d8239"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:acf4786ebe1c2e654b488d9a0382d8239 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#acf4786ebe1c2e654b488d9a0382d8239">cv::dnn::BaseDefaultFunctor&lt; CeilFunctor &gt;::ocl_kernel_name</a> = &quot;CeilForward&quot;</td></tr>
+<tr class="memitem:ad546ac02fce1b4142d4a2e27a8d899e2" id="r_ad546ac02fce1b4142d4a2e27a8d899e2"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ad546ac02fce1b4142d4a2e27a8d899e2 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#ad546ac02fce1b4142d4a2e27a8d899e2">cv::dnn::BaseDefaultFunctor&lt; FloorFunctor &gt;::ocl_kernel_name</a> = &quot;FloorForward&quot;</td></tr>
+<tr class="memitem:a7b75a907b1de2b64a0c54fbc45474b8e" id="r_a7b75a907b1de2b64a0c54fbc45474b8e"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a7b75a907b1de2b64a0c54fbc45474b8e template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a7b75a907b1de2b64a0c54fbc45474b8e">cv::dnn::BaseDefaultFunctor&lt; LogFunctor &gt;::ocl_kernel_name</a> = &quot;LogForward&quot;</td></tr>
+<tr class="memitem:aba9679bbcc98b4eae3dee5830e8d3e4b" id="r_aba9679bbcc98b4eae3dee5830e8d3e4b"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:aba9679bbcc98b4eae3dee5830e8d3e4b template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#aba9679bbcc98b4eae3dee5830e8d3e4b">cv::dnn::BaseDefaultFunctor&lt; RoundFunctor &gt;::ocl_kernel_name</a> = &quot;RoundForward&quot;</td></tr>
+<tr class="memitem:a543aba8f1a4603bc5009f60fcf01b70c" id="r_a543aba8f1a4603bc5009f60fcf01b70c"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a543aba8f1a4603bc5009f60fcf01b70c template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a543aba8f1a4603bc5009f60fcf01b70c">cv::dnn::BaseDefaultFunctor&lt; SqrtFunctor &gt;::ocl_kernel_name</a> = &quot;SqrtForward&quot;</td></tr>
+<tr class="memitem:a8f2ff41542bac44ad35f4cef0adeddb0" id="r_a8f2ff41542bac44ad35f4cef0adeddb0"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a8f2ff41542bac44ad35f4cef0adeddb0 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a8f2ff41542bac44ad35f4cef0adeddb0">cv::dnn::BaseDefaultFunctor&lt; AcosFunctor &gt;::ocl_kernel_name</a> = &quot;AcosForward&quot;</td></tr>
+<tr class="memitem:a1ffa5e3b8dab3c4734e3f8e803f2572e" id="r_a1ffa5e3b8dab3c4734e3f8e803f2572e"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a1ffa5e3b8dab3c4734e3f8e803f2572e template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a1ffa5e3b8dab3c4734e3f8e803f2572e">cv::dnn::BaseDefaultFunctor&lt; AcoshFunctor &gt;::ocl_kernel_name</a> = &quot;AcoshForward&quot;</td></tr>
+<tr class="memitem:a5c99a8d1bd96e062727f5397758bba1e" id="r_a5c99a8d1bd96e062727f5397758bba1e"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a5c99a8d1bd96e062727f5397758bba1e template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a5c99a8d1bd96e062727f5397758bba1e">cv::dnn::BaseDefaultFunctor&lt; AsinFunctor &gt;::ocl_kernel_name</a> = &quot;AsinForward&quot;</td></tr>
+<tr class="memitem:aaa0939c355c8dce188f8894f2723efe1" id="r_aaa0939c355c8dce188f8894f2723efe1"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:aaa0939c355c8dce188f8894f2723efe1 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#aaa0939c355c8dce188f8894f2723efe1">cv::dnn::BaseDefaultFunctor&lt; AsinhFunctor &gt;::ocl_kernel_name</a> = &quot;AsinhForward&quot;</td></tr>
+<tr class="memitem:ac209a6364db8e43a9f07f0a29e4d4496" id="r_ac209a6364db8e43a9f07f0a29e4d4496"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ac209a6364db8e43a9f07f0a29e4d4496 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#ac209a6364db8e43a9f07f0a29e4d4496">cv::dnn::BaseDefaultFunctor&lt; AtanFunctor &gt;::ocl_kernel_name</a> = &quot;AtanForward&quot;</td></tr>
+<tr class="memitem:a3231782d1a65658040fc16c6a164af7f" id="r_a3231782d1a65658040fc16c6a164af7f"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a3231782d1a65658040fc16c6a164af7f template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a3231782d1a65658040fc16c6a164af7f">cv::dnn::BaseDefaultFunctor&lt; AtanhFunctor &gt;::ocl_kernel_name</a> = &quot;AtanhForward&quot;</td></tr>
+<tr class="memitem:a528588f77dc01bcfc6091ee8fcc07d07" id="r_a528588f77dc01bcfc6091ee8fcc07d07"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a528588f77dc01bcfc6091ee8fcc07d07 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a528588f77dc01bcfc6091ee8fcc07d07">cv::dnn::BaseDefaultFunctor&lt; CosFunctor &gt;::ocl_kernel_name</a> = &quot;CosForward&quot;</td></tr>
+<tr class="memitem:a3417719083c191ffe35bc29895a32039" id="r_a3417719083c191ffe35bc29895a32039"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a3417719083c191ffe35bc29895a32039 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a3417719083c191ffe35bc29895a32039">cv::dnn::BaseDefaultFunctor&lt; CoshFunctor &gt;::ocl_kernel_name</a> = &quot;CoshForward&quot;</td></tr>
+<tr class="memitem:a0432550e2592f96a537d6e786cdec10e" id="r_a0432550e2592f96a537d6e786cdec10e"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a0432550e2592f96a537d6e786cdec10e template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a0432550e2592f96a537d6e786cdec10e">cv::dnn::BaseDefaultFunctor&lt; ErfFunctor &gt;::ocl_kernel_name</a> = &quot;ErfForward&quot;</td></tr>
+<tr class="memitem:aefe56e4297c362bcbdcc5ab8eb4cd1e6" id="r_aefe56e4297c362bcbdcc5ab8eb4cd1e6"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:aefe56e4297c362bcbdcc5ab8eb4cd1e6 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#aefe56e4297c362bcbdcc5ab8eb4cd1e6">cv::dnn::BaseDefaultFunctor&lt; HardSwishFunctor &gt;::ocl_kernel_name</a> = &quot;HardSwishForward&quot;</td></tr>
+<tr class="memitem:ac19516d42523adcc151177afa489bb74" id="r_ac19516d42523adcc151177afa489bb74"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ac19516d42523adcc151177afa489bb74 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#ac19516d42523adcc151177afa489bb74">cv::dnn::BaseDefaultFunctor&lt; SinFunctor &gt;::ocl_kernel_name</a> = &quot;SinForward&quot;</td></tr>
+<tr class="memitem:a6ab53fa7680a886aaea8e00482b534e2" id="r_a6ab53fa7680a886aaea8e00482b534e2"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a6ab53fa7680a886aaea8e00482b534e2 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a6ab53fa7680a886aaea8e00482b534e2">cv::dnn::BaseDefaultFunctor&lt; SinhFunctor &gt;::ocl_kernel_name</a> = &quot;SinhForward&quot;</td></tr>
+<tr class="memitem:a18d0bc37026f2bb8e0038da4ed3bce44" id="r_a18d0bc37026f2bb8e0038da4ed3bce44"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a18d0bc37026f2bb8e0038da4ed3bce44 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a18d0bc37026f2bb8e0038da4ed3bce44">cv::dnn::BaseDefaultFunctor&lt; SoftplusFunctor &gt;::ocl_kernel_name</a> = &quot;SoftplusForward&quot;</td></tr>
+<tr class="memitem:ab5085fdfca6dbbc1949e7fbddb74edcb" id="r_ab5085fdfca6dbbc1949e7fbddb74edcb"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ab5085fdfca6dbbc1949e7fbddb74edcb template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#ab5085fdfca6dbbc1949e7fbddb74edcb">cv::dnn::BaseDefaultFunctor&lt; SoftsignFunctor &gt;::ocl_kernel_name</a> = &quot;SoftsignForward&quot;</td></tr>
+<tr class="memitem:a5c75b01508442583c576406e55dc2964" id="r_a5c75b01508442583c576406e55dc2964"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a5c75b01508442583c576406e55dc2964 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a5c75b01508442583c576406e55dc2964">cv::dnn::BaseDefaultFunctor&lt; TanFunctor &gt;::ocl_kernel_name</a> = &quot;TanForward&quot;</td></tr>
+<tr class="memitem:adebd1dbc8d9d73064dca7a03f655d098" id="r_adebd1dbc8d9d73064dca7a03f655d098"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:adebd1dbc8d9d73064dca7a03f655d098 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#adebd1dbc8d9d73064dca7a03f655d098">cv::dnn::BaseDefaultFunctor&lt; CeluFunctor &gt;::ocl_kernel_name</a> = &quot;CeluForward&quot;</td></tr>
+<tr class="memitem:a4b9a07cf6d0de2fddc1348d19aa4d5d9" id="r_a4b9a07cf6d0de2fddc1348d19aa4d5d9"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a4b9a07cf6d0de2fddc1348d19aa4d5d9 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#a4b9a07cf6d0de2fddc1348d19aa4d5d9">cv::dnn::BaseDefaultFunctor&lt; HardSigmoidFunctor &gt;::ocl_kernel_name</a> = &quot;HardSigmoidForward&quot;</td></tr>
+<tr class="memitem:af4f564d77bb5364844308378128665cd" id="r_af4f564d77bb5364844308378128665cd"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:af4f564d77bb5364844308378128665cd template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#af4f564d77bb5364844308378128665cd">cv::dnn::BaseDefaultFunctor&lt; SeluFunctor &gt;::ocl_kernel_name</a> = &quot;SeluForward&quot;</td></tr>
+<tr class="memitem:af3e16a45168bfdc210eadfdd2ff67637" id="r_af3e16a45168bfdc210eadfdd2ff67637"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:af3e16a45168bfdc210eadfdd2ff67637 template"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1dnn.html#af3e16a45168bfdc210eadfdd2ff67637">cv::dnn::BaseDefaultFunctor&lt; ThresholdedReluFunctor &gt;::ocl_kernel_name</a> = &quot;ThresholdedReluForward&quot;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="layers_2elementwise__layers_8cpp.html">elementwise_layers.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

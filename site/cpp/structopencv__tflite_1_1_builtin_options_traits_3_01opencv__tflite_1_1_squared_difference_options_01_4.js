@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_squared_difference_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_squared_difference_options_01_4.html#adc9aa479f190d205e0e1cab2b2131bb9", null ]
+];

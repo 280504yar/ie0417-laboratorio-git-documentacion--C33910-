@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/features/src/feature2d.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('feature2d_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">feature2d.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="feature2d_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                          License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="features_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">using </span>std::vector;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#a0f448d9e162337f285dc075e29dd018b">   50</a></span><a class="code hl_function" href="classcv_1_1_feature2_d.html#a0f448d9e162337f285dc075e29dd018b">Feature2D::~Feature2D</a>() {}</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> * Detect keypoints in an image.</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> * image        The image.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> * keypoints    The detected keypoints.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> * mask         Mask specifying where to look for keypoints (optional). Must be a char</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> *              matrix with non-zero values in the region of interest.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51ddfb8764e3a6830c853fb463499ac8">Feature2D::detect</a>( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                        std::vector&lt;KeyPoint&gt;&amp; keypoints,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                        <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a> )</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span>( image.empty() )</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        keypoints.clear();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_function" href="classcv_1_1_feature2_d.html#ad94bb74ce0461aa4c041893645ff27cf">detectAndCompute</a>(image, <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, keypoints, <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51ddfb8764e3a6830c853fb463499ac8">Feature2D::detect</a>( <a class="code hl_typedef" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> images,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                        std::vector&lt;std::vector&lt;KeyPoint&gt; &gt;&amp; keypoints,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                        <a class="code hl_typedef" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> masks )</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>{</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">int</span> nimages = (int)images.total();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">if</span> (!masks.empty())</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(masks.total() == (<span class="keywordtype">size_t</span>)nimages);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    keypoints.resize(nimages);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (images.isMatVector())</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>       <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; nimages; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>       {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>           <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51ddfb8764e3a6830c853fb463499ac8">detect</a>(images.getMat(i), keypoints[i], masks.empty() ? <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>() : masks.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>(i));</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>       }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="comment">// assume UMats</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; nimages; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51ddfb8764e3a6830c853fb463499ac8">detect</a>(images.getUMat(i), keypoints[i], masks.empty() ? <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>() : masks.<a class="code hl_function" href="classcv_1_1___input_array.html#af38304bf253a127c66685593237dee29">getUMat</a>(i));</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"> * Compute the descriptors for a set of keypoints in an image.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"> * image        The image.</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"> * keypoints    The input keypoints. Keypoints for which a descriptor cannot be computed are removed.</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"> * descriptors  Copmputed descriptors. Row i is the descriptor for keypoint i.</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51d05a3b1eb5676be22c5fedd72c81bd">Feature2D::compute</a>( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                         std::vector&lt;KeyPoint&gt;&amp; keypoints,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                         <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> descriptors )</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>{</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="group__stitching__match.html#gac970419e5c62180f6cc48851d0815830">image</a>.empty() )</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        descriptors.release();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_function" href="classcv_1_1_feature2_d.html#ad94bb74ce0461aa4c041893645ff27cf">detectAndCompute</a>(image, <a class="code hl_function" href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">noArray</a>(), keypoints, descriptors, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51d05a3b1eb5676be22c5fedd72c81bd">Feature2D::compute</a>( <a class="code hl_typedef" href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">InputArrayOfArrays</a> images,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                         std::vector&lt;std::vector&lt;KeyPoint&gt; &gt;&amp; keypoints,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                         <a class="code hl_typedef" href="group__core__basic.html#ga889a09549b98223016170d9b613715de">OutputArrayOfArrays</a> descriptors )</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>{</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">if</span>( !descriptors.needed() )</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordtype">int</span> nimages = (int)images.total();</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( keypoints.size() == (<span class="keywordtype">size_t</span>)nimages );</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="comment">// resize descriptors to appropriate size and compute</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span> (descriptors.isMatVector())</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        vector&lt;Mat&gt;&amp; vec = *(vector&lt;Mat&gt;*)descriptors.getObj();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        vec.resize(nimages);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; nimages; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51d05a3b1eb5676be22c5fedd72c81bd">compute</a>(images.getMat(i), keypoints[i], vec[i]);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (descriptors.isUMatVector())</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        vector&lt;UMat&gt;&amp; vec = *(vector&lt;UMat&gt;*)descriptors.getObj();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        vec.resize(nimages);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; nimages; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++)</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <a class="code hl_function" href="classcv_1_1_feature2_d.html#a51d05a3b1eb5676be22c5fedd72c81bd">compute</a>(images.getUMat(i), keypoints[i], vec[i]);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">Error::StsBadArg</a>, <span class="stringliteral">&quot;descriptors must be vector&lt;Mat&gt; or vector&lt;UMat&gt;&quot;</span>);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">/* Detects keypoints and computes the descriptors */</span></div>
+<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#ad94bb74ce0461aa4c041893645ff27cf">  167</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#ad94bb74ce0461aa4c041893645ff27cf">Feature2D::detectAndCompute</a>( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a>, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a>,</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                                  std::vector&lt;KeyPoint&gt;&amp;,</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                                  <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a>,</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                                  <span class="keywordtype">bool</span> )</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>{</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">Error::StsNotImplemented</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
+</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="foldopen" id="foldopen00177" data-start="{" data-end="}">
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#a856b4bc1303a7ee8fcec452c7c62f969">  177</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a856b4bc1303a7ee8fcec452c7c62f969">Feature2D::write</a>( <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp; fileName )<span class="keyword"> const</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a> <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>(fileName, <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da747a241cefee7b8af34c3d804c864ad6">FileStorage::WRITE</a>);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <a class="code hl_function" href="classcv_1_1_feature2_d.html#a856b4bc1303a7ee8fcec452c7c62f969">write</a>(<a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}</div>
+</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#a84382d745ea4b4fee70ed2e665ad1b61">  183</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a84382d745ea4b4fee70ed2e665ad1b61">Feature2D::read</a>( <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a>&amp; fileName )</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>{</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a> <a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>(fileName, <a class="code hl_enumvalue" href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">FileStorage::READ</a>);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <a class="code hl_function" href="classcv_1_1_feature2_d.html#a84382d745ea4b4fee70ed2e665ad1b61">read</a>(<a class="code hl_namespace" href="namespacecv_1_1fs.html">fs</a>.root());</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>}</div>
+</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#acbe076e0e166b12376f2ce0f0b66ca0d">  189</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a856b4bc1303a7ee8fcec452c7c62f969">Feature2D::write</a>( <a class="code hl_class" href="classcv_1_1_file_storage.html">FileStorage</a>&amp;)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>}</div>
+</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#ac18f8439d88271003b1198d4f871e634">  193</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a84382d745ea4b4fee70ed2e665ad1b61">Feature2D::read</a>( <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_file_node.html">FileNode</a>&amp;)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>{</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
+</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#aef961e413f12d30de0d227362cd583b9">  197</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#aef961e413f12d30de0d227362cd583b9">Feature2D::descriptorSize</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>}</div>
+</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="foldopen" id="foldopen00202" data-start="{" data-end="}">
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#aa6b146e63d690fe59884ae2edf2e6e1b">  202</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#aa6b146e63d690fe59884ae2edf2e6e1b">Feature2D::descriptorType</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>}</div>
+</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#a74afd7afe5fe673efda9cfcb6f89bd83">  207</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a74afd7afe5fe673efda9cfcb6f89bd83">Feature2D::defaultNorm</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordtype">int</span> tp = <a class="code hl_function" href="classcv_1_1_feature2_d.html#aa6b146e63d690fe59884ae2edf2e6e1b">descriptorType</a>();</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">return</span> tp == <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a> ? <a class="code hl_enumvalue" href="group__core__array.html#ggad12cefbcb5291cf958a85b4b67b6149fa4b063afd04aebb8dd07085a1207da727">NORM_HAMMING</a> : <a class="code hl_enumvalue" href="group__core__array.html#ggad12cefbcb5291cf958a85b4b67b6149fa7bacbe84d400336a8f26297d8e80e3a2">NORM_L2</a>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>}</div>
+</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">// Return true if detector object is empty</span></div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#a6c5c4791f5c0d0aa4def302ddde50de2">  214</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a6c5c4791f5c0d0aa4def302ddde50de2">Feature2D::empty</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>}</div>
+</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="foldopen" id="foldopen00219" data-start="{" data-end="}">
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">  219</a></span><a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> <a class="code hl_function" href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">Feature2D::getDefaultName</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;Feature2D&quot;</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>}</div>
+</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>}</div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a9c09739ca3e0ce212e2ab8374aa2f195"><div class="ttname"><a href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">cv::_InputArray::getMat</a></div><div class="ttdeci">Mat getMat(int idx=-1) const</div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_af38304bf253a127c66685593237dee29"><div class="ttname"><a href="classcv_1_1___input_array.html#af38304bf253a127c66685593237dee29">cv::_InputArray::getUMat</a></div><div class="ttdeci">UMat getUMat(int idx=-1) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l00182">matrix_wrap.cpp:182</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a0f448d9e162337f285dc075e29dd018b"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a0f448d9e162337f285dc075e29dd018b">cv::Feature2D::~Feature2D</a></div><div class="ttdeci">virtual ~Feature2D()</div><div class="ttdef"><b>Definición</b> <a href="#l00050">feature2d.cpp:50</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a342b15bfee06d992c2f67158cc6dc4d5"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">cv::Feature2D::getDefaultName</a></div><div class="ttdeci">virtual CV_WRAP String getDefaultName() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00219">feature2d.cpp:219</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a51d05a3b1eb5676be22c5fedd72c81bd"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a51d05a3b1eb5676be22c5fedd72c81bd">cv::Feature2D::compute</a></div><div class="ttdeci">virtual CV_WRAP void compute(InputArray image, CV_OUT CV_IN_OUT std::vector&lt; KeyPoint &gt; &amp;keypoints, OutputArray descriptors)</div><div class="ttdoc">Computes the descriptors for a set of keypoints detected in an image (first variant) or image set (se...</div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a51ddfb8764e3a6830c853fb463499ac8"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a51ddfb8764e3a6830c853fb463499ac8">cv::Feature2D::detect</a></div><div class="ttdeci">virtual CV_WRAP void detect(InputArray image, CV_OUT std::vector&lt; KeyPoint &gt; &amp;keypoints, InputArray mask=noArray())</div><div class="ttdoc">Detects keypoints in an image (first variant) or image set (second variant).</div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a6c5c4791f5c0d0aa4def302ddde50de2"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a6c5c4791f5c0d0aa4def302ddde50de2">cv::Feature2D::empty</a></div><div class="ttdeci">virtual CV_WRAP bool empty() const CV_OVERRIDE</div><div class="ttdoc">Return true if detector object is empty.</div><div class="ttdef"><b>Definición</b> <a href="#l00214">feature2d.cpp:214</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a74afd7afe5fe673efda9cfcb6f89bd83"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a74afd7afe5fe673efda9cfcb6f89bd83">cv::Feature2D::defaultNorm</a></div><div class="ttdeci">virtual CV_WRAP int defaultNorm() const</div><div class="ttdef"><b>Definición</b> <a href="#l00207">feature2d.cpp:207</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a84382d745ea4b4fee70ed2e665ad1b61"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a84382d745ea4b4fee70ed2e665ad1b61">cv::Feature2D::read</a></div><div class="ttdeci">CV_WRAP void read(const String &amp;fileName)</div><div class="ttdef"><b>Definición</b> <a href="#l00183">feature2d.cpp:183</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a856b4bc1303a7ee8fcec452c7c62f969"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a856b4bc1303a7ee8fcec452c7c62f969">cv::Feature2D::write</a></div><div class="ttdeci">CV_WRAP void write(const String &amp;fileName) const</div><div class="ttdef"><b>Definición</b> <a href="#l00177">feature2d.cpp:177</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_aa6b146e63d690fe59884ae2edf2e6e1b"><div class="ttname"><a href="classcv_1_1_feature2_d.html#aa6b146e63d690fe59884ae2edf2e6e1b">cv::Feature2D::descriptorType</a></div><div class="ttdeci">virtual CV_WRAP int descriptorType() const</div><div class="ttdef"><b>Definición</b> <a href="#l00202">feature2d.cpp:202</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_ad94bb74ce0461aa4c041893645ff27cf"><div class="ttname"><a href="classcv_1_1_feature2_d.html#ad94bb74ce0461aa4c041893645ff27cf">cv::Feature2D::detectAndCompute</a></div><div class="ttdeci">virtual CV_WRAP void detectAndCompute(InputArray image, InputArray mask, CV_OUT std::vector&lt; KeyPoint &gt; &amp;keypoints, OutputArray descriptors, bool useProvidedKeypoints=false)</div><div class="ttdef"><b>Definición</b> <a href="#l00167">feature2d.cpp:167</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_aef961e413f12d30de0d227362cd583b9"><div class="ttname"><a href="classcv_1_1_feature2_d.html#aef961e413f12d30de0d227362cd583b9">cv::Feature2D::descriptorSize</a></div><div class="ttdeci">virtual CV_WRAP int descriptorSize() const</div><div class="ttdef"><b>Definición</b> <a href="#l00197">feature2d.cpp:197</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_node_html"><div class="ttname"><a href="classcv_1_1_file_node.html">cv::FileNode</a></div><div class="ttdoc">File Storage Node class.</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00447">persistence.hpp:448</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html"><div class="ttname"><a href="classcv_1_1_file_storage.html">cv::FileStorage</a></div><div class="ttdoc">XML/YAML/JSON file storage class that encapsulates all the information necessary for writing or readi...</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00260">persistence.hpp:261</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html_a973e41cb75ef6230412a567723b7482da747a241cefee7b8af34c3d804c864ad6"><div class="ttname"><a href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482da747a241cefee7b8af34c3d804c864ad6">cv::FileStorage::WRITE</a></div><div class="ttdeci">@ WRITE</div><div class="ttdoc">value, open the file for writing</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00267">persistence.hpp:267</a></div></div>
+<div class="ttc" id="aclasscv_1_1_file_storage_html_a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed"><div class="ttname"><a href="classcv_1_1_file_storage.html#a973e41cb75ef6230412a567723b7482daa0dcc459c4d100c35ccfa9a643827bed">cv::FileStorage::READ</a></div><div class="ttdeci">@ READ</div><div class="ttdoc">value, open the file for reading</div><div class="ttdef"><b>Definición</b> <a href="include_2opencv2_2core_2persistence_8hpp_source.html#l00266">persistence.hpp:266</a></div></div>
+<div class="ttc" id="afeatures_2src_2precomp_8hpp_html"><div class="ttname"><a href="features_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ggad12cefbcb5291cf958a85b4b67b6149fa4b063afd04aebb8dd07085a1207da727"><div class="ttname"><a href="group__core__array.html#ggad12cefbcb5291cf958a85b4b67b6149fa4b063afd04aebb8dd07085a1207da727">cv::NORM_HAMMING</a></div><div class="ttdeci">@ NORM_HAMMING</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00133">base.hpp:133</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ggad12cefbcb5291cf958a85b4b67b6149fa7bacbe84d400336a8f26297d8e80e3a2"><div class="ttname"><a href="group__core__array.html#ggad12cefbcb5291cf958a85b4b67b6149fa7bacbe84d400336a8f26297d8e80e3a2">cv::NORM_L2</a></div><div class="ttdeci">@ NORM_L2</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00119">base.hpp:119</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga606feabe3b50ab6838f1ba89727aa07a"><div class="ttname"><a href="group__core__basic.html#ga606feabe3b50ab6838f1ba89727aa07a">cv::InputArrayOfArrays</a></div><div class="ttdeci">InputArray InputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00588">mat.hpp:588</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga889a09549b98223016170d9b613715de"><div class="ttname"><a href="group__core__basic.html#ga889a09549b98223016170d9b613715de">cv::OutputArrayOfArrays</a></div><div class="ttdeci">OutputArray OutputArrayOfArrays</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00590">mat.hpp:590</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gad9287b23bba2fed753b36ef561ae7346"><div class="ttname"><a href="group__core__basic.html#gad9287b23bba2fed753b36ef561ae7346">cv::noArray</a></div><div class="ttdeci">CV_EXPORTS InputOutputArray noArray()</div><div class="ttdoc">Returns an empty InputArray or OutputArray.</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l02476">matrix_wrap.cpp:2476</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__stitching__match_html_gac970419e5c62180f6cc48851d0815830"><div class="ttname"><a href="group__stitching__match.html#gac970419e5c62180f6cc48851d0815830">cv::detail::image</a></div><div class="ttdeci">InputArray image</div><div class="ttdef"><b>Definición</b> <a href="matchers_8hpp_source.html#l00088">matchers.hpp:88</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">cv::Error::StsNotImplemented</a></div><div class="ttdeci">@ StsNotImplemented</div><div class="ttdoc">the requested function/feature is not implemented</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00063">exception.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaaf587497af64537041ee62c04a92b755d">cv::Error::StsBadArg</a></div><div class="ttdeci">@ StsBadArg</div><div class="ttdoc">function arg/param is bad</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00024">exception.hpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_1_1fs_html"><div class="ttname"><a href="namespacecv_1_1fs.html">cv::fs</a></div><div class="ttdef"><b>Definición</b> <a href="persistence_8cpp_source.html#l00019">persistence.cpp:20</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a3f4c9888bcfa4a6e9150cbcfb39fc480"><div class="ttname"><a href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">parser_cl.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00052">parser_cl.py:52</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_42fc4c00be4dc0fac92759a97eddf1c7.html">features</a></li><li class="navelem"><a href="dir_a53baf90590c6cd83f3293daa50f4abb.html">src</a></li><li class="navelem"><a href="feature2d_8cpp.html">feature2d.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

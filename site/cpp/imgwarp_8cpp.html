@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del archivo C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/imgproc/src/imgwarp.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('imgwarp_8cpp.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo imgwarp.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="imgproc_2src_2precomp_8hpp_source.html">precomp.hpp</a>&quot;</code><br />
+<code>#include &quot;opencl_kernels_imgproc.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="imgproc_2src_2hal__replacement_8hpp_source.html">hal_replacement.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="configuration_8private_8hpp_source.html">opencv2/core/utils/configuration.private.hpp</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="intrin_8hpp_source.html">opencv2/core/hal/intrin.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="softfloat_8hpp_source.html">opencv2/core/softfloat.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="imgwarp_8hpp_source.html">imgwarp.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="warp__common_8hpp_source.html">warp_common.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="warp__kernels_8simd_8hpp_source.html">warp_kernels.simd.hpp</a>&quot;</code><br />
+<code>#include &quot;warp_kernels.simd_declarations.hpp&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en imgwarp.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="imgwarp_8cpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="imgwarp_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:cv_3A_3ACast_3C_20ST_2C_20DT_20_3E" id="r_cv_3A_3ACast_3C_20ST_2C_20DT_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_cast.html">cv::Cast&lt; ST, DT &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3AFixedPtCast_3C_20ST_2C_20DT_2C_20bits_20_3E" id="r_cv_3A_3AFixedPtCast_3C_20ST_2C_20DT_2C_20bits_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_fixed_pt_cast.html">cv::FixedPtCast&lt; ST, DT, bits &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3ARemapNoVec_3C_20bool_20_3E" id="r_cv_3A_3ARemapNoVec_3C_20bool_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcv_1_1_remap_no_vec.html">cv::RemapNoVec&lt; bool &gt;</a></td></tr>
+<tr class="memitem:cv_3A_3ARemapInvoker" id="r_cv_3A_3ARemapInvoker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_remap_invoker.html">cv::RemapInvoker</a></td></tr>
+<tr class="memitem:cv_3A_3AWarpAffineInvoker" id="r_cv_3A_3AWarpAffineInvoker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_warp_affine_invoker.html">cv::WarpAffineInvoker</a></td></tr>
+<tr class="memitem:cv_3A_3AWarpPerspectiveInvoker" id="r_cv_3A_3AWarpPerspectiveInvoker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcv_1_1_warp_perspective_invoker.html">cv::WarpPerspectiveInvoker</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Espacios de nombres</h2></td></tr>
+<tr class="memitem:cv" id="r_cv"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html">cv</a></td></tr>
+<tr class="memdesc:namespacecv"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file is part of OpenCV project. <br /></td></tr>
+<tr class="memitem:cv_3A_3Ahal" id="r_cv_3A_3Ahal"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1hal.html">cv::hal</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+typedefs</h2></td></tr>
+<tr class="memitem:acc450ed27278872152d5634a8e97edef" id="r_acc450ed27278872152d5634a8e97edef"><td class="memTemplParams" colspan="2">template&lt;bool isRelative&gt; </td></tr>
+<tr class="memitem:acc450ed27278872152d5634a8e97edef template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#acc450ed27278872152d5634a8e97edef">cv::RemapVec_8u</a> = <a class="el" href="structcv_1_1_remap_no_vec.html">RemapNoVec</a>&lt;isRelative&gt;</td></tr>
+<tr class="memitem:a01c5566eafd42378e9789dfcd31bc505" id="r_a01c5566eafd42378e9789dfcd31bc505"><td class="memItemLeft">typedef <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>(*)&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a01c5566eafd42378e9789dfcd31bc505">cv::RemapNNFunc</a>(const <a class="el" href="interface_mat.html">Mat</a> &amp;_src, <a class="el" href="interface_mat.html">Mat</a> &amp;_dst, const <a class="el" href="interface_mat.html">Mat</a> &amp;_xy, int borderType, const <a class="el" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;_borderValue, const <a class="el" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> &amp;_offset)</td></tr>
+<tr class="memitem:a9b88ecb2083468b7222c1cfe5b2f9542" id="r_a9b88ecb2083468b7222c1cfe5b2f9542"><td class="memItemLeft">typedef <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>(*)&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a9b88ecb2083468b7222c1cfe5b2f9542">cv::RemapFunc</a>(const <a class="el" href="interface_mat.html">Mat</a> &amp;_src, <a class="el" href="interface_mat.html">Mat</a> &amp;_dst, const <a class="el" href="interface_mat.html">Mat</a> &amp;_xy, const <a class="el" href="interface_mat.html">Mat</a> &amp;_fxy, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *_wtab, int borderType, const <a class="el" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;_borderValue, const <a class="el" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> &amp;_offset)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a6ad225f2b458e89c71d1abb022f4db37" id="r_a6ad225f2b458e89c71d1abb022f4db37"><td class="memItemLeft"><a class="el" href="namespacecv.html#a0d1ceb51d2bb1e85c7b17703bd3659b1">ImgWarpFunc</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a6ad225f2b458e89c71d1abb022f4db37">cv::getImgWarpFunc</a> (int type, int interpolation)</td></tr>
+<tr class="memitem:ab5b6b109453698409681754185299c24" id="r_ab5b6b109453698409681754185299c24"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ab5b6b109453698409681754185299c24">cv::genericWarp</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;src, const <a class="el" href="interface_mat.html">Mat</a> &amp;M_, const <a class="el" href="interface_mat.html">Mat</a> &amp;mapx, const <a class="el" href="interface_mat.html">Mat</a> &amp;mapy, <a class="el" href="interface_mat.html">Mat</a> &amp;dst, int interpolation, int borderType_, const <a class="el" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;borderValue, bool relativeMap_)</td></tr>
+<tr class="memitem:aefadf4beb189ae1f3e6b9481303d9bf1" id="r_aefadf4beb189ae1f3e6b9481303d9bf1"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aefadf4beb189ae1f3e6b9481303d9bf1">cv::interpolateLinear</a> (float x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, float *coeffs)</td></tr>
+<tr class="memitem:aa17788002a617afe70063903b4aaae3d" id="r_aa17788002a617afe70063903b4aaae3d"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#aa17788002a617afe70063903b4aaae3d">cv::interpolateLanczos4</a> (float x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, float *coeffs)</td></tr>
+<tr class="memitem:a0bbffbb132bf536926ddbe517b752e8d" id="r_a0bbffbb132bf536926ddbe517b752e8d"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a0bbffbb132bf536926ddbe517b752e8d">cv::initInterTab1D</a> (int method, float *tab, int tabsz)</td></tr>
+<tr class="memitem:ada507069a0cb0603a77cc23e5feedcd1" id="r_ada507069a0cb0603a77cc23e5feedcd1"><td class="memItemLeft">static const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ada507069a0cb0603a77cc23e5feedcd1">cv::initInterTab2D</a> (int method, bool fixpt)</td></tr>
+<tr class="memitem:a3b5917e54aa838acb792ede9686da8ad" id="r_a3b5917e54aa838acb792ede9686da8ad"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a3b5917e54aa838acb792ede9686da8ad">cv::initAllInterTab2D</a> ()</td></tr>
+<tr class="memitem:abb68112a494256408d075578132f3b1c" id="r_abb68112a494256408d075578132f3b1c"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#abb68112a494256408d075578132f3b1c">cv::clip</a> (int x<a class="el" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, int a, int b)</td></tr>
+<tr class="memitem:a72be05410b659cfe4e4e8ccfb8c894d1" id="r_a72be05410b659cfe4e4e8ccfb8c894d1"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>, bool isRelative&gt; </td></tr>
+<tr class="memitem:a72be05410b659cfe4e4e8ccfb8c894d1 template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a72be05410b659cfe4e4e8ccfb8c894d1">cv::remapNearest</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;_src, <a class="el" href="interface_mat.html">Mat</a> &amp;_dst, const <a class="el" href="interface_mat.html">Mat</a> &amp;_xy, int borderType, const <a class="el" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;_borderValue, const <a class="el" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> &amp;_offset)</td></tr>
+<tr class="memitem:a8b3b47fe5a0b98703d509c52ac7b9c36" id="r_a8b3b47fe5a0b98703d509c52ac7b9c36"><td class="memTemplParams" colspan="2">template&lt;class CastOp, class VecOp, typename AT, bool isRelative&gt; </td></tr>
+<tr class="memitem:a8b3b47fe5a0b98703d509c52ac7b9c36 template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a8b3b47fe5a0b98703d509c52ac7b9c36">cv::remapBilinear</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;_src, <a class="el" href="interface_mat.html">Mat</a> &amp;_dst, const <a class="el" href="interface_mat.html">Mat</a> &amp;_xy, const <a class="el" href="interface_mat.html">Mat</a> &amp;_fxy, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *_wtab, int borderType, const <a class="el" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;_borderValue, const <a class="el" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> &amp;_offset)</td></tr>
+<tr class="memitem:a94755f0faf73582354288f096f89b2f1" id="r_a94755f0faf73582354288f096f89b2f1"><td class="memTemplParams" colspan="2">template&lt;class CastOp, typename AT, int ONE, bool isRelative&gt; </td></tr>
+<tr class="memitem:a94755f0faf73582354288f096f89b2f1 template"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a94755f0faf73582354288f096f89b2f1">cv::remapLanczos4</a> (const <a class="el" href="interface_mat.html">Mat</a> &amp;_src, <a class="el" href="interface_mat.html">Mat</a> &amp;_dst, const <a class="el" href="interface_mat.html">Mat</a> &amp;_xy, const <a class="el" href="interface_mat.html">Mat</a> &amp;_fxy, const <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> *_wtab, int borderType, const <a class="el" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;_borderValue, const <a class="el" href="group__core__basic.html#ga1e83eafb2d26b3c93f09e8338bcab192">Point</a> &amp;_offset)</td></tr>
+<tr class="memitem:ad2b3f08c882a0a73dc336d2faf302fd7" id="r_ad2b3f08c882a0a73dc336d2faf302fd7"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1hal.html#ad2b3f08c882a0a73dc336d2faf302fd7">cv::hal::warpAffine</a> (int src_type, const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src_data, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src_step, int src_width, int src_height, <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *dst_data, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int dst_width, int dst_height, const double M[6], int interpolation, int borderType, const double borderValue[4], <a class="el" href="group__core__utils.html#gafeab8763db9cdb68a6c20353efe0e9de">AlgorithmHint</a> hint)</td></tr>
+<tr class="memitem:ga040d5db372e1d854f3d1f4b8e695649f" id="r_ga040d5db372e1d854f3d1f4b8e695649f"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgproc__hal__functions.html#ga040d5db372e1d854f3d1f4b8e695649f">cv::hal::warpAffineBlocklineNN</a> (int *adelta, int *bdelta, short *xy, int X0, int Y0, int bw)</td></tr>
+<tr class="memitem:ga28dafb13f7e201c61ceaa59b38cebb4f" id="r_ga28dafb13f7e201c61ceaa59b38cebb4f"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgproc__hal__functions.html#ga28dafb13f7e201c61ceaa59b38cebb4f">cv::hal::warpAffineBlockline</a> (int *adelta, int *bdelta, short *xy, short *alpha, int X0, int Y0, int bw)</td></tr>
+<tr class="memitem:a4419afa370e9ebee40d213f81a8b1cdf" id="r_a4419afa370e9ebee40d213f81a8b1cdf"><td class="memItemLeft">static <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv_1_1hal.html#a4419afa370e9ebee40d213f81a8b1cdf">cv::hal::warpPerspective</a> (int src_type, const <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *src_data, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> src_step, int src_width, int src_height, <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *dst_data, <a class="el" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a> dst_step, int dst_width, int dst_height, const double M[9], int interpolation, int borderType, const double borderValue[4], <a class="el" href="group__core__utils.html#gafeab8763db9cdb68a6c20353efe0e9de">AlgorithmHint</a> hint)</td></tr>
+<tr class="memitem:gaed2e95ff434ef5eedcb8306d0689808b" id="r_gaed2e95ff434ef5eedcb8306d0689808b"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgproc__hal__functions.html#gaed2e95ff434ef5eedcb8306d0689808b">cv::hal::warpPerspectiveBlocklineNN</a> (const double *M, short *xy, double X0, double Y0, double W0, int bw)</td></tr>
+<tr class="memitem:ga4b4f8893306fd4a30314efd9e7673d6d" id="r_ga4b4f8893306fd4a30314efd9e7673d6d"><td class="memItemLeft"><a class="el" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="el" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a>&#160;</td><td class="memItemRight"><a class="el" href="group__imgproc__hal__functions.html#ga4b4f8893306fd4a30314efd9e7673d6d">cv::hal::warpPerspectiveBlockline</a> (const double *M, short *xy, short *alpha, double X0, double Y0, double W0, int bw)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a7ad8a9eba6c76f56ee5539a644b7fbe9" id="r_a7ad8a9eba6c76f56ee5539a644b7fbe9"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a7ad8a9eba6c76f56ee5539a644b7fbe9">cv::INTER_REMAP_COEF_BITS</a> =15</td></tr>
+<tr class="memitem:a7cfcd496646e2dbf4e4256954867ca6c" id="r_a7cfcd496646e2dbf4e4256954867ca6c"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a7cfcd496646e2dbf4e4256954867ca6c">cv::INTER_REMAP_COEF_SCALE</a> =1 &lt;&lt; <a class="el" href="namespacecv.html#a7ad8a9eba6c76f56ee5539a644b7fbe9">INTER_REMAP_COEF_BITS</a></td></tr>
+<tr class="memitem:ad5fd8b6f121019021d0c2abb811ef99d" id="r_ad5fd8b6f121019021d0c2abb811ef99d"><td class="memItemLeft">static <a class="el" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#ad5fd8b6f121019021d0c2abb811ef99d">cv::NNDeltaTab_i</a> [<a class="el" href="group__imgproc__transform.html#gga628d8c499433359d67b1d830d46d8daeabdbe1089b768d20af013c344bcac74cf">INTER_TAB_SIZE2</a>][2]</td></tr>
+<tr class="memitem:a2db56f50ad936d5119087e6f729ae97b" id="r_a2db56f50ad936d5119087e6f729ae97b"><td class="memItemLeft">static float&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a2db56f50ad936d5119087e6f729ae97b">cv::BilinearTab_f</a> [<a class="el" href="group__imgproc__transform.html#gga628d8c499433359d67b1d830d46d8daeabdbe1089b768d20af013c344bcac74cf">INTER_TAB_SIZE2</a>][2][2]</td></tr>
+<tr class="memitem:a08d5952ca1355f89f16d5e957d6e5b7a" id="r_a08d5952ca1355f89f16d5e957d6e5b7a"><td class="memItemLeft">static short&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a08d5952ca1355f89f16d5e957d6e5b7a">cv::BilinearTab_i</a> [<a class="el" href="group__imgproc__transform.html#gga628d8c499433359d67b1d830d46d8daeabdbe1089b768d20af013c344bcac74cf">INTER_TAB_SIZE2</a>][2][2]</td></tr>
+<tr class="memitem:af554dd87fe8a651a0511a4a17d2a0512" id="r_af554dd87fe8a651a0511a4a17d2a0512"><td class="memItemLeft">static float&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#af554dd87fe8a651a0511a4a17d2a0512">cv::Lanczos4Tab_f</a> [<a class="el" href="group__imgproc__transform.html#gga628d8c499433359d67b1d830d46d8daeabdbe1089b768d20af013c344bcac74cf">INTER_TAB_SIZE2</a>][8][8]</td></tr>
+<tr class="memitem:af02ad884536cf1bd5c429d1bc8ad6642" id="r_af02ad884536cf1bd5c429d1bc8ad6642"><td class="memItemLeft">static short&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#af02ad884536cf1bd5c429d1bc8ad6642">cv::Lanczos4Tab_i</a> [<a class="el" href="group__imgproc__transform.html#gga628d8c499433359d67b1d830d46d8daeabdbe1089b768d20af013c344bcac74cf">INTER_TAB_SIZE2</a>][8][8]</td></tr>
+<tr class="memitem:a0f298cfc97dc77eb33db3b44549be7b0" id="r_a0f298cfc97dc77eb33db3b44549be7b0"><td class="memItemLeft">static volatile bool&#160;</td><td class="memItemRight"><a class="el" href="namespacecv.html#a0f298cfc97dc77eb33db3b44549be7b0">cv::doInitAllInterTab2D</a> = <a class="el" href="namespacecv.html#a3b5917e54aa838acb792ede9686da8ad">initAllInterTab2D</a>()</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_ff1242571287b720ea1174d525b8d38d.html">imgproc</a></li><li class="navelem"><a href="dir_3381323028adc7a7a76521f55c54fb57.html">src</a></li><li class="navelem"><a href="imgwarp_8cpp.html">imgwarp.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

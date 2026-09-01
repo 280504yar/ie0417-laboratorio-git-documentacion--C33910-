@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/photo/src/contrast_preserve.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('contrast__preserve_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">contrast_preserve.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="contrast__preserve_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2013, OpenCV Foundation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="photo_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="photo_8hpp.html">opencv2/photo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &lt;limits&gt;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="contrast__preserve_8hpp.html">contrast_preserve.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group__photo__decolor.html#gada54130b276088536e9aeb8a7497ffa9">   53</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__decolor.html#gada54130b276088536e9aeb8a7497ffa9">cv::decolor</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _color_boost)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> I = _src.getMat();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    _dst.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(I.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    _color_boost.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(I.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> color_boost = _color_boost.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(!I.<a class="code hl_function" href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">empty</a>() &amp;&amp; (I.<a class="code hl_function" href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">channels</a>()==3));</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// Parameter Setting</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> maxIter = 15;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> tol = .0001;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">int</span> iterCount = 0;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a> = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">double</span> pre_E = std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> img;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    I.<a class="code hl_function" href="classcv_1_1_mat.html#afbe2adb264f22740ae30b69e3500a213">convertTo</a>(img, <a class="code hl_define" href="group__core__hal__interface.html#ga0610d99405b809062622588c25ed5c8f">CV_32FC3</a>, 1.0/255.0);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="comment">// Initialization</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_class" href="class_decolor.html">Decolor</a> obj;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    vector &lt;double&gt; Cg;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    vector &lt; vector &lt;double&gt; &gt; polyGrad;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    vector &lt;Vec3i&gt; comb;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    vector &lt;double&gt; alf;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    obj.grad_system(img,polyGrad,Cg,comb);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    obj.weak_order(img,alf);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// Solver</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> Mt = <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>(<span class="keywordtype">int</span>(polyGrad.size()),<span class="keywordtype">int</span>(polyGrad[0].size()), <a class="code hl_define" href="group__core__hal__interface.html#ga32ec76240e43e4c9c7b2e2785180a7e6">CV_32FC1</a>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    obj.wei_update_matrix(polyGrad,Cg,Mt);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    vector &lt;double&gt; wei;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    obj.wei_inti(comb,wei);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    vector &lt;double&gt; G_pos(alf.size());</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    vector &lt;double&gt; G_neg(alf.size());</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    vector &lt;double&gt; EXPsum(G_pos.size());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    vector &lt;double&gt; EXPterm(G_pos.size());</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    vector &lt;double&gt; temp(polyGrad[0].size());</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    vector &lt;double&gt; temp1(polyGrad[0].size());</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    vector &lt;double&gt; temp2(EXPsum.size());</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    vector &lt;double&gt; wei1(polyGrad.size());</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">while</span>(std::abs(<a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>-pre_E) &gt; tol)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        iterCount +=1;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        pre_E = <a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i&lt;polyGrad[0].size(); i++)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="keywordtype">double</span> val = 0.0;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j=0; j&lt;polyGrad.size(); j++)</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                val = val + (polyGrad[j][i] * wei[j]);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            temp[i] = val - Cg[i];</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            temp1[i] = val + Cg[i];</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i&lt;alf.size(); i++)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keyword">const</span> <span class="keywordtype">double</span> sqSigma = obj.sigma * obj.sigma;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <span class="keyword">const</span> <span class="keywordtype">double</span> pos = ((1 + alf[i])/2) * <a class="code hl_function" href="group__core__array.html#ga3e10108e2162c338f1b848af619f39e5">exp</a>(-1.0 * 0.5 * (temp[i] * temp[i]) / sqSigma);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keyword">const</span> <span class="keywordtype">double</span> neg = ((1 - alf[i])/2) * <a class="code hl_function" href="group__core__array.html#ga3e10108e2162c338f1b848af619f39e5">exp</a>(-1.0 * 0.5 * (temp1[i] * temp1[i]) / sqSigma);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            G_pos[i] = pos;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            G_neg[i] = neg;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i&lt;G_pos.size(); i++)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            EXPsum[i] = G_pos[i]+G_neg[i];</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i&lt;EXPsum.size(); i++)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            temp2[i] = (EXPsum[i] == 0) ? 1.0 : 0.0;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i&lt;G_pos.size(); i++)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            EXPterm[i] = (G_pos[i] - G_neg[i])/(EXPsum[i] + temp2[i]);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;int(polyGrad.size()); i++)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="keywordtype">double</span> val1 = 0.0;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0; j&lt;int(polyGrad[0].size()); j++)</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                val1 = val1 + (Mt.<a class="code hl_function" href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">at</a>&lt;<span class="keywordtype">float</span>&gt;(i,j) * EXPterm[j]);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            wei1[i] = val1;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i&lt;wei.size(); i++)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            wei[i] = wei1[i];</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <a class="code hl_variable" href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">E</a> = obj.energyCalcu(Cg, polyGrad, wei);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">if</span>(iterCount &gt; maxIter)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> Gray = <a class="code hl_function" href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">Mat::zeros</a>(img.size(),<a class="code hl_define" href="group__core__hal__interface.html#ga32ec76240e43e4c9c7b2e2785180a7e6">CV_32FC1</a>);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    obj.grayImContruct(wei, img, Gray);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    Gray.convertTo(<a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>,<a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>,255);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> lab;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cvtColor</a>(I,lab,<a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a860b72b4741c431e81340fafef5eca24">COLOR_BGR2Lab</a>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    vector &lt;Mat&gt; lab_channel;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_function" href="group__core__array.html#ga0547c7fed86152d7e9d0096029c8518a">split</a>(lab,lab_channel);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#a938c12fa2b73e6aea81017fe8d31526e">copyTo</a>(lab_channel[0]);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <a class="code hl_function" href="group__core__array.html#ga7d7b4d6c6ee504b30a20b1680029c7b4">merge</a>(lab_channel,lab);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cvtColor</a>(lab,color_boost,<a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a966fd47d10ad71c4220b3ef9f1ac5774">COLOR_Lab2BGR</a>);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}</div>
+</div>
+<div class="ttc" id="aclass_decolor_html"><div class="ttname"><a href="class_decolor.html">Decolor</a></div><div class="ttdef"><b>Definición</b> <a href="contrast__preserve_8hpp_source.html#l00050">contrast_preserve.hpp:51</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a938c12fa2b73e6aea81017fe8d31526e"><div class="ttname"><a href="classcv_1_1___input_array.html#a938c12fa2b73e6aea81017fe8d31526e">cv::_InputArray::copyTo</a></div><div class="ttdeci">void copyTo(const _OutputArray &amp;arr) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01414">matrix_wrap.cpp:1414</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a9c09739ca3e0ce212e2ab8374aa2f195"><div class="ttname"><a href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">cv::_InputArray::getMat</a></div><div class="ttdeci">Mat getMat(int idx=-1) const</div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4eb2daf4732c371c7565db49f76c63ce"><div class="ttname"><a href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">cv::_OutputArray::create</a></div><div class="ttdeci">void create(Size sz, int type, int i=-1, bool allowTransposed=false, _OutputArray::DepthMask fixedDepthMask=static_cast&lt; _OutputArray::DepthMask &gt;(0)) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01466">matrix_wrap.cpp:1466</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a146f8e8dda07d1365a575ab83d9828d1"><div class="ttname"><a href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">cv::Mat::size</a></div><div class="ttdeci">MatSize size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02513">mat.hpp:2513</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a3c38e95b4221550d5ef81d83b80afc57"><div class="ttname"><a href="classcv_1_1_mat.html#a3c38e95b4221550d5ef81d83b80afc57">cv::Mat::zeros</a></div><div class="ttdeci">static CV_NODISCARD_STD MatExpr zeros(int rows, int cols, int type)</div><div class="ttdoc">Returns a zero array of the specified size and type.</div><div class="ttdef"><b>Definición</b> <a href="matrix__expressions_8cpp_source.html#l01751">matrix_expressions.cpp:1751</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa10d804e90b51d4157b5c26e12c5d2df"><div class="ttname"><a href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">cv::Mat::at</a></div><div class="ttdeci">_Tp &amp; at(int i0=0)</div><div class="ttdoc">Returns a reference to the specified array element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa11336b9ac538e0475d840657ce164be"><div class="ttname"><a href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">cv::Mat::channels</a></div><div class="ttdeci">int channels() const</div><div class="ttdoc">Returns the number of matrix channels.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af855717faf149c9ec128896a7a6c7711"><div class="ttname"><a href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">cv::Mat::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">Returns true if the array has no elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01028">matrix.cpp:1028</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_afbe2adb264f22740ae30b69e3500a213"><div class="ttname"><a href="classcv_1_1_mat.html#afbe2adb264f22740ae30b69e3500a213">cv::Mat::convertTo</a></div><div class="ttdeci">void convertTo(OutputArray m, int rtype, double alpha=1, double beta=0) const</div><div class="ttdoc">Converts an array to another data type with optional scaling.</div><div class="ttdef"><b>Definición</b> <a href="convert_8dispatch_8cpp_source.html#l00136">convert.dispatch.cpp:136</a></div></div>
+<div class="ttc" id="acontrast__preserve_8hpp_html"><div class="ttname"><a href="contrast__preserve_8hpp.html">contrast_preserve.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gab2e5bbb3f797d988799adccbf60fb96e"><div class="ttname"><a href="group__calib.html#gab2e5bbb3f797d988799adccbf60fb96e">cv::E</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray OutputArray E</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga0547c7fed86152d7e9d0096029c8518a"><div class="ttname"><a href="group__core__array.html#ga0547c7fed86152d7e9d0096029c8518a">cv::split</a></div><div class="ttdeci">CV_EXPORTS void split(const Mat &amp;src, Mat *mvbegin)</div><div class="ttdoc">Divides a multi-channel array into several single-channel arrays.</div><div class="ttdef"><b>Definición</b> <a href="split_8dispatch_8cpp_source.html#l00122">split.dispatch.cpp:122</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga3e10108e2162c338f1b848af619f39e5"><div class="ttname"><a href="group__core__array.html#ga3e10108e2162c338f1b848af619f39e5">cv::exp</a></div><div class="ttdeci">CV_EXPORTS_W void exp(InputArray src, OutputArray dst)</div><div class="ttdoc">Calculates the exponent of every array element.</div><div class="ttdef"><b>Definición</b> <a href="mathfuncs_8cpp_source.html#l00481">mathfuncs.cpp:481</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga7d7b4d6c6ee504b30a20b1680029c7b4"><div class="ttname"><a href="group__core__array.html#ga7d7b4d6c6ee504b30a20b1680029c7b4">cv::merge</a></div><div class="ttdeci">CV_EXPORTS void merge(const Mat *mv, size_t count, OutputArray dst)</div><div class="ttdoc">Creates one multi-channel array out of several single-channel ones.</div><div class="ttdef"><b>Definición</b> <a href="merge_8dispatch_8cpp_source.html#l00119">merge.dispatch.cpp:119</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga0610d99405b809062622588c25ed5c8f"><div class="ttname"><a href="group__core__hal__interface.html#ga0610d99405b809062622588c25ed5c8f">CV_32FC3</a></div><div class="ttdeci">#define CV_32FC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00113">interface.h:113</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32ec76240e43e4c9c7b2e2785180a7e6"><div class="ttname"><a href="group__core__hal__interface.html#ga32ec76240e43e4c9c7b2e2785180a7e6">CV_32FC1</a></div><div class="ttdeci">#define CV_32FC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00111">interface.h:111</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga88c4cd9de76f678f33928ef1e3f96047"><div class="ttname"><a href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a></div><div class="ttdeci">#define CV_8UC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00083">interface.h:83</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gaf86c09fe702ed037c03c2bc603ceab14"><div class="ttname"><a href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a></div><div class="ttdeci">CV_EXPORTS_W void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0, AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Converts an image from one color space to another.</div><div class="ttdef"><b>Definición</b> <a href="imgproc_2src_2color_8cpp_source.html#l00192">color.cpp:192</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a860b72b4741c431e81340fafef5eca24"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a860b72b4741c431e81340fafef5eca24">cv::COLOR_BGR2Lab</a></div><div class="ttdeci">@ COLOR_BGR2Lab</div><div class="ttdoc">[8U/32F] convert RGB/BGR to CIE Lab, color conversions</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00593">imgproc.hpp:593</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a966fd47d10ad71c4220b3ef9f1ac5774"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a966fd47d10ad71c4220b3ef9f1ac5774">cv::COLOR_Lab2BGR</a></div><div class="ttdeci">@ COLOR_Lab2BGR</div><div class="ttdoc">[8U/32F]</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00604">imgproc.hpp:604</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="agroup__photo__decolor_html_gada54130b276088536e9aeb8a7497ffa9"><div class="ttname"><a href="group__photo__decolor.html#gada54130b276088536e9aeb8a7497ffa9">cv::decolor</a></div><div class="ttdeci">CV_EXPORTS_W void decolor(InputArray src, OutputArray grayscale, OutputArray color_boost)</div><div class="ttdoc">Transforms a color image to a grayscale image. It is a basic tool in digital printing,...</div><div class="ttdef"><b>Definición</b> <a href="#l00053">contrast_preserve.cpp:53</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="aphoto_2src_2precomp_8hpp_html"><div class="ttname"><a href="photo_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="aphoto_8hpp_html"><div class="ttname"><a href="photo_8hpp.html">photo.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_847b99370ed06e1072f8b8059d2f9ef8.html">photo</a></li><li class="navelem"><a href="dir_8ce04962efed91e20e757beca4d6ab49.html">src</a></li><li class="navelem"><a href="contrast__preserve_8cpp.html">contrast_preserve.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

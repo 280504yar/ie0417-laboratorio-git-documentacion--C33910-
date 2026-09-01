@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: DNN Engine Selection</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('api_dnn_engine_selection.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">DNN Engine Selection </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__c_1_2_users_2_y_a_r_a_d_e_y_e_n_i_s_a_i_z_a_g_u_i_r_r_2opencv_2modules_2dnn_2doc_2dnn__engine"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
+Detailed Description</h1>
+<p>OpenCV 5 introduces a selectable inference backend for the DNN module, referred to as the <em>engine</em>. All engines share the same public API - <span class="tt"><a class="el" href="group__dnn.html#gac56d415c3788b6590bb52263de2a7e72" title="Read deep learning network represented in one of the supported formats.">cv::dnn::readNet()</a></span>, <span class="tt">net.forward()</span>, and related functions - so switching between them requires changing at most a single argument.</p>
+<p>The engine is specified at model-load time and cannot be changed after the model has been loaded, as each engine uses a different internal graph representation.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md46"></a>
+ENGINE_AUTO</h2>
+<p><span class="tt">ENGINE_AUTO</span> is the default value for the engine parameter on all <span class="tt">readNet*()</span> functions. It lets OpenCV pick the engine: it currently resolves to <span class="tt">ENGINE_OPENCV</span>. The resolution is intentionally an implementation detail and may change as more engines are added, so code that does not need a specific engine should leave the default in place.</p>
+<p>Because <span class="tt">ENGINE_AUTO</span> is the default, existing code that does not pass an engine argument requires no modification.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
+ENGINE_OPENCV</h2>
+<p><span class="tt">ENGINE_OPENCV</span> is OpenCV's built-in DNN engine, a ground-up rewrite of the inference graph introduced in OpenCV 5. It is built around a typed operation graph with shape inference, constant folding, and operator fusion, covering approximately 75-80% of the ONNX operator specification. Models that failed to load under OpenCV 4.x due to dynamic shapes or unsupported operators will typically load and run correctly under this engine.</p>
+<p>The engine performs automatic attention fusion: the <span class="tt">MatMul</span> → <span class="tt">Softmax</span> → <span class="tt">MatMul</span> subgraph common to transformer architectures is recognised and collapsed into a single fused operation at load time, with no changes required to the model or calling code.</p>
+<p><span class="tt">ENGINE_OPENCV</span> also introduces native support for Large Language Models and Vision-Language Models. Built-in tokenizers, attention layers, decoding blocks, and KV-caching allow models such as Qwen, Gemma, and PaliGemma to run end-to-end through the standard <span class="tt">Net</span> API, with no external runtime required.</p>
+<p>In OpenCV 5.0, <span class="tt">ENGINE_OPENCV</span> runs on CPU only. Support for CUDA and other non-CPU backends is planned for a subsequent release. Users requiring GPU acceleration should use <span class="tt">ENGINE_ORT</span>.</p>
+<dl class="section note"><dt>Nota</dt><dd>The Darknet and Caffe parsers have been removed in OpenCV 5; ONNX is the recommended format. TFLite and TensorFlow models are still supported and are executed via <span class="tt">ENGINE_OPENCV</span>.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
+ENGINE_ORT</h2>
+<p><span class="tt">ENGINE_ORT</span> routes inference through a bundled ONNX Runtime (ORT) wrapper. OpenCV uses its own ONNX parser to construct the ORT graph internally, so only the ORT library is required at runtime, not the standalone onnx package. It applies to ONNX models only.</p>
+<p><span class="tt">ENGINE_ORT</span> must be enabled at compile time:</p>
+<div class="fragment"><div class="line"># CPU only</div>
+<div class="line">cmake -DWITH_ONNXRUNTIME=ON ..</div>
+<div class="line"> </div>
+<div class="line"># With NVIDIA GPU execution providers</div>
+<div class="line">cmake -DWITH_ONNXRUNTIME=ON -DDOWNLOAD_ONNXRUNTIME_GPU=ON ..</div>
+</div><!-- fragment --><p>ORT execution providers are supported, including CUDA for NVIDIA hardware. This makes <span class="tt">ENGINE_ORT</span> the recommended choice for GPU-accelerated inference while native GPU support for <span class="tt">ENGINE_OPENCV</span> is still in development.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
+Selecting an Engine</h2>
+<p>The engine parameter is accepted by the <span class="tt">readNet*()</span> family of functions.</p>
+<p>@add_toggle_cpp </p><div class="fragment"><div class="line"><span class="comment">// ENGINE_AUTO is the default (resolves to ENGINE_OPENCV)</span></div>
+<div class="line"><a class="code hl_class" href="classcv_1_1dnn_1_1_net.html">cv::dnn::Net</a> net = <a class="code hl_function" href="group__dnn.html#ga02abced18387a1b89e3ed4d930130860">cv::dnn::readNetFromONNX</a>(<span class="stringliteral">&quot;model.onnx&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Explicitly select OpenCV&#39;s built-in engine</span></div>
+<div class="line"><a class="code hl_class" href="classcv_1_1dnn_1_1_net.html">cv::dnn::Net</a> net = <a class="code hl_function" href="group__dnn.html#ga02abced18387a1b89e3ed4d930130860">cv::dnn::readNetFromONNX</a>(<span class="stringliteral">&quot;model.onnx&quot;</span>, <a class="code hl_enumvalue" href="group__dnn.html#ggab13999feed711a37d50c1bdb4f01b458ae6af60833801c3d730e380418fcbdc0b">cv::dnn::ENGINE_OPENCV</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use ONNX Runtime (ONNX models only, requires WITH_ONNXRUNTIME=ON)</span></div>
+<div class="line"><a class="code hl_class" href="classcv_1_1dnn_1_1_net.html">cv::dnn::Net</a> net = <a class="code hl_function" href="group__dnn.html#ga02abced18387a1b89e3ed4d930130860">cv::dnn::readNetFromONNX</a>(<span class="stringliteral">&quot;model.onnx&quot;</span>, <a class="code hl_enumvalue" href="group__dnn.html#ggab13999feed711a37d50c1bdb4f01b458a506dc34c2f7963ce67cf218514a4e205">cv::dnn::ENGINE_ORT</a>);</div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_net_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_net.html">cv::dnn::Net</a></div><div class="ttdoc">This class allows to create and manipulate comprehensive artificial neural networks.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00566">dnn.hpp:567</a></div></div>
+<div class="ttc" id="agroup__dnn_html_ga02abced18387a1b89e3ed4d930130860"><div class="ttname"><a href="group__dnn.html#ga02abced18387a1b89e3ed4d930130860">cv::dnn::readNetFromONNX</a></div><div class="ttdeci">CV_EXPORTS_W Net readNetFromONNX(CV_WRAP_FILE_PATH const String &amp;onnxFile, int engine=ENGINE_AUTO)</div><div class="ttdoc">Reads a network model ONNX.</div></div>
+<div class="ttc" id="agroup__dnn_html_ggab13999feed711a37d50c1bdb4f01b458a506dc34c2f7963ce67cf218514a4e205"><div class="ttname"><a href="group__dnn.html#ggab13999feed711a37d50c1bdb4f01b458a506dc34c2f7963ce67cf218514a4e205">cv::dnn::ENGINE_ORT</a></div><div class="ttdeci">@ ENGINE_ORT</div><div class="ttdoc">Use the ONNX Runtime wrapper (ONNX only, requires build with WITH_ONNXRUNTIME=ON).</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l01108">dnn.hpp:1108</a></div></div>
+<div class="ttc" id="agroup__dnn_html_ggab13999feed711a37d50c1bdb4f01b458ae6af60833801c3d730e380418fcbdc0b"><div class="ttname"><a href="group__dnn.html#ggab13999feed711a37d50c1bdb4f01b458ae6af60833801c3d730e380418fcbdc0b">cv::dnn::ENGINE_OPENCV</a></div><div class="ttdeci">@ ENGINE_OPENCV</div><div class="ttdoc">Use OpenCV&#39;s built-in DNN engine. Does not support non-CPU back-ends for now.</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l01107">dnn.hpp:1107</a></div></div>
+</div><!-- fragment --><p> @end_toggle</p>
+<p>@add_toggle_python </p><div class="fragment"><div class="line"><span class="keyword">import</span> cv2</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"># ENGINE_AUTO is the default (resolves to ENGINE_OPENCV)</span></div>
+<div class="line">net = cv2.dnn.readNetFromONNX(<span class="stringliteral">&quot;model.onnx&quot;</span>)</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"># Explicitly select OpenCV&#39;s built-in engine</span></div>
+<div class="line">net = cv2.dnn.readNetFromONNX(<span class="stringliteral">&quot;model.onnx&quot;</span>, engine=cv2.dnn.ENGINE_OPENCV)</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"># Use ONNX Runtime (ONNX models only, requires WITH_ONNXRUNTIME=ON)</span></div>
+<div class="line">net = cv2.dnn.readNetFromONNX(<span class="stringliteral">&quot;model.onnx&quot;</span>, engine=cv2.dnn.ENGINE_ORT)</div>
+</div><!-- fragment --><p> @end_toggle</p>
+<p>The engine cannot be changed after a model has been loaded. To use a different engine, the model must be reloaded with the new engine argument.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
+Engine Selection via Environment Variable</h2>
+<p>The engine can be overridden at the process level using the <span class="tt">OPENCV_FORCE_DNN_ENGINE</span> environment variable. The integer values correspond directly to the <span class="tt">EngineType</span> enum: 0 for <span class="tt">ENGINE_AUTO</span>, 1 for <span class="tt">ENGINE_OPENCV</span>, and 2 for <span class="tt">ENGINE_ORT</span>. Leaving the variable unset (or set to <span class="tt">ENGINE_AUTO</span>) does not force any engine, so the value passed to <span class="tt">readNet*()</span> is honored.</p>
+<div class="fragment"><div class="line"># Linux / macOS</div>
+<div class="line">OPENCV_FORCE_DNN_ENGINE=1 python3 inference.py</div>
+<div class="line"> </div>
+<div class="line"># Windows</div>
+<div class="line">set OPENCV_FORCE_DNN_ENGINE=1</div>
+<div class="line">python inference.py</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

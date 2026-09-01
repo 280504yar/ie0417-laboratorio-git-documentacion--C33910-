@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/parallel/registry_parallel.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('registry__parallel_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">registry_parallel.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="registry__parallel_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_CORE_PARALLEL_REGISTRY_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_CORE_PARALLEL_REGISTRY_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="factory__parallel_8hpp.html">factory_parallel.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1parallel.html">parallel</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="structcv_1_1parallel_1_1_parallel_backend_info.html">   12</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1parallel_1_1_parallel_backend_info.html">ParallelBackendInfo</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structcv_1_1parallel_1_1_parallel_backend_info.html#a2629345278575059c6c0cee74d770ce3">   14</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structcv_1_1parallel_1_1_parallel_backend_info.html#a2629345278575059c6c0cee74d770ce3">priority</a>;     <span class="comment">// 1000-&lt;index*10&gt; - default builtin priority</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                      <span class="comment">// 0 - disabled (OPENCV_PARALLEL_PRIORITY_&lt;name&gt; = 0)</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>                      <span class="comment">// &gt;10000 - prioritized list (OPENCV_PARALLEL_PRIORITY_LIST)</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structcv_1_1parallel_1_1_parallel_backend_info.html#ae1210a0f19a943aa39d2f7c043a2e553">   17</a></span>    std::string <a class="code hl_variable" href="structcv_1_1parallel_1_1_parallel_backend_info.html#ae1210a0f19a943aa39d2f7c043a2e553">name</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structcv_1_1parallel_1_1_parallel_backend_info.html#aac21e9fe9c6d541f3420ff79031cab72">   18</a></span>    std::shared_ptr&lt;IParallelBackendFactory&gt; <a class="code hl_variable" href="structcv_1_1parallel_1_1_parallel_backend_info.html#aac21e9fe9c6d541f3420ff79031cab72">backendFactory</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>};</div>
+</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">const</span> std::vector&lt;ParallelBackendInfo&gt;&amp; <a class="code hl_function" href="namespacecv_1_1parallel.html#af744076cf51e6c66461ce56d12f5b9ae">getParallelBackendsInfo</a>();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}} <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_CORE_PARALLEL_REGISTRY_HPP</span></div>
+<div class="ttc" id="afactory__parallel_8hpp_html"><div class="ttname"><a href="factory__parallel_8hpp.html">factory_parallel.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1parallel_html"><div class="ttname"><a href="namespacecv_1_1parallel.html">cv::parallel</a></div><div class="ttdef"><b>Definición</b> <a href="parallel__for_8openmp_8hpp_source.html#l00016">parallel_for.openmp.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1parallel_html_af744076cf51e6c66461ce56d12f5b9ae"><div class="ttname"><a href="namespacecv_1_1parallel.html#af744076cf51e6c66461ce56d12f5b9ae">cv::parallel::getParallelBackendsInfo</a></div><div class="ttdeci">const std::vector&lt; ParallelBackendInfo &gt; &amp; getParallelBackendsInfo()</div><div class="ttdef"><b>Definición</b> <a href="registry__parallel_8impl_8hpp_source.html#l00168">registry_parallel.impl.hpp:168</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1parallel_1_1_parallel_backend_info_html"><div class="ttname"><a href="structcv_1_1parallel_1_1_parallel_backend_info.html">cv::parallel::ParallelBackendInfo</a></div><div class="ttdef"><b>Definición</b> <a href="#l00012">registry_parallel.hpp:13</a></div></div>
+<div class="ttc" id="astructcv_1_1parallel_1_1_parallel_backend_info_html_a2629345278575059c6c0cee74d770ce3"><div class="ttname"><a href="structcv_1_1parallel_1_1_parallel_backend_info.html#a2629345278575059c6c0cee74d770ce3">cv::parallel::ParallelBackendInfo::priority</a></div><div class="ttdeci">int priority</div><div class="ttdef"><b>Definición</b> <a href="#l00014">registry_parallel.hpp:14</a></div></div>
+<div class="ttc" id="astructcv_1_1parallel_1_1_parallel_backend_info_html_aac21e9fe9c6d541f3420ff79031cab72"><div class="ttname"><a href="structcv_1_1parallel_1_1_parallel_backend_info.html#aac21e9fe9c6d541f3420ff79031cab72">cv::parallel::ParallelBackendInfo::backendFactory</a></div><div class="ttdeci">std::shared_ptr&lt; IParallelBackendFactory &gt; backendFactory</div><div class="ttdef"><b>Definición</b> <a href="#l00018">registry_parallel.hpp:18</a></div></div>
+<div class="ttc" id="astructcv_1_1parallel_1_1_parallel_backend_info_html_ae1210a0f19a943aa39d2f7c043a2e553"><div class="ttname"><a href="structcv_1_1parallel_1_1_parallel_backend_info.html#ae1210a0f19a943aa39d2f7c043a2e553">cv::parallel::ParallelBackendInfo::name</a></div><div class="ttdeci">std::string name</div><div class="ttdef"><b>Definición</b> <a href="#l00017">registry_parallel.hpp:17</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="dir_b89785eea07c07300309f07e8b8846ce.html">parallel</a></li><li class="navelem"><a href="registry__parallel_8hpp.html">registry_parallel.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

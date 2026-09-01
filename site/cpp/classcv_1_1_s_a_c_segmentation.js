@@ -1,0 +1,28 @@
+var classcv_1_1_s_a_c_segmentation =
+[
+    [ "ModelConstraintFunction", "classcv_1_1_s_a_c_segmentation.html#a11b16886a2acbf7fb0c6e7323e6b3f2b", null ],
+    [ "SACSegmentation", "classcv_1_1_s_a_c_segmentation.html#a1750068154a560627d054bb9e8d6f8b2", null ],
+    [ "~SACSegmentation", "classcv_1_1_s_a_c_segmentation.html#a7c93e4d1a34ee9d3c97fe2bc9f91258c", null ],
+    [ "create", "classcv_1_1_s_a_c_segmentation.html#ae4b37b321761d050785e916d903a58f3", null ],
+    [ "getConfidence", "classcv_1_1_s_a_c_segmentation.html#ae76ef8c616e84e624e9a1a90265da5fc", null ],
+    [ "getCustomModelConstraints", "classcv_1_1_s_a_c_segmentation.html#aac6cfa1df38eefec01ac121c8740bbb6", null ],
+    [ "getDistanceThreshold", "classcv_1_1_s_a_c_segmentation.html#ada5dad6261b50a4c0d0df529328ee972", null ],
+    [ "getMaxIterations", "classcv_1_1_s_a_c_segmentation.html#ae20bd261ec3cba816f85ac4a3eac8ff0", null ],
+    [ "getNumberOfModelsExpected", "classcv_1_1_s_a_c_segmentation.html#a3ddda2af4afeee6572d46124c2edeac8", null ],
+    [ "getRadiusLimits", "classcv_1_1_s_a_c_segmentation.html#a674cb38bd89c72ef98eb772760b4fe33", null ],
+    [ "getRandomGeneratorState", "classcv_1_1_s_a_c_segmentation.html#a22fc806fd9b599d8f2af32b4e3accc0d", null ],
+    [ "getSacMethodType", "classcv_1_1_s_a_c_segmentation.html#aeb7c99efc76b929a15cd8039ad42d8da", null ],
+    [ "getSacModelType", "classcv_1_1_s_a_c_segmentation.html#a10a9055c1e6cfb4d7b54a7e84b7fc344", null ],
+    [ "isParallel", "classcv_1_1_s_a_c_segmentation.html#a0a19afd20baed410f481c2b6da3df828", null ],
+    [ "segment", "classcv_1_1_s_a_c_segmentation.html#ac11e40c8036814f301d9c4ea18236bf8", null ],
+    [ "setConfidence", "classcv_1_1_s_a_c_segmentation.html#ab0d61dddba91cd62cb9d9f87405ca1af", null ],
+    [ "setCustomModelConstraints", "classcv_1_1_s_a_c_segmentation.html#af857329b6b5e2084a855b7db8b34210e", null ],
+    [ "setDistanceThreshold", "classcv_1_1_s_a_c_segmentation.html#a5f62ffc50b089e8c4277cd9a9b579305", null ],
+    [ "setMaxIterations", "classcv_1_1_s_a_c_segmentation.html#add50586fa68e6aa2654329232aef6464", null ],
+    [ "setNumberOfModelsExpected", "classcv_1_1_s_a_c_segmentation.html#a4cf3c5cc42039c34dbdf3e642ffea261", null ],
+    [ "setParallel", "classcv_1_1_s_a_c_segmentation.html#ab74d6cafbd76230c5c84570e0772fb72", null ],
+    [ "setRadiusLimits", "classcv_1_1_s_a_c_segmentation.html#aac5d61e38ac40bc83a7752d288d5dfa8", null ],
+    [ "setRandomGeneratorState", "classcv_1_1_s_a_c_segmentation.html#a3d400b8f85f18f259e0f91005b8b192f", null ],
+    [ "setSacMethodType", "classcv_1_1_s_a_c_segmentation.html#a96ff2fe5f7f960cb187fdc3b823d096b", null ],
+    [ "setSacModelType", "classcv_1_1_s_a_c_segmentation.html#a13d5650e3940fd5b55678d4ead3c6782", null ]
+];

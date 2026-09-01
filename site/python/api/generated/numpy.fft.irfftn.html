@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>numpy.fft.irfftn &#8212; NumPy - Documentación Sphinx</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=3f32dc30"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="numpy.fft.hfft" href="numpy.fft.hfft.html" />
+    <link rel="prev" title="numpy.fft.rfftn" href="numpy.fft.rfftn.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="numpy-fft-irfftn">
+<h1>numpy.fft.irfftn<a class="headerlink" href="#numpy-fft-irfftn" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="numpy.fft.irfftn">
+<span class="sig-prename descclassname"><span class="pre">numpy.fft.</span></span><span class="sig-name descname"><span class="pre">irfftn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#numpy.fft.irfftn" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the inverse of <cite>rfftn</cite>.</p>
+<p>This function computes the inverse of the N-dimensional discrete
+Fourier Transform for real input over any number of axes in an
+M-dimensional array by means of the Fast Fourier Transform (FFT).  In
+other words, <code class="docutils literal notranslate"><span class="pre">irfftn(rfftn(a),</span> <span class="pre">a.shape)</span> <span class="pre">==</span> <span class="pre">a</span></code> to within numerical
+accuracy. (The <code class="docutils literal notranslate"><span class="pre">a.shape</span></code> is necessary like <code class="docutils literal notranslate"><span class="pre">len(a)</span></code> is for <cite>irfft</cite>,
+and for the same reason.)</p>
+<p>The input should be ordered in the same way as is returned by <cite>rfftn</cite>,
+i.e. as for <cite>irfft</cite> for the final transformation axis, and as for <cite>ifftn</cite>
+along all the other axes.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>a</strong><span class="classifier">array_like</span></dt><dd><p>Input array.</p>
+</dd>
+<dt><strong>s</strong><span class="classifier">sequence of ints, optional</span></dt><dd><p>Shape (length of each transformed axis) of the output
+(<code class="docutils literal notranslate"><span class="pre">s[0]</span></code> refers to axis 0, <code class="docutils literal notranslate"><span class="pre">s[1]</span></code> to axis 1, etc.). <cite>s</cite> is also the
+number of input points used along this axis, except for the last axis,
+where <code class="docutils literal notranslate"><span class="pre">s[-1]//2+1</span></code> points of the input are used.
+Along any axis, if the shape indicated by <cite>s</cite> is smaller than that of
+the input, the input is cropped.  If it is larger, the input is padded
+with zeros.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Distinto en la versión 2.0: </span>If it is <code class="docutils literal notranslate"><span class="pre">-1</span></code>, the whole input is used (no padding/trimming).</p>
+</div>
+<p>If <cite>s</cite> is not given, the shape of the input along the axes
+specified by axes is used. Except for the last axis which is taken to
+be <code class="docutils literal notranslate"><span class="pre">2*(m-1)</span></code> where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the length of the input along that axis.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Obsoleto desde la versión 2.0: </span>If <cite>s</cite> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, <cite>axes</cite> must not be <code class="docutils literal notranslate"><span class="pre">None</span></code> either.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Obsoleto desde la versión 2.0: </span><cite>s</cite> must contain only <code class="docutils literal notranslate"><span class="pre">int</span></code> s, not <code class="docutils literal notranslate"><span class="pre">None</span></code> values. <code class="docutils literal notranslate"><span class="pre">None</span></code>
+values currently mean that the default value for <code class="docutils literal notranslate"><span class="pre">n</span></code> is used
+in the corresponding 1-D transform, but this behaviour is
+deprecated.</p>
+</div>
+</dd>
+<dt><strong>axes</strong><span class="classifier">sequence of ints, optional</span></dt><dd><p>Axes over which to compute the inverse FFT. If not given, the last
+<cite>len(s)</cite> axes are used, or all axes if <cite>s</cite> is also not specified.
+Repeated indices in <cite>axes</cite> means that the inverse transform over that
+axis is performed multiple times.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Obsoleto desde la versión 2.0: </span>If <cite>s</cite> is specified, the corresponding <cite>axes</cite> to be transformed
+must be explicitly specified too.</p>
+</div>
+</dd>
+<dt><strong>norm</strong><span class="classifier">{«backward», «ortho», «forward»}, optional</span></dt><dd><p>Normalization mode (see <cite>numpy.fft</cite>). Default is «backward».
+Indicates which direction of the forward/backward pair of transforms
+is scaled and with what normalization factor.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.20.0: </span>The «backward», «forward» values were added.</p>
+</div>
+</dd>
+<dt><strong>out</strong><span class="classifier">ndarray, optional</span></dt><dd><p>If provided, the result will be placed in this array. It should be
+of the appropriate shape and dtype for the last transformation.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.0.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">ndarray</span></dt><dd><p>The truncated or zero-padded input, transformed along the axes
+indicated by <cite>axes</cite>, or by a combination of <cite>s</cite> or <cite>a</cite>,
+as explained in the parameters section above.
+The length of each transformed axis is as given by the corresponding
+element of <cite>s</cite>, or the length of the input in every axis except for the
+last one if <cite>s</cite> is not given.  In the final transformed axis the length
+of the output when <cite>s</cite> is not given is <code class="docutils literal notranslate"><span class="pre">2*(m-1)</span></code> where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the
+length of the final transformed axis of the input.  To get an odd
+number of output points in the final axis, <cite>s</cite> must be specified.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If <cite>s</cite> and <cite>axes</cite> have different length.</p>
+</dd>
+<dt>IndexError</dt><dd><p>If an element of <cite>axes</cite> is larger than than the number of axes of <cite>a</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">Ver también</p>
+<dl class="simple">
+<dt><a class="reference internal" href="numpy.fft.rfftn.html#numpy.fft.rfftn" title="numpy.fft.rfftn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rfftn</span></code></a></dt><dd><p>The forward n-dimensional FFT of real input, of which <cite>ifftn</cite> is the inverse.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fft</span></code></a></dt><dd><p>The one-dimensional FFT, with definitions and conventions used.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.fft.irfft.html#numpy.fft.irfft" title="numpy.fft.irfft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">irfft</span></code></a></dt><dd><p>The inverse of the one-dimensional FFT of real input.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.fft.irfft2.html#numpy.fft.irfft2" title="numpy.fft.irfft2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">irfft2</span></code></a></dt><dd><p>The inverse of the two-dimensional FFT of real input.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>See <cite>fft</cite> for definitions and conventions used.</p>
+<p>See <cite>rfft</cite> for definitions and conventions used for real input.</p>
+<p>The correct interpretation of the hermitian input depends on the shape of
+the original data, as given by <cite>s</cite>. This is because each input shape could
+correspond to either an odd or even length signal. By default, <cite>irfftn</cite>
+assumes an even output length which puts the last entry at the Nyquist
+frequency; aliasing with its symmetric counterpart. When performing the
+final complex to real transform, the last value is thus treated as purely
+real. To avoid losing information, the correct shape of the real input
+<strong>must</strong> be given.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfftn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[[1.,  1.],</span>
+<span class="go">        [1.,  1.]],</span>
+<span class="go">       [[1.,  1.],</span>
+<span class="go">        [1.,  1.]],</span>
+<span class="go">       [[1.,  1.],</span>
+<span class="go">        [1.,  1.]]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">NumPy - Documentación Sphinx</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción a NumPy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Referencia de API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../numpy.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linalg.html">Álgebra lineal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random.html">Números aleatorios</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../fft.html">Transformada rápida de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../polynomial.html">Polinomios</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../modules.html">Referencia de API</a><ul>
+  <li><a href="../fft.html">Transformada rápida de Fourier</a><ul>
+      <li>Previous: <a href="numpy.fft.rfftn.html" title="capítulo anterior">numpy.fft.rfftn</a></li>
+      <li>Next: <a href="numpy.fft.hfft.html" title="próximo capítulo">numpy.fft.hfft</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Yara.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../_sources/api/generated/numpy.fft.irfftn.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

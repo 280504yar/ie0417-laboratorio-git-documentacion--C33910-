@@ -1,0 +1,28 @@
+var structcv_1_1_calc_horizontal_sums =
+[
+    [ "CalcHorizontalSums", "structcv_1_1_calc_horizontal_sums.html#a18aefbf7212420d41edce6f5783778d6", null ],
+    [ "operator()", "structcv_1_1_calc_horizontal_sums.html#a2709ec9b8bc1666905df74a180e317bd", null ],
+    [ "D", "structcv_1_1_calc_horizontal_sums.html#a94e067dfa383c83d4ceebb862c092411", null ],
+    [ "Da", "structcv_1_1_calc_horizontal_sums.html#a654939864f238dcc80d0df26e3b5f091", null ],
+    [ "disp1", "structcv_1_1_calc_horizontal_sums.html#a90f88f8b7aca2963922d3c69875045f5", null ],
+    [ "disp12MaxDiff", "structcv_1_1_calc_horizontal_sums.html#a9526b2cc4e3486cefbe465ce6b121203", null ],
+    [ "DISP_SCALE", "structcv_1_1_calc_horizontal_sums.html#ab0a2bea921a1b5a8895b4ee4b9b53c2e", null ],
+    [ "DISP_SHIFT", "structcv_1_1_calc_horizontal_sums.html#ae5ff995a9d45da5a4ea274b48d84a78f", null ],
+    [ "Dlra", "structcv_1_1_calc_horizontal_sums.html#ad60999d3470146c7505aa4ad89413f9d", null ],
+    [ "height", "structcv_1_1_calc_horizontal_sums.html#ad4b80f21dcf24e6d41bc031483d7ad3e", null ],
+    [ "img1", "structcv_1_1_calc_horizontal_sums.html#a77268ec66597d5d6c0c05602b80c368f", null ],
+    [ "img2", "structcv_1_1_calc_horizontal_sums.html#a5b8c8686648f8da389f2ea898b59289e", null ],
+    [ "INVALID_DISP", "structcv_1_1_calc_horizontal_sums.html#ac77c97bf21e1507522003c36a865df00", null ],
+    [ "INVALID_DISP_SCALED", "structcv_1_1_calc_horizontal_sums.html#a12bf2acc6313cb1f063ed68d552a0723", null ],
+    [ "MAX_COST", "structcv_1_1_calc_horizontal_sums.html#a176f24dd479d5c2392848d68d5f9d29e", null ],
+    [ "maxD", "structcv_1_1_calc_horizontal_sums.html#a18c7de3d3d81da1967c29d3a7c45a56f", null ],
+    [ "maxX1", "structcv_1_1_calc_horizontal_sums.html#ade128cbf053590f057c4ed3faf03843d", null ],
+    [ "mem", "structcv_1_1_calc_horizontal_sums.html#a2e4db5e33e7a12bfbad3098e386503c6", null ],
+    [ "minD", "structcv_1_1_calc_horizontal_sums.html#a02dda5e5fa6c295980742b362b8e7d17", null ],
+    [ "minX1", "structcv_1_1_calc_horizontal_sums.html#a16b182acbc461b05734c51968a92396b", null ],
+    [ "P1", "structcv_1_1_calc_horizontal_sums.html#af0eaf9ac267f64ccdc65503ccfdb09dc", null ],
+    [ "P2", "structcv_1_1_calc_horizontal_sums.html#a5fd8384abdf5968be93329002ab120d6", null ],
+    [ "uniquenessRatio", "structcv_1_1_calc_horizontal_sums.html#af8f4e4235c4b9200c58318cf8e23bf46", null ],
+    [ "width", "structcv_1_1_calc_horizontal_sums.html#a4726a4755f9fe2917eebfe50f53c2613", null ],
+    [ "width1", "structcv_1_1_calc_horizontal_sums.html#a8f5394d08209140a006b21a620b07e9b", null ]
+];

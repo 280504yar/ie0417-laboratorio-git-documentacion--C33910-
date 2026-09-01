@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/layers/cpu_kernels/fast_attn.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('fast__attn_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fast_attn.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="fast__attn_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="intrin_8hpp.html">opencv2/core/hal/intrin.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">   10</a></span><span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">load_int_mask_as_f32</a>(<span class="keyword">const</span> int32_t* ptr) {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    v_int32 v = vx_load(ptr);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordflow">return</span> v_reinterpret_as_f32(v_ne(v, vx_setall_s32(0)));</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
+</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a4e41720f7bd7e204fe209633c2a02270">   15</a></span><span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">load_int_mask_as_f32</a>(<span class="keyword">const</span> uint8_t* ptr) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    v_uint32 v = vx_load_expand_q(ptr);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span> v_reinterpret_as_f32(v_ne(v, vx_setall_u32(0)));</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
+</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a4c30ed0971804bceaf7f37acb4c0a1f9">   20</a></span><span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">load_int_mask_as_f32</a>(<span class="keyword">const</span> int8_t* ptr) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    v_int32 v = vx_load_expand_q(ptr);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span> v_reinterpret_as_f32(v_ne(v, vx_setall_s32(0)));</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
+</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#ae4e67c2f3dbc4214f6d29348daae5b1b">   25</a></span><span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">load_int_mask_as_f32</a>(<span class="keyword">const</span> uint16_t* ptr) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    v_uint32 v = vx_load_expand(ptr);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span> v_reinterpret_as_f32(v_ne(v, vx_setall_u32(0)));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#a500372830d09c50e7b743d40d0d1c7b9">   31</a></span><span class="keyword">inline</span> v_float32 <a class="code hl_function" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">load_int_mask_as_f32</a>(<span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>* ptr) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">return</span> vx_setall_f32(0.f);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> MaskT&gt;</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_float.html">   37</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1_mask_policy_float.html">MaskPolicyFloat</a> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_float.html#a731a2caa16ce05521977a149d46ede9f">   38</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_float.html#a731a2caa16ce05521977a149d46ede9f">load_mask</a>(<span class="keyword">const</span> MaskT* ptr) { <span class="keywordflow">return</span> vx_load((<span class="keyword">const</span> <span class="keywordtype">float</span>*)ptr); }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_float.html#a0bfdc5a780a1da927f9943576ffe5c7e">   39</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_float.html#a0bfdc5a780a1da927f9943576ffe5c7e">load_mask_scalar</a>(<span class="keyword">const</span> MaskT* ptr) { <span class="keywordflow">return</span> vx_setall_f32((<span class="keywordtype">float</span>)*ptr); }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_float.html#a06ffa90401421adb34c17c4a95e045e2">   40</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_float.html#a06ffa90401421adb34c17c4a95e045e2">apply</a>(v_float32 val, v_float32 <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, v_float32 min_val) { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(val, <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>); }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_float.html#ac346e32a542a290d9b5b6932f653168e">   41</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_float.html#ac346e32a542a290d9b5b6932f653168e">apply_scalar</a>(<span class="keywordtype">float</span> val, MaskT <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <span class="keywordtype">float</span> min_val) { <span class="keywordflow">return</span> val + <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>; }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> MaskT&gt;</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_int.html">   45</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1_mask_policy_int.html">MaskPolicyInt</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_int.html#a191e923dddbd5b701fe59be4f760fd0d">   46</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_int.html#a191e923dddbd5b701fe59be4f760fd0d">load_mask</a>(<span class="keyword">const</span> MaskT* ptr) { <span class="keywordflow">return</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">load_int_mask_as_f32</a>(ptr); }</div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_int.html#acbf39b398984f7151a7a8262762b49b6">   47</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_int.html#acbf39b398984f7151a7a8262762b49b6">load_mask_scalar</a>(<span class="keyword">const</span> MaskT* ptr) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">return</span> (*ptr != 0) ? v_reinterpret_as_f32(vx_setall_u32(0xFFFFFFFF)) : vx_setall_f32(0.f);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_int.html#ac024cd046eab9e3fe30b69ade346859a">   50</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_int.html#ac024cd046eab9e3fe30b69ade346859a">apply</a>(v_float32 val, v_float32 <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, v_float32 min_val) { <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__hal__intrin.html#ga97f089f6c4606ddba14792d97bbe1b0d">v_select</a>(<a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, val, min_val); }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_int.html#a07d313e7c5182b5f1f54fdccb65164dc">   51</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_int.html#a07d313e7c5182b5f1f54fdccb65164dc">apply_scalar</a>(<span class="keywordtype">float</span> val, MaskT <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <span class="keywordtype">float</span> min_val) { <span class="keywordflow">return</span> (<a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a> != 0) ? val : min_val; }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_none.html">   54</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1dnn_1_1_mask_policy_none.html">MaskPolicyNone</a> {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_none.html#a0d5fc2cbf4db688e1f468cd0ccb74bce">   55</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_none.html#a0d5fc2cbf4db688e1f468cd0ccb74bce">load_mask</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) { <span class="keywordflow">return</span> vx_setzero_f32(); }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_none.html#aacc9925b386e9ea923b75b9309e1dcab">   56</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_none.html#aacc9925b386e9ea923b75b9309e1dcab">load_mask_scalar</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) { <span class="keywordflow">return</span> vx_setzero_f32(); }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_none.html#a78de99d0496c7eb57ad0af5eed862907">   57</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> v_float32 <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_none.html#a78de99d0496c7eb57ad0af5eed862907">apply</a>(v_float32 val, v_float32 <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, v_float32 min_val) { <span class="keywordflow">return</span> val; }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_mask_policy_none.html#a7c937a0b61802b28ec4b02ff90b1dd1d">   58</a></span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_mask_policy_none.html#a7c937a0b61802b28ec4b02ff90b1dd1d">apply_scalar</a>(<span class="keywordtype">float</span> val, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, <span class="keywordtype">float</span> min_val) { <span class="keywordflow">return</span> val; }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> MaskT, <span class="keyword">typename</span> Policy&gt;</div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">   62</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax</a>(</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;att_weights, <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;att_mask,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> softcap, <span class="keyword">const</span> <span class="keywordtype">bool</span> do_softcap,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> min_val, <span class="keyword">const</span> <span class="keywordtype">bool</span> is_causal, <span class="keyword">const</span> <span class="keywordtype">int</span> past_seq_len,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> do_softmax)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> batch_size = att_weights.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>[0];</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> n_heads = att_weights.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>[1];</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> seq_len_q = att_weights.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>[2];</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> seq_len_kv = att_weights.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>[3];</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">float</span>* data = att_weights.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keywordtype">float</span>&gt;();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">const</span> MaskT* mask_data = att_mask.<a class="code hl_function" href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">empty</a>() ? nullptr : att_mask.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;MaskT&gt;();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">size_t</span> mask_step_b = 0, mask_step_h = 0, mask_step_q = 0, mask_step_k = 0;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (mask_data) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordtype">int</span> dims_m = att_mask.<a class="code hl_variable" href="classcv_1_1_mat.html#a39cf614aa52567e9a945cd2609bd767b">dims</a>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordtype">int</span> offset_dim = 4 - dims_m;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keyword">auto</span> get_size = [&amp;](<span class="keywordtype">int</span> i) { <span class="keywordflow">return</span> (i &lt; offset_dim) ? 1 : att_mask.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>[i - offset_dim]; };</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keyword">auto</span> get_step = [&amp;](<span class="keywordtype">int</span> i) { <span class="keywordflow">return</span> (i &lt; offset_dim) ? 0 : att_mask.<a class="code hl_variable" href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">step</a>[i - offset_dim] / <span class="keyword">sizeof</span>(MaskT); };</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">if</span> (get_size(0) &gt; 1) mask_step_b = get_step(0);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">if</span> (get_size(1) &gt; 1) mask_step_h = get_step(1);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">if</span> (get_size(2) &gt; 1) mask_step_q = get_step(2);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">if</span> (get_size(3) &gt; 1) mask_step_k = 1;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">size_t</span> total_tasks = (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)batch_size * n_heads;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">Range</a>(0, (<span class="keywordtype">int</span>)total_tasks), [&amp;](<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">Range</a> &amp;range) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = range.<a class="code hl_variable" href="classcv_1_1_range.html#ad7ce51f1d8797236c97bec49d2b25522">start</a>; i &lt; range.<a class="code hl_variable" href="classcv_1_1_range.html#aba16789fec81858a31c9685d399b62fc">end</a>; i++) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="keywordtype">int</span> b = i / n_heads;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keywordtype">int</span> h = i % n_heads;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordtype">size_t</span> offset = (<a class="code hl_variable" href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a>)i * seq_len_q * seq_len_kv;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordtype">size_t</span> mask_offset_q = b * mask_step_b + h * mask_step_h;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> tq = 0; tq &lt; seq_len_q; tq++){</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> tmax = is_causal ? std::min(past_seq_len + tq + 1, seq_len_kv) : seq_len_kv;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keywordtype">float</span> maxVal = -FLT_MAX;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordtype">int</span> tk = 0;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keyword">const</span> <span class="keywordtype">int</span> w = VTraits&lt;v_float32&gt;::vlanes();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            v_float32 v_max_val = vx_setall_f32(maxVal);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            v_float32 v_softcap = vx_setall_f32(softcap);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            v_float32 v_inv_softcap = vx_setall_f32(1.f / softcap);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            v_float32 v_threshold = vx_setall_f32(<a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            v_float32 v_minus_threshold = vx_setall_f32(-<a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            v_float32 v_one = vx_setall_f32(1.f);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            v_float32 v_minus_one = vx_setall_f32(-1.f);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            v_float32 v_minus_two = vx_setall_f32(-2.f);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            v_float32 v_min_val = vx_setall_f32(min_val);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            <span class="keywordflow">for</span> (; tk &lt;= tmax - w; tk += w) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                v_float32 v_val = vx_load(&amp;data[offset + tk]);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                <span class="keywordflow">if</span> (mask_data) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                    v_float32 v_mask_val;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    <span class="keywordflow">if</span> (mask_step_k)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                        v_mask_val = Policy::load_mask(&amp;mask_data[mask_offset_q + tk]);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                        v_mask_val = Policy::load_mask_scalar(&amp;mask_data[mask_offset_q]);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    v_val = Policy::apply(v_val, v_mask_val, v_min_val);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                <span class="keywordflow">if</span> (do_softcap) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                    v_float32 v_scaled = <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(v_val, v_inv_softcap);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                    v_float32 v_mask_pos = v_gt(v_scaled, v_threshold);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                    v_float32 v_mask_neg = v_lt(v_scaled, v_minus_threshold);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    v_float32 v_scaled_safe = <a class="code hl_function" href="group__core__hal__intrin.html#ga97f089f6c4606ddba14792d97bbe1b0d">v_select</a>(v_mask_neg, vx_setall_f32(0.f), v_scaled);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                    v_float32 v_exp_part = v_exp(<a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(v_minus_two, v_scaled_safe));</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                    v_float32 v_tanh = <a class="code hl_function" href="group__core__hal__intrin.html#ga397f0365ee0f2243e7de1bd7ac65aae5">v_div</a>(<a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(v_one, v_exp_part), <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(v_one, v_exp_part));</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                    v_float32 v_res = <a class="code hl_function" href="group__core__hal__intrin.html#ga97f089f6c4606ddba14792d97bbe1b0d">v_select</a>(v_mask_pos, v_one,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                                        <a class="code hl_function" href="group__core__hal__intrin.html#ga97f089f6c4606ddba14792d97bbe1b0d">v_select</a>(v_mask_neg, v_minus_one, v_tanh));</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                    v_val = <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(v_res, v_softcap);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                vx_store(&amp;data[offset + tk], v_val);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                v_max_val = v_max(v_max_val, v_val);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            maxVal = v_reduce_max(v_max_val);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordflow">for</span> (; tk &lt; tmax; tk++){</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordflow">if</span> (mask_data) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                    <span class="keywordtype">size_t</span> mask_idx = mask_offset_q + (mask_step_k ? tk : 0);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                    data[offset + tk] = Policy::apply_scalar(data[offset + tk], mask_data[mask_idx], min_val);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="keywordflow">if</span> (do_softcap) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    <span class="keywordtype">float</span> softcap_val = data[offset + tk] / softcap;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                    <span class="keywordflow">if</span> (softcap_val &gt; <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>)</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                        data[offset + tk ] = 1.f;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(softcap_val &lt; -<a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                        data[offset + tk ] = -1.f;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                        data[offset + tk] = (1.f - expf(-2 *softcap_val)) / (1.f + expf(-2 *softcap_val));</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    data[offset + tk] *= softcap;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                maxVal = std::max(maxVal, data[offset + tk]);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            <span class="keywordflow">for</span> (; tk &lt; seq_len_kv; tk++) {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                data[offset + tk] = min_val;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            <span class="keywordflow">if</span> (do_softmax) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordtype">float</span> <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a> = 0.f;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            tk = 0;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            v_float32 v_sum = vx_setzero_f32();</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            v_float32 v_max_val_shift = vx_setall_f32(maxVal);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            <span class="keywordflow">for</span> (; tk &lt;= seq_len_kv - w; tk += w) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                v_float32 v_val = vx_load(&amp;data[offset + tk]);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                v_val = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(v_val, v_max_val_shift);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                v_val = v_exp(v_val);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                v_sum = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(v_sum, v_val);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                vx_store(&amp;data[offset + tk], v_val);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            }</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a> = <a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(v_sum);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keywordflow">for</span> (; tk &lt; seq_len_kv; tk++){</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                data[offset + tk] = expf(data[offset + tk] - maxVal);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a> += data[offset + tk];</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keywordtype">float</span> inv_sum = 1.f / <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            tk = 0;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            v_float32 v_inv_sum = vx_setall_f32(inv_sum);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="keywordflow">for</span> (; tk &lt;= seq_len_kv - w; tk += w) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                v_float32 v_val = vx_load(&amp;data[offset + tk]);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                v_val = <a class="code hl_function" href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">v_mul</a>(v_val, v_inv_sum);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>                vx_store(&amp;data[offset + tk], v_val);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            }</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="keywordflow">for</span> (; tk &lt; seq_len_kv; tk++){</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                data[offset + tk] *= inv_sum;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            } <span class="comment">// do_softmax</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            offset += seq_len_kv;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            mask_offset_q += mask_step_q;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    });</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>}</div>
+</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="foldopen" id="foldopen00215" data-start="{" data-end="}">
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn.html#acb9dc8368f81f1519c6da5935c227f68">  215</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#acb9dc8368f81f1519c6da5935c227f68">fused_softmax_softcap_mask</a>(</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;att_weights,<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;att_mask,</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> softcap, <span class="keyword">const</span> <span class="keywordtype">bool</span> do_softcap,</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>,</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> min_val, <span class="keyword">const</span> <span class="keywordtype">bool</span> has_mask, <span class="keyword">const</span> <span class="keywordtype">bool</span> is_causal,</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordtype">int</span> past_seq_len, <span class="keywordtype">bool</span> do_softmax</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>){</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">if</span> (has_mask) {</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">switch</span>(att_mask.<a class="code hl_function" href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">depth</a>())</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a>:</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;float, MaskPolicyFloat&lt;float&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a>:</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>:</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;uint8_t, MaskPolicyInt&lt;uint8_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a>:</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;int8_t, MaskPolicyInt&lt;int8_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gaf55ae5a94c48cae66b96979877576f12">CV_16U</a>:</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;uint16_t, MaskPolicyInt&lt;uint16_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga9d2ee1a8334733dea7482a47a88e0f87">CV_16S</a>:</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;int16_t, MaskPolicyInt&lt;int16_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gaa79e0fdad5adb5036e5c549b84718694">CV_32U</a>:</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;uint32_t, MaskPolicyInt&lt;uint32_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>:</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;int32_t, MaskPolicyInt&lt;int32_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#ga345975890de9d8ee1bd99adc986c4a88">CV_64U</a>:</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;uint64_t, MaskPolicyInt&lt;uint64_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            <span class="keywordflow">case</span> <a class="code hl_define" href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a>:</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>                <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;int64_t, MaskPolicyInt&lt;int64_t&gt;</a>&gt;(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa33999ba3bd3e78ac3f1b615782a103d2">Error::StsUnsupportedFormat</a>, <span class="stringliteral">&quot;Unsupported mask data type in fused_softmax_softcap_mask&quot;</span>);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        }</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <a class="code hl_function" href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">run_fused_softmax&lt;float, MaskPolicyNone&gt;</a>(att_weights, att_mask, softcap, do_softcap, <a class="code hl_function" href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">threshold</a>, min_val, is_causal, past_seq_len, do_softmax);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>}</div>
+</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>}}</div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a8d1a237453cad869d11df90f8279651a"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a8d1a237453cad869d11df90f8279651a">size_t</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void void *CL_RUNTIME_EXPORT const cl_device_id const char const cl_program const char void void *CL_RUNTIME_EXPORT size_t</div><div class="ttdef"><b>Definición</b> <a href="autogenerated_2opencl__core_8hpp_source.html#l00286">opencl_core.hpp:286</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a146f8e8dda07d1365a575ab83d9828d1"><div class="ttname"><a href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">cv::Mat::size</a></div><div class="ttdeci">MatSize size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02513">mat.hpp:2513</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a39cf614aa52567e9a945cd2609bd767b"><div class="ttname"><a href="classcv_1_1_mat.html#a39cf614aa52567e9a945cd2609bd767b">cv::Mat::dims</a></div><div class="ttdeci">int dims</div><div class="ttdoc">the matrix dimensionality, &gt;= 2</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02488">mat.hpp:2488</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8b2912f6a6f5d55a3c9a7aae9134d862"><div class="ttname"><a href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">cv::Mat::ptr</a></div><div class="ttdeci">uchar * ptr(int i0=0)</div><div class="ttdoc">Returns a pointer to the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8da9f853b6f3a29d738572fd1ffc44c0"><div class="ttname"><a href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">cv::Mat::depth</a></div><div class="ttdeci">int depth() const</div><div class="ttdoc">Returns the depth of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ab4b0843e64328eb2a026b5b9ede726fe"><div class="ttname"><a href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">cv::Mat::step</a></div><div class="ttdeci">MatStep step</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02514">mat.hpp:2514</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af855717faf149c9ec128896a7a6c7711"><div class="ttname"><a href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">cv::Mat::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">Returns true if the array has no elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01028">matrix.cpp:1028</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html"><div class="ttname"><a href="classcv_1_1_range.html">cv::Range</a></div><div class="ttdoc">Template class specifying a continuous subsequence (slice) of a sequence.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00632">types.hpp:633</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aafab1fe471bac7c314dcd0d678ac4e2d"><div class="ttname"><a href="classcv_1_1_range.html#aafab1fe471bac7c314dcd0d678ac4e2d">cv::Range::Range</a></div><div class="ttdeci">Range()</div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_aba16789fec81858a31c9685d399b62fc"><div class="ttname"><a href="classcv_1_1_range.html#aba16789fec81858a31c9685d399b62fc">cv::Range::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html_ad7ce51f1d8797236c97bec49d2b25522"><div class="ttname"><a href="classcv_1_1_range.html#ad7ce51f1d8797236c97bec49d2b25522">cv::Range::start</a></div><div class="ttdeci">int start</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga21111882276c49470604662f036151e6"><div class="ttname"><a href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a></div><div class="ttdeci">#define CV_Bool</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00063">interface.h:63</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3"><div class="ttname"><a href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a></div><div class="ttdeci">#define CV_8S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00055">interface.h:55</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga345975890de9d8ee1bd99adc986c4a88"><div class="ttname"><a href="group__core__hal__interface.html#ga345975890de9d8ee1bd99adc986c4a88">CV_64U</a></div><div class="ttdeci">#define CV_64U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00064">interface.h:64</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga9d2ee1a8334733dea7482a47a88e0f87"><div class="ttname"><a href="group__core__hal__interface.html#ga9d2ee1a8334733dea7482a47a88e0f87">CV_16S</a></div><div class="ttdeci">#define CV_16S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00057">interface.h:57</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa79e0fdad5adb5036e5c549b84718694"><div class="ttname"><a href="group__core__hal__interface.html#gaa79e0fdad5adb5036e5c549b84718694">CV_32U</a></div><div class="ttdeci">#define CV_32U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00066">interface.h:66</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabfa4c421815900f05d712345a0e808a7"><div class="ttname"><a href="group__core__hal__interface.html#gabfa4c421815900f05d712345a0e808a7">CV_64S</a></div><div class="ttdeci">#define CV_64S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00065">interface.h:65</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaf55ae5a94c48cae66b96979877576f12"><div class="ttname"><a href="group__core__hal__interface.html#gaf55ae5a94c48cae66b96979877576f12">CV_16U</a></div><div class="ttdeci">#define CV_16U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00056">interface.h:56</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga397f0365ee0f2243e7de1bd7ac65aae5"><div class="ttname"><a href="group__core__hal__intrin.html#ga397f0365ee0f2243e7de1bd7ac65aae5">cv::v_div</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_div(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Divide values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga51066f94e5de1b7905996186d848b5dc"><div class="ttname"><a href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">cv::v_reduce_sum</a></div><div class="ttdeci">V_TypeTraits&lt; _Tp &gt;::sum_type v_reduce_sum(const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Element shift left among vector.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01405">intrin_cpp.hpp:1405</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga97f089f6c4606ddba14792d97bbe1b0d"><div class="ttname"><a href="group__core__hal__intrin.html#ga97f089f6c4606ddba14792d97bbe1b0d">cv::v_select</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_select(const v_reg&lt; _Tp, n &gt; &amp;mask, const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Per-element select (blend operation).</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01521">intrin_cpp.hpp:1521</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gaaa56a561e899888ef65fc2c2e258b892"><div class="ttname"><a href="group__core__hal__intrin.html#gaaa56a561e899888ef65fc2c2e258b892">cv::v_mul</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_mul(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Multiply values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gad23e56d9bbb3d122b20a86e51db73c68"><div class="ttname"><a href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">cv::v_sub</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_sub(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Subtract values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gadcf8617ab63379c5cbb04ea5f819ff20"><div class="ttname"><a href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">cv::v_add</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_add(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Add values.</div></div>
+<div class="ttc" id="agroup__core__parallel_html_gaa42ec9937b847cb52a97c613fc894c4a"><div class="ttname"><a href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">cv::parallel_for_</a></div><div class="ttdeci">CV_EXPORTS void parallel_for_(const Range &amp;range, const ParallelLoopBody &amp;body, double nstripes=-1.)</div><div class="ttdoc">Parallel data processor.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00503">parallel.cpp:503</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gaa012757b1a6536a1a3ef813a0aba1c1e"><div class="ttname"><a href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">cv::sum</a></div><div class="ttdeci">OutputArray sum</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l02650">imgproc.hpp:2650</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gae8a4a146d1ca78c626a53577199e9c57"><div class="ttname"><a href="group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57">cv::threshold</a></div><div class="ttdeci">CV_EXPORTS_W double threshold(InputArray src, OutputArray dst, double thresh, double maxval, int type)</div><div class="ttdoc">Applies a fixed-level threshold to each array element.</div><div class="ttdef"><b>Definición</b> <a href="thresh_8cpp_source.html#l01473">thresh.cpp:1473</a></div></div>
+<div class="ttc" id="aintrin_8hpp_html"><div class="ttname"><a href="intrin_8hpp.html">intrin.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaa33999ba3bd3e78ac3f1b615782a103d2"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaa33999ba3bd3e78ac3f1b615782a103d2">cv::Error::StsUnsupportedFormat</a></div><div class="ttdeci">@ StsUnsupportedFormat</div><div class="ttdoc">the data format/type is not supported by the function</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00060">exception.hpp:60</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_a520b2c66f6013173c9b0d29fbacb903d"><div class="ttname"><a href="namespacecv_1_1dnn.html#a520b2c66f6013173c9b0d29fbacb903d">cv::dnn::load_int_mask_as_f32</a></div><div class="ttdeci">static v_float32 load_int_mask_as_f32(const int32_t *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00010">fast_attn.cpp:10</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_acb9dc8368f81f1519c6da5935c227f68"><div class="ttname"><a href="namespacecv_1_1dnn.html#acb9dc8368f81f1519c6da5935c227f68">cv::dnn::fused_softmax_softcap_mask</a></div><div class="ttdeci">void fused_softmax_softcap_mask(Mat &amp;att_weights, const Mat &amp;att_mask, const float softcap, const bool do_softcap, const float threshold, const float min_val, const bool has_mask, const bool is_causal, int past_seq_len, bool do_softmax)</div><div class="ttdef"><b>Definición</b> <a href="#l00215">fast_attn.cpp:215</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ad3076a2a579105990afd8f443d08211c"><div class="ttname"><a href="namespacecv_1_1dnn.html#ad3076a2a579105990afd8f443d08211c">cv::dnn::run_fused_softmax</a></div><div class="ttdeci">void run_fused_softmax(Mat &amp;att_weights, const Mat &amp;att_mask, const float softcap, const bool do_softcap, const float threshold, const float min_val, const bool is_causal, const int past_seq_len, const bool do_softmax)</div><div class="ttdef"><b>Definición</b> <a href="#l00062">fast_attn.cpp:62</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_float_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_float.html">cv::dnn::MaskPolicyFloat</a></div><div class="ttdef"><b>Definición</b> <a href="#l00037">fast_attn.cpp:37</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_float_html_a06ffa90401421adb34c17c4a95e045e2"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_float.html#a06ffa90401421adb34c17c4a95e045e2">cv::dnn::MaskPolicyFloat::apply</a></div><div class="ttdeci">static v_float32 apply(v_float32 val, v_float32 mask, v_float32 min_val)</div><div class="ttdef"><b>Definición</b> <a href="#l00040">fast_attn.cpp:40</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_float_html_a0bfdc5a780a1da927f9943576ffe5c7e"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_float.html#a0bfdc5a780a1da927f9943576ffe5c7e">cv::dnn::MaskPolicyFloat::load_mask_scalar</a></div><div class="ttdeci">static v_float32 load_mask_scalar(const MaskT *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00039">fast_attn.cpp:39</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_float_html_a731a2caa16ce05521977a149d46ede9f"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_float.html#a731a2caa16ce05521977a149d46ede9f">cv::dnn::MaskPolicyFloat::load_mask</a></div><div class="ttdeci">static v_float32 load_mask(const MaskT *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">fast_attn.cpp:38</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_float_html_ac346e32a542a290d9b5b6932f653168e"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_float.html#ac346e32a542a290d9b5b6932f653168e">cv::dnn::MaskPolicyFloat::apply_scalar</a></div><div class="ttdeci">static float apply_scalar(float val, MaskT mask, float min_val)</div><div class="ttdef"><b>Definición</b> <a href="#l00041">fast_attn.cpp:41</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_int_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_int.html">cv::dnn::MaskPolicyInt</a></div><div class="ttdef"><b>Definición</b> <a href="#l00045">fast_attn.cpp:45</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_int_html_a07d313e7c5182b5f1f54fdccb65164dc"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_int.html#a07d313e7c5182b5f1f54fdccb65164dc">cv::dnn::MaskPolicyInt::apply_scalar</a></div><div class="ttdeci">static float apply_scalar(float val, MaskT mask, float min_val)</div><div class="ttdef"><b>Definición</b> <a href="#l00051">fast_attn.cpp:51</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_int_html_a191e923dddbd5b701fe59be4f760fd0d"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_int.html#a191e923dddbd5b701fe59be4f760fd0d">cv::dnn::MaskPolicyInt::load_mask</a></div><div class="ttdeci">static v_float32 load_mask(const MaskT *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00046">fast_attn.cpp:46</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_int_html_ac024cd046eab9e3fe30b69ade346859a"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_int.html#ac024cd046eab9e3fe30b69ade346859a">cv::dnn::MaskPolicyInt::apply</a></div><div class="ttdeci">static v_float32 apply(v_float32 val, v_float32 mask, v_float32 min_val)</div><div class="ttdef"><b>Definición</b> <a href="#l00050">fast_attn.cpp:50</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_int_html_acbf39b398984f7151a7a8262762b49b6"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_int.html#acbf39b398984f7151a7a8262762b49b6">cv::dnn::MaskPolicyInt::load_mask_scalar</a></div><div class="ttdeci">static v_float32 load_mask_scalar(const MaskT *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00047">fast_attn.cpp:47</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_none_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_none.html">cv::dnn::MaskPolicyNone</a></div><div class="ttdef"><b>Definición</b> <a href="#l00054">fast_attn.cpp:54</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_none_html_a0d5fc2cbf4db688e1f468cd0ccb74bce"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_none.html#a0d5fc2cbf4db688e1f468cd0ccb74bce">cv::dnn::MaskPolicyNone::load_mask</a></div><div class="ttdeci">static v_float32 load_mask(const void *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00055">fast_attn.cpp:55</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_none_html_a78de99d0496c7eb57ad0af5eed862907"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_none.html#a78de99d0496c7eb57ad0af5eed862907">cv::dnn::MaskPolicyNone::apply</a></div><div class="ttdeci">static v_float32 apply(v_float32 val, v_float32 mask, v_float32 min_val)</div><div class="ttdef"><b>Definición</b> <a href="#l00057">fast_attn.cpp:57</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_none_html_a7c937a0b61802b28ec4b02ff90b1dd1d"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_none.html#a7c937a0b61802b28ec4b02ff90b1dd1d">cv::dnn::MaskPolicyNone::apply_scalar</a></div><div class="ttdeci">static float apply_scalar(float val, int mask, float min_val)</div><div class="ttdef"><b>Definición</b> <a href="#l00058">fast_attn.cpp:58</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_mask_policy_none_html_aacc9925b386e9ea923b75b9309e1dcab"><div class="ttname"><a href="structcv_1_1dnn_1_1_mask_policy_none.html#aacc9925b386e9ea923b75b9309e1dcab">cv::dnn::MaskPolicyNone::load_mask_scalar</a></div><div class="ttdeci">static v_float32 load_mask_scalar(const void *ptr)</div><div class="ttdef"><b>Definición</b> <a href="#l00056">fast_attn.cpp:56</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_548457ad41cf416cfc3c5ee4fe52e883.html">layers</a></li><li class="navelem"><a href="dir_f4f7c9f64246e7a78cb90b1cc26742b7.html">cpu_kernels</a></li><li class="navelem"><a href="fast__attn_8cpp.html">fast_attn.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

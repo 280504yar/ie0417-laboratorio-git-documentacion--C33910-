@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda4dnn/csl/cudnn/activation.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('csl_2cudnn_2activation_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">activation.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="csl_2cudnn_2activation_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_CUDA4DNN_CSL_CUDNN_ACTIVATION_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_CUDA4DNN_CSL_CUDNN_ACTIVATION_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cudnn.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html">   10</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">csl</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html">cudnn</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151">   14</a></span>        <span class="keyword">enum class</span> <a class="code hl_enumeration" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151">ActivationType</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ad8156d3c6735d75d8a1b8dedd0e79c8b">   15</a></span>            IDENTITY,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ad346bb4679d29be241279f15d7795c1c">   16</a></span>            RELU,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a112eef50ee515dfc29864770d82a5d99">   17</a></span>            CLIPPED_RELU,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a143c8c6f51b9bb893ce71e38702e3cc1">   18</a></span>            TANH,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ab299f45b5de2a8f7c45192590290742b">   19</a></span>            <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a538d6904c868410d5983f1a95b46d452ab299f45b5de2a8f7c45192590290742b">SIGMOID</a>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a5b44c930bf0ddeef48b50ef11e5ddd58">   20</a></span>            ELU</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        };</div>
+</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">   23</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>() noexcept : descriptor{ <span class="keyword">nullptr</span> } { }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a19446c1f7601ea83864c914cf5049cf2">   24</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a19446c1f7601ea83864c914cf5049cf2">ActivationDescriptor</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#af2f3bd8cec9bb338b7700315e9af0b18">   25</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#af2f3bd8cec9bb338b7700315e9af0b18">ActivationDescriptor</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            : descriptor{ other.descriptor } {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            other.descriptor = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="comment">/* `relu_ceiling_or_elu_alpha`:</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">         * - `alpha` coefficient in ELU activation</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">         * - `ceiling` for CLIPPED_RELU activation</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a5585943cdceac397cd403fec17d4d5fe">   34</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a5585943cdceac397cd403fec17d4d5fe">ActivationDescriptor</a>(<a class="code hl_enumeration" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151">ActivationType</a> type, <span class="keywordtype">double</span> relu_ceiling_or_elu_alpha = 0.0) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <a class="code hl_define" href="cudnn_2cudnn_8hpp.html#abf82b79f5fd5595e1dc512e514c74fad">CUDA4DNN_CHECK_CUDNN</a>(cudnnCreateActivationDescriptor(&amp;descriptor));</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <span class="keyword">const</span> <span class="keyword">auto</span> mode = [type] {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                    <span class="keywordflow">switch</span>(type) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ad8156d3c6735d75d8a1b8dedd0e79c8b">ActivationType::IDENTITY</a>: <span class="keywordflow">return</span> CUDNN_ACTIVATION_IDENTITY;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ad346bb4679d29be241279f15d7795c1c">ActivationType::RELU</a>: <span class="keywordflow">return</span> CUDNN_ACTIVATION_RELU;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a112eef50ee515dfc29864770d82a5d99">ActivationType::CLIPPED_RELU</a>: <span class="keywordflow">return</span> CUDNN_ACTIVATION_CLIPPED_RELU;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ab299f45b5de2a8f7c45192590290742b">ActivationType::SIGMOID</a>: <span class="keywordflow">return</span> CUDNN_ACTIVATION_SIGMOID;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a143c8c6f51b9bb893ce71e38702e3cc1">ActivationType::TANH</a>: <span class="keywordflow">return</span> CUDNN_ACTIVATION_TANH;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a5b44c930bf0ddeef48b50ef11e5ddd58">ActivationType::ELU</a>: <span class="keywordflow">return</span> CUDNN_ACTIVATION_ELU;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(0);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                    <span class="keywordflow">return</span> CUDNN_ACTIVATION_IDENTITY;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                } ();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                <a class="code hl_define" href="cudnn_2cudnn_8hpp.html#abf82b79f5fd5595e1dc512e514c74fad">CUDA4DNN_CHECK_CUDNN</a>(cudnnSetActivationDescriptor(descriptor, mode, CUDNN_NOT_PROPAGATE_NAN, relu_ceiling_or_elu_alpha));</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            } <span class="keywordflow">catch</span>(...) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="comment">/* cudnnDestroyActivationDescriptor will not fail for a valid descriptor object */</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                <a class="code hl_define" href="cudnn_2cudnn_8hpp.html#abf82b79f5fd5595e1dc512e514c74fad">CUDA4DNN_CHECK_CUDNN</a>(cudnnDestroyActivationDescriptor(descriptor));</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                <span class="keywordflow">throw</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#ae296caafc0a295fa8a2c75caa32a98c2">   58</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#ae296caafc0a295fa8a2c75caa32a98c2">~ActivationDescriptor</a>() noexcept {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">if</span> (descriptor != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                <span class="comment">/* cudnnDestroyActivationDescriptor will not fail */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                <a class="code hl_define" href="cudnn_2cudnn_8hpp.html#abf82b79f5fd5595e1dc512e514c74fad">CUDA4DNN_CHECK_CUDNN</a>(cudnnDestroyActivationDescriptor(descriptor));</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a635310c5729e538c4399e311eef3f6c9">   65</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a635310c5729e538c4399e311eef3f6c9">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a8e926b8290287ca13011f3b4db44bde9">   66</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>&amp; <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a8e926b8290287ca13011f3b4db44bde9">operator=</a>(<a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">ActivationDescriptor</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            descriptor = other.descriptor;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            other.descriptor = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        };</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a9256890ec58e63b69cad6b01840fce0d">   72</a></span>        cudnnActivationDescriptor_t <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a9256890ec58e63b69cad6b01840fce0d">get</a>() const noexcept { <span class="keywordflow">return</span> descriptor; }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        cudnnActivationDescriptor_t descriptor;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    };</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}}}}} <span class="comment">/* namespace cv::dnn::cuda4dnn::csl::cudnn */</span></div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_CUDA4DNN_CSL_CUDNN_ACTIVATION_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_a19446c1f7601ea83864c914cf5049cf2"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a19446c1f7601ea83864c914cf5049cf2">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationDescriptor</a></div><div class="ttdeci">ActivationDescriptor(const ActivationDescriptor &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_a1adbcdbe37df7ea347124f00dda3cefa"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a1adbcdbe37df7ea347124f00dda3cefa">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationDescriptor</a></div><div class="ttdeci">ActivationDescriptor() noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00023">activation.hpp:23</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_a5585943cdceac397cd403fec17d4d5fe"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a5585943cdceac397cd403fec17d4d5fe">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationDescriptor</a></div><div class="ttdeci">ActivationDescriptor(ActivationType type, double relu_ceiling_or_elu_alpha=0.0)</div><div class="ttdef"><b>Definición</b> <a href="#l00034">activation.hpp:34</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_a635310c5729e538c4399e311eef3f6c9"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a635310c5729e538c4399e311eef3f6c9">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::operator=</a></div><div class="ttdeci">ActivationDescriptor &amp; operator=(const ActivationDescriptor &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_a8e926b8290287ca13011f3b4db44bde9"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a8e926b8290287ca13011f3b4db44bde9">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::operator=</a></div><div class="ttdeci">ActivationDescriptor &amp; operator=(ActivationDescriptor &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00066">activation.hpp:66</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_a9256890ec58e63b69cad6b01840fce0d"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#a9256890ec58e63b69cad6b01840fce0d">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::get</a></div><div class="ttdeci">cudnnActivationDescriptor_t get() const noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00072">activation.hpp:72</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_ae296caafc0a295fa8a2c75caa32a98c2"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#ae296caafc0a295fa8a2c75caa32a98c2">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::~ActivationDescriptor</a></div><div class="ttdeci">~ActivationDescriptor() noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00058">activation.hpp:58</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType</a></div><div class="ttdeci">ActivationType</div><div class="ttdef"><b>Definición</b> <a href="#l00014">activation.hpp:14</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151a112eef50ee515dfc29864770d82a5d99"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a112eef50ee515dfc29864770d82a5d99">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType::CLIPPED_RELU</a></div><div class="ttdeci">@ CLIPPED_RELU</div><div class="ttdef"><b>Definición</b> <a href="#l00017">activation.hpp:17</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151a143c8c6f51b9bb893ce71e38702e3cc1"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a143c8c6f51b9bb893ce71e38702e3cc1">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType::TANH</a></div><div class="ttdeci">@ TANH</div><div class="ttdef"><b>Definición</b> <a href="#l00018">activation.hpp:18</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151a5b44c930bf0ddeef48b50ef11e5ddd58"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151a5b44c930bf0ddeef48b50ef11e5ddd58">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType::ELU</a></div><div class="ttdeci">@ ELU</div><div class="ttdef"><b>Definición</b> <a href="#l00020">activation.hpp:20</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151ab299f45b5de2a8f7c45192590290742b"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ab299f45b5de2a8f7c45192590290742b">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType::SIGMOID</a></div><div class="ttdeci">@ SIGMOID</div><div class="ttdef"><b>Definición</b> <a href="#l00019">activation.hpp:19</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151ad346bb4679d29be241279f15d7795c1c"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ad346bb4679d29be241279f15d7795c1c">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType::RELU</a></div><div class="ttdeci">@ RELU</div><div class="ttdef"><b>Definición</b> <a href="#l00016">activation.hpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_aefca5e689bf3f4c261d35ea6ca37e151ad8156d3c6735d75d8a1b8dedd0e79c8b"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#aefca5e689bf3f4c261d35ea6ca37e151ad8156d3c6735d75d8a1b8dedd0e79c8b">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationType::IDENTITY</a></div><div class="ttdeci">@ IDENTITY</div><div class="ttdef"><b>Definición</b> <a href="#l00015">activation.hpp:15</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor_html_af2f3bd8cec9bb338b7700315e9af0b18"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_1_1_activation_descriptor.html#af2f3bd8cec9bb338b7700315e9af0b18">cv::dnn::cuda4dnn::csl::cudnn::ActivationDescriptor::ActivationDescriptor</a></div><div class="ttdeci">ActivationDescriptor(ActivationDescriptor &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definición</b> <a href="#l00025">activation.hpp:25</a></div></div>
+<div class="ttc" id="acudnn_2cudnn_8hpp_html_abf82b79f5fd5595e1dc512e514c74fad"><div class="ttname"><a href="cudnn_2cudnn_8hpp.html#abf82b79f5fd5595e1dc512e514c74fad">CUDA4DNN_CHECK_CUDNN</a></div><div class="ttdeci">#define CUDA4DNN_CHECK_CUDNN(call)</div><div class="ttdef"><b>Definición</b> <a href="cudnn_2cudnn_8hpp_source.html#l00026">cudnn.hpp:26</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html">cv::dnn::cuda4dnn::csl::cudnn</a></div><div class="ttdef"><b>Definición</b> <a href="#l00010">activation.hpp:10</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl.html">cv::dnn::cuda4dnn::csl</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a538d6904c868410d5983f1a95b46d452ab299f45b5de2a8f7c45192590290742b"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a538d6904c868410d5983f1a95b46d452ab299f45b5de2a8f7c45192590290742b">cv::dnn::cuda4dnn::SquashMethod::SIGMOID</a></div><div class="ttdeci">@ SIGMOID</div><div class="ttdef"><b>Definición</b> <a href="primitives_2region_8hpp_source.html#l00028">region.hpp:28</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_329f8aeda4c94140e35f70be21279668.html">cuda4dnn</a></li><li class="navelem"><a href="dir_c1ab3ca0f95442b07db671d87c7a5644.html">csl</a></li><li class="navelem"><a href="dir_1c73530b52a8208556413923e5f4d1dd.html">cudnn</a></li><li class="navelem"><a href="csl_2cudnn_2activation_8hpp.html">activation.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

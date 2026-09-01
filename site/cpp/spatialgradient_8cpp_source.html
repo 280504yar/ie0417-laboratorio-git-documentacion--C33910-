@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/imgproc/src/spatialgradient.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('spatialgradient_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">spatialgradient.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="spatialgradient_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="imgproc_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="intrin_8hpp.html">opencv2/core/hal/intrin.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">/* NOTE:</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> * Sobel-x: -1  0  1</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> *          -2  0  2</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> *          -1  0  1</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> * Sobel-y: -1 -2 -1</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> *           0  0  0</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> *           1  2  1</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> spatialGradientKernel_vec( <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; vx, <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; vy,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                                          <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v00, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v01, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v02,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                                          <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v10,               <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v12,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                                          <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v20, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v21, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v22 )</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">// vx = (v22 - v00) + (v02 - v20) + 2 * (v12 - v10)</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">// vy = (v22 - v00) + (v20 - v02) + 2 * (v21 - v01)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> tmp_add = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(v22, v00),</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      tmp_sub = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(v02, v20),</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      tmp_x   = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(v12, v10),</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      tmp_y   = <a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(v21, v01);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    vx = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(<a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(<a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(tmp_add, tmp_sub), tmp_x), tmp_x);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    vy = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(<a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(<a class="code hl_function" href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">v_sub</a>(tmp_add, tmp_sub), tmp_y), tmp_y);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="namespacecv.html#a189ba0ea6dfb8b92caadc830b31526e6">   80</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv.html#a189ba0ea6dfb8b92caadc830b31526e6">spatialGradientKernel</a>( <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; vx, <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; vy,</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                                          <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v00, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v01, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v02,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                                          <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v10,               <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v12,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                                          <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v20, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v21, <span class="keyword">const</span> <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a>&amp; v22 )</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>{</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">// vx = (v22 - v00) + (v02 - v20) + 2 * (v12 - v10)</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// vy = (v22 - v00) + (v20 - v02) + 2 * (v21 - v01)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> tmp_add = v22 - v00,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      tmp_sub = v02 - v20,</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      tmp_x   = v12 - v10,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      tmp_y   = v21 - v01;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    vx = tmp_add + tmp_sub + tmp_x + tmp_x;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    vy = tmp_add - tmp_sub + tmp_y + tmp_y;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group__imgproc__filter.html#ga405d03b20c782b65a4daf54d233239a2">   96</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__imgproc__filter.html#ga405d03b20c782b65a4daf54d233239a2">spatialGradient</a>( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dx, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dy,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                      <span class="keywordtype">int</span> ksize, <span class="keywordtype">int</span> borderType )</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>{</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="comment">// Prepare InputArray src</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src = _src.getMat();</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( !src.<a class="code hl_function" href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">empty</a>() );</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>() == <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a> );</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( borderType == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01">BORDER_DEFAULT</a> || borderType == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f">BORDER_REPLICATE</a> );</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="comment">// Prepare OutputArrays dx, dy</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    _dx.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>( src.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), <a class="code hl_define" href="group__core__hal__interface.html#ga3515053e24377cf079fa1027d208ad52">CV_16SC1</a> );</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    _dy.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>( src.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), <a class="code hl_define" href="group__core__hal__interface.html#ga3515053e24377cf079fa1027d208ad52">CV_16SC1</a> );</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> dx = _dx.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>(),</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        dy = _dy.<a class="code hl_function" href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">getMat</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="comment">// TODO: Allow for other kernel sizes</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(ksize == 3);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    CALL_HAL(<a class="code hl_function" href="group__imgproc__filter.html#ga405d03b20c782b65a4daf54d233239a2">spatialGradient</a>, cv_hal_spatialGradient,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>         src.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>, src.<a class="code hl_variable" href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">step</a>,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>         dx.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keywordtype">short</span>&gt;(), dx.<a class="code hl_variable" href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">step</a>,</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>         dy.ptr&lt;<span class="keywordtype">short</span>&gt;(), dy.step,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>         src.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a>, src.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>,</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>         ksize, borderType);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="comment">// Get dimensions</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> H = src.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>              W = src.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// Row, column indices</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">int</span> i = 0,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        j = 0;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">// Handle border types</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">int</span> i_top    = 0,     <span class="comment">// Case for H == 1 &amp;&amp; W == 1 &amp;&amp; BORDER_REPLICATE</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        i_bottom = H - 1,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        j_offl   = 0,     <span class="comment">// j offset from 0th   pixel to reach -1st pixel</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        j_offr   = 0;     <span class="comment">// j offset from W-1th pixel to reach Wth  pixel</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">if</span> ( borderType == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01">BORDER_DEFAULT</a> ) <span class="comment">// Equiv. to BORDER_REFLECT_101</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">if</span> ( H &gt; 1 )</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            i_top    = 1;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            i_bottom = H - 2;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">if</span> ( W &gt; 1 )</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            j_offl = 1;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            j_offr = -1;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordtype">int</span> i_start = 0;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordtype">int</span> j_start = 0;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="comment">// Characters in variable names have the following meanings:</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="comment">// u: unsigned char</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="comment">// s: signed int</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="comment">// [row][column]</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="comment">// m: offset -1</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">// n: offset  0</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="comment">// p: offset  1</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="comment">// Example: umn is offset -1 in row and offset 0 in column</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">for</span> ( i = 0; i &lt; H - 1; i += 2 )</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *p_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i == 0 ? i_top : i - 1);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *c_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *n_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i+1);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *m_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i == H - 2 ? i_bottom : i + 2);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordtype">short</span> *c_dx = dx.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keywordtype">short</span>&gt;(i);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordtype">short</span> *c_dy = dy.ptr&lt;<span class="keywordtype">short</span>&gt;(i);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">short</span> *n_dx = dx.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keywordtype">short</span>&gt;(i+1);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordtype">short</span> *n_dy = dy.ptr&lt;<span class="keywordtype">short</span>&gt;(i+1);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="comment">// Process rest of columns 16-column chunks at a time</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">for</span> ( j = 1; j &lt; W - VTraits&lt;v_uint8&gt;::vlanes(); j += VTraits&lt;v_uint8&gt;::vlanes())</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            <span class="comment">// Load top row for 3x3 Sobel filter</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            v_uint8 v_um = vx_load(&amp;p_src[j-1]);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            v_uint8 v_un = vx_load(&amp;p_src[j]);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            v_uint8 v_up = vx_load(&amp;p_src[j+1]);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            v_uint16 v_um1, v_um2, v_un1, v_un2, v_up1, v_up2;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_um, v_um1, v_um2);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_un, v_un1, v_un2);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_up, v_up1, v_up2);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            v_int16 v_s1m1 = v_reinterpret_as_s16(v_um1);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            v_int16 v_s1m2 = v_reinterpret_as_s16(v_um2);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            v_int16 v_s1n1 = v_reinterpret_as_s16(v_un1);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            v_int16 v_s1n2 = v_reinterpret_as_s16(v_un2);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            v_int16 v_s1p1 = v_reinterpret_as_s16(v_up1);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            v_int16 v_s1p2 = v_reinterpret_as_s16(v_up2);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="comment">// Load second row for 3x3 Sobel filter</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            v_um = vx_load(&amp;c_src[j-1]);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            v_un = vx_load(&amp;c_src[j]);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            v_up = vx_load(&amp;c_src[j+1]);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_um, v_um1, v_um2);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_un, v_un1, v_un2);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_up, v_up1, v_up2);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            v_int16 v_s2m1 = v_reinterpret_as_s16(v_um1);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            v_int16 v_s2m2 = v_reinterpret_as_s16(v_um2);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            v_int16 v_s2n1 = v_reinterpret_as_s16(v_un1);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            v_int16 v_s2n2 = v_reinterpret_as_s16(v_un2);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            v_int16 v_s2p1 = v_reinterpret_as_s16(v_up1);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            v_int16 v_s2p2 = v_reinterpret_as_s16(v_up2);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="comment">// Load third row for 3x3 Sobel filter</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            v_um = vx_load(&amp;n_src[j-1]);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            v_un = vx_load(&amp;n_src[j]);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            v_up = vx_load(&amp;n_src[j+1]);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_um, v_um1, v_um2);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_un, v_un1, v_un2);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_up, v_up1, v_up2);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            v_int16 v_s3m1 = v_reinterpret_as_s16(v_um1);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            v_int16 v_s3m2 = v_reinterpret_as_s16(v_um2);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            v_int16 v_s3n1 = v_reinterpret_as_s16(v_un1);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            v_int16 v_s3n2 = v_reinterpret_as_s16(v_un2);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            v_int16 v_s3p1 = v_reinterpret_as_s16(v_up1);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            v_int16 v_s3p2 = v_reinterpret_as_s16(v_up2);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="comment">// dx &amp; dy for rows 1, 2, 3</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            v_int16 v_sdx1, v_sdy1;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            spatialGradientKernel_vec&lt;v_int16&gt;( v_sdx1, v_sdy1,</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                                              v_s1m1, v_s1n1, v_s1p1,</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                                              v_s2m1,         v_s2p1,</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                                              v_s3m1, v_s3n1, v_s3p1 );</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            v_int16 v_sdx2, v_sdy2;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            spatialGradientKernel_vec&lt;v_int16&gt;( v_sdx2, v_sdy2,</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                                              v_s1m2, v_s1n2, v_s1p2,</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                                              v_s2m2,         v_s2p2,</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>                                              v_s3m2, v_s3n2, v_s3p2 );</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <span class="comment">// Store</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;c_dx[j],                 v_sdx1);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;c_dx[j+VTraits&lt;v_int16&gt;::vlanes()], v_sdx2);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;c_dy[j],                 v_sdy1);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;c_dy[j+VTraits&lt;v_int16&gt;::vlanes()], v_sdy2);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            <span class="comment">// Load fourth row for 3x3 Sobel filter</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            v_um = vx_load(&amp;m_src[j-1]);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            v_un = vx_load(&amp;m_src[j]);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            v_up = vx_load(&amp;m_src[j+1]);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_um, v_um1, v_um2);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_un, v_un1, v_un2);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">v_expand</a>(v_up, v_up1, v_up2);</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            v_int16 v_s4m1 = v_reinterpret_as_s16(v_um1);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            v_int16 v_s4m2 = v_reinterpret_as_s16(v_um2);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            v_int16 v_s4n1 = v_reinterpret_as_s16(v_un1);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            v_int16 v_s4n2 = v_reinterpret_as_s16(v_un2);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            v_int16 v_s4p1 = v_reinterpret_as_s16(v_up1);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            v_int16 v_s4p2 = v_reinterpret_as_s16(v_up2);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="comment">// dx &amp; dy for rows 2, 3, 4</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            spatialGradientKernel_vec&lt;v_int16&gt;( v_sdx1, v_sdy1,</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                                              v_s2m1, v_s2n1, v_s2p1,</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                                              v_s3m1,         v_s3p1,</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                                              v_s4m1, v_s4n1, v_s4p1 );</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            spatialGradientKernel_vec&lt;v_int16&gt;( v_sdx2, v_sdy2,</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                                              v_s2m2, v_s2n2, v_s2p2,</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                                              v_s3m2,         v_s3p2,</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                                              v_s4m2, v_s4n2, v_s4p2 );</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="comment">// Store</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;n_dx[j],                 v_sdx1);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;n_dx[j+VTraits&lt;v_int16&gt;::vlanes()], v_sdx2);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;n_dy[j],                 v_sdy1);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <a class="code hl_function" href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">v_store</a>(&amp;n_dy[j+VTraits&lt;v_int16&gt;::vlanes()], v_sdy2);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        }</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    i_start = i;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    j_start = j;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keywordtype">int</span> j_p, j_n;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> v00, v01, v02, v10, v11, v12, v20, v21, v22;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordflow">for</span> ( i = 0; i &lt; H; i++ )</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *p_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i == 0 ? i_top : i - 1);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *c_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> *n_src = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>&gt;(i == H - 1 ? i_bottom : i + 1);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordtype">short</span> *c_dx = dx.<a class="code hl_function" href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">ptr</a>&lt;<span class="keywordtype">short</span>&gt;(i);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordtype">short</span> *c_dy = dy.ptr&lt;<span class="keywordtype">short</span>&gt;(i);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="comment">// Process left-most column</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        j = 0;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        j_p = j + j_offl;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        j_n = 1;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">if</span> ( j_n &gt;= W ) j_n = j + j_offr;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        v00 = p_src[j_p]; v01 = p_src[j]; v02 = p_src[j_n];</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        v10 = c_src[j_p]; v11 = c_src[j]; v12 = c_src[j_n];</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        v20 = n_src[j_p]; v21 = n_src[j]; v22 = n_src[j_n];</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <a class="code hl_function" href="namespacecv.html#a189ba0ea6dfb8b92caadc830b31526e6">spatialGradientKernel&lt;short&gt;</a>( c_dx[0], c_dy[0], v00, v01, v02, v10,</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                                      v12, v20, v21, v22 );</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        v00 = v01; v10 = v11; v20 = v21;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        v01 = v02; v11 = v12; v21 = v22;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="comment">// Process middle columns</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        j = i &gt;= i_start ? 1 : j_start;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        j_p = j - 1;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        v00 = p_src[j_p]; v01 = p_src[j];</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        v10 = c_src[j_p]; v11 = c_src[j];</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        v20 = n_src[j_p]; v21 = n_src[j];</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        <span class="keywordflow">for</span> ( ; j &lt; W - 1; j++ )</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        {</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            <span class="comment">// Get values for next column</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            j_n = j + 1; v02 = p_src[j_n]; v12 = c_src[j_n]; v22 = n_src[j_n];</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            <a class="code hl_function" href="namespacecv.html#a189ba0ea6dfb8b92caadc830b31526e6">spatialGradientKernel&lt;short&gt;</a>( c_dx[j], c_dy[j], v00, v01, v02, v10,</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                                          v12, v20, v21, v22 );</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            <span class="comment">// Move values back one column for next iteration</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            v00 = v01; v10 = v11; v20 = v21;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            v01 = v02; v11 = v12; v21 = v22;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="comment">// Process right-most column</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">if</span> ( j &lt; W )</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            j_n = j + j_offr; v02 = p_src[j_n]; v12 = c_src[j_n]; v22 = n_src[j_n];</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>            <a class="code hl_function" href="namespacecv.html#a189ba0ea6dfb8b92caadc830b31526e6">spatialGradientKernel&lt;short&gt;</a>( c_dx[j], c_dy[j], v00, v01, v02, v10,</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                                          v12, v20, v21, v22 );</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        }</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>}</div>
+</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>}</div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a9c09739ca3e0ce212e2ab8374aa2f195"><div class="ttname"><a href="classcv_1_1___input_array.html#a9c09739ca3e0ce212e2ab8374aa2f195">cv::_InputArray::getMat</a></div><div class="ttdeci">Mat getMat(int idx=-1) const</div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4eb2daf4732c371c7565db49f76c63ce"><div class="ttname"><a href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">cv::_OutputArray::create</a></div><div class="ttdeci">void create(Size sz, int type, int i=-1, bool allowTransposed=false, _OutputArray::DepthMask fixedDepthMask=static_cast&lt; _OutputArray::DepthMask &gt;(0)) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01466">matrix_wrap.cpp:1466</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a146f8e8dda07d1365a575ab83d9828d1"><div class="ttname"><a href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">cv::Mat::size</a></div><div class="ttdeci">MatSize size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02513">mat.hpp:2513</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a4d33bed1c850265370d2af0ff02e1564"><div class="ttname"><a href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">cv::Mat::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdoc">pointer to the data</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02493">mat.hpp:2493</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8b2912f6a6f5d55a3c9a7aae9134d862"><div class="ttname"><a href="classcv_1_1_mat.html#a8b2912f6a6f5d55a3c9a7aae9134d862">cv::Mat::ptr</a></div><div class="ttdeci">uchar * ptr(int i0=0)</div><div class="ttdoc">Returns a pointer to the specified matrix row.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa3e5a47585c9ef6a0842556739155e3e"><div class="ttname"><a href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cv::Mat::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ab4b0843e64328eb2a026b5b9ede726fe"><div class="ttname"><a href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">cv::Mat::step</a></div><div class="ttdeci">MatStep step</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02514">mat.hpp:2514</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_abed816466c45234254d25bc59c31245e"><div class="ttname"><a href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">cv::Mat::rows</a></div><div class="ttdeci">int rows</div><div class="ttdoc">the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af2d2652e552d7de635988f18a84b53e5"><div class="ttname"><a href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">cv::Mat::type</a></div><div class="ttdeci">int type() const</div><div class="ttdoc">Returns the type of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af855717faf149c9ec128896a7a6c7711"><div class="ttname"><a href="classcv_1_1_mat.html#af855717faf149c9ec128896a7a6c7711">cv::Mat::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">Returns true if the array has no elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01028">matrix.cpp:1028</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f">cv::BORDER_REPLICATE</a></div><div class="ttdeci">@ BORDER_REPLICATE</div><div class="ttdoc">aaaaaa|abcdefgh|hhhhhhh</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00268">base.hpp:268</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01">cv::BORDER_DEFAULT</a></div><div class="ttdeci">@ BORDER_DEFAULT</div><div class="ttdoc">same as BORDER_REFLECT_101</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00275">base.hpp:275</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga3515053e24377cf079fa1027d208ad52"><div class="ttname"><a href="group__core__hal__interface.html#ga3515053e24377cf079fa1027d208ad52">CV_16SC1</a></div><div class="ttdeci">#define CV_16SC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00099">interface.h:99</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga275dfa9c8935f5e9a1031121cde460f4"><div class="ttname"><a href="group__core__hal__intrin.html#ga275dfa9c8935f5e9a1031121cde460f4">cv::v_store</a></div><div class="ttdeci">void v_store(_Tp *ptr, const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Store data to memory.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l02260">intrin_cpp.hpp:2260</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga9eff16d8d73c6ce81122b3cd44a99627"><div class="ttname"><a href="group__core__hal__intrin.html#ga9eff16d8d73c6ce81122b3cd44a99627">cv::v_expand</a></div><div class="ttdeci">void v_expand(const v_reg&lt; _Tp, n &gt; &amp;a, v_reg&lt; typename V_TypeTraits&lt; _Tp &gt;::w_type, n/2 &gt; &amp;b0, v_reg&lt; typename V_TypeTraits&lt; _Tp &gt;::w_type, n/2 &gt; &amp;b1)</div><div class="ttdoc">Expand values to the wider pack type.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01544">intrin_cpp.hpp:1544</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gad23e56d9bbb3d122b20a86e51db73c68"><div class="ttname"><a href="group__core__hal__intrin.html#gad23e56d9bbb3d122b20a86e51db73c68">cv::v_sub</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_sub(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Subtract values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gadcf8617ab63379c5cbb04ea5f819ff20"><div class="ttname"><a href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">cv::v_add</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_add(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Add values.</div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga405d03b20c782b65a4daf54d233239a2"><div class="ttname"><a href="group__imgproc__filter.html#ga405d03b20c782b65a4daf54d233239a2">cv::spatialGradient</a></div><div class="ttdeci">CV_EXPORTS_W void spatialGradient(InputArray src, OutputArray dx, OutputArray dy, int ksize=3, int borderType=BORDER_DEFAULT)</div><div class="ttdoc">Calculates the first order image derivative in both x and y using a Sobel operator.</div><div class="ttdef"><b>Definición</b> <a href="#l00096">spatialgradient.cpp:96</a></div></div>
+<div class="ttc" id="aimgproc_2src_2precomp_8hpp_html"><div class="ttname"><a href="imgproc_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="aintrin_8hpp_html"><div class="ttname"><a href="intrin_8hpp.html">intrin.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a189ba0ea6dfb8b92caadc830b31526e6"><div class="ttname"><a href="namespacecv.html#a189ba0ea6dfb8b92caadc830b31526e6">cv::spatialGradientKernel</a></div><div class="ttdeci">static void spatialGradientKernel(T &amp;vx, T &amp;vy, const T &amp;v00, const T &amp;v01, const T &amp;v02, const T &amp;v10, const T &amp;v12, const T &amp;v20, const T &amp;v21, const T &amp;v22)</div><div class="ttdef"><b>Definición</b> <a href="#l00080">spatialgradient.cpp:80</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_ff1242571287b720ea1174d525b8d38d.html">imgproc</a></li><li class="navelem"><a href="dir_3381323028adc7a7a76521f55c54fb57.html">src</a></li><li class="navelem"><a href="spatialgradient_8cpp.html">spatialgradient.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

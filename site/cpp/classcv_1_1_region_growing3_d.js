@@ -1,0 +1,27 @@
+var classcv_1_1_region_growing3_d =
+[
+    [ "RegionGrowing3D", "classcv_1_1_region_growing3_d.html#a254fa094d1e12415521d363c4a7a873d", null ],
+    [ "~RegionGrowing3D", "classcv_1_1_region_growing3_d.html#aff261d88e04f5673a300d1082394c825", null ],
+    [ "create", "classcv_1_1_region_growing3_d.html#a98dddd46ebc573194fa159064b72776d", null ],
+    [ "getCurvatures", "classcv_1_1_region_growing3_d.html#a27500fea6dbf839db47b43b3c615bf8c", null ],
+    [ "getCurvatureThreshold", "classcv_1_1_region_growing3_d.html#ab643e945cc56d71f71961ecfcda7ef50", null ],
+    [ "getMaxNumberOfNeighbors", "classcv_1_1_region_growing3_d.html#a515853c485c310bdcc1a5af3de740a78", null ],
+    [ "getMaxSize", "classcv_1_1_region_growing3_d.html#af3e9860a0f550c5bbc45517e7c3c0da4", null ],
+    [ "getMinSize", "classcv_1_1_region_growing3_d.html#affcfe27c990eff2e917c683d6d8ab194", null ],
+    [ "getNeedSort", "classcv_1_1_region_growing3_d.html#a038a22daea6021f54c0ffb6001ec7c7a", null ],
+    [ "getNumberOfRegions", "classcv_1_1_region_growing3_d.html#a5d42ca35b18964dd9b8c0fde5d384c4e", null ],
+    [ "getSeeds", "classcv_1_1_region_growing3_d.html#a5ce11ff558be844b29058a40b7cf0142", null ],
+    [ "getSmoothModeFlag", "classcv_1_1_region_growing3_d.html#a8a23663575056eb814bc974cfeecb414", null ],
+    [ "getSmoothnessThreshold", "classcv_1_1_region_growing3_d.html#a3166c39100aa248d885224429728f922", null ],
+    [ "segment", "classcv_1_1_region_growing3_d.html#aa53f618c97aa46d16f02a4dc2f1d156b", null ],
+    [ "setCurvatures", "classcv_1_1_region_growing3_d.html#aa46409065ebb2f243afe776ba4f1c9df", null ],
+    [ "setCurvatureThreshold", "classcv_1_1_region_growing3_d.html#ae800ae07a148c18dee906c66ff54e952", null ],
+    [ "setMaxNumberOfNeighbors", "classcv_1_1_region_growing3_d.html#a336e03fd0c355015e4d5f4d7412404ce", null ],
+    [ "setMaxSize", "classcv_1_1_region_growing3_d.html#abadac7e9212ee63c7e480bb6622395f2", null ],
+    [ "setMinSize", "classcv_1_1_region_growing3_d.html#aba6316cda915b36876ab57ab1074c28f", null ],
+    [ "setNeedSort", "classcv_1_1_region_growing3_d.html#a8b2010674509cca8471faf1bb57ce4c9", null ],
+    [ "setNumberOfRegions", "classcv_1_1_region_growing3_d.html#a4ab8bcd3584c52cf6f91139d73660b8c", null ],
+    [ "setSeeds", "classcv_1_1_region_growing3_d.html#a02d72af6836d70b2716eadc852fb8272", null ],
+    [ "setSmoothModeFlag", "classcv_1_1_region_growing3_d.html#a227283eb0299f7fbdcd13dd30ca696ca", null ],
+    [ "setSmoothnessThreshold", "classcv_1_1_region_growing3_d.html#a7ab83763be77dcc3f0bd719056f1382a", null ]
+];

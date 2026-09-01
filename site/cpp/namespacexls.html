@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Referencia del espacio de nombres xls</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacexls.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del espacio de nombres xls</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>-report  
+<a href="#details">Más...</a></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>-report </p>
+<pre class="fragment">    This script can generate XLS reports from OpenCV tests' XML output files.
+
+    To use it, first, create a directory for each machine you ran tests on.
+    Each such directory will become a sheet in the report. Put each XML file
+    into the corresponding directory.
+
+    Then, create your configuration file(s). You can have a global configuration
+    file (specified with the -c option), and per-sheet configuration files, which
+    must be called sheet.conf and placed in the directory corresponding to the sheet.
+    The settings in the per-sheet configuration file will override those in the
+    global configuration file, if both are present.
+
+    A configuration file must consist of a Python dictionary. The following keys
+    will be recognized:
+
+    * 'comparisons': [{'from': string, 'to': string}]
+        List of configurations to compare performance between. For each item,
+        the sheet will have a column showing speedup from configuration named
+        'from' to configuration named "to".
+
+    * 'configuration_matchers': [{'properties': {string: object}, 'name': string}]
+        Instructions for matching test run property sets to configuration names.
+
+        For each found XML file:
+
+        1) All attributes of the root element starting with the prefix 'cv_' are
+           placed in a dictionary, with the cv_ prefix stripped and the cv_module_name
+           element deleted.
+
+        2) The first matcher for which the XML's file property set contains the same
+           keys with equal values as its 'properties' dictionary is searched for.
+           A missing property can be matched by using None as the value.
+
+           Corollary 1: you should place more specific matchers before less specific
+           ones.
+
+           Corollary 2: an empty 'properties' dictionary matches every property set.
+
+        3) If a matching matcher is found, its 'name' string is presumed to be the name
+           of the configuration the XML file corresponds to. A warning is printed if
+           two different property sets match to the same configuration name.
+
+        4) If a such a matcher isn't found, if --include-unmatched was specified, the
+           configuration name is assumed to be the relative path from the sheet's
+           directory to the XML file's containing directory. If the XML file isinstance
+           directly inside the sheet's directory, the configuration name is instead
+           a dump of all its properties. If --include-unmatched wasn't specified,
+           the XML file is ignored and a warning is printed.
+
+    * 'configurations': [string]
+        List of names for compile-time and runtime configurations of OpenCV.
+        Each item will correspond to a column of the sheet.
+
+    * 'module_colors': {string: string}
+        Mapping from module name to color name. In the sheet, cells containing module
+        names from this mapping will be colored with the corresponding color. You can
+        find the list of available colors here:
+        &lt;http://www.simplistix.co.uk/presentations/python-excel.pdf&gt;.
+
+    * 'sheet_name': string
+        Name for the sheet. If this parameter is missing, the name of sheet's directory
+        will be used.
+
+    * 'sheet_properties': [(string, string)]
+        List of arbitrary (key, value) pairs that somehow describe the sheet. Will be
+        dumped into the first row of the sheet in string form.
+
+    Note that all keys are optional, although to get useful results, you'll want to
+    specify at least 'configurations' and 'configuration_matchers'.
+
+    Finally, run the script. Use the --help option for usage information.
+</pre> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacexls.html">xls</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

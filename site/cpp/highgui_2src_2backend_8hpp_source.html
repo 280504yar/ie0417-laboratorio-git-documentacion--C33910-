@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/highgui/src/backend.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('highgui_2src_2backend_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">backend.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="highgui_2src_2backend_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifndef OPENCV_HIGHGUI_BACKEND_HPP</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define OPENCV_HIGHGUI_BACKEND_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1highgui__backend.html">highgui_backend</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html">   12</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html">UIWindowBase</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a89036e9b71a0474c3ceccf31656d8e1b">   15</a></span>    <span class="keyword">typedef</span> std::shared_ptr&lt;UIWindowBase&gt; <a class="code hl_typedef" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a89036e9b71a0474c3ceccf31656d8e1b">Ptr</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a933ebd8c507663c643e3baca3a8d0994">   16</a></span>    <span class="keyword">typedef</span> std::weak_ptr&lt;UIWindowBase&gt; <a class="code hl_typedef" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a933ebd8c507663c643e3baca3a8d0994">WeakPtr</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html">~UIWindowBase</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a38ed31e0a0bbbaca4796bc1615f1e20b">   20</a></span>    <span class="keyword">virtual</span> <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a38ed31e0a0bbbaca4796bc1615f1e20b">getID</a>() <span class="keyword">const</span> = 0;  <span class="comment">// internal name, used for logging</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#aa4e9c12658f0575bbbb80b55ddf46399">   22</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#aa4e9c12658f0575bbbb80b55ddf46399">isActive</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#ae2f152a0270cb42717336eb518031db7">   24</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#ae2f152a0270cb42717336eb518031db7">destroy</a>() = 0;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};  <span class="comment">// UIWindowBase</span></div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html">UITrackbar</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html">   29</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window.html">UIWindow</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html">UIWindowBase</a></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window.html">~UIWindow</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a601eff38cf3a2c9bd7195f158f435e0f">   34</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a601eff38cf3a2c9bd7195f158f435e0f">imshow</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image) = 0;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a3498c1cd70734c95b38c7ad617495497">   36</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a3498c1cd70734c95b38c7ad617495497">getProperty</a>(<span class="keywordtype">int</span> prop) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#aba3847f51bd4c706504f4903f7d1ab65">   37</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#aba3847f51bd4c706504f4903f7d1ab65">setProperty</a>(<span class="keywordtype">int</span> prop, <span class="keywordtype">double</span> value) = 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#aed9fdf86e2f2db16b1282f64f42fba02">   39</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#aed9fdf86e2f2db16b1282f64f42fba02">resize</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height) = 0;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a7186541f01f71a8169bd108a9a12ee77">   40</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a7186541f01f71a8169bd108a9a12ee77">move</a>(<span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a>, <span class="keywordtype">int</span> <a class="code hl_typedef" href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a>) = 0;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#ab6694ea56a29603f7c9ca1a7778453df">   42</a></span>    <span class="keyword">virtual</span> <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#ab6694ea56a29603f7c9ca1a7778453df">getImageRect</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#aa5c745271807bb7c665c5baffb6efe6d">   44</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#aa5c745271807bb7c665c5baffb6efe6d">setTitle</a>(<span class="keyword">const</span> std::string&amp; title) = 0;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#ac3b2d9ad9f30c1a03ac69522c049617a">   46</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#ac3b2d9ad9f30c1a03ac69522c049617a">setMouseCallback</a>(<a class="code hl_typedef" href="group__highgui.html#ga12a3c2ca79231ca158d30bf8ed892bc1">MouseCallback</a> onMouse, <span class="keywordtype">void</span>* userdata <span class="comment">/*= 0*/</span>) = 0;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">//TODO: handle both keys and mouse events (both with mouse coordinates)</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">//virtual void setInputCallback(InputCallback onInputEvent, void* userdata /*= 0*/) = 0;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a4fbbda3c4323b02802d8a922fd6a2aca">   51</a></span>    <span class="keyword">virtual</span> std::shared_ptr&lt;UITrackbar&gt; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a4fbbda3c4323b02802d8a922fd6a2aca">createTrackbar</a>(</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">int</span> count,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_typedef" href="group__highgui.html#gaa84183880fdb1de4f7f0cf6fed63c213">TrackbarCallback</a> onChange <span class="comment">/*= 0*/</span>,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">void</span>* userdata <span class="comment">/*= 0*/</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    ) = 0;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_window.html#adf2b7b949358ade3bc7b3ddfc27e2c08">   58</a></span>    <span class="keyword">virtual</span> std::shared_ptr&lt;UITrackbar&gt; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#adf2b7b949358ade3bc7b3ddfc27e2c08">findTrackbar</a>(<span class="keyword">const</span> std::string&amp; name) = 0;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#if 0  </span><span class="comment">// QT only</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__highgui__qt.html#ga68085e17fc3f2358e550bc0d9bdeadc0">displayOverlay</a>(<span class="keyword">const</span> std::string&amp; text, <span class="keywordtype">int</span> delayms = 0) = 0;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__highgui__qt.html#ga374a14b4a2b1a56603b7a4a84c066715">displayStatusBar</a>(<span class="keyword">const</span> std::string&amp; text, <span class="keywordtype">int</span> delayms <span class="comment">/*= 0*/</span>) = 0;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="group__highgui__qt.html#ga8dac87dd5b5b16b559f2d8d31d0e3328">createButton</a>(</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keyword">const</span> std::string&amp; bar_name, <a class="code hl_typedef" href="group__highgui.html#gaaae19262330256b5534557015f7e799b">ButtonCallback</a> on_change,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">void</span>* userdata = 0, <span class="keywordtype">int</span> type <span class="comment">/*= QT_PUSH_BUTTON*/</span>,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">bool</span> initial_button_state <span class="comment">/*= false*/</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ) = 0;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">// addText, QtFont stuff</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#if 0  </span><span class="comment">// OpenGL</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_window.html#a601eff38cf3a2c9bd7195f158f435e0f">imshow</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1ogl_1_1_texture2_d.html">ogl::Texture2D</a>&amp; tex) = 0;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__highgui__opengl.html#gad417cce3d331c3399c19b1ccf5f026cb">setOpenGlDrawCallback</a>(<a class="code hl_typedef" href="group__highgui.html#ga9399e738c28de6ddca6862e905bb98ef">OpenGlDrawCallback</a> onOpenGlDraw, <span class="keywordtype">void</span>* userdata = 0) = 0;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__highgui__opengl.html#gafe19517331b05844ee8e766e60bc29bd">setOpenGlContext</a>() = 0;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group__highgui__opengl.html#ga8ba0dc979f4b05c2cf5d7776370e27e2">updateWindow</a>() = 0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>};  <span class="comment">// UIWindow</span></div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="};">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html">   81</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html">UITrackbar</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_window_base.html">UIWindowBase</a></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>{</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html">~UITrackbar</a>();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a09382a0dff9999f2c96fdec55c339d79">   86</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a09382a0dff9999f2c96fdec55c339d79">getPos</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#adf6ab84cb3d112afc247ea1e4df4daee">   87</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#adf6ab84cb3d112afc247ea1e4df4daee">setPos</a>(<span class="keywordtype">int</span> pos) = 0;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a9f9a76689d37ec94eaf4586dbd175190">   89</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1_range.html">cv::Range</a> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a9f9a76689d37ec94eaf4586dbd175190">getRange</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a99f772f917011d0daf59fb1831580fb7">   90</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a99f772f917011d0daf59fb1831580fb7">setRange</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">cv::Range</a>&amp; range) = 0;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};  <span class="comment">// UITrackbar</span></div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="};">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_backend.html">   94</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_backend.html">UIBackend</a></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classcv_1_1highgui__backend_1_1_u_i_backend.html">~UIBackend</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a8ad8ed0861e465f6445eb65b1c92980e">   99</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a8ad8ed0861e465f6445eb65b1c92980e">destroyAllWindows</a>() = 0;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="comment">// namedWindow</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a8ee84e8cee9b8d7b8387fbad2800c688">  102</a></span>    <span class="keyword">virtual</span> std::shared_ptr&lt;UIWindow&gt; <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a8ee84e8cee9b8d7b8387fbad2800c688">createWindow</a>(</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keyword">const</span> std::string&amp; winname,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">flags</a></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    ) = 0;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a3f727a85b1f66d9b2c9cce65e69780da">  107</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a3f727a85b1f66d9b2c9cce65e69780da">waitKeyEx</a>(<span class="keywordtype">int</span> delay <span class="comment">/*= 0*/</span>) = 0;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#af83e82ee9f3f9440c913d6b59af889ab">  108</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#af83e82ee9f3f9440c913d6b59af889ab">pollKey</a>() = 0;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a6c38c397464164fd4bd8b5761b65d31d">  109</a></span>    <span class="keyword">virtual</span> <span class="keyword">const</span> std::string <a class="code hl_function" href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a6c38c397464164fd4bd8b5761b65d31d">getName</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>};</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>std::shared_ptr&lt;UIBackend&gt;&amp; <a class="code hl_function" href="namespacecv_1_1highgui__backend.html#a9b605a700cb1f00351ac1644d130858b">getCurrentUIBackend</a>();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1highgui__backend.html#a65fe25eb38a1eee1d0434b3161cfa6c5">setUIBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;UIBackend&gt;&amp; api);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacecv_1_1highgui__backend.html#a65fe25eb38a1eee1d0434b3161cfa6c5">setUIBackend</a>(<span class="keyword">const</span> std::string&amp; backendName);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#ifndef BUILD_PLUGIN</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#ifdef HAVE_WIN32UI</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>std::shared_ptr&lt;UIBackend&gt; createUIBackendWin32UI();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#ifdef HAVE_GTK</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>std::shared_ptr&lt;UIBackend&gt; createUIBackendGTK();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#if 0  </span><span class="comment">// TODO: defined HAVE_QT</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>std::shared_ptr&lt;UIBackend&gt; createUIBackendQT();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#ifdef HAVE_FRAMEBUFFER</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>std::shared_ptr&lt;UIBackend&gt; <a class="code hl_function" href="namespacecv_1_1highgui__backend.html#a01c2b4ed13bd8d494d6047810696c51e">createUIBackendFramebuffer</a>();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">#endif  </span><span class="comment">// BUILD_PLUGIN</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}  <span class="comment">// namespace highgui_backend</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}  <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_HIGHGUI_BACKEND_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_range_html"><div class="ttname"><a href="classcv_1_1_range.html">cv::Range</a></div><div class="ttdoc">Template class specifying a continuous subsequence (slice) of a sequence.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00632">types.hpp:633</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html">cv::highgui_backend::UIBackend</a></div><div class="ttdef"><b>Definición</b> <a href="#l00094">backend.hpp:95</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html_a3f727a85b1f66d9b2c9cce65e69780da"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a3f727a85b1f66d9b2c9cce65e69780da">cv::highgui_backend::UIBackend::waitKeyEx</a></div><div class="ttdeci">virtual int waitKeyEx(int delay)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html_a6c38c397464164fd4bd8b5761b65d31d"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a6c38c397464164fd4bd8b5761b65d31d">cv::highgui_backend::UIBackend::getName</a></div><div class="ttdeci">virtual const std::string getName() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html_a8ad8ed0861e465f6445eb65b1c92980e"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a8ad8ed0861e465f6445eb65b1c92980e">cv::highgui_backend::UIBackend::destroyAllWindows</a></div><div class="ttdeci">virtual void destroyAllWindows()=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html_a8ee84e8cee9b8d7b8387fbad2800c688"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html#a8ee84e8cee9b8d7b8387fbad2800c688">cv::highgui_backend::UIBackend::createWindow</a></div><div class="ttdeci">virtual std::shared_ptr&lt; UIWindow &gt; createWindow(const std::string &amp;winname, int flags)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_backend_html_af83e82ee9f3f9440c913d6b59af889ab"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_backend.html#af83e82ee9f3f9440c913d6b59af889ab">cv::highgui_backend::UIBackend::pollKey</a></div><div class="ttdeci">virtual int pollKey()=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_trackbar_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html">cv::highgui_backend::UITrackbar</a></div><div class="ttdef"><b>Definición</b> <a href="#l00081">backend.hpp:82</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_trackbar_html_a09382a0dff9999f2c96fdec55c339d79"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a09382a0dff9999f2c96fdec55c339d79">cv::highgui_backend::UITrackbar::getPos</a></div><div class="ttdeci">virtual int getPos() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_trackbar_html_a99f772f917011d0daf59fb1831580fb7"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a99f772f917011d0daf59fb1831580fb7">cv::highgui_backend::UITrackbar::setRange</a></div><div class="ttdeci">virtual void setRange(const cv::Range &amp;range)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_trackbar_html_a9f9a76689d37ec94eaf4586dbd175190"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#a9f9a76689d37ec94eaf4586dbd175190">cv::highgui_backend::UITrackbar::getRange</a></div><div class="ttdeci">virtual cv::Range getRange() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_trackbar_html_adf6ab84cb3d112afc247ea1e4df4daee"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_trackbar.html#adf6ab84cb3d112afc247ea1e4df4daee">cv::highgui_backend::UITrackbar::setPos</a></div><div class="ttdeci">virtual void setPos(int pos)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_base_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window_base.html">cv::highgui_backend::UIWindowBase</a></div><div class="ttdef"><b>Definición</b> <a href="#l00012">backend.hpp:13</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_base_html_a38ed31e0a0bbbaca4796bc1615f1e20b"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a38ed31e0a0bbbaca4796bc1615f1e20b">cv::highgui_backend::UIWindowBase::getID</a></div><div class="ttdeci">virtual const std::string &amp; getID() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_base_html_a89036e9b71a0474c3ceccf31656d8e1b"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a89036e9b71a0474c3ceccf31656d8e1b">cv::highgui_backend::UIWindowBase::Ptr</a></div><div class="ttdeci">std::shared_ptr&lt; UIWindowBase &gt; Ptr</div><div class="ttdef"><b>Definición</b> <a href="#l00015">backend.hpp:15</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_base_html_a933ebd8c507663c643e3baca3a8d0994"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#a933ebd8c507663c643e3baca3a8d0994">cv::highgui_backend::UIWindowBase::WeakPtr</a></div><div class="ttdeci">std::weak_ptr&lt; UIWindowBase &gt; WeakPtr</div><div class="ttdef"><b>Definición</b> <a href="#l00016">backend.hpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_base_html_aa4e9c12658f0575bbbb80b55ddf46399"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#aa4e9c12658f0575bbbb80b55ddf46399">cv::highgui_backend::UIWindowBase::isActive</a></div><div class="ttdeci">virtual bool isActive() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_base_html_ae2f152a0270cb42717336eb518031db7"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window_base.html#ae2f152a0270cb42717336eb518031db7">cv::highgui_backend::UIWindowBase::destroy</a></div><div class="ttdeci">virtual void destroy()=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html">cv::highgui_backend::UIWindow</a></div><div class="ttdef"><b>Definición</b> <a href="#l00029">backend.hpp:30</a></div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_a3498c1cd70734c95b38c7ad617495497"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#a3498c1cd70734c95b38c7ad617495497">cv::highgui_backend::UIWindow::getProperty</a></div><div class="ttdeci">virtual double getProperty(int prop) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_a4fbbda3c4323b02802d8a922fd6a2aca"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#a4fbbda3c4323b02802d8a922fd6a2aca">cv::highgui_backend::UIWindow::createTrackbar</a></div><div class="ttdeci">virtual std::shared_ptr&lt; UITrackbar &gt; createTrackbar(const std::string &amp;name, int count, TrackbarCallback onChange, void *userdata)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_a601eff38cf3a2c9bd7195f158f435e0f"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#a601eff38cf3a2c9bd7195f158f435e0f">cv::highgui_backend::UIWindow::imshow</a></div><div class="ttdeci">virtual void imshow(InputArray image)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_a7186541f01f71a8169bd108a9a12ee77"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#a7186541f01f71a8169bd108a9a12ee77">cv::highgui_backend::UIWindow::move</a></div><div class="ttdeci">virtual void move(int x, int y)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_aa5c745271807bb7c665c5baffb6efe6d"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#aa5c745271807bb7c665c5baffb6efe6d">cv::highgui_backend::UIWindow::setTitle</a></div><div class="ttdeci">virtual void setTitle(const std::string &amp;title)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_ab6694ea56a29603f7c9ca1a7778453df"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#ab6694ea56a29603f7c9ca1a7778453df">cv::highgui_backend::UIWindow::getImageRect</a></div><div class="ttdeci">virtual Rect getImageRect() const =0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_aba3847f51bd4c706504f4903f7d1ab65"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#aba3847f51bd4c706504f4903f7d1ab65">cv::highgui_backend::UIWindow::setProperty</a></div><div class="ttdeci">virtual bool setProperty(int prop, double value)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_ac3b2d9ad9f30c1a03ac69522c049617a"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#ac3b2d9ad9f30c1a03ac69522c049617a">cv::highgui_backend::UIWindow::setMouseCallback</a></div><div class="ttdeci">virtual void setMouseCallback(MouseCallback onMouse, void *userdata)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_adf2b7b949358ade3bc7b3ddfc27e2c08"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#adf2b7b949358ade3bc7b3ddfc27e2c08">cv::highgui_backend::UIWindow::findTrackbar</a></div><div class="ttdeci">virtual std::shared_ptr&lt; UITrackbar &gt; findTrackbar(const std::string &amp;name)=0</div></div>
+<div class="ttc" id="aclasscv_1_1highgui__backend_1_1_u_i_window_html_aed9fdf86e2f2db16b1282f64f42fba02"><div class="ttname"><a href="classcv_1_1highgui__backend_1_1_u_i_window.html#aed9fdf86e2f2db16b1282f64f42fba02">cv::highgui_backend::UIWindow::resize</a></div><div class="ttdeci">virtual void resize(int width, int height)=0</div></div>
+<div class="ttc" id="aclasscv_1_1ogl_1_1_texture2_d_html"><div class="ttname"><a href="classcv_1_1ogl_1_1_texture2_d.html">cv::ogl::Texture2D</a></div><div class="ttdoc">Smart pointer for OpenGL 2D texture memory with reference counting.</div><div class="ttdef"><b>Definición</b> <a href="opengl_8hpp_source.html#l00283">opengl.hpp:284</a></div></div>
+<div class="ttc" id="agroup__calib_html_gac28e35eb6aa1ca2fc43838e8bdd0dbdc"><div class="ttname"><a href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">cv::flags</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray InputOutputArray OutputArrayOfArrays OutputArrayOfArrays OutputArray OutputArray OutputArray int flags</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00697">calib.hpp:697</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga1bf9f0e121b54272da02379cfccd0a2b"><div class="ttname"><a href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a></div><div class="ttdeci">#define CV_EXPORTS</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00446">cvdef.h:446</a></div></div>
+<div class="ttc" id="agroup__highgui__opengl_html_ga8ba0dc979f4b05c2cf5d7776370e27e2"><div class="ttname"><a href="group__highgui__opengl.html#ga8ba0dc979f4b05c2cf5d7776370e27e2">cv::updateWindow</a></div><div class="ttdeci">CV_EXPORTS void updateWindow(const String &amp;winname)</div><div class="ttdoc">Force window to redraw its context and call draw callback ( See cv::setOpenGlDrawCallback ).</div><div class="ttdef"><b>Definición</b> <a href="window_8cpp_source.html#l00942">window.cpp:942</a></div></div>
+<div class="ttc" id="agroup__highgui__opengl_html_gad417cce3d331c3399c19b1ccf5f026cb"><div class="ttname"><a href="group__highgui__opengl.html#gad417cce3d331c3399c19b1ccf5f026cb">cv::setOpenGlDrawCallback</a></div><div class="ttdeci">CV_EXPORTS void setOpenGlDrawCallback(const String &amp;winname, OpenGlDrawCallback onOpenGlDraw, void *userdata=0)</div><div class="ttdoc">Sets a callback function to be called to draw on top of displayed image.</div><div class="ttdef"><b>Definición</b> <a href="window_8cpp_source.html#l00912">window.cpp:912</a></div></div>
+<div class="ttc" id="agroup__highgui__opengl_html_gafe19517331b05844ee8e766e60bc29bd"><div class="ttname"><a href="group__highgui__opengl.html#gafe19517331b05844ee8e766e60bc29bd">cv::setOpenGlContext</a></div><div class="ttdeci">CV_EXPORTS void setOpenGlContext(const String &amp;winname)</div><div class="ttdoc">Sets the specified window as current OpenGL context.</div><div class="ttdef"><b>Definición</b> <a href="window_8cpp_source.html#l00936">window.cpp:936</a></div></div>
+<div class="ttc" id="agroup__highgui__qt_html_ga374a14b4a2b1a56603b7a4a84c066715"><div class="ttname"><a href="group__highgui__qt.html#ga374a14b4a2b1a56603b7a4a84c066715">cv::displayStatusBar</a></div><div class="ttdeci">CV_EXPORTS_W void displayStatusBar(const String &amp;winname, const String &amp;text, int delayms=0)</div><div class="ttdoc">Displays a text on the window statusbar during the specified period of time.</div><div class="ttdef"><b>Definición</b> <a href="window_8cpp_source.html#l01181">window.cpp:1181</a></div></div>
+<div class="ttc" id="agroup__highgui__qt_html_ga68085e17fc3f2358e550bc0d9bdeadc0"><div class="ttname"><a href="group__highgui__qt.html#ga68085e17fc3f2358e550bc0d9bdeadc0">cv::displayOverlay</a></div><div class="ttdeci">CV_EXPORTS_W void displayOverlay(const String &amp;winname, const String &amp;text, int delayms=0)</div><div class="ttdoc">Displays a text on a window image as an overlay for a specified duration.</div><div class="ttdef"><b>Definición</b> <a href="window_8cpp_source.html#l01186">window.cpp:1186</a></div></div>
+<div class="ttc" id="agroup__highgui__qt_html_ga8dac87dd5b5b16b559f2d8d31d0e3328"><div class="ttname"><a href="group__highgui__qt.html#ga8dac87dd5b5b16b559f2d8d31d0e3328">cv::createButton</a></div><div class="ttdeci">CV_EXPORTS int createButton(const String &amp;bar_name, ButtonCallback on_change, void *userdata=0, int type=QT_PUSH_BUTTON, bool initial_button_state=false)</div><div class="ttdoc">Attaches a button to the control panel.</div><div class="ttdef"><b>Definición</b> <a href="window_8cpp_source.html#l01211">window.cpp:1211</a></div></div>
+<div class="ttc" id="agroup__highgui_html_ga12a3c2ca79231ca158d30bf8ed892bc1"><div class="ttname"><a href="group__highgui.html#ga12a3c2ca79231ca158d30bf8ed892bc1">cv::MouseCallback</a></div><div class="ttdeci">void(*) MouseCallback(int event, int x, int y, int flags, void *userdata)</div><div class="ttdoc">Callback function for mouse events. see cv::setMouseCallback.</div><div class="ttdef"><b>Definición</b> <a href="highgui_8hpp_source.html#l00191">highgui.hpp:191</a></div></div>
+<div class="ttc" id="agroup__highgui_html_ga9399e738c28de6ddca6862e905bb98ef"><div class="ttname"><a href="group__highgui.html#ga9399e738c28de6ddca6862e905bb98ef">cv::OpenGlDrawCallback</a></div><div class="ttdeci">void(*) OpenGlDrawCallback(void *userdata)</div><div class="ttdoc">Callback function defined to be called every frame. See cv::setOpenGlDrawCallback.</div><div class="ttdef"><b>Definición</b> <a href="highgui_8hpp_source.html#l00202">highgui.hpp:202</a></div></div>
+<div class="ttc" id="agroup__highgui_html_gaa84183880fdb1de4f7f0cf6fed63c213"><div class="ttname"><a href="group__highgui.html#gaa84183880fdb1de4f7f0cf6fed63c213">cv::TrackbarCallback</a></div><div class="ttdeci">void(*) TrackbarCallback(int pos, void *userdata)</div><div class="ttdoc">Callback function for Trackbar see cv::createTrackbar.</div><div class="ttdef"><b>Definición</b> <a href="highgui_8hpp_source.html#l00197">highgui.hpp:197</a></div></div>
+<div class="ttc" id="agroup__highgui_html_gaaae19262330256b5534557015f7e799b"><div class="ttname"><a href="group__highgui.html#gaaae19262330256b5534557015f7e799b">cv::ButtonCallback</a></div><div class="ttdeci">void(*) ButtonCallback(int state, void *userdata)</div><div class="ttdoc">Callback function for a button created by cv::createButton.</div><div class="ttdef"><b>Definición</b> <a href="highgui_8hpp_source.html#l00213">highgui.hpp:213</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_a9298c7ad619074f5285b32c6b72bfdea"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#a9298c7ad619074f5285b32c6b72bfdea">y</a></div><div class="ttdeci">int int y</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="ahighgui_2src_2precomp_8hpp_html_ad77deca22f617d3f0e0eb786445689fc"><div class="ttname"><a href="highgui_2src_2precomp_8hpp.html#ad77deca22f617d3f0e0eb786445689fc">x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2precomp_8hpp_source.html#l00111">precomp.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html">cv::highgui_backend</a></div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2backend_8cpp_source.html#l00024">backend.cpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a01c2b4ed13bd8d494d6047810696c51e"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a01c2b4ed13bd8d494d6047810696c51e">cv::highgui_backend::createUIBackendFramebuffer</a></div><div class="ttdeci">std::shared_ptr&lt; UIBackend &gt; createUIBackendFramebuffer()</div><div class="ttdef"><b>Definición</b> <a href="window__framebuffer_8cpp_source.html#l00042">window_framebuffer.cpp:42</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a65fe25eb38a1eee1d0434b3161cfa6c5"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a65fe25eb38a1eee1d0434b3161cfa6c5">cv::highgui_backend::setUIBackend</a></div><div class="ttdeci">void setUIBackend(const std::shared_ptr&lt; UIBackend &gt; &amp;api)</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2backend_8cpp_source.html#l00130">backend.cpp:130</a></div></div>
+<div class="ttc" id="anamespacecv_1_1highgui__backend_html_a9b605a700cb1f00351ac1644d130858b"><div class="ttname"><a href="namespacecv_1_1highgui__backend.html#a9b605a700cb1f00351ac1644d130858b">cv::highgui_backend::getCurrentUIBackend</a></div><div class="ttdeci">std::shared_ptr&lt; UIBackend &gt; &amp; getCurrentUIBackend()</div><div class="ttdef"><b>Definición</b> <a href="highgui_2src_2backend_8cpp_source.html#l00124">backend.cpp:124</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_be6337095d1b912ed3c4152eac0324ca.html">highgui</a></li><li class="navelem"><a href="dir_bdc7ac64697320a9da1908273e53045d.html">src</a></li><li class="navelem"><a href="highgui_2src_2backend_8hpp.html">backend.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

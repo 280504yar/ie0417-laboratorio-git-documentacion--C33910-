@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/include/opencv2/core/utils/instrumentation.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('instrumentation_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">instrumentation.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="instrumentation_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_UTILS_INSTR_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_UTILS_INSTR_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="utility_8hpp.html">opencv2/core/utility.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="tls_8hpp.html">opencv2/core/utils/tls.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifdef CV_COLLECT_IMPL_DATA</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">void</span> setImpl(<span class="keywordtype">int</span> <a class="code hl_variable" href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">flags</a>); <span class="comment">// set implementation flags and reset storage arrays</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">void</span> addImpl(<span class="keywordtype">int</span> flag, <span class="keyword">const</span> <span class="keywordtype">char</span>* func = 0); <span class="comment">// add implementation and function name to storage arrays</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// Get stored implementation flags and functions names arrays</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// Each implementation entry correspond to function name entry, so you can find which implementation was executed in which function</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">int</span> getImpl(std::vector&lt;int&gt; &amp;<a class="code hl_namespace" href="namespacecv_1_1impl.html">impl</a>, std::vector&lt;String&gt; &amp;funName);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">bool</span> useCollection(); <span class="comment">// return implementation collection state</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">void</span> setUseCollection(<span class="keywordtype">bool</span> flag); <span class="comment">// set implementation collection state</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define CV_IMPL_PLAIN  0x01 </span><span class="comment">// native CPU OpenCV implementation</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define CV_IMPL_OCL    0x02 </span><span class="comment">// OpenCL implementation</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define CV_IMPL_IPP    0x04 </span><span class="comment">// IPP implementation</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#define CV_IMPL_MT     0x10 </span><span class="comment">// multithreaded implementation</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#undef CV_IMPL_ADD</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#define CV_IMPL_ADD(impl)                                                   \</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">    if(cv::useCollection())                                                 \</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">    {                                                                       \</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">        cv::addImpl(impl, CV_Func);                                         \</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">    }</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// Instrumentation external interface</span></div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html">   40</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1instr.html">instr</a></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#if !defined OPENCV_ABI_CHECK</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07">   45</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07">TYPE</a></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a289321828657503ab1539ad17904a925">   47</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a289321828657503ab1539ad17904a925">TYPE_GENERAL</a> = 0,   <span class="comment">// OpenCV API function, e.g. exported function</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a0025497a8b803c1564fa60d01c628247">   48</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a0025497a8b803c1564fa60d01c628247">TYPE_MARKER</a>,        <span class="comment">// Information marker</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a3bb468f2996912301469d76be784c183">   49</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a3bb468f2996912301469d76be784c183">TYPE_WRAPPER</a>,       <span class="comment">// Wrapper function for implementation</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a76e4e851a896def5b60f25367f44ac6f">   50</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a76e4e851a896def5b60f25367f44ac6f">TYPE_FUN</a>,           <span class="comment">// Simple function call</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="};">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178">   53</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178">IMPL</a></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a856b5bd29129dc9ce32254688e2519d4">   55</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a856b5bd29129dc9ce32254688e2519d4">IMPL_PLAIN</a> = 0,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a2dae30c2ae75ed684f0d51130fedcf9c">   56</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a2dae30c2ae75ed684f0d51130fedcf9c">IMPL_IPP</a>,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a28151a2fbfc313cc38dab21d1c878e56">   57</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a28151a2fbfc313cc38dab21d1c878e56">IMPL_OPENCL</a>,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>};</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="};">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structcv_1_1instr_1_1_node_data_tls.html">   60</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1instr_1_1_node_data_tls.html#a34016bdad236c128476f65d6e591fee2">NodeDataTls</a></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>{</div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structcv_1_1instr_1_1_node_data_tls.html#a34016bdad236c128476f65d6e591fee2">   62</a></span>    <a class="code hl_function" href="structcv_1_1instr_1_1_node_data_tls.html#a34016bdad236c128476f65d6e591fee2">NodeDataTls</a>()</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_variable" href="structcv_1_1instr_1_1_node_data_tls.html#a77898a506d7136eb18055ee6584b033d">m_ticksTotal</a> = 0;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structcv_1_1instr_1_1_node_data_tls.html#a77898a506d7136eb18055ee6584b033d">   66</a></span>    <a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a>      <a class="code hl_variable" href="structcv_1_1instr_1_1_node_data_tls.html#a77898a506d7136eb18055ee6584b033d">m_ticksTotal</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="};">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html">   69</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">NodeData</a></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>{</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">NodeData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* funName = 0, <span class="keyword">const</span> <span class="keywordtype">char</span>* fileName = NULL, <span class="keywordtype">int</span> lineNum = 0, <span class="keywordtype">void</span>* retAddress = NULL, <span class="keywordtype">bool</span> alwaysExpand = <span class="keyword">false</span>, <a class="code hl_enumeration" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07">cv::instr::TYPE</a> instrType = <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a289321828657503ab1539ad17904a925">TYPE_GENERAL</a>, <a class="code hl_enumeration" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178">cv::instr::IMPL</a> implType = <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a856b5bd29129dc9ce32254688e2519d4">IMPL_PLAIN</a>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">NodeData</a>(<a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">NodeData</a> &amp;ref);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">~NodeData</a>();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">NodeData</a>&amp; <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a9853a9e8a6280f9b0723b2b0fda2fdda">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">NodeData</a>&amp;);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a09acb1c045804b3cc3412dacc545132a">   77</a></span>    <a class="code hl_typedef" href="group__core__basic.html#ga49ac4c5d66aa290ab8c7827152bc4b25">cv::String</a>          <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a09acb1c045804b3cc3412dacc545132a">m_funName</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#ae8371dee470cf131e820185609234fe7">   78</a></span>    <a class="code hl_enumeration" href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07">cv::instr::TYPE</a>     <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#ae8371dee470cf131e820185609234fe7">m_instrType</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a6c53de0dfc0e7ad832f89f08db982f8f">   79</a></span>    <a class="code hl_enumeration" href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178">cv::instr::IMPL</a>     <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a6c53de0dfc0e7ad832f89f08db982f8f">m_implType</a>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a1842fb92b507d24f0f0fb9b4fae0a215">   80</a></span>    <span class="keyword">const</span> <span class="keywordtype">char</span>*         <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a1842fb92b507d24f0f0fb9b4fae0a215">m_fileName</a>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#adce90c486e8ab99ffe67e76390073507">   81</a></span>    <span class="keywordtype">int</span>                 <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#adce90c486e8ab99ffe67e76390073507">m_lineNum</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#ac1289915a65c041830a578eb61e01f7d">   82</a></span>    <span class="keywordtype">void</span>*               <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#ac1289915a65c041830a578eb61e01f7d">m_retAddress</a>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a20c1f8ede8ddfaaf40e2d0309eaa3d67">   83</a></span>    <span class="keywordtype">bool</span>                <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a20c1f8ede8ddfaaf40e2d0309eaa3d67">m_alwaysExpand</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a6e79dd13da8cc956cc1ccd113e825499">   84</a></span>    <span class="keywordtype">bool</span>                <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a6e79dd13da8cc956cc1ccd113e825499">m_funError</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a1d1b789681d9136cb1daee2cc2b0a377">   86</a></span>    <span class="keyword">volatile</span> <span class="keywordtype">int</span>         <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a1d1b789681d9136cb1daee2cc2b0a377">m_counter</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a7f2b6fe87b188b830efde0e260415cbb">   87</a></span>    <span class="keyword">volatile</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">uint64</a>      <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a7f2b6fe87b188b830efde0e260415cbb">m_ticksTotal</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#aa31803d2ebe526970ab6313d703d8ea8">   88</a></span>    <a class="code hl_class" href="classcv_1_1_t_l_s_data_accumulator.html">TLSDataAccumulator&lt;NodeDataTls&gt;</a> <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#aa31803d2ebe526970ab6313d703d8ea8">m_tls</a>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#ae856728e63391da12b5303ad4541e27e">   89</a></span>    <span class="keywordtype">int</span>                  <a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#ae856728e63391da12b5303ad4541e27e">m_threads</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">// No synchronization</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#ac0ab4ea62e93dc189706dee3888fe155">   92</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#ac0ab4ea62e93dc189706dee3888fe155">getTotalMs</a>()<span class="keyword">   const </span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)<a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a7f2b6fe87b188b830efde0e260415cbb">m_ticksTotal</a> / <a class="code hl_function" href="group__core__utils.html#ga705441a9ef01f47acdc55d87fbe5090c">cv::getTickFrequency</a>()) * 1000; }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classcv_1_1instr_1_1_node_data.html#a3de1ed84a540aeed4d16a9f5db7a641e">   93</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classcv_1_1instr_1_1_node_data.html#a3de1ed84a540aeed4d16a9f5db7a641e">getMeanMs</a>()<span class="keyword">    const </span>{ <span class="keywordflow">return</span> (((<span class="keywordtype">double</span>)<a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a7f2b6fe87b188b830efde0e260415cbb">m_ticksTotal</a>/<a class="code hl_variable" href="classcv_1_1instr_1_1_node_data.html#a1d1b789681d9136cb1daee2cc2b0a377">m_counter</a>) / <a class="code hl_function" href="group__core__utils.html#ga705441a9ef01f47acdc55d87fbe5090c">cv::getTickFrequency</a>()) * 1000; }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>};</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keywordtype">bool</span> <a class="code hl_function" href="group__core__basic.html#ga61cb144dc5e6021947b211515777e3cd">operator==</a>(<span class="keyword">const</span> NodeData&amp; lhs, <span class="keyword">const</span> NodeData&amp; rhs);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#af24d8c0b3b5a29011882e54fdbf153a2">   97</a></span><span class="keyword">typedef</span> <a class="code hl_class" href="classcv_1_1_node.html">Node&lt;NodeData&gt;</a> <a class="code hl_typedef" href="namespacecv_1_1instr.html#af24d8c0b3b5a29011882e54fdbf153a2">InstrNode</a>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_typedef" href="namespacecv_1_1instr.html#af24d8c0b3b5a29011882e54fdbf153a2">InstrNode</a>* <a class="code hl_function" href="namespacecv_1_1instr.html#a1a3b6382d52b8d75c09f858e76d0b13b">getTrace</a>();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#endif </span><span class="comment">// !defined OPENCV_ABI_CHECK</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">bool</span>       <a class="code hl_function" href="namespacecv_1_1instr.html#a851536b52d18bac7b2d2cb8c05d540eb">useInstrumentation</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">void</span>       <a class="code hl_function" href="namespacecv_1_1instr.html#a09cfb71c8b9c9e222a9110b964bb2e5d">setUseInstrumentation</a>(<span class="keywordtype">bool</span> flag);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">void</span>       <a class="code hl_function" href="namespacecv_1_1instr.html#a2bfb5e5c8e5f5d81aa19dfe8b168863e">resetTrace</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="};">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612">  108</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612">FLAGS</a></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a7cb3d7e2fb9323ea58c26d71b0b5ad41">  110</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a7cb3d7e2fb9323ea58c26d71b0b5ad41">FLAGS_NONE</a>              = 0,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a2179656df5cb2d063fc7d4cd7832c674">  111</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a2179656df5cb2d063fc7d4cd7832c674">FLAGS_MAPPING</a>           = 0x01,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a0f3b3d3a281bf899e129650268314e8f">  112</a></span>    <a class="code hl_enumvalue" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a0f3b3d3a281bf899e129650268314e8f">FLAGS_EXPAND_SAME_NAMES</a> = 0x02,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
+</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <span class="keywordtype">void</span>       <a class="code hl_function" href="namespacecv_1_1instr.html#a4a7e562d10be02f026af8492778c50b5">setFlags</a>(<a class="code hl_enumeration" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612">FLAGS</a> modeFlags);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="namespacecv_1_1instr.html#a7aad83de04757de4495d197ba2a7a216">  116</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span>    <a class="code hl_function" href="namespacecv_1_1instr.html#a4a7e562d10be02f026af8492778c50b5">setFlags</a>(<span class="keywordtype">int</span> modeFlags) { <a class="code hl_function" href="namespacecv_1_1instr.html#a4a7e562d10be02f026af8492778c50b5">setFlags</a>((<a class="code hl_enumeration" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612">FLAGS</a>)modeFlags); }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_enumeration" href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612">FLAGS</a>      <a class="code hl_function" href="namespacecv_1_1instr.html#a5142de0b305bcbd647d1c0e3a686f2e5">getFlags</a>();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>} <span class="comment">// namespace instr</span></div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>} <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_UTILS_TLS_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1_node_html"><div class="ttname"><a href="classcv_1_1_node.html">cv::Node</a></div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l01216">utility.hpp:1217</a></div></div>
+<div class="ttc" id="aclasscv_1_1_t_l_s_data_accumulator_html"><div class="ttname"><a href="classcv_1_1_t_l_s_data_accumulator.html">cv::TLSDataAccumulator</a></div><div class="ttdoc">TLS data accumulator with gathering methods.</div><div class="ttdef"><b>Definición</b> <a href="tls_8hpp_source.html#l00088">tls.hpp:89</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a09acb1c045804b3cc3412dacc545132a"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a09acb1c045804b3cc3412dacc545132a">cv::instr::NodeData::m_funName</a></div><div class="ttdeci">cv::String m_funName</div><div class="ttdef"><b>Definición</b> <a href="#l00077">instrumentation.hpp:77</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a1842fb92b507d24f0f0fb9b4fae0a215"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a1842fb92b507d24f0f0fb9b4fae0a215">cv::instr::NodeData::m_fileName</a></div><div class="ttdeci">const char * m_fileName</div><div class="ttdef"><b>Definición</b> <a href="#l00080">instrumentation.hpp:80</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a1d1b789681d9136cb1daee2cc2b0a377"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a1d1b789681d9136cb1daee2cc2b0a377">cv::instr::NodeData::m_counter</a></div><div class="ttdeci">volatile int m_counter</div><div class="ttdef"><b>Definición</b> <a href="#l00086">instrumentation.hpp:86</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a20c1f8ede8ddfaaf40e2d0309eaa3d67"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a20c1f8ede8ddfaaf40e2d0309eaa3d67">cv::instr::NodeData::m_alwaysExpand</a></div><div class="ttdeci">bool m_alwaysExpand</div><div class="ttdef"><b>Definición</b> <a href="#l00083">instrumentation.hpp:83</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a3de1ed84a540aeed4d16a9f5db7a641e"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a3de1ed84a540aeed4d16a9f5db7a641e">cv::instr::NodeData::getMeanMs</a></div><div class="ttdeci">double getMeanMs() const</div><div class="ttdef"><b>Definición</b> <a href="#l00093">instrumentation.hpp:93</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a641519557ec9bf51ad37ed4145cf7fef"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a641519557ec9bf51ad37ed4145cf7fef">cv::instr::NodeData::NodeData</a></div><div class="ttdeci">NodeData(const char *funName=0, const char *fileName=NULL, int lineNum=0, void *retAddress=NULL, bool alwaysExpand=false, cv::instr::TYPE instrType=TYPE_GENERAL, cv::instr::IMPL implType=IMPL_PLAIN)</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02329">system.cpp:2329</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a6c53de0dfc0e7ad832f89f08db982f8f"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a6c53de0dfc0e7ad832f89f08db982f8f">cv::instr::NodeData::m_implType</a></div><div class="ttdeci">cv::instr::IMPL m_implType</div><div class="ttdef"><b>Definición</b> <a href="#l00079">instrumentation.hpp:79</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a6e79dd13da8cc956cc1ccd113e825499"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a6e79dd13da8cc956cc1ccd113e825499">cv::instr::NodeData::m_funError</a></div><div class="ttdeci">bool m_funError</div><div class="ttdef"><b>Definición</b> <a href="#l00084">instrumentation.hpp:84</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a7f2b6fe87b188b830efde0e260415cbb"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a7f2b6fe87b188b830efde0e260415cbb">cv::instr::NodeData::m_ticksTotal</a></div><div class="ttdeci">volatile uint64 m_ticksTotal</div><div class="ttdef"><b>Definición</b> <a href="#l00087">instrumentation.hpp:87</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_a9853a9e8a6280f9b0723b2b0fda2fdda"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#a9853a9e8a6280f9b0723b2b0fda2fdda">cv::instr::NodeData::operator=</a></div><div class="ttdeci">NodeData &amp; operator=(const NodeData &amp;)</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02349">system.cpp:2349</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_aa31803d2ebe526970ab6313d703d8ea8"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#aa31803d2ebe526970ab6313d703d8ea8">cv::instr::NodeData::m_tls</a></div><div class="ttdeci">TLSDataAccumulator&lt; NodeDataTls &gt; m_tls</div><div class="ttdef"><b>Definición</b> <a href="#l00088">instrumentation.hpp:88</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_ac0ab4ea62e93dc189706dee3888fe155"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#ac0ab4ea62e93dc189706dee3888fe155">cv::instr::NodeData::getTotalMs</a></div><div class="ttdeci">double getTotalMs() const</div><div class="ttdef"><b>Definición</b> <a href="#l00092">instrumentation.hpp:92</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_ac1289915a65c041830a578eb61e01f7d"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#ac1289915a65c041830a578eb61e01f7d">cv::instr::NodeData::m_retAddress</a></div><div class="ttdeci">void * m_retAddress</div><div class="ttdef"><b>Definición</b> <a href="#l00082">instrumentation.hpp:82</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_adce90c486e8ab99ffe67e76390073507"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#adce90c486e8ab99ffe67e76390073507">cv::instr::NodeData::m_lineNum</a></div><div class="ttdeci">int m_lineNum</div><div class="ttdef"><b>Definición</b> <a href="#l00081">instrumentation.hpp:81</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_ae8371dee470cf131e820185609234fe7"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#ae8371dee470cf131e820185609234fe7">cv::instr::NodeData::m_instrType</a></div><div class="ttdeci">cv::instr::TYPE m_instrType</div><div class="ttdef"><b>Definición</b> <a href="#l00078">instrumentation.hpp:78</a></div></div>
+<div class="ttc" id="aclasscv_1_1instr_1_1_node_data_html_ae856728e63391da12b5303ad4541e27e"><div class="ttname"><a href="classcv_1_1instr_1_1_node_data.html#ae856728e63391da12b5303ad4541e27e">cv::instr::NodeData::m_threads</a></div><div class="ttdeci">int m_threads</div><div class="ttdef"><b>Definición</b> <a href="#l00089">instrumentation.hpp:89</a></div></div>
+<div class="ttc" id="agroup__calib_html_gac28e35eb6aa1ca2fc43838e8bdd0dbdc"><div class="ttname"><a href="group__calib.html#gac28e35eb6aa1ca2fc43838e8bdd0dbdc">cv::flags</a></div><div class="ttdeci">InputArrayOfArrays Size InputOutputArray InputOutputArray OutputArrayOfArrays OutputArrayOfArrays OutputArray OutputArray OutputArray int flags</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00697">calib.hpp:697</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga49ac4c5d66aa290ab8c7827152bc4b25"><div class="ttname"><a href="group__core__basic.html#ga49ac4c5d66aa290ab8c7827152bc4b25">cv::cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00151">templmatch.cpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga61cb144dc5e6021947b211515777e3cd"><div class="ttname"><a href="group__core__basic.html#ga61cb144dc5e6021947b211515777e3cd">cv::operator==</a></div><div class="ttdeci">CV_EXPORTS bool operator==(const MatShape &amp;shape1, const MatShape &amp;shape2)</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00023">matrix.cpp:23</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga02c1dbabceb00737ef16838630952adc"><div class="ttname"><a href="group__core__hal__interface.html#ga02c1dbabceb00737ef16838630952adc">cv::uint64</a></div><div class="ttdeci">uint64_t uint64</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00040">templmatch.cpp:40</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga1bf9f0e121b54272da02379cfccd0a2b"><div class="ttname"><a href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a></div><div class="ttdeci">#define CV_EXPORTS</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00446">cvdef.h:446</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga705441a9ef01f47acdc55d87fbe5090c"><div class="ttname"><a href="group__core__utils.html#ga705441a9ef01f47acdc55d87fbe5090c">cv::getTickFrequency</a></div><div class="ttdeci">CV_EXPORTS_W double getTickFrequency()</div><div class="ttdoc">Returns the number of ticks per second.</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l00982">system.cpp:982</a></div></div>
+<div class="ttc" id="anamespacecv_1_1impl_html"><div class="ttname"><a href="namespacecv_1_1impl.html">cv::impl</a></div><div class="ttdef"><b>Definición</b> <a href="plugin__parallel__wrapper_8impl_8hpp_source.html#l00014">plugin_parallel_wrapper.impl.hpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html"><div class="ttname"><a href="namespacecv_1_1instr.html">cv::instr</a></div><div class="ttdef"><b>Definición</b> <a href="#l00040">instrumentation.hpp:41</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a017f72a106b21e7ed62c5efa25300612"><div class="ttname"><a href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612">cv::instr::FLAGS</a></div><div class="ttdeci">FLAGS</div><div class="ttdef"><b>Definición</b> <a href="#l00108">instrumentation.hpp:109</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a017f72a106b21e7ed62c5efa25300612a0f3b3d3a281bf899e129650268314e8f"><div class="ttname"><a href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a0f3b3d3a281bf899e129650268314e8f">cv::instr::FLAGS_EXPAND_SAME_NAMES</a></div><div class="ttdeci">@ FLAGS_EXPAND_SAME_NAMES</div><div class="ttdef"><b>Definición</b> <a href="#l00112">instrumentation.hpp:112</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a017f72a106b21e7ed62c5efa25300612a2179656df5cb2d063fc7d4cd7832c674"><div class="ttname"><a href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a2179656df5cb2d063fc7d4cd7832c674">cv::instr::FLAGS_MAPPING</a></div><div class="ttdeci">@ FLAGS_MAPPING</div><div class="ttdef"><b>Definición</b> <a href="#l00111">instrumentation.hpp:111</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a017f72a106b21e7ed62c5efa25300612a7cb3d7e2fb9323ea58c26d71b0b5ad41"><div class="ttname"><a href="namespacecv_1_1instr.html#a017f72a106b21e7ed62c5efa25300612a7cb3d7e2fb9323ea58c26d71b0b5ad41">cv::instr::FLAGS_NONE</a></div><div class="ttdeci">@ FLAGS_NONE</div><div class="ttdef"><b>Definición</b> <a href="#l00110">instrumentation.hpp:110</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a09cfb71c8b9c9e222a9110b964bb2e5d"><div class="ttname"><a href="namespacecv_1_1instr.html#a09cfb71c8b9c9e222a9110b964bb2e5d">cv::instr::setUseInstrumentation</a></div><div class="ttdeci">CV_EXPORTS void setUseInstrumentation(bool flag)</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02286">system.cpp:2286</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a1a3b6382d52b8d75c09f858e76d0b13b"><div class="ttname"><a href="namespacecv_1_1instr.html#a1a3b6382d52b8d75c09f858e76d0b13b">cv::instr::getTrace</a></div><div class="ttdeci">CV_EXPORTS InstrNode * getTrace()</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02295">system.cpp:2295</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a2bfb5e5c8e5f5d81aa19dfe8b168863e"><div class="ttname"><a href="namespacecv_1_1instr.html#a2bfb5e5c8e5f5d81aa19dfe8b168863e">cv::instr::resetTrace</a></div><div class="ttdeci">CV_EXPORTS void resetTrace()</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02304">system.cpp:2304</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a4a7e562d10be02f026af8492778c50b5"><div class="ttname"><a href="namespacecv_1_1instr.html#a4a7e562d10be02f026af8492778c50b5">cv::instr::setFlags</a></div><div class="ttdeci">CV_EXPORTS void setFlags(FLAGS modeFlags)</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02312">system.cpp:2312</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a5142de0b305bcbd647d1c0e3a686f2e5"><div class="ttname"><a href="namespacecv_1_1instr.html#a5142de0b305bcbd647d1c0e3a686f2e5">cv::instr::getFlags</a></div><div class="ttdeci">CV_EXPORTS FLAGS getFlags()</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02320">system.cpp:2320</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a851536b52d18bac7b2d2cb8c05d540eb"><div class="ttname"><a href="namespacecv_1_1instr.html#a851536b52d18bac7b2d2cb8c05d540eb">cv::instr::useInstrumentation</a></div><div class="ttdeci">CV_EXPORTS bool useInstrumentation()</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l02277">system.cpp:2277</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a9b77a9e0a5f5e66564a1a39c87903178"><div class="ttname"><a href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178">cv::instr::IMPL</a></div><div class="ttdeci">IMPL</div><div class="ttdef"><b>Definición</b> <a href="#l00053">instrumentation.hpp:54</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a9b77a9e0a5f5e66564a1a39c87903178a28151a2fbfc313cc38dab21d1c878e56"><div class="ttname"><a href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a28151a2fbfc313cc38dab21d1c878e56">cv::instr::IMPL_OPENCL</a></div><div class="ttdeci">@ IMPL_OPENCL</div><div class="ttdef"><b>Definición</b> <a href="#l00057">instrumentation.hpp:57</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a9b77a9e0a5f5e66564a1a39c87903178a2dae30c2ae75ed684f0d51130fedcf9c"><div class="ttname"><a href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a2dae30c2ae75ed684f0d51130fedcf9c">cv::instr::IMPL_IPP</a></div><div class="ttdeci">@ IMPL_IPP</div><div class="ttdef"><b>Definición</b> <a href="#l00056">instrumentation.hpp:56</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_a9b77a9e0a5f5e66564a1a39c87903178a856b5bd29129dc9ce32254688e2519d4"><div class="ttname"><a href="namespacecv_1_1instr.html#a9b77a9e0a5f5e66564a1a39c87903178a856b5bd29129dc9ce32254688e2519d4">cv::instr::IMPL_PLAIN</a></div><div class="ttdeci">@ IMPL_PLAIN</div><div class="ttdef"><b>Definición</b> <a href="#l00055">instrumentation.hpp:55</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_ab97cb8c3f3c89d95e1a8a6c090534b07"><div class="ttname"><a href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07">cv::instr::TYPE</a></div><div class="ttdeci">TYPE</div><div class="ttdef"><b>Definición</b> <a href="#l00045">instrumentation.hpp:46</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_ab97cb8c3f3c89d95e1a8a6c090534b07a0025497a8b803c1564fa60d01c628247"><div class="ttname"><a href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a0025497a8b803c1564fa60d01c628247">cv::instr::TYPE_MARKER</a></div><div class="ttdeci">@ TYPE_MARKER</div><div class="ttdef"><b>Definición</b> <a href="#l00048">instrumentation.hpp:48</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_ab97cb8c3f3c89d95e1a8a6c090534b07a289321828657503ab1539ad17904a925"><div class="ttname"><a href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a289321828657503ab1539ad17904a925">cv::instr::TYPE_GENERAL</a></div><div class="ttdeci">@ TYPE_GENERAL</div><div class="ttdef"><b>Definición</b> <a href="#l00047">instrumentation.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_ab97cb8c3f3c89d95e1a8a6c090534b07a3bb468f2996912301469d76be784c183"><div class="ttname"><a href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a3bb468f2996912301469d76be784c183">cv::instr::TYPE_WRAPPER</a></div><div class="ttdeci">@ TYPE_WRAPPER</div><div class="ttdef"><b>Definición</b> <a href="#l00049">instrumentation.hpp:49</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_ab97cb8c3f3c89d95e1a8a6c090534b07a76e4e851a896def5b60f25367f44ac6f"><div class="ttname"><a href="namespacecv_1_1instr.html#ab97cb8c3f3c89d95e1a8a6c090534b07a76e4e851a896def5b60f25367f44ac6f">cv::instr::TYPE_FUN</a></div><div class="ttdeci">@ TYPE_FUN</div><div class="ttdef"><b>Definición</b> <a href="#l00050">instrumentation.hpp:50</a></div></div>
+<div class="ttc" id="anamespacecv_1_1instr_html_af24d8c0b3b5a29011882e54fdbf153a2"><div class="ttname"><a href="namespacecv_1_1instr.html#af24d8c0b3b5a29011882e54fdbf153a2">cv::instr::InstrNode</a></div><div class="ttdeci">Node&lt; NodeData &gt; InstrNode</div><div class="ttdef"><b>Definición</b> <a href="#l00097">instrumentation.hpp:97</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1instr_1_1_node_data_tls_html_a34016bdad236c128476f65d6e591fee2"><div class="ttname"><a href="structcv_1_1instr_1_1_node_data_tls.html#a34016bdad236c128476f65d6e591fee2">cv::instr::NodeDataTls::NodeDataTls</a></div><div class="ttdeci">NodeDataTls()</div><div class="ttdef"><b>Definición</b> <a href="#l00062">instrumentation.hpp:62</a></div></div>
+<div class="ttc" id="astructcv_1_1instr_1_1_node_data_tls_html_a77898a506d7136eb18055ee6584b033d"><div class="ttname"><a href="structcv_1_1instr_1_1_node_data_tls.html#a77898a506d7136eb18055ee6584b033d">cv::instr::NodeDataTls::m_ticksTotal</a></div><div class="ttdeci">uint64 m_ticksTotal</div><div class="ttdef"><b>Definición</b> <a href="#l00066">instrumentation.hpp:66</a></div></div>
+<div class="ttc" id="atls_8hpp_html"><div class="ttname"><a href="tls_8hpp.html">tls.hpp</a></div></div>
+<div class="ttc" id="autility_8hpp_html"><div class="ttname"><a href="utility_8hpp.html">utility.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_a1ce6c622e502fce8b9ea1b3bba41ffe.html">include</a></li><li class="navelem"><a href="dir_09383d60383568eadd55fb8da7ff392b.html">opencv2</a></li><li class="navelem"><a href="dir_74897800f5c261f7ce57f88938dadca6.html">core</a></li><li class="navelem"><a href="dir_11f96279a5614b38df67f57cd3752461.html">utils</a></li><li class="navelem"><a href="instrumentation_8hpp.html">instrumentation.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

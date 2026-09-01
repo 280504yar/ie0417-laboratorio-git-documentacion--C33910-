@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/include/opencv2/core/detail/async_promise.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('async__promise_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">async_promise.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="async__promise_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_CORE_ASYNC_PROMISE_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_CORE_ASYNC_PROMISE_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="async_8hpp.html">../async.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="exception__ptr_8hpp.html">exception_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html">   22</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">~AsyncPromise</a>() <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>() <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>&amp; o) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>&amp; <a class="code hl_function" href="classcv_1_1_async_promise.html#a726b8256aaeb66e3b51f1680f64403ff">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>&amp; o) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#a5373c68ea688b275771e5fe61a205b7f">release</a>() <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_class" href="classcv_1_1_async_array.html">AsyncArray</a> <a class="code hl_function" href="classcv_1_1_async_promise.html#a50ec36f2aae302e3e5ecf7f9078efe4f">getArrayResult</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#a9df30b85b150691694ce9f0fb2ea1757">setValue</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> value);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// TODO &quot;move&quot; setters</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#if CV__EXCEPTION_PTR</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html#a2346d2175f4d9b061e29a473fcffe0f2">   47</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#a2346d2175f4d9b061e29a473fcffe0f2">setException</a>(std::exception_ptr exception);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#a2346d2175f4d9b061e29a473fcffe0f2">setException</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_exception.html">cv::Exception</a>&amp; exception);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html#afe9b3953de6a656700eed1fa52efcd62">   55</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1_async_promise.html#afe9b3953de6a656700eed1fa52efcd62">AsyncPromise</a>(<a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>&amp;&amp; o) { <a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a> = o.<a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a>; o.<a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a> = NULL; }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html#a45afafdbfe8cac2b6e06b9dce58b2fbc">   56</a></span>    <a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>&amp; <a class="code hl_function" href="classcv_1_1_async_promise.html#a45afafdbfe8cac2b6e06b9dce58b2fbc">operator=</a>(<a class="code hl_function" href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">AsyncPromise</a>&amp;&amp; o) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a> { std::swap(<a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a>, o.<a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a>); <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">// PImpl</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html#aa7ee836a29c724a5f017b2f3b86a5abb">   60</a></span>    <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1_async_array_1_1_impl.html">AsyncArray::Impl</a> <a class="code hl_typedef" href="classcv_1_1_async_promise.html#a28f9208c375f8929eed44ac72398978b">Impl</a>; <span class="keyword">friend</span> <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1_async_array_1_1_impl.html">AsyncArray::Impl</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html#a5ed8bd828afa0eda7e91fd70c5495ece">   61</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="classcv_1_1_async_promise.html#a5ed8bd828afa0eda7e91fd70c5495ece">_getImpl</a>() const <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a> { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a>; }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">   63</a></span>    <a class="code hl_typedef" href="classcv_1_1_async_promise.html#a28f9208c375f8929eed44ac72398978b">Impl</a>* <a class="code hl_variable" href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">p</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>} <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_CORE_ASYNC_PROMISE_HPP</span></div>
+<div class="ttc" id="aasync_8hpp_html"><div class="ttname"><a href="async_8hpp.html">async.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_array_html"><div class="ttname"><a href="classcv_1_1_async_array.html">cv::AsyncArray</a></div><div class="ttdoc">Returns result of asynchronous operations.</div><div class="ttdef"><b>Definición</b> <a href="async_8hpp_source.html#l00029">async.hpp:30</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a2346d2175f4d9b061e29a473fcffe0f2"><div class="ttname"><a href="classcv_1_1_async_promise.html#a2346d2175f4d9b061e29a473fcffe0f2">cv::AsyncPromise::setException</a></div><div class="ttdeci">void setException(std::exception_ptr exception)</div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a28f9208c375f8929eed44ac72398978b"><div class="ttname"><a href="classcv_1_1_async_promise.html#a28f9208c375f8929eed44ac72398978b">cv::AsyncPromise::Impl</a></div><div class="ttdeci">struct AsyncArray::Impl Impl</div><div class="ttdef"><b>Definición</b> <a href="#l00060">async_promise.hpp:60</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a45afafdbfe8cac2b6e06b9dce58b2fbc"><div class="ttname"><a href="classcv_1_1_async_promise.html#a45afafdbfe8cac2b6e06b9dce58b2fbc">cv::AsyncPromise::operator=</a></div><div class="ttdeci">AsyncPromise &amp; operator=(AsyncPromise &amp;&amp;o) CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="#l00056">async_promise.hpp:56</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a50ec36f2aae302e3e5ecf7f9078efe4f"><div class="ttname"><a href="classcv_1_1_async_promise.html#a50ec36f2aae302e3e5ecf7f9078efe4f">cv::AsyncPromise::getArrayResult</a></div><div class="ttdeci">AsyncArray getArrayResult()</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00473">async.cpp:473</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a5373c68ea688b275771e5fe61a205b7f"><div class="ttname"><a href="classcv_1_1_async_promise.html#a5373c68ea688b275771e5fe61a205b7f">cv::AsyncPromise::release</a></div><div class="ttdeci">void release() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00465">async.cpp:465</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a5ed8bd828afa0eda7e91fd70c5495ece"><div class="ttname"><a href="classcv_1_1_async_promise.html#a5ed8bd828afa0eda7e91fd70c5495ece">cv::AsyncPromise::_getImpl</a></div><div class="ttdeci">void * _getImpl() const CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="#l00061">async_promise.hpp:61</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a726b8256aaeb66e3b51f1680f64403ff"><div class="ttname"><a href="classcv_1_1_async_promise.html#a726b8256aaeb66e3b51f1680f64403ff">cv::AsyncPromise::operator=</a></div><div class="ttdeci">AsyncPromise &amp; operator=(const AsyncPromise &amp;o) CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00455">async.cpp:455</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_a9df30b85b150691694ce9f0fb2ea1757"><div class="ttname"><a href="classcv_1_1_async_promise.html#a9df30b85b150691694ce9f0fb2ea1757">cv::AsyncPromise::setValue</a></div><div class="ttdeci">void setValue(InputArray value)</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00479">async.cpp:479</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_abbdcc54117a7b1c38826b697e94e9880"><div class="ttname"><a href="classcv_1_1_async_promise.html#abbdcc54117a7b1c38826b697e94e9880">cv::AsyncPromise::p</a></div><div class="ttdeci">Impl * p</div><div class="ttdef"><b>Definición</b> <a href="#l00063">async_promise.hpp:63</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_acc0b836ba3b79227de551dd9d874f25b"><div class="ttname"><a href="classcv_1_1_async_promise.html#acc0b836ba3b79227de551dd9d874f25b">cv::AsyncPromise::AsyncPromise</a></div><div class="ttdeci">AsyncPromise() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00438">async.cpp:438</a></div></div>
+<div class="ttc" id="aclasscv_1_1_async_promise_html_afe9b3953de6a656700eed1fa52efcd62"><div class="ttname"><a href="classcv_1_1_async_promise.html#afe9b3953de6a656700eed1fa52efcd62">cv::AsyncPromise::AsyncPromise</a></div><div class="ttdeci">AsyncPromise(AsyncPromise &amp;&amp;o)</div><div class="ttdef"><b>Definición</b> <a href="#l00055">async_promise.hpp:55</a></div></div>
+<div class="ttc" id="aclasscv_1_1_exception_html"><div class="ttname"><a href="classcv_1_1_exception.html">cv::Exception</a></div><div class="ttdoc">Class passed to an error.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00085">exception.hpp:86</a></div></div>
+<div class="ttc" id="aexception__ptr_8hpp_html"><div class="ttname"><a href="exception__ptr_8hpp.html">exception_ptr.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga1bf9f0e121b54272da02379cfccd0a2b"><div class="ttname"><a href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a></div><div class="ttdeci">#define CV_EXPORTS</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00446">cvdef.h:446</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga7b88772bee40b329b585a3a2157abd9b"><div class="ttname"><a href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a></div><div class="ttdeci">#define CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00838">cvdef.h:838</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_async_array_1_1_impl_html"><div class="ttname"><a href="structcv_1_1_async_array_1_1_impl.html">cv::AsyncArray::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="async_8cpp_source.html#l00027">async.cpp:28</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_a1ce6c622e502fce8b9ea1b3bba41ffe.html">include</a></li><li class="navelem"><a href="dir_09383d60383568eadd55fb8da7ff392b.html">opencv2</a></li><li class="navelem"><a href="dir_74897800f5c261f7ce57f88938dadca6.html">core</a></li><li class="navelem"><a href="dir_f417e932371e725aefe675f3b9302ec2.html">detail</a></li><li class="navelem"><a href="async__promise_8hpp.html">async_promise.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

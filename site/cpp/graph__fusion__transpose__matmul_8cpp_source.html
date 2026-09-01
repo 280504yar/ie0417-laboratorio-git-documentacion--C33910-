@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/graph_fusion_transpose_matmul.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('graph__fusion__transpose__matmul_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">graph_fusion_transpose_matmul.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="graph__fusion__transpose__matmul_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Folds a Transpose-of-last-two-dims into the consuming MatMul&#39;s trans_a / trans_b.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// Pattern:</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//   X -&gt; Transpose(perm=[0,..,n-3, n-1, n-2]) -&gt; MatMul(., Y)</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//   =&gt;  X -&gt; MatMul(trans_a=true, ., Y)</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Symmetric on the second operand -&gt; trans_b.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="net__impl_8hpp.html">net_impl.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">using </span>std::vector;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">using </span>std::string;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html">   24</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6d0ffeb69bfadc737b123aab7423899d">ModelFusionTransposeMatMul</a></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6d0ffeb69bfadc737b123aab7423899d">   26</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6d0ffeb69bfadc737b123aab7423899d">ModelFusionTransposeMatMul</a>(<a class="code hl_struct" href="structcv_1_1dnn_1_1_net_1_1_impl.html">Net::Impl</a>* netimpl_) : <a class="code hl_variable" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#ab787d9a3de57da6809cb4ca6f3185c89">netimpl</a>(netimpl_) {}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6a195314d1251886f40e30145bef02b4">   28</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6a195314d1251886f40e30145bef02b4">fuse</a>() { <a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a515d37be953ca4d3979585b4538c8d1a">fuseGraph</a>(<a class="code hl_variable" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#ab787d9a3de57da6809cb4ca6f3185c89">netimpl</a>-&gt;<a class="code hl_variable" href="structcv_1_1dnn_1_1_net_1_1_impl.html#ab3c8d9b2c03aa5da8a677488b6735cee">mainGraph</a>); }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a57f062d7f62635538ca86e96a0a3573b">   30</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a57f062d7f62635538ca86e96a0a3573b">isLastTwoSwap</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1vector.html">vector&lt;int&gt;</a>&amp; perm)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordtype">int</span> n = (int)perm.size();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">if</span> (n &lt; 2) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n - 2; i++)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">if</span> (perm[i] != i) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> perm[n - 2] == n - 1 &amp;&amp; perm[n - 1] == n - 2;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a515d37be953ca4d3979585b4538c8d1a">   39</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a515d37be953ca4d3979585b4538c8d1a">fuseGraph</a>(<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Graph&gt;</a>&amp; graph)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1dnn_1_1vector.html">vector&lt;Ptr&lt;LayerInfo&gt;</a>&gt;&amp; prog = graph-&gt;prog();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">size_t</span> nops = prog.size();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">bool</span> modified = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nops; i++) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keywordflow">if</span> (!prog[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1vector.html">vector&lt;Ptr&lt;Graph&gt;</a>&gt;* subgraphs = prog[i]-&gt;subgraphs();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keywordflow">if</span> (subgraphs) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <span class="keywordflow">for</span> (<a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Graph&gt;</a>&amp; g : *subgraphs)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a515d37be953ca4d3979585b4538c8d1a">fuseGraph</a>(g)) modified = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1vector.html">vector&lt;int&gt;</a> usecounts;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_variable" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#ab787d9a3de57da6809cb4ca6f3185c89">netimpl</a>-&gt;<a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a16ae89b761bdd81ea7ba7e3edced2776">useCounts</a>(usecounts);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        std::set&lt;int&gt; externalArgs;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">for</span> (<a class="code hl_struct" href="structcv_1_1dnn_1_1_arg.html">Arg</a> out : graph-&gt;outputs())</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            externalArgs.insert(out.idx);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        std::map&lt;int, int&gt; producer;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nops; i++) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">if</span> (!prog[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">for</span> (<a class="code hl_struct" href="structcv_1_1dnn_1_1_arg.html">Arg</a> out : prog[i]-&gt;outputs)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                producer[out.idx] = (int)i;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_class" href="classcv_1_1dnn_1_1vector.html">vector&lt;bool&gt;</a> dropped(nops, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nops; i++) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;LayerInfo&gt;</a>&amp; layer = prog[i];</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">if</span> (!layer || dropped[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1_mat_mul_layer.html">MatMulLayer</a>* mm = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classcv_1_1dnn_1_1_mat_mul_layer.html">MatMulLayer</a>*<span class="keyword">&gt;</span>(layer.get());</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">if</span> (!mm) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">if</span> (layer-&gt;inputs.size() != 2) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> slot = 0; slot &lt; 2; slot++) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                <a class="code hl_struct" href="structcv_1_1dnn_1_1_arg.html">Arg</a> in = layer-&gt;inputs[slot];</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keyword">auto</span> it = producer.find(in.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">idx</a>);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">if</span> (it == producer.end()) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordtype">int</span> prod_idx = it-&gt;second;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keywordflow">if</span> (prod_idx &lt; 0 || dropped[prod_idx]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;LayerInfo&gt;</a>&amp; pl = prog[prod_idx];</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                <a class="code hl_class" href="classcv_1_1dnn_1_1_transpose_layer.html">TransposeLayer</a>* tr = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classcv_1_1dnn_1_1_transpose_layer.html">TransposeLayer</a>*<span class="keyword">&gt;</span>(pl.get());</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keywordflow">if</span> (!tr || pl-&gt;outputs.size() != 1) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordflow">if</span> (!<a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a57f062d7f62635538ca86e96a0a3573b">isLastTwoSwap</a>(tr-&gt;<a class="code hl_variable" href="classcv_1_1dnn_1_1_transpose_layer.html#ad91b70608d43487cee2ade5df5aff5ac">perm</a>)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="keywordtype">bool</span> single_consumer = usecounts[in.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">idx</a>] == 1</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                                    &amp;&amp; externalArgs.count(in.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">idx</a>) == 0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keywordflow">if</span> (!single_consumer) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keywordflow">if</span> (slot == 0) mm-&gt;<a class="code hl_variable" href="classcv_1_1dnn_1_1_mat_mul_layer.html#a7735c3fae86b64864c1fbf439179e72f">trans_a</a> = !mm-&gt;<a class="code hl_variable" href="classcv_1_1dnn_1_1_mat_mul_layer.html#a7735c3fae86b64864c1fbf439179e72f">trans_a</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                <span class="keywordflow">else</span>           mm-&gt;<a class="code hl_variable" href="classcv_1_1dnn_1_1_mat_mul_layer.html#a25346821f13e308116cb4affd2c02209">trans_b</a> = !mm-&gt;<a class="code hl_variable" href="classcv_1_1dnn_1_1_mat_mul_layer.html#a25346821f13e308116cb4affd2c02209">trans_b</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                layer-&gt;inputs[slot] = pl-&gt;inputs[0];</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                dropped[prod_idx] = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                usecounts[in.<a class="code hl_variable" href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">idx</a>] = 0;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                modified = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">if</span> (modified) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1vector.html">vector&lt;Ptr&lt;LayerInfo&gt;</a>&gt; newprog;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            newprog.reserve(nops);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nops; i++) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keywordflow">if</span> (!dropped[i] &amp;&amp; prog[i])</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    newprog.push_back(prog[i]);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            graph-&gt;setProg(newprog);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span> modified;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#ab787d9a3de57da6809cb4ca6f3185c89">  117</a></span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_net_1_1_impl.html">Net::Impl</a>* <a class="code hl_variable" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#ab787d9a3de57da6809cb4ca6f3185c89">netimpl</a>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a31bcf57f1df2b243460db55f9a182a36">  120</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="structcv_1_1dnn_1_1_net_1_1_impl.html#a31bcf57f1df2b243460db55f9a182a36">Net::Impl::fuseTransposeMatMul</a>()</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>{</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_struct" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html">ModelFusionTransposeMatMul</a> pass(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    pass.<a class="code hl_function" href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6a195314d1251886f40e30145bef02b4">fuse</a>();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><a class="code hl_define" href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}}</div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_mat_mul_layer_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_mat_mul_layer.html">cv::dnn::MatMulLayer</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l01872">all_layers.hpp:1872</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_mat_mul_layer_html_a25346821f13e308116cb4affd2c02209"><div class="ttname"><a href="classcv_1_1dnn_1_1_mat_mul_layer.html#a25346821f13e308116cb4affd2c02209">cv::dnn::MatMulLayer::trans_b</a></div><div class="ttdeci">bool trans_b</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l01875">all_layers.hpp:1875</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_mat_mul_layer_html_a7735c3fae86b64864c1fbf439179e72f"><div class="ttname"><a href="classcv_1_1dnn_1_1_mat_mul_layer.html#a7735c3fae86b64864c1fbf439179e72f">cv::dnn::MatMulLayer::trans_a</a></div><div class="ttdeci">bool trans_a</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l01874">all_layers.hpp:1874</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_transpose_layer_html"><div class="ttname"><a href="classcv_1_1dnn_1_1_transpose_layer.html">cv::dnn::TransposeLayer</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00983">all_layers.hpp:984</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1_transpose_layer_html_ad91b70608d43487cee2ade5df5aff5ac"><div class="ttname"><a href="classcv_1_1dnn_1_1_transpose_layer.html#ad91b70608d43487cee2ade5df5aff5ac">cv::dnn::TransposeLayer::perm</a></div><div class="ttdeci">std::vector&lt; int &gt; perm</div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00986">all_layers.hpp:986</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1vector_html"><div class="ttname"><a href="classcv_1_1dnn_1_1vector.html">cv::dnn::vector</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6ae3ef8009ead8a7e6caeb96885bcf99"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6ae3ef8009ead8a7e6caeb96885bcf99">CV__DNN_INLINE_NS_END</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_END</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="adnn_2include_2opencv2_2dnn_2version_8hpp_html_a6dd37e41bfe9ef4fb958829bf068ea42"><div class="ttname"><a href="dnn_2include_2opencv2_2dnn_2version_8hpp.html#a6dd37e41bfe9ef4fb958829bf068ea42">CV__DNN_INLINE_NS_BEGIN</a></div><div class="ttdeci">#define CV__DNN_INLINE_NS_BEGIN</div><div class="ttdef"><b>Definición</b> <a href="dnn_2include_2opencv2_2dnn_2version_8hpp_source.html#l00013">version.hpp:13</a></div></div>
+<div class="ttc" id="adnn_2src_2precomp_8hpp_html"><div class="ttname"><a href="dnn_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anet__impl_8hpp_html"><div class="ttname"><a href="net__impl_8hpp.html">net_impl.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg.html">cv::dnn::Arg</a></div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00229">dnn.hpp:230</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_arg_html_ab3291707c7982aa10edd66dd1fc1ff7a"><div class="ttname"><a href="structcv_1_1dnn_1_1_arg.html#ab3291707c7982aa10edd66dd1fc1ff7a">cv::dnn::Arg::idx</a></div><div class="ttdeci">int idx</div><div class="ttdef"><b>Definición</b> <a href="dnn_2dnn_8hpp_source.html#l00238">dnn.hpp:238</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_model_fusion_transpose_mat_mul_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html">cv::dnn::ModelFusionTransposeMatMul</a></div><div class="ttdef"><b>Definición</b> <a href="#l00024">graph_fusion_transpose_matmul.cpp:25</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_model_fusion_transpose_mat_mul_html_a515d37be953ca4d3979585b4538c8d1a"><div class="ttname"><a href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a515d37be953ca4d3979585b4538c8d1a">cv::dnn::ModelFusionTransposeMatMul::fuseGraph</a></div><div class="ttdeci">bool fuseGraph(Ptr&lt; Graph &gt; &amp;graph)</div><div class="ttdef"><b>Definición</b> <a href="#l00039">graph_fusion_transpose_matmul.cpp:39</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_model_fusion_transpose_mat_mul_html_a57f062d7f62635538ca86e96a0a3573b"><div class="ttname"><a href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a57f062d7f62635538ca86e96a0a3573b">cv::dnn::ModelFusionTransposeMatMul::isLastTwoSwap</a></div><div class="ttdeci">static bool isLastTwoSwap(const vector&lt; int &gt; &amp;perm)</div><div class="ttdef"><b>Definición</b> <a href="#l00030">graph_fusion_transpose_matmul.cpp:30</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_model_fusion_transpose_mat_mul_html_a6a195314d1251886f40e30145bef02b4"><div class="ttname"><a href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6a195314d1251886f40e30145bef02b4">cv::dnn::ModelFusionTransposeMatMul::fuse</a></div><div class="ttdeci">void fuse()</div><div class="ttdef"><b>Definición</b> <a href="#l00028">graph_fusion_transpose_matmul.cpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_model_fusion_transpose_mat_mul_html_a6d0ffeb69bfadc737b123aab7423899d"><div class="ttname"><a href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#a6d0ffeb69bfadc737b123aab7423899d">cv::dnn::ModelFusionTransposeMatMul::ModelFusionTransposeMatMul</a></div><div class="ttdeci">ModelFusionTransposeMatMul(Net::Impl *netimpl_)</div><div class="ttdef"><b>Definición</b> <a href="#l00026">graph_fusion_transpose_matmul.cpp:26</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_model_fusion_transpose_mat_mul_html_ab787d9a3de57da6809cb4ca6f3185c89"><div class="ttname"><a href="structcv_1_1dnn_1_1_model_fusion_transpose_mat_mul.html#ab787d9a3de57da6809cb4ca6f3185c89">cv::dnn::ModelFusionTransposeMatMul::netimpl</a></div><div class="ttdeci">Net::Impl * netimpl</div><div class="ttdef"><b>Definición</b> <a href="#l00117">graph_fusion_transpose_matmul.cpp:117</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html">cv::dnn::Net::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00088">net_impl.hpp:89</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a16ae89b761bdd81ea7ba7e3edced2776"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a16ae89b761bdd81ea7ba7e3edced2776">cv::dnn::Net::Impl::useCounts</a></div><div class="ttdeci">void useCounts(std::vector&lt; int &gt; &amp;usecounts) const</div><div class="ttdef"><b>Definición</b> <a href="net__impl2_8cpp_source.html#l01903">net_impl2.cpp:1903</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_a31bcf57f1df2b243460db55f9a182a36"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#a31bcf57f1df2b243460db55f9a182a36">cv::dnn::Net::Impl::fuseTransposeMatMul</a></div><div class="ttdeci">void fuseTransposeMatMul()</div><div class="ttdef"><b>Definición</b> <a href="#l00120">graph_fusion_transpose_matmul.cpp:120</a></div></div>
+<div class="ttc" id="astructcv_1_1dnn_1_1_net_1_1_impl_html_ab3c8d9b2c03aa5da8a677488b6735cee"><div class="ttname"><a href="structcv_1_1dnn_1_1_net_1_1_impl.html#ab3c8d9b2c03aa5da8a677488b6735cee">cv::dnn::Net::Impl::mainGraph</a></div><div class="ttdeci">Ptr&lt; Graph &gt; mainGraph</div><div class="ttdef"><b>Definición</b> <a href="net__impl_8hpp_source.html#l00141">net_impl.hpp:141</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="graph__fusion__transpose__matmul_8cpp.html">graph_fusion_transpose_matmul.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

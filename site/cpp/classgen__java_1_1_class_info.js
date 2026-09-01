@@ -1,0 +1,27 @@
+var classgen__java_1_1_class_info =
+[
+    [ "__init__", "classgen__java_1_1_class_info.html#aa218433d25f0d853da38a5aeec29c0d6", null ],
+    [ "__repr__", "classgen__java_1_1_class_info.html#ac112ed7c0eb061c736151327a10fec26", null ],
+    [ "addConst", "classgen__java_1_1_class_info.html#a7f4887f7c95568fe2ede1fca0fd926f4", null ],
+    [ "addImports", "classgen__java_1_1_class_info.html#a86ba614647b7d824636189c1d8046342", null ],
+    [ "addMethod", "classgen__java_1_1_class_info.html#a0a07d8d590459a494cfe38bc45fcb301", null ],
+    [ "cleanupCodeStreams", "classgen__java_1_1_class_info.html#a01b136ace7179f435b224e562654084b", null ],
+    [ "generateCppCode", "classgen__java_1_1_class_info.html#ac79cb242e61f90bca772057d162f7a8f", null ],
+    [ "generateJavaCode", "classgen__java_1_1_class_info.html#a36378a2b9a73a5359c8284a730cf000c", null ],
+    [ "getAllImports", "classgen__java_1_1_class_info.html#a1cf481902e0b2d385e423b35891d7282", null ],
+    [ "getAllMethods", "classgen__java_1_1_class_info.html#a4ec83e58b423a5cc16a2fea571990609", null ],
+    [ "getConst", "classgen__java_1_1_class_info.html#afc5e4ab5f993e6075de260e26f19bfcd", null ],
+    [ "initCodeStreams", "classgen__java_1_1_class_info.html#a4646d63f64e814cbffaa4cfe41b78147", null ],
+    [ "base", "classgen__java_1_1_class_info.html#aed675bc0b1efe1e67cd2d298b1c28aa4", null ],
+    [ "consts", "classgen__java_1_1_class_info.html#a1e5d3e2df935453b8ab3ac22af8572b7", null ],
+    [ "cpp_code", "classgen__java_1_1_class_info.html#a9f80eeeabea46bdd983a939f6e6114e2", null ],
+    [ "imports", "classgen__java_1_1_class_info.html#a051eba073f06e10a17c433436c9b7267", null ],
+    [ "j_code", "classgen__java_1_1_class_info.html#a07cd7af4bd5396caa149a4414e1e796e", null ],
+    [ "jn_code", "classgen__java_1_1_class_info.html#a381dde2abfef9ad31ba15d29c13d46d1", null ],
+    [ "jname", "classgen__java_1_1_class_info.html#aadfa012b758ccc8f5ef6022c407fe7b1", null ],
+    [ "methods", "classgen__java_1_1_class_info.html#acac24fcafcbf18e2199d84c9f5100caa", null ],
+    [ "methods_suffixes", "classgen__java_1_1_class_info.html#a74964f13f36e66548dbcf3562f02fa96", null ],
+    [ "private_consts", "classgen__java_1_1_class_info.html#ab16671f61d985090611482ed00d07b8f", null ],
+    [ "props", "classgen__java_1_1_class_info.html#a70b589fe8bf6f65520473db9f9df037b", null ],
+    [ "smart", "classgen__java_1_1_class_info.html#a114722e3f2d6baa0f0a895b2baed19d5", null ]
+];

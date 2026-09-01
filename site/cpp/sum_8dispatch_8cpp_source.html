@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/sum.dispatch.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('sum_8dispatch_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sum.dispatch.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sum_8dispatch_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;opencl_kernels_core.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="stat_8hpp.html">stat.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="sum_8simd_8hpp.html">sum.simd.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;sum.simd_declarations.hpp&quot;</span> <span class="comment">// defines CV_CPU_DISPATCH_MODES_ALL=AVX2,...,BASELINE based on CMakeLists.txt content</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespacecv.html#aa9e70172e5746fa4598e6624115d0765">   16</a></span><a class="code hl_typedef" href="namespacecv.html#a69765a5b11b6a6ebaf54daa35916f961">SumFunc</a> <a class="code hl_function" href="namespacecv.html#aa9e70172e5746fa4598e6624115d0765">getSumFunc</a>(<span class="keywordtype">int</span> depth)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    CV_CPU_DISPATCH(<a class="code hl_function" href="namespacecv.html#aa9e70172e5746fa4598e6624115d0765">getSumFunc</a>, (depth),</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        CV_CPU_DISPATCH_MODES_ALL);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
+</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifdef HAVE_OPENCL</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">bool</span> ocl_sum( <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_class" href="interface_scalar.html">Scalar</a> &amp; res, <span class="keywordtype">int</span> sum_op, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _mask,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                     <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src2, <span class="keywordtype">bool</span> calc2, <span class="keyword">const</span> <a class="code hl_class" href="interface_scalar.html">Scalar</a> &amp; res2 )</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(sum_op == OCL_OP_SUM || sum_op == OCL_OP_SUM_ABS || sum_op == OCL_OP_SUM_SQR);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <a class="code hl_variable" href="group__core__opencl.html#ga157cb03840c1a3186916c9805abacf50">ocl::Device</a> &amp; dev = <a class="code hl_function" href="classcv_1_1ocl_1_1_device.html#a9e5b75c8b02d10050864af4e6c4b6768">ocl::Device::getDefault</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">bool</span> doubleSupport = dev.doubleFPConfig() &gt; 0,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        haveMask = _mask.kind() != <a class="code hl_enumvalue" href="classcv_1_1___input_array.html#a0f6bead7579fcd0e30b15a5d6bf5b53ba7f22b71cc694233d39d400bb0192a30a">_InputArray::NONE</a>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        haveSrc2 = _src2.kind() != <a class="code hl_enumvalue" href="classcv_1_1___input_array.html#a0f6bead7579fcd0e30b15a5d6bf5b53ba7f22b71cc694233d39d400bb0192a30a">_InputArray::NONE</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">int</span> type = _src.type(), depth = <a class="code hl_define" href="group__core__hal__interface.html#ga39f3412d63cac68d4f1d138ab52a6fc8">CV_MAT_DEPTH</a>(type), cn = <a class="code hl_define" href="group__core__utils.html#ga645f5d1efbab7bb8fdd460df6e633ebc">CV_MAT_CN</a>(type),</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            kercn = cn == 1 &amp;&amp; !haveMask ? <a class="code hl_function" href="group__core__opencl.html#ga1b16507915166d63529ad8126e465c1a">ocl::predictOptimalVectorWidth</a>(_src, _src2) : 1,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            mcn = <a class="code hl_namespace" href="namespacestd.html">std</a>::<a class="code hl_function" href="group__core__array.html#gacc40fa15eac0fb83f8ca70b7cc0b588d">max</a>(cn, kercn);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(!haveSrc2 || _src2.type() == type);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> convert_cn = haveSrc2 ? mcn : cn;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> ( (!doubleSupport &amp;&amp; depth == <a class="code hl_define" href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a>) || cn &gt; 4 )</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> (depth &gt;= <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a>)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> ngroups = dev.maxComputeUnits(), dbsize = ngroups * (calc2 ? 2 : 1);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">size_t</span> wgs = dev.maxWorkGroupSize();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">int</span> ddepth = std::max(sum_op == OCL_OP_SUM_SQR ? <a class="code hl_define" href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a> : <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>, depth),</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            dtype = <a class="code hl_define" href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a>(ddepth, cn);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(!haveMask || _mask.type() == <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a> || _mask.type() == <a class="code hl_define" href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a> || _mask.type() == <a class="code hl_define" href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span> wgs2_aligned = 1;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">while</span> (wgs2_aligned &lt; (<span class="keywordtype">int</span>)wgs)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        wgs2_aligned &lt;&lt;= 1;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    wgs2_aligned &gt;&gt;= 1;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> opMap[3] = { <span class="stringliteral">&quot;OP_SUM&quot;</span>, <span class="stringliteral">&quot;OP_SUM_ABS&quot;</span>, <span class="stringliteral">&quot;OP_SUM_SQR&quot;</span> };</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">char</span> cvt[2][50];</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> opts = <a class="code hl_function" href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">format</a>(<span class="stringliteral">&quot;-D srcT=%s -D srcT1=%s -D dstT=%s -D dstTK=%s -D dstT1=%s -D ddepth=%d -D cn=%d&quot;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                         <span class="stringliteral">&quot; -D convertToDT=%s -D %s -D WGS=%d -D WGS2_ALIGNED=%d%s%s%s%s -D kercn=%d%s%s%s -D convertFromU=%s&quot;</span>,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(<a class="code hl_define" href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a>(depth, mcn)), <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(depth),</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(dtype), <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(<a class="code hl_define" href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a>(ddepth, mcn)),</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                         <a class="code hl_function" href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">ocl::typeToStr</a>(ddepth), ddepth, cn,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                         <a class="code hl_function" href="group__core__opencl.html#ga5f148c32937ac94c6d39b34377849bbe">ocl::convertTypeStr</a>(depth, ddepth, mcn, cvt[0], <span class="keyword">sizeof</span>(cvt[0])),</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                         opMap[sum_op], (<span class="keywordtype">int</span>)wgs, wgs2_aligned,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                         doubleSupport ? <span class="stringliteral">&quot; -D DOUBLE_SUPPORT&quot;</span> : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                         haveMask ? <span class="stringliteral">&quot; -D HAVE_MASK&quot;</span> : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                         _src.isContinuous() ? <span class="stringliteral">&quot; -D HAVE_SRC_CONT&quot;</span> : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                         haveMask &amp;&amp; _mask.isContinuous() ? <span class="stringliteral">&quot; -D HAVE_MASK_CONT&quot;</span> : <span class="stringliteral">&quot;&quot;</span>, kercn,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                         haveSrc2 ? <span class="stringliteral">&quot; -D HAVE_SRC2&quot;</span> : <span class="stringliteral">&quot;&quot;</span>, calc2 ? <span class="stringliteral">&quot; -D OP_CALC2&quot;</span> : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                         haveSrc2 &amp;&amp; _src2.isContinuous() ? <span class="stringliteral">&quot; -D HAVE_SRC2_CONT&quot;</span> : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                         depth &lt;= <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a> &amp;&amp; ddepth == <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a> ? <a class="code hl_function" href="group__core__opencl.html#ga5f148c32937ac94c6d39b34377849bbe">ocl::convertTypeStr</a>(<a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>, ddepth, convert_cn, cvt[1], <span class="keyword">sizeof</span>(cvt[1])) : <span class="stringliteral">&quot;noconvert&quot;</span>);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_class" href="classcv_1_1ocl_1_1_kernel.html">ocl::Kernel</a> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>(<span class="stringliteral">&quot;reduce&quot;</span>, ocl::core::reduce_oclsrc, opts);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.<a class="code hl_function" href="classcv_1_1___input_array.html#aca4fc0e916419225f18026bdc7b1b180">empty</a>())</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_class" href="classcv_1_1_u_mat.html">UMat</a> src = _src.getUMat(), src2 = _src2.getUMat(),</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_enumvalue" href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8ae6f9dbf9718c71c2bc102b015f57b508">db</a>(1, dbsize, dtype), <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a> = _mask.getUMat();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_class" href="classcv_1_1ocl_1_1_kernel_arg.html">ocl::KernelArg</a> srcarg = <a class="code hl_function" href="classcv_1_1ocl_1_1_kernel_arg.html#a221bd893d50d9d0ec9b0b9e4eb3bb78e">ocl::KernelArg::ReadOnlyNoSize</a>(src),</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            dbarg = <a class="code hl_function" href="classcv_1_1ocl_1_1_kernel_arg.html#a54217697aa71270c29c064b7c8f462f7">ocl::KernelArg::PtrWriteOnly</a>(<a class="code hl_enumvalue" href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8ae6f9dbf9718c71c2bc102b015f57b508">db</a>),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            maskarg = <a class="code hl_function" href="classcv_1_1ocl_1_1_kernel_arg.html#a221bd893d50d9d0ec9b0b9e4eb3bb78e">ocl::KernelArg::ReadOnlyNoSize</a>(<a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>),</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            src2arg = <a class="code hl_function" href="classcv_1_1ocl_1_1_kernel_arg.html#a221bd893d50d9d0ec9b0b9e4eb3bb78e">ocl::KernelArg::ReadOnlyNoSize</a>(src2);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">if</span> (haveMask)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">if</span> (haveSrc2)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.args(srcarg, src.cols, (<span class="keywordtype">int</span>)src.total(), ngroups, dbarg, maskarg, src2arg);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.args(srcarg, src.cols, (<span class="keywordtype">int</span>)src.total(), ngroups, dbarg, maskarg);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">if</span> (haveSrc2)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.args(srcarg, src.cols, (<span class="keywordtype">int</span>)src.total(), ngroups, dbarg, src2arg);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.args(srcarg, src.cols, (<span class="keywordtype">int</span>)src.total(), ngroups, dbarg);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">size_t</span> globalsize = ngroups * wgs;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>.run(1, &amp;globalsize, &amp;wgs, <span class="keyword">true</span>))</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keyword">typedef</span> <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> (*part_sum)(<a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_variable" href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">m</a>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        part_sum <a class="code hl_variable" href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">funcs</a>[3] = { ocl_part_sum&lt;int&gt;, ocl_part_sum&lt;float&gt;, ocl_part_sum&lt;double&gt; },</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                <a class="code hl_variable" href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">func</a> = <a class="code hl_variable" href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">funcs</a>[ddepth - <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>];</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> mres = <a class="code hl_enumvalue" href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8ae6f9dbf9718c71c2bc102b015f57b508">db</a>.getMat(<a class="code hl_enumvalue" href="group__core__basic.html#gga6226c29c7b0e7bda7aff72e96ba8e1dfa39d5f615d02cac084ab1dd0cb4f7c221">ACCESS_READ</a>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">if</span> (calc2)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="keyword">const_cast&lt;</span><a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> &amp;<span class="keyword">&gt;</span>(res2) = <a class="code hl_variable" href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">func</a>(mres.colRange(ngroups, dbsize));</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <a class="code hl_variable" href="namespacerun__long.html#ab2bf1810418997fe9349bd3b7cee6e6f">res</a> = <a class="code hl_variable" href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">func</a>(mres.colRange(0, ngroups));</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespacecv.html#ab92a95186bc3bc92d4d8d62e0a048529">  121</a></span><a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> <a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src)</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>{</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    CV_INSTRUMENT_REGION();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a> _res;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#ifdef HAVE_OPENCL</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_define" href="ocl__defs_8hpp.html#aefa2ccfa90b56b40407f53c560b0ab2d">CV_OCL_RUN_</a>(OCL_PERFORMANCE_CHECK(_src.isUMat()) &amp;&amp; _src.dims() &lt;= 2,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                ocl_sum(_src, _res, OCL_OP_SUM),</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                _res);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> src = _src.getMat();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">int</span> cn = src.<a class="code hl_function" href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">channels</a>();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <a class="code hl_define" href="check_8hpp.html#a7b8e786a57dcee88dc0cae752adab921">CV_CheckLE</a>( cn, 4, <span class="stringliteral">&quot;cv::sum does not support more than 4 channels&quot;</span> );</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span> (_src.dims() &lt;= 2)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        CALL_HAL_RET2(<a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a>, cv_hal_sum, _res, src.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>, src.<a class="code hl_variable" href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">step</a>, src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>(), src.<a class="code hl_variable" href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cols</a>, src.<a class="code hl_variable" href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">rows</a>, &amp;_res[0]);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_src.isContinuous())</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        CALL_HAL_RET2(<a class="code hl_variable" href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">sum</a>, cv_hal_sum, _res, src.<a class="code hl_variable" href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">data</a>, 0, src.<a class="code hl_function" href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">type</a>(), (<span class="keywordtype">int</span>)src.<a class="code hl_function" href="classcv_1_1_mat.html#aedf850a24d0fa24cd7f84044a82aaae3">total</a>(), 1, &amp;_res[0]);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>, depth = src.<a class="code hl_function" href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">depth</a>();</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_typedef" href="namespacecv.html#a69765a5b11b6a6ebaf54daa35916f961">SumFunc</a> func = <a class="code hl_function" href="namespacecv.html#aa9e70172e5746fa4598e6624115d0765">getSumFunc</a>(depth);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> (func == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">if</span> (depth == <a class="code hl_define" href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a> &amp;&amp; cn == 1)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">return</span> <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a>((<span class="keywordtype">double</span>)<a class="code hl_function" href="group__core__array.html#gaa4b89393263bb4d604e0fe5986723914">countNonZero</a>(src));</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <a class="code hl_define" href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a>(<a class="code hl_enumvalue" href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">Error::StsNotImplemented</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>* arrays[] = {&amp;src, 0};</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* ptrs[1] = {};</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <a class="code hl_class" href="classcv_1_1_n_ary_mat_iterator.html">NAryMatIterator</a> it(arrays, ptrs);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> = (int)it.<a class="code hl_variable" href="classcv_1_1_n_ary_mat_iterator.html#a42ec820537c8749494a65784dbb44261">size</a>, <a class="code hl_variable" href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">blockSize</a> = <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>, partialBlockSize = 0;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordtype">int</span> j, count = 0;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">int</span> _buf[<a class="code hl_define" href="group__core__hal__interface.html#ga3de14a42631396fe0480be69d5d2363f">CV_CN_MAX</a>];</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">int</span>* buf = (<span class="keywordtype">int</span>*)&amp;_res[0];</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordtype">size_t</span> esz = 0;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordtype">bool</span> partialSumIsInt = depth &lt; <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacecv.html#a69016dcee68e109979fb0094c55107f7">blockSum</a> = partialSumIsInt || depth == <a class="code hl_define" href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a> || depth == <a class="code hl_define" href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordflow">if</span>( <a class="code hl_function" href="namespacecv.html#a69016dcee68e109979fb0094c55107f7">blockSum</a> )</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        partialBlockSize = depth &lt;= <a class="code hl_define" href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a> ? (1 &lt;&lt; 23) : (1 &lt;&lt; 15);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <a class="code hl_variable" href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">blockSize</a> = std::min(<a class="code hl_variable" href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">blockSize</a>, partialBlockSize);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        buf = _buf;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">for</span>( <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; cn; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++ )</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            buf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = 0;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        esz = src.<a class="code hl_function" href="classcv_1_1_mat.html#aba7a5ef00b22b70668fba575005dfe55">elemSize</a>();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> i = 0; i &lt; it.<a class="code hl_variable" href="classcv_1_1_n_ary_mat_iterator.html#a94ba374a7e5a004d19060a522893e09d">nplanes</a>; i++, ++it )</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">for</span>( j = 0; j &lt; <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>; j += <a class="code hl_variable" href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">blockSize</a> )</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            <span class="keywordtype">int</span> bsz = std::min(<a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a> - j, <a class="code hl_variable" href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">blockSize</a>);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            func( ptrs[0], 0, (<a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>*)buf, bsz, cn );</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            count += bsz;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordflow">if</span>( <a class="code hl_function" href="namespacecv.html#a69016dcee68e109979fb0094c55107f7">blockSum</a> &amp;&amp; (count + <a class="code hl_variable" href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">blockSize</a> &gt;= partialBlockSize || (i+1 &gt;= it.<a class="code hl_variable" href="classcv_1_1_n_ary_mat_iterator.html#a94ba374a7e5a004d19060a522893e09d">nplanes</a> &amp;&amp; j+bsz &gt;= <a class="code hl_function" href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">total</a>)) )</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                <span class="keywordflow">if</span> (partialSumIsInt) {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                    <span class="keywordflow">for</span>( <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; cn; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++ )</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                    {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                        _res[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] += buf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                        buf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = 0;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                    }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                    <span class="keywordflow">for</span>( <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> = 0; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a> &lt; cn; <a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>++ )</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                    {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                        _res[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] += ((<span class="keywordtype">float</span>*)buf)[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>];</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                        buf[<a class="code hl_variable" href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">k</a>] = 0;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                    }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                count = 0;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            ptrs[0] += bsz*esz;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">return</span> _res;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>}</div>
+</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>} <span class="comment">// namespace</span></div>
+<div class="ttc" id="acheck_8hpp_html_a7b8e786a57dcee88dc0cae752adab921"><div class="ttname"><a href="check_8hpp.html#a7b8e786a57dcee88dc0cae752adab921">CV_CheckLE</a></div><div class="ttdeci">#define CV_CheckLE(v1, v2, msg)</div><div class="ttdef"><b>Definición</b> <a href="check_8hpp_source.html#l00122">check.hpp:122</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a0f6bead7579fcd0e30b15a5d6bf5b53ba7f22b71cc694233d39d400bb0192a30a"><div class="ttname"><a href="classcv_1_1___input_array.html#a0f6bead7579fcd0e30b15a5d6bf5b53ba7f22b71cc694233d39d400bb0192a30a">cv::_InputArray::NONE</a></div><div class="ttdeci">@ NONE</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00279">mat.hpp:279</a></div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_aca4fc0e916419225f18026bdc7b1b180"><div class="ttname"><a href="classcv_1_1___input_array.html#aca4fc0e916419225f18026bdc7b1b180">cv::_InputArray::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01123">matrix_wrap.cpp:1123</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a4d33bed1c850265370d2af0ff02e1564"><div class="ttname"><a href="classcv_1_1_mat.html#a4d33bed1c850265370d2af0ff02e1564">cv::Mat::data</a></div><div class="ttdeci">uchar * data</div><div class="ttdoc">pointer to the data</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02493">mat.hpp:2493</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a8da9f853b6f3a29d738572fd1ffc44c0"><div class="ttname"><a href="classcv_1_1_mat.html#a8da9f853b6f3a29d738572fd1ffc44c0">cv::Mat::depth</a></div><div class="ttdeci">int depth() const</div><div class="ttdoc">Returns the depth of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa11336b9ac538e0475d840657ce164be"><div class="ttname"><a href="classcv_1_1_mat.html#aa11336b9ac538e0475d840657ce164be">cv::Mat::channels</a></div><div class="ttdeci">int channels() const</div><div class="ttdoc">Returns the number of matrix channels.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa3e5a47585c9ef6a0842556739155e3e"><div class="ttname"><a href="classcv_1_1_mat.html#aa3e5a47585c9ef6a0842556739155e3e">cv::Mat::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_ab4b0843e64328eb2a026b5b9ede726fe"><div class="ttname"><a href="classcv_1_1_mat.html#ab4b0843e64328eb2a026b5b9ede726fe">cv::Mat::step</a></div><div class="ttdeci">MatStep step</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02514">mat.hpp:2514</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aba7a5ef00b22b70668fba575005dfe55"><div class="ttname"><a href="classcv_1_1_mat.html#aba7a5ef00b22b70668fba575005dfe55">cv::Mat::elemSize</a></div><div class="ttdeci">size_t elemSize() const</div><div class="ttdoc">Returns the matrix element size in bytes.</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_abed816466c45234254d25bc59c31245e"><div class="ttname"><a href="classcv_1_1_mat.html#abed816466c45234254d25bc59c31245e">cv::Mat::rows</a></div><div class="ttdeci">int rows</div><div class="ttdoc">the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02490">mat.hpp:2490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aedf850a24d0fa24cd7f84044a82aaae3"><div class="ttname"><a href="classcv_1_1_mat.html#aedf850a24d0fa24cd7f84044a82aaae3">cv::Mat::total</a></div><div class="ttdeci">size_t total() const</div><div class="ttdoc">Returns the total number of array elements.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l01033">matrix.cpp:1033</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_af2d2652e552d7de635988f18a84b53e5"><div class="ttname"><a href="classcv_1_1_mat.html#af2d2652e552d7de635988f18a84b53e5">cv::Mat::type</a></div><div class="ttdeci">int type() const</div><div class="ttdoc">Returns the type of a matrix element.</div></div>
+<div class="ttc" id="aclasscv_1_1_n_ary_mat_iterator_html"><div class="ttname"><a href="classcv_1_1_n_ary_mat_iterator.html">cv::NAryMatIterator</a></div><div class="ttdoc">n-ary multi-dimensional array iterator.</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l03860">mat.hpp:3861</a></div></div>
+<div class="ttc" id="aclasscv_1_1_n_ary_mat_iterator_html_a42ec820537c8749494a65784dbb44261"><div class="ttname"><a href="classcv_1_1_n_ary_mat_iterator.html#a42ec820537c8749494a65784dbb44261">cv::NAryMatIterator::size</a></div><div class="ttdeci">size_t size</div><div class="ttdoc">the size of each segment (in elements)</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l03888">mat.hpp:3888</a></div></div>
+<div class="ttc" id="aclasscv_1_1_n_ary_mat_iterator_html_a94ba374a7e5a004d19060a522893e09d"><div class="ttname"><a href="classcv_1_1_n_ary_mat_iterator.html#a94ba374a7e5a004d19060a522893e09d">cv::NAryMatIterator::nplanes</a></div><div class="ttdeci">size_t nplanes</div><div class="ttdoc">the number of hyper-planes that the iterator steps through</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l03886">mat.hpp:3886</a></div></div>
+<div class="ttc" id="aclasscv_1_1_u_mat_html"><div class="ttname"><a href="classcv_1_1_u_mat.html">cv::UMat</a></div><div class="ttdoc">Matrix class whose data may reside outside host memory..</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02813">mat.hpp:2814</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_device_html_a9e5b75c8b02d10050864af4e6c4b6768"><div class="ttname"><a href="classcv_1_1ocl_1_1_device.html#a9e5b75c8b02d10050864af4e6c4b6768">cv::ocl::Device::getDefault</a></div><div class="ttdeci">static CV_WRAP const Device &amp; getDefault()</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00146">ocl_disabled.impl.hpp:146</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_arg_html"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel_arg.html">cv::ocl::KernelArg</a></div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00417">ocl.hpp:418</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_arg_html_a221bd893d50d9d0ec9b0b9e4eb3bb78e"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel_arg.html#a221bd893d50d9d0ec9b0b9e4eb3bb78e">cv::ocl::KernelArg::ReadOnlyNoSize</a></div><div class="ttdeci">static KernelArg ReadOnlyNoSize(const UMat &amp;m, int wscale=1, int iwscale=1)</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00440">ocl.hpp:440</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_arg_html_a54217697aa71270c29c064b7c8f462f7"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel_arg.html#a54217697aa71270c29c064b7c8f462f7">cv::ocl::KernelArg::PtrWriteOnly</a></div><div class="ttdeci">static KernelArg PtrWriteOnly(const UMat &amp;m)</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00426">ocl.hpp:426</a></div></div>
+<div class="ttc" id="aclasscv_1_1ocl_1_1_kernel_html"><div class="ttname"><a href="classcv_1_1ocl_1_1_kernel.html">cv::ocl::Kernel</a></div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00456">ocl.hpp:457</a></div></div>
+<div class="ttc" id="acore_2src_2precomp_8hpp_html"><div class="ttname"><a href="core_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gaa4b89393263bb4d604e0fe5986723914"><div class="ttname"><a href="group__core__array.html#gaa4b89393263bb4d604e0fe5986723914">cv::countNonZero</a></div><div class="ttdeci">CV_EXPORTS_W int countNonZero(InputArray src)</div><div class="ttdoc">Counts non-zero array elements.</div><div class="ttdef"><b>Definición</b> <a href="count__non__zero_8dispatch_8cpp_source.html#l00119">count_non_zero.dispatch.cpp:119</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gacc40fa15eac0fb83f8ca70b7cc0b588d"><div class="ttname"><a href="group__core__array.html#gacc40fa15eac0fb83f8ca70b7cc0b588d">cv::max</a></div><div class="ttdeci">CV_EXPORTS_W void max(InputArray src1, InputArray src2, OutputArray dst)</div><div class="ttdoc">Calculates per-element maximum of two arrays or an array and a scalar.</div><div class="ttdef"><b>Definición</b> <a href="arithm_8cpp_source.html#l00231">arithm.cpp:231</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gga6226c29c7b0e7bda7aff72e96ba8e1dfa39d5f615d02cac084ab1dd0cb4f7c221"><div class="ttname"><a href="group__core__basic.html#gga6226c29c7b0e7bda7aff72e96ba8e1dfa39d5f615d02cac084ab1dd0cb4f7c221">cv::ACCESS_READ</a></div><div class="ttdeci">@ ACCESS_READ</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00066">mat.hpp:66</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga21111882276c49470604662f036151e6"><div class="ttname"><a href="group__core__hal__interface.html#ga21111882276c49470604662f036151e6">CV_Bool</a></div><div class="ttdeci">#define CV_Bool</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00063">interface.h:63</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3"><div class="ttname"><a href="group__core__hal__interface.html#ga26f5e76cbfb2fd9c2ba6fadc6cc19ce3">CV_8S</a></div><div class="ttdeci">#define CV_8S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00055">interface.h:55</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga2b02a49f1f211e23c1fc11705a1f0ce7"><div class="ttname"><a href="group__core__hal__interface.html#ga2b02a49f1f211e23c1fc11705a1f0ce7">CV_16F</a></div><div class="ttdeci">#define CV_16F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00061">interface.h:61</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga30a562691cc5987bc88eb7bb7a8faf2b"><div class="ttname"><a href="group__core__hal__interface.html#ga30a562691cc5987bc88eb7bb7a8faf2b">CV_64F</a></div><div class="ttdeci">#define CV_64F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00060">interface.h:60</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga39f3412d63cac68d4f1d138ab52a6fc8"><div class="ttname"><a href="group__core__hal__interface.html#ga39f3412d63cac68d4f1d138ab52a6fc8">CV_MAT_DEPTH</a></div><div class="ttdeci">#define CV_MAT_DEPTH(flags)</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00073">interface.h:73</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga3de14a42631396fe0480be69d5d2363f"><div class="ttname"><a href="group__core__hal__interface.html#ga3de14a42631396fe0480be69d5d2363f">CV_CN_MAX</a></div><div class="ttdeci">#define CV_CN_MAX</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00050">interface.h:50</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4a3def5d72b74bed31f5f8ab7676099c"><div class="ttname"><a href="group__core__hal__interface.html#ga4a3def5d72b74bed31f5f8ab7676099c">CV_32F</a></div><div class="ttdeci">#define CV_32F</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00059">interface.h:59</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gabee4806a5f37b92d6c3dff4d97780a35"><div class="ttname"><a href="group__core__hal__interface.html#gabee4806a5f37b92d6c3dff4d97780a35">CV_16BF</a></div><div class="ttdeci">#define CV_16BF</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00062">interface.h:62</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gac0f2281e91c4e610de4f450eb0a39993"><div class="ttname"><a href="group__core__hal__interface.html#gac0f2281e91c4e610de4f450eb0a39993">CV_MAKE_TYPE</a></div><div class="ttdeci">#define CV_MAKE_TYPE</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00079">interface.h:79</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga157cb03840c1a3186916c9805abacf50"><div class="ttname"><a href="group__core__opencl.html#ga157cb03840c1a3186916c9805abacf50">cv::ocl::Device</a></div><div class="ttdeci">class CV_EXPORTS_W_SIMPLE Device</div><div class="ttdef"><b>Definición</b> <a href="ocl_8hpp_source.html#l00064">ocl.hpp:64</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga1b16507915166d63529ad8126e465c1a"><div class="ttname"><a href="group__core__opencl.html#ga1b16507915166d63529ad8126e465c1a">cv::ocl::predictOptimalVectorWidth</a></div><div class="ttdeci">CV_EXPORTS int predictOptimalVectorWidth(InputArray src1, InputArray src2=noArray(), InputArray src3=noArray(), InputArray src4=noArray(), InputArray src5=noArray(), InputArray src6=noArray(), InputArray src7=noArray(), InputArray src8=noArray(), InputArray src9=noArray(), OclVectorStrategy strat=OCL_VECTOR_DEFAULT)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00349">ocl_disabled.impl.hpp:349</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga5f148c32937ac94c6d39b34377849bbe"><div class="ttname"><a href="group__core__opencl.html#ga5f148c32937ac94c6d39b34377849bbe">cv::ocl::convertTypeStr</a></div><div class="ttdeci">CV_EXPORTS CV_DEPRECATED const char * convertTypeStr(int sdepth, int ddepth, int cn, char *buf)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00340">ocl_disabled.impl.hpp:340</a></div></div>
+<div class="ttc" id="agroup__core__opencl_html_ga7f2f248d37cfa3e1e4122249f7dc8c49"><div class="ttname"><a href="group__core__opencl.html#ga7f2f248d37cfa3e1e4122249f7dc8c49">cv::ocl::typeToStr</a></div><div class="ttdeci">CV_EXPORTS const char * typeToStr(int t)</div><div class="ttdef"><b>Definición</b> <a href="ocl__disabled_8impl_8hpp_source.html#l00341">ocl_disabled.impl.hpp:341</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga5b48c333c777666e076bd7052799f891"><div class="ttname"><a href="group__core__utils.html#ga5b48c333c777666e076bd7052799f891">CV_Error</a></div><div class="ttdeci">#define CV_Error(code, msg)</div><div class="ttdoc">Call the error handler.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00174">exception.hpp:174</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga645f5d1efbab7bb8fdd460df6e633ebc"><div class="ttname"><a href="group__core__utils.html#ga645f5d1efbab7bb8fdd460df6e633ebc">CV_MAT_CN</a></div><div class="ttdeci">#define CV_MAT_CN(flags)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00507">cvdef.h:507</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaea1b569d6ac0c23308304824f059ff50"><div class="ttname"><a href="group__core__utils.html#gaea1b569d6ac0c23308304824f059ff50">cv::format</a></div><div class="ttdeci">CV_EXPORTS String format(const char *fmt,...) CV_FORMAT_PRINTF(1</div><div class="ttdoc">Returns a text string formatted using the printf-like expression.</div><div class="ttdef"><b>Definición</b> <a href="system_8cpp_source.html#l01115">system.cpp:1115</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga77e8d152530f6f3e51c3a048b7c0e32e"><div class="ttname"><a href="group__features__main.html#ga77e8d152530f6f3e51c3a048b7c0e32e">cv::blockSize</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int blockSize</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga9932ca98172c18d686fd1b8793b0961e"><div class="ttname"><a href="group__features__main.html#ga9932ca98172c18d686fd1b8793b0961e">cv::k</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray OutputArray int int bool double k</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00221">features.hpp:221</a></div></div>
+<div class="ttc" id="agroup__imgproc__misc_html_gaa012757b1a6536a1a3ef813a0aba1c1e"><div class="ttname"><a href="group__imgproc__misc.html#gaa012757b1a6536a1a3ef813a0aba1c1e">cv::sum</a></div><div class="ttdeci">OutputArray sum</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l02650">imgproc.hpp:2650</a></div></div>
+<div class="ttc" id="ainterface_scalar_html"><div class="ttname"><a href="interface_scalar.html">Scalar</a></div><div class="ttdef"><b>Definición</b> <a href="_scalar_8h_source.html#l00022">Scalar.h:23</a></div></div>
+<div class="ttc" id="anamespacecheck-tests_html_a53a41da50b9dbc4ab5e1ffb9a5eaf552"><div class="ttname"><a href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">check-tests.funcs</a></div><div class="ttdeci">funcs</div><div class="ttdef"><b>Definición</b> <a href="check-tests_8py_source.html#l00160">check-tests.py:160</a></div></div>
+<div class="ttc" id="anamespacecv_1_1_error_html_a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465"><div class="ttname"><a href="namespacecv_1_1_error.html#a759fa1af92f7aa7377c76ffb142abccaab5d0063314f64d350a93d091b542d465">cv::Error::StsNotImplemented</a></div><div class="ttdeci">@ StsNotImplemented</div><div class="ttdoc">the requested function/feature is not implemented</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00063">exception.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html_ad0ae34c58960d6781fd8ceb895524722"><div class="ttname"><a href="namespacecv_1_1dnn.html#ad0ae34c58960d6781fd8ceb895524722">cv::dnn::total</a></div><div class="ttdeci">size_t total(const MatShape &amp;shape, int start=-1, int end=-1)</div><div class="ttdef"><b>Definición</b> <a href="shape__utils_8hpp_source.html#l00155">shape_utils.hpp:155</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a172ccaaba996db5201af1c17c04a5fe8ae6f9dbf9718c71c2bc102b015f57b508"><div class="ttname"><a href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8ae6f9dbf9718c71c2bc102b015f57b508">cv::db</a></div><div class="ttdeci">@ db</div><div class="ttdef"><b>Definición</b> <a href="container__avi_8private_8hpp_source.html#l00138">container_avi.private.hpp:138</a></div></div>
+<div class="ttc" id="anamespacecv_html_a69016dcee68e109979fb0094c55107f7"><div class="ttname"><a href="namespacecv.html#a69016dcee68e109979fb0094c55107f7">cv::blockSum</a></div><div class="ttdeci">void blockSum(const Mat &amp;src, Mat &amp;dst, Size ksize, Point anchor, const Size &amp;wsz, const Point &amp;ofs, bool normalize, int borderType)</div><div class="ttdef"><b>Definición</b> <a href="box__filter_8simd_8hpp_source.html#l01658">box_filter.simd.hpp:1658</a></div></div>
+<div class="ttc" id="anamespacecv_html_a69765a5b11b6a6ebaf54daa35916f961"><div class="ttname"><a href="namespacecv.html#a69765a5b11b6a6ebaf54daa35916f961">cv::SumFunc</a></div><div class="ttdeci">int(*) SumFunc(const uchar *, const uchar *mask, uchar *, int, int)</div><div class="ttdef"><b>Definición</b> <a href="stat_8hpp_source.html#l00038">stat.hpp:38</a></div></div>
+<div class="ttc" id="anamespacecv_html_aa9e70172e5746fa4598e6624115d0765"><div class="ttname"><a href="namespacecv.html#aa9e70172e5746fa4598e6624115d0765">cv::getSumFunc</a></div><div class="ttdeci">SumFunc getSumFunc(int depth)</div><div class="ttdef"><b>Definición</b> <a href="#l00016">sum.dispatch.cpp:16</a></div></div>
+<div class="ttc" id="anamespacegl_html_aafb899ef4c796df60bf5087c5e487bf2"><div class="ttname"><a href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">gl::func</a></div><div class="ttdeci">GLenum func</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01186">gl_core_3_1.hpp:1186</a></div></div>
+<div class="ttc" id="anamespacereport_html_a0b2a055171c088a511a6dc6d9b622b68"><div class="ttname"><a href="namespacereport.html#a0b2a055171c088a511a6dc6d9b622b68">report.m</a></div><div class="ttdeci">m</div><div class="ttdef"><b>Definición</b> <a href="report_8py_source.html#l00116">report.py:116</a></div></div>
+<div class="ttc" id="anamespacerun__long_html_ab2bf1810418997fe9349bd3b7cee6e6f"><div class="ttname"><a href="namespacerun__long.html#ab2bf1810418997fe9349bd3b7cee6e6f">run_long.res</a></div><div class="ttdeci">list res</div><div class="ttdef"><b>Definición</b> <a href="run__long_8py_source.html#l00110">run_long.py:110</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="aocl__defs_8hpp_html_aefa2ccfa90b56b40407f53c560b0ab2d"><div class="ttname"><a href="ocl__defs_8hpp.html#aefa2ccfa90b56b40407f53c560b0ab2d">CV_OCL_RUN_</a></div><div class="ttdeci">#define CV_OCL_RUN_(condition, func,...)</div><div class="ttdef"><b>Definición</b> <a href="ocl__defs_8hpp_source.html#l00077">ocl_defs.hpp:77</a></div></div>
+<div class="ttc" id="astat_8hpp_html"><div class="ttname"><a href="stat_8hpp.html">stat.hpp</a></div></div>
+<div class="ttc" id="asum_8simd_8hpp_html"><div class="ttname"><a href="sum_8simd_8hpp.html">sum.simd.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="sum_8dispatch_8cpp.html">sum.dispatch.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

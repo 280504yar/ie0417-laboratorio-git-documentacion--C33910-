@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_reverse_sequence_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_reverse_sequence_options_01_4.html#a9a1389f3aa9aac6e643b243f617be385", null ]
+];

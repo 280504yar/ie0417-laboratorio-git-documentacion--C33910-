@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_dynamic_update_slice_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_dynamic_update_slice_options_01_4.html#a68f317dab5f8441f880ae7775fa3d3f7", null ]
+];

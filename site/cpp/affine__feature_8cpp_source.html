@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/features/src/affine_feature.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('affine__feature_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">affine_feature.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="affine__feature_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// This file is based on code issued with the following license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">/*********************************************************************</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">* Software License Agreement (BSD License)</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">*</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">*  Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">*  Copyright (C) 2008-2013, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">*  Copyright (C) 2013, Evgeny Toropov, all rights reserved.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">*  Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">*</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">*  Redistribution and use in source and binary forms, with or without</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">*  modification, are permitted provided that the following conditions</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">*  are met:</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">*</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">*   * Redistributions of source code must retain the above copyright</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">*     notice, this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">*   * Redistributions in binary form must reproduce the above</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">*     copyright notice, this list of conditions and the following</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">*     disclaimer in the documentation and/or other materials provided</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">*     with the distribution.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">*   * The name of the copyright holders may not be used to endorse</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">*     or promote products derived from this software without specific</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">*     prior written permission.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">*</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">*  &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">*  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">*  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">*  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">*  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">*  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">*  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">*  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">*  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">*  POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">*********************************************************************/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> Guoshen Yu, Jean-Michel Morel, ASIFT: An Algorithm for Fully Affine</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> Invariant Comparison,  Image Processing On Line, 1 (2011), pp. 11-38.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> https://doi.org/10.5201/ipol.2011.my-asift</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="features_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">class </span>AffineFeature_Impl <a class="code hl_struct" href="classcv_1_1_c_v___f_i_n_a_l.html">CV_FINAL</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_affine_feature.html">AffineFeature</a></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">   56</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Feature2D&gt;</a>&amp; backend,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordtype">int</span> maxTilt, <span class="keywordtype">int</span> minTilt, <span class="keywordtype">float</span> tiltStep, <span class="keywordtype">float</span> rotateStepBase);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#aab6fee3b90f6ed74c20904cd682f4a0e">   59</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#aab6fee3b90f6ed74c20904cd682f4a0e">descriptorSize</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">backend_</a>-&gt;descriptorSize();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#aef0e21567c820178249a7b6c275703e9">   64</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#aef0e21567c820178249a7b6c275703e9">descriptorType</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">backend_</a>-&gt;descriptorType();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ada65f739d7597f115640dc37fadfd2bd">   69</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#ada65f739d7597f115640dc37fadfd2bd">defaultNorm</a>() const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">backend_</a>-&gt;defaultNorm();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a26c7af03d2647d91722a6266a6a378d9">   74</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a26c7af03d2647d91722a6266a6a378d9">detectAndCompute</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> image, <a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>, std::vector&lt;KeyPoint&gt;&amp; keypoints,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> descriptors, <span class="keywordtype">bool</span> useProvidedKeypoints=<span class="keyword">false</span>) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a3f7e698c91fc432b48f94fd8565f0dae">   77</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a3f7e698c91fc432b48f94fd8565f0dae">setViewParams</a>(const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">float</span>&gt;&amp; tilts, const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">float</span>&gt;&amp; rolls) <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a38fbff945fe26575e85414ef1ff67377">   78</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a38fbff945fe26575e85414ef1ff67377">getViewParams</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">float</span>&gt;&amp; tilts, <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">float</span>&gt;&amp; rolls) const <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>protected:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ac9c56e89a5f6468979afbdf2a003ffee">   81</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#ac9c56e89a5f6468979afbdf2a003ffee">splitKeypointsByView</a>(const <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1_key_point.html">KeyPoint</a>&gt;&amp; keypoints_,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt; <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<a class="code hl_class" href="classcv_1_1_key_point.html">KeyPoint</a>&gt; &gt;&amp; keypointsByView) const;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">   84</a></span>    const <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr</a>&lt;<a class="code hl_class" href="classcv_1_1_feature2_d.html">Feature2D</a>&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">backend_</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a5cfd40a925cc3f2d953357f89b344e80">   85</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a5cfd40a925cc3f2d953357f89b344e80">maxTilt_</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a60a6573a3dce047e52dbfd6b56ce4a9b">   86</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a60a6573a3dce047e52dbfd6b56ce4a9b">minTilt_</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a54ec49b2bfebbbc43e4782aa7b418c8b">   87</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a54ec49b2bfebbbc43e4782aa7b418c8b">tiltStep_</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#ac5e7504848ef792324146c6e124c48b5">   88</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#ac5e7504848ef792324146c6e124c48b5">rotateStepBase_</a>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="comment">// Tilt factors.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a530f34a2a423ca3d32f6ff4055d1dd4a">   91</a></span>    <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">float</span>&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a530f34a2a423ca3d32f6ff4055d1dd4a">tilts_</a>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="comment">// Roll factors.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classcv_1_1_c_v___f_i_n_a_l.html#a29e44aace3400c18d7dd052fa67d5045">   93</a></span>    <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;<span class="keywordtype">float</span>&gt; <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a29e44aace3400c18d7dd052fa67d5045">rolls_</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>private:</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a>(const <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a> &amp;); <span class="comment">// copy disabled</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a>&amp; operator=(const <a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a> &amp;); <span class="comment">// assign disabled</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>};</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a>::<a class="code hl_function" href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">AffineFeature_Impl</a>(const <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr</a>&lt;<a class="code hl_typedef" href="group__features__main.html#ga15e1361bda978d83a2bea629b32dfd3c">FeatureDetector</a>&gt;&amp; backend,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">int</span> maxTilt, <span class="keywordtype">int</span> minTilt, <span class="keywordtype">float</span> tiltStep, <span class="keywordtype">float</span> rotateStepBase)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    : <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">backend_</a>(backend), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a5cfd40a925cc3f2d953357f89b344e80">maxTilt_</a>(maxTilt), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a60a6573a3dce047e52dbfd6b56ce4a9b">minTilt_</a>(minTilt), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a54ec49b2bfebbbc43e4782aa7b418c8b">tiltStep_</a>(tiltStep), <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#ac5e7504848ef792324146c6e124c48b5">rotateStepBase_</a>(rotateStepBase)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>{</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">int</span> i = <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a60a6573a3dce047e52dbfd6b56ce4a9b">minTilt_</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">if</span>( i == 0 )</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a530f34a2a423ca3d32f6ff4055d1dd4a">tilts_</a>.push_back(1);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a29e44aace3400c18d7dd052fa67d5045">rolls_</a>.push_back(0);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        i++;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">float</span> tilt = 1;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">for</span>( ; i &lt;= <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a5cfd40a925cc3f2d953357f89b344e80">maxTilt_</a>; i++ )</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        tilt *= <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a54ec49b2bfebbbc43e4782aa7b418c8b">tiltStep_</a>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordtype">float</span> rotateStep = <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#ac5e7504848ef792324146c6e124c48b5">rotateStepBase_</a> / tilt;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordtype">int</span> rollN = <a class="code hl_function" href="group__core__utils.html#ga007054c538d25a8b9d6e6cc75098992c">cvFloor</a>(180.0f / rotateStep);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">if</span>( rollN * rotateStep == 180.0f )</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            rollN--;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">for</span>( <span class="keywordtype">int</span> j = 0; j &lt;= rollN; j++ )</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a530f34a2a423ca3d32f6ff4055d1dd4a">tilts_</a>.push_back(tilt);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <a class="code hl_variable" href="classcv_1_1_c_v___f_i_n_a_l.html#a29e44aace3400c18d7dd052fa67d5045">rolls_</a>.push_back(rotateStep * j);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="keywordtype">void</span> AffineFeature_Impl::setViewParams(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; tilts,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keyword">const</span> std::vector&lt;float&gt;&amp; rolls)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>{</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(tilts.size() == rolls.size());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    tilts_ = tilts;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    rolls_ = rolls;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keywordtype">void</span> AffineFeature_Impl::getViewParams(std::vector&lt;float&gt;&amp; tilts,</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        std::vector&lt;float&gt;&amp; rolls)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    tilts = tilts_;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    rolls = rolls_;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keywordtype">void</span> AffineFeature_Impl::splitKeypointsByView(<span class="keyword">const</span> std::vector&lt;KeyPoint&gt;&amp; keypoints_,</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        std::vector&lt; std::vector&lt;KeyPoint&gt; &gt;&amp; keypointsByView)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; keypoints_.size(); <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++ )</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keyword">const</span> KeyPoint&amp; kp = keypoints_[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>( kp.class_id &gt;= 0 &amp;&amp; kp.class_id &lt; (<span class="keywordtype">int</span>)tilts_.<a class="code hl_property" href="interface_key_point.html#a6be74bd787640cbd1dc88f50735e4aae">size</a>() );</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        keypointsByView[kp.class_id].push_back(kp);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="};">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classcv_1_1skewed_detect_and_compute.html">  153</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1skewed_detect_and_compute.html#a0bf94dc188890dc8a0b5bd11ba10b6d3">skewedDetectAndCompute</a> : <span class="keyword">public</span> <a class="code hl_class" href="classcv_1_1_parallel_loop_body.html">ParallelLoopBody</a></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00156" data-start="{" data-end="}">
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classcv_1_1skewed_detect_and_compute.html#a0bf94dc188890dc8a0b5bd11ba10b6d3">  156</a></span>    <a class="code hl_function" href="classcv_1_1skewed_detect_and_compute.html#a0bf94dc188890dc8a0b5bd11ba10b6d3">skewedDetectAndCompute</a>(</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keyword">const</span> std::vector&lt;float&gt;&amp; _tilts,</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keyword">const</span> std::vector&lt;float&gt;&amp; _rolls,</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        std::vector&lt; std::vector&lt;KeyPoint&gt; &gt;&amp; _keypointsCollection,</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        std::vector&lt;Mat&gt;&amp; _descriptorCollection,</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; _image,</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; _mask,</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> _do_keypoints,</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> _do_descriptors,</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Feature2D&gt;</a>&amp; _backend)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        : tilts(_tilts),</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>          rolls(_rolls),</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>          keypointsCollection(_keypointsCollection),</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>          descriptorCollection(_descriptorCollection),</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>          image(_image),</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>          mask(_mask),</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>          do_keypoints(_do_keypoints),</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>          do_descriptors(_do_descriptors),</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>          backend(_backend) {}</div>
+</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classcv_1_1skewed_detect_and_compute.html#a384bbcd3ef82a63d1efc97a0e41504ad">  176</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1skewed_detect_and_compute.html#a384bbcd3ef82a63d1efc97a0e41504ad">operator()</a>( <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_range.html">cv::Range</a>&amp; range ) <span class="keyword">const</span> <a class="code hl_define" href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <a class="code hl_define" href="group__core__logging.html#ga9b1e047c2289e857adb155864c798f55">CV_TRACE_FUNCTION</a>();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> begin = range.start;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> end = range.end;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keywordflow">for</span>( <span class="keywordtype">int</span> a = begin; a &lt; end; a++ )</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> warpedImage, warpedMask;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <a class="code hl_typedef" href="group__core__basic.html#gaa52e0258d92b0ff1be1644b061e65f66">Matx23f</a> pose, invPose;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            affineSkew(tilts[a], rolls[a], warpedImage, warpedMask, pose);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <a class="code hl_function" href="group__geometry__shape.html#ga57d3505a878a7e1a636645727ca08f51">invertAffineTransform</a>(pose, invPose);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            std::vector&lt;KeyPoint&gt; wKeypoints;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> wDescriptors;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="keywordflow">if</span>( !do_keypoints )</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                <span class="keyword">const</span> std::vector&lt;KeyPoint&gt;&amp; keypointsInView = keypointsCollection[a];</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <span class="keywordflow">if</span>( keypointsInView.size() == 0 ) <span class="comment">// when there are no keypoints in this affine view</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                std::vector&lt;Point2f&gt; pts_, pts;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                <a class="code hl_function" href="classcv_1_1_key_point.html#acd6b98a482c40e7b0e6e7e2772c2f8a2">KeyPoint::convert</a>(keypointsInView, pts_);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>                <a class="code hl_function" href="group__core__array.html#ga393164aa54bb9169ce0a8cc44e08ff22">transform</a>(pts_, pts, pose);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                wKeypoints.resize(keypointsInView.size());</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> wi = 0; wi &lt; wKeypoints.size(); wi++ )</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                    wKeypoints[wi] = keypointsInView[wi];</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                    wKeypoints[wi].pt = pts[wi];</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                }</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            backend-&gt;detectAndCompute(warpedImage, warpedMask, wKeypoints, wDescriptors, !do_keypoints);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            <span class="keywordflow">if</span>( do_keypoints )</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                <span class="comment">// KeyPointsFilter::runByPixelsMask( wKeypoints, warpedMask );</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                <span class="keywordflow">if</span>( wKeypoints.size() == 0 )</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                    keypointsCollection[a].clear();</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                std::vector&lt;Point2f&gt; pts_, pts;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                <a class="code hl_function" href="classcv_1_1_key_point.html#acd6b98a482c40e7b0e6e7e2772c2f8a2">KeyPoint::convert</a>(wKeypoints, pts_);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                <a class="code hl_function" href="group__core__array.html#ga393164aa54bb9169ce0a8cc44e08ff22">transform</a>(pts_, pts, invPose);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                keypointsCollection[a].resize(wKeypoints.size());</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> wi = 0; wi &lt; wKeypoints.size(); wi++ )</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                    keypointsCollection[a][wi] = wKeypoints[wi];</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                    keypointsCollection[a][wi].pt = pts[wi];</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                    keypointsCollection[a][wi].class_id = a;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            }</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="keywordflow">if</span>( do_descriptors )</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                wDescriptors.<a class="code hl_function" href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">copyTo</a>(descriptorCollection[a]);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    }</div>
+</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordtype">void</span> affineSkew(<span class="keywordtype">float</span> tilt, <span class="keywordtype">float</span> phi,</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; warpedImage, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; warpedMask, <a class="code hl_typedef" href="group__core__basic.html#gaa52e0258d92b0ff1be1644b061e65f66">Matx23f</a>&amp; pose)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordtype">int</span> h = image.size().height;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordtype">int</span> w = image.size().width;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> rotImage;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> mask0;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">if</span>( <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>.empty() )</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            mask0 = <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>(h, w, <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>, 255);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            mask0 = <a class="code hl_variable" href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">mask</a>;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        pose = <a class="code hl_typedef" href="group__core__basic.html#gaa52e0258d92b0ff1be1644b061e65f66">Matx23f</a>(1,0,0,</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                       0,1,0);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">if</span>( phi == 0 )</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            image.copyTo(rotImage);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            phi = phi * (float)<a class="code hl_define" href="group__core__utils.html#ga677b89fae9308b340ddaebf0dba8455f">CV_PI</a> / 180;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="keywordtype">float</span> s = std::sin(phi);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordtype">float</span> c = std::cos(phi);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <a class="code hl_typedef" href="group__core__basic.html#ga8f480b4b705baac0f2bc1a7db43809ce">Matx22f</a> A(c, -s, s, c);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            <a class="code hl_class" href="classcv_1_1_matx.html">Matx&lt;float, 4, 2&gt;</a> <a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a>(0, 0, (<span class="keywordtype">float</span>)w, 0, (<span class="keywordtype">float</span>)w,(<span class="keywordtype">float</span>)h, 0, (<span class="keywordtype">float</span>)h);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> tf(<a class="code hl_variable" href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">corners</a> * A.t());</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> tcorners;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            tf.<a class="code hl_function" href="classcv_1_1_mat.html#afbe2adb264f22740ae30b69e3500a213">convertTo</a>(tcorners, <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a> rect = <a class="code hl_function" href="group__geometry__shape.html#ga5dac345dfeea578bf979daf1fe9ec0a7">boundingRect</a>(tcorners);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            h = rect.<a class="code hl_variable" href="classcv_1_1_rect__.html#a6fed06513cedd76652389e38c7b1222e">height</a>; w = rect.<a class="code hl_variable" href="classcv_1_1_rect__.html#a6c16a3bce912faa4fe5be42d7f1b53fe">width</a>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            pose = <a class="code hl_typedef" href="group__core__basic.html#gaa52e0258d92b0ff1be1644b061e65f66">Matx23f</a>(c, -s, -(<span class="keywordtype">float</span>)rect.<a class="code hl_variable" href="classcv_1_1_rect__.html#a2cadfdc3b4b7dbf8085622b27e044572">x</a>,</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                        s,  c, -(<span class="keywordtype">float</span>)rect.<a class="code hl_variable" href="classcv_1_1_rect__.html#a6a4860e984df1752623b6ce2a8bde73a">y</a>);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <a class="code hl_function" href="group__imgproc__transform.html#gae801ea115b4d782cf06ec7709cf0799e">warpAffine</a>(image, rotImage, pose, <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(w, h), <a class="code hl_enumvalue" href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121ac97d8e4880d8b5d509e96825c7522deb">INTER_LINEAR</a>, <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f">BORDER_REPLICATE</a>, <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a>(), <a class="code hl_enumvalue" href="group__core__utils.html#ggafeab8763db9cdb68a6c20353efe0e9dea7cf203d987a7264ad517ecf534c12513">cv::ALGO_HINT_ACCURATE</a>);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        }</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">if</span>( tilt == 1 )</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            warpedImage = rotImage;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        {</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <span class="keywordtype">float</span> s = 0.8f * sqrt(tilt * tilt - 1);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            GaussianBlur(rotImage, rotImage, Size(0, 0), s, 0.01);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            resize(rotImage, warpedImage, Size(0, 0), 1.0/tilt, 1.0, INTER_NEAREST);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            pose(0, 0) /= tilt;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            pose(0, 1) /= tilt;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            pose(0, 2) /= tilt;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        }</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">if</span>( phi != 0 || tilt != 1 )</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            <a class="code hl_function" href="group__imgproc__transform.html#gae801ea115b4d782cf06ec7709cf0799e">warpAffine</a>(mask0, warpedMask, pose, warpedImage.<a class="code hl_variable" href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">size</a>(), INTER_NEAREST, BORDER_CONSTANT, <a class="code hl_typedef" href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">Scalar</a>(), <a class="code hl_enumvalue" href="group__core__utils.html#ggafeab8763db9cdb68a6c20353efe0e9dea7cf203d987a7264ad517ecf534c12513">cv::ALGO_HINT_ACCURATE</a>);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            warpedMask = mask0;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keyword">const</span> std::vector&lt;float&gt;&amp; tilts;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keyword">const</span> std::vector&lt;float&gt;&amp; rolls;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    std::vector&lt; std::vector&lt;KeyPoint&gt; &gt;&amp; keypointsCollection;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    std::vector&lt;Mat&gt;&amp; descriptorCollection;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="keyword">const</span> Mat&amp; <a class="code hl_variable" href="group__stitching__match.html#gac970419e5c62180f6cc48851d0815830">image</a>;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keyword">const</span> Mat&amp; <a class="code hl_variable" href="namespacegl.html#a5b661fa513f764b4d4916c0c1ae95a8f">mask</a>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> do_keypoints;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> do_descriptors;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keyword">const</span> Ptr&lt;Feature2D&gt;&amp; backend;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>};</div>
+</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="keywordtype">void</span> AffineFeature_Impl::detectAndCompute(InputArray _image, InputArray _mask,</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        std::vector&lt;KeyPoint&gt;&amp; keypoints,</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        OutputArray _descriptors,</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordtype">bool</span> useProvidedKeypoints)</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>{</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <a class="code hl_define" href="group__core__logging.html#ga9b1e047c2289e857adb155864c798f55">CV_TRACE_FUNCTION</a>();</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="keywordtype">bool</span> do_keypoints = !useProvidedKeypoints;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordtype">bool</span> do_descriptors = _descriptors.needed();</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    Mat <a class="code hl_variable" href="group__stitching__match.html#gac970419e5c62180f6cc48851d0815830">image</a> = _image.getMat(), <a class="code hl_variable" href="namespacegl.html#a5b661fa513f764b4d4916c0c1ae95a8f">mask</a> = _mask.getMat();</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    Mat descriptors;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">if</span>( (!do_keypoints &amp;&amp; !do_descriptors) || _image.empty() )</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    std::vector&lt; std::vector&lt;KeyPoint&gt; &gt; keypointsCollection(tilts_.size());</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    std::vector&lt; Mat &gt; descriptorCollection(tilts_.size());</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordflow">if</span>( do_keypoints )</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        keypoints.clear();</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        splitKeypointsByView(keypoints, keypointsCollection);</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <a class="code hl_function" href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">parallel_for_</a>(<a class="code hl_function" href="namespacetesting.html#a4f2c9978ad0c764f57e0cbd6f72cb540">Range</a>(0, (<span class="keywordtype">int</span>)tilts_.size()), skewedDetectAndCompute(tilts_, rolls_, keypointsCollection, descriptorCollection,</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        image, mask, do_keypoints, do_descriptors, backend_));</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">if</span>( do_keypoints )</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; keypointsCollection.size(); <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++ )</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            <span class="keyword">const</span> std::vector&lt;KeyPoint&gt;&amp; keys = keypointsCollection[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>            keypoints.insert(keypoints.end(), keys.begin(), keys.end());</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        }</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordflow">if</span>( do_descriptors )</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    {</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        _descriptors.create((<span class="keywordtype">int</span>)keypoints.size(), backend_-&gt;descriptorSize(), backend_-&gt;descriptorType());</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        descriptors = _descriptors.getMat();</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keywordtype">int</span> iter = 0;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordflow">for</span>( <span class="keywordtype">size_t</span> i = 0; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; descriptorCollection.size(); <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++ )</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            <span class="keyword">const</span> Mat&amp; descs = descriptorCollection[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>];</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>            <span class="keywordflow">if</span>( descs.<a class="code hl_function" href="interface_mat.html#a7a3f04f235e4a12588bb7bd3b31698fb">empty</a>() )</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            Mat roi(descriptors, <a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a>(0, iter, descriptors.<a class="code hl_function" href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">cols</a>, descs.<a class="code hl_function" href="interface_mat.html#a939b5265c8dbe049a59ea3a48d4434f0">rows</a>));</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            descs.copyTo(roi);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            iter += descs.<a class="code hl_function" href="interface_mat.html#a939b5265c8dbe049a59ea3a48d4434f0">rows</a>;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        }</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    }</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>}</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="foldopen" id="foldopen00347" data-start="{" data-end="}">
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno"><a class="line" href="classcv_1_1_affine_feature.html#ae7efebc05b24d4d1928b4793323d9911">  347</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;AffineFeature&gt;</a> <a class="code hl_function" href="classcv_1_1_affine_feature.html#ae7efebc05b24d4d1928b4793323d9911">AffineFeature::create</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Feature2D&gt;</a>&amp; backend,</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>                                         <span class="keywordtype">int</span> maxTilt, <span class="keywordtype">int</span> minTilt, <span class="keywordtype">float</span> tiltStep, <span class="keywordtype">float</span> rotateStepBase)</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>{</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(minTilt &lt; maxTilt);</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(tiltStep &gt; 0);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(rotateStepBase &gt; 0);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">makePtr&lt;AffineFeature_Impl&gt;</a>(backend, maxTilt, minTilt, tiltStep, rotateStepBase);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>}</div>
+</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="foldopen" id="foldopen00356" data-start="{" data-end="}">
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="classcv_1_1_affine_feature.html#a0c5d509527e09fe042080c996a1d048e">  356</a></span><a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> <a class="code hl_function" href="classcv_1_1_affine_feature.html#a0c5d509527e09fe042080c996a1d048e">AffineFeature::getDefaultName</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="keywordflow">return</span> (<a class="code hl_function" href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">Feature2D::getDefaultName</a>() + <span class="stringliteral">&quot;.AffineFeature&quot;</span>);</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>}</div>
+</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>} <span class="comment">// namespace</span></div>
+<div class="ttc" id="aclasscv_1_1_affine_feature_html"><div class="ttname"><a href="classcv_1_1_affine_feature.html">cv::AffineFeature</a></div><div class="ttdoc">Class for implementing the wrapper which makes detectors and extractors to be affine invariant,...</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00327">features.hpp:328</a></div></div>
+<div class="ttc" id="aclasscv_1_1_affine_feature_html_a0c5d509527e09fe042080c996a1d048e"><div class="ttname"><a href="classcv_1_1_affine_feature.html#a0c5d509527e09fe042080c996a1d048e">cv::AffineFeature::getDefaultName</a></div><div class="ttdeci">virtual CV_WRAP String getDefaultName() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00356">affine_feature.cpp:356</a></div></div>
+<div class="ttc" id="aclasscv_1_1_affine_feature_html_ae7efebc05b24d4d1928b4793323d9911"><div class="ttname"><a href="classcv_1_1_affine_feature.html#ae7efebc05b24d4d1928b4793323d9911">cv::AffineFeature::create</a></div><div class="ttdeci">static CV_WRAP Ptr&lt; AffineFeature &gt; create(const Ptr&lt; Feature2D &gt; &amp;backend, int maxTilt=5, int minTilt=0, float tiltStep=1.4142135623730951f, float rotateStepBase=72)</div><div class="ttdef"><b>Definición</b> <a href="#l00347">affine_feature.cpp:347</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html">cv::CV_FINAL</a></div><div class="ttdef"><b>Definición</b> <a href="conjugate__gradient_8cpp_source.html#l00071">conjugate_gradient.cpp:72</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a26c7af03d2647d91722a6266a6a378d9"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a26c7af03d2647d91722a6266a6a378d9">cv::CV_FINAL::detectAndCompute</a></div><div class="ttdeci">void detectAndCompute(InputArray image, InputArray mask, std::vector&lt; KeyPoint &gt; &amp;keypoints, OutputArray descriptors, bool useProvidedKeypoints=false) CV_OVERRIDE</div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a29e44aace3400c18d7dd052fa67d5045"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a29e44aace3400c18d7dd052fa67d5045">cv::CV_FINAL::rolls_</a></div><div class="ttdeci">std::vector&lt; float &gt; rolls_</div><div class="ttdef"><b>Definición</b> <a href="#l00093">affine_feature.cpp:93</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a38fbff945fe26575e85414ef1ff67377"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a38fbff945fe26575e85414ef1ff67377">cv::CV_FINAL::getViewParams</a></div><div class="ttdeci">void getViewParams(std::vector&lt; float &gt; &amp;tilts, std::vector&lt; float &gt; &amp;rolls) const CV_OVERRIDE</div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a3f7e698c91fc432b48f94fd8565f0dae"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a3f7e698c91fc432b48f94fd8565f0dae">cv::CV_FINAL::setViewParams</a></div><div class="ttdeci">void setViewParams(const std::vector&lt; float &gt; &amp;tilts, const std::vector&lt; float &gt; &amp;rolls) CV_OVERRIDE</div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a428427741432d4d87a34220d1da9958b"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a428427741432d4d87a34220d1da9958b">cv::CV_FINAL::AffineFeature_Impl</a></div><div class="ttdeci">AffineFeature_Impl(const Ptr&lt; Feature2D &gt; &amp;backend, int maxTilt, int minTilt, float tiltStep, float rotateStepBase)</div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a530f34a2a423ca3d32f6ff4055d1dd4a"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a530f34a2a423ca3d32f6ff4055d1dd4a">cv::CV_FINAL::tilts_</a></div><div class="ttdeci">std::vector&lt; float &gt; tilts_</div><div class="ttdef"><b>Definición</b> <a href="#l00091">affine_feature.cpp:91</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a54ec49b2bfebbbc43e4782aa7b418c8b"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a54ec49b2bfebbbc43e4782aa7b418c8b">cv::CV_FINAL::tiltStep_</a></div><div class="ttdeci">float tiltStep_</div><div class="ttdef"><b>Definición</b> <a href="#l00087">affine_feature.cpp:87</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a5cfd40a925cc3f2d953357f89b344e80"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a5cfd40a925cc3f2d953357f89b344e80">cv::CV_FINAL::maxTilt_</a></div><div class="ttdeci">int maxTilt_</div><div class="ttdef"><b>Definición</b> <a href="#l00085">affine_feature.cpp:85</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a60a6573a3dce047e52dbfd6b56ce4a9b"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a60a6573a3dce047e52dbfd6b56ce4a9b">cv::CV_FINAL::minTilt_</a></div><div class="ttdeci">int minTilt_</div><div class="ttdef"><b>Definición</b> <a href="#l00086">affine_feature.cpp:86</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_a7dd66f41f317094bd69bad05744b2577"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#a7dd66f41f317094bd69bad05744b2577">cv::CV_FINAL::backend_</a></div><div class="ttdeci">const Ptr&lt; Feature2D &gt; backend_</div><div class="ttdef"><b>Definición</b> <a href="#l00084">affine_feature.cpp:84</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_aab6fee3b90f6ed74c20904cd682f4a0e"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#aab6fee3b90f6ed74c20904cd682f4a0e">cv::CV_FINAL::descriptorSize</a></div><div class="ttdeci">int descriptorSize() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00059">affine_feature.cpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ac5e7504848ef792324146c6e124c48b5"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ac5e7504848ef792324146c6e124c48b5">cv::CV_FINAL::rotateStepBase_</a></div><div class="ttdeci">float rotateStepBase_</div><div class="ttdef"><b>Definición</b> <a href="#l00088">affine_feature.cpp:88</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ac9c56e89a5f6468979afbdf2a003ffee"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ac9c56e89a5f6468979afbdf2a003ffee">cv::CV_FINAL::splitKeypointsByView</a></div><div class="ttdeci">void splitKeypointsByView(const std::vector&lt; KeyPoint &gt; &amp;keypoints_, std::vector&lt; std::vector&lt; KeyPoint &gt; &gt; &amp;keypointsByView) const</div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_ada65f739d7597f115640dc37fadfd2bd"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#ada65f739d7597f115640dc37fadfd2bd">cv::CV_FINAL::defaultNorm</a></div><div class="ttdeci">int defaultNorm() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00069">affine_feature.cpp:69</a></div></div>
+<div class="ttc" id="aclasscv_1_1_c_v___f_i_n_a_l_html_aef0e21567c820178249a7b6c275703e9"><div class="ttname"><a href="classcv_1_1_c_v___f_i_n_a_l.html#aef0e21567c820178249a7b6c275703e9">cv::CV_FINAL::descriptorType</a></div><div class="ttdeci">int descriptorType() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00064">affine_feature.cpp:64</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html"><div class="ttname"><a href="classcv_1_1_feature2_d.html">cv::Feature2D</a></div><div class="ttdoc">Abstract base class for 2D image feature detectors and descriptor extractors.</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00227">features.hpp:228</a></div></div>
+<div class="ttc" id="aclasscv_1_1_feature2_d_html_a342b15bfee06d992c2f67158cc6dc4d5"><div class="ttname"><a href="classcv_1_1_feature2_d.html#a342b15bfee06d992c2f67158cc6dc4d5">cv::Feature2D::getDefaultName</a></div><div class="ttdeci">virtual CV_WRAP String getDefaultName() const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="feature2d_8cpp_source.html#l00219">feature2d.cpp:219</a></div></div>
+<div class="ttc" id="aclasscv_1_1_key_point_html"><div class="ttname"><a href="classcv_1_1_key_point.html">cv::KeyPoint</a></div><div class="ttdoc">Data structure for salient point detectors.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00754">types.hpp:755</a></div></div>
+<div class="ttc" id="aclasscv_1_1_key_point_html_acd6b98a482c40e7b0e6e7e2772c2f8a2"><div class="ttname"><a href="classcv_1_1_key_point.html#acd6b98a482c40e7b0e6e7e2772c2f8a2">cv::KeyPoint::convert</a></div><div class="ttdeci">static CV_WRAP void convert(const std::vector&lt; KeyPoint &gt; &amp;keypoints, CV_OUT std::vector&lt; Point2f &gt; &amp;points2f, const std::vector&lt; int &gt; &amp;keypointIndexes=std::vector&lt; int &gt;())</div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a146f8e8dda07d1365a575ab83d9828d1"><div class="ttname"><a href="classcv_1_1_mat.html#a146f8e8dda07d1365a575ab83d9828d1">cv::Mat::size</a></div><div class="ttdeci">MatSize size</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l02513">mat.hpp:2513</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a2cc2a68970b85d50f3a4fac1b55ba7c8"><div class="ttname"><a href="classcv_1_1_mat.html#a2cc2a68970b85d50f3a4fac1b55ba7c8">cv::Mat::copyTo</a></div><div class="ttdeci">void copyTo(OutputArray m) const</div><div class="ttdoc">Copies the matrix to another one.</div><div class="ttdef"><b>Definición</b> <a href="copy_8cpp_source.html#l00447">copy.cpp:447</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_afbe2adb264f22740ae30b69e3500a213"><div class="ttname"><a href="classcv_1_1_mat.html#afbe2adb264f22740ae30b69e3500a213">cv::Mat::convertTo</a></div><div class="ttdeci">void convertTo(OutputArray m, int rtype, double alpha=1, double beta=0) const</div><div class="ttdoc">Converts an array to another data type with optional scaling.</div><div class="ttdef"><b>Definición</b> <a href="convert_8dispatch_8cpp_source.html#l00136">convert.dispatch.cpp:136</a></div></div>
+<div class="ttc" id="aclasscv_1_1_matx_html"><div class="ttname"><a href="classcv_1_1_matx.html">cv::Matx</a></div><div class="ttdoc">Template class for small matrices whose type and size are known at compilation time.</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00105">matx.hpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_parallel_loop_body_html"><div class="ttname"><a href="classcv_1_1_parallel_loop_body.html">cv::ParallelLoopBody</a></div><div class="ttdoc">Base class for parallel data processors.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00683">utility.hpp:684</a></div></div>
+<div class="ttc" id="aclasscv_1_1_range_html"><div class="ttname"><a href="classcv_1_1_range.html">cv::Range</a></div><div class="ttdoc">Template class specifying a continuous subsequence (slice) of a sequence.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00632">types.hpp:633</a></div></div>
+<div class="ttc" id="aclasscv_1_1_rect___html_a2cadfdc3b4b7dbf8085622b27e044572"><div class="ttname"><a href="classcv_1_1_rect__.html#a2cadfdc3b4b7dbf8085622b27e044572">cv::Rect_::x</a></div><div class="ttdeci">_Tp x</div><div class="ttdoc">x coordinate of the top-left corner</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00490">types.hpp:490</a></div></div>
+<div class="ttc" id="aclasscv_1_1_rect___html_a6a4860e984df1752623b6ce2a8bde73a"><div class="ttname"><a href="classcv_1_1_rect__.html#a6a4860e984df1752623b6ce2a8bde73a">cv::Rect_::y</a></div><div class="ttdeci">_Tp y</div><div class="ttdoc">y coordinate of the top-left corner</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00491">types.hpp:491</a></div></div>
+<div class="ttc" id="aclasscv_1_1_rect___html_a6c16a3bce912faa4fe5be42d7f1b53fe"><div class="ttname"><a href="classcv_1_1_rect__.html#a6c16a3bce912faa4fe5be42d7f1b53fe">cv::Rect_::width</a></div><div class="ttdeci">_Tp width</div><div class="ttdoc">width of the rectangle</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00492">types.hpp:492</a></div></div>
+<div class="ttc" id="aclasscv_1_1_rect___html_a6fed06513cedd76652389e38c7b1222e"><div class="ttname"><a href="classcv_1_1_rect__.html#a6fed06513cedd76652389e38c7b1222e">cv::Rect_::height</a></div><div class="ttdeci">_Tp height</div><div class="ttdoc">height of the rectangle</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00493">types.hpp:493</a></div></div>
+<div class="ttc" id="aclasscv_1_1skewed_detect_and_compute_html_a0bf94dc188890dc8a0b5bd11ba10b6d3"><div class="ttname"><a href="classcv_1_1skewed_detect_and_compute.html#a0bf94dc188890dc8a0b5bd11ba10b6d3">cv::skewedDetectAndCompute::skewedDetectAndCompute</a></div><div class="ttdeci">skewedDetectAndCompute(const std::vector&lt; float &gt; &amp;_tilts, const std::vector&lt; float &gt; &amp;_rolls, std::vector&lt; std::vector&lt; KeyPoint &gt; &gt; &amp;_keypointsCollection, std::vector&lt; Mat &gt; &amp;_descriptorCollection, const Mat &amp;_image, const Mat &amp;_mask, const bool _do_keypoints, const bool _do_descriptors, const Ptr&lt; Feature2D &gt; &amp;_backend)</div><div class="ttdef"><b>Definición</b> <a href="#l00156">affine_feature.cpp:156</a></div></div>
+<div class="ttc" id="aclasscv_1_1skewed_detect_and_compute_html_a384bbcd3ef82a63d1efc97a0e41504ad"><div class="ttname"><a href="classcv_1_1skewed_detect_and_compute.html#a384bbcd3ef82a63d1efc97a0e41504ad">cv::skewedDetectAndCompute::operator()</a></div><div class="ttdeci">void operator()(const cv::Range &amp;range) const CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00176">affine_feature.cpp:176</a></div></div>
+<div class="ttc" id="afeatures_2src_2precomp_8hpp_html"><div class="ttname"><a href="features_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="agroup__core__array_html_ga393164aa54bb9169ce0a8cc44e08ff22"><div class="ttname"><a href="group__core__array.html#ga393164aa54bb9169ce0a8cc44e08ff22">cv::transform</a></div><div class="ttdeci">CV_EXPORTS_W void transform(InputArray src, OutputArray dst, InputArray m)</div><div class="ttdoc">Performs the matrix transformation of every array element.</div><div class="ttdef"><b>Definición</b> <a href="matmul_8dispatch_8cpp_source.html#l00452">matmul.dispatch.cpp:452</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f">cv::BORDER_REPLICATE</a></div><div class="ttdeci">@ BORDER_REPLICATE</div><div class="ttdoc">aaaaaa|abcdefgh|hhhhhhh</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00268">base.hpp:268</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga599fe92e910c027be274233eccad7beb"><div class="ttname"><a href="group__core__basic.html#ga599fe92e910c027be274233eccad7beb">cv::Scalar</a></div><div class="ttdeci">Scalar_&lt; double &gt; Scalar</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00712">types.hpp:712</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga8f480b4b705baac0f2bc1a7db43809ce"><div class="ttname"><a href="group__core__basic.html#ga8f480b4b705baac0f2bc1a7db43809ce">cv::Matx22f</a></div><div class="ttdeci">Matx&lt; float, 2, 2 &gt; Matx22f</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00249">matx.hpp:249</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaa52e0258d92b0ff1be1644b061e65f66"><div class="ttname"><a href="group__core__basic.html#gaa52e0258d92b0ff1be1644b061e65f66">cv::Matx23f</a></div><div class="ttdeci">Matx&lt; float, 2, 3 &gt; Matx23f</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00251">matx.hpp:251</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gafbfd33c54208d116d5059bededf6c396"><div class="ttname"><a href="group__core__basic.html#gafbfd33c54208d116d5059bededf6c396">cv::makePtr</a></div><div class="ttdeci">Ptr&lt; _Tp &gt; makePtr(const A1 &amp;... a1)</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00138">cvstd_wrapper.hpp:138</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__logging_html_ga9b1e047c2289e857adb155864c798f55"><div class="ttname"><a href="group__core__logging.html#ga9b1e047c2289e857adb155864c798f55">CV_TRACE_FUNCTION</a></div><div class="ttdeci">#define CV_TRACE_FUNCTION()</div><div class="ttdoc">Macro to trace function.</div><div class="ttdef"><b>Definición</b> <a href="trace_8hpp_source.html#l00018">trace.hpp:18</a></div></div>
+<div class="ttc" id="agroup__core__parallel_html_gaa42ec9937b847cb52a97c613fc894c4a"><div class="ttname"><a href="group__core__parallel.html#gaa42ec9937b847cb52a97c613fc894c4a">cv::parallel_for_</a></div><div class="ttdeci">CV_EXPORTS void parallel_for_(const Range &amp;range, const ParallelLoopBody &amp;body, double nstripes=-1.)</div><div class="ttdoc">Parallel data processor.</div><div class="ttdef"><b>Definición</b> <a href="parallel_8cpp_source.html#l00503">parallel.cpp:503</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga007054c538d25a8b9d6e6cc75098992c"><div class="ttname"><a href="group__core__utils.html#ga007054c538d25a8b9d6e6cc75098992c">cv::cvFloor</a></div><div class="ttdeci">int cvFloor(double value)</div><div class="ttdoc">Rounds floating-point number to the nearest integer not larger than the original.</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00236">templmatch.cpp:236</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4d89d63e402ef9ddc48e18e21180fe4a"><div class="ttname"><a href="group__core__utils.html#ga4d89d63e402ef9ddc48e18e21180fe4a">CV_OVERRIDE</a></div><div class="ttdeci">#define CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00830">cvdef.h:830</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga677b89fae9308b340ddaebf0dba8455f"><div class="ttname"><a href="group__core__utils.html#ga677b89fae9308b340ddaebf0dba8455f">CV_PI</a></div><div class="ttdeci">#define CV_PI</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00386">cvdef.h:386</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ggafeab8763db9cdb68a6c20353efe0e9dea7cf203d987a7264ad517ecf534c12513"><div class="ttname"><a href="group__core__utils.html#ggafeab8763db9cdb68a6c20353efe0e9dea7cf203d987a7264ad517ecf534c12513">cv::ALGO_HINT_ACCURATE</a></div><div class="ttdeci">@ ALGO_HINT_ACCURATE</div><div class="ttdoc">Use generic portable implementation.</div><div class="ttdef"><b>Definición</b> <a href="utility_8hpp_source.html#l00646">utility.hpp:646</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga15e1361bda978d83a2bea629b32dfd3c"><div class="ttname"><a href="group__features__main.html#ga15e1361bda978d83a2bea629b32dfd3c">cv::FeatureDetector</a></div><div class="ttdeci">Feature2D FeatureDetector</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00314">features.hpp:314</a></div></div>
+<div class="ttc" id="agroup__features__main_html_ga6823ad48efce9322e042a72c8a3a5f64"><div class="ttname"><a href="group__features__main.html#ga6823ad48efce9322e042a72c8a3a5f64">cv::mask</a></div><div class="ttdeci">CV_EXPORTS OutputArray int double double InputArray mask</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00220">features.hpp:220</a></div></div>
+<div class="ttc" id="agroup__features__main_html_gad876e2c53af18078dda096b260b7507b"><div class="ttname"><a href="group__features__main.html#gad876e2c53af18078dda096b260b7507b">cv::corners</a></div><div class="ttdeci">CV_EXPORTS OutputArray corners</div><div class="ttdef"><b>Definición</b> <a href="features_8hpp_source.html#l00218">features.hpp:218</a></div></div>
+<div class="ttc" id="agroup__geometry__shape_html_ga57d3505a878a7e1a636645727ca08f51"><div class="ttname"><a href="group__geometry__shape.html#ga57d3505a878a7e1a636645727ca08f51">cv::invertAffineTransform</a></div><div class="ttdeci">CV_EXPORTS_W void invertAffineTransform(InputArray M, OutputArray iM)</div><div class="ttdoc">Inverts an affine transformation.</div><div class="ttdef"><b>Definición</b> <a href="geometry_8cpp_source.html#l00860">geometry.cpp:860</a></div></div>
+<div class="ttc" id="agroup__geometry__shape_html_ga5dac345dfeea578bf979daf1fe9ec0a7"><div class="ttname"><a href="group__geometry__shape.html#ga5dac345dfeea578bf979daf1fe9ec0a7">cv::boundingRect</a></div><div class="ttdeci">CV_EXPORTS_W Rect boundingRect(InputArray array)</div><div class="ttdoc">Calculates the up-right bounding rectangle of a point set or non-zero pixels of gray-scale image.</div><div class="ttdef"><b>Definición</b> <a href="geometry_8cpp_source.html#l00707">geometry.cpp:707</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_gae801ea115b4d782cf06ec7709cf0799e"><div class="ttname"><a href="group__imgproc__transform.html#gae801ea115b4d782cf06ec7709cf0799e">cv::warpAffine</a></div><div class="ttdeci">CV_EXPORTS_W void warpAffine(InputArray src, OutputArray dst, InputArray M, Size dsize, int flags=INTER_LINEAR, int borderMode=BORDER_CONSTANT, const Scalar &amp;borderValue=Scalar(), AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Applies an affine transformation to an image.</div><div class="ttdef"><b>Definición</b> <a href="imgwarp_8cpp_source.html#l02451">imgwarp.cpp:2451</a></div></div>
+<div class="ttc" id="agroup__imgproc__transform_html_gga5bb5a1fea74ea38e1a5445ca803ff121ac97d8e4880d8b5d509e96825c7522deb"><div class="ttname"><a href="group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121ac97d8e4880d8b5d509e96825c7522deb">cv::INTER_LINEAR</a></div><div class="ttdeci">@ INTER_LINEAR</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00253">imgproc.hpp:253</a></div></div>
+<div class="ttc" id="agroup__stitching__match_html_gac970419e5c62180f6cc48851d0815830"><div class="ttname"><a href="group__stitching__match.html#gac970419e5c62180f6cc48851d0815830">cv::detail::image</a></div><div class="ttdeci">InputArray image</div><div class="ttdef"><b>Definición</b> <a href="matchers_8hpp_source.html#l00088">matchers.hpp:88</a></div></div>
+<div class="ttc" id="ainterface_key_point_html_a6be74bd787640cbd1dc88f50735e4aae"><div class="ttname"><a href="interface_key_point.html#a6be74bd787640cbd1dc88f50735e4aae">KeyPoint::size</a></div><div class="ttdeci">float size</div><div class="ttdef"><b>Definición</b> <a href="_key_point_8h_source.html#l00035">KeyPoint.h:35</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a02a1bed6246a87b004010b9a54745c1b"><div class="ttname"><a href="interface_mat.html#a02a1bed6246a87b004010b9a54745c1b">-[Mat cols]</a></div><div class="ttdeci">int cols()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00248">Mat.mm:248</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a7a3f04f235e4a12588bb7bd3b31698fb"><div class="ttname"><a href="interface_mat.html#a7a3f04f235e4a12588bb7bd3b31698fb">-[Mat empty]</a></div><div class="ttdeci">BOOL empty()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00329">Mat.mm:329</a></div></div>
+<div class="ttc" id="ainterface_mat_html_a939b5265c8dbe049a59ea3a48d4434f0"><div class="ttname"><a href="interface_mat.html#a939b5265c8dbe049a59ea3a48d4434f0">-[Mat rows]</a></div><div class="ttdeci">int rows()</div><div class="ttdef"><b>Definición</b> <a href="_mat_8mm_source.html#l00434">Mat.mm:434</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_a5b661fa513f764b4d4916c0c1ae95a8f"><div class="ttname"><a href="namespacegl.html#a5b661fa513f764b4d4916c0c1ae95a8f">gl::mask</a></div><div class="ttdeci">GLint GLuint mask</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01096">gl_core_3_1.hpp:1096</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a3f4c9888bcfa4a6e9150cbcfb39fc480"><div class="ttname"><a href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">parser_cl.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00052">parser_cl.py:52</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="anamespacetesting_html_a4f2c9978ad0c764f57e0cbd6f72cb540"><div class="ttname"><a href="namespacetesting.html#a4f2c9978ad0c764f57e0cbd6f72cb540">testing::Range</a></div><div class="ttdeci">internal::ParamGenerator&lt; T &gt; Range(T start, T end, IncrementT step)</div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l17845">ts_gtest.h:17845</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_42fc4c00be4dc0fac92759a97eddf1c7.html">features</a></li><li class="navelem"><a href="dir_a53baf90590c6cd83f3293daa50f4abb.html">src</a></li><li class="navelem"><a href="affine__feature_8cpp.html">affine_feature.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

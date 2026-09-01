@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/video/src/tracking/detail/tracker_state_estimator.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tracker__state__estimator_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">tracker_state_estimator.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="tracker__state__estimator_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="video_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="tracking_8detail_8hpp.html">opencv2/video/detail/tracking.detail.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">inline</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail_1_1tracking.html">tracking</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a5bf0cd93fdfb8d8930cce357ffd8c139">   12</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a5bf0cd93fdfb8d8930cce357ffd8c139">TrackerStateEstimator::~TrackerStateEstimator</a>()</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#aaa36fe18e2194f12fb100d8a3e9ab1bd">   16</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;TrackerTargetState&gt;</a> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#aaa36fe18e2194f12fb100d8a3e9ab1bd">TrackerStateEstimator::estimate</a>(<span class="keyword">const</span> std::vector&lt;ConfidenceMap&gt;&amp; confidenceMaps)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> (confidenceMaps.empty())</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">Ptr&lt;TrackerTargetState&gt;</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a8bc457f99300541389aa0c77194f046f">estimateImpl</a>(confidenceMaps);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a4e2c0f2eeaf30a41128ae6cec6ee9070">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a4e2c0f2eeaf30a41128ae6cec6ee9070">TrackerStateEstimator::update</a>(std::vector&lt;ConfidenceMap&gt;&amp; confidenceMaps)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (confidenceMaps.empty())</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a9490f89ae79cd1b96af759aa6d02c653">updateImpl</a>(confidenceMaps);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#aa81349c3aa82f159aa1678d310ecf2d8">   32</a></span><a class="code hl_typedef" href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">String</a> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#aa81349c3aa82f159aa1678d310ecf2d8">TrackerStateEstimator::getClassName</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#abcf922c8baa1c5509a1f6ab351f0b3ab">className</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}}}  <span class="comment">// namespace cv::detail::tracking</span></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_a4e2c0f2eeaf30a41128ae6cec6ee9070"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a4e2c0f2eeaf30a41128ae6cec6ee9070">cv::detail::tracking::TrackerStateEstimator::update</a></div><div class="ttdeci">void update(std::vector&lt; ConfidenceMap &gt; &amp;confidenceMaps)</div><div class="ttdoc">Update the ConfidenceMap with the scores.</div><div class="ttdef"><b>Definición</b> <a href="#l00024">tracker_state_estimator.cpp:24</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_a5bf0cd93fdfb8d8930cce357ffd8c139"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a5bf0cd93fdfb8d8930cce357ffd8c139">cv::detail::tracking::TrackerStateEstimator::~TrackerStateEstimator</a></div><div class="ttdeci">virtual ~TrackerStateEstimator()</div><div class="ttdef"><b>Definición</b> <a href="#l00012">tracker_state_estimator.cpp:12</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_a8bc457f99300541389aa0c77194f046f"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a8bc457f99300541389aa0c77194f046f">cv::detail::tracking::TrackerStateEstimator::estimateImpl</a></div><div class="ttdeci">virtual Ptr&lt; TrackerTargetState &gt; estimateImpl(const std::vector&lt; ConfidenceMap &gt; &amp;confidenceMaps)=0</div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_a9490f89ae79cd1b96af759aa6d02c653"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#a9490f89ae79cd1b96af759aa6d02c653">cv::detail::tracking::TrackerStateEstimator::updateImpl</a></div><div class="ttdeci">virtual void updateImpl(std::vector&lt; ConfidenceMap &gt; &amp;confidenceMaps)=0</div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_aa81349c3aa82f159aa1678d310ecf2d8"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#aa81349c3aa82f159aa1678d310ecf2d8">cv::detail::tracking::TrackerStateEstimator::getClassName</a></div><div class="ttdeci">String getClassName() const</div><div class="ttdoc">Get the name of the specific TrackerStateEstimator.</div><div class="ttdef"><b>Definición</b> <a href="#l00032">tracker_state_estimator.cpp:32</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_aaa36fe18e2194f12fb100d8a3e9ab1bd"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#aaa36fe18e2194f12fb100d8a3e9ab1bd">cv::detail::tracking::TrackerStateEstimator::estimate</a></div><div class="ttdeci">Ptr&lt; TrackerTargetState &gt; estimate(const std::vector&lt; ConfidenceMap &gt; &amp;confidenceMaps)</div><div class="ttdoc">Estimate the most likely target state, return the estimated state.</div><div class="ttdef"><b>Definición</b> <a href="#l00016">tracker_state_estimator.cpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_abcf922c8baa1c5509a1f6ab351f0b3ab"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#abcf922c8baa1c5509a1f6ab351f0b3ab">cv::detail::tracking::TrackerStateEstimator::className</a></div><div class="ttdeci">String className</div><div class="ttdef"><b>Definición</b> <a href="tracking_8detail_8hpp_source.html#l00265">tracking.detail.hpp:265</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga1f6634802eeadfd7245bc75cf3e216c2"><div class="ttname"><a href="group__core__basic.html#ga1f6634802eeadfd7245bc75cf3e216c2">cv::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definición</b> <a href="cvstd_8hpp_source.html#l00151">cvstd.hpp:151</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_1_1tracking_html"><div class="ttname"><a href="namespacecv_1_1detail_1_1tracking.html">cv::detail::tracking</a></div><div class="ttdef"><b>Definición</b> <a href="tracking_8detail_8hpp_source.html#l00022">tracking.detail.hpp:22</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html"><div class="ttname"><a href="namespacecv_1_1detail.html">cv::detail</a></div><div class="ttdef"><b>Definición</b> <a href="dualquaternion_8inl_8hpp_source.html#l00317">dualquaternion.inl.hpp:317</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html_ac18c0d5defdf2b5653649393d563cce7"><div class="ttname"><a href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">cv::Ptr::Ptr</a></div><div class="ttdeci">Ptr() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00073">cvstd_wrapper.hpp:73</a></div></div>
+<div class="ttc" id="atracking_8detail_8hpp_html"><div class="ttname"><a href="tracking_8detail_8hpp.html">tracking.detail.hpp</a></div></div>
+<div class="ttc" id="avideo_2src_2precomp_8hpp_html"><div class="ttname"><a href="video_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_2508e962348bdf6937b92f313b633ed9.html">video</a></li><li class="navelem"><a href="dir_e10036e501edf27ab5629bafc103e45e.html">src</a></li><li class="navelem"><a href="dir_b56a50f837f97c89175c87daafb7ae1e.html">tracking</a></li><li class="navelem"><a href="dir_a91f2a465a31ba171a1b9bef84670d7b.html">detail</a></li><li class="navelem"><a href="tracker__state__estimator_8cpp.html">tracker_state_estimator.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

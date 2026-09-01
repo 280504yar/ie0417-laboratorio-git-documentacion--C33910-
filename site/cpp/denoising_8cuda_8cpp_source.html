@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/photo/src/denoising.cuda.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('denoising_8cuda_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">denoising.cuda.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="denoising_8cuda_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="photo_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;<a class="code" href="photo_2include_2opencv2_2photo_2cuda_8hpp.html">opencv2/photo/cuda.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;opencv2/opencv_modules.hpp&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#if !defined (HAVE_CUDA) || !defined(HAVE_OPENCV_CUDAARITHM) || !defined(HAVE_OPENCV_CUDAIMGPROC)</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="cuda__stubs_8hpp.html">opencv2/core/private/cuda_stubs.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &quot;<a class="code" href="private_8cuda_8hpp.html">opencv2/core/private.cuda.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#ifdef HAVE_OPENCV_CUDAARITHM</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#  include &quot;opencv2/cudaarithm.hpp&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#ifdef HAVE_OPENCV_CUDAIMGPROC</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#  include &quot;opencv2/cudaimgproc.hpp&quot;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacecv_1_1cuda.html">cv::cuda</a>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#if !defined (HAVE_CUDA) || !defined(HAVE_OPENCV_CUDAARITHM) || !defined(HAVE_OPENCV_CUDAIMGPROC)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group__photo__denoise.html#gafa990f16548581987e7e509b435c3648">   68</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__denoise.html#gafa990f16548581987e7e509b435c3648">cv::cuda::nonLocalMeans</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a>, <span class="keywordtype">float</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <a class="code hl_class" href="classcv_1_1cuda_1_1_stream.html">Stream</a>&amp;) { <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>(); }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group__photo__denoise.html#ga76abf348c234cecd0faf3c42ef3dc715">   69</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__denoise.html#ga76abf348c234cecd0faf3c42ef3dc715">cv::cuda::fastNlMeansDenoising</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a>, <span class="keywordtype">float</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <a class="code hl_class" href="classcv_1_1cuda_1_1_stream.html">Stream</a>&amp;) { <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>(); }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group__photo__denoise.html#ga21abc1c8b0e15f78cd3eff672cb6c476">   70</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__denoise.html#ga21abc1c8b0e15f78cd3eff672cb6c476">cv::cuda::fastNlMeansDenoisingColored</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a>, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a>, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <a class="code hl_class" href="classcv_1_1cuda_1_1_stream.html">Stream</a>&amp;) { <a class="code hl_function" href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a>(); }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1cuda.html">cuda</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1cuda_1_1device.html">device</a></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">namespace </span>imgproc</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">void</span> nlm_bruteforce_gpu(<span class="keyword">const</span> PtrStepSzb&amp; src, PtrStepSzb <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">int</span> search_radius, <span class="keywordtype">int</span> block_radius, <span class="keywordtype">float</span> h, <span class="keywordtype">int</span> borderMode, cudaStream_t stream);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}}}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__denoise.html#gafa990f16548581987e7e509b435c3648">cv::cuda::nonLocalMeans</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <span class="keywordtype">float</span> h, <span class="keywordtype">int</span> search_window, <span class="keywordtype">int</span> block_window, <span class="keywordtype">int</span> borderMode, <a class="code hl_class" href="classcv_1_1cuda_1_1_stream.html">Stream</a>&amp; stream)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">using </span>cv::cuda::device::imgproc::nlm_bruteforce_gpu;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">typedef</span> <a class="code hl_function" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> (*func_t)(<span class="keyword">const</span> PtrStepSzb&amp; src, PtrStepSzb <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <span class="keywordtype">int</span> search_radius, <span class="keywordtype">int</span> block_radius, <span class="keywordtype">float</span> h, <span class="keywordtype">int</span> borderMode, cudaStream_t stream);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">static</span> <span class="keyword">const</span> func_t <a class="code hl_variable" href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">funcs</a>[4] = { nlm_bruteforce_gpu&lt;uchar&gt;, nlm_bruteforce_gpu&lt;uchar2&gt;, nlm_bruteforce_gpu&lt;uchar3&gt;, 0<span class="comment">/*nlm_bruteforce_gpu&lt;uchar4&gt;,*/</span> };</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> src = _src.getGpuMat();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(src.type() == <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a> || src.type() == <a class="code hl_define" href="group__core__hal__interface.html#ga3cb9fe9fa9bc4989f5a89035e2a994e3">CV_8UC2</a> || src.type() == <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">const</span> func_t <a class="code hl_variable" href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">func</a> = <a class="code hl_variable" href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">funcs</a>[src.channels() - 1];</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(func != 0);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a> = borderMode;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(b == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5a119fb22eda11675d2e00426d334a1a81">BORDER_REFLECT101</a> || b == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f">BORDER_REPLICATE</a> || b == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aed2e4346047e265c8c5a6d0276dcd838">BORDER_CONSTANT</a> || b == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5a815c8a89b7cb206dcba14d11b7560f4b">BORDER_REFLECT</a> || b == <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5a697c1b011884a7c2bdc0e5caf7955661">BORDER_WRAP</a>);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    _dst.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(src.size(), src.type());</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a27af21d5fb66f761f6b7c0c59ce1b808">getGpuMat</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_variable" href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">func</a>(src, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, search_window/2, block_window/2, h, borderMode, <a class="code hl_function" href="structcv_1_1cuda_1_1_stream_accessor.html#a2ea3937bb61e12a630e9661ebbe2a845">StreamAccessor::getStream</a>(stream));</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1cuda.html">cuda</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1cuda_1_1device.html">device</a></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>{</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">namespace </span>imgproc</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">void</span> nln_fast_get_buffer_size(<span class="keyword">const</span> PtrStepSzb&amp; src, <span class="keywordtype">int</span> search_window, <span class="keywordtype">int</span> block_window, <span class="keywordtype">int</span>&amp; buffer_cols, <span class="keywordtype">int</span>&amp; buffer_rows);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordtype">void</span> nlm_fast_gpu(<span class="keyword">const</span> PtrStepSzb&amp; src, PtrStepSzb <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, PtrStepi buffer,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                          <span class="keywordtype">int</span> search_window, <span class="keywordtype">int</span> block_window, <span class="keywordtype">float</span> h, cudaStream_t stream);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordtype">void</span> fnlm_split_channels(<span class="keyword">const</span> PtrStepSz&lt;uchar3&gt;&amp; lab, PtrStepb l, PtrStep&lt;uchar2&gt; ab, cudaStream_t stream);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordtype">void</span> fnlm_merge_channels(<span class="keyword">const</span> PtrStepb&amp; l, <span class="keyword">const</span> PtrStep&lt;uchar2&gt;&amp; ab, PtrStepSz&lt;uchar3&gt; lab, cudaStream_t stream);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>     }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>}}}</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__denoise.html#ga76abf348c234cecd0faf3c42ef3dc715">cv::cuda::fastNlMeansDenoising</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <span class="keywordtype">float</span> h, <span class="keywordtype">int</span> search_window, <span class="keywordtype">int</span> block_window, <a class="code hl_class" href="classcv_1_1cuda_1_1_stream.html">Stream</a>&amp; stream)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>{</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> src = _src.getGpuMat();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a2a44ca80e44bfc4b0f1739282101f535">depth</a>() == <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a> &amp;&amp; src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a687642c5db949c7dbfee2f3ba99584c3">channels</a>() &lt; 4);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">int</span> border_size = search_window/2 + block_window/2;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a> esize = src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">size</a>() + <a class="code hl_typedef" href="group__core__basic.html#ga346f563897249351a34549137c8532a0">Size</a>(border_size, border_size) * 2;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_buffer_pool.html">BufferPool</a> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>(stream);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> extended_src = <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>.getBuffer(esize, src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#aee4e67001da534851843e4b4da099a90">type</a>());</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    cv::cuda::copyMakeBorder(src, extended_src, border_size, border_size, border_size, border_size, <a class="code hl_enumvalue" href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01">cv::BORDER_DEFAULT</a>, <a class="code hl_class" href="interface_scalar.html">Scalar</a>(), stream);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> src_hdr = extended_src(<a class="code hl_typedef" href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">Rect</a>(<a class="code hl_class" href="interface_point2i.html">Point2i</a>(border_size, border_size), src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">size</a>()));</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordtype">int</span> bcols, brows;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    device::imgproc::nln_fast_get_buffer_size(src_hdr, search_window, block_window, bcols, brows);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> <a class="code hl_variable" href="namespacegl.html#af1bd5433d4e42cb8df763d053866e0a6">buffer</a> = <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>.getBuffer(brows, bcols, <a class="code hl_define" href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a>);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">using namespace </span>cv::cuda::device::imgproc;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">typedef</span> <a class="code hl_function" href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a> (*nlm_fast_t)(<span class="keyword">const</span> PtrStepSzb&amp;, PtrStepSzb, PtrStepi, int, int, float, cudaStream_t);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">static</span> <span class="keyword">const</span> nlm_fast_t <a class="code hl_variable" href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">funcs</a>[] = { nlm_fast_gpu&lt;uchar&gt;, nlm_fast_gpu&lt;uchar2&gt;, nlm_fast_gpu&lt;uchar3&gt;, 0};</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    _dst.<a class="code hl_function" href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">create</a>(src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">size</a>(), src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#aee4e67001da534851843e4b4da099a90">type</a>());</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a> = _dst.<a class="code hl_function" href="classcv_1_1___input_array.html#a27af21d5fb66f761f6b7c0c59ce1b808">getGpuMat</a>();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_variable" href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">funcs</a>[src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a687642c5db949c7dbfee2f3ba99584c3">channels</a>()-1](src_hdr, <a class="code hl_variable" href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">dst</a>, <a class="code hl_variable" href="namespacegl.html#af1bd5433d4e42cb8df763d053866e0a6">buffer</a>, search_window, block_window, h, <a class="code hl_function" href="structcv_1_1cuda_1_1_stream_accessor.html#a2ea3937bb61e12a630e9661ebbe2a845">StreamAccessor::getStream</a>(stream));</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keywordtype">void</span> <a class="code hl_function" href="group__photo__denoise.html#ga21abc1c8b0e15f78cd3eff672cb6c476">cv::cuda::fastNlMeansDenoisingColored</a>(<a class="code hl_variable" href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">InputArray</a> _src, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">OutputArray</a> _dst, <span class="keywordtype">float</span> h_luminance, <span class="keywordtype">float</span> h_color, <span class="keywordtype">int</span> search_window, <span class="keywordtype">int</span> block_window, <a class="code hl_class" href="classcv_1_1cuda_1_1_stream.html">Stream</a>&amp; stream)</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> src = _src.getGpuMat();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#aee4e67001da534851843e4b4da099a90">type</a>() == <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a>);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_buffer_pool.html">BufferPool</a> <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>(stream);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> lab = <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>.getBuffer(src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">size</a>(), src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#aee4e67001da534851843e4b4da099a90">type</a>());</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    cv::cuda::cvtColor(src, lab, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a860b72b4741c431e81340fafef5eca24">cv::COLOR_BGR2Lab</a>, 0, stream);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> l = <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>.getBuffer(src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">size</a>(), <a class="code hl_define" href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <a class="code hl_class" href="classcv_1_1cuda_1_1_gpu_mat.html">GpuMat</a> ab = <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">pool</a>.getBuffer(src.<a class="code hl_function" href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">size</a>(), <a class="code hl_define" href="group__core__hal__interface.html#ga3cb9fe9fa9bc4989f5a89035e2a994e3">CV_8UC2</a>);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    device::imgproc::fnlm_split_channels(lab, l, ab, <a class="code hl_function" href="structcv_1_1cuda_1_1_stream_accessor.html#a2ea3937bb61e12a630e9661ebbe2a845">StreamAccessor::getStream</a>(stream));</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_function" href="group__photo__denoise.html#ga7915ab7b6188d6d3dbe4e59bcd8ea819">fastNlMeansDenoising</a>(l, l, h_luminance, search_window, block_window, stream);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <a class="code hl_function" href="group__photo__denoise.html#ga7915ab7b6188d6d3dbe4e59bcd8ea819">fastNlMeansDenoising</a>(ab, ab, h_color, search_window, block_window, stream);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    device::imgproc::fnlm_merge_channels(l, ab, lab, <a class="code hl_function" href="structcv_1_1cuda_1_1_stream_accessor.html#a2ea3937bb61e12a630e9661ebbe2a845">StreamAccessor::getStream</a>(stream));</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    cv::cuda::cvtColor(lab, _dst, <a class="code hl_enumvalue" href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a966fd47d10ad71c4220b3ef9f1ac5774">cv::COLOR_Lab2BGR</a>, 0, stream);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>}</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aautogenerated_2opencl__core_8hpp_html_a1dabed62d2d603302ed85878c743e251"><div class="ttname"><a href="autogenerated_2opencl__core_8hpp.html#a1dabed62d2d603302ed85878c743e251">void</a></div><div class="ttdeci">CL_RUNTIME_EXPORT const cl_device_id const char void(CL_CALLBACK *)(cl_program</div></div>
+<div class="ttc" id="aclasscv_1_1___input_array_html_a27af21d5fb66f761f6b7c0c59ce1b808"><div class="ttname"><a href="classcv_1_1___input_array.html#a27af21d5fb66f761f6b7c0c59ce1b808">cv::_InputArray::getGpuMat</a></div><div class="ttdeci">cuda::GpuMat getGpuMat() const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l00383">matrix_wrap.cpp:383</a></div></div>
+<div class="ttc" id="aclasscv_1_1___output_array_html_a4eb2daf4732c371c7565db49f76c63ce"><div class="ttname"><a href="classcv_1_1___output_array.html#a4eb2daf4732c371c7565db49f76c63ce">cv::_OutputArray::create</a></div><div class="ttdeci">void create(Size sz, int type, int i=-1, bool allowTransposed=false, _OutputArray::DepthMask fixedDepthMask=static_cast&lt; _OutputArray::DepthMask &gt;(0)) const</div><div class="ttdef"><b>Definición</b> <a href="matrix__wrap_8cpp_source.html#l01466">matrix_wrap.cpp:1466</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_buffer_pool_html"><div class="ttname"><a href="classcv_1_1cuda_1_1_buffer_pool.html">cv::cuda::BufferPool</a></div><div class="ttdoc">BufferPool for use with CUDA streams.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00755">cuda.hpp:756</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html">cv::cuda::GpuMat</a></div><div class="ttdoc">Base storage class for GPU memory with reference counting.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00105">cuda.hpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html_a2a44ca80e44bfc4b0f1739282101f535"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html#a2a44ca80e44bfc4b0f1739282101f535">cv::cuda::GpuMat::depth</a></div><div class="ttdeci">CV_WRAP int depth() const</div><div class="ttdoc">returns element type</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html_a5236af176f9a104fc630d0e26bdd9917"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html#a5236af176f9a104fc630d0e26bdd9917">cv::cuda::GpuMat::size</a></div><div class="ttdeci">CV_WRAP Size size() const</div><div class="ttdoc">returns GpuMat size : width == number of columns, height == number of rows</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html_a687642c5db949c7dbfee2f3ba99584c3"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html#a687642c5db949c7dbfee2f3ba99584c3">cv::cuda::GpuMat::channels</a></div><div class="ttdeci">CV_WRAP int channels() const</div><div class="ttdoc">returns number of channels</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_gpu_mat_html_aee4e67001da534851843e4b4da099a90"><div class="ttname"><a href="classcv_1_1cuda_1_1_gpu_mat.html#aee4e67001da534851843e4b4da099a90">cv::cuda::GpuMat::type</a></div><div class="ttdeci">CV_WRAP int type() const</div><div class="ttdoc">returns element type</div></div>
+<div class="ttc" id="aclasscv_1_1cuda_1_1_stream_html"><div class="ttname"><a href="classcv_1_1cuda_1_1_stream.html">cv::cuda::Stream</a></div><div class="ttdoc">This class encapsulates a queue of asynchronous calls.</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00924">cuda.hpp:925</a></div></div>
+<div class="ttc" id="acuda__stubs_8hpp_html"><div class="ttname"><a href="cuda__stubs_8hpp.html">cuda_stubs.hpp</a></div></div>
+<div class="ttc" id="acuda__stubs_8hpp_html_a5321f59f42253d937a925ec3a61bc2c8"><div class="ttname"><a href="cuda__stubs_8hpp.html#a5321f59f42253d937a925ec3a61bc2c8">throw_no_cuda</a></div><div class="ttdeci">CV_NORETURN void throw_no_cuda()</div><div class="ttdef"><b>Definición</b> <a href="cuda__stubs_8hpp_source.html#l00016">cuda_stubs.hpp:16</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5a119fb22eda11675d2e00426d334a1a81"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5a119fb22eda11675d2e00426d334a1a81">cv::BORDER_REFLECT101</a></div><div class="ttdeci">@ BORDER_REFLECT101</div><div class="ttdoc">same as BORDER_REFLECT_101</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00274">base.hpp:274</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5a697c1b011884a7c2bdc0e5caf7955661"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5a697c1b011884a7c2bdc0e5caf7955661">cv::BORDER_WRAP</a></div><div class="ttdeci">@ BORDER_WRAP</div><div class="ttdoc">cdefgh|abcdefgh|abcdefg</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00270">base.hpp:270</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5a815c8a89b7cb206dcba14d11b7560f4b"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5a815c8a89b7cb206dcba14d11b7560f4b">cv::BORDER_REFLECT</a></div><div class="ttdeci">@ BORDER_REFLECT</div><div class="ttdoc">fedcba|abcdefgh|hgfedcb</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00269">base.hpp:269</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aa1de4cff95e3377d6d0cbe7569bd4e9f">cv::BORDER_REPLICATE</a></div><div class="ttdeci">@ BORDER_REPLICATE</div><div class="ttdoc">aaaaaa|abcdefgh|hhhhhhh</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00268">base.hpp:268</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5aed2e4346047e265c8c5a6d0276dcd838"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5aed2e4346047e265c8c5a6d0276dcd838">cv::BORDER_CONSTANT</a></div><div class="ttdeci">@ BORDER_CONSTANT</div><div class="ttdoc">iiiiii|abcdefgh|iiiiiii with some specified i</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00267">base.hpp:267</a></div></div>
+<div class="ttc" id="agroup__core__array_html_gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01"><div class="ttname"><a href="group__core__array.html#gga209f2f4869e304c82d07739337eae7c5afe14c13a4ea8b8e3b3ef399013dbae01">cv::BORDER_DEFAULT</a></div><div class="ttdeci">@ BORDER_DEFAULT</div><div class="ttdoc">same as BORDER_REFLECT_101</div><div class="ttdef"><b>Definición</b> <a href="base_8hpp_source.html#l00275">base.hpp:275</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga11d95de507098e90bad732b9345402e8"><div class="ttname"><a href="group__core__basic.html#ga11d95de507098e90bad732b9345402e8">cv::Rect</a></div><div class="ttdeci">Rect2i Rect</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00499">types.hpp:499</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga346f563897249351a34549137c8532a0"><div class="ttname"><a href="group__core__basic.html#ga346f563897249351a34549137c8532a0">cv::Size</a></div><div class="ttdeci">Size2i Size</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00373">types.hpp:373</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gab1371a23c90d5f4725ea98240377d7a1"><div class="ttname"><a href="group__core__basic.html#gab1371a23c90d5f4725ea98240377d7a1">cv::InputArray</a></div><div class="ttdeci">CV__DEBUG_NS_END typedef const _InputArray &amp; InputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00587">mat.hpp:587</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32b18d904ee2b1731a9416a8eef67d06"><div class="ttname"><a href="group__core__hal__interface.html#ga32b18d904ee2b1731a9416a8eef67d06">CV_8U</a></div><div class="ttdeci">#define CV_8U</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00054">interface.h:54</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga3cb9fe9fa9bc4989f5a89035e2a994e3"><div class="ttname"><a href="group__core__hal__interface.html#ga3cb9fe9fa9bc4989f5a89035e2a994e3">CV_8UC2</a></div><div class="ttdeci">#define CV_8UC2</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00082">interface.h:82</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga4067910fc388075c3ea3aa14393e83b9"><div class="ttname"><a href="group__core__hal__interface.html#ga4067910fc388075c3ea3aa14393e83b9">CV_32S</a></div><div class="ttdeci">#define CV_32S</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00058">interface.h:58</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga88c4cd9de76f678f33928ef1e3f96047"><div class="ttname"><a href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a></div><div class="ttdeci">#define CV_8UC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00083">interface.h:83</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a860b72b4741c431e81340fafef5eca24"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a860b72b4741c431e81340fafef5eca24">cv::COLOR_BGR2Lab</a></div><div class="ttdeci">@ COLOR_BGR2Lab</div><div class="ttdoc">[8U/32F] convert RGB/BGR to CIE Lab, color conversions</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00593">imgproc.hpp:593</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gga4e0972be5de079fed4e3a10e24ef5ef0a966fd47d10ad71c4220b3ef9f1ac5774"><div class="ttname"><a href="group__imgproc__color__conversions.html#gga4e0972be5de079fed4e3a10e24ef5ef0a966fd47d10ad71c4220b3ef9f1ac5774">cv::COLOR_Lab2BGR</a></div><div class="ttdeci">@ COLOR_Lab2BGR</div><div class="ttdoc">[8U/32F]</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l00604">imgproc.hpp:604</a></div></div>
+<div class="ttc" id="agroup__imgproc__filter_html_ga52bb929b38b35664f16102ee054f0b3d"><div class="ttname"><a href="group__imgproc__filter.html#ga52bb929b38b35664f16102ee054f0b3d">cv::dst</a></div><div class="ttdeci">OutputArray dst</div><div class="ttdef"><b>Definición</b> <a href="imgproc_8hpp_source.html#l01450">imgproc.hpp:1450</a></div></div>
+<div class="ttc" id="agroup__photo__denoise_html_ga21abc1c8b0e15f78cd3eff672cb6c476"><div class="ttname"><a href="group__photo__denoise.html#ga21abc1c8b0e15f78cd3eff672cb6c476">cv::cuda::fastNlMeansDenoisingColored</a></div><div class="ttdeci">CV_EXPORTS void fastNlMeansDenoisingColored(InputArray src, OutputArray dst, float h_luminance, float photo_render, int search_window=21, int block_size=7, Stream &amp;stream=Stream::Null())</div><div class="ttdoc">Modification of fastNlMeansDenoising function for colored images.</div><div class="ttdef"><b>Definición</b> <a href="#l00070">denoising.cuda.cpp:70</a></div></div>
+<div class="ttc" id="agroup__photo__denoise_html_ga76abf348c234cecd0faf3c42ef3dc715"><div class="ttname"><a href="group__photo__denoise.html#ga76abf348c234cecd0faf3c42ef3dc715">cv::cuda::fastNlMeansDenoising</a></div><div class="ttdeci">CV_EXPORTS void fastNlMeansDenoising(InputArray src, OutputArray dst, float h, int search_window=21, int block_size=7, Stream &amp;stream=Stream::Null())</div><div class="ttdoc">Perform image denoising using Non-local Means Denoising algorithm http://www.ipol....</div><div class="ttdef"><b>Definición</b> <a href="#l00069">denoising.cuda.cpp:69</a></div></div>
+<div class="ttc" id="agroup__photo__denoise_html_ga7915ab7b6188d6d3dbe4e59bcd8ea819"><div class="ttname"><a href="group__photo__denoise.html#ga7915ab7b6188d6d3dbe4e59bcd8ea819">cv::fastNlMeansDenoising</a></div><div class="ttdeci">CV_EXPORTS_W void fastNlMeansDenoising(InputArray src, OutputArray dst, float h=3, int templateWindowSize=7, int searchWindowSize=21)</div><div class="ttdoc">Perform image denoising using Non-local Means Denoising algorithm http://www.ipol....</div><div class="ttdef"><b>Definición</b> <a href="denoising_8cpp_source.html#l00104">denoising.cpp:104</a></div></div>
+<div class="ttc" id="agroup__photo__denoise_html_gafa990f16548581987e7e509b435c3648"><div class="ttname"><a href="group__photo__denoise.html#gafa990f16548581987e7e509b435c3648">cv::cuda::nonLocalMeans</a></div><div class="ttdeci">CV_EXPORTS void nonLocalMeans(InputArray src, OutputArray dst, float h, int search_window=21, int block_size=7, int borderMode=BORDER_DEFAULT, Stream &amp;stream=Stream::Null())</div><div class="ttdoc">Performs pure non local means denoising without any simplification, and thus it is not fast.</div><div class="ttdef"><b>Definición</b> <a href="#l00068">denoising.cuda.cpp:68</a></div></div>
+<div class="ttc" id="ainterface_point2i_html"><div class="ttname"><a href="interface_point2i.html">Point2i</a></div><div class="ttdef"><b>Definición</b> <a href="_point2i_8h_source.html#l00024">Point2i.h:25</a></div></div>
+<div class="ttc" id="ainterface_scalar_html"><div class="ttname"><a href="interface_scalar.html">Scalar</a></div><div class="ttdef"><b>Definición</b> <a href="_scalar_8h_source.html#l00022">Scalar.h:23</a></div></div>
+<div class="ttc" id="anamespacecheck-tests_html_a53a41da50b9dbc4ab5e1ffb9a5eaf552"><div class="ttname"><a href="namespacecheck-tests.html#a53a41da50b9dbc4ab5e1ffb9a5eaf552">check-tests.funcs</a></div><div class="ttdeci">funcs</div><div class="ttdef"><b>Definición</b> <a href="check-tests_8py_source.html#l00160">check-tests.py:160</a></div></div>
+<div class="ttc" id="anamespacecv_1_1cuda_1_1device_html"><div class="ttname"><a href="namespacecv_1_1cuda_1_1device.html">cv::cuda::device</a></div><div class="ttdef"><b>Definición</b> <a href="cuda__compat_8hpp_source.html#l00010">cuda_compat.hpp:10</a></div></div>
+<div class="ttc" id="anamespacecv_1_1cuda_html"><div class="ttname"><a href="namespacecv_1_1cuda.html">cv::cuda</a></div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2cuda_8hpp_source.html#l00065">cuda.hpp:65</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn_html_aece9814ce89e483dcc021227e1f95c61"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1cudnn.html#aece9814ce89e483dcc021227e1f95c61">cv::dnn::cuda4dnn::csl::cudnn::pool</a></div><div class="ttdeci">void pool(const Handle &amp;handle, const PoolingDescriptor &amp;poolingDesc, const TensorDescriptor&lt; T &gt; &amp;inputDesc, const DevicePtr&lt; const T &gt; inputPtr, T alpha, T beta, const TensorDescriptor&lt; T &gt; &amp;outputDesc, DevicePtr&lt; T &gt; outputPtr)</div><div class="ttdoc">performs pooling operation</div><div class="ttdef"><b>Definición</b> <a href="csl_2cudnn_2pooling_8hpp_source.html#l00189">pooling.hpp:189</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_aafb899ef4c796df60bf5087c5e487bf2"><div class="ttname"><a href="namespacegl.html#aafb899ef4c796df60bf5087c5e487bf2">gl::func</a></div><div class="ttdeci">GLenum func</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01186">gl_core_3_1.hpp:1186</a></div></div>
+<div class="ttc" id="anamespacegl_html_abffb406910610800948b016e2fd690c7"><div class="ttname"><a href="namespacegl.html#abffb406910610800948b016e2fd690c7">gl::b</a></div><div class="ttdeci">GLboolean GLboolean GLboolean b</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01282">gl_core_3_1.hpp:1282</a></div></div>
+<div class="ttc" id="anamespacegl_html_af1bd5433d4e42cb8df763d053866e0a6"><div class="ttname"><a href="namespacegl.html#af1bd5433d4e42cb8df763d053866e0a6">gl::buffer</a></div><div class="ttdeci">GLuint buffer</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01170">gl_core_3_1.hpp:1170</a></div></div>
+<div class="ttc" id="aphoto_2include_2opencv2_2photo_2cuda_8hpp_html"><div class="ttname"><a href="photo_2include_2opencv2_2photo_2cuda_8hpp.html">cuda.hpp</a></div></div>
+<div class="ttc" id="aphoto_2src_2precomp_8hpp_html"><div class="ttname"><a href="photo_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="aprivate_8cuda_8hpp_html"><div class="ttname"><a href="private_8cuda_8hpp.html">private.cuda.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1cuda_1_1_stream_accessor_html_a2ea3937bb61e12a630e9661ebbe2a845"><div class="ttname"><a href="structcv_1_1cuda_1_1_stream_accessor.html#a2ea3937bb61e12a630e9661ebbe2a845">cv::cuda::StreamAccessor::getStream</a></div><div class="ttdeci">static CV_EXPORTS cudaStream_t getStream(const Stream &amp;stream)</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_847b99370ed06e1072f8b8059d2f9ef8.html">photo</a></li><li class="navelem"><a href="dir_8ce04962efed91e20e757beca4d6ab49.html">src</a></li><li class="navelem"><a href="denoising_8cuda_8cpp.html">denoising.cuda.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

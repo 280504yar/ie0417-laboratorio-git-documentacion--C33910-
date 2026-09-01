@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/stat.simd.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('stat_8simd_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">stat.simd.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="stat_8simd_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Copyright (C) 2026, Advanced Micro Devices, Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="intrin_8hpp.html">opencv2/core/hal/intrin.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1hal.html">hal</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">   11</a></span><span class="keyword">extern</span> <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[256];</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacecv_1_1hal.html#a5bd311807d9e365feaaa0c8b539e4851">   13</a></span><span class="keyword">typedef</span> int (*<a class="code hl_typedef" href="namespacecv_1_1hal.html#a5bd311807d9e365feaaa0c8b539e4851">NormHammingFunc</a>)(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>*, int);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacecv_1_1hal.html#a16ff23a1ef9ae105bc9d05de044c97f2">   14</a></span><span class="keyword">typedef</span> int (*<a class="code hl_typedef" href="namespacecv_1_1hal.html#a16ff23a1ef9ae105bc9d05de044c97f2">NormHammingDiffFunc</a>)(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>*, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>*, int);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><a class="code hl_namespace" href="namespacecv_1_1hal_1_1_c_v___c_p_u___o_p_t_i_m_i_z_a_t_i_o_n___n_a_m_e_s_p_a_c_e___b_e_g_i_n.html">CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// forward declarations</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">normHamming</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* a, <span class="keywordtype">int</span> n);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">normHamming</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* a, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* b, <span class="keywordtype">int</span> n);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><a class="code hl_typedef" href="namespacecv_1_1hal.html#a5bd311807d9e365feaaa0c8b539e4851">NormHammingFunc</a> getNormHammingFunc();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><a class="code hl_typedef" href="namespacecv_1_1hal.html#a16ff23a1ef9ae105bc9d05de044c97f2">NormHammingDiffFunc</a> getNormHammingDiffFunc();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#ifndef CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#if CV_AVX2</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> _mm256_extract_epi32_(__m256i reg, <span class="keyword">const</span> <span class="keywordtype">int</span> i)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_define" href="group__core__utils.html#ga37ad1490cadef420db822300ba567bef">CV_DECL_ALIGNED</a>(32) int reg_data[8];</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_define" href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a>(0 &lt;= i &amp;&amp; i &lt; 8);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    _mm256_store_si256((__m256i*)reg_data, reg);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    return reg_data[i];</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">normHamming</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* a, <span class="keywordtype">int</span> n)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    CV_AVX_GUARD;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> result = 0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        v_uint64 t = vx_setzero_u64();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">for</span> (; i &lt;= n - VTraits&lt;v_uint8&gt;::vlanes(); i += VTraits&lt;v_uint8&gt;::vlanes())</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            t = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(t, <a class="code hl_function" href="group__core__hal__intrin.html#gaef05f738878673d4aa07fd4e2f23dc9a">v_popcount</a>(v_reinterpret_as_u64(vx_load(a + i))));</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        result = (int)<a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(t);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        vx_cleanup();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#if CV_POPCNT</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#  if defined CV_POPCNT_U64</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">for</span>(; i &lt;= n - 8; i += 8)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            uint64_t val;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            std::memcpy(&amp;val, a + i, <span class="keyword">sizeof</span>(val));</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            result += (int)CV_POPCNT_U64(val);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#  endif</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">for</span>(; i &lt;= n - 4; i += 4)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            uint32_t val;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            std::memcpy(&amp;val, a + i, <span class="keyword">sizeof</span>(val));</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            result += CV_POPCNT_U32(val);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#if CV_ENABLE_UNROLLED</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">for</span>(; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt;= n - 4; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> += 4)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        result += <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>]] + <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+1]] +</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+2]] + <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+3]];</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">for</span>(; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; n; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        result += <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>]];</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">normHamming</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* a, <span class="keyword">const</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a>* b, <span class="keywordtype">int</span> n)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    CV_AVX_GUARD;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> = 0;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">int</span> result = 0;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#if (CV_SIMD || CV_SIMD_SCALABLE)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        v_uint64 t = vx_setzero_u64();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">for</span> (; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt;= n - VTraits&lt;v_uint8&gt;::vlanes(); <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> += VTraits&lt;v_uint8&gt;::vlanes())</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            t = <a class="code hl_function" href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">v_add</a>(t, <a class="code hl_function" href="group__core__hal__intrin.html#gaef05f738878673d4aa07fd4e2f23dc9a">v_popcount</a>(v_reinterpret_as_u64(<a class="code hl_function" href="group__core__hal__intrin.html#ga606298e4544878d88214c17b20dd39fe">v_xor</a>(vx_load(a + i), vx_load(b + i)))));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        result += (int)<a class="code hl_function" href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">v_reduce_sum</a>(t);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#if CV_POPCNT</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#  if defined CV_POPCNT_U64</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">for</span>(; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt;= n - 8; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> += 8)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            uint64_t val_a, val_b;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            std::memcpy(&amp;val_a, a + i, <span class="keyword">sizeof</span>(val_a));</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            std::memcpy(&amp;val_b, b + i, <span class="keyword">sizeof</span>(val_b));</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            result += (int)CV_POPCNT_U64(val_a ^ val_b);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">#  endif</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">for</span>(; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt;= n - 4; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> += 4)</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            uint32_t val_a, val_b;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            std::memcpy(&amp;val_a, a + i, <span class="keyword">sizeof</span>(val_a));</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            std::memcpy(&amp;val_b, b + i, <span class="keyword">sizeof</span>(val_b));</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            result += (int)CV_POPCNT_U32(val_a ^ val_b);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#if CV_ENABLE_UNROLLED</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">for</span>(; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt;= n - 4; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> += 4)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        result += <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>] ^ <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>]] + <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+1] ^ <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+1]] +</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+2] ^ <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+2]] + <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+3] ^ <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>+3]];</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">for</span>(; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a> &lt; n; <a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>++)</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        result += <a class="code hl_variable" href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">popCountTable</a>[<a class="code hl_variable" href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">a</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>] ^ <a class="code hl_variable" href="namespacegl.html#abffb406910610800948b016e2fd690c7">b</a>[<a class="code hl_variable" href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">i</a>]];</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><a class="code hl_typedef" href="namespacecv_1_1hal.html#a5bd311807d9e365feaaa0c8b539e4851">NormHammingFunc</a> getNormHammingFunc()</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>{</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <a class="code hl_typedef" href="namespacecv_1_1hal.html#a5bd311807d9e365feaaa0c8b539e4851">NormHammingFunc</a> <a class="code hl_variable" href="namespaceparser__cl.html#a1c63ef561e539781293d415e0406c302">f</a> = &amp;<a class="code hl_function" href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">normHamming</a>; <span class="comment">// disambiguate the (a,n) overload</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="namespaceparser__cl.html#a1c63ef561e539781293d415e0406c302">f</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><a class="code hl_typedef" href="namespacecv_1_1hal.html#a16ff23a1ef9ae105bc9d05de044c97f2">NormHammingDiffFunc</a> getNormHammingDiffFunc()</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>{</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_typedef" href="namespacecv_1_1hal.html#a16ff23a1ef9ae105bc9d05de044c97f2">NormHammingDiffFunc</a> <a class="code hl_variable" href="namespaceparser__cl.html#a1c63ef561e539781293d415e0406c302">f</a> = &amp;<a class="code hl_function" href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">normHamming</a>; <span class="comment">// disambiguate the (a,b,n) overload</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="namespaceparser__cl.html#a1c63ef561e539781293d415e0406c302">f</a>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>}</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="preprocessor">#endif </span><span class="comment">// CV_CPU_OPTIMIZATION_DECLARATIONS_ONLY</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><a class="code hl_define" href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>}} <span class="comment">//cv::hal</span></div>
+<div class="ttc" id="acv__cpu__include__simd__declarations_8hpp_html_a25097f49e52ccec77b2128b6ffadf135"><div class="ttname"><a href="cv__cpu__include__simd__declarations_8hpp.html#a25097f49e52ccec77b2128b6ffadf135">CV_CPU_OPTIMIZATION_NAMESPACE_END</a></div><div class="ttdeci">#define CV_CPU_OPTIMIZATION_NAMESPACE_END</div><div class="ttdef"><b>Definición</b> <a href="cv__cpu__include__simd__declarations_8hpp_source.html#l00024">cv_cpu_include_simd_declarations.hpp:24</a></div></div>
+<div class="ttc" id="agroup__core__hal__functions_html_gaf779b175d6b59d5c36b76e58f17cf922"><div class="ttname"><a href="group__core__hal__functions.html#gaf779b175d6b59d5c36b76e58f17cf922">cv::hal::normHamming</a></div><div class="ttdeci">CV_EXPORTS int normHamming(const uchar *a, int n)</div><div class="ttdef"><b>Definición</b> <a href="stat_8dispatch_8cpp_source.html#l00024">stat.dispatch.cpp:24</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga51066f94e5de1b7905996186d848b5dc"><div class="ttname"><a href="group__core__hal__intrin.html#ga51066f94e5de1b7905996186d848b5dc">cv::v_reduce_sum</a></div><div class="ttdeci">V_TypeTraits&lt; _Tp &gt;::sum_type v_reduce_sum(const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Element shift left among vector.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l01405">intrin_cpp.hpp:1405</a></div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_ga606298e4544878d88214c17b20dd39fe"><div class="ttname"><a href="group__core__hal__intrin.html#ga606298e4544878d88214c17b20dd39fe">cv::v_xor</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_xor(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Bitwise XOR.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gadcf8617ab63379c5cbb04ea5f819ff20"><div class="ttname"><a href="group__core__hal__intrin.html#gadcf8617ab63379c5cbb04ea5f819ff20">cv::v_add</a></div><div class="ttdeci">v_reg&lt; _Tp, n &gt; v_add(const v_reg&lt; _Tp, n &gt; &amp;a, const v_reg&lt; _Tp, n &gt; &amp;b)</div><div class="ttdoc">Add values.</div></div>
+<div class="ttc" id="agroup__core__hal__intrin_html_gaef05f738878673d4aa07fd4e2f23dc9a"><div class="ttname"><a href="group__core__hal__intrin.html#gaef05f738878673d4aa07fd4e2f23dc9a">cv::v_popcount</a></div><div class="ttdeci">v_reg&lt; typename V_TypeTraits&lt; _Tp &gt;::abs_type, n &gt; v_popcount(const v_reg&lt; _Tp, n &gt; &amp;a)</div><div class="ttdoc">Count the 1 bits in the vector lanes and return result as corresponding unsigned type.</div><div class="ttdef"><b>Definición</b> <a href="intrin__cpp_8hpp_source.html#l00898">intrin_cpp.hpp:898</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga37ad1490cadef420db822300ba567bef"><div class="ttname"><a href="group__core__utils.html#ga37ad1490cadef420db822300ba567bef">CV_DECL_ALIGNED</a></div><div class="ttdeci">#define CV_DECL_ALIGNED(x)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00243">cvdef.h:243</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafbcb487cba05bd288dbe18c433de4f6f"><div class="ttname"><a href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a></div><div class="ttdeci">#define CV_DbgAssert(expr)</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00232">exception.hpp:232</a></div></div>
+<div class="ttc" id="aintrin_8hpp_html"><div class="ttname"><a href="intrin_8hpp.html">intrin.hpp</a></div></div>
+<div class="ttc" id="anamespacecv_1_1hal_1_1_c_v___c_p_u___o_p_t_i_m_i_z_a_t_i_o_n___n_a_m_e_s_p_a_c_e___b_e_g_i_n_html"><div class="ttname"><a href="namespacecv_1_1hal_1_1_c_v___c_p_u___o_p_t_i_m_i_z_a_t_i_o_n___n_a_m_e_s_p_a_c_e___b_e_g_i_n.html">cv::hal::CV_CPU_OPTIMIZATION_NAMESPACE_BEGIN</a></div><div class="ttdef"><b>Definición</b> <a href="sumpixels_8avx512__skx_8hpp_source.html#l00018">sumpixels.avx512_skx.hpp:18</a></div></div>
+<div class="ttc" id="anamespacecv_1_1hal_html"><div class="ttname"><a href="namespacecv_1_1hal.html">cv::hal</a></div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2hal_8hpp_source.html#l00052">hal.hpp:52</a></div></div>
+<div class="ttc" id="anamespacecv_1_1hal_html_a16ff23a1ef9ae105bc9d05de044c97f2"><div class="ttname"><a href="namespacecv_1_1hal.html#a16ff23a1ef9ae105bc9d05de044c97f2">cv::hal::NormHammingDiffFunc</a></div><div class="ttdeci">int(*) NormHammingDiffFunc(const uchar *, const uchar *, int)</div><div class="ttdef"><b>Definición</b> <a href="#l00014">stat.simd.hpp:14</a></div></div>
+<div class="ttc" id="anamespacecv_1_1hal_html_a4ea23475de13e2a251709b6e89846f21"><div class="ttname"><a href="namespacecv_1_1hal.html#a4ea23475de13e2a251709b6e89846f21">cv::hal::popCountTable</a></div><div class="ttdeci">const uchar popCountTable[256]</div><div class="ttdef"><b>Definición</b> <a href="#l00011">stat.simd.hpp:11</a></div></div>
+<div class="ttc" id="anamespacecv_1_1hal_html_a5bd311807d9e365feaaa0c8b539e4851"><div class="ttname"><a href="namespacecv_1_1hal.html#a5bd311807d9e365feaaa0c8b539e4851">cv::hal::NormHammingFunc</a></div><div class="ttdeci">int(*) NormHammingFunc(const uchar *, int)</div><div class="ttdef"><b>Definición</b> <a href="#l00013">stat.simd.hpp:13</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacegl_html_abffb406910610800948b016e2fd690c7"><div class="ttname"><a href="namespacegl.html#abffb406910610800948b016e2fd690c7">gl::b</a></div><div class="ttdeci">GLboolean GLboolean GLboolean b</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01282">gl_core_3_1.hpp:1282</a></div></div>
+<div class="ttc" id="anamespacegl_html_af2753ee7944d450bb463309a8537bfc3"><div class="ttname"><a href="namespacegl.html#af2753ee7944d450bb463309a8537bfc3">gl::a</a></div><div class="ttdeci">GLboolean GLboolean GLboolean GLboolean a</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01282">gl_core_3_1.hpp:1282</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a1c63ef561e539781293d415e0406c302"><div class="ttname"><a href="namespaceparser__cl.html#a1c63ef561e539781293d415e0406c302">parser_cl.f</a></div><div class="ttdeci">f</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00018">parser_cl.py:18</a></div></div>
+<div class="ttc" id="anamespaceparser__cl_html_a3f4c9888bcfa4a6e9150cbcfb39fc480"><div class="ttname"><a href="namespaceparser__cl.html#a3f4c9888bcfa4a6e9150cbcfb39fc480">parser_cl.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definición</b> <a href="parser__cl_8py_source.html#l00052">parser_cl.py:52</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="stat_8simd_8hpp.html">stat.simd.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

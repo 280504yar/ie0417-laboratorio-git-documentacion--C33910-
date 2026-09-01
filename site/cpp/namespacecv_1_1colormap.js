@@ -1,0 +1,27 @@
+var namespacecv_1_1colormap =
+[
+    [ "ColorMap", "classcv_1_1colormap_1_1_color_map.html", "classcv_1_1colormap_1_1_color_map" ],
+    [ "Autumn", "classcv_1_1colormap_1_1_autumn.html", "classcv_1_1colormap_1_1_autumn" ],
+    [ "Bone", "classcv_1_1colormap_1_1_bone.html", "classcv_1_1colormap_1_1_bone" ],
+    [ "Jet", "classcv_1_1colormap_1_1_jet.html", "classcv_1_1colormap_1_1_jet" ],
+    [ "Winter", "classcv_1_1colormap_1_1_winter.html", "classcv_1_1colormap_1_1_winter" ],
+    [ "Rainbow", "classcv_1_1colormap_1_1_rainbow.html", "classcv_1_1colormap_1_1_rainbow" ],
+    [ "DeepGreen", "classcv_1_1colormap_1_1_deep_green.html", "classcv_1_1colormap_1_1_deep_green" ],
+    [ "Ocean", "classcv_1_1colormap_1_1_ocean.html", "classcv_1_1colormap_1_1_ocean" ],
+    [ "Summer", "classcv_1_1colormap_1_1_summer.html", "classcv_1_1colormap_1_1_summer" ],
+    [ "Spring", "classcv_1_1colormap_1_1_spring.html", "classcv_1_1colormap_1_1_spring" ],
+    [ "Cool", "classcv_1_1colormap_1_1_cool.html", "classcv_1_1colormap_1_1_cool" ],
+    [ "HSV", "classcv_1_1colormap_1_1_h_s_v.html", "classcv_1_1colormap_1_1_h_s_v" ],
+    [ "Pink", "classcv_1_1colormap_1_1_pink.html", "classcv_1_1colormap_1_1_pink" ],
+    [ "Hot", "classcv_1_1colormap_1_1_hot.html", "classcv_1_1colormap_1_1_hot" ],
+    [ "Parula", "classcv_1_1colormap_1_1_parula.html", "classcv_1_1colormap_1_1_parula" ],
+    [ "Magma", "classcv_1_1colormap_1_1_magma.html", "classcv_1_1colormap_1_1_magma" ],
+    [ "Inferno", "classcv_1_1colormap_1_1_inferno.html", "classcv_1_1colormap_1_1_inferno" ],
+    [ "Plasma", "classcv_1_1colormap_1_1_plasma.html", "classcv_1_1colormap_1_1_plasma" ],
+    [ "Viridis", "classcv_1_1colormap_1_1_viridis.html", "classcv_1_1colormap_1_1_viridis" ],
+    [ "Cividis", "classcv_1_1colormap_1_1_cividis.html", "classcv_1_1colormap_1_1_cividis" ],
+    [ "Twilight", "classcv_1_1colormap_1_1_twilight.html", "classcv_1_1colormap_1_1_twilight" ],
+    [ "TwilightShifted", "classcv_1_1colormap_1_1_twilight_shifted.html", "classcv_1_1colormap_1_1_twilight_shifted" ],
+    [ "Turbo", "classcv_1_1colormap_1_1_turbo.html", "classcv_1_1colormap_1_1_turbo" ],
+    [ "UserColorMap", "classcv_1_1colormap_1_1_user_color_map.html", "classcv_1_1colormap_1_1_user_color_map" ]
+];

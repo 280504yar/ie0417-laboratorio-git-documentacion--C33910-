@@ -1,0 +1,27 @@
+var group__core__hal__interface__minmax =
+[
+    [ "hal_ni_max16bf", "group__core__hal__interface__minmax.html#gaecf46ad0fe800f9983622cb05b1d1b14", null ],
+    [ "hal_ni_max16f", "group__core__hal__interface__minmax.html#ga5970965d2c43ca7104e32ca1940a9de8", null ],
+    [ "hal_ni_max16s", "group__core__hal__interface__minmax.html#gafeaae69f3826301a03d20b0d94288e2e", null ],
+    [ "hal_ni_max16u", "group__core__hal__interface__minmax.html#ga21a4fe72f476df0a7aaeee99b96a0941", null ],
+    [ "hal_ni_max32f", "group__core__hal__interface__minmax.html#ga64614db29371b3296b28d4fbe03ce720", null ],
+    [ "hal_ni_max32s", "group__core__hal__interface__minmax.html#gac6a2f265778499392722c5a81417575c", null ],
+    [ "hal_ni_max32u", "group__core__hal__interface__minmax.html#ga7979431a0beec477896211a82e81abd5", null ],
+    [ "hal_ni_max64f", "group__core__hal__interface__minmax.html#ga00f815e9969a445b94fb199c5e61baee", null ],
+    [ "hal_ni_max64s", "group__core__hal__interface__minmax.html#gafa37cb8443b5722cc48381abbe1e2e90", null ],
+    [ "hal_ni_max64u", "group__core__hal__interface__minmax.html#ga837f2f54577fbc54dfcebe7ab3b6757c", null ],
+    [ "hal_ni_max8s", "group__core__hal__interface__minmax.html#ga15c6ef201d1e383edecf4e0d68761df7", null ],
+    [ "hal_ni_max8u", "group__core__hal__interface__minmax.html#gade37ad26d674fa1f09da923a7ce6791c", null ],
+    [ "hal_ni_min16bf", "group__core__hal__interface__minmax.html#ga0ec22939ad73f674989b2e4093d0b40f", null ],
+    [ "hal_ni_min16f", "group__core__hal__interface__minmax.html#ga124ab30867bf2a7d19894d5f22024f43", null ],
+    [ "hal_ni_min16s", "group__core__hal__interface__minmax.html#gaf2553793763f3632c5ad7dd75860d680", null ],
+    [ "hal_ni_min16u", "group__core__hal__interface__minmax.html#gac3e1d1e8041fde6e266c37e1fa2a5452", null ],
+    [ "hal_ni_min32f", "group__core__hal__interface__minmax.html#gafe17af2e4e039c204ae6004ddfbee09b", null ],
+    [ "hal_ni_min32s", "group__core__hal__interface__minmax.html#ga0bb5f3994e900c8a06532c7c4840e3e3", null ],
+    [ "hal_ni_min32u", "group__core__hal__interface__minmax.html#gab235e68b26984c19a0940e81a929fae3", null ],
+    [ "hal_ni_min64f", "group__core__hal__interface__minmax.html#ga3e56a6d687f0d9b31671c6e8f36e40a8", null ],
+    [ "hal_ni_min64s", "group__core__hal__interface__minmax.html#gaea118b76c985ae2d6cdb758f782ea583", null ],
+    [ "hal_ni_min64u", "group__core__hal__interface__minmax.html#ga240074e3a3ac64b120604af616765624", null ],
+    [ "hal_ni_min8s", "group__core__hal__interface__minmax.html#gac85bf376c25de21643ff3a452f12ccac", null ],
+    [ "hal_ni_min8u", "group__core__hal__interface__minmax.html#ga0bfaeb45170c4e105d6b94386067e24a", null ]
+];

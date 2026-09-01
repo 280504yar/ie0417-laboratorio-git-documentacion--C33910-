@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/imgcodecs/src/exif.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('exif_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">exif.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="exif_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Copyright (C) 2009, Willow Garage Inc., all rights reserved.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#ifndef _OPENCV_EXIF_HPP_</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#define _OPENCV_EXIF_HPP_</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>{</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="};">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2">   61</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2">ExifTagName</a></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a538a09ee31a26255f0488aa0b3505ae6">   63</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a538a09ee31a26255f0488aa0b3505ae6">IMAGE_DESCRIPTION</a>       = 0x010E,   </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a83b22f12ddff2045056158cf5fe45ffb">   64</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a83b22f12ddff2045056158cf5fe45ffb">MAKE</a>                    = 0x010F,   </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2aca9b7fab0d0fade3f054373ede0845de">   65</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2aca9b7fab0d0fade3f054373ede0845de">MODEL</a>                   = 0x0110,   </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a18467a2c757a0ec330604ff08a4004a9">   66</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a18467a2c757a0ec330604ff08a4004a9">ORIENTATION</a>             = 0x0112,   </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab1f55bcb2be27080595e148bccf78e17">   67</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab1f55bcb2be27080595e148bccf78e17">XRESOLUTION</a>             = 0x011A,   </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a101bff5e4f10dfcf0f755059f8195945">   68</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a101bff5e4f10dfcf0f755059f8195945">YRESOLUTION</a>             = 0x011B,   </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a329e01a8424a7fdd9baa3d92eacde1e0">   69</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a329e01a8424a7fdd9baa3d92eacde1e0">RESOLUTION_UNIT</a>         = 0x0128,   </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab99de6af69d5f38a29d98a190648e0b7">   70</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab99de6af69d5f38a29d98a190648e0b7">SOFTWARE</a>                = 0x0131,   </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ad41f4738042b5c0b740ed1e5696eb104">   71</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ad41f4738042b5c0b740ed1e5696eb104">DATE_TIME</a>               = 0x0132,   </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a291bf89b1330fd6b1949f87116bcb82f">   72</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a291bf89b1330fd6b1949f87116bcb82f">WHITE_POINT</a>             = 0x013E,   </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a56d73f5bf3cacf191d265987dfceb047">   73</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a56d73f5bf3cacf191d265987dfceb047">PRIMARY_CHROMATICIES</a>    = 0x013F,   </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a12df8121c04b53650c194e27f32f292a">   74</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a12df8121c04b53650c194e27f32f292a">Y_CB_CR_COEFFICIENTS</a>    = 0x0211,   </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a1b857b190a1882f76f52406c5c752e45">   75</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a1b857b190a1882f76f52406c5c752e45">Y_CB_CR_POSITIONING</a>     = 0x0213,   </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2aafa9b434caeccc30a763b5e8ee10f0d0">   76</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2aafa9b434caeccc30a763b5e8ee10f0d0">REFERENCE_BLACK_WHITE</a>   = 0x0214,   </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab5e633c0e66558f7bb12781e177844d6">   77</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab5e633c0e66558f7bb12781e177844d6">COPYRIGHT</a>               = 0x8298,   </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2abb3d23905db6383b6a40116b8594476c">   78</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2abb3d23905db6383b6a40116b8594476c">EXIF_OFFSET</a>             = 0x8769,   </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a1b7341a3ce2b2cdaa570b2003ad9a42d">   79</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a1b7341a3ce2b2cdaa570b2003ad9a42d">INVALID_TAG</a>             = 0xFFFF    </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>};</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="};">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4">   82</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4">Endianness_t</a></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4a2545f72f611d6caedff31e31ac3ed0d5">   84</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4a2545f72f611d6caedff31e31ac3ed0d5">INTEL</a> = 0x49,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4adcbab76b82123390402bb1bd0cfa25c1">   85</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4adcbab76b82123390402bb1bd0cfa25c1">MOTO</a> = 0x4D,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4ab96115ba665bc9005e315490e64d0e42">   86</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4ab96115ba665bc9005e315490e64d0e42">NONE</a> = 0x00</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>};</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="namespacecv.html#a96b6553499e57d9f2303080dba74ce21">   89</a></span><span class="keyword">typedef</span> std::pair&lt;uint32_t, uint32_t&gt; <a class="code hl_typedef" href="namespacecv.html#a96b6553499e57d9f2303080dba74ce21">u_rational_t</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span></div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="};">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html">   94</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1_exif_entry__t.html#a706f03d6bac06d737d7fae12a5006e0f">ExifEntry_t</a></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_function" href="structcv_1_1_exif_entry__t.html#a706f03d6bac06d737d7fae12a5006e0f">ExifEntry_t</a>();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#a9167b664cf01168f6bc2e184b0813c56">   98</a></span>    std::vector&lt;u_rational_t&gt; <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#a9167b664cf01168f6bc2e184b0813c56">field_u_rational</a>; </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#a151696dae628cd68d02d73c801c7f67a">   99</a></span>    std::string <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#a151696dae628cd68d02d73c801c7f67a">field_str</a>;                      </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#ad50b971388d172b8934593afed845107">  101</a></span>    <span class="keywordtype">float</span>  <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#ad50b971388d172b8934593afed845107">field_float</a>;                         </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#abdcf9d929df3fbeb3763b757d366a251">  102</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#abdcf9d929df3fbeb3763b757d366a251">field_double</a>;                        </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#a2a9b8215f8e5d6cfe9476d0c234a6033">  104</a></span>    uint32_t <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#a2a9b8215f8e5d6cfe9476d0c234a6033">field_u32</a>;                         </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#ac03c3f5df7cc4b0ba4900ce8c78fb47c">  105</a></span>    int32_t  <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#ac03c3f5df7cc4b0ba4900ce8c78fb47c">field_s32</a>;                         </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#a97964da72fd6cc9694bbbdbdc2cfc858">  107</a></span>    uint16_t <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#a97964da72fd6cc9694bbbdbdc2cfc858">tag</a>;                               </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#acb16934247a1046efe008b5e552d007b">  109</a></span>    uint16_t <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#acb16934247a1046efe008b5e552d007b">field_u16</a>;                         </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#ab390f7b74e5509e5c0e31994efb85783">  110</a></span>    int16_t  <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#ab390f7b74e5509e5c0e31994efb85783">field_s16</a>;                         </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#ace9acdc54c38054a19cfeaa058a56492">  111</a></span>    uint8_t  <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#ace9acdc54c38054a19cfeaa058a56492">field_u8</a>;                          </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="structcv_1_1_exif_entry__t.html#ac518333173862979b6eedd19bc980667">  112</a></span>    int8_t   <a class="code hl_variable" href="structcv_1_1_exif_entry__t.html#ac518333173862979b6eedd19bc980667">field_s8</a>;                          </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
+</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span></div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="};">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4">  121</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4">ImageOrientation</a></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>{</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a629c0d68dc6909896d46983c474e28a8">  123</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a629c0d68dc6909896d46983c474e28a8">IMAGE_ORIENTATION_TL</a> = 1, </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4af0bfff62685c73a1f68139c26746d5cd">  124</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4af0bfff62685c73a1f68139c26746d5cd">IMAGE_ORIENTATION_TR</a> = 2, </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4ae07691b7ed002f4fc43ccab076cad2f5">  125</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4ae07691b7ed002f4fc43ccab076cad2f5">IMAGE_ORIENTATION_BR</a> = 3, </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a74b81822a3564faf23fd309305ef2168">  126</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a74b81822a3564faf23fd309305ef2168">IMAGE_ORIENTATION_BL</a> = 4, </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a4f2d0e2a8bfdc8230b443d6ee52559cd">  127</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a4f2d0e2a8bfdc8230b443d6ee52559cd">IMAGE_ORIENTATION_LT</a> = 5, </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a998d1f68729b8a15b6da6c639583b2b7">  128</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a998d1f68729b8a15b6da6c639583b2b7">IMAGE_ORIENTATION_RT</a> = 6, </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4aa22bc958c56d6fe6cb3235377c4e870d">  129</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4aa22bc958c56d6fe6cb3235377c4e870d">IMAGE_ORIENTATION_RB</a> = 7, </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a2cdb83d1393beb99a0c24cbb65826429">  130</a></span>    <a class="code hl_enumvalue" href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a2cdb83d1393beb99a0c24cbb65826429">IMAGE_ORIENTATION_LB</a> = 8  </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>};</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="foldopen" id="foldopen00148" data-start="{" data-end="};">
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classcv_1_1_exif_reader.html">  148</a></span><span class="keyword">class </span><a class="code hl_function" href="classcv_1_1_exif_reader.html#a6aabc9f1d667c922a644cccc5abb1705">ExifReader</a></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>{</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <a class="code hl_function" href="classcv_1_1_exif_reader.html#a6aabc9f1d667c922a644cccc5abb1705">ExifReader</a>();</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <a class="code hl_function" href="classcv_1_1_exif_reader.html#a6aabc9f1d667c922a644cccc5abb1705">~ExifReader</a>();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_exif_reader.html#aacce23d194bb21dd1d4379a968374525">processRawProfile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* profile, <span class="keywordtype">size_t</span> profile_len);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1_exif_reader.html#a6b0d3c57a9edab38069455ec1907ccab">parseExif</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keyword">const</span> <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_struct" href="structcv_1_1_exif_entry__t.html">ExifEntry_t</a> <a class="code hl_function" href="classcv_1_1_exif_reader.html#ab332534d2f46b669b55493e56165ee92">getTag</a>( <span class="keyword">const</span> <a class="code hl_enumeration" href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2">ExifTagName</a> tag ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keyword">const</span> std::vector&lt;unsigned char&gt;&amp; <a class="code hl_function" href="classcv_1_1_exif_reader.html#a505759f79c3fe2154d2405205ccdb304">getData</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    std::vector&lt;unsigned char&gt; m_data;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    std::map&lt;int, ExifEntry_t &gt; m_exif;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_enumeration" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4">Endianness_t</a> m_format;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1_exif_reader.html#a6b0d3c57a9edab38069455ec1907ccab">parseExif</a>();</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">bool</span> checkTagMark() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordtype">size_t</span> getNumDirEntry( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offsetNumDir ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    uint32_t getStartOffset() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    uint16_t getExifTag( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    uint16_t getU16( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    uint32_t getU32( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    uint16_t getOrientation( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    uint16_t getResolutionUnit( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    uint16_t getYCbCrPos( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <a class="code hl_enumeration" href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4">Endianness_t</a> getFormat() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <a class="code hl_struct" href="structcv_1_1_exif_entry__t.html">ExifEntry_t</a> parseExifEntry( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset );</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <a class="code hl_typedef" href="namespacecv.html#a96b6553499e57d9f2303080dba74ce21">u_rational_t</a> getURational( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    std::string getString( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    std::vector&lt;u_rational_t&gt; getResolution( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    std::vector&lt;u_rational_t&gt; getWhitePoint( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    std::vector&lt;u_rational_t&gt; getPrimaryChromaticies( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    std::vector&lt;u_rational_t&gt; getYCbCrCoeffs( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    std::vector&lt;u_rational_t&gt; getRefBW( <span class="keyword">const</span> <span class="keywordtype">size_t</span> offset ) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keyword">static</span> <span class="keyword">const</span> uint16_t tagMarkRequired = 0x2A;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="comment">//max size of data in tag.</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="comment">//&#39;DDDDDDDD&#39; contains the value of that Tag. If its size is over 4bytes,</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="comment">//&#39;DDDDDDDD&#39; contains the offset to data stored address.</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> maxDataSize = 4;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="comment">//bytes per tag field</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> tiffFieldSize = 12;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="comment">//number of primary chromaticies components</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> primaryChromaticiesComponents = 6;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="comment">//number of YCbCr coefficients in field</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> ycbcrCoeffs = 3;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="comment">//number of Reference Black&amp;White components</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> refBWComponents = 6;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>};</div>
+</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>}</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="preprocessor">#endif </span><span class="comment">/* _OPENCV_EXIF_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasscv_1_1_exif_reader_html_a505759f79c3fe2154d2405205ccdb304"><div class="ttname"><a href="classcv_1_1_exif_reader.html#a505759f79c3fe2154d2405205ccdb304">cv::ExifReader::getData</a></div><div class="ttdeci">const std::vector&lt; unsigned char &gt; &amp; getData() const</div><div class="ttdoc">Get the whole exif buffer.</div><div class="ttdef"><b>Definición</b> <a href="exif_8cpp_source.html#l00138">exif.cpp:138</a></div></div>
+<div class="ttc" id="aclasscv_1_1_exif_reader_html_a6aabc9f1d667c922a644cccc5abb1705"><div class="ttname"><a href="classcv_1_1_exif_reader.html#a6aabc9f1d667c922a644cccc5abb1705">cv::ExifReader::ExifReader</a></div><div class="ttdeci">ExifReader()</div><div class="ttdoc">ExifReader constructor. Constructs an object of exif reader.</div><div class="ttdef"><b>Definición</b> <a href="exif_8cpp_source.html#l00106">exif.cpp:106</a></div></div>
+<div class="ttc" id="aclasscv_1_1_exif_reader_html_a6b0d3c57a9edab38069455ec1907ccab"><div class="ttname"><a href="classcv_1_1_exif_reader.html#a6b0d3c57a9edab38069455ec1907ccab">cv::ExifReader::parseExif</a></div><div class="ttdeci">bool parseExif(unsigned char *data, const size_t size)</div><div class="ttdoc">Parse the file with exif info.</div><div class="ttdef"><b>Definición</b> <a href="exif_8cpp_source.html#l00215">exif.cpp:215</a></div></div>
+<div class="ttc" id="aclasscv_1_1_exif_reader_html_aacce23d194bb21dd1d4379a968374525"><div class="ttname"><a href="classcv_1_1_exif_reader.html#aacce23d194bb21dd1d4379a968374525">cv::ExifReader::processRawProfile</a></div><div class="ttdeci">bool processRawProfile(const char *profile, size_t profile_len)</div><div class="ttdef"><b>Definición</b> <a href="exif_8cpp_source.html#l00143">exif.cpp:143</a></div></div>
+<div class="ttc" id="aclasscv_1_1_exif_reader_html_ab332534d2f46b669b55493e56165ee92"><div class="ttname"><a href="classcv_1_1_exif_reader.html#ab332534d2f46b669b55493e56165ee92">cv::ExifReader::getTag</a></div><div class="ttdeci">ExifEntry_t getTag(const ExifTagName tag) const</div><div class="ttdoc">Get tag info by tag number.</div><div class="ttdef"><b>Definición</b> <a href="exif_8cpp_source.html#l00126">exif.cpp:126</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4">cv::ImageOrientation</a></div><div class="ttdeci">ImageOrientation</div><div class="ttdoc">Picture orientation which may be taken from EXIF Orientation usually matters when the picture is take...</div><div class="ttdef"><b>Definición</b> <a href="#l00121">exif.hpp:122</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4a2cdb83d1393beb99a0c24cbb65826429"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a2cdb83d1393beb99a0c24cbb65826429">cv::IMAGE_ORIENTATION_LB</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_LB</div><div class="ttdoc">Rotate 270 CW.</div><div class="ttdef"><b>Definición</b> <a href="#l00130">exif.hpp:130</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4a4f2d0e2a8bfdc8230b443d6ee52559cd"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a4f2d0e2a8bfdc8230b443d6ee52559cd">cv::IMAGE_ORIENTATION_LT</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_LT</div><div class="ttdoc">Mirrored horizontal &amp; rotate 270 CW.</div><div class="ttdef"><b>Definición</b> <a href="#l00127">exif.hpp:127</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4a629c0d68dc6909896d46983c474e28a8"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a629c0d68dc6909896d46983c474e28a8">cv::IMAGE_ORIENTATION_TL</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_TL</div><div class="ttdoc">Horizontal (normal).</div><div class="ttdef"><b>Definición</b> <a href="#l00123">exif.hpp:123</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4a74b81822a3564faf23fd309305ef2168"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a74b81822a3564faf23fd309305ef2168">cv::IMAGE_ORIENTATION_BL</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_BL</div><div class="ttdoc">Mirrored vertical.</div><div class="ttdef"><b>Definición</b> <a href="#l00126">exif.hpp:126</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4a998d1f68729b8a15b6da6c639583b2b7"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4a998d1f68729b8a15b6da6c639583b2b7">cv::IMAGE_ORIENTATION_RT</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_RT</div><div class="ttdoc">Rotate 90 CW.</div><div class="ttdef"><b>Definición</b> <a href="#l00128">exif.hpp:128</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4aa22bc958c56d6fe6cb3235377c4e870d"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4aa22bc958c56d6fe6cb3235377c4e870d">cv::IMAGE_ORIENTATION_RB</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_RB</div><div class="ttdoc">Mirrored horizontal &amp; rotate 90 CW.</div><div class="ttdef"><b>Definición</b> <a href="#l00129">exif.hpp:129</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4ae07691b7ed002f4fc43ccab076cad2f5"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4ae07691b7ed002f4fc43ccab076cad2f5">cv::IMAGE_ORIENTATION_BR</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_BR</div><div class="ttdoc">Rotate 180.</div><div class="ttdef"><b>Definición</b> <a href="#l00125">exif.hpp:125</a></div></div>
+<div class="ttc" id="anamespacecv_html_a428fcd3017857d3245bc657e2319d2c4af0bfff62685c73a1f68139c26746d5cd"><div class="ttname"><a href="namespacecv.html#a428fcd3017857d3245bc657e2319d2c4af0bfff62685c73a1f68139c26746d5cd">cv::IMAGE_ORIENTATION_TR</a></div><div class="ttdeci">@ IMAGE_ORIENTATION_TR</div><div class="ttdoc">Mirrored horizontal.</div><div class="ttdef"><b>Definición</b> <a href="#l00124">exif.hpp:124</a></div></div>
+<div class="ttc" id="anamespacecv_html_a96b6553499e57d9f2303080dba74ce21"><div class="ttname"><a href="namespacecv.html#a96b6553499e57d9f2303080dba74ce21">cv::u_rational_t</a></div><div class="ttdeci">std::pair&lt; uint32_t, uint32_t &gt; u_rational_t</div><div class="ttdef"><b>Definición</b> <a href="#l00089">exif.hpp:89</a></div></div>
+<div class="ttc" id="anamespacecv_html_ab12411d7d5fa769fcbdb3b82c47af0b4"><div class="ttname"><a href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4">cv::Endianness_t</a></div><div class="ttdeci">Endianness_t</div><div class="ttdef"><b>Definición</b> <a href="#l00082">exif.hpp:83</a></div></div>
+<div class="ttc" id="anamespacecv_html_ab12411d7d5fa769fcbdb3b82c47af0b4a2545f72f611d6caedff31e31ac3ed0d5"><div class="ttname"><a href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4a2545f72f611d6caedff31e31ac3ed0d5">cv::INTEL</a></div><div class="ttdeci">@ INTEL</div><div class="ttdef"><b>Definición</b> <a href="#l00084">exif.hpp:84</a></div></div>
+<div class="ttc" id="anamespacecv_html_ab12411d7d5fa769fcbdb3b82c47af0b4ab96115ba665bc9005e315490e64d0e42"><div class="ttname"><a href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4ab96115ba665bc9005e315490e64d0e42">cv::NONE</a></div><div class="ttdeci">@ NONE</div><div class="ttdef"><b>Definición</b> <a href="#l00086">exif.hpp:86</a></div></div>
+<div class="ttc" id="anamespacecv_html_ab12411d7d5fa769fcbdb3b82c47af0b4adcbab76b82123390402bb1bd0cfa25c1"><div class="ttname"><a href="namespacecv.html#ab12411d7d5fa769fcbdb3b82c47af0b4adcbab76b82123390402bb1bd0cfa25c1">cv::MOTO</a></div><div class="ttdeci">@ MOTO</div><div class="ttdef"><b>Definición</b> <a href="#l00085">exif.hpp:85</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2">cv::ExifTagName</a></div><div class="ttdeci">ExifTagName</div><div class="ttdoc">Base Exif tags used by IFD0 (main image).</div><div class="ttdef"><b>Definición</b> <a href="#l00061">exif.hpp:62</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a101bff5e4f10dfcf0f755059f8195945"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a101bff5e4f10dfcf0f755059f8195945">cv::YRESOLUTION</a></div><div class="ttdeci">@ YRESOLUTION</div><div class="ttdoc">Resolution of the image across Y axis: unsigned rational.</div><div class="ttdef"><b>Definición</b> <a href="#l00068">exif.hpp:68</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a12df8121c04b53650c194e27f32f292a"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a12df8121c04b53650c194e27f32f292a">cv::Y_CB_CR_COEFFICIENTS</a></div><div class="ttdeci">@ Y_CB_CR_COEFFICIENTS</div><div class="ttdoc">constant to translate an image from YCbCr to RGB format</div><div class="ttdef"><b>Definición</b> <a href="#l00074">exif.hpp:74</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a18467a2c757a0ec330604ff08a4004a9"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a18467a2c757a0ec330604ff08a4004a9">cv::ORIENTATION</a></div><div class="ttdeci">@ ORIENTATION</div><div class="ttdoc">Orientation of the image: unsigned short.</div><div class="ttdef"><b>Definición</b> <a href="#l00066">exif.hpp:66</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a1b7341a3ce2b2cdaa570b2003ad9a42d"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a1b7341a3ce2b2cdaa570b2003ad9a42d">cv::INVALID_TAG</a></div><div class="ttdeci">@ INVALID_TAG</div><div class="ttdoc">Shows that the tag was not recognized.</div><div class="ttdef"><b>Definición</b> <a href="#l00079">exif.hpp:79</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a1b857b190a1882f76f52406c5c752e45"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a1b857b190a1882f76f52406c5c752e45">cv::Y_CB_CR_POSITIONING</a></div><div class="ttdeci">@ Y_CB_CR_POSITIONING</div><div class="ttdoc">Chroma sample point of subsampling pixel array.</div><div class="ttdef"><b>Definición</b> <a href="#l00075">exif.hpp:75</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a291bf89b1330fd6b1949f87116bcb82f"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a291bf89b1330fd6b1949f87116bcb82f">cv::WHITE_POINT</a></div><div class="ttdeci">@ WHITE_POINT</div><div class="ttdoc">Chromaticity of white point of the image.</div><div class="ttdef"><b>Definición</b> <a href="#l00072">exif.hpp:72</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a329e01a8424a7fdd9baa3d92eacde1e0"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a329e01a8424a7fdd9baa3d92eacde1e0">cv::RESOLUTION_UNIT</a></div><div class="ttdeci">@ RESOLUTION_UNIT</div><div class="ttdoc">Resolution units. &#39;1&#39; no-unit, &#39;2&#39; inch, &#39;3&#39; centimeter.</div><div class="ttdef"><b>Definición</b> <a href="#l00069">exif.hpp:69</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a538a09ee31a26255f0488aa0b3505ae6"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a538a09ee31a26255f0488aa0b3505ae6">cv::IMAGE_DESCRIPTION</a></div><div class="ttdeci">@ IMAGE_DESCRIPTION</div><div class="ttdoc">Image Description: ASCII string.</div><div class="ttdef"><b>Definición</b> <a href="#l00063">exif.hpp:63</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a56d73f5bf3cacf191d265987dfceb047"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a56d73f5bf3cacf191d265987dfceb047">cv::PRIMARY_CHROMATICIES</a></div><div class="ttdeci">@ PRIMARY_CHROMATICIES</div><div class="ttdoc">Chromaticity of the primaries of the image.</div><div class="ttdef"><b>Definición</b> <a href="#l00073">exif.hpp:73</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2a83b22f12ddff2045056158cf5fe45ffb"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2a83b22f12ddff2045056158cf5fe45ffb">cv::MAKE</a></div><div class="ttdeci">@ MAKE</div><div class="ttdoc">Description of manufacturer: ASCII string.</div><div class="ttdef"><b>Definición</b> <a href="#l00064">exif.hpp:64</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2aafa9b434caeccc30a763b5e8ee10f0d0"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2aafa9b434caeccc30a763b5e8ee10f0d0">cv::REFERENCE_BLACK_WHITE</a></div><div class="ttdeci">@ REFERENCE_BLACK_WHITE</div><div class="ttdoc">Reference value of black point/white point.</div><div class="ttdef"><b>Definición</b> <a href="#l00076">exif.hpp:76</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2ab1f55bcb2be27080595e148bccf78e17"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab1f55bcb2be27080595e148bccf78e17">cv::XRESOLUTION</a></div><div class="ttdeci">@ XRESOLUTION</div><div class="ttdoc">Resolution of the image across X axis: unsigned rational.</div><div class="ttdef"><b>Definición</b> <a href="#l00067">exif.hpp:67</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2ab5e633c0e66558f7bb12781e177844d6"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab5e633c0e66558f7bb12781e177844d6">cv::COPYRIGHT</a></div><div class="ttdeci">@ COPYRIGHT</div><div class="ttdoc">Copyright information.</div><div class="ttdef"><b>Definición</b> <a href="#l00077">exif.hpp:77</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2ab99de6af69d5f38a29d98a190648e0b7"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ab99de6af69d5f38a29d98a190648e0b7">cv::SOFTWARE</a></div><div class="ttdeci">@ SOFTWARE</div><div class="ttdoc">Shows firmware(internal software of digicam) version number.</div><div class="ttdef"><b>Definición</b> <a href="#l00070">exif.hpp:70</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2abb3d23905db6383b6a40116b8594476c"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2abb3d23905db6383b6a40116b8594476c">cv::EXIF_OFFSET</a></div><div class="ttdeci">@ EXIF_OFFSET</div><div class="ttdoc">Offset to Exif Sub IFD.</div><div class="ttdef"><b>Definición</b> <a href="#l00078">exif.hpp:78</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2aca9b7fab0d0fade3f054373ede0845de"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2aca9b7fab0d0fade3f054373ede0845de">cv::MODEL</a></div><div class="ttdeci">@ MODEL</div><div class="ttdoc">Description of camera model: ASCII string.</div><div class="ttdef"><b>Definición</b> <a href="#l00065">exif.hpp:65</a></div></div>
+<div class="ttc" id="anamespacecv_html_afc3419e49823351fadce8e383d21eeb2ad41f4738042b5c0b740ed1e5696eb104"><div class="ttname"><a href="namespacecv.html#afc3419e49823351fadce8e383d21eeb2ad41f4738042b5c0b740ed1e5696eb104">cv::DATE_TIME</a></div><div class="ttdeci">@ DATE_TIME</div><div class="ttdoc">Date/Time of image was last modified.</div><div class="ttdef"><b>Definición</b> <a href="#l00071">exif.hpp:71</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html">cv::ExifEntry_t</a></div><div class="ttdoc">Entry which contains possible values for different exif tags.</div><div class="ttdef"><b>Definición</b> <a href="#l00094">exif.hpp:95</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_a151696dae628cd68d02d73c801c7f67a"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#a151696dae628cd68d02d73c801c7f67a">cv::ExifEntry_t::field_str</a></div><div class="ttdeci">std::string field_str</div><div class="ttdoc">any kind of textual information</div><div class="ttdef"><b>Definición</b> <a href="#l00099">exif.hpp:99</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_a2a9b8215f8e5d6cfe9476d0c234a6033"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#a2a9b8215f8e5d6cfe9476d0c234a6033">cv::ExifEntry_t::field_u32</a></div><div class="ttdeci">uint32_t field_u32</div><div class="ttdoc">Unsigned 32-bit value.</div><div class="ttdef"><b>Definición</b> <a href="#l00104">exif.hpp:104</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_a706f03d6bac06d737d7fae12a5006e0f"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#a706f03d6bac06d737d7fae12a5006e0f">cv::ExifEntry_t::ExifEntry_t</a></div><div class="ttdeci">ExifEntry_t()</div><div class="ttdef"><b>Definición</b> <a href="exif_8cpp_source.html#l00097">exif.cpp:97</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_a9167b664cf01168f6bc2e184b0813c56"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#a9167b664cf01168f6bc2e184b0813c56">cv::ExifEntry_t::field_u_rational</a></div><div class="ttdeci">std::vector&lt; u_rational_t &gt; field_u_rational</div><div class="ttdoc">vector of rational fields</div><div class="ttdef"><b>Definición</b> <a href="#l00098">exif.hpp:98</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_a97964da72fd6cc9694bbbdbdc2cfc858"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#a97964da72fd6cc9694bbbdbdc2cfc858">cv::ExifEntry_t::tag</a></div><div class="ttdeci">uint16_t tag</div><div class="ttdoc">Tag number.</div><div class="ttdef"><b>Definición</b> <a href="#l00107">exif.hpp:107</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_ab390f7b74e5509e5c0e31994efb85783"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#ab390f7b74e5509e5c0e31994efb85783">cv::ExifEntry_t::field_s16</a></div><div class="ttdeci">int16_t field_s16</div><div class="ttdoc">Signed 16-bit value.</div><div class="ttdef"><b>Definición</b> <a href="#l00110">exif.hpp:110</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_abdcf9d929df3fbeb3763b757d366a251"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#abdcf9d929df3fbeb3763b757d366a251">cv::ExifEntry_t::field_double</a></div><div class="ttdeci">double field_double</div><div class="ttdoc">Currently is not used.</div><div class="ttdef"><b>Definición</b> <a href="#l00102">exif.hpp:102</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_ac03c3f5df7cc4b0ba4900ce8c78fb47c"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#ac03c3f5df7cc4b0ba4900ce8c78fb47c">cv::ExifEntry_t::field_s32</a></div><div class="ttdeci">int32_t field_s32</div><div class="ttdoc">Signed 32-bit value.</div><div class="ttdef"><b>Definición</b> <a href="#l00105">exif.hpp:105</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_ac518333173862979b6eedd19bc980667"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#ac518333173862979b6eedd19bc980667">cv::ExifEntry_t::field_s8</a></div><div class="ttdeci">int8_t field_s8</div><div class="ttdoc">Signed 8-bit value.</div><div class="ttdef"><b>Definición</b> <a href="#l00112">exif.hpp:112</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_acb16934247a1046efe008b5e552d007b"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#acb16934247a1046efe008b5e552d007b">cv::ExifEntry_t::field_u16</a></div><div class="ttdeci">uint16_t field_u16</div><div class="ttdoc">Unsigned 16-bit value.</div><div class="ttdef"><b>Definición</b> <a href="#l00109">exif.hpp:109</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_ace9acdc54c38054a19cfeaa058a56492"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#ace9acdc54c38054a19cfeaa058a56492">cv::ExifEntry_t::field_u8</a></div><div class="ttdeci">uint8_t field_u8</div><div class="ttdoc">Unsigned 8-bit value.</div><div class="ttdef"><b>Definición</b> <a href="#l00111">exif.hpp:111</a></div></div>
+<div class="ttc" id="astructcv_1_1_exif_entry__t_html_ad50b971388d172b8934593afed845107"><div class="ttname"><a href="structcv_1_1_exif_entry__t.html#ad50b971388d172b8934593afed845107">cv::ExifEntry_t::field_float</a></div><div class="ttdeci">float field_float</div><div class="ttdoc">Currently is not used.</div><div class="ttdef"><b>Definición</b> <a href="#l00101">exif.hpp:101</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_26d0a741bc21e7b978cdc652ade2f25c.html">imgcodecs</a></li><li class="navelem"><a href="dir_f9db06f3de9524254c631c466ec8007c.html">src</a></li><li class="navelem"><a href="exif_8hpp.html">exif.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

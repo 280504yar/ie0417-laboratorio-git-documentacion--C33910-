@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/dnn/src/cuda4dnn/primitives/eltwise.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('eltwise_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">eltwise.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="eltwise_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_ELTWISE_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_ELTWISE_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="op__cuda_8hpp.html">../../op_cuda.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8hpp.html">../csl/stream.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="cuda4dnn_2csl_2tensor_8hpp.html">../csl/tensor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="tensor__ops_8hpp.html">../csl/tensor_ops.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="eltwise__ops_8hpp.html">../kernels/eltwise_ops.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;<a class="code" href="core_8hpp.html">opencv2/core.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn.html">dnn</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1dnn_1_1cuda4dnn.html">cuda4dnn</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5a">   24</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5a">EltwiseOpType</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa26a4b44a837bf97b972628509912b4a5">   25</a></span>        <a class="code hl_define" href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a">   26</a></span>        <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a">SUM</a>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa2544e5b1e7659a7ba6f06444cc03d066">   27</a></span>        <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa2544e5b1e7659a7ba6f06444cc03d066">PRODUCT</a>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa29bbf66f7f8529ec47e394fb5a36c646">   28</a></span>        <a class="code hl_define" href="arithm_8simd_8hpp.html#a2af7bd518bd960d4ad08e8ddbb14ef43">DIV</a>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aace31e2a082d17e038fcc6e3006166653">   29</a></span>        <a class="code hl_define" href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a>,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa241dd841abade20fcb27b8a9f494e1eb">   30</a></span>        <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa241dd841abade20fcb27b8a9f494e1eb">SUB</a>,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aac5a28f4b35a2884fa3277150ac5d0967">   31</a></span>        <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aac5a28f4b35a2884fa3277150ac5d0967">MOD</a>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa83ee8e4cce253ad1c7e7b1c78dbc6d9d">   32</a></span>        <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa83ee8e4cce253ad1c7e7b1c78dbc6d9d">FMOD</a>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa17faf4e999b8cee4c36915c1f54ccffe">   33</a></span>        <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa17faf4e999b8cee4c36915c1f54ccffe">POW</a>,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    };</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html">   36</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#af6cb4ac154543548cbfd55e29fd510d2">EltwiseOpBase</a> : <span class="keyword">public</span> CUDABackendNode {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#af6cb4ac154543548cbfd55e29fd510d2">   38</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#af6cb4ac154543548cbfd55e29fd510d2">EltwiseOpBase</a>(<a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">csl::Stream</a> stream_, <a class="code hl_enumeration" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5a">EltwiseOpType</a> op_, std::vector&lt;float&gt; coeffs_)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            : <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(stream_)), <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">op</a>(op_), <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(coeffs_))</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        }</div>
+</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">   44</a></span>        <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">csl::Stream</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">   47</a></span>        <a class="code hl_enumeration" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5a">EltwiseOpType</a> <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">op</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">   48</a></span>        std::vector&lt;float&gt; <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    };</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="};">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html">   52</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a0ab2bde157915ba2fc95e7d6ba00dedc">EltwiseOp</a> final : <span class="keyword">public</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#af6cb4ac154543548cbfd55e29fd510d2">EltwiseOpBase</a> {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#abf36ea46fec612a8557a434295484dc1">   54</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#abf36ea46fec612a8557a434295484dc1">wrapper_type</a> = GetCUDABackendWrapperType&lt;T&gt;;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a0ab2bde157915ba2fc95e7d6ba00dedc">   56</a></span>        <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a0ab2bde157915ba2fc95e7d6ba00dedc">EltwiseOp</a>(<a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">csl::Stream</a> stream_, <a class="code hl_enumeration" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5a">EltwiseOpType</a> op_, std::vector&lt;float&gt; coeffs_)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            : <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#af6cb4ac154543548cbfd55e29fd510d2">EltwiseOpBase</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(stream_), op_, <a class="code hl_namespace" href="namespacestd.html">std</a>::move(coeffs_))</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a34e926eb650c33ce4cd153e309637bb5">   61</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a34e926eb650c33ce4cd153e309637bb5">forward</a>(</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">const</span> std::vector&lt;cuda::GpuMatND&gt;&amp; inputs,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">const</span> std::vector&lt;cuda::GpuMatND&gt;&amp; outputs,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <a class="code hl_class" href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace.html">csl::Workspace</a>&amp; workspace)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(outputs.size() == 1);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>.size() == 0 || <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">op</a> == <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a">EltwiseOpType::SUM</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_define" href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>.size() == 0 || inputs.size() == <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>.size());</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keyword">auto</span> output = csl::spanOf&lt;T&gt;(outputs[0]);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">if</span> (inputs.size() == 2)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="keyword">auto</span> input_x = csl::viewOf&lt;T&gt;(inputs[0]);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                <span class="keyword">auto</span> input_y = csl::viewOf&lt;T&gt;(inputs[1]);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="keywordflow">switch</span> (<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">op</a>)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa26a4b44a837bf97b972628509912b4a5">EltwiseOpType::MAX</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a5ed15c87a2666c87eb3228ca343b5700">kernels::eltwise_max_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aace31e2a082d17e038fcc6e3006166653">EltwiseOpType::MIN</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aad64c46bb689b9929a36e925aa04ba66">kernels::eltwise_min_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa2544e5b1e7659a7ba6f06444cc03d066">EltwiseOpType::PRODUCT</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aae5938e7cb64c4137ad488d6d077f6a5">kernels::eltwise_prod_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa29bbf66f7f8529ec47e394fb5a36c646">EltwiseOpType::DIV</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#acaabac5fd40868ae624022015ccf42f8">kernels::eltwise_div_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a">EltwiseOpType::SUM</a>:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>.empty() || (<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[0] == 1 &amp;&amp; <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[1] == 1))</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                        <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a1f8301ee155763609ee6f6eed63c2e12">kernels::eltwise_sum_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                        <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a796452fac6d93742553afcb25a7ddf49">kernels::eltwise_sum_coeff_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[0], input_x, <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[1], input_y);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa241dd841abade20fcb27b8a9f494e1eb">EltwiseOpType::SUB</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aebd4457760e9b1200967f5c0455a6a9a">kernels::eltwise_sub_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aac5a28f4b35a2884fa3277150ac5d0967">EltwiseOpType::MOD</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a6d5377abc96081bac26d3db1132fe501">kernels::eltwise_mod_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa83ee8e4cce253ad1c7e7b1c78dbc6d9d">EltwiseOpType::FMOD</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a835d725cd94fa59170b3c1155d66ede4">kernels::eltwise_fmod_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa17faf4e999b8cee4c36915c1f54ccffe">EltwiseOpType::POW</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aad3c61ce5d1f50a70ea0685a094f8be3">kernels::eltwise_pow_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_x, input_y); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (inputs.size() == 1) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                <span class="keyword">auto</span> input_0 = csl::viewOf&lt;T&gt;(inputs[0]);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1tensor__ops.html#ab3b2ac1bec02d599b665f4561dd4e723">csl::tensor_ops::copy</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_0);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                <span class="keyword">auto</span> input_0 = csl::viewOf&lt;T&gt;(inputs[0]);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="comment">/* we first make a copy and then apply EltwiseOp cumulatively */</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1tensor__ops.html#ab3b2ac1bec02d599b665f4561dd4e723">csl::tensor_ops::copy</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, input_0);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; inputs.size(); i++)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    <span class="keyword">auto</span> input = csl::viewOf&lt;T&gt;(inputs[i]);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    <span class="keywordflow">switch</span> (<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">op</a>)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa26a4b44a837bf97b972628509912b4a5">EltwiseOpType::MAX</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a5ed15c87a2666c87eb3228ca343b5700">kernels::eltwise_max_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aace31e2a082d17e038fcc6e3006166653">EltwiseOpType::MIN</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aad64c46bb689b9929a36e925aa04ba66">kernels::eltwise_min_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa2544e5b1e7659a7ba6f06444cc03d066">EltwiseOpType::PRODUCT</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aae5938e7cb64c4137ad488d6d077f6a5">kernels::eltwise_prod_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa29bbf66f7f8529ec47e394fb5a36c646">EltwiseOpType::DIV</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#acaabac5fd40868ae624022015ccf42f8">kernels::eltwise_div_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a">EltwiseOpType::SUM</a>:</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>.empty() || <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[i] == 1)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                            <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a1f8301ee155763609ee6f6eed63c2e12">kernels::eltwise_sum_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                        {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                            <span class="comment">/* if this is the first op, we must scale output too */</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                            <a class="code hl_variable" href="group__calib.html#gad225b15027b8bb78c48ce641700086de">T</a> coeff_x = (i == 1) ? <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[0] : 1.0;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                            <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a796452fac6d93742553afcb25a7ddf49">kernels::eltwise_sum_coeff_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, coeff_x, output, <a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">coeffs</a>[i], input);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                        }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa241dd841abade20fcb27b8a9f494e1eb">EltwiseOpType::SUB</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aebd4457760e9b1200967f5c0455a6a9a">kernels::eltwise_sub_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aac5a28f4b35a2884fa3277150ac5d0967">EltwiseOpType::MOD</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a6d5377abc96081bac26d3db1132fe501">kernels::eltwise_mod_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa83ee8e4cce253ad1c7e7b1c78dbc6d9d">EltwiseOpType::FMOD</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a835d725cd94fa59170b3c1155d66ede4">kernels::eltwise_fmod_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa17faf4e999b8cee4c36915c1f54ccffe">EltwiseOpType::POW</a>: <a class="code hl_function" href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aad3c61ce5d1f50a70ea0685a094f8be3">kernels::eltwise_pow_2&lt;T&gt;</a>(<a class="code hl_variable" href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">stream</a>, output, output, input); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                    }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    };</div>
+</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}}} <span class="comment">/* namespace cv::dnn::cuda4dnn */</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="preprocessor">#endif </span><span class="comment">/* OPENCV_DNN_SRC_CUDA4DNN_PRIMITIVES_ELTWISE_HPP */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aarithm_8simd_8hpp_html_a2af7bd518bd960d4ad08e8ddbb14ef43"><div class="ttname"><a href="arithm_8simd_8hpp.html#a2af7bd518bd960d4ad08e8ddbb14ef43">DIV</a></div><div class="ttdeci">#define DIV(T_, Tr_, Wv_, W_)</div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base_html_a234838e5769db82da5a4577fcde75efa"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#a234838e5769db82da5a4577fcde75efa">cv::dnn::cuda4dnn::EltwiseOpBase::coeffs</a></div><div class="ttdeci">std::vector&lt; float &gt; coeffs</div><div class="ttdef"><b>Definición</b> <a href="#l00048">eltwise.hpp:48</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base_html_aace11504ae457fc7d5373d6a1bf0dcd4"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#aace11504ae457fc7d5373d6a1bf0dcd4">cv::dnn::cuda4dnn::EltwiseOpBase::stream</a></div><div class="ttdeci">csl::Stream stream</div><div class="ttdef"><b>Definición</b> <a href="#l00044">eltwise.hpp:44</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base_html_ade44d9a69e093deb29edb7920b603353"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#ade44d9a69e093deb29edb7920b603353">cv::dnn::cuda4dnn::EltwiseOpBase::op</a></div><div class="ttdeci">EltwiseOpType op</div><div class="ttdef"><b>Definición</b> <a href="#l00047">eltwise.hpp:47</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base_html_af6cb4ac154543548cbfd55e29fd510d2"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_base.html#af6cb4ac154543548cbfd55e29fd510d2">cv::dnn::cuda4dnn::EltwiseOpBase::EltwiseOpBase</a></div><div class="ttdeci">EltwiseOpBase(csl::Stream stream_, EltwiseOpType op_, std::vector&lt; float &gt; coeffs_)</div><div class="ttdef"><b>Definición</b> <a href="#l00038">eltwise.hpp:38</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_html_a0ab2bde157915ba2fc95e7d6ba00dedc"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a0ab2bde157915ba2fc95e7d6ba00dedc">cv::dnn::cuda4dnn::EltwiseOp::EltwiseOp</a></div><div class="ttdeci">EltwiseOp(csl::Stream stream_, EltwiseOpType op_, std::vector&lt; float &gt; coeffs_)</div><div class="ttdef"><b>Definición</b> <a href="#l00056">eltwise.hpp:56</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_html_a34e926eb650c33ce4cd153e309637bb5"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#a34e926eb650c33ce4cd153e309637bb5">cv::dnn::cuda4dnn::EltwiseOp::forward</a></div><div class="ttdeci">void forward(const std::vector&lt; cuda::GpuMatND &gt; &amp;inputs, const std::vector&lt; cuda::GpuMatND &gt; &amp;outputs, csl::Workspace &amp;workspace) override</div><div class="ttdef"><b>Definición</b> <a href="#l00061">eltwise.hpp:61</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op_html_abf36ea46fec612a8557a434295484dc1"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1_eltwise_op.html#abf36ea46fec612a8557a434295484dc1">cv::dnn::cuda4dnn::EltwiseOp::wrapper_type</a></div><div class="ttdeci">GetCUDABackendWrapperType&lt; T &gt; wrapper_type</div><div class="ttdef"><b>Definición</b> <a href="#l00054">eltwise.hpp:54</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_stream.html">cv::dnn::cuda4dnn::csl::Stream</a></div><div class="ttdoc">sharable smart CUDA stream</div><div class="ttdef"><b>Definición</b> <a href="stream_8hpp_source.html#l00116">stream.hpp:116</a></div></div>
+<div class="ttc" id="aclasscv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace_html"><div class="ttname"><a href="classcv_1_1dnn_1_1cuda4dnn_1_1csl_1_1_workspace.html">cv::dnn::cuda4dnn::csl::Workspace</a></div><div class="ttdoc">maintains a single block of reusable device memory</div><div class="ttdef"><b>Definición</b> <a href="workspace_8hpp_source.html#l00024">workspace.hpp:24</a></div></div>
+<div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
+<div class="ttc" id="acuda4dnn_2csl_2tensor_8hpp_html"><div class="ttname"><a href="cuda4dnn_2csl_2tensor_8hpp.html">tensor.hpp</a></div></div>
+<div class="ttc" id="aeltwise__ops_8hpp_html"><div class="ttname"><a href="eltwise__ops_8hpp.html">eltwise_ops.hpp</a></div></div>
+<div class="ttc" id="agroup__calib_html_gad225b15027b8bb78c48ce641700086de"><div class="ttname"><a href="group__calib.html#gad225b15027b8bb78c48ce641700086de">cv::T</a></div><div class="ttdeci">InputArrayOfArrays InputArrayOfArrays InputOutputArray InputOutputArray InputOutputArray InputOutputArray Size InputOutputArray InputOutputArray T</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00921">calib.hpp:921</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga3acffbd305ee72dcd4593c0d8af64a4f"><div class="ttname"><a href="group__core__utils.html#ga3acffbd305ee72dcd4593c0d8af64a4f">MIN</a></div><div class="ttdeci">#define MIN(a, b)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00535">cvdef.h:535</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gaf62bcd90f70e275191ab95136d85906b"><div class="ttname"><a href="group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b">CV_Assert</a></div><div class="ttdeci">#define CV_Assert(expr)</div><div class="ttdoc">Checks a condition at runtime and throws exception if it fails.</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00198">exception.hpp:198</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafa99ec4acc4ecb2dc3c2d05da15d0e3f"><div class="ttname"><a href="group__core__utils.html#gafa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a></div><div class="ttdeci">#define MAX(a, b)</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00539">cvdef.h:539</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1tensor__ops_html_ab3b2ac1bec02d599b665f4561dd4e723"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1csl_1_1tensor__ops.html#ab3b2ac1bec02d599b665f4561dd4e723">cv::dnn::cuda4dnn::csl::tensor_ops::copy</a></div><div class="ttdeci">void copy(const Stream &amp;stream, TensorSpan&lt; T &gt; dest, TensorView&lt; T &gt; src)</div><div class="ttdoc">copies data between tensors</div><div class="ttdef"><b>Definición</b> <a href="tensor__ops_8hpp_source.html#l00042">tensor_ops.hpp:42</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_a1f8301ee155763609ee6f6eed63c2e12"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a1f8301ee155763609ee6f6eed63c2e12">cv::dnn::cuda4dnn::kernels::eltwise_sum_2</a></div><div class="ttdeci">void eltwise_sum_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_a5ed15c87a2666c87eb3228ca343b5700"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a5ed15c87a2666c87eb3228ca343b5700">cv::dnn::cuda4dnn::kernels::eltwise_max_2</a></div><div class="ttdeci">void eltwise_max_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_a6d5377abc96081bac26d3db1132fe501"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a6d5377abc96081bac26d3db1132fe501">cv::dnn::cuda4dnn::kernels::eltwise_mod_2</a></div><div class="ttdeci">void eltwise_mod_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_a796452fac6d93742553afcb25a7ddf49"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a796452fac6d93742553afcb25a7ddf49">cv::dnn::cuda4dnn::kernels::eltwise_sum_coeff_2</a></div><div class="ttdeci">void eltwise_sum_coeff_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, T coeff_x, csl::TensorView&lt; T &gt; x, T coeff_y, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_a835d725cd94fa59170b3c1155d66ede4"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#a835d725cd94fa59170b3c1155d66ede4">cv::dnn::cuda4dnn::kernels::eltwise_fmod_2</a></div><div class="ttdeci">void eltwise_fmod_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_aad3c61ce5d1f50a70ea0685a094f8be3"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aad3c61ce5d1f50a70ea0685a094f8be3">cv::dnn::cuda4dnn::kernels::eltwise_pow_2</a></div><div class="ttdeci">void eltwise_pow_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_aad64c46bb689b9929a36e925aa04ba66"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aad64c46bb689b9929a36e925aa04ba66">cv::dnn::cuda4dnn::kernels::eltwise_min_2</a></div><div class="ttdeci">void eltwise_min_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_aae5938e7cb64c4137ad488d6d077f6a5"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aae5938e7cb64c4137ad488d6d077f6a5">cv::dnn::cuda4dnn::kernels::eltwise_prod_2</a></div><div class="ttdeci">void eltwise_prod_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_acaabac5fd40868ae624022015ccf42f8"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#acaabac5fd40868ae624022015ccf42f8">cv::dnn::cuda4dnn::kernels::eltwise_div_2</a></div><div class="ttdeci">void eltwise_div_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_1_1kernels_html_aebd4457760e9b1200967f5c0455a6a9a"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn_1_1kernels.html#aebd4457760e9b1200967f5c0455a6a9a">cv::dnn::cuda4dnn::kernels::eltwise_sub_2</a></div><div class="ttdeci">void eltwise_sub_2(const csl::Stream &amp;stream, csl::TensorSpan&lt; T &gt; output, csl::TensorView&lt; T &gt; x, csl::TensorView&lt; T &gt; y)</div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html">cv::dnn::cuda4dnn</a></div><div class="ttdef"><b>Definición</b> <a href="array_8hpp_source.html#l00016">array.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5a"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5a">cv::dnn::cuda4dnn::EltwiseOpType</a></div><div class="ttdeci">EltwiseOpType</div><div class="ttdef"><b>Definición</b> <a href="#l00024">eltwise.hpp:24</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa17faf4e999b8cee4c36915c1f54ccffe"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa17faf4e999b8cee4c36915c1f54ccffe">cv::dnn::cuda4dnn::EltwiseOpType::POW</a></div><div class="ttdeci">@ POW</div><div class="ttdef"><b>Definición</b> <a href="#l00033">eltwise.hpp:33</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa241dd841abade20fcb27b8a9f494e1eb"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa241dd841abade20fcb27b8a9f494e1eb">cv::dnn::cuda4dnn::EltwiseOpType::SUB</a></div><div class="ttdeci">@ SUB</div><div class="ttdef"><b>Definición</b> <a href="#l00030">eltwise.hpp:30</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa2544e5b1e7659a7ba6f06444cc03d066"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa2544e5b1e7659a7ba6f06444cc03d066">cv::dnn::cuda4dnn::EltwiseOpType::PRODUCT</a></div><div class="ttdeci">@ PRODUCT</div><div class="ttdef"><b>Definición</b> <a href="#l00027">eltwise.hpp:27</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa26a4b44a837bf97b972628509912b4a5"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa26a4b44a837bf97b972628509912b4a5">cv::dnn::cuda4dnn::EltwiseOpType::MAX</a></div><div class="ttdeci">@ MAX</div><div class="ttdef"><b>Definición</b> <a href="#l00025">eltwise.hpp:25</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa29bbf66f7f8529ec47e394fb5a36c646"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa29bbf66f7f8529ec47e394fb5a36c646">cv::dnn::cuda4dnn::EltwiseOpType::DIV</a></div><div class="ttdeci">@ DIV</div><div class="ttdef"><b>Definición</b> <a href="#l00028">eltwise.hpp:28</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa6970bdc2201030b9c03fbdcf3973858a">cv::dnn::cuda4dnn::EltwiseOpType::SUM</a></div><div class="ttdeci">@ SUM</div><div class="ttdef"><b>Definición</b> <a href="#l00026">eltwise.hpp:26</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aa83ee8e4cce253ad1c7e7b1c78dbc6d9d"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aa83ee8e4cce253ad1c7e7b1c78dbc6d9d">cv::dnn::cuda4dnn::EltwiseOpType::FMOD</a></div><div class="ttdeci">@ FMOD</div><div class="ttdef"><b>Definición</b> <a href="#l00032">eltwise.hpp:32</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aac5a28f4b35a2884fa3277150ac5d0967"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aac5a28f4b35a2884fa3277150ac5d0967">cv::dnn::cuda4dnn::EltwiseOpType::MOD</a></div><div class="ttdeci">@ MOD</div><div class="ttdef"><b>Definición</b> <a href="#l00031">eltwise.hpp:31</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_1_1cuda4dnn_html_a7e1ce6c918e27efbe6e8f824f7339f5aace31e2a082d17e038fcc6e3006166653"><div class="ttname"><a href="namespacecv_1_1dnn_1_1cuda4dnn.html#a7e1ce6c918e27efbe6e8f824f7339f5aace31e2a082d17e038fcc6e3006166653">cv::dnn::cuda4dnn::EltwiseOpType::MIN</a></div><div class="ttdeci">@ MIN</div><div class="ttdef"><b>Definición</b> <a href="#l00029">eltwise.hpp:29</a></div></div>
+<div class="ttc" id="anamespacecv_1_1dnn_html"><div class="ttname"><a href="namespacecv_1_1dnn.html">cv::dnn</a></div><div class="ttdef"><b>Definición</b> <a href="all__layers_8hpp_source.html#l00047">all_layers.hpp:47</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definición</b> <a href="ts__gtest_8h_source.html#l01172">ts_gtest.h:1172</a></div></div>
+<div class="ttc" id="aop__cuda_8hpp_html"><div class="ttname"><a href="op__cuda_8hpp.html">op_cuda.hpp</a></div></div>
+<div class="ttc" id="astream_8hpp_html"><div class="ttname"><a href="stream_8hpp.html">stream.hpp</a></div></div>
+<div class="ttc" id="atensor__ops_8hpp_html"><div class="ttname"><a href="tensor__ops_8hpp.html">tensor_ops.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_71e0dc4abf722aad8ea13bb3d4783c48.html">dnn</a></li><li class="navelem"><a href="dir_dbffceb417faeca118f9afa0ad408c91.html">src</a></li><li class="navelem"><a href="dir_329f8aeda4c94140e35f70be21279668.html">cuda4dnn</a></li><li class="navelem"><a href="dir_d2ca54779c2590542eeb89ca6000009d.html">primitives</a></li><li class="navelem"><a href="eltwise_8hpp.html">eltwise.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['técnica_0',['OpenCV - Documentación técnica',['../index.html',1,'']]],
+  ['tareas_20pendientes_1',['Lista de tareas pendientes',['../todo.html',1,'']]],
+  ['tbb_2',['Intel TBB',['../group__core__parallel__backend.html#autotoc_md34',1,'']]],
+  ['templates_3',['Templates',['../api_hal.html#autotoc_md10',1,'1. Start with the Templates'],['../intro.html#autotoc_md20',1,'Fixed Pixel Types. Limited Use of Templates']]],
+  ['test_20native_20dnn_5fbackend_5fwebnn_20backend_4',['Test native DNN_BACKEND_WEBNN backend',['../dir_f6ad9f5eb7677a3cab0ca27461c8fdd6.html#autotoc_md53',1,'']]],
+  ['the_20backend_20at_20runtime_5',['Select the backend at runtime',['../videoio_overview.html#autotoc_md83',1,'']]],
+  ['the_20call_20chain_6',['Architecture &amp;amp; The Call Chain',['../api_hal.html#autotoc_md5',1,'']]],
+  ['the_20environment_20variable_7',['Build WebNN-native and set the environment variable',['../dir_f6ad9f5eb7677a3cab0ca27461c8fdd6.html#autotoc_md52',1,'']]],
+  ['the_20ffmpeg_20library_8',['The FFmpeg library',['../videoio_overview.html#autotoc_md86',1,'']]],
+  ['the_20hal_20ecosystem_9',['The HAL Ecosystem',['../api_hal.html#autotoc_md14',1,'']]],
+  ['the_20interface_10',['2. Implement the Interface',['../api_hal.html#autotoc_md11',1,'']]],
+  ['the_20output_20data_11',['Automatic Allocation of the Output Data',['../intro.html#autotoc_md18',1,'']]],
+  ['the_20replaceable_20interface_12',['Design Principles of the Replaceable Interface',['../api_hal.html#autotoc_md7',1,'']]],
+  ['the_20templates_13',['1. Start with the Templates',['../api_hal.html#autotoc_md10',1,'']]],
+  ['threading_20and_20re_20enterability_14',['Multi-threading and Re-enterability',['../intro.html#autotoc_md23',1,'']]],
+  ['to_20a_20file_20storage_15',['Writing to a file storage.',['../group__core__xml.html#autotoc_md37',1,'']]],
+  ['to_20enable_20backends_16',['How to enable backends',['../videoio_overview.html#autotoc_md84',1,'']]],
+  ['to_20use_20during_20init_17',['to use during init',['../structcv_1_1detail_1_1tracking_1_1_tracker_sampler_c_s_c_1_1_params.html#autotoc_md74',1,'negative samples to use during init'],['../structcv_1_1_tracker_m_i_l_1_1_params.html#autotoc_md77',1,'negative samples to use during init']]],
+  ['to_20use_20during_20tracking_18',['to use during tracking',['../structcv_1_1_tracker_m_i_l_1_1_params.html#autotoc_md79',1,'negative samples to use during tracking'],['../structcv_1_1_tracker_m_i_l_1_1_params.html#autotoc_md78',1,'positive samples to use during tracking']]],
+  ['to_20use_20during_20training_19',['to use during training',['../structcv_1_1detail_1_1tracking_1_1_tracker_sampler_c_s_c_1_1_params.html#autotoc_md76',1,'negative samples to use during training'],['../structcv_1_1detail_1_1tracking_1_1_tracker_sampler_c_s_c_1_1_params.html#autotoc_md75',1,'positive samples to use during training']]],
+  ['tracking_20',['tracking',['../structcv_1_1_tracker_m_i_l_1_1_params.html#autotoc_md79',1,'negative samples to use during tracking'],['../structcv_1_1_tracker_m_i_l_1_1_params.html#autotoc_md78',1,'positive samples to use during tracking']]],
+  ['training_21',['training',['../structcv_1_1detail_1_1tracking_1_1_tracker_sampler_c_s_c_1_1_params.html#autotoc_md76',1,'negative samples to use during training'],['../structcv_1_1detail_1_1tracking_1_1_tracker_sampler_c_s_c_1_1_params.html#autotoc_md75',1,'positive samples to use during training']]],
+  ['tutorial_22',['Tutorial',['../md__c_1_2_users_2_y_a_r_a_d_e_y_e_n_i_s_a_i_z_a_g_u_i_r_r_2opencv_2modules_2objc_2doc_2_landing_page__ios.html#autotoc_md71',1,'Quick Start Tutorial'],['../md__c_1_2_users_2_y_a_r_a_d_e_y_e_n_i_s_a_i_z_a_g_u_i_r_r_2opencv_2modules_2objc_2doc_2_landing_page__osx.html#autotoc_md72',1,'Quick Start Tutorial']]],
+  ['types_23',['Types',['../group__core__hal__intrin.html#autotoc_md24',1,'Types'],['../group__core__utils__softfloat.html#autotoc_md39',1,'Types']]],
+  ['types_20limited_20use_20of_20templates_24',['Fixed Pixel Types. Limited Use of Templates',['../intro.html#autotoc_md20',1,'']]]
+];

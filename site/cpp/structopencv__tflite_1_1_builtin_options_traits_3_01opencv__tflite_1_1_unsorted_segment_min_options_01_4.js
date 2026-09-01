@@ -1,0 +1,4 @@
+var structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_unsorted_segment_min_options_01_4 =
+[
+    [ "enum_value", "structopencv__tflite_1_1_builtin_options_traits_3_01opencv__tflite_1_1_unsorted_segment_min_options_01_4.html#a8c765e43bd0373c67313ff77a2df0a31", null ]
+];

@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/videoio/src/cap_librealsense.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('cap__librealsense_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">cap_librealsense.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="cap__librealsense_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="videoio_2src_2precomp_8hpp.html">precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifdef HAVE_LIBREALSENSE</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="cap__librealsense_8hpp.html">cap_librealsense.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>VideoCapture_LibRealsense::VideoCapture_LibRealsense(<span class="keywordtype">int</span>) : mAlign(RS2_STREAM_COLOR)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        rs2::config <a class="code hl_variable" href="namespacegen__java.html#af4a21f751d7dde7351d13619fc519251">config</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="comment">// Configure all streams to run at VGA resolution at default fps</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_variable" href="namespacegen__java.html#af4a21f751d7dde7351d13619fc519251">config</a>.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_variable" href="namespacegen__java.html#af4a21f751d7dde7351d13619fc519251">config</a>.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <a class="code hl_variable" href="namespacegen__java.html#af4a21f751d7dde7351d13619fc519251">config</a>.enable_stream(RS2_STREAM_INFRARED, 640, 480, RS2_FORMAT_Y8);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        mPipe.start(config);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">catch</span> (<span class="keyword">const</span> rs2::error&amp;)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>VideoCapture_LibRealsense::~VideoCapture_LibRealsense(){}</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">double</span> VideoCapture_LibRealsense::getProperty(<span class="keywordtype">int</span> propIdx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">double</span> propValue = <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> purePropIdx = propIdx &amp; ~CAP_INTELPERC_GENERATORS_MASK;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">if</span>((propIdx &amp; CAP_INTELPERC_GENERATORS_MASK) == CAP_INTELPERC_IMAGE_GENERATOR)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        propValue = getImageGeneratorProperty(purePropIdx);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>((propIdx &amp; CAP_INTELPERC_GENERATORS_MASK) == CAP_INTELPERC_DEPTH_GENERATOR)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        propValue = getDepthGeneratorProperty(purePropIdx);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>((propIdx &amp; CAP_INTELPERC_GENERATORS_MASK) == CAP_INTELPERC_IR_GENERATOR)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        propValue = getIrGeneratorProperty(purePropIdx);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        propValue = getCommonProperty(purePropIdx);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">double</span> VideoCapture_LibRealsense::getImageGeneratorProperty(<span class="keywordtype">int</span> propIdx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">double</span> propValue = <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">const</span> rs2::video_stream_profile profile = mPipe.get_active_profile().get_stream(RS2_STREAM_COLOR).as&lt;rs2::video_stream_profile&gt;();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span>(!profile)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">switch</span>(propIdx)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">CAP_PROP_FRAME_WIDTH</a>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.width());</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">CAP_PROP_FRAME_HEIGHT</a>:</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.height());</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">CAP_PROP_FPS</a>:</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.fps());</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordtype">double</span> VideoCapture_LibRealsense::getDepthGeneratorProperty(<span class="keywordtype">int</span> propIdx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">double</span> propValue = <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">const</span> rs2::video_stream_profile profile = mPipe.get_active_profile().get_stream(RS2_STREAM_DEPTH).as&lt;rs2::video_stream_profile&gt;();</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">const</span> rs2::depth_sensor sensor = mPipe.get_active_profile().get_device().first&lt;rs2::depth_sensor&gt;();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span>(!profile || !sensor)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">switch</span>(propIdx)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">CAP_PROP_FRAME_WIDTH</a>:</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.width());</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">CAP_PROP_FRAME_HEIGHT</a>:</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.height());</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">CAP_PROP_FPS</a>:</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.fps());</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115acc9291ae9c5beec367fb701cabcaaf0e">CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE</a>:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(sensor.get_depth_scale());</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115a07423906d8a904f7997292878a5c78f0">CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ</a>:</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.get_intrinsics().fx);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115a647281df465ac37cdc9e199f1fb9ca3c">CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT</a>:</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.get_intrinsics().fy);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keywordtype">double</span> VideoCapture_LibRealsense::getIrGeneratorProperty(<span class="keywordtype">int</span> propIdx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">double</span> propValue = <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">const</span> rs2::video_stream_profile profile = mPipe.get_active_profile().get_stream(RS2_STREAM_INFRARED).as&lt;rs2::video_stream_profile&gt;();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">if</span>(!profile)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">switch</span>(propIdx)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">CAP_PROP_FRAME_WIDTH</a>:</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.width());</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">CAP_PROP_FRAME_HEIGHT</a>:</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.height());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">CAP_PROP_FPS</a>:</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.fps());</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="keywordtype">double</span> VideoCapture_LibRealsense::getCommonProperty(<span class="keywordtype">int</span> propIdx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordtype">double</span> propValue = <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">CAP_PROP_UNKNOWN</a>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">const</span> rs2::video_stream_profile profile = mPipe.get_active_profile().get_stream(RS2_STREAM_DEPTH).as&lt;rs2::video_stream_profile&gt;();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">const</span> rs2::depth_sensor sensor = mPipe.get_active_profile().get_device().first&lt;rs2::depth_sensor&gt;();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">if</span>(!profile || !sensor)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">switch</span>(propIdx)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">CAP_PROP_FRAME_WIDTH</a>:</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">CAP_PROP_FRAME_HEIGHT</a>:</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">CAP_PROP_FPS</a>:</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        propValue = getDepthGeneratorProperty(propIdx);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115acc9291ae9c5beec367fb701cabcaaf0e">CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE</a>:</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(sensor.get_depth_scale());</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115a07423906d8a904f7997292878a5c78f0">CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ</a>:</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.get_intrinsics().fx);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115a647281df465ac37cdc9e199f1fb9ca3c">CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT</a>:</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        propValue = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(profile.get_intrinsics().fy);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">return</span> propValue;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keywordtype">bool</span> VideoCapture_LibRealsense::setProperty(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>{</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">bool</span> isSet = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">return</span> isSet;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keywordtype">bool</span> VideoCapture_LibRealsense::grabFrame()</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>{</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">if</span> (!isOpened())</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        mData = mAlign.process(mPipe.wait_for_frames());</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    }</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordflow">catch</span> (<span class="keyword">const</span> rs2::error&amp;)</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="keywordtype">bool</span> VideoCapture_LibRealsense::retrieveFrame(<span class="keywordtype">int</span> outputType, <a class="code hl_typedef" href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a> frame)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>{</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    rs2::video_frame _frame(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacegl.html#a633e694dcd9bc4d91c4276e3b5ab7073">type</a>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keywordflow">switch</span> (outputType)</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#ggab1fa502f1a6a4c5838713fad8af0e876a0633813010b6c21838951de5fb34d643">CAP_INTELPERC_DEPTH_MAP</a>:</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        _frame = mData.get_depth_frame().as&lt;rs2::video_frame&gt;();</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <a class="code hl_variable" href="namespacegl.html#a633e694dcd9bc4d91c4276e3b5ab7073">type</a> = <a class="code hl_define" href="group__core__hal__interface.html#ga404fd4e4553b57c481b7fac31aedcd2b">CV_16UC1</a>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#ggab1fa502f1a6a4c5838713fad8af0e876a56fd50220f952776712bcfb656a5c64d">CAP_INTELPERC_IR_MAP</a>:</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        _frame = mData.get_infrared_frame();</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <a class="code hl_variable" href="namespacegl.html#a633e694dcd9bc4d91c4276e3b5ab7073">type</a> = <a class="code hl_define" href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group__videoio__flags__others.html#ggab1fa502f1a6a4c5838713fad8af0e876a5c722445f6d9324474cf50b39b92ae74">CAP_INTELPERC_IMAGE</a>:</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        _frame = mData.get_color_frame();</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <a class="code hl_variable" href="namespacegl.html#a633e694dcd9bc4d91c4276e3b5ab7073">type</a> = <a class="code hl_define" href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="comment">// we copy the data straight away, so const_cast should be fine</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordtype">void</span>* <a class="code hl_variable" href="namespacegl.html#a261ee7895778c7283e2b8802ec75974e">data</a> = <span class="keyword">const_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(_frame.get_data());</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <a class="code hl_class" href="interface_mat.html">Mat</a>(_frame.get_height(), _frame.get_width(), type, data, _frame.get_stride_in_bytes()).copyTo(frame);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        <span class="keywordflow">if</span>(_frame.get_profile().format() == RS2_FORMAT_RGB8)</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <a class="code hl_function" href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cvtColor</a>(frame, frame, COLOR_RGB2BGR);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">catch</span> (<span class="keyword">const</span> rs2::error&amp;)</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>}</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="keywordtype">int</span> VideoCapture_LibRealsense::getCaptureDomain()</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>{</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__videoio__flags__base.html#gga023786be1ee68a9105bf2e48c700294dabe0df46cd132d1cfbae88efd6f4becdf">CAP_INTELPERC</a>;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>}</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keywordtype">bool</span> VideoCapture_LibRealsense::isOpened()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordflow">return</span> bool(std::shared_ptr&lt;rs2_pipeline&gt;(mPipe));</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>Ptr&lt;IVideoCapture&gt; <a class="code hl_function" href="namespacecv.html#ad5a5733fe254099735d8c2a3a73cb3fa">create_RealSense_capture</a>(<span class="keywordtype">int</span> index)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>{</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordflow">return</span> makePtr&lt;VideoCapture_LibRealsense&gt;(index);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>}</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acap__librealsense_8hpp_html"><div class="ttname"><a href="cap__librealsense_8hpp.html">cap_librealsense.hpp</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_gaad17fda1d0f0d1ee069aebb1df2913c0"><div class="ttname"><a href="group__core__basic.html#gaad17fda1d0f0d1ee069aebb1df2913c0">cv::OutputArray</a></div><div class="ttdeci">const _OutputArray &amp; OutputArray</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00589">mat.hpp:589</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga404fd4e4553b57c481b7fac31aedcd2b"><div class="ttname"><a href="group__core__hal__interface.html#ga404fd4e4553b57c481b7fac31aedcd2b">CV_16UC1</a></div><div class="ttdeci">#define CV_16UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00093">interface.h:93</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga81df635441b21f532fdace401e04f588"><div class="ttname"><a href="group__core__hal__interface.html#ga81df635441b21f532fdace401e04f588">CV_8UC1</a></div><div class="ttdeci">#define CV_8UC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00081">interface.h:81</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga88c4cd9de76f678f33928ef1e3f96047"><div class="ttname"><a href="group__core__hal__interface.html#ga88c4cd9de76f678f33928ef1e3f96047">CV_8UC3</a></div><div class="ttdeci">#define CV_8UC3</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00083">interface.h:83</a></div></div>
+<div class="ttc" id="agroup__imgproc__color__conversions_html_gaf86c09fe702ed037c03c2bc603ceab14"><div class="ttname"><a href="group__imgproc__color__conversions.html#gaf86c09fe702ed037c03c2bc603ceab14">cv::cvtColor</a></div><div class="ttdeci">CV_EXPORTS_W void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0, AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)</div><div class="ttdoc">Converts an image from one color space to another.</div><div class="ttdef"><b>Definición</b> <a href="imgproc_2src_2color_8cpp_source.html#l00192">color.cpp:192</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_gga023786be1ee68a9105bf2e48c700294dabe0df46cd132d1cfbae88efd6f4becdf"><div class="ttname"><a href="group__videoio__flags__base.html#gga023786be1ee68a9105bf2e48c700294dabe0df46cd132d1cfbae88efd6f4becdf">cv::CAP_INTELPERC</a></div><div class="ttdeci">@ CAP_INTELPERC</div><div class="ttdoc">RealSense (former Intel Perceptual Computing SDK).</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00107">videoio.hpp:107</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704da43286725388883a8e231c9ffbe92ca40">cv::CAP_PROP_UNKNOWN</a></div><div class="ttdeci">@ CAP_PROP_UNKNOWN</div><div class="ttdoc">Returned by VideoCapture::get if the requested property is unknown or unsupported.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00132">videoio.hpp:132</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dab26d2ba37086662261148e9fe93eecad">cv::CAP_PROP_FRAME_WIDTH</a></div><div class="ttdeci">@ CAP_PROP_FRAME_WIDTH</div><div class="ttdoc">Width of the frames in the video stream.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00136">videoio.hpp:136</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704dad8b57083fd9bd58e0f94e68a54b42b7e">cv::CAP_PROP_FRAME_HEIGHT</a></div><div class="ttdeci">@ CAP_PROP_FRAME_HEIGHT</div><div class="ttdoc">Height of the frames in the video stream.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00137">videoio.hpp:137</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__base_html_ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2"><div class="ttname"><a href="group__videoio__flags__base.html#ggaeb8dd9c89c10a5c63c139bf7c4f5704daf01bc92359d2abc9e6eeb5cbe36d9af2">cv::CAP_PROP_FPS</a></div><div class="ttdeci">@ CAP_PROP_FPS</div><div class="ttdoc">Frame rate.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00138">videoio.hpp:138</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__others_html_gga0b27320d767d625314a9e04633cd2115a07423906d8a904f7997292878a5c78f0"><div class="ttname"><a href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115a07423906d8a904f7997292878a5c78f0">cv::CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ</a></div><div class="ttdeci">@ CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00640">videoio.hpp:640</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__others_html_gga0b27320d767d625314a9e04633cd2115a647281df465ac37cdc9e199f1fb9ca3c"><div class="ttname"><a href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115a647281df465ac37cdc9e199f1fb9ca3c">cv::CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT</a></div><div class="ttdeci">@ CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00641">videoio.hpp:641</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__others_html_gga0b27320d767d625314a9e04633cd2115acc9291ae9c5beec367fb701cabcaaf0e"><div class="ttname"><a href="group__videoio__flags__others.html#gga0b27320d767d625314a9e04633cd2115acc9291ae9c5beec367fb701cabcaaf0e">cv::CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE</a></div><div class="ttdeci">@ CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00638">videoio.hpp:638</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__others_html_ggab1fa502f1a6a4c5838713fad8af0e876a0633813010b6c21838951de5fb34d643"><div class="ttname"><a href="group__videoio__flags__others.html#ggab1fa502f1a6a4c5838713fad8af0e876a0633813010b6c21838951de5fb34d643">cv::CAP_INTELPERC_DEPTH_MAP</a></div><div class="ttdeci">@ CAP_INTELPERC_DEPTH_MAP</div><div class="ttdoc">Each pixel is a 16-bit integer. The value indicates the distance from an object to the camera&#39;s XY pl...</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00651">videoio.hpp:651</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__others_html_ggab1fa502f1a6a4c5838713fad8af0e876a56fd50220f952776712bcfb656a5c64d"><div class="ttname"><a href="group__videoio__flags__others.html#ggab1fa502f1a6a4c5838713fad8af0e876a56fd50220f952776712bcfb656a5c64d">cv::CAP_INTELPERC_IR_MAP</a></div><div class="ttdeci">@ CAP_INTELPERC_IR_MAP</div><div class="ttdoc">Each pixel is a 16-bit integer. The value indicates the intensity of the reflected laser beam.</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00653">videoio.hpp:653</a></div></div>
+<div class="ttc" id="agroup__videoio__flags__others_html_ggab1fa502f1a6a4c5838713fad8af0e876a5c722445f6d9324474cf50b39b92ae74"><div class="ttname"><a href="group__videoio__flags__others.html#ggab1fa502f1a6a4c5838713fad8af0e876a5c722445f6d9324474cf50b39b92ae74">cv::CAP_INTELPERC_IMAGE</a></div><div class="ttdeci">@ CAP_INTELPERC_IMAGE</div><div class="ttdef"><b>Definición</b> <a href="videoio_8hpp_source.html#l00654">videoio.hpp:654</a></div></div>
+<div class="ttc" id="ainterface_mat_html"><div class="ttname"><a href="interface_mat.html">Mat</a></div><div class="ttdef"><b>Definición</b> <a href="_mat_8h_source.html#l00048">Mat.h:49</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_ad5a5733fe254099735d8c2a3a73cb3fa"><div class="ttname"><a href="namespacecv.html#ad5a5733fe254099735d8c2a3a73cb3fa">cv::create_RealSense_capture</a></div><div class="ttdeci">Ptr&lt; IVideoCapture &gt; create_RealSense_capture(int index)</div></div>
+<div class="ttc" id="anamespacegen__java_html_af4a21f751d7dde7351d13619fc519251"><div class="ttname"><a href="namespacegen__java.html#af4a21f751d7dde7351d13619fc519251">gen_java.config</a></div><div class="ttdeci">config</div><div class="ttdef"><b>Definición</b> <a href="gen__java_8py_source.html#l00023">gen_java.py:23</a></div></div>
+<div class="ttc" id="anamespacegl_html_a261ee7895778c7283e2b8802ec75974e"><div class="ttname"><a href="namespacegl.html#a261ee7895778c7283e2b8802ec75974e">gl::data</a></div><div class="ttdeci">GLint GLenum GLsizei GLsizei GLsizei GLint GLsizei const GLvoid * data</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01144">gl_core_3_1.hpp:1144</a></div></div>
+<div class="ttc" id="anamespacegl_html_a633e694dcd9bc4d91c4276e3b5ab7073"><div class="ttname"><a href="namespacegl.html#a633e694dcd9bc4d91c4276e3b5ab7073">gl::type</a></div><div class="ttdeci">GLint GLint GLsizei GLint GLenum GLenum type</div><div class="ttdef"><b>Definición</b> <a href="gl__core__3__1_8hpp_source.html#l01080">gl_core_3_1.hpp:1080</a></div></div>
+<div class="ttc" id="avideoio_2src_2precomp_8hpp_html"><div class="ttname"><a href="videoio_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_1c13ec14a00cdffc96ed6d9999f4d2ae.html">videoio</a></li><li class="navelem"><a href="dir_48eafdc7f117491a9d2fe1694fdb1b11.html">src</a></li><li class="navelem"><a href="cap__librealsense_8cpp.html">cap_librealsense.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

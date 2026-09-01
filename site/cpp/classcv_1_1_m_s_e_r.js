@@ -1,0 +1,26 @@
+var classcv_1_1_m_s_e_r =
+[
+    [ "create", "classcv_1_1_m_s_e_r.html#a68184a4c8d53aa76a1b083a111280063", null ],
+    [ "detectRegions", "classcv_1_1_m_s_e_r.html#aadd36925310cf366ae702600beab529c", null ],
+    [ "getAreaThreshold", "classcv_1_1_m_s_e_r.html#a8634d69aab47324e55a9836ddb06fdda", null ],
+    [ "getDefaultName", "classcv_1_1_m_s_e_r.html#afe119a055f4b9815db89dcb8e8b786bb", null ],
+    [ "getDelta", "classcv_1_1_m_s_e_r.html#abd8f80845edf5d0557090fdeb643c9cc", null ],
+    [ "getEdgeBlurSize", "classcv_1_1_m_s_e_r.html#abbfe09346640439cc03d985b4974c95d", null ],
+    [ "getMaxArea", "classcv_1_1_m_s_e_r.html#a9ee1c227c122a74cd9716a4da327789b", null ],
+    [ "getMaxEvolution", "classcv_1_1_m_s_e_r.html#a18d34df7069c40ee1406e76684a3d6ed", null ],
+    [ "getMaxVariation", "classcv_1_1_m_s_e_r.html#ab6366e77127ae6fe9c8e8e833b5617dc", null ],
+    [ "getMinArea", "classcv_1_1_m_s_e_r.html#a7e877a223db50060623ea02d02b7d6a2", null ],
+    [ "getMinDiversity", "classcv_1_1_m_s_e_r.html#a8d428d64956c5db290ad184e38ad8736", null ],
+    [ "getMinMargin", "classcv_1_1_m_s_e_r.html#ad19a7e221d3bcba79464ccc92bd420cc", null ],
+    [ "getPass2Only", "classcv_1_1_m_s_e_r.html#a02e06eff327b563174dd6b028d92ccc7", null ],
+    [ "setAreaThreshold", "classcv_1_1_m_s_e_r.html#a2c7e3bc00290ede3b328a969165e5cf0", null ],
+    [ "setDelta", "classcv_1_1_m_s_e_r.html#ab0c37b0d4f4b098acac4b8d2563805f7", null ],
+    [ "setEdgeBlurSize", "classcv_1_1_m_s_e_r.html#a2f390f98c48fe2bcb4d9a75f37022b69", null ],
+    [ "setMaxArea", "classcv_1_1_m_s_e_r.html#a767d5eba5521311bf13bfddb216d7daf", null ],
+    [ "setMaxEvolution", "classcv_1_1_m_s_e_r.html#addaac75d0eeca14c6eefcfd756ba2a4a", null ],
+    [ "setMaxVariation", "classcv_1_1_m_s_e_r.html#a9291cf619cb93dcc4d7326eb44157b14", null ],
+    [ "setMinArea", "classcv_1_1_m_s_e_r.html#a4420c3cc6f375947de17e0c7313a4f7e", null ],
+    [ "setMinDiversity", "classcv_1_1_m_s_e_r.html#a1e722d646ba874956a807599996982ba", null ],
+    [ "setMinMargin", "classcv_1_1_m_s_e_r.html#aac2b6e69ceb7fd3c5ff02f037dc63e62", null ],
+    [ "setPass2Only", "classcv_1_1_m_s_e_r.html#a4a80da5c7716db2b444b256c8c7e3f7f", null ]
+];

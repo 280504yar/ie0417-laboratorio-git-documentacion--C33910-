@@ -1,0 +1,4 @@
+var unionopencv__onnx_1_1_node_device_configuration_proto_default_type_internal_1_1_0funion_0e_8____unnamed0____ =
+[
+    [ "_instance", "unionopencv__onnx_1_1_node_device_configuration_proto_default_type_internal_1_1_0funion_0e_8____unnamed0____.html#a24c84f34fc3fa60350cf5ed5e82d424a", null ]
+];

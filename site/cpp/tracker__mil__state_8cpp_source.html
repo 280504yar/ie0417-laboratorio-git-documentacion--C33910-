@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/video/src/tracking/detail/tracker_mil_state.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tracker__mil__state_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">tracker_mil_state.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="tracker__mil__state_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="video_2src_2precomp_8hpp.html">../../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="tracking_8detail_8hpp.html">opencv2/video/detail/tracking.detail.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="tracker__mil__state_8hpp.html">tracker_mil_state.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">inline</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1detail_1_1tracking.html">tracking</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span></div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#a21e8bbae3a3bb53fdc1315b3c143dc54">   16</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#a21e8bbae3a3bb53fdc1315b3c143dc54">TrackerStateEstimatorMILBoosting::TrackerMILTargetState::TrackerMILTargetState</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">Point2f</a>&amp; position, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">bool</span> foreground,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__stitching__match.html#ga9abb80158a01f6f8cd3a1a782075f481">features</a>)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_target_state.html#a42b38479d2f312c4e8bfc6b14efd09eb">setTargetPosition</a>(position);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_target_state.html#ac53c0b8db4d1994c4b601f6c52d2e24c">setTargetWidth</a>(width);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_target_state.html#a2cc56727dab6e512b753e32478d43c99">setTargetHeight</a>(height);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#af73b0f1b595da1e737fe660c540d43c6">setTargetFg</a>(foreground);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#aab4ec435b6dbf250ad2529c509ed4ce7">setFeatures</a>(<a class="code hl_variable" href="group__stitching__match.html#ga9abb80158a01f6f8cd3a1a782075f481">features</a>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
+</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#af73b0f1b595da1e737fe660c540d43c6">   26</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#af73b0f1b595da1e737fe660c540d43c6">TrackerStateEstimatorMILBoosting::TrackerMILTargetState::setTargetFg</a>(<span class="keywordtype">bool</span> foreground)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    isTarget = foreground;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#aab4ec435b6dbf250ad2529c509ed4ce7">   31</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#aab4ec435b6dbf250ad2529c509ed4ce7">TrackerStateEstimatorMILBoosting::TrackerMILTargetState::setFeatures</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; <a class="code hl_variable" href="group__stitching__match.html#ga9abb80158a01f6f8cd3a1a782075f481">features</a>)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    targetFeatures = <a class="code hl_variable" href="group__stitching__match.html#ga9abb80158a01f6f8cd3a1a782075f481">features</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#afeb34f763be343824660295ff912a0f2">   36</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#afeb34f763be343824660295ff912a0f2">TrackerStateEstimatorMILBoosting::TrackerMILTargetState::isTargetFg</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> isTarget;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
+</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#a596d3738b87cf026c83d17e4a68a01fa">   41</a></span><a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#a596d3738b87cf026c83d17e4a68a01fa">TrackerStateEstimatorMILBoosting::TrackerMILTargetState::getFeatures</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> targetFeatures;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#ae47b18866f624cd8a41e795e66da33bf">   46</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#ae47b18866f624cd8a41e795e66da33bf">TrackerStateEstimatorMILBoosting::TrackerStateEstimatorMILBoosting</a>(<span class="keywordtype">int</span> nFeatures)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>{</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_variable" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#abcf922c8baa1c5509a1f6ab351f0b3ab">className</a> = <span class="stringliteral">&quot;BOOSTING&quot;</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    trained = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    numFeatures = nFeatures;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#ae27a7085606e4bfbd20bd2739ffea64a">   53</a></span><a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#ae27a7085606e4bfbd20bd2739ffea64a">TrackerStateEstimatorMILBoosting::~TrackerStateEstimatorMILBoosting</a>()</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#aece69296dbc5125865baf4fccb67f534">   57</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#aece69296dbc5125865baf4fccb67f534">TrackerStateEstimatorMILBoosting::setCurrentConfidenceMap</a>(<a class="code hl_typedef" href="group__tracking__detail.html#ga67c9939022cafc96f51089517d7636e5">ConfidenceMap</a>&amp; confidenceMap)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    currentConfidenceMap.clear();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    currentConfidenceMap = confidenceMap;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> TrackerStateEstimatorMILBoosting::max_idx(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; v)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">const</span> <span class="keywordtype">float</span>* findPtr = &amp;(*std::max_element(v.begin(), v.end()));</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">const</span> <span class="keywordtype">float</span>* beginPtr = &amp;(*v.begin());</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> (<a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a>)(findPtr - beginPtr);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#a1e977c43a02650e2c9765baff674639e">   70</a></span><a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;TrackerTargetState&gt;</a> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#a1e977c43a02650e2c9765baff674639e">TrackerStateEstimatorMILBoosting::estimateImpl</a>(<span class="keyword">const</span> std::vector&lt;ConfidenceMap&gt;&amp; <span class="comment">/*confidenceMaps*/</span>)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>{</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">//run ClfMilBoost classify in order to compute next location</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">if</span> (currentConfidenceMap.empty())</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">Ptr&lt;TrackerTargetState&gt;</a>();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> positiveStates;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> negativeStates;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    prepareData(currentConfidenceMap, positiveStates, negativeStates);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    std::vector&lt;float&gt; prob = boostMILModel.classify(positiveStates);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">int</span> bestind = max_idx(prob);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="comment">//float resp = prob[bestind];</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">return</span> currentConfidenceMap.at(bestind).first;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keywordtype">void</span> TrackerStateEstimatorMILBoosting::prepareData(<span class="keyword">const</span> <a class="code hl_typedef" href="group__tracking__detail.html#ga67c9939022cafc96f51089517d7636e5">ConfidenceMap</a>&amp; confidenceMap, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; positive, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a>&amp; negative)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>{</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">int</span> posCounter = 0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">int</span> negCounter = 0;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; confidenceMap.size(); i++)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;TrackerMILTargetState&gt;</a> currentTargetState = confidenceMap.at(i).first.staticCast&lt;TrackerMILTargetState&gt;();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_define" href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a>(currentTargetState);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">if</span> (currentTargetState-&gt;isTargetFg())</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            posCounter++;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            negCounter++;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    positive.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(posCounter, numFeatures, <a class="code hl_define" href="group__core__hal__interface.html#ga32ec76240e43e4c9c7b2e2785180a7e6">CV_32FC1</a>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    negative.<a class="code hl_function" href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">create</a>(negCounter, numFeatures, <a class="code hl_define" href="group__core__hal__interface.html#ga32ec76240e43e4c9c7b2e2785180a7e6">CV_32FC1</a>);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">//TODO change with mat fast access</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="comment">//initialize trainData (positive and negative)</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">int</span> <a class="code hl_enumvalue" href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8a5c598dc317cfe6ac99afeaeed18454c7">pc</a> = 0;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">int</span> nc = 0;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; confidenceMap.size(); i++)</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;TrackerMILTargetState&gt;</a> currentTargetState = confidenceMap.at(i).first.staticCast&lt;TrackerMILTargetState&gt;();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> stateFeatures = currentTargetState-&gt;getFeatures();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">if</span> (currentTargetState-&gt;isTargetFg())</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; stateFeatures.rows; j++)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="comment">//fill the positive trainData with the value of the feature j for sample i</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                positive.<a class="code hl_function" href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">at</a>&lt;<span class="keywordtype">float</span>&gt;(<a class="code hl_enumvalue" href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8a5c598dc317cfe6ac99afeaeed18454c7">pc</a>, j) = stateFeatures.at&lt;<span class="keywordtype">float</span>&gt;(j, 0);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <a class="code hl_enumvalue" href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8a5c598dc317cfe6ac99afeaeed18454c7">pc</a>++;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; stateFeatures.rows; j++)</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                <span class="comment">//fill the negative trainData with the value of the feature j for sample i</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                negative.<a class="code hl_function" href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">at</a>&lt;<span class="keywordtype">float</span>&gt;(nc, j) = stateFeatures.at&lt;<span class="keywordtype">float</span>&gt;(j, 0);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            nc++;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#aac20ff31142a1622be13b1978c01fb55">  139</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#aac20ff31142a1622be13b1978c01fb55">TrackerStateEstimatorMILBoosting::updateImpl</a>(std::vector&lt;ConfidenceMap&gt;&amp; confidenceMaps)</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>{</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">if</span> (!trained)</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="comment">//this is the first time that the classifier is built</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="comment">//init MIL</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        boostMILModel.init();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        trained = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_typedef" href="group__tracking__detail.html#ga67c9939022cafc96f51089517d7636e5">ConfidenceMap</a> lastConfidenceMap = confidenceMaps.back();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> positiveStates;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> negativeStates;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    prepareData(lastConfidenceMap, positiveStates, negativeStates);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="comment">//update MIL</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    boostMILModel.update(positiveStates, negativeStates);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}}}  <span class="comment">// namespace cv::detail::tracking</span></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_a6c1bf08cec827af2f571fa222ed8ba2c"><div class="ttname"><a href="classcv_1_1_mat.html#a6c1bf08cec827af2f571fa222ed8ba2c">cv::Mat::create</a></div><div class="ttdeci">void create(int rows, int cols, int type)</div><div class="ttdoc">Allocates new array data if needed.</div><div class="ttdef"><b>Definición</b> <a href="matrix_8cpp_source.html#l00923">matrix.cpp:923</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html_aa10d804e90b51d4157b5c26e12c5d2df"><div class="ttname"><a href="classcv_1_1_mat.html#aa10d804e90b51d4157b5c26e12c5d2df">cv::Mat::at</a></div><div class="ttdeci">_Tp &amp; at(int i0=0)</div><div class="ttdoc">Returns a reference to the specified array element.</div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_html_abcf922c8baa1c5509a1f6ab351f0b3ab"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator.html#abcf922c8baa1c5509a1f6ab351f0b3ab">cv::detail::tracking::TrackerStateEstimator::className</a></div><div class="ttdeci">String className</div><div class="ttdef"><b>Definición</b> <a href="tracking_8detail_8hpp_source.html#l00265">tracking.detail.hpp:265</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state_html_a21e8bbae3a3bb53fdc1315b3c143dc54"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#a21e8bbae3a3bb53fdc1315b3c143dc54">cv::detail::tracking::TrackerStateEstimatorMILBoosting::TrackerMILTargetState::TrackerMILTargetState</a></div><div class="ttdeci">TrackerMILTargetState(const Point2f &amp;position, int width, int height, bool foreground, const Mat &amp;features)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definición</b> <a href="#l00016">tracker_mil_state.cpp:16</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state_html_a596d3738b87cf026c83d17e4a68a01fa"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#a596d3738b87cf026c83d17e4a68a01fa">cv::detail::tracking::TrackerStateEstimatorMILBoosting::TrackerMILTargetState::getFeatures</a></div><div class="ttdeci">Mat getFeatures() const</div><div class="ttdoc">Get the features extracted.</div><div class="ttdef"><b>Definición</b> <a href="#l00041">tracker_mil_state.cpp:41</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state_html_aab4ec435b6dbf250ad2529c509ed4ce7"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#aab4ec435b6dbf250ad2529c509ed4ce7">cv::detail::tracking::TrackerStateEstimatorMILBoosting::TrackerMILTargetState::setFeatures</a></div><div class="ttdeci">void setFeatures(const Mat &amp;features)</div><div class="ttdoc">Set the features extracted from TrackerFeatureSet.</div><div class="ttdef"><b>Definición</b> <a href="#l00031">tracker_mil_state.cpp:31</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state_html_af73b0f1b595da1e737fe660c540d43c6"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#af73b0f1b595da1e737fe660c540d43c6">cv::detail::tracking::TrackerStateEstimatorMILBoosting::TrackerMILTargetState::setTargetFg</a></div><div class="ttdeci">void setTargetFg(bool foreground)</div><div class="ttdoc">Set label: true for target foreground, false for background.</div><div class="ttdef"><b>Definición</b> <a href="#l00026">tracker_mil_state.cpp:26</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state_html_afeb34f763be343824660295ff912a0f2"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_1_1_tracker_m_i_l_target_state.html#afeb34f763be343824660295ff912a0f2">cv::detail::tracking::TrackerStateEstimatorMILBoosting::TrackerMILTargetState::isTargetFg</a></div><div class="ttdeci">bool isTargetFg() const</div><div class="ttdoc">Get the label. Return true for target foreground, false for background.</div><div class="ttdef"><b>Definición</b> <a href="#l00036">tracker_mil_state.cpp:36</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_html_a1e977c43a02650e2c9765baff674639e"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#a1e977c43a02650e2c9765baff674639e">cv::detail::tracking::TrackerStateEstimatorMILBoosting::estimateImpl</a></div><div class="ttdeci">Ptr&lt; TrackerTargetState &gt; estimateImpl(const std::vector&lt; ConfidenceMap &gt; &amp;confidenceMaps) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00070">tracker_mil_state.cpp:70</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_html_aac20ff31142a1622be13b1978c01fb55"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#aac20ff31142a1622be13b1978c01fb55">cv::detail::tracking::TrackerStateEstimatorMILBoosting::updateImpl</a></div><div class="ttdeci">void updateImpl(std::vector&lt; ConfidenceMap &gt; &amp;confidenceMaps) CV_OVERRIDE</div><div class="ttdef"><b>Definición</b> <a href="#l00139">tracker_mil_state.cpp:139</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_html_ae27a7085606e4bfbd20bd2739ffea64a"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#ae27a7085606e4bfbd20bd2739ffea64a">cv::detail::tracking::TrackerStateEstimatorMILBoosting::~TrackerStateEstimatorMILBoosting</a></div><div class="ttdeci">~TrackerStateEstimatorMILBoosting()</div><div class="ttdef"><b>Definición</b> <a href="#l00053">tracker_mil_state.cpp:53</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_html_ae47b18866f624cd8a41e795e66da33bf"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#ae47b18866f624cd8a41e795e66da33bf">cv::detail::tracking::TrackerStateEstimatorMILBoosting::TrackerStateEstimatorMILBoosting</a></div><div class="ttdeci">TrackerStateEstimatorMILBoosting(int nFeatures=250)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definición</b> <a href="#l00046">tracker_mil_state.cpp:46</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting_html_aece69296dbc5125865baf4fccb67f534"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_state_estimator_m_i_l_boosting.html#aece69296dbc5125865baf4fccb67f534">cv::detail::tracking::TrackerStateEstimatorMILBoosting::setCurrentConfidenceMap</a></div><div class="ttdeci">void setCurrentConfidenceMap(ConfidenceMap &amp;confidenceMap)</div><div class="ttdoc">Set the current confidenceMap.</div><div class="ttdef"><b>Definición</b> <a href="#l00057">tracker_mil_state.cpp:57</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_target_state_html_a2cc56727dab6e512b753e32478d43c99"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_target_state.html#a2cc56727dab6e512b753e32478d43c99">cv::detail::tracking::TrackerTargetState::setTargetHeight</a></div><div class="ttdeci">void setTargetHeight(int height)</div><div class="ttdoc">Set the height of the target.</div><div class="ttdef"><b>Definición</b> <a href="tracker__model_8cpp_source.html#l00127">tracker_model.cpp:127</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_target_state_html_a42b38479d2f312c4e8bfc6b14efd09eb"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_target_state.html#a42b38479d2f312c4e8bfc6b14efd09eb">cv::detail::tracking::TrackerTargetState::setTargetPosition</a></div><div class="ttdeci">void setTargetPosition(const Point2f &amp;position)</div><div class="ttdoc">Set the position.</div><div class="ttdef"><b>Definición</b> <a href="tracker__model_8cpp_source.html#l00108">tracker_model.cpp:108</a></div></div>
+<div class="ttc" id="aclasscv_1_1detail_1_1tracking_1_1_tracker_target_state_html_ac53c0b8db4d1994c4b601f6c52d2e24c"><div class="ttname"><a href="classcv_1_1detail_1_1tracking_1_1_tracker_target_state.html#ac53c0b8db4d1994c4b601f6c52d2e24c">cv::detail::tracking::TrackerTargetState::setTargetWidth</a></div><div class="ttdeci">void setTargetWidth(int width)</div><div class="ttdoc">Set the width of the target.</div><div class="ttdef"><b>Definición</b> <a href="tracker__model_8cpp_source.html#l00118">tracker_model.cpp:118</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga7d080aa40de011e4410bca63385ffe2a"><div class="ttname"><a href="group__core__basic.html#ga7d080aa40de011e4410bca63385ffe2a">cv::Point2f</a></div><div class="ttdeci">Point_&lt; float &gt; Point2f</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2types_8hpp_source.html#l00207">types.hpp:207</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga32ec76240e43e4c9c7b2e2785180a7e6"><div class="ttname"><a href="group__core__hal__interface.html#ga32ec76240e43e4c9c7b2e2785180a7e6">CV_32FC1</a></div><div class="ttdeci">#define CV_32FC1</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2hal_2interface_8h_source.html#l00111">interface.h:111</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa4ffa7f460d95bda4fd293dd4e337418"><div class="ttname"><a href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">cv::uint</a></div><div class="ttdeci">uint32_t uint</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00038">templmatch.cpp:38</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_gafbcb487cba05bd288dbe18c433de4f6f"><div class="ttname"><a href="group__core__utils.html#gafbcb487cba05bd288dbe18c433de4f6f">CV_DbgAssert</a></div><div class="ttdeci">#define CV_DbgAssert(expr)</div><div class="ttdef"><b>Definición</b> <a href="exception_8hpp_source.html#l00232">exception.hpp:232</a></div></div>
+<div class="ttc" id="agroup__stitching__match_html_ga9abb80158a01f6f8cd3a1a782075f481"><div class="ttname"><a href="group__stitching__match.html#ga9abb80158a01f6f8cd3a1a782075f481">cv::detail::features</a></div><div class="ttdeci">InputArray CV_OUT ImageFeatures &amp; features</div><div class="ttdef"><b>Definición</b> <a href="matchers_8hpp_source.html#l00089">matchers.hpp:89</a></div></div>
+<div class="ttc" id="agroup__tracking__detail_html_ga67c9939022cafc96f51089517d7636e5"><div class="ttname"><a href="group__tracking__detail.html#ga67c9939022cafc96f51089517d7636e5">cv::detail::tracking::ConfidenceMap</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; Ptr&lt; TrackerTargetState &gt;, float &gt; &gt; ConfidenceMap</div><div class="ttdoc">Represents the model of the target at frame  (all states and scores).</div><div class="ttdef"><b>Definición</b> <a href="tracking_8detail_8hpp_source.html#l00214">tracking.detail.hpp:214</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_1_1tracking_html"><div class="ttname"><a href="namespacecv_1_1detail_1_1tracking.html">cv::detail::tracking</a></div><div class="ttdef"><b>Definición</b> <a href="tracking_8detail_8hpp_source.html#l00022">tracking.detail.hpp:22</a></div></div>
+<div class="ttc" id="anamespacecv_1_1detail_html"><div class="ttname"><a href="namespacecv_1_1detail.html">cv::detail</a></div><div class="ttdef"><b>Definición</b> <a href="dualquaternion_8inl_8hpp_source.html#l00317">dualquaternion.inl.hpp:317</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="anamespacecv_html_a172ccaaba996db5201af1c17c04a5fe8a5c598dc317cfe6ac99afeaeed18454c7"><div class="ttname"><a href="namespacecv.html#a172ccaaba996db5201af1c17c04a5fe8a5c598dc317cfe6ac99afeaeed18454c7">cv::pc</a></div><div class="ttdeci">@ pc</div><div class="ttdef"><b>Definición</b> <a href="container__avi_8private_8hpp_source.html#l00138">container_avi.private.hpp:138</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html_ac18c0d5defdf2b5653649393d563cce7"><div class="ttname"><a href="structcv_1_1_ptr.html#ac18c0d5defdf2b5653649393d563cce7">cv::Ptr::Ptr</a></div><div class="ttdeci">Ptr() CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00073">cvstd_wrapper.hpp:73</a></div></div>
+<div class="ttc" id="atracker__mil__state_8hpp_html"><div class="ttname"><a href="tracker__mil__state_8hpp.html">tracker_mil_state.hpp</a></div></div>
+<div class="ttc" id="atracking_8detail_8hpp_html"><div class="ttname"><a href="tracking_8detail_8hpp.html">tracking.detail.hpp</a></div></div>
+<div class="ttc" id="avideo_2src_2precomp_8hpp_html"><div class="ttname"><a href="video_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_2508e962348bdf6937b92f313b633ed9.html">video</a></li><li class="navelem"><a href="dir_e10036e501edf27ab5629bafc103e45e.html">src</a></li><li class="navelem"><a href="dir_b56a50f837f97c89175c87daafb7ae1e.html">tracking</a></li><li class="navelem"><a href="dir_a91f2a465a31ba171a1b9bef84670d7b.html">detail</a></li><li class="navelem"><a href="tracker__mil__state_8cpp.html">tracker_mil_state.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

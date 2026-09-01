@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/core/src/parallel/parallel_tbb.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('parallel__tbb_8cpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">parallel_tbb.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="parallel__tbb_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="core_2src_2precomp_8hpp.html">../precomp.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="factory__parallel_8hpp.html">factory_parallel.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef HAVE_TBB</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="parallel_8hpp.html">parallel.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="parallel__for_8tbb_8hpp.html">opencv2/core/parallel/backend/parallel_for.tbb.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> { <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1parallel.html">parallel</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">static</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>std::shared_ptr&lt;cv::parallel::tbb::ParallelForBackend&gt;&amp; getInstance()</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static</span> std::shared_ptr&lt;cv::parallel::tbb::ParallelForBackend&gt; g_instance = std::make_shared&lt;cv::parallel::tbb::ParallelForBackend&gt;();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">return</span> g_instance;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#ifndef BUILD_PLUGIN</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>std::shared_ptr&lt;cv::parallel::ParallelForAPI&gt; createParallelBackendTBB()</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">return</span> getInstance();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}}  <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#ifdef BUILD_PLUGIN</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define ABI_VERSION 0</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#define API_VERSION 0</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="plugin__parallel__api_8hpp.html">plugin_parallel_api.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">static</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><a class="code hl_typedef" href="group__core__lowlevel__api.html#ga4f9d1dbe5d6bd23e14163e65c32c4f48">CvResult</a> cv_getInstance(<a class="code hl_define" href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a> <a class="code hl_typedef" href="plugin__parallel__api_8hpp.html#af2c61086e6b6c234f99473348c08d0bd">CvPluginParallelBackendAPI</a>* handle) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (!handle)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__core__lowlevel__api.html#gga613f3f74b290fd96e9b2e19583baa515ac34ec3b7a47b8f639326d44d5074c6ef">CV_ERROR_FAIL</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        *handle = cv::parallel::getInstance().get();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__core__lowlevel__api.html#gga613f3f74b290fd96e9b2e19583baa515abf35bd19393375fdeeef47ae6cfde0f8">CV_ERROR_OK</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">catch</span> (...)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__core__lowlevel__api.html#gga613f3f74b290fd96e9b2e19583baa515ac34ec3b7a47b8f639326d44d5074c6ef">CV_ERROR_FAIL</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_typedef" href="plugin__parallel__api_8hpp.html#ab3eb1cf6c005fd8a16eb6683419a63f0">OpenCV_Core_Parallel_Plugin_API</a> plugin_api =</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="plugin__parallel__api_8hpp.html#ab3eb1cf6c005fd8a16eb6683419a63f0">OpenCV_Core_Parallel_Plugin_API</a>), <a class="code hl_define" href="plugin__parallel__api_8hpp.html#aba076ea3adc5becdfb501bc9c3d371aa">ABI_VERSION</a>, <a class="code hl_define" href="plugin__parallel__api_8hpp.html#ad97188edfdd667de971027b35330fa41">API_VERSION</a>,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_define" href="core_2include_2opencv2_2core_2version_8hpp.html#a8b16dd46dfbea6b5c1e566d496d89aea">CV_VERSION_MAJOR</a>, <a class="code hl_define" href="core_2include_2opencv2_2core_2version_8hpp.html#a2da793dc9e28ff4b93ebc305a739ee8e">CV_VERSION_MINOR</a>, <a class="code hl_define" href="core_2include_2opencv2_2core_2version_8hpp.html#a7d28f54b6f2873c448716f1d19c51f3e">CV_VERSION_REVISION</a>, <a class="code hl_define" href="core_2include_2opencv2_2core_2version_8hpp.html#a744971513b33fc56b31d86cb49fb041d">CV_VERSION_STATUS</a>,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="stringliteral">&quot;TBB (interface &quot;</span> <a class="code hl_define" href="core_2include_2opencv2_2core_2version_8hpp.html#aea72ae30b49e17fd343def2fac4766a2">CVAUX_STR</a>(TBB_INTERFACE_VERSION) <span class="stringliteral">&quot;) OpenCV parallel plugin&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    },</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="comment">/*  1*/</span>cv_getInstance</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>};</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">const</span> <a class="code hl_typedef" href="plugin__parallel__api_8hpp.html#ab3eb1cf6c005fd8a16eb6683419a63f0">OpenCV_Core_Parallel_Plugin_API</a>* <a class="code hl_define" href="group__core__lowlevel__api.html#ga291abe853820ed86c6df64641b218a15">CV_API_CALL</a> opencv_core_parallel_plugin_init_v0(<span class="keywordtype">int</span> requested_abi_version, <span class="keywordtype">int</span> requested_api_version, <span class="keywordtype">void</span>* <span class="comment">/*reserved=NULL*/</span>) <a class="code hl_define" href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">if</span> (requested_abi_version == <a class="code hl_define" href="plugin__parallel__api_8hpp.html#aba076ea3adc5becdfb501bc9c3d371aa">ABI_VERSION</a> &amp;&amp; requested_api_version &lt;= <a class="code hl_define" href="plugin__parallel__api_8hpp.html#ad97188edfdd667de971027b35330fa41">API_VERSION</a>)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> &amp;plugin_api;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif  </span><span class="comment">// BUILD_PLUGIN</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif  </span><span class="comment">// HAVE_TBB</span></div>
+<div class="ttc" id="acore_2include_2opencv2_2core_2version_8hpp_html_a2da793dc9e28ff4b93ebc305a739ee8e"><div class="ttname"><a href="core_2include_2opencv2_2core_2version_8hpp.html#a2da793dc9e28ff4b93ebc305a739ee8e">CV_VERSION_MINOR</a></div><div class="ttdeci">#define CV_VERSION_MINOR</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2version_8hpp_source.html#l00009">version.hpp:9</a></div></div>
+<div class="ttc" id="acore_2include_2opencv2_2core_2version_8hpp_html_a744971513b33fc56b31d86cb49fb041d"><div class="ttname"><a href="core_2include_2opencv2_2core_2version_8hpp.html#a744971513b33fc56b31d86cb49fb041d">CV_VERSION_STATUS</a></div><div class="ttdeci">#define CV_VERSION_STATUS</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2version_8hpp_source.html#l00011">version.hpp:11</a></div></div>
+<div class="ttc" id="acore_2include_2opencv2_2core_2version_8hpp_html_a7d28f54b6f2873c448716f1d19c51f3e"><div class="ttname"><a href="core_2include_2opencv2_2core_2version_8hpp.html#a7d28f54b6f2873c448716f1d19c51f3e">CV_VERSION_REVISION</a></div><div class="ttdeci">#define CV_VERSION_REVISION</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2version_8hpp_source.html#l00010">version.hpp:10</a></div></div>
+<div class="ttc" id="acore_2include_2opencv2_2core_2version_8hpp_html_a8b16dd46dfbea6b5c1e566d496d89aea"><div class="ttname"><a href="core_2include_2opencv2_2core_2version_8hpp.html#a8b16dd46dfbea6b5c1e566d496d89aea">CV_VERSION_MAJOR</a></div><div class="ttdeci">#define CV_VERSION_MAJOR</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2version_8hpp_source.html#l00008">version.hpp:8</a></div></div>
+<div class="ttc" id="acore_2include_2opencv2_2core_2version_8hpp_html_aea72ae30b49e17fd343def2fac4766a2"><div class="ttname"><a href="core_2include_2opencv2_2core_2version_8hpp.html#aea72ae30b49e17fd343def2fac4766a2">CVAUX_STR</a></div><div class="ttdeci">#define CVAUX_STR(__A)</div><div class="ttdef"><b>Definición</b> <a href="core_2include_2opencv2_2core_2version_8hpp_source.html#l00014">version.hpp:14</a></div></div>
+<div class="ttc" id="acore_2src_2precomp_8hpp_html"><div class="ttname"><a href="core_2src_2precomp_8hpp.html">precomp.hpp</a></div></div>
+<div class="ttc" id="afactory__parallel_8hpp_html"><div class="ttname"><a href="factory__parallel_8hpp.html">factory_parallel.hpp</a></div></div>
+<div class="ttc" id="agroup__core__lowlevel__api_html_ga291abe853820ed86c6df64641b218a15"><div class="ttname"><a href="group__core__lowlevel__api.html#ga291abe853820ed86c6df64641b218a15">CV_API_CALL</a></div><div class="ttdeci">#define CV_API_CALL</div><div class="ttdoc">calling convention (including callbacks)</div><div class="ttdef"><b>Definición</b> <a href="llapi_8h_source.html#l00027">llapi.h:27</a></div></div>
+<div class="ttc" id="agroup__core__lowlevel__api_html_ga4f9d1dbe5d6bd23e14163e65c32c4f48"><div class="ttname"><a href="group__core__lowlevel__api.html#ga4f9d1dbe5d6bd23e14163e65c32c4f48">CvResult</a></div><div class="ttdeci">enum cvResult CvResult</div></div>
+<div class="ttc" id="agroup__core__lowlevel__api_html_gga613f3f74b290fd96e9b2e19583baa515abf35bd19393375fdeeef47ae6cfde0f8"><div class="ttname"><a href="group__core__lowlevel__api.html#gga613f3f74b290fd96e9b2e19583baa515abf35bd19393375fdeeef47ae6cfde0f8">CV_ERROR_OK</a></div><div class="ttdeci">@ CV_ERROR_OK</div><div class="ttdoc">No error.</div><div class="ttdef"><b>Definición</b> <a href="llapi_8h_source.html#l00041">llapi.h:41</a></div></div>
+<div class="ttc" id="agroup__core__lowlevel__api_html_gga613f3f74b290fd96e9b2e19583baa515ac34ec3b7a47b8f639326d44d5074c6ef"><div class="ttname"><a href="group__core__lowlevel__api.html#gga613f3f74b290fd96e9b2e19583baa515ac34ec3b7a47b8f639326d44d5074c6ef">CV_ERROR_FAIL</a></div><div class="ttdeci">@ CV_ERROR_FAIL</div><div class="ttdoc">Some error occurred (TODO Require to fill exception information).</div><div class="ttdef"><b>Definición</b> <a href="llapi_8h_source.html#l00040">llapi.h:40</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga4e999bc21cb894d3ed789f3f0bc26778"><div class="ttname"><a href="group__core__utils.html#ga4e999bc21cb894d3ed789f3f0bc26778">CV_OUT</a></div><div class="ttdeci">#define CV_OUT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00489">cvdef.h:489</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga7b88772bee40b329b585a3a2157abd9b"><div class="ttname"><a href="group__core__utils.html#ga7b88772bee40b329b585a3a2157abd9b">CV_NOEXCEPT</a></div><div class="ttdeci">#define CV_NOEXCEPT</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00838">cvdef.h:838</a></div></div>
+<div class="ttc" id="anamespacecv_1_1parallel_html"><div class="ttname"><a href="namespacecv_1_1parallel.html">cv::parallel</a></div><div class="ttdef"><b>Definición</b> <a href="parallel__for_8openmp_8hpp_source.html#l00016">parallel_for.openmp.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aparallel_8hpp_html"><div class="ttname"><a href="parallel_8hpp.html">parallel.hpp</a></div></div>
+<div class="ttc" id="aparallel__for_8tbb_8hpp_html"><div class="ttname"><a href="parallel__for_8tbb_8hpp.html">parallel_for.tbb.hpp</a></div></div>
+<div class="ttc" id="aplugin__parallel__api_8hpp_html"><div class="ttname"><a href="plugin__parallel__api_8hpp.html">plugin_parallel_api.hpp</a></div></div>
+<div class="ttc" id="aplugin__parallel__api_8hpp_html_ab3eb1cf6c005fd8a16eb6683419a63f0"><div class="ttname"><a href="plugin__parallel__api_8hpp.html#ab3eb1cf6c005fd8a16eb6683419a63f0">OpenCV_Core_Parallel_Plugin_API</a></div><div class="ttdeci">OpenCV_Core_Parallel_Plugin_API_v0 OpenCV_Core_Parallel_Plugin_API</div><div class="ttdef"><b>Definición</b> <a href="plugin__parallel__api_8hpp_source.html#l00054">plugin_parallel_api.hpp:54</a></div></div>
+<div class="ttc" id="aplugin__parallel__api_8hpp_html_aba076ea3adc5becdfb501bc9c3d371aa"><div class="ttname"><a href="plugin__parallel__api_8hpp.html#aba076ea3adc5becdfb501bc9c3d371aa">ABI_VERSION</a></div><div class="ttdeci">#define ABI_VERSION</div><div class="ttdef"><b>Definición</b> <a href="plugin__parallel__api_8hpp_source.html#l00024">plugin_parallel_api.hpp:24</a></div></div>
+<div class="ttc" id="aplugin__parallel__api_8hpp_html_ad97188edfdd667de971027b35330fa41"><div class="ttname"><a href="plugin__parallel__api_8hpp.html#ad97188edfdd667de971027b35330fa41">API_VERSION</a></div><div class="ttdeci">#define API_VERSION</div><div class="ttdef"><b>Definición</b> <a href="plugin__parallel__api_8hpp_source.html#l00018">plugin_parallel_api.hpp:18</a></div></div>
+<div class="ttc" id="aplugin__parallel__api_8hpp_html_af2c61086e6b6c234f99473348c08d0bd"><div class="ttname"><a href="plugin__parallel__api_8hpp.html#af2c61086e6b6c234f99473348c08d0bd">CvPluginParallelBackendAPI</a></div><div class="ttdeci">cv::parallel::ParallelForAPI * CvPluginParallelBackendAPI</div><div class="ttdef"><b>Definición</b> <a href="plugin__parallel__api_8hpp_source.html#l00034">plugin_parallel_api.hpp:34</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_52ce136c3a2ee9aa007cb4fb58e626e3.html">core</a></li><li class="navelem"><a href="dir_7290fb79a76b96c97b49be648fd30856.html">src</a></li><li class="navelem"><a href="dir_b89785eea07c07300309f07e8b8846ce.html">parallel</a></li><li class="navelem"><a href="parallel__tbb_8cpp.html">parallel_tbb.cpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

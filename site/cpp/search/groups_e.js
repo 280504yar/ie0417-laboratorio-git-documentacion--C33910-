@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['macos_20osx_20glue_0',['MacOS(OSX) glue',['../group__imgcodecs__macosx.html',1,'']]],
+  ['macros_1',['Utility and system functions and macros',['../group__core__utils.html',1,'']]],
+  ['magnitude_20calculation_2',['Magnitude calculation',['../group__core__hal__interface__magnitude.html',1,'']]],
+  ['manipulating_20highgui_20windows_20and_20mouse_20events_3',['Flags related creating and manipulating HighGUI windows and mouse events',['../group__highgui__window__flags.html',1,'']]],
+  ['markers_20and_20boards_20detection_20for_20robust_20camera_20pose_20estimation_4',['ArUco markers and boards detection for robust camera pose estimation',['../group__objdetect__aruco.html',1,'']]],
+  ['matchers_5',['Descriptor Matchers',['../group__features__match.html',1,'']]],
+  ['matches_6',['Drawing Function of Keypoints and Matches',['../group__features__draw.html',1,'']]],
+  ['matching_7',['Features Finding and Images Matching',['../group__stitching__match.html',1,'']]],
+  ['matrix_20decomposition_8',['matrix decomposition',['../group__core__hal__interface__decomp__cholesky.html',1,'Cholesky matrix decomposition'],['../group__core__hal__interface__decomp__lu.html',1,'LU matrix decomposition'],['../group__core__hal__interface__decomp__qr.html',1,'QR matrix decomposition'],['../group__core__hal__interface__decomp__svd.html',1,'Singular value matrix decomposition']]],
+  ['matrix_20multiplication_9',['Matrix multiplication',['../group__core__hal__interface__matrix__multiplication.html',1,'']]],
+  ['maximum_10',['Element-wise minimum or maximum',['../group__core__hal__interface__minmax.html',1,'']]],
+  ['mcc_11',['Mcc',['../group__mcc.html',1,'']]],
+  ['merge_12',['Channel merge',['../group__core__hal__interface__merge.html',1,'']]],
+  ['minimum_20or_20maximum_13',['Element-wise minimum or maximum',['../group__core__hal__interface__minmax.html',1,'']]],
+  ['miscellaneous_20image_20transformations_14',['Miscellaneous Image Transformations',['../group__imgproc__misc.html',1,'']]],
+  ['model_15',['Fisheye camera model',['../group__calib3d__fisheye.html',1,'']]],
+  ['module_16',['module',['../group__ccm.html',1,'Color Correction module'],['../group__geometry.html',1,'Computational geometry primitives module.'],['../group__dnn.html',1,'Deep Neural Network module']]],
+  ['motion_20analysis_17',['Motion Analysis',['../group__video__motion.html',1,'']]],
+  ['motion_20analysis_20and_20object_20tracking_18',['Motion Analysis and Object Tracking',['../group__imgproc__motion.html',1,'']]],
+  ['mouse_20events_19',['Flags related creating and manipulating HighGUI windows and mouse events',['../group__highgui__window__flags.html',1,'']]],
+  ['multi_20dimensional_20spaces_20',['Multi Dimensional Spaces',['../group__features__annoy.html',1,'Approximate Nearest Neighbors Search in Multi-Dimensional Spaces'],['../group__flann.html',1,'Clustering and Search in Multi-Dimensional Spaces']]],
+  ['multiplication_21',['Matrix multiplication',['../group__core__hal__interface__matrix__multiplication.html',1,'']]],
+  ['multiply_22',['Element-wise multiply',['../group__core__hal__interface__multiply.html',1,'']]]
+];

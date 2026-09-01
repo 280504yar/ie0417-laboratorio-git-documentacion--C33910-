@@ -1,0 +1,25 @@
+var structcv_1_1dnn_1_1detail_1_1_layer_data =
+[
+    [ "LayerData", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#adea8017f6aeb8aee048d42e6f67020cc", null ],
+    [ "LayerData", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a494a8e71c759a180b04598bd4143559f", null ],
+    [ "resetAllocation", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a05373d6a146a565c03e73bfb2c35a73c", null ],
+    [ "backendNodes", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#aeca49ddc2caa755aa1349133ff539cdf", null ],
+    [ "consumers", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a94e81fa660f4f795babcab53fb45e13f", null ],
+    [ "dtype", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a5317875ff039c33ac13d62b8ddbc2038", null ],
+    [ "flag", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#ade039b5ee69cfcfc7e070c96d1b09dc5", null ],
+    [ "id", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a1576263369a6c7ba636da6221027da1b", null ],
+    [ "inputBlobs", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a67c612a9c6e444301a536f7c85190a6f", null ],
+    [ "inputBlobsId", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a4a4442424233c4cf60565e5d0dd2b2ba", null ],
+    [ "inputBlobsWrappers", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a4cde099189b2ee83f41f4e318357117d", null ],
+    [ "inputLayersId", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a4c528f450a9180d60bdad82990a38254", null ],
+    [ "internalBlobsWrappers", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#aa56b2a49869efed61dd25d227bed3f9d", null ],
+    [ "internals", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a4656babf0e08c2da8db4981ab308a2b8", null ],
+    [ "layerInstance", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a11611aea2fea4f406d043779492086c6", null ],
+    [ "name", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#adea4bc387fc2dfe9410fd993fa5ac831", null ],
+    [ "outputBlobs", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a2c33987b4ab98c6c91bed1e870b97e27", null ],
+    [ "outputBlobsWrappers", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a34ffab12728cf68ec31b1050d8ad6b41", null ],
+    [ "params", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a75e3da573f95baa1eab8cde61cc50ac3", null ],
+    [ "requiredOutputs", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#acc222f52c50c043e0ea4d05e184822a2", null ],
+    [ "skip", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a900890bcbcf94284c8f4b084d94d1534", null ],
+    [ "type", "structcv_1_1dnn_1_1detail_1_1_layer_data.html#a931d5f528b275f77c8975ff3c6ae3a58", null ]
+];

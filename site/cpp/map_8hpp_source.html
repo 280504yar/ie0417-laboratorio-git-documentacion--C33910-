@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/ptcloud/include/opencv2/ptcloud/slam/map.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('map_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">map.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="map_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (C) 2026, BigVision LLC, all rights reserved.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef OPENCV_SLAM_MAP_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define OPENCV_SLAM_MAP_HPP</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp.html">opencv2/ptcloud/slam/types.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespacecv_1_1slam.html">   16</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1slam.html">slam</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_map.html">   23</a></span><span class="keyword">class </span><a class="code hl_define" href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">Map</a></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">Map</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">~Map</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_map.html#ab680e9ee43506784e9bb46c7b66e7367">   29</a></span>    <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#ab680e9ee43506784e9bb46c7b66e7367">Map</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">Map</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classcv_1_1slam_1_1_map.html#a8d9099e7d2df626f41bfee21884b7cfa">   30</a></span>    <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">Map</a>&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a8d9099e7d2df626f41bfee21884b7cfa">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">Map</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="comment">// Keyframes</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a95fbb23ac63d0734e36c8516a3f63dc2">addKeyframe</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* kf); </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#ad083b21d740eceb2635a2ccdc495bc4c">getKeyframe</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> std::set&lt;KeyFrame*&gt;&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a1a698e906db15e263c5de916c06dacf7">keyframes</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a6ca207df7b213729816dcc7ca7536b4a">numKeyframes</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="comment">// Map points</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#af31184fb8d47bca7c1119a38e34887d7">addMapPoint</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* mp); </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a065a668064c418be91ced49fd259a859">getMapPoint</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">const</span> std::set&lt;MapPoint*&gt;&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a1c5ae7b2e1cc9930d8aff9ece469268e">mapPoints</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a6527095e7989dcd0cef54cfb530c5f9f">numMapPoints</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a7120f84a565b17a760b667488ca8f47c">addObservation</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* kf, <span class="keywordtype">size_t</span> kpIdx, <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* mp);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a432222989f584bac5a54854ad9bbf16a">removeObservation</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* kf, <a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* mp);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#abce42309ae964f82724fb6377e5e371f">removeMapPoint</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_map_point.html">MapPoint</a>* mp);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">// Reference / current keyframes</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a8507b67014ded68cf242a6363966b7ef">setRefKeyframe</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* kf);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a1343dcbfff0280fceada0dd02f6b5df0">getRefKeyframe</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#ae5c6128e81cdb0ec0ef09b71ec0303f4">setCurrentKeyframe</a>(<a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* kf);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_struct" href="structcv_1_1slam_1_1_key_frame.html">KeyFrame</a>* <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#a2f612a6c99d3cfca613a7dea7cd33cb2">getCurrentKeyframe</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="comment">// Trajectory</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#acdeb4b321c95519a2c470e82cc15d0e6">appendPose</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group__core__basic.html#ga366070cdc95233a6b6db521dfd99e713">Matx44d</a>&amp; T_cw);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">const</span> std::vector&lt;Matx44d&gt;&amp; <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#aa75ff66b74b149e80bf51026513d3803">trajectory</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">// Lifecycle</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcv_1_1slam_1_1_map.html#acbef3aa1333d3a84aeb471bc4402e1f3">clear</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcv_1_1slam_1_1_map_1_1_impl.html">Impl</a>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_struct" href="structcv_1_1_ptr.html">Ptr&lt;Impl&gt;</a> impl;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}} <span class="comment">// namespace cv::slam</span></div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_SLAM_MAP_HPP</span></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a065a668064c418be91ced49fd259a859"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a065a668064c418be91ced49fd259a859">cv::slam::Map::getMapPoint</a></div><div class="ttdeci">MapPoint * getMapPoint(int id) const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00076">map.cpp:76</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a1343dcbfff0280fceada0dd02f6b5df0"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a1343dcbfff0280fceada0dd02f6b5df0">cv::slam::Map::getRefKeyframe</a></div><div class="ttdeci">KeyFrame * getRefKeyframe() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00121">map.cpp:121</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a1a698e906db15e263c5de916c06dacf7"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a1a698e906db15e263c5de916c06dacf7">cv::slam::Map::keyframes</a></div><div class="ttdeci">const std::set&lt; KeyFrame * &gt; &amp; keyframes() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00059">map.cpp:59</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a1c5ae7b2e1cc9930d8aff9ece469268e"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a1c5ae7b2e1cc9930d8aff9ece469268e">cv::slam::Map::mapPoints</a></div><div class="ttdeci">const std::set&lt; MapPoint * &gt; &amp; mapPoints() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00082">map.cpp:82</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a2f612a6c99d3cfca613a7dea7cd33cb2"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a2f612a6c99d3cfca613a7dea7cd33cb2">cv::slam::Map::getCurrentKeyframe</a></div><div class="ttdeci">KeyFrame * getCurrentKeyframe() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00124">map.cpp:124</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a432222989f584bac5a54854ad9bbf16a"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a432222989f584bac5a54854ad9bbf16a">cv::slam::Map::removeObservation</a></div><div class="ttdeci">void removeObservation(KeyFrame *kf, MapPoint *mp)</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00096">map.cpp:96</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a51b1e4e51c1d03e46fb080d447bd7e4c"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a51b1e4e51c1d03e46fb080d447bd7e4c">cv::slam::Map::Map</a></div><div class="ttdeci">Map()</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00031">map.cpp:31</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a6527095e7989dcd0cef54cfb530c5f9f"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a6527095e7989dcd0cef54cfb530c5f9f">cv::slam::Map::numMapPoints</a></div><div class="ttdeci">int numMapPoints() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00083">map.cpp:83</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a6ca207df7b213729816dcc7ca7536b4a"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a6ca207df7b213729816dcc7ca7536b4a">cv::slam::Map::numKeyframes</a></div><div class="ttdeci">int numKeyframes() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00060">map.cpp:60</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a7120f84a565b17a760b667488ca8f47c"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a7120f84a565b17a760b667488ca8f47c">cv::slam::Map::addObservation</a></div><div class="ttdeci">void addObservation(KeyFrame *kf, size_t kpIdx, MapPoint *mp)</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00087">map.cpp:87</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a8507b67014ded68cf242a6363966b7ef"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a8507b67014ded68cf242a6363966b7ef">cv::slam::Map::setRefKeyframe</a></div><div class="ttdeci">void setRefKeyframe(KeyFrame *kf)</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00120">map.cpp:120</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a8d9099e7d2df626f41bfee21884b7cfa"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a8d9099e7d2df626f41bfee21884b7cfa">cv::slam::Map::operator=</a></div><div class="ttdeci">Map &amp; operator=(const Map &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_a95fbb23ac63d0734e36c8516a3f63dc2"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#a95fbb23ac63d0734e36c8516a3f63dc2">cv::slam::Map::addKeyframe</a></div><div class="ttdeci">KeyFrame * addKeyframe(KeyFrame *kf)</div><div class="ttdoc">takes ownership; assigns id if &lt; 0</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00041">map.cpp:41</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_aa75ff66b74b149e80bf51026513d3803"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#aa75ff66b74b149e80bf51026513d3803">cv::slam::Map::trajectory</a></div><div class="ttdeci">const std::vector&lt; Matx44d &gt; &amp; trajectory() const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00129">map.cpp:129</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_ab680e9ee43506784e9bb46c7b66e7367"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#ab680e9ee43506784e9bb46c7b66e7367">cv::slam::Map::Map</a></div><div class="ttdeci">Map(const Map &amp;)=delete</div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_abce42309ae964f82724fb6377e5e371f"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#abce42309ae964f82724fb6377e5e371f">cv::slam::Map::removeMapPoint</a></div><div class="ttdeci">void removeMapPoint(MapPoint *mp)</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00107">map.cpp:107</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_acbef3aa1333d3a84aeb471bc4402e1f3"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#acbef3aa1333d3a84aeb471bc4402e1f3">cv::slam::Map::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00133">map.cpp:133</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_acdeb4b321c95519a2c470e82cc15d0e6"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#acdeb4b321c95519a2c470e82cc15d0e6">cv::slam::Map::appendPose</a></div><div class="ttdeci">void appendPose(const Matx44d &amp;T_cw)</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00128">map.cpp:128</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_ad083b21d740eceb2635a2ccdc495bc4c"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#ad083b21d740eceb2635a2ccdc495bc4c">cv::slam::Map::getKeyframe</a></div><div class="ttdeci">KeyFrame * getKeyframe(int id) const</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00053">map.cpp:53</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_ae5c6128e81cdb0ec0ef09b71ec0303f4"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#ae5c6128e81cdb0ec0ef09b71ec0303f4">cv::slam::Map::setCurrentKeyframe</a></div><div class="ttdeci">void setCurrentKeyframe(KeyFrame *kf)</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00123">map.cpp:123</a></div></div>
+<div class="ttc" id="aclasscv_1_1slam_1_1_map_html_af31184fb8d47bca7c1119a38e34887d7"><div class="ttname"><a href="classcv_1_1slam_1_1_map.html#af31184fb8d47bca7c1119a38e34887d7">cv::slam::Map::addMapPoint</a></div><div class="ttdeci">MapPoint * addMapPoint(MapPoint *mp)</div><div class="ttdoc">takes ownership; assigns id if &lt; 0</div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00064">map.cpp:64</a></div></div>
+<div class="ttc" id="agroup__core__basic_html_ga366070cdc95233a6b6db521dfd99e713"><div class="ttname"><a href="group__core__basic.html#ga366070cdc95233a6b6db521dfd99e713">cv::Matx44d</a></div><div class="ttdeci">Matx&lt; double, 4, 4 &gt; Matx44d</div><div class="ttdef"><b>Definición</b> <a href="matx_8hpp_source.html#l00265">matx.hpp:265</a></div></div>
+<div class="ttc" id="agroup__core__utils_html_ga1bf9f0e121b54272da02379cfccd0a2b"><div class="ttname"><a href="group__core__utils.html#ga1bf9f0e121b54272da02379cfccd0a2b">CV_EXPORTS</a></div><div class="ttdeci">#define CV_EXPORTS</div><div class="ttdef"><b>Definición</b> <a href="cvdef_8h_source.html#l00446">cvdef.h:446</a></div></div>
+<div class="ttc" id="anamespacecv_1_1slam_html"><div class="ttname"><a href="namespacecv_1_1slam.html">cv::slam</a></div><div class="ttdef"><b>Definición</b> <a href="#l00016">map.hpp:16</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="aptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_html"><div class="ttname"><a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp.html">types.hpp</a></div></div>
+<div class="ttc" id="astructcv_1_1_ptr_html"><div class="ttname"><a href="structcv_1_1_ptr.html">cv::Ptr</a></div><div class="ttdef"><b>Definición</b> <a href="cvstd__wrapper_8hpp_source.html#l00068">cvstd_wrapper.hpp:69</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_key_frame_html"><div class="ttname"><a href="structcv_1_1slam_1_1_key_frame.html">cv::slam::KeyFrame</a></div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_source.html#l00048">types.hpp:49</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_map_1_1_impl_html"><div class="ttname"><a href="structcv_1_1slam_1_1_map_1_1_impl.html">cv::slam::Map::Impl</a></div><div class="ttdef"><b>Definición</b> <a href="map_8cpp_source.html#l00015">map.cpp:16</a></div></div>
+<div class="ttc" id="astructcv_1_1slam_1_1_map_point_html"><div class="ttname"><a href="structcv_1_1slam_1_1_map_point.html">cv::slam::MapPoint</a></div><div class="ttdef"><b>Definición</b> <a href="ptcloud_2include_2opencv2_2ptcloud_2slam_2types_8hpp_source.html#l00034">types.hpp:35</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_3556975c26b206e57deb3848e08bf640.html">ptcloud</a></li><li class="navelem"><a href="dir_a9037f4ed1ec75d0caf55d2711bc72b6.html">include</a></li><li class="navelem"><a href="dir_1de3aac8aad9fd9856fd56fd06b84f4c.html">opencv2</a></li><li class="navelem"><a href="dir_dd715dc039d82cfb809eded872f873c9.html">ptcloud</a></li><li class="navelem"><a href="dir_146e752ce612cadeb05178fd909adcf8.html">slam</a></li><li class="navelem"><a href="map_8hpp.html">map.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

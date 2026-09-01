@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['uint64_5fc_0',['UINT64_C',['../ffmpeg__codecs_8hpp.html#a26a7bac63d90ef61175acb9f6fc4f2ca',1,'ffmpeg_codecs.hpp']]],
+  ['umat_5fupload_5finput_5fparameter_1',['UMAT_UPLOAD_INPUT_PARAMETER',['../ocl__test_8hpp.html#a415b9141dbec939032edfa46006b262b',1,'ocl_test.hpp']]],
+  ['umat_5fupload_5foutput_5fparameter_2',['UMAT_UPLOAD_OUTPUT_PARAMETER',['../ocl__test_8hpp.html#a098c020d5ba4dacb25c94ed10da96806',1,'ocl_test.hpp']]],
+  ['un_5fop_3',['UN_OP',['../intrin__legacy__ops_8h.html#a5b0f5f5d18488554ed82ccbd9425be33',1,'intrin_legacy_ops.h']]],
+  ['update_4',['UPDATE',['../variational__refinement_8cpp.html#ac2558c32fa879d85fe59f8c5f8dfbc04',1,'variational_refinement.cpp']]],
+  ['update_5facc01_5',['UPDATE_ACC01',['../median__blur_8simd_8hpp.html#aafd683a95fe551068215ae0d82bc6763',1,'median_blur.simd.hpp']]],
+  ['update_5fsparse_5fi_5fcoordinates_6',['UPDATE_SPARSE_I_COORDINATES',['../dis__flow_8cpp.html#a3dabae84f7dee81c8bdfb7621a126563',1,'dis_flow.cpp']]],
+  ['update_5fsparse_5fj_5fcoordinates_7',['UPDATE_SPARSE_J_COORDINATES',['../dis__flow_8cpp.html#a5825076899dea672830080245a65d9e3',1,'dis_flow.cpp']]],
+  ['update_5fsum_5fs32_8',['UPDATE_SUM_S32',['../count__non__zero_8simd_8hpp.html#ac5fecadf963fc7a522f4bf557ca07374',1,'count_non_zero.simd.hpp']]],
+  ['update_5fsum_5fu16_9',['UPDATE_SUM_U16',['../count__non__zero_8simd_8hpp.html#a511eb66118dea11b68abe23beda12259',1,'count_non_zero.simd.hpp']]],
+  ['update_5fsum_5fu8_10',['UPDATE_SUM_U8',['../count__non__zero_8simd_8hpp.html#abce16f1855e436597c0090b9f9c713c5',1,'count_non_zero.simd.hpp']]],
+  ['use_5fav_5fframe_5fget_5fbuffer_11',['USE_AV_FRAME_GET_BUFFER',['../cap__ffmpeg__impl_8hpp.html#ad547e2c1db48a885ae2875582cb24fc9',1,'cap_ffmpeg_impl.hpp']]],
+  ['use_5fav_5fhw_5fcodecs_12',['USE_AV_HW_CODECS',['../cap__ffmpeg__impl_8hpp.html#a62b4f06f6b759cc3b9b29c32f665a70a',1,'cap_ffmpeg_impl.hpp']]],
+  ['use_5fav_5finterrupt_5fcallback_13',['USE_AV_INTERRUPT_CALLBACK',['../cap__ffmpeg__impl_8hpp.html#a205306d014a84055c1c738e5eabe70e6',1,'cap_ffmpeg_impl.hpp']]],
+  ['use_5fav_5fsend_5fframe_5fapi_14',['USE_AV_SEND_FRAME_API',['../cap__ffmpeg__impl_8hpp.html#a41fcf41958a010949c8eae0370be6ed1',1,'cap_ffmpeg_impl.hpp']]],
+  ['use_5favx_15',['USE_AVX',['../core_2src_2precomp_8hpp.html#a222b1ba0e95d57f37efa09f22d42b209',1,'precomp.hpp']]],
+  ['use_5favx2_16',['USE_AVX2',['../core_2src_2precomp_8hpp.html#adb99a00572c227373f525754d163fbdb',1,'precomp.hpp']]],
+  ['use_5ffast_5fexp_17',['USE_FAST_EXP',['../multiview__calibration_8cpp.html#ad3029c03dc4c6a09e5fdcf38a9b58c24',1,'multiview_calibration.cpp']]],
+  ['use_5finterpolation_5fin_5fgetnormal_18',['USE_INTERPOLATION_IN_GETNORMAL',['../color__tsdf__functions_8hpp.html#a64cead3aa40a936342d6bf18ffaff592',1,'USE_INTERPOLATION_IN_GETNORMAL:&#160;color_tsdf_functions.hpp'],['../hash__tsdf__functions_8hpp.html#a64cead3aa40a936342d6bf18ffaff592',1,'USE_INTERPOLATION_IN_GETNORMAL:&#160;hash_tsdf_functions.hpp']]],
+  ['use_5fintrinsics_19',['USE_INTRINSICS',['../ptcloud_2src_2utils_8hpp.html#a97c0bae77e9d7d7088ff89a54e6abbc9',1,'utils.hpp']]],
+  ['use_5fsse2_20',['USE_SSE2',['../core_2src_2precomp_8hpp.html#accf9760e79ae20a6de49bc375e08eb1c',1,'precomp.hpp']]],
+  ['use_5fsse4_5f2_21',['USE_SSE4_2',['../core_2src_2precomp_8hpp.html#abd7dbc22b761537a40ecf38675dae4b4',1,'precomp.hpp']]],
+  ['use_5fzlib_22',['USE_ZLIB',['../src_2persistence_8hpp.html#a20a006ce613b219a138e7aa018a63435',1,'persistence.hpp']]],
+  ['used_23',['USED',['../lsd_8cpp.html#abcd0a22ee4346cad5706adb6d2119429',1,'lsd.cpp']]]
+];

@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OpenCV - Documentación Doxygen: Archivo de código fuente C:/Users/YARADEYENISAIZAGUIRR/opencv/modules/objdetect/src/barcode_decoder/abs_decoder.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<meta name="doxygen-page-layout" content="1" />
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OpenCV - Documentación Doxygen<span id="projectnumber">&#160;5.0.0-468-g390c4fdcb9</span>
+   </div>
+   <div id="projectbrief">Documentación técnica generada para OpenCV mediante Doxygen</div>
+  </td>
+ </tr>
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+</div><!-- top -->
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('abs__decoder_8hpp_source.html','',''); });
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": true
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+    </li>
+  </ul>
+</div><!-- main-nav -->
+<div id="container"><div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">abs_decoder.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="abs__decoder_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This file is part of OpenCV project.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// It is subject to the license terms in the LICENSE file found in the top-level directory</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// of this distribution and at http://opencv.org/license.html.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Copyright (c) 2020-2021 darkliang wangberlinT Certseeds</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef OPENCV_BARCODE_ABS_DECODER_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define OPENCV_BARCODE_ABS_DECODER_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="barcode_8hpp.html">opencv2/objdetect/barcode.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv.html">cv</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecv_1_1barcode.html">barcode</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">using </span>std::string;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using </span>std::vector;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#a8b52e18bee6c522bdeede612d104c205">   15</a></span><span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> <a class="code hl_variable" href="namespacecv_1_1barcode.html#a8b52e18bee6c522bdeede612d104c205">BLACK</a> = std::numeric_limits&lt;uchar&gt;::min();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// WHITE elemental area is 0xff</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#ab2233402450f28a2f0b1a25fe9d6a882">   17</a></span><span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_typedef" href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">uchar</a> <a class="code hl_variable" href="namespacecv_1_1barcode.html#ab2233402450f28a2f0b1a25fe9d6a882">WHITE</a> = std::numeric_limits&lt;uchar&gt;::max();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html">   20</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1barcode_1_1_result.html#a71d9f2599d95eb68616ab4403488536f">Result</a></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33">   22</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33">BarcodeType</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ad235fd398c3a19c6ffe85ec2def6112c">   24</a></span>        <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ad235fd398c3a19c6ffe85ec2def6112c">BARCODE_NONE</a>,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ae4333f63e500122658122147daba9e8e">   25</a></span>        <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ae4333f63e500122658122147daba9e8e">BARCODE_EAN_8</a>,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a375c1fe01fc85e298857a53796f1cd0b">   26</a></span>        <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a375c1fe01fc85e298857a53796f1cd0b">BARCODE_EAN_13</a>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ade8240a24156eda70bcfa307011f11aa">   27</a></span>        <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ade8240a24156eda70bcfa307011f11aa">BARCODE_UPC_A</a>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33addcaf5244eb425636f8be0d3af33690d">   28</a></span>        <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33addcaf5244eb425636f8be0d3af33690d">BARCODE_UPC_E</a>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a220d2c4826c18fdd37056c3510769cd8">   29</a></span>        <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a220d2c4826c18fdd37056c3510769cd8">BARCODE_UPC_EAN_EXTENSION</a></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    };</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a86ce09665f2d60fd732e0439eb030abf">   32</a></span>    std::string <a class="code hl_variable" href="structcv_1_1barcode_1_1_result.html#a86ce09665f2d60fd732e0439eb030abf">result</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a7e97bd3fd62e3b06d8767c7acbc6a70b">   33</a></span>    <a class="code hl_enumeration" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33">BarcodeType</a> <a class="code hl_variable" href="structcv_1_1barcode_1_1_result.html#a7e97bd3fd62e3b06d8767c7acbc6a70b">format</a> = <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ad235fd398c3a19c6ffe85ec2def6112c">Result::BARCODE_NONE</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a71d9f2599d95eb68616ab4403488536f">   35</a></span>    <a class="code hl_function" href="structcv_1_1barcode_1_1_result.html#a71d9f2599d95eb68616ab4403488536f">Result</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#abf168e66147efc5fd4e6cd35a4de9658">   37</a></span>    <a class="code hl_function" href="structcv_1_1barcode_1_1_result.html#abf168e66147efc5fd4e6cd35a4de9658">Result</a>(<span class="keyword">const</span> std::string &amp;_result, <a class="code hl_enumeration" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33">BarcodeType</a> _format)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <a class="code hl_variable" href="structcv_1_1barcode_1_1_result.html#a86ce09665f2d60fd732e0439eb030abf">result</a> = _result;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_variable" href="structcv_1_1barcode_1_1_result.html#a7e97bd3fd62e3b06d8767c7acbc6a70b">format</a> = _format;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#aa2403917fb10e98938affba0089daf21">   42</a></span>    <span class="keywordtype">string</span> <a class="code hl_function" href="structcv_1_1barcode_1_1_result.html#aa2403917fb10e98938affba0089daf21">typeString</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">switch</span> (<a class="code hl_variable" href="structcv_1_1barcode_1_1_result.html#a7e97bd3fd62e3b06d8767c7acbc6a70b">format</a>)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ae4333f63e500122658122147daba9e8e">Result::BARCODE_EAN_8</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;EAN_8&quot;</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a375c1fe01fc85e298857a53796f1cd0b">Result::BARCODE_EAN_13</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;EAN_13&quot;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33addcaf5244eb425636f8be0d3af33690d">Result::BARCODE_UPC_E</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;UPC_E&quot;</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ade8240a24156eda70bcfa307011f11aa">Result::BARCODE_UPC_A</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;UPC_A&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a220d2c4826c18fdd37056c3510769cd8">Result::BARCODE_UPC_EAN_EXTENSION</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;UPC_EAN_EXTENSION&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordflow">default</span>: <span class="keywordflow">return</span> <a class="code hl_typedef" href="core__bindings_8cpp.html#ad453f9f71ce1f9153fb748d6bb25e454">string</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_result.html#a9bf97a8fbacd24d5448a3c74bffa66e2">   54</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="structcv_1_1barcode_1_1_result.html#a9bf97a8fbacd24d5448a3c74bffa66e2">isValid</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structcv_1_1barcode_1_1_result.html#a7e97bd3fd62e3b06d8767c7acbc6a70b">format</a> != <a class="code hl_enumvalue" href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ad235fd398c3a19c6ffe85ec2def6112c">BARCODE_NONE</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>};</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="};">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_counter.html">   60</a></span><span class="keyword">struct </span><a class="code hl_function" href="structcv_1_1barcode_1_1_counter.html#a55e2890ce3245a14a160fce6070008ab">Counter</a></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>{</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">   62</a></span>    std::vector&lt;int&gt; <a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">   63</a></span>    <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">sum</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structcv_1_1barcode_1_1_counter.html#a55e2890ce3245a14a160fce6070008ab">   65</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="structcv_1_1barcode_1_1_counter.html#a55e2890ce3245a14a160fce6070008ab">Counter</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;int&gt;</a> &amp;_pattern)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">pattern</a> = _pattern;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_variable" href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">sum</a> = 0;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>};</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="};">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html">   72</a></span><span class="keyword">class </span><a class="code hl_class" href="classcv_1_1barcode_1_1_abs_decoder.html">AbsDecoder</a></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>{</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html#a16183c0a110cd6858b0e68b1bd0d20d5">   75</a></span>    <span class="keyword">virtual</span> std::pair&lt;Result, float&gt; <a class="code hl_function" href="classcv_1_1barcode_1_1_abs_decoder.html#a16183c0a110cd6858b0e68b1bd0d20d5">decodeROI</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;bar_img) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html#ae9cea7f5a394329b9f8b882d2a5daa52">   77</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_abs_decoder.html#ae9cea7f5a394329b9f8b882d2a5daa52">~AbsDecoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html#acedb53024631a77310fcdcb027fadec3">   80</a></span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structcv_1_1barcode_1_1_result.html">Result</a> <a class="code hl_function" href="classcv_1_1barcode_1_1_abs_decoder.html#acedb53024631a77310fcdcb027fadec3">decode</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1barcode_1_1vector.html">vector&lt;uchar&gt;</a> &amp;data) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html#aaddcd3d24b9009f7ca6ee084cc6ef7ba">   82</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcv_1_1barcode_1_1_abs_decoder.html#aaddcd3d24b9009f7ca6ee084cc6ef7ba">isValid</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;result) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html#aa41a49bbadb45bc1756f7f8f05c72e97">   84</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classcv_1_1barcode_1_1_abs_decoder.html#aa41a49bbadb45bc1756f7f8f05c72e97">bits_num</a>{};</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classcv_1_1barcode_1_1_abs_decoder.html#a4f64281d77b480568f53d5bcd27f2d41">   85</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classcv_1_1barcode_1_1_abs_decoder.html#a4f64281d77b480568f53d5bcd27f2d41">digit_number</a>{};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1barcode.html#a8e24fa38d33dba21cedc5848c8c61fbd">cropROI</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;_src, <a class="code hl_class" href="classcv_1_1_mat.html">Mat</a> &amp;_dst, <span class="keyword">const</span> std::vector&lt;Point2f&gt; &amp;rect);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacecv_1_1barcode.html#ac59ed5229e20c2ffd07d73a283c6c084">fillCounter</a>(<span class="keyword">const</span> std::vector&lt;uchar&gt; &amp;row, <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> start, Counter &amp;counter);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#a5bdbd33a8bd97b1cbe3b08c03db16734">   92</a></span><span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_variable" href="namespacecv_1_1barcode.html#a5bdbd33a8bd97b1cbe3b08c03db16734">INTEGER_MATH_SHIFT</a> = 8;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="namespacecv_1_1barcode.html#ab9aa52a88835493f0bc2aecc4a5bbc39">   93</a></span><span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_variable" href="namespacecv_1_1barcode.html#ab9aa52a88835493f0bc2aecc4a5bbc39">PATTERN_MATCH_RESULT_SCALE_FACTOR</a> = 1 &lt;&lt; <a class="code hl_variable" href="namespacecv_1_1barcode.html#a5bdbd33a8bd97b1cbe3b08c03db16734">INTEGER_MATH_SHIFT</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> <a class="code hl_function" href="namespacecv_1_1barcode.html#a1771d7ce95b9642703d7377809c30506">patternMatch</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structcv_1_1barcode_1_1_counter.html">Counter</a> &amp;counters, <span class="keyword">const</span> std::vector&lt;int&gt; &amp;pattern, <a class="code hl_typedef" href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">uint</a> maxIndividual);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>} <span class="comment">// namespace cv</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif </span><span class="comment">// OPENCV_BARCODE_ABS_DECODER_HPP</span></div>
+<div class="ttc" id="abarcode_8hpp_html"><div class="ttname"><a href="barcode_8hpp.html">barcode.hpp</a></div></div>
+<div class="ttc" id="aclasscv_1_1_mat_html"><div class="ttname"><a href="classcv_1_1_mat.html">cv::Mat</a></div><div class="ttdoc">n-dimensional dense array class</div><div class="ttdef"><b>Definición</b> <a href="mat_8hpp_source.html#l00965">mat.hpp:966</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html">cv::barcode::AbsDecoder</a></div><div class="ttdef"><b>Definición</b> <a href="#l00072">abs_decoder.hpp:73</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html_a16183c0a110cd6858b0e68b1bd0d20d5"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html#a16183c0a110cd6858b0e68b1bd0d20d5">cv::barcode::AbsDecoder::decodeROI</a></div><div class="ttdeci">virtual std::pair&lt; Result, float &gt; decodeROI(const Mat &amp;bar_img) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html_a4f64281d77b480568f53d5bcd27f2d41"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html#a4f64281d77b480568f53d5bcd27f2d41">cv::barcode::AbsDecoder::digit_number</a></div><div class="ttdeci">size_t digit_number</div><div class="ttdef"><b>Definición</b> <a href="#l00085">abs_decoder.hpp:85</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html_aa41a49bbadb45bc1756f7f8f05c72e97"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html#aa41a49bbadb45bc1756f7f8f05c72e97">cv::barcode::AbsDecoder::bits_num</a></div><div class="ttdeci">size_t bits_num</div><div class="ttdef"><b>Definición</b> <a href="#l00084">abs_decoder.hpp:84</a></div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html_aaddcd3d24b9009f7ca6ee084cc6ef7ba"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html#aaddcd3d24b9009f7ca6ee084cc6ef7ba">cv::barcode::AbsDecoder::isValid</a></div><div class="ttdeci">virtual bool isValid(const string &amp;result) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html_acedb53024631a77310fcdcb027fadec3"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html#acedb53024631a77310fcdcb027fadec3">cv::barcode::AbsDecoder::decode</a></div><div class="ttdeci">virtual Result decode(const vector&lt; uchar &gt; &amp;data) const =0</div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1_abs_decoder_html_ae9cea7f5a394329b9f8b882d2a5daa52"><div class="ttname"><a href="classcv_1_1barcode_1_1_abs_decoder.html#ae9cea7f5a394329b9f8b882d2a5daa52">cv::barcode::AbsDecoder::~AbsDecoder</a></div><div class="ttdeci">virtual ~AbsDecoder()=default</div></div>
+<div class="ttc" id="aclasscv_1_1barcode_1_1vector_html"><div class="ttname"><a href="classcv_1_1barcode_1_1vector.html">cv::barcode::vector</a></div></div>
+<div class="ttc" id="acore__bindings_8cpp_html_ad453f9f71ce1f9153fb748d6bb25e454"><div class="ttname"><a href="core__bindings_8cpp.html#ad453f9f71ce1f9153fb748d6bb25e454">string</a></div><div class="ttdeci">std::string string</div><div class="ttdef"><b>Definición</b> <a href="core__bindings_8cpp_source.html#l00115">core_bindings.cpp:115</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_ga46bc8267fdb18cbae0509b7a7491e890"><div class="ttname"><a href="group__core__hal__interface.html#ga46bc8267fdb18cbae0509b7a7491e890">cv::uchar</a></div><div class="ttdeci">uint8_t uchar</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00036">templmatch.cpp:36</a></div></div>
+<div class="ttc" id="agroup__core__hal__interface_html_gaa4ffa7f460d95bda4fd293dd4e337418"><div class="ttname"><a href="group__core__hal__interface.html#gaa4ffa7f460d95bda4fd293dd4e337418">cv::uint</a></div><div class="ttdeci">uint32_t uint</div><div class="ttdef"><b>Definición</b> <a href="templmatch_8cpp_source.html#l00038">templmatch.cpp:38</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html"><div class="ttname"><a href="namespacecv_1_1barcode.html">cv::barcode</a></div><div class="ttdef"><b>Definición</b> <a href="barcode_8hpp_source.html#l00013">barcode.hpp:13</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a1771d7ce95b9642703d7377809c30506"><div class="ttname"><a href="namespacecv_1_1barcode.html#a1771d7ce95b9642703d7377809c30506">cv::barcode::patternMatch</a></div><div class="ttdeci">uint patternMatch(const Counter &amp;counters, const std::vector&lt; int &gt; &amp;pattern, uint maxIndividual)</div><div class="ttdef"><b>Definición</b> <a href="abs__decoder_8cpp_source.html#l00112">abs_decoder.cpp:112</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a5bdbd33a8bd97b1cbe3b08c03db16734"><div class="ttname"><a href="namespacecv_1_1barcode.html#a5bdbd33a8bd97b1cbe3b08c03db16734">cv::barcode::INTEGER_MATH_SHIFT</a></div><div class="ttdeci">static constexpr uint INTEGER_MATH_SHIFT</div><div class="ttdef"><b>Definición</b> <a href="#l00092">abs_decoder.hpp:92</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a8b52e18bee6c522bdeede612d104c205"><div class="ttname"><a href="namespacecv_1_1barcode.html#a8b52e18bee6c522bdeede612d104c205">cv::barcode::BLACK</a></div><div class="ttdeci">static constexpr uchar BLACK</div><div class="ttdef"><b>Definición</b> <a href="#l00015">abs_decoder.hpp:15</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_a8e24fa38d33dba21cedc5848c8c61fbd"><div class="ttname"><a href="namespacecv_1_1barcode.html#a8e24fa38d33dba21cedc5848c8c61fbd">cv::barcode::cropROI</a></div><div class="ttdeci">void cropROI(const Mat &amp;src, Mat &amp;dst, const std::vector&lt; Point2f &gt; &amp;rects)</div><div class="ttdef"><b>Definición</b> <a href="abs__decoder_8cpp_source.html#l00012">abs_decoder.cpp:12</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_ab2233402450f28a2f0b1a25fe9d6a882"><div class="ttname"><a href="namespacecv_1_1barcode.html#ab2233402450f28a2f0b1a25fe9d6a882">cv::barcode::WHITE</a></div><div class="ttdeci">static constexpr uchar WHITE</div><div class="ttdef"><b>Definición</b> <a href="#l00017">abs_decoder.hpp:17</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_ab9aa52a88835493f0bc2aecc4a5bbc39"><div class="ttname"><a href="namespacecv_1_1barcode.html#ab9aa52a88835493f0bc2aecc4a5bbc39">cv::barcode::PATTERN_MATCH_RESULT_SCALE_FACTOR</a></div><div class="ttdeci">static constexpr uint PATTERN_MATCH_RESULT_SCALE_FACTOR</div><div class="ttdef"><b>Definición</b> <a href="#l00093">abs_decoder.hpp:93</a></div></div>
+<div class="ttc" id="anamespacecv_1_1barcode_html_ac59ed5229e20c2ffd07d73a283c6c084"><div class="ttname"><a href="namespacecv_1_1barcode.html#ac59ed5229e20c2ffd07d73a283c6c084">cv::barcode::fillCounter</a></div><div class="ttdeci">void fillCounter(const std::vector&lt; uchar &gt; &amp;row, uint start, Counter &amp;counter)</div><div class="ttdef"><b>Definición</b> <a href="abs__decoder_8cpp_source.html#l00032">abs_decoder.cpp:32</a></div></div>
+<div class="ttc" id="anamespacecv_html"><div class="ttname"><a href="namespacecv.html">cv</a></div><div class="ttdoc">This file is part of OpenCV project.</div><div class="ttdef"><b>Definición</b> <a href="calib_8hpp_source.html#l00484">calib.hpp:484</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html">cv::barcode::Counter</a></div><div class="ttdef"><b>Definición</b> <a href="#l00060">abs_decoder.hpp:61</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html_a0bb1d332e69d34214143d42659a0a03b"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html#a0bb1d332e69d34214143d42659a0a03b">cv::barcode::Counter::sum</a></div><div class="ttdeci">uint sum</div><div class="ttdef"><b>Definición</b> <a href="#l00063">abs_decoder.hpp:63</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html_a55e2890ce3245a14a160fce6070008ab"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html#a55e2890ce3245a14a160fce6070008ab">cv::barcode::Counter::Counter</a></div><div class="ttdeci">Counter(const vector&lt; int &gt; &amp;_pattern)</div><div class="ttdef"><b>Definición</b> <a href="#l00065">abs_decoder.hpp:65</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_counter_html_a6a779b7eac769256e543cbf05312f4d4"><div class="ttname"><a href="structcv_1_1barcode_1_1_counter.html#a6a779b7eac769256e543cbf05312f4d4">cv::barcode::Counter::pattern</a></div><div class="ttdeci">std::vector&lt; int &gt; pattern</div><div class="ttdef"><b>Definición</b> <a href="#l00062">abs_decoder.hpp:62</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html">cv::barcode::Result</a></div><div class="ttdef"><b>Definición</b> <a href="#l00020">abs_decoder.hpp:21</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33">cv::barcode::Result::BarcodeType</a></div><div class="ttdeci">BarcodeType</div><div class="ttdef"><b>Definición</b> <a href="#l00022">abs_decoder.hpp:23</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33a220d2c4826c18fdd37056c3510769cd8"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a220d2c4826c18fdd37056c3510769cd8">cv::barcode::Result::BARCODE_UPC_EAN_EXTENSION</a></div><div class="ttdeci">@ BARCODE_UPC_EAN_EXTENSION</div><div class="ttdef"><b>Definición</b> <a href="#l00029">abs_decoder.hpp:29</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33a375c1fe01fc85e298857a53796f1cd0b"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33a375c1fe01fc85e298857a53796f1cd0b">cv::barcode::Result::BARCODE_EAN_13</a></div><div class="ttdeci">@ BARCODE_EAN_13</div><div class="ttdef"><b>Definición</b> <a href="#l00026">abs_decoder.hpp:26</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33ad235fd398c3a19c6ffe85ec2def6112c"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ad235fd398c3a19c6ffe85ec2def6112c">cv::barcode::Result::BARCODE_NONE</a></div><div class="ttdeci">@ BARCODE_NONE</div><div class="ttdef"><b>Definición</b> <a href="#l00024">abs_decoder.hpp:24</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33addcaf5244eb425636f8be0d3af33690d"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33addcaf5244eb425636f8be0d3af33690d">cv::barcode::Result::BARCODE_UPC_E</a></div><div class="ttdeci">@ BARCODE_UPC_E</div><div class="ttdef"><b>Definición</b> <a href="#l00028">abs_decoder.hpp:28</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33ade8240a24156eda70bcfa307011f11aa"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ade8240a24156eda70bcfa307011f11aa">cv::barcode::Result::BARCODE_UPC_A</a></div><div class="ttdeci">@ BARCODE_UPC_A</div><div class="ttdef"><b>Definición</b> <a href="#l00027">abs_decoder.hpp:27</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a33b3fb7ad4be2fb962cb8d23bb33fe33ae4333f63e500122658122147daba9e8e"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a33b3fb7ad4be2fb962cb8d23bb33fe33ae4333f63e500122658122147daba9e8e">cv::barcode::Result::BARCODE_EAN_8</a></div><div class="ttdeci">@ BARCODE_EAN_8</div><div class="ttdef"><b>Definición</b> <a href="#l00025">abs_decoder.hpp:25</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a71d9f2599d95eb68616ab4403488536f"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a71d9f2599d95eb68616ab4403488536f">cv::barcode::Result::Result</a></div><div class="ttdeci">Result()=default</div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a7e97bd3fd62e3b06d8767c7acbc6a70b"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a7e97bd3fd62e3b06d8767c7acbc6a70b">cv::barcode::Result::format</a></div><div class="ttdeci">BarcodeType format</div><div class="ttdef"><b>Definición</b> <a href="#l00033">abs_decoder.hpp:33</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a86ce09665f2d60fd732e0439eb030abf"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a86ce09665f2d60fd732e0439eb030abf">cv::barcode::Result::result</a></div><div class="ttdeci">std::string result</div><div class="ttdef"><b>Definición</b> <a href="#l00032">abs_decoder.hpp:32</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_a9bf97a8fbacd24d5448a3c74bffa66e2"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#a9bf97a8fbacd24d5448a3c74bffa66e2">cv::barcode::Result::isValid</a></div><div class="ttdeci">bool isValid() const</div><div class="ttdef"><b>Definición</b> <a href="#l00054">abs_decoder.hpp:54</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_aa2403917fb10e98938affba0089daf21"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#aa2403917fb10e98938affba0089daf21">cv::barcode::Result::typeString</a></div><div class="ttdeci">string typeString() const</div><div class="ttdef"><b>Definición</b> <a href="#l00042">abs_decoder.hpp:42</a></div></div>
+<div class="ttc" id="astructcv_1_1barcode_1_1_result_html_abf168e66147efc5fd4e6cd35a4de9658"><div class="ttname"><a href="structcv_1_1barcode_1_1_result.html#abf168e66147efc5fd4e6cd35a4de9658">cv::barcode::Result::Result</a></div><div class="ttdeci">Result(const std::string &amp;_result, BarcodeType _format)</div><div class="ttdef"><b>Definición</b> <a href="#l00037">abs_decoder.hpp:37</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bc7ba1e312bfc05dfad081506e1881af.html">opencv</a></li><li class="navelem"><a href="dir_691a308d78a1e5542e7faeb4783d9767.html">modules</a></li><li class="navelem"><a href="dir_6650e5a9243b8e56cb659596d9cf84bc.html">objdetect</a></li><li class="navelem"><a href="dir_3cf09a6fc374368e5f930d0bee098ae8.html">src</a></li><li class="navelem"><a href="dir_4daf0341874e9eb5cb8974052196445c.html">barcode_decoder</a></li><li class="navelem"><a href="abs__decoder_8hpp.html">abs_decoder.hpp</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>
